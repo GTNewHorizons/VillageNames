@@ -1,0 +1,119 @@
+# Item localizations
+item.villagenames:villagebook.name=Village Book
+item.villagenames:strongholdbook.name=Stronghold Book
+item.villagenames:templebook.name=Temple Book
+item.villagenames:mineshaftbook.name=Mineshaft Book
+item.villagenames:monumentbook.name=Monument Book
+item.villagenames:mansionbook.name=Mansion Book
+item.villagenames:fortressbook.name=Fortress Book
+item.villagenames:endcitybook.name=End City Book
+item.villagenames:codex.name=Codex
+item.villagenames:moonvillagebook.name=Moon Village Book
+item.villagenames:koentusvillagebook.name=Koentus Village Book
+item.villagenames:fronosvillagebook.name=Fronos Village Book
+item.villagenames:nibiruvillagebook.name=Nibiru Village Book
+item.villagenames:abandonedbasebook.name=Abandoned Base Book
+
+
+# Block localizations
+tile.villagenames:lunarinGoldBrick.name=Lunarin Style Gold Brick
+tile.villagenames:lunarinIronBrick.name=Lunarin Style Iron Brick
+
+# Backported materials
+tile.villagenames:glazedTerracotta.white.name=White Glazed Terracotta
+tile.villagenames:glazedTerracotta.orange.name=Orange Glazed Terracotta
+tile.villagenames:glazedTerracotta.magenta.name=Magenta Glazed Terracotta
+tile.villagenames:glazedTerracotta.light_blue.name=Light Blue Glazed Terracotta
+tile.villagenames:glazedTerracotta.yellow.name=Yellow Glazed Terracotta
+tile.villagenames:glazedTerracotta.lime.name=Lime Glazed Terracotta
+tile.villagenames:glazedTerracotta.pink.name=Pink Glazed Terracotta
+tile.villagenames:glazedTerracotta.gray.name=Gray Glazed Terracotta
+tile.villagenames:glazedTerracotta.silver.name=Light Gray Glazed Terracotta
+tile.villagenames:glazedTerracotta.cyan.name=Cyan Glazed Terracotta
+tile.villagenames:glazedTerracotta.purple.name=Purple Glazed Terracotta
+tile.villagenames:glazedTerracotta.blue.name=Blue Glazed Terracotta
+tile.villagenames:glazedTerracotta.brown.name=Brown Glazed Terracotta
+tile.villagenames:glazedTerracotta.green.name=Green Glazed Terracotta
+tile.villagenames:glazedTerracotta.red.name=Red Glazed Terracotta
+tile.villagenames:glazedTerracotta.black.name=Black Glazed Terracotta
+
+tile.villagenames:concrete.white.name=White Concrete
+tile.villagenames:concrete.orange.name=Orange Concrete
+tile.villagenames:concrete.magenta.name=Magenta Concrete
+tile.villagenames:concrete.light_blue.name=Light Blue Concrete
+tile.villagenames:concrete.yellow.name=Yellow Concrete
+tile.villagenames:concrete.lime.name=Lime Concrete
+tile.villagenames:concrete.pink.name=Pink Concrete
+tile.villagenames:concrete.gray.name=Gray Concrete
+tile.villagenames:concrete.silver.name=Light Gray Concrete
+tile.villagenames:concrete.cyan.name=Cyan Concrete
+tile.villagenames:concrete.purple.name=Purple Concrete
+tile.villagenames:concrete.blue.name=Blue Concrete
+tile.villagenames:concrete.brown.name=Brown Concrete
+tile.villagenames:concrete.green.name=Green Concrete
+tile.villagenames:concrete.red.name=Red Concrete
+tile.villagenames:concrete.black.name=Black Concrete
+
+tile.villagenames:concretePowder.white.name=White Concrete Powder
+tile.villagenames:concretePowder.orange.name=Orange Concrete Powder
+tile.villagenames:concretePowder.magenta.name=Magenta Concrete Powder
+tile.villagenames:concretePowder.light_blue.name=Light Blue Concrete Powder
+tile.villagenames:concretePowder.yellow.name=Yellow Concrete Powder
+tile.villagenames:concretePowder.lime.name=Lime Concrete Powder
+tile.villagenames:concretePowder.pink.name=Pink Concrete Powder
+tile.villagenames:concretePowder.gray.name=Gray Concrete Powder
+tile.villagenames:concretePowder.silver.name=Light Gray Concrete Powder
+tile.villagenames:concretePowder.cyan.name=Cyan Concrete Powder
+tile.villagenames:concretePowder.purple.name=Purple Concrete Powder
+tile.villagenames:concretePowder.blue.name=Blue Concrete Powder
+tile.villagenames:concretePowder.brown.name=Brown Concrete Powder
+tile.villagenames:concretePowder.green.name=Green Concrete Powder
+tile.villagenames:concretePowder.red.name=Red Concrete Powder
+tile.villagenames:concretePowder.black.name=Black Concrete Powder
+
+# Update "stained clay" to "Terracotta" as per 1.12
+tile.clayHardenedStained.name=Stained Terracotta
+tile.clayHardenedStained.black.name=Black Terracotta
+tile.clayHardenedStained.red.name=Red Terracotta
+tile.clayHardenedStained.green.name=Green Terracotta
+tile.clayHardenedStained.brown.name=Brown Terracotta
+tile.clayHardenedStained.blue.name=Blue Terracotta
+tile.clayHardenedStained.purple.name=Purple Terracotta
+tile.clayHardenedStained.cyan.name=Cyan Terracotta
+tile.clayHardenedStained.silver.name=Light Gray Terracotta
+tile.clayHardenedStained.gray.name=Gray Terracotta
+tile.clayHardenedStained.pink.name=Pink Terracotta
+tile.clayHardenedStained.lime.name=Lime Terracotta
+tile.clayHardenedStained.yellow.name=Yellow Terracotta
+tile.clayHardenedStained.lightBlue.name=Light Blue Terracotta
+tile.clayHardenedStained.magenta.name=Magenta Terracotta
+tile.clayHardenedStained.orange.name=Orange Terracotta
+tile.clayHardenedStained.white.name=White Terracotta
+tile.clayHardened.name=Terracotta
+
+# Ocean Monument stuff
+item.villagenames:prismarine_crystals.name=Prismarine Crystals
+item.villagenames:prismarine_shard.name=Prismarine Shard
+tile.villagenames:sea_lantern.name=Sea Lantern
+tile.villagenames:sponge.name=Dry Sponge
+tile.villagenames:sponge_wet.name=Wet Sponge
+tile.villagenames:prismarine_block_rough.name=Prismarine
+tile.villagenames:prismarine_block_bricks.name=Prismarine Bricks
+tile.villagenames:prismarine_block_dark.name=Dark Prismarine
+
+# Villager careers/professions
+entity.Villager.farmer=Farmer
+entity.Villager.fisherman=Fisherman
+entity.Villager.shepherd=Shepherd
+entity.Villager.fletcher=Fletcher
+entity.Villager.librarian=Librarian
+entity.Villager.cleric=Cleric
+entity.Villager.armor=Armorer
+entity.Villager.weapon=Weapon Smith
+entity.Villager.tool=Tool Smith
+entity.Villager.butcher=Butcher
+entity.Villager.leather=Leatherworker
+entity.Villager.nitwit=Nitwit
+entity.Villager.cartographer=Cartographer
+# This one's custom because there was no such title in vanilla
+entity.Villager.blacksmith=Blacksmith
