@@ -1,9 +1,8 @@
 package astrotibs.villagenames.utility;
 
-import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
-import astrotibs.villagenames.reference.Reference;
+import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper {
 	public static void log(Level logLevel, Object object) {

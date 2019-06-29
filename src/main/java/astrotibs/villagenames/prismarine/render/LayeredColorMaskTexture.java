@@ -1,9 +1,5 @@
 package astrotibs.villagenames.prismarine.render;
 
-import org.apache.logging.log4j.Logger;
-
-import astrotibs.villagenames.prismarine.EnumColour;
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -15,8 +11,11 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.logging.log4j.LogManager;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
+
+import astrotibs.villagenames.prismarine.EnumColour;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;

@@ -3,7 +3,7 @@ package astrotibs.villagenames.block.color;
 import java.util.List;
 
 import astrotibs.villagenames.proxy.ClientProxy;
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 // Adapted from KillerMapper
 public class BlockGlazedTerracotta extends Block
 {
+	// These are used to reference texture names
     public static String[] subBlock = {
     		"white", //0
     		"orange", //1
@@ -38,6 +39,25 @@ public class BlockGlazedTerracotta extends Block
     		"green", //13
     		"red", //14
     		"black" //15
+    		};
+    // These are used to reference unlocalized names
+    public static String[] subBlockUnloc = {
+    		"White", //0
+    		"Orange", //1
+    		"Magenta", //2
+    		"LightBlue", //3
+    		"Yellow", //4
+    		"Lime", //5
+    		"Pink", //6
+    		"Gray", //7
+    		"Silver", //8
+    		"Cyan", //9
+    		"Purple", //10
+    		"Blue", //11
+    		"Brown", //12
+    		"Green", //13
+    		"Red", //14
+    		"Black" //15
     		};
     private IIcon[] blockIcons = new IIcon[32];
     private int metaSubStart; // This value iterates through the color strings because you can only register 4 (since meta is limited to 16 values)
@@ -79,11 +99,16 @@ public class BlockGlazedTerracotta extends Block
     {
     	
         for (int subs = 0; subs < 4; subs ++) {
+        	/* VN addresses are kept here because there needs to be two icons per block,
+        	 * which is different from the vanilla-style one per block.
+        	 * If someone were to use a resource pack to reference the vanilla addresses,
+        	 * it would only replace some of the block faces.
+        	 */
 	        this.blockIcons[subs] = iicon.registerIcon(Reference.MOD_ID + ":glazed_terracotta_"+subBlock[metaSubStart+subs]);
 	        this.blockIcons[subs+16] = iicon.registerIcon(Reference.MOD_ID + ":glazed_terracotta_"+subBlock[metaSubStart+subs]+"_i");
 	    }
     }
-
+    
     @Override
 	public IIcon getIcon(int side, int metadata)
     {

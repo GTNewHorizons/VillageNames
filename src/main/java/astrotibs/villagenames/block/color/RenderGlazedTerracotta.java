@@ -31,7 +31,7 @@ public class RenderGlazedTerracotta implements ISimpleBlockRenderingHandler
         renderer.uvRotateWest = 0;
         renderer.uvRotateBottom = 0;
     }
-
+    
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
     {
@@ -45,6 +45,7 @@ public class RenderGlazedTerracotta implements ISimpleBlockRenderingHandler
         renderer.uvRotateWest = orient > 1 ? 3-orient : orient+2; // Rotate south-facing side (NO NEED FOR MIRROR)
         renderer.uvRotateBottom = orient > 1 ? 2*orient-4 : 3-2*orient; // (ALL orientations are wrong)
         renderer.renderStandardBlock(block, x, y, z);
+        
         // Must reset the rotation or it will mess up all rotating blocks around
         renderer.uvRotateTop = 0;
         renderer.uvRotateNorth = 0;
@@ -52,6 +53,7 @@ public class RenderGlazedTerracotta implements ISimpleBlockRenderingHandler
         renderer.uvRotateSouth = 0;
         renderer.uvRotateWest = 0;
         renderer.uvRotateBottom = 0;
+        
         return true;
         
     }

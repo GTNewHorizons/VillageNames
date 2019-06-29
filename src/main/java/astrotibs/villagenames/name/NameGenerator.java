@@ -1,1699 +1,676 @@
 package astrotibs.villagenames.name;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Random;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import astrotibs.villagenames.config.AlienConfigHandler;
+import astrotibs.villagenames.config.AlienVillageConfigHandler;
+import astrotibs.villagenames.config.AngelConfigHandler;
+import astrotibs.villagenames.config.CustomConfigHandler;
+import astrotibs.villagenames.config.DemonConfigHandler;
+import astrotibs.villagenames.config.DragonConfigHandler;
 import astrotibs.villagenames.config.EndCityConfigHandler;
 import astrotibs.villagenames.config.FortressConfigHandler;
-import astrotibs.villagenames.config.GeneralConfigHandler;
+import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.GoblinConfigHandler;
+import astrotibs.villagenames.config.GolemConfigHandler;
 import astrotibs.villagenames.config.MansionConfigHandler;
 import astrotibs.villagenames.config.MineshaftConfigHandler;
 import astrotibs.villagenames.config.MonumentConfigHandler;
-import astrotibs.villagenames.config.OtherModConfigHandler;
 import astrotibs.villagenames.config.StrongholdConfigHandler;
 import astrotibs.villagenames.config.TempleConfigHandler;
 import astrotibs.villagenames.config.VillageConfigHandler;
 import astrotibs.villagenames.config.VillagerConfigHandler;
-import astrotibs.villagenames.handler.ItemEventHandler;
+import astrotibs.villagenames.integration.ModObjects;
+import astrotibs.villagenames.utility.LogHelper;
 
 //The whole point of this thing is to be a separate class that generates the names.
 
 public class NameGenerator {
-	
+	/*
 	// The constructor
 	public NameGenerator() {
+		// Not called. YOLO
 	}
+	*/
+	//static Random random = new Random();
 	
-	public static int[] otherModIDs = OtherModConfigHandler.otherModIDs;//.config.get("Mapping Professions", "otherModIDs", new int[]{-1}, "").getIntList();
-	public static String[] otherModProfessions = OtherModConfigHandler.otherModProfessions;//.config.getStringList("otherModProfessions", "Mapping Professions", new String[]{"Villager"}, "");
-
-	static Random random = new Random();
-	
-	
-	// Generate all the name pieces necessary for a village sign
-	public static String[] newVillageName() {
+	/**
+	 * Enter in a name type to generate (e.g. "village"), and this will return a string list containing:
+	 * [0] a header tag (for village colors; unused so far)
+	 * [1] prefix
+	 * [2] root name -- this is the CORE NAME of interest
+	 * [3] suffix
+	 */
+	public static String[] newRandomName(String nameType) {
 		
-		String[] prefix = VillageConfigHandler.prefix;
-		String[] suffix = VillageConfigHandler.suffix;
-		String[] oneSylBegin = VillageConfigHandler.oneSylBegin;
-		String[] oneSylEnd = VillageConfigHandler.oneSylEnd;
-		String[] syl1Trans = VillageConfigHandler.syl1Trans;
-		String[] syl2Trans = VillageConfigHandler.syl2Trans;
-		String[] syl2Term = VillageConfigHandler.syl2Term;
-		String[] syl3Trans = VillageConfigHandler.syl3Trans;
-		String[] syl3Term = VillageConfigHandler.syl3Term;
-		String[] syl4Trans = VillageConfigHandler.syl4Trans;
-		String[] syl4Term = VillageConfigHandler.syl4Term;
-		String[] syl5Trans = VillageConfigHandler.syl5Trans;
-		String[] syl5Term = VillageConfigHandler.syl5Term;
-		String[] syl6Trans = VillageConfigHandler.syl6Trans;
-		String[] syl6Term = VillageConfigHandler.syl6Term;
-		String[] syl7Term = VillageConfigHandler.syl7Term;
-		String headerTags = GeneralConfigHandler.headerTags;
+		Random random = new Random(); // Overwrites world random because of simultaneity issues
 		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
+		// Unpack nameType into multiple possible name pools
 		
-		numChoices = oneSylBegin.length + syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < prefix.length) {
-			// Add a prefix!
-			namePrefix = prefix[indx];
+		// Split input string by hyphen
+		String[] nameType_raw = nameType.trim().split("\\s*-\\s*"); // Using regular expression \s* to optional remove leading and tailing spaces
+		
+		// Cast all elements as lowercase for easier comparison
+		String[] nameType_a = new String[nameType_raw.length];
+		for (int input_i=0; input_i < nameType_raw.length; input_i++) {nameType_a[input_i] = nameType_raw[input_i].toLowerCase().trim();}
+		
+		// Step 0: initialize empty syllable pools, into which will be added specific source pools
+		String[] prefix = new String[]{};
+		String[] suffix = new String[]{};
+		
+		String[] syl1begin = new String[]{};  String[] syl1end = new String[]{};
+						                      String[] syl1trans = new String[]{};
+		String[] syl2term = new String[]{};   String[] syl2trans = new String[]{};
+		String[] syl3term = new String[]{};   String[] syl3trans = new String[]{};
+		String[] syl4term = new String[]{};   String[] syl4trans = new String[]{};
+		String[] syl5term = new String[]{};   String[] syl5trans = new String[]{};
+		String[] syl6term = new String[]{};   String[] syl6trans = new String[]{};
+						                      String[] syl7term = new String[]{};
+		
+	    // Load in syllable pieces
+		
+		//if (nameType.toLowerCase().trim().equals("village")) {
+		if ( Arrays.asList(nameType_a).contains("village") ) {
+			prefix =    ArrayUtils.addAll(prefix, VillageConfigHandler.village_prefix);
+			suffix =    ArrayUtils.addAll(suffix, VillageConfigHandler.village_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, VillageConfigHandler.village_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, VillageConfigHandler.village_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, VillageConfigHandler.village_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, VillageConfigHandler.village_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, VillageConfigHandler.village_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, VillageConfigHandler.village_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, VillageConfigHandler.village_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, VillageConfigHandler.village_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, VillageConfigHandler.village_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, VillageConfigHandler.village_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, VillageConfigHandler.village_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, VillageConfigHandler.village_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, VillageConfigHandler.village_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, VillageConfigHandler.village_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("temple")) {
+		if ( Arrays.asList(nameType_a).contains("temple") ) {
+			prefix =    ArrayUtils.addAll(prefix, TempleConfigHandler.temple_prefix);
+			suffix =    ArrayUtils.addAll(suffix, TempleConfigHandler.temple_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, TempleConfigHandler.temple_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, TempleConfigHandler.temple_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, TempleConfigHandler.temple_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, TempleConfigHandler.temple_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, TempleConfigHandler.temple_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, TempleConfigHandler.temple_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, TempleConfigHandler.temple_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, TempleConfigHandler.temple_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, TempleConfigHandler.temple_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, TempleConfigHandler.temple_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, TempleConfigHandler.temple_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, TempleConfigHandler.temple_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, TempleConfigHandler.temple_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, TempleConfigHandler.temple_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("mineshaft")) {
+		if ( Arrays.asList(nameType_a).contains("mineshaft") ) {
+			prefix =    ArrayUtils.addAll(prefix, MineshaftConfigHandler.mineshaft_prefix);
+			suffix =    ArrayUtils.addAll(suffix, MineshaftConfigHandler.mineshaft_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, MineshaftConfigHandler.mineshaft_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, MineshaftConfigHandler.mineshaft_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, MineshaftConfigHandler.mineshaft_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, MineshaftConfigHandler.mineshaft_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, MineshaftConfigHandler.mineshaft_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, MineshaftConfigHandler.mineshaft_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, MineshaftConfigHandler.mineshaft_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, MineshaftConfigHandler.mineshaft_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, MineshaftConfigHandler.mineshaft_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, MineshaftConfigHandler.mineshaft_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, MineshaftConfigHandler.mineshaft_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, MineshaftConfigHandler.mineshaft_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, MineshaftConfigHandler.mineshaft_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, MineshaftConfigHandler.mineshaft_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("fortress")) {
+		if ( Arrays.asList(nameType_a).contains("fortress") ) {
+			prefix =    ArrayUtils.addAll(prefix, FortressConfigHandler.fortress_prefix);
+			suffix =    ArrayUtils.addAll(suffix, FortressConfigHandler.fortress_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, FortressConfigHandler.fortress_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, FortressConfigHandler.fortress_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, FortressConfigHandler.fortress_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, FortressConfigHandler.fortress_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, FortressConfigHandler.fortress_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, FortressConfigHandler.fortress_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, FortressConfigHandler.fortress_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, FortressConfigHandler.fortress_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, FortressConfigHandler.fortress_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, FortressConfigHandler.fortress_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, FortressConfigHandler.fortress_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, FortressConfigHandler.fortress_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, FortressConfigHandler.fortress_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, FortressConfigHandler.fortress_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("stronghold")) {
+		if ( Arrays.asList(nameType_a).contains("stronghold") ) {
+			prefix =    ArrayUtils.addAll(prefix, StrongholdConfigHandler.stronghold_prefix);
+			suffix =    ArrayUtils.addAll(suffix, StrongholdConfigHandler.stronghold_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, StrongholdConfigHandler.stronghold_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, StrongholdConfigHandler.stronghold_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, StrongholdConfigHandler.stronghold_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, StrongholdConfigHandler.stronghold_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, StrongholdConfigHandler.stronghold_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, StrongholdConfigHandler.stronghold_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, StrongholdConfigHandler.stronghold_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, StrongholdConfigHandler.stronghold_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, StrongholdConfigHandler.stronghold_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, StrongholdConfigHandler.stronghold_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, StrongholdConfigHandler.stronghold_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, StrongholdConfigHandler.stronghold_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, StrongholdConfigHandler.stronghold_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, StrongholdConfigHandler.stronghold_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("monument")) {
+		if ( Arrays.asList(nameType_a).contains("monument") ) {
+			prefix =    ArrayUtils.addAll(prefix, MonumentConfigHandler.monument_prefix);
+			suffix =    ArrayUtils.addAll(suffix, MonumentConfigHandler.monument_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, MonumentConfigHandler.monument_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, MonumentConfigHandler.monument_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, MonumentConfigHandler.monument_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, MonumentConfigHandler.monument_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, MonumentConfigHandler.monument_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, MonumentConfigHandler.monument_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, MonumentConfigHandler.monument_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, MonumentConfigHandler.monument_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, MonumentConfigHandler.monument_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, MonumentConfigHandler.monument_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, MonumentConfigHandler.monument_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, MonumentConfigHandler.monument_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, MonumentConfigHandler.monument_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, MonumentConfigHandler.monument_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("endcity")) {
+		if ( Arrays.asList(nameType_a).contains("endcity") ) {
+			prefix =    ArrayUtils.addAll(prefix, EndCityConfigHandler.endcity_prefix);
+			suffix =    ArrayUtils.addAll(suffix, EndCityConfigHandler.endcity_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, EndCityConfigHandler.endcity_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, EndCityConfigHandler.endcity_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, EndCityConfigHandler.endcity_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, EndCityConfigHandler.endcity_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, EndCityConfigHandler.endcity_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, EndCityConfigHandler.endcity_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, EndCityConfigHandler.endcity_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, EndCityConfigHandler.endcity_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, EndCityConfigHandler.endcity_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, EndCityConfigHandler.endcity_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, EndCityConfigHandler.endcity_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, EndCityConfigHandler.endcity_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, EndCityConfigHandler.endcity_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, EndCityConfigHandler.endcity_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("mansion")) {
+		if ( Arrays.asList(nameType_a).contains("mansion") ) {
+			prefix =    ArrayUtils.addAll(prefix, MansionConfigHandler.mansion_prefix);
+			suffix =    ArrayUtils.addAll(suffix, MansionConfigHandler.mansion_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, MansionConfigHandler.mansion_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, MansionConfigHandler.mansion_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, MansionConfigHandler.mansion_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, MansionConfigHandler.mansion_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, MansionConfigHandler.mansion_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, MansionConfigHandler.mansion_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, MansionConfigHandler.mansion_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, MansionConfigHandler.mansion_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, MansionConfigHandler.mansion_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, MansionConfigHandler.mansion_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, MansionConfigHandler.mansion_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, MansionConfigHandler.mansion_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, MansionConfigHandler.mansion_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, MansionConfigHandler.mansion_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("alienvillager")) {
+		if ( Arrays.asList(nameType_a).contains("alien") ) {
+			prefix =    ArrayUtils.addAll(prefix, AlienConfigHandler.alien_prefix);
+			suffix =    ArrayUtils.addAll(suffix, AlienConfigHandler.alien_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, AlienConfigHandler.alien_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, AlienConfigHandler.alien_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, AlienConfigHandler.alien_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, AlienConfigHandler.alien_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, AlienConfigHandler.alien_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, AlienConfigHandler.alien_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, AlienConfigHandler.alien_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, AlienConfigHandler.alien_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, AlienConfigHandler.alien_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, AlienConfigHandler.alien_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, AlienConfigHandler.alien_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, AlienConfigHandler.alien_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, AlienConfigHandler.alien_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, AlienConfigHandler.alien_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("alienvillage")) {
+		if ( Arrays.asList(nameType_a).contains("alienvillage") ) {
+			prefix =    ArrayUtils.addAll(prefix, AlienVillageConfigHandler.alienVillage_prefix);
+			suffix =    ArrayUtils.addAll(suffix, AlienVillageConfigHandler.alienVillage_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, AlienVillageConfigHandler.alienVillage_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, AlienVillageConfigHandler.alienVillage_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, AlienVillageConfigHandler.alienVillage_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, AlienVillageConfigHandler.alienVillage_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, AlienVillageConfigHandler.alienVillage_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, AlienVillageConfigHandler.alienVillage_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, AlienVillageConfigHandler.alienVillage_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, AlienVillageConfigHandler.alienVillage_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, AlienVillageConfigHandler.alienVillage_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, AlienVillageConfigHandler.alienVillage_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, AlienVillageConfigHandler.alienVillage_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, AlienVillageConfigHandler.alienVillage_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, AlienVillageConfigHandler.alienVillage_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, AlienVillageConfigHandler.alienVillage_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("goblin")) {
+		if ( Arrays.asList(nameType_a).contains("goblin") ) {
+			prefix =    ArrayUtils.addAll(prefix, GoblinConfigHandler.goblin_prefix);
+			suffix =    ArrayUtils.addAll(suffix, GoblinConfigHandler.goblin_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, GoblinConfigHandler.goblin_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, GoblinConfigHandler.goblin_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, GoblinConfigHandler.goblin_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, GoblinConfigHandler.goblin_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, GoblinConfigHandler.goblin_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, GoblinConfigHandler.goblin_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, GoblinConfigHandler.goblin_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, GoblinConfigHandler.goblin_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, GoblinConfigHandler.goblin_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, GoblinConfigHandler.goblin_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, GoblinConfigHandler.goblin_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, GoblinConfigHandler.goblin_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, GoblinConfigHandler.goblin_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, GoblinConfigHandler.goblin_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("golem")) {
+		if ( Arrays.asList(nameType_a).contains("golem") ) {
+			prefix =    ArrayUtils.addAll(prefix, GolemConfigHandler.golem_prefix);
+			suffix =    ArrayUtils.addAll(suffix, GolemConfigHandler.golem_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, GolemConfigHandler.golem_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, GolemConfigHandler.golem_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, GolemConfigHandler.golem_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, GolemConfigHandler.golem_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, GolemConfigHandler.golem_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, GolemConfigHandler.golem_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, GolemConfigHandler.golem_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, GolemConfigHandler.golem_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, GolemConfigHandler.golem_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, GolemConfigHandler.golem_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, GolemConfigHandler.golem_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, GolemConfigHandler.golem_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, GolemConfigHandler.golem_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, GolemConfigHandler.golem_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("demon")) {
+		if ( Arrays.asList(nameType_a).contains("demon") ) {
+			prefix =    ArrayUtils.addAll(prefix, DemonConfigHandler.demon_prefix);
+			suffix =    ArrayUtils.addAll(suffix, DemonConfigHandler.demon_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, DemonConfigHandler.demon_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, DemonConfigHandler.demon_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, DemonConfigHandler.demon_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, DemonConfigHandler.demon_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, DemonConfigHandler.demon_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, DemonConfigHandler.demon_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, DemonConfigHandler.demon_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, DemonConfigHandler.demon_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, DemonConfigHandler.demon_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, DemonConfigHandler.demon_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, DemonConfigHandler.demon_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, DemonConfigHandler.demon_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, DemonConfigHandler.demon_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, DemonConfigHandler.demon_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("angel")) {
+		if ( Arrays.asList(nameType_a).contains("angel") ) {
+			prefix =    ArrayUtils.addAll(prefix, AngelConfigHandler.angel_prefix);
+			suffix =    ArrayUtils.addAll(suffix, AngelConfigHandler.angel_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, AngelConfigHandler.angel_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, AngelConfigHandler.angel_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, AngelConfigHandler.angel_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, AngelConfigHandler.angel_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, AngelConfigHandler.angel_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, AngelConfigHandler.angel_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, AngelConfigHandler.angel_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, AngelConfigHandler.angel_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, AngelConfigHandler.angel_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, AngelConfigHandler.angel_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, AngelConfigHandler.angel_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, AngelConfigHandler.angel_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, AngelConfigHandler.angel_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, AngelConfigHandler.angel_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("dragon")) {
+		if ( Arrays.asList(nameType_a).contains("dragon") ) {
+			prefix =    ArrayUtils.addAll(prefix, DragonConfigHandler.dragon_prefix);
+			suffix =    ArrayUtils.addAll(suffix, DragonConfigHandler.dragon_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, DragonConfigHandler.dragon_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, DragonConfigHandler.dragon_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, DragonConfigHandler.dragon_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, DragonConfigHandler.dragon_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, DragonConfigHandler.dragon_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, DragonConfigHandler.dragon_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, DragonConfigHandler.dragon_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, DragonConfigHandler.dragon_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, DragonConfigHandler.dragon_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, DragonConfigHandler.dragon_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, DragonConfigHandler.dragon_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, DragonConfigHandler.dragon_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, DragonConfigHandler.dragon_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, DragonConfigHandler.dragon_syl7Term);
+		}
+		//else if (nameType.toLowerCase().trim().equals("custom")) {
+		if ( Arrays.asList(nameType_a).contains("custom") ) {
+			prefix =    ArrayUtils.addAll(prefix, CustomConfigHandler.custom_prefix);
+			suffix =    ArrayUtils.addAll(suffix, CustomConfigHandler.custom_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, CustomConfigHandler.custom_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, CustomConfigHandler.custom_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, CustomConfigHandler.custom_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, CustomConfigHandler.custom_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, CustomConfigHandler.custom_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, CustomConfigHandler.custom_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, CustomConfigHandler.custom_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, CustomConfigHandler.custom_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, CustomConfigHandler.custom_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, CustomConfigHandler.custom_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, CustomConfigHandler.custom_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, CustomConfigHandler.custom_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, CustomConfigHandler.custom_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, CustomConfigHandler.custom_syl7Term);
+		}
+		// It's possible the player made a mistake and no name pieces were correctly entered. If so, default to "villager"
+		if ( 
+				Arrays.asList(nameType_a).contains("villager") // User deliberately chose "villager"
+				|| (syl1begin.length + syl1trans.length) <= 0  // No previous entries were chosen
+				) {
+			if ( !Arrays.asList(nameType_a).contains("villager") && (syl1begin.length + syl1trans.length) <= 0 )
+				{ if (GeneralConfig.debugMessages) LogHelper.error("Submitted nameType contained no valid entries! Defaulting to Villager name pool."); }
+			prefix =    ArrayUtils.addAll(prefix, VillagerConfigHandler.villager_prefix);
+			suffix =    ArrayUtils.addAll(suffix, VillagerConfigHandler.villager_suffix);
+			syl1begin = ArrayUtils.addAll(syl1begin, VillagerConfigHandler.villager_oneSylBegin);
+			syl1end =   ArrayUtils.addAll(syl1end, VillagerConfigHandler.villager_oneSylEnd);
+			syl1trans = ArrayUtils.addAll(syl1trans, VillagerConfigHandler.villager_syl1Trans);
+			syl2term =  ArrayUtils.addAll(syl2term, VillagerConfigHandler.villager_syl2Term);
+			syl2trans = ArrayUtils.addAll(syl2trans, VillagerConfigHandler.villager_syl2Trans);
+			syl3term =  ArrayUtils.addAll(syl3term, VillagerConfigHandler.villager_syl3Term);
+			syl3trans = ArrayUtils.addAll(syl3trans, VillagerConfigHandler.villager_syl3Trans);
+			syl4term =  ArrayUtils.addAll(syl4term, VillagerConfigHandler.villager_syl4Term);
+			syl4trans = ArrayUtils.addAll(syl4trans, VillagerConfigHandler.villager_syl4Trans);
+			syl5term =  ArrayUtils.addAll(syl5term, VillagerConfigHandler.villager_syl5Term);
+			syl5trans = ArrayUtils.addAll(syl5trans, VillagerConfigHandler.villager_syl5Trans);
+			syl6term =  ArrayUtils.addAll(syl6term, VillagerConfigHandler.villager_syl6Term);
+			syl6trans = ArrayUtils.addAll(syl6trans, VillagerConfigHandler.villager_syl6Trans);
+			syl7term =  ArrayUtils.addAll(syl7term, VillagerConfigHandler.villager_syl7Term);
 		}
 		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
+		// The three pieces of interest
+		String r_prefix = "";
+		String r_suffix = "";
+		String rootName = "";
 		
+		// These integers will get iterated over every time a root generation fails.
+		// An exception is thrown if one gets to 50--pretty generous, if I say so.
+		// Someone has to have REALLY bungled up syllable pools to have done this.
+		int tooManyFailures = 50;
+		int blankRoot = 0;
+		int sizeOverflow = 0;
+		int sizeUnderflow = 0;
+		int repeatedChar = 0;
+		int filterFail = 0;
+		
+		int r; // Integer used for randomizing
+		
+		// Step 1: Generate a prefix.
+		if ( (syl1begin.length + syl1trans.length) > 0) { // There are starting syllables.
+			
+			if ( (syl1begin.length + syl1trans.length) > prefix.length) { // There are more starting syllables than prefixes, as should be the case.
+				r = random.nextInt(syl1begin.length + syl1trans.length);
+				if (r < prefix.length) r_prefix=prefix[r]; // Prefix generated
+				if (prefix.length >= (syl1begin.length + syl1trans.length) && GeneralConfig.debugMessages) LogHelper.warn(nameType + " has more prefixes than first syllables!");
+			}
+			else { // There are fewer starting syllables than prefixes, which is abnormal. Just pick a random prefix.
+				r_prefix = (prefix.length>0) ? prefix[random.nextInt(prefix.length)] : "";
+			}
+		}
+		else LogHelper.error(nameType + " has no entries for the first syllable!");
+		
+		
+		// Step 3: Generate a suffix.
+		//r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
+		if ( (syl1begin.length + syl1trans.length) > 0) { // There are starting syllables.
+			
+			if ( (syl1begin.length + syl1trans.length) > suffix.length) { // There are more starting syllables than suffixes, as should be the case.
+				r = random.nextInt(syl1begin.length + syl1trans.length);
+				if (r < suffix.length) r_suffix=suffix[r]; // Suffix generated
+				if (suffix.length >= (syl1begin.length + syl1trans.length) && GeneralConfig.debugMessages) LogHelper.warn(nameType + " has more suffixes than first syllables!");
+			}
+			else { // There are fewer starting syllables than suffixes, which is abnormal. Just pick a random suffix.
+				r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
+			}
+		}
+		
+		// Step 2: Generate a proper (root) name.
+		
+		// The while loop continues until a valid name is generated or an exception is thrown
 		while (true) {
 			
-    		// Step 2: Generate a proper (root) name.
-    		// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = oneSylBegin.length + syl1Trans.length; // Number of possible name bases
-    		indx = random.nextInt(numChoices);
-    		if (indx < syl1Trans.length) {
-    			// This will be a multi-syllable compound name
-    			nameRoot = syl1Trans[indx];
-    			
-    			// Step 2.2: Add second syllable
-    			numChoices = syl2Trans.length + syl2Term.length; // Number of possible second syllables
-    			indx = random.nextInt(numChoices);
-    			if (indx < syl2Trans.length) {
-    				nameRoot += syl2Trans[indx];
-    				
-    				// Step 2.3: Add a third syllable
-        			numChoices = syl3Trans.length + syl3Term.length; // Number of possible third syllables
-        			indx = random.nextInt(numChoices);
-        			if (indx < syl3Trans.length) {
-        				nameRoot += syl3Trans[indx];
-        				
-        				// Step 2.4: Add a fourth syllable
-            			numChoices = syl4Trans.length + syl4Term.length; // Number of possible fourth syllables
-            			indx = random.nextInt(numChoices);
-            			if (indx < syl4Trans.length) {
-            				nameRoot += syl4Trans[indx];
-            				
-            				// Step 2.5: Add a fifth syllable
-            				numChoices = syl5Trans.length + syl5Term.length; // Number of possible fifth syllables
-                			indx = random.nextInt(numChoices);
-                			if (indx < syl5Trans.length) {
-                				nameRoot += syl5Trans[indx];
-                				
-                				// Step 2.6: Add a sixth syllable
-                				numChoices = syl6Trans.length + syl6Term.length; // Number of possible sixth syllables
-                    			indx = random.nextInt(numChoices);
-                    			if (indx < syl6Trans.length) {
-                    				nameRoot += syl6Trans[indx];
-                    				
-                    				// Step 2.7: Add the seventh and final syllable.
-                    				indx = random.nextInt(syl7Term.length);
-                    				nameRoot += syl7Term[indx];
-                    			}
-                    			else {
-                    				// End the word with six syllables.
-                    				nameRoot += syl6Term[indx-syl6Trans.length];
-                    			}
-                			}
-                			else {
-                				// End the word with five syllables.
-                				nameRoot += syl5Term[indx-syl5Trans.length];
-                			}
-            			}
-            			else {
-            				// End the word with four syllables.
-            				nameRoot += syl4Term[indx-syl4Trans.length];
-            			}
-        			}
-        			else {
-        				// End the word with three syllables.
-        				nameRoot += syl3Term[indx-syl3Trans.length];
-        			}
-    			}
-    			else {
-    				// End the word with two syllables.
-    				nameRoot += syl2Term[indx-syl2Trans.length];
-    			}
-    		}
-    		else {
-    			// This will be a one-syllable name.
-    			nameRoot = oneSylBegin[indx-syl1Trans.length];
-    			indx = random.nextInt(oneSylBegin.length);
-    			if (indx < oneSylEnd.length) {
-    				// Add a second half to the syllable
-    				nameRoot += oneSylEnd[indx];
-    			}
-    		}
-    		
-    		// I have to reject this (root) name if it's above 15 characters or below 2.
-    		// Also I should ensure the last three characters are not all the same
-    		if (
-    				nameRoot.length() <= 15 && 
-    				nameRoot.length() >= 3
-    			) {
-    			// Now, make sure the same characters don't appear in the name three times in a row
-    			char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-    			int consecutives = 0;
-    			for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-    				if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-    					consecutives++;
-    				}
-    			}
-    			if (consecutives == 0) {
-					// Accept the name!
-        			break;
-				}
-    		}
-    		// Now ensure that a two-letter name isn't the same letter twice.
-    		else if (nameRoot.length() == 2) {
-    			if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-    				// Accept the name!
-        			break;
-    			}
-    		}
-    		//LogHelper.info("Gotta go round again...");
-		}
-    		
-		// Step 3: generate suffix.
-		numChoices = oneSylBegin.length + syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < suffix.length) {
-			// Add a suffix!
-			nameSuffix = suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		headerTags = headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {headerTags, namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	// This generates a name for a villager
-	public static String newVillagerName() {
-		
-		String[] villager_oneSylBegin = VillagerConfigHandler.villager_oneSylBegin;
-		String[] villager_oneSylEnd = VillagerConfigHandler.villager_oneSylEnd;
-		String[] villager_syl1Trans = VillagerConfigHandler.villager_syl1Trans;
-		String[] villager_syl2Trans = VillagerConfigHandler.villager_syl2Trans;
-		String[] villager_syl2Term = VillagerConfigHandler.villager_syl2Term;
-		String[] villager_syl3Trans = VillagerConfigHandler.villager_syl3Trans;
-		String[] villager_syl3Term = VillagerConfigHandler.villager_syl3Term;
-		String[] villager_syl4Trans = VillagerConfigHandler.villager_syl4Trans;
-		String[] villager_syl4Term = VillagerConfigHandler.villager_syl4Term;
-		String[] villager_syl5Term = VillagerConfigHandler.villager_syl5Term;
-		
-		int i;
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-    		// Step 2: Generate a proper (root) name.
-    		// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			
-			int numChoices = villager_oneSylBegin.length + villager_syl1Trans.length; // Number of possible name bases
-    		i = random.nextInt(numChoices);
-    		if (i < villager_syl1Trans.length) {
-    			// This will be a multi-syllable compound name
-    			nameRoot = villager_syl1Trans[i];
-    			
-    			// Step 2.2: Add second syllable
-    			numChoices = villager_syl2Trans.length + villager_syl2Term.length; // Number of possible second syllables
-    			i = random.nextInt(numChoices);
-    			if (i < villager_syl2Trans.length) {
-    				nameRoot += villager_syl2Trans[i];
-    				
-    				// Step 2.3: Add a third syllable
-        			numChoices = villager_syl3Trans.length + villager_syl3Term.length; // Number of possible third syllables
-        			i = random.nextInt(numChoices);
-        			if (i < villager_syl3Trans.length) {
-        				nameRoot += villager_syl3Trans[i];
-        				
-        				// Step 2.4: Add a fourth syllable
-            			numChoices = villager_syl4Trans.length + villager_syl4Term.length; // Number of possible fourth syllables
-            			i = random.nextInt(numChoices);
-            			if (i < villager_syl4Trans.length) {
-            				nameRoot += villager_syl4Trans[i];
-            				
-            				// Step 2.5: Add the fifth and final syllable
-                			i = random.nextInt(villager_syl5Term.length);
-                			nameRoot += villager_syl5Term[i];
-            			}
-            			else {
-            				// End the word with four syllables.
-            				nameRoot += villager_syl4Term[i-villager_syl4Trans.length];
-            			}
-        			}
-        			else {
-        				// End the word with three syllables.
-        				nameRoot += villager_syl3Term[i-villager_syl3Trans.length];
-        			}
-    			}
-    			else {
-    				// End the word with two syllables.
-    				nameRoot += villager_syl2Term[i-villager_syl2Trans.length];
-    			}
-    		}
-    		else {
-    			// This will be a one-syllable name.
-    			nameRoot = villager_oneSylBegin[i-villager_syl1Trans.length];
-    			i = random.nextInt(villager_oneSylBegin.length);
-    			if (i < villager_oneSylEnd.length) {
-    				// Add a second half to the syllable
-    				nameRoot += villager_oneSylEnd[i];
-    			}
-    		}
-    		
-    		nameRoot = nameRoot.replaceAll("\\^", " ");
-    		
-    		// I have to reject this (root) name if it's above 15 characters or below 2.
-    		// Also I should ensure the last three characters are not all the same
-    		if (
-    				nameRoot.length() <= 15 && 
-    				nameRoot.length() >= 3
-    			) {
-    			// Now, make sure the same characters don't appear in the name three times in a row
-    			char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-    			int consecutives = 0;
-    			for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-    				if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-    					consecutives++;
-    				}
-    			}
-    			if (consecutives == 0) {
-					// Accept the name!
-        			break;
-				}
-    		}
-    		// Now ensure that a two-letter name isn't the same letter twice.
-    		else if (nameRoot.length() == 2) {
-    			if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-    				// Accept the name!
-        			break;
-    			}
-    		}
-		}
-		return nameRoot;
-	}
-	
-	
-	// Generate all the name pieces necessary for a mineshaft
-	public static String[] newMineshaftName() {
-		
-		String[] mineshaft_prefix = MineshaftConfigHandler.mineshaft_prefix;
-		String[] mineshaft_suffix = MineshaftConfigHandler.mineshaft_suffix;
-		String[] mineshaft_oneSylBegin = MineshaftConfigHandler.mineshaft_oneSylBegin;
-		String[] mineshaft_oneSylEnd = MineshaftConfigHandler.mineshaft_oneSylEnd;
-		String[] mineshaft_syl1Trans = MineshaftConfigHandler.mineshaft_syl1Trans;
-		String[] mineshaft_syl2Trans = MineshaftConfigHandler.mineshaft_syl2Trans;
-		String[] mineshaft_syl2Term = MineshaftConfigHandler.mineshaft_syl2Term;
-		String[] mineshaft_syl3Trans = MineshaftConfigHandler.mineshaft_syl3Trans;
-		String[] mineshaft_syl3Term = MineshaftConfigHandler.mineshaft_syl3Term;
-		String[] mineshaft_syl4Trans = MineshaftConfigHandler.mineshaft_syl4Trans;
-		String[] mineshaft_syl4Term = MineshaftConfigHandler.mineshaft_syl4Term;
-		String[] mineshaft_syl5Term = MineshaftConfigHandler.mineshaft_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = mineshaft_oneSylBegin.length + mineshaft_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < mineshaft_prefix.length) {
-			// Add a prefix!
-			namePrefix = mineshaft_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = mineshaft_oneSylBegin.length + mineshaft_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < mineshaft_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = mineshaft_syl1Trans[indx];
+			// Step 2.1: Determine whether or not this will be a one-syllable name
+			if ( (syl1begin.length + syl1trans.length) <= 0 ) { // There is no first syllable to choose from!
 				
-				// Step 2.2: Add second syllable
-				numChoices = mineshaft_syl2Trans.length + mineshaft_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < mineshaft_syl2Trans.length) {
-					nameRoot += mineshaft_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = mineshaft_syl3Trans.length + mineshaft_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < mineshaft_syl3Trans.length) {
-						nameRoot += mineshaft_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = mineshaft_syl4Trans.length + mineshaft_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < mineshaft_syl4Trans.length) {
-							nameRoot += mineshaft_syl4Trans[indx];
-							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(mineshaft_syl5Term.length);
-							nameRoot += mineshaft_syl5Term[indx];
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += mineshaft_syl4Term[indx-mineshaft_syl4Trans.length];
-						}
-					}
-					else {
-						// End the word with three syllables.
-						nameRoot += mineshaft_syl3Term[indx-mineshaft_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += mineshaft_syl2Term[indx-mineshaft_syl2Trans.length];
-				}
+				String errorMessage = "Name type " + nameType + " has no syllable 1 entries! No name can be constructed!";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
 			}
 			else {
-				// This will be a one-syllable name.
-				nameRoot = mineshaft_oneSylBegin[indx-mineshaft_syl1Trans.length];
-				indx = random.nextInt(mineshaft_oneSylBegin.length);
-				if (indx < mineshaft_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += mineshaft_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
+				r = random.nextInt(syl1begin.length + syl1trans.length);
+				if (r < syl1begin.length) { // This will be a monosyllabic name.
+					rootName = syl1begin[r];
+					// Now try to generate an end cap
+					r = random.nextInt(syl1begin.length);
+					if (r < syl1end.length) { // Add an ending part to the syllable
+						rootName += syl1end[r];
 					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		numChoices = mineshaft_oneSylBegin.length + mineshaft_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < mineshaft_suffix.length) {
-			// Add a suffix!
-			nameSuffix = mineshaft_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//mineshaft_headerTags = mineshaft_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
+					if ( syl1end.length > syl1begin.length && GeneralConfig.debugMessages) LogHelper.warn("Name type " + nameType + " has more one-syllable ending pieces than beginning pieces!");
 
-
-
-	// Generate all the name pieces necessary for a stronghold
-	public static String[] newStrongholdName() {
-		
-		String[] stronghold_prefix = StrongholdConfigHandler.stronghold_prefix;
-		String[] stronghold_suffix = StrongholdConfigHandler.stronghold_suffix;
-		String[] stronghold_oneSylBegin = StrongholdConfigHandler.stronghold_oneSylBegin;
-		String[] stronghold_oneSylEnd = StrongholdConfigHandler.stronghold_oneSylEnd;
-		String[] stronghold_syl1Trans = StrongholdConfigHandler.stronghold_syl1Trans;
-		String[] stronghold_syl2Trans = StrongholdConfigHandler.stronghold_syl2Trans;
-		String[] stronghold_syl2Term = StrongholdConfigHandler.stronghold_syl2Term;
-		String[] stronghold_syl3Trans = StrongholdConfigHandler.stronghold_syl3Trans;
-		String[] stronghold_syl3Term = StrongholdConfigHandler.stronghold_syl3Term;
-		String[] stronghold_syl4Trans = StrongholdConfigHandler.stronghold_syl4Trans;
-		String[] stronghold_syl4Term = StrongholdConfigHandler.stronghold_syl4Term;
-		String[] stronghold_syl5Term = StrongholdConfigHandler.stronghold_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = stronghold_oneSylBegin.length + stronghold_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < stronghold_prefix.length) {
-			// Add a prefix!
-			namePrefix = stronghold_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = stronghold_oneSylBegin.length + stronghold_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < stronghold_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = stronghold_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = stronghold_syl2Trans.length + stronghold_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < stronghold_syl2Trans.length) {
-					nameRoot += stronghold_syl2Trans[indx];
+					// The root name was created. It is one syllable long.
+				}
+				else { // This will be a polysyllabic name.
+					// Start with a 1-syl transitional name
+					rootName = syl1trans[r-syl1begin.length];
 					
-					// Step 2.3: Add a third syllable
-					numChoices = stronghold_syl3Trans.length + stronghold_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < stronghold_syl3Trans.length) {
-						nameRoot += stronghold_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = stronghold_syl4Trans.length + stronghold_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < stronghold_syl4Trans.length) {
-							nameRoot += stronghold_syl4Trans[indx];
-							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(stronghold_syl5Term.length);
-							nameRoot += stronghold_syl5Term[indx];
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += stronghold_syl4Term[indx-stronghold_syl4Trans.length];
-						}
+					// Step 2.2: Determine whether to stop at syllable 2 or continue to a third
+					if ( (syl2term.length + syl2trans.length) <= 0 ) { // There is no second syllable to choose from!
+						if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 1 entries, but no syllable 2 entries!");
+						// The root name was created. It is one syllable long, but it has ended on a transitional syllable.
 					}
 					else {
-						// End the word with three syllables.
-						nameRoot += stronghold_syl3Term[indx-stronghold_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += stronghold_syl2Term[indx-stronghold_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = stronghold_oneSylBegin[indx-stronghold_syl1Trans.length];
-				indx = random.nextInt(stronghold_oneSylBegin.length);
-				if (indx < stronghold_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += stronghold_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		numChoices = stronghold_oneSylBegin.length + stronghold_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < stronghold_suffix.length) {
-			// Add a suffix!
-			nameSuffix = stronghold_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//stronghold_headerTags = stronghold_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-
-
-
-	// Generate all the name pieces necessary for a temple
-	public static String[] newTempleName() {
-		
-		String[] temple_prefix = TempleConfigHandler.temple_prefix;
-		String[] temple_suffix = TempleConfigHandler.temple_suffix;
-		String[] temple_oneSylBegin = TempleConfigHandler.temple_oneSylBegin;
-		String[] temple_oneSylEnd = TempleConfigHandler.temple_oneSylEnd;
-		String[] temple_syl1Trans = TempleConfigHandler.temple_syl1Trans;
-		String[] temple_syl2Trans = TempleConfigHandler.temple_syl2Trans;
-		String[] temple_syl2Term = TempleConfigHandler.temple_syl2Term;
-		String[] temple_syl3Trans = TempleConfigHandler.temple_syl3Trans;
-		String[] temple_syl3Term = TempleConfigHandler.temple_syl3Term;
-		String[] temple_syl4Trans = TempleConfigHandler.temple_syl4Trans;
-		String[] temple_syl4Term = TempleConfigHandler.temple_syl4Term;
-		String[] temple_syl5Term = TempleConfigHandler.temple_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = temple_oneSylBegin.length + temple_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < temple_prefix.length) {
-			// Add a prefix!
-			namePrefix = temple_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = temple_oneSylBegin.length + temple_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < temple_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = temple_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = temple_syl2Trans.length + temple_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < temple_syl2Trans.length) {
-					nameRoot += temple_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = temple_syl3Trans.length + temple_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < temple_syl3Trans.length) {
-						nameRoot += temple_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = temple_syl4Trans.length + temple_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < temple_syl4Trans.length) {
-							nameRoot += temple_syl4Trans[indx];
+						r = random.nextInt(syl2term.length + syl2trans.length);
+						if (r < syl2term.length) { // This name will terminate at syllable 2.
+							rootName += syl2term[r];
+						}
+						else { // This name will go on to a third syllable.
+							rootName += syl2trans[r-syl2term.length];
 							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(temple_syl5Term.length);
-							nameRoot += temple_syl5Term[indx];
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += temple_syl4Term[indx-temple_syl4Trans.length];
-						}
-					}
-					else {
-						// End the word with three syllables.
-						nameRoot += temple_syl3Term[indx-temple_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += temple_syl2Term[indx-temple_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = temple_oneSylBegin[indx-temple_syl1Trans.length];
-				indx = random.nextInt(temple_oneSylBegin.length);
-				if (indx < temple_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += temple_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		numChoices = temple_oneSylBegin.length + temple_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < temple_suffix.length) {
-			// Add a suffix!
-			nameSuffix = temple_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//temple_headerTags = temple_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	// Generate all the name pieces necessary for a fortress
-	public static String[] newFortressName() {
-		
-		String[] fortress_prefix = FortressConfigHandler.fortress_prefix;
-		String[] fortress_suffix = FortressConfigHandler.fortress_suffix;
-		String[] fortress_oneSylBegin = FortressConfigHandler.fortress_oneSylBegin;
-		String[] fortress_oneSylEnd = FortressConfigHandler.fortress_oneSylEnd;
-		String[] fortress_syl1Trans = FortressConfigHandler.fortress_syl1Trans;
-		String[] fortress_syl2Trans = FortressConfigHandler.fortress_syl2Trans;
-		String[] fortress_syl2Term = FortressConfigHandler.fortress_syl2Term;
-		String[] fortress_syl3Trans = FortressConfigHandler.fortress_syl3Trans;
-		String[] fortress_syl3Term = FortressConfigHandler.fortress_syl3Term;
-		String[] fortress_syl4Trans = FortressConfigHandler.fortress_syl4Trans;
-		String[] fortress_syl4Term = FortressConfigHandler.fortress_syl4Term;
-		String[] fortress_syl5Term = FortressConfigHandler.fortress_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = fortress_oneSylBegin.length + fortress_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < fortress_prefix.length) {
-			// Add a prefix!
-			namePrefix = fortress_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = fortress_oneSylBegin.length + fortress_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < fortress_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = fortress_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = fortress_syl2Trans.length + fortress_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < fortress_syl2Trans.length) {
-					nameRoot += fortress_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = fortress_syl3Trans.length + fortress_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < fortress_syl3Trans.length) {
-						nameRoot += fortress_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = fortress_syl4Trans.length + fortress_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < fortress_syl4Trans.length) {
-							nameRoot += fortress_syl4Trans[indx];
-							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(fortress_syl5Term.length);
-							nameRoot += fortress_syl5Term[indx];
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += fortress_syl4Term[indx-fortress_syl4Trans.length];
-						}
-					}
-					else {
-						// End the word with three syllables.
-						nameRoot += fortress_syl3Term[indx-fortress_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += fortress_syl2Term[indx-fortress_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = fortress_oneSylBegin[indx-fortress_syl1Trans.length];
-				indx = random.nextInt(fortress_oneSylBegin.length);
-				if (indx < fortress_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += fortress_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		numChoices = fortress_oneSylBegin.length + fortress_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < fortress_suffix.length) {
-			// Add a suffix!
-			nameSuffix = fortress_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//fortress_headerTags = fortress_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	// Generate all the name pieces necessary for a monument
-	public static String[] newMonumentName() {
-		
-		String[] monument_prefix = MonumentConfigHandler.monument_prefix;
-		String[] monument_suffix = MonumentConfigHandler.monument_suffix;
-		String[] monument_oneSylBegin = MonumentConfigHandler.monument_oneSylBegin;
-		String[] monument_oneSylEnd = MonumentConfigHandler.monument_oneSylEnd;
-		String[] monument_syl1Trans = MonumentConfigHandler.monument_syl1Trans;
-		String[] monument_syl2Trans = MonumentConfigHandler.monument_syl2Trans;
-		String[] monument_syl2Term = MonumentConfigHandler.monument_syl2Term;
-		String[] monument_syl3Trans = MonumentConfigHandler.monument_syl3Trans;
-		String[] monument_syl3Term = MonumentConfigHandler.monument_syl3Term;
-		String[] monument_syl4Trans = MonumentConfigHandler.monument_syl4Trans;
-		String[] monument_syl4Term = MonumentConfigHandler.monument_syl4Term;
-		String[] monument_syl5Trans = MonumentConfigHandler.monument_syl5Trans;
-		String[] monument_syl5Term = MonumentConfigHandler.monument_syl5Term;
-		String[] monument_syl6Term = MonumentConfigHandler.monument_syl6Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = monument_oneSylBegin.length + monument_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < monument_prefix.length) {
-			// Add a prefix!
-			namePrefix = monument_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = monument_oneSylBegin.length + monument_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < monument_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = monument_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = monument_syl2Trans.length + monument_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < monument_syl2Trans.length) {
-					nameRoot += monument_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = monument_syl3Trans.length + monument_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < monument_syl3Trans.length) {
-						nameRoot += monument_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = monument_syl4Trans.length + monument_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < monument_syl4Trans.length) {
-							nameRoot += monument_syl4Trans[indx];
-							
-							// Step 2.5: Add a fifth syllable
-							numChoices = monument_syl5Trans.length + monument_syl5Term.length; // Number of possible fifth syllables
-							indx = random.nextInt(numChoices);
-							if (indx < monument_syl5Trans.length) {
-								nameRoot += monument_syl5Trans[indx];
-								
-								// Step 2.6: Add the sixth and final syllable
-								indx = random.nextInt(monument_syl6Term.length);
-								nameRoot += monument_syl6Term[indx];
+							// Step 2.3: Determine whether to stop at syllable 3 or continue to a fourth
+							if ( (syl3term.length + syl3trans.length) <= 0 ) { // There is no third syllable to choose from!
+								if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 2 entries, but no syllable 3 entries!");
+								// The root name was created. It is two syllables long, but it has ended on a transitional syllable.
+							}
+							else {
+								r = random.nextInt(syl3term.length + syl3trans.length);
+								if (r < syl3term.length) { // This name will terminate at syllable 3.
+									rootName += syl3term[r];
+								}
+								else { // This name will go on to a fourth syllable.
+									rootName += syl3trans[r-syl3term.length];
+									
+									// Step 2.4: Determine whether to stop at syllable 4 or continue to a fifth
+									if ( (syl4term.length + syl4trans.length) <= 0 ) { // There is no fourth syllable to choose from!
+										if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 3 entries, but no syllable 4 entries!");
+										// The root name was created. It is three syllables long, but it has ended on a transitional syllable.
+									}
+									else {
+										r = random.nextInt(syl4term.length + syl4trans.length);
+										if (r < syl4term.length) { // This name will terminate at syllable 4.
+											rootName += syl4term[r];
+										}
+										else { // This name will go on to a fifth syllable.
+											rootName += syl4trans[r-syl4term.length];
+											
+											// Step 2.5: Determine whether to stop at syllable 5 or continue to a sixth
+											if ( (syl5term.length + syl5trans.length) <= 0 ) { // There is no fifth syllable to choose from!
+												if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 4 entries, but no syllable 5 entries!");
+												// The root name was created. It is four syllables long, but it has ended on a transitional syllable.
+											}
+											else {
+												r = random.nextInt(syl5term.length + syl5trans.length);
+												if (r < syl5term.length) { // This name will terminate at syllable 5.
+													rootName += syl5term[r];
+												}
+												else { // This name will go on to a sixth syllable.
+													rootName += syl5trans[r-syl5term.length];
+													
+													// Step 2.6: Determine whether to stop at syllable 6 or continue to a seventh
+													if ( (syl6term.length + syl6trans.length) <= 0 ) { // There is no sixth syllable to choose from!
+														if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 5 entries, but no syllable 6 entries!");
+														// The root name was created. It is five syllables long, but it has ended on a transitional syllable.
+													}
+													else {
+														r = random.nextInt(syl6term.length + syl6trans.length);
+														if (r < syl6term.length) { // This name will terminate at syllable 6.
+															rootName += syl6term[r];
+														}
+														else { // This name will go on to a seventh syllable.
+															rootName += syl6trans[r-syl6term.length];
+															
+															// Step 2.7: Generate a seventh syllable
+															if ( syl7term.length <= 0 ) { // There is no seventh syllable to choose from!
+																if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 6 entries, but no syllable 7 entries!");
+																// The root name was created. It is six syllables long, but it has ended on a transitional syllable.
+															}
+															else {
+																r = random.nextInt(syl7term.length);
+																rootName += syl7term[r];
+																// Ended on syllable 7.
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
 							}
 						}
-						else {
-							// End the word with four syllables.
-							nameRoot += monument_syl4Term[indx-monument_syl4Trans.length];
-						}
 					}
-					else {
-						// End the word with three syllables.
-						nameRoot += monument_syl3Term[indx-monument_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += monument_syl2Term[indx-monument_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = monument_oneSylBegin[indx-monument_syl1Trans.length];
-				indx = random.nextInt(monument_oneSylBegin.length);
-				if (indx < monument_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += monument_oneSylEnd[indx];
 				}
 			}
 			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
+			// Step 2V: clean up for validation
 			
-		// Step 3: generate suffix.
-		numChoices = monument_oneSylBegin.length + monument_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < monument_suffix.length) {
-			// Add a suffix!
-			nameSuffix = monument_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//monument_headerTags = monument_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	
-	// Generate all the name pieces necessary for an end city
-	public static String[] newEndCityName() {
-		
-		String[] endcity_prefix = EndCityConfigHandler.endcity_prefix;
-		String[] endcity_suffix = EndCityConfigHandler.endcity_suffix;
-		String[] endcity_oneSylBegin = EndCityConfigHandler.endcity_oneSylBegin;
-		String[] endcity_oneSylEnd = EndCityConfigHandler.endcity_oneSylEnd;
-		String[] endcity_syl1Trans = EndCityConfigHandler.endcity_syl1Trans;
-		String[] endcity_syl2Trans = EndCityConfigHandler.endcity_syl2Trans;
-		String[] endcity_syl2Term = EndCityConfigHandler.endcity_syl2Term;
-		String[] endcity_syl3Trans = EndCityConfigHandler.endcity_syl3Trans;
-		String[] endcity_syl3Term = EndCityConfigHandler.endcity_syl3Term;
-		String[] endcity_syl4Trans = EndCityConfigHandler.endcity_syl4Trans;
-		String[] endcity_syl4Term = EndCityConfigHandler.endcity_syl4Term;
-		String[] endcity_syl5Term = EndCityConfigHandler.endcity_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = endcity_oneSylBegin.length + endcity_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < endcity_prefix.length) {
-			// Add a prefix!
-			namePrefix = endcity_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = endcity_oneSylBegin.length + endcity_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < endcity_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = endcity_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = endcity_syl2Trans.length + endcity_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < endcity_syl2Trans.length) {
-					nameRoot += endcity_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = endcity_syl3Trans.length + endcity_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < endcity_syl3Trans.length) {
-						nameRoot += endcity_syl3Trans[indx];
+			rootName = rootName.trim();
 						
-						// Step 2.4: Add a fourth syllable
-						numChoices = endcity_syl4Trans.length + endcity_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < endcity_syl4Trans.length) {
-							nameRoot += endcity_syl4Trans[indx];
-							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(endcity_syl5Term.length);
-							nameRoot += endcity_syl5Term[indx];
+			// Replace carots here with INTENTIONAL spaces.
+			rootName = rootName.replaceAll("\\^", " ");
+			
+			// I have to reject this (root) name if it's not within the allotted size threshold.
+			// Also I should ensure the last three characters are not all the same.
+			
+			if ( rootName.length() <= 15 ) {
+				if ( rootName.length() >= 3 ) {
+					// Now, make sure the same characters don't appear in the name three times in a row
+					char[] nameRootArray = rootName.toLowerCase().toCharArray();
+					int consecutives = 0;
+					for(int ci = 0; ci < nameRootArray.length-2; ci++) {
+						if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
+							consecutives++; 
 						}
-						else {
-							// End the word with four syllables.
-							nameRoot += endcity_syl4Term[indx-endcity_syl4Trans.length];
+					}
+					if (consecutives == 0) {
+						// Do a content scan
+						if ( !contentScan(rootName) ) {
+							// Passes all the checks! Accept the name!
+							break;
 						}
+						// Something caught the attention of the filter 
+						filterFail++;
 					}
 					else {
-						// End the word with three syllables.
-						nameRoot += endcity_syl3Term[indx-endcity_syl3Trans.length];
+						repeatedChar++; // Detected three of the same letter in a row.
 					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += endcity_syl2Term[indx-endcity_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = endcity_oneSylBegin[indx-endcity_syl1Trans.length];
-				indx = random.nextInt(endcity_oneSylBegin.length);
-				if (indx < endcity_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += endcity_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		numChoices = endcity_oneSylBegin.length + endcity_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < endcity_suffix.length) {
-			// Add a suffix!
-			nameSuffix = endcity_suffix[indx];
-		}
-		
-		//Should probably replace the carots here
-		//fortress_headerTags = fortress_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	
-	// Generate all the name pieces necessary for a mansion
-	public static String[] newMansionName() {
-		
-		String[] mansion_prefix = MansionConfigHandler.mansion_prefix;
-		String[] mansion_suffix = MansionConfigHandler.mansion_suffix;
-		String[] mansion_oneSylBegin = MansionConfigHandler.mansion_oneSylBegin;
-		String[] mansion_oneSylEnd = MansionConfigHandler.mansion_oneSylEnd;
-		String[] mansion_syl1Trans = MansionConfigHandler.mansion_syl1Trans;
-		String[] mansion_syl2Trans = MansionConfigHandler.mansion_syl2Trans;
-		String[] mansion_syl2Term = MansionConfigHandler.mansion_syl2Term;
-		String[] mansion_syl3Trans = MansionConfigHandler.mansion_syl3Trans;
-		String[] mansion_syl3Term = MansionConfigHandler.mansion_syl3Term;
-		String[] mansion_syl4Trans = MansionConfigHandler.mansion_syl4Trans;
-		String[] mansion_syl4Term = MansionConfigHandler.mansion_syl4Term;
-		String[] mansion_syl5Term = MansionConfigHandler.mansion_syl5Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = mansion_oneSylBegin.length + mansion_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		if (indx < mansion_prefix.length) {
-			// Add a prefix!
-			namePrefix = mansion_prefix[indx];
-		}
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = mansion_oneSylBegin.length + mansion_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < mansion_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = mansion_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = mansion_syl2Trans.length + mansion_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < mansion_syl2Trans.length) {
-					nameRoot += mansion_syl2Trans[indx];
 					
-					// Step 2.3: Add a third syllable
-					numChoices = mansion_syl3Trans.length + mansion_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < mansion_syl3Trans.length) {
-						nameRoot += mansion_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = mansion_syl4Trans.length + mansion_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < mansion_syl4Trans.length) {
-							nameRoot += mansion_syl4Trans[indx];
-							
-							// Step 2.5: Add the fifth and final syllable
-							indx = random.nextInt(mansion_syl5Term.length);
-							nameRoot += mansion_syl5Term[indx];
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += mansion_syl4Term[indx-mansion_syl4Trans.length];
-						}
-					}
-					else {
-						// End the word with three syllables.
-						nameRoot += mansion_syl3Term[indx-mansion_syl3Trans.length];
+				}
+				// Now ensure that a two-letter name isn't the same letter twice.
+				else if (rootName.length() == 2) {
+					if ( rootName.toLowerCase().charAt(0) != rootName.toLowerCase().charAt(1) ) {
+						// Passes all the checks! Accept the name!
+		    			break;
 					}
 				}
-				else {
-					// End the word with two syllables.
-					nameRoot += mansion_syl2Term[indx-mansion_syl2Trans.length];
+				else if (rootName.length() > 0) {
+					sizeUnderflow++; // Root name is too short.
 				}
+				else blankRoot++; // Root name is blank.
 			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = mansion_oneSylBegin[indx-mansion_syl1Trans.length];
-				indx = random.nextInt(mansion_oneSylBegin.length);
-				if (indx < mansion_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += mansion_oneSylEnd[indx];
-				}
+			else { // Root name is too long.
+				sizeOverflow++;
 			}
 			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
+			// Step 2X
+			// If we counted too many invalid name attempts, throw an exception
+			if (sizeOverflow>=tooManyFailures) {
+				String errorMessage = "Name type " + nameType +" names are too long! Check your syllable lengths.";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+				//r_prefix = rootName = r_suffix = "";
+				//break;
 				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
+			if (sizeUnderflow>=tooManyFailures) {
+				String errorMessage = "Name type " + nameType +" names are too short! Check your syllables configs.";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+				//r_prefix = rootName = r_suffix = "";
+				//break;
 				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
+			if (blankRoot>=tooManyFailures) {
+				String errorMessage = "Name type " + nameType +" Produced blank names! Check your syllable configs.";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+				//r_prefix = rootName = r_suffix = "";
+				//break;
 				}
-			}
+			if (repeatedChar>=tooManyFailures) {
+				String errorMessage = "Name type " + nameType +" has too many consecutive repeated letters! Check your syllable configs.";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+				//r_prefix = rootName = r_suffix = "";
+				//break;
+				}
+			if (filterFail>=tooManyFailures) {
+				String errorMessage = "Name type " + nameType +" has tripped the content filter too many times. Are you being naughty?";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+				//r_prefix = rootName = r_suffix = "";
+				//break;
+				}
 		}
-			
-		// Step 3: generate suffix.
-		numChoices = mansion_oneSylBegin.length + mansion_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String nameSuffix = "";
-		if (indx < mansion_suffix.length) {
-			// Add a suffix!
-			nameSuffix = mansion_suffix[indx];
+		
+		// Step 3: Generate a suffix
+		// This is is identical to generating a prefix: it checks against the length of the 1-syl lists.
+		r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
+				
+		if ( (syl1begin.length + syl1trans.length) > 0) {
+			if (suffix.length >= (syl1begin.length + syl1trans.length)) LogHelper.warn(nameType + " should have fewer prefixes than first syllable entries!");
+			else if ( random.nextInt( syl1begin.length + syl1trans.length ) >= suffix.length) r_suffix = ""; // No suffix
 		}
 		
-		//Should probably replace the carots here
-		//mansion_headerTags = mansion_headerTags.trim(); // Just in case some idiot added spaces
+		// Step 4: Grab a header tag.
+		String headerTags = GeneralConfig.headerTags.trim(); // Just in case some idiot added spaces
 		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
+		String[] nameStringArray = {headerTags, r_prefix, rootName, r_suffix};
 		
 		return nameStringArray;
 	}
-	
-	
-	// This generates a name for an alien villager
-	public static String newAlienVillagerName() {
-		
-		String[] alienVillager_oneSylBegin = OtherModConfigHandler.alienVillager_oneSylBegin;
-		String[] alienVillager_oneSylEnd = OtherModConfigHandler.alienVillager_oneSylEnd;
-		String[] alienVillager_syl1Trans = OtherModConfigHandler.alienVillager_syl1Trans;
-		String[] alienVillager_syl2Trans = OtherModConfigHandler.alienVillager_syl2Trans;
-		String[] alienVillager_syl2Term = OtherModConfigHandler.alienVillager_syl2Term;
-		String[] alienVillager_syl3Trans = OtherModConfigHandler.alienVillager_syl3Trans;
-		String[] alienVillager_syl3Term = OtherModConfigHandler.alienVillager_syl3Term;
-		String[] alienVillager_syl4Trans = OtherModConfigHandler.alienVillager_syl4Trans;
-		String[] alienVillager_syl4Term = OtherModConfigHandler.alienVillager_syl4Term;
-		String[] alienVillager_syl5Trans = OtherModConfigHandler.alienVillager_syl5Trans;
-		String[] alienVillager_syl5Term = OtherModConfigHandler.alienVillager_syl5Term;
-		String[] alienVillager_syl6Trans = OtherModConfigHandler.alienVillager_syl6Trans;
-		String[] alienVillager_syl6Term = OtherModConfigHandler.alienVillager_syl6Term;
-		String[] alienVillager_syl7Term = OtherModConfigHandler.alienVillager_syl7Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = alienVillager_oneSylBegin.length + alienVillager_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-    		// Step 2: Generate a proper (root) name.
-    		// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = alienVillager_oneSylBegin.length + alienVillager_syl1Trans.length; // Number of possible name bases
-    		indx = random.nextInt(numChoices);
-    		if (indx < alienVillager_syl1Trans.length) {
-    			// This will be a multi-syllable compound name
-    			nameRoot = alienVillager_syl1Trans[indx];
-    			
-    			// Step 2.2: Add second syllable
-    			numChoices = alienVillager_syl2Trans.length + alienVillager_syl2Term.length; // Number of possible second syllables
-    			indx = random.nextInt(numChoices);
-    			if (indx < alienVillager_syl2Trans.length) {
-    				nameRoot += alienVillager_syl2Trans[indx];
-    				
-    				// Step 2.3: Add a third syllable
-        			numChoices = alienVillager_syl3Trans.length + alienVillager_syl3Term.length; // Number of possible third syllables
-        			indx = random.nextInt(numChoices);
-        			if (indx < alienVillager_syl3Trans.length) {
-        				nameRoot += alienVillager_syl3Trans[indx];
-        				
-        				// Step 2.4: Add a fourth syllable
-            			numChoices = alienVillager_syl4Trans.length + alienVillager_syl4Term.length; // Number of possible fourth syllables
-            			indx = random.nextInt(numChoices);
-            			if (indx < alienVillager_syl4Trans.length) {
-            				nameRoot += alienVillager_syl4Trans[indx];
-            				
-            				// Step 2.5: Add a fifth syllable
-            				numChoices = alienVillager_syl5Trans.length + alienVillager_syl5Term.length; // Number of possible fifth syllables
-                			indx = random.nextInt(numChoices);
-                			if (indx < alienVillager_syl5Trans.length) {
-                				nameRoot += alienVillager_syl5Trans[indx];
-                				
-                				// Step 2.6: Add a sixth syllable
-                				numChoices = alienVillager_syl6Trans.length + alienVillager_syl6Term.length; // Number of possible sixth syllables
-                    			indx = random.nextInt(numChoices);
-                    			if (indx < alienVillager_syl6Trans.length) {
-                    				nameRoot += alienVillager_syl6Trans[indx];
-                    				
-                    				// Step 2.7: Add the seventh and final syllable.
-                    				indx = random.nextInt(alienVillager_syl7Term.length);
-                    				nameRoot += alienVillager_syl7Term[indx];
-                    			}
-                    			else {
-                    				// End the word with six syllables.
-                    				nameRoot += alienVillager_syl6Term[indx-alienVillager_syl6Trans.length];
-                    			}
-                			}
-                			else {
-                				// End the word with five syllables.
-                				nameRoot += alienVillager_syl5Term[indx-alienVillager_syl5Trans.length];
-                			}
-            			}
-            			else {
-            				// End the word with four syllables.
-            				nameRoot += alienVillager_syl4Term[indx-alienVillager_syl4Trans.length];
-            			}
-        			}
-        			else {
-        				// End the word with three syllables.
-        				nameRoot += alienVillager_syl3Term[indx-alienVillager_syl3Trans.length];
-        			}
-    			}
-    			else {
-    				// End the word with two syllables.
-    				nameRoot += alienVillager_syl2Term[indx-alienVillager_syl2Trans.length];
-    			}
-    		}
-    		else {
-    			// This will be a one-syllable name.
-    			nameRoot = alienVillager_oneSylBegin[indx-alienVillager_syl1Trans.length];
-    			indx = random.nextInt(alienVillager_oneSylBegin.length);
-    			if (indx < alienVillager_oneSylEnd.length) {
-    				// Add a second half to the syllable
-    				nameRoot += alienVillager_oneSylEnd[indx];
-    			}
-    		}
-    		
-    		// I have to reject this (root) name if it's above 15 characters or below 2.
-    		// Also I should ensure the last three characters are not all the same
-    		if (
-    				nameRoot.length() <= 15 && 
-    				nameRoot.length() >= 4
-    			) {
-    			
-    			// Now, make sure the same characters don't appear in the name four times in a row
-    			char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-    			int consecutives = 0;
-    			for(int ci = 0; ci < nameRootArray.length-3; ci++) {
-    				if (nameRootArray[ci] == nameRootArray[ci+1]
-    						&& nameRootArray[ci] == nameRootArray[ci+2]
-    						&& nameRootArray[ci] == nameRootArray[ci+3]) {
-    					consecutives++;
-    				}
-    			}
-    			if (consecutives == 0) {
-					// Accept the name!
-        			break;
-				}
-				
-    			break;
-    		}
-    		// Now ensure that a three-letter name isn't the same letter thrice.
-    		else if (nameRoot.length() == 3) {
-    			if ( !(
-    				 (nameRoot.toLowerCase().charAt(0) == nameRoot.toLowerCase().charAt(1)) &&
-    				 (nameRoot.toLowerCase().charAt(0) == nameRoot.toLowerCase().charAt(2))
-    				 ) ) {
-    				// Accept the name!
-        			break;
-    			}
-    		}
-    		// Now ensure that a two-letter name isn't the same letter twice.
-    		else if (nameRoot.length() == 2) {
-    			if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-    				// Accept the name!
-        			break;
-    			}
-    		}
-		}
-		//Should probably replace the carots here
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		
-		return nameRoot;
-	}
-	
-	
-	
-	// Generate all the name pieces necessary for an alien village
-	public static String[] newAlienVillageName() {
-		
-		String[] alienVillage_oneSylBegin = OtherModConfigHandler.alienVillage_oneSylBegin;
-		String[] alienVillage_oneSylEnd = OtherModConfigHandler.alienVillage_oneSylEnd;
-		String[] alienVillage_syl1Trans = OtherModConfigHandler.alienVillage_syl1Trans;
-		String[] alienVillage_syl2Trans = OtherModConfigHandler.alienVillage_syl2Trans;
-		String[] alienVillage_syl2Term = OtherModConfigHandler.alienVillage_syl2Term;
-		String[] alienVillage_syl3Trans = OtherModConfigHandler.alienVillage_syl3Trans;
-		String[] alienVillage_syl3Term = OtherModConfigHandler.alienVillage_syl3Term;
-		String[] alienVillage_syl4Trans = OtherModConfigHandler.alienVillage_syl4Trans;
-		String[] alienVillage_syl4Term = OtherModConfigHandler.alienVillage_syl4Term;
-		String[] alienVillage_syl5Trans = OtherModConfigHandler.alienVillage_syl5Trans;
-		String[] alienVillage_syl5Term = OtherModConfigHandler.alienVillage_syl5Term;
-		String[] alienVillage_syl6Term = OtherModConfigHandler.alienVillage_syl6Term;
-		
-		// Step 1: generate prefix.
-		// Step 1a: get number of all possible name bases. This should be length of all one-syl words and first syllables.
-		int numChoices = 0;
-		int indx;
-		
-		numChoices = alienVillage_oneSylBegin.length + alienVillage_syl1Trans.length; // Number of possible name bases
-		indx = random.nextInt(numChoices);
-		String namePrefix = "";
-		
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-			// Step 2: Generate a proper (root) name.
-			// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			numChoices = alienVillage_oneSylBegin.length + alienVillage_syl1Trans.length; // Number of possible name bases
-			indx = random.nextInt(numChoices);
-			if (indx < alienVillage_syl1Trans.length) {
-				// This will be a multi-syllable compound name
-				nameRoot = alienVillage_syl1Trans[indx];
-				
-				// Step 2.2: Add second syllable
-				numChoices = alienVillage_syl2Trans.length + alienVillage_syl2Term.length; // Number of possible second syllables
-				indx = random.nextInt(numChoices);
-				if (indx < alienVillage_syl2Trans.length) {
-					nameRoot += alienVillage_syl2Trans[indx];
-					
-					// Step 2.3: Add a third syllable
-					numChoices = alienVillage_syl3Trans.length + alienVillage_syl3Term.length; // Number of possible third syllables
-					indx = random.nextInt(numChoices);
-					if (indx < alienVillage_syl3Trans.length) {
-						nameRoot += alienVillage_syl3Trans[indx];
-						
-						// Step 2.4: Add a fourth syllable
-						numChoices = alienVillage_syl4Trans.length + alienVillage_syl4Term.length; // Number of possible fourth syllables
-						indx = random.nextInt(numChoices);
-						if (indx < alienVillage_syl4Trans.length) {
-							nameRoot += alienVillage_syl4Trans[indx];
-							
-							// Step 2.5: Add a fifth syllable
-							numChoices = alienVillage_syl5Trans.length + alienVillage_syl5Term.length; // Number of possible fifth syllables
-							indx = random.nextInt(numChoices);
-							if (indx < alienVillage_syl5Trans.length) {
-								nameRoot += alienVillage_syl5Trans[indx];
-								
-								// Step 2.6: Add the sixth and final syllable
-								indx = random.nextInt(alienVillage_syl6Term.length);
-								nameRoot += alienVillage_syl6Term[indx];
-							}
-						}
-						else {
-							// End the word with four syllables.
-							nameRoot += alienVillage_syl4Term[indx-alienVillage_syl4Trans.length];
-						}
-					}
-					else {
-						// End the word with three syllables.
-						nameRoot += alienVillage_syl3Term[indx-alienVillage_syl3Trans.length];
-					}
-				}
-				else {
-					// End the word with two syllables.
-					nameRoot += alienVillage_syl2Term[indx-alienVillage_syl2Trans.length];
-				}
-			}
-			else {
-				// This will be a one-syllable name.
-				nameRoot = alienVillage_oneSylBegin[indx-alienVillage_syl1Trans.length];
-				indx = random.nextInt(alienVillage_oneSylBegin.length);
-				if (indx < alienVillage_oneSylEnd.length) {
-					// Add a second half to the syllable
-					nameRoot += alienVillage_oneSylEnd[indx];
-				}
-			}
-			
-			// I have to reject this (root) name if it's above 15 characters or below 2.
-			// Also I should ensure the last three characters are not all the same
-			if (
-					nameRoot.length() <= 15 && 
-					nameRoot.length() >= 3
-				) {
-				// Now, make sure the same characters don't appear in the name three times in a row
-				char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-				int consecutives = 0;
-				for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-					if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-						consecutives++;
-					}
-				}
-				if (consecutives == 0) {
-					// Accept the name!
-					break;
-				}
-			}
-			// Now ensure that a two-letter name isn't the same letter twice.
-			else if (nameRoot.length() == 2) {
-				if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-					// Accept the name!
-					break;
-				}
-			}
-		}
-			
-		// Step 3: generate suffix.
-		String nameSuffix = "";
-		
-		//Should probably replace the carots here
-		//monument_headerTags = monument_headerTags.trim(); // Just in case some idiot added spaces
-		
-		namePrefix = namePrefix.replaceAll("\\^", " ");
-		nameRoot = nameRoot.replaceAll("\\^", " ");
-		nameSuffix = nameSuffix.replaceAll("\\^", " ");
-		
-		String[] nameStringArray = {"", namePrefix, nameRoot, nameSuffix};
-		
-		return nameStringArray;
-	}
-	
-	
-	
-	// This generates a name for a hobgoblin
-	public static String newHobgoblinName() {
-		
-		String[] hobgoblin_oneSylBegin = OtherModConfigHandler.hobgoblin_oneSylBegin;
-		String[] hobgoblin_oneSylEnd = OtherModConfigHandler.hobgoblin_oneSylEnd;
-		String[] hobgoblin_syl1Trans = OtherModConfigHandler.hobgoblin_syl1Trans;
-		String[] hobgoblin_syl2Trans = OtherModConfigHandler.hobgoblin_syl2Trans;
-		String[] hobgoblin_syl2Term = OtherModConfigHandler.hobgoblin_syl2Term;
-		String[] hobgoblin_syl3Trans = OtherModConfigHandler.hobgoblin_syl3Trans;
-		String[] hobgoblin_syl3Term = OtherModConfigHandler.hobgoblin_syl3Term;
-		String[] hobgoblin_syl4Trans = OtherModConfigHandler.hobgoblin_syl4Trans;
-		String[] hobgoblin_syl4Term = OtherModConfigHandler.hobgoblin_syl4Term;
-		String[] hobgoblin_syl5Term = OtherModConfigHandler.hobgoblin_syl5Term;
-		
-		int i;
-		String nameRoot; // I need to declare it here in order to place it onto the sign
-		
-		while (true) {
-			
-    		// Step 2: Generate a proper (root) name.
-    		// Step 2.1: Generate the first syllable
-			nameRoot = "";
-			
-			int numChoices = hobgoblin_oneSylBegin.length + hobgoblin_syl1Trans.length; // Number of possible name bases
-    		i = random.nextInt(numChoices);
-    		if (i < hobgoblin_syl1Trans.length) {
-    			// This will be a multi-syllable compound name
-    			nameRoot = hobgoblin_syl1Trans[i];
-    			
-    			// Step 2.2: Add second syllable
-    			numChoices = hobgoblin_syl2Trans.length + hobgoblin_syl2Term.length; // Number of possible second syllables
-    			i = random.nextInt(numChoices);
-    			if (i < hobgoblin_syl2Trans.length) {
-    				nameRoot += hobgoblin_syl2Trans[i];
-    				
-    				// Step 2.3: Add a third syllable
-        			numChoices = hobgoblin_syl3Trans.length + hobgoblin_syl3Term.length; // Number of possible third syllables
-        			i = random.nextInt(numChoices);
-        			if (i < hobgoblin_syl3Trans.length) {
-        				nameRoot += hobgoblin_syl3Trans[i];
-        				
-        				// Step 2.4: Add a fourth syllable
-            			numChoices = hobgoblin_syl4Trans.length + hobgoblin_syl4Term.length; // Number of possible fourth syllables
-            			i = random.nextInt(numChoices);
-            			if (i < hobgoblin_syl4Trans.length) {
-            				nameRoot += hobgoblin_syl4Trans[i];
-            				
-            				// Step 2.5: Add the fifth and final syllable
-                			i = random.nextInt(hobgoblin_syl5Term.length);
-                			nameRoot += hobgoblin_syl5Term[i];
-            			}
-            			else {
-            				// End the word with four syllables.
-            				nameRoot += hobgoblin_syl4Term[i-hobgoblin_syl4Trans.length];
-            			}
-        			}
-        			else {
-        				// End the word with three syllables.
-        				nameRoot += hobgoblin_syl3Term[i-hobgoblin_syl3Trans.length];
-        			}
-    			}
-    			else {
-    				// End the word with two syllables.
-    				nameRoot += hobgoblin_syl2Term[i-hobgoblin_syl2Trans.length];
-    			}
-    		}
-    		else {
-    			// This will be a one-syllable name.
-    			nameRoot = hobgoblin_oneSylBegin[i-hobgoblin_syl1Trans.length];
-    			i = random.nextInt(hobgoblin_oneSylBegin.length);
-    			if (i < hobgoblin_oneSylEnd.length) {
-    				// Add a second half to the syllable
-    				nameRoot += hobgoblin_oneSylEnd[i];
-    			}
-    		}
-    		
-    		nameRoot = nameRoot.replaceAll("\\^", " ");
-    		
-    		// I have to reject this (root) name if it's above 15 characters or below 2.
-    		// Also I should ensure the last three characters are not all the same
-    		if (
-    				nameRoot.length() <= 15 && 
-    				nameRoot.length() >= 3
-    			) {
-    			// Now, make sure the same characters don't appear in the name three times in a row
-    			char[] nameRootArray  = nameRoot.toLowerCase().toCharArray();
-    			int consecutives = 0;
-    			for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-    				if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
-    					consecutives++;
-    				}
-    			}
-    			if (consecutives == 0) {
-					// Accept the name!
-        			break;
-				}
-    		}
-    		// Now ensure that a two-letter name isn't the same letter twice.
-    		else if (nameRoot.length() == 2) {
-    			if ( nameRoot.toLowerCase().charAt(0) != nameRoot.toLowerCase().charAt(1) ) {
-    				// Accept the name!
-        			break;
-    			}
-    		}
-		}
-		return nameRoot;
-	}
-	
 	
 	
 	/**
@@ -1703,147 +680,255 @@ public class NameGenerator {
 	 * @param nitwitProfession: name to assign to a nitwit (profession 5)
 	 * @return
 	 */
-	public static String getCareerTag(int villagerProfession, int villagerCareer, String nitwitProfession) {
+	public static String getCareerTag(String entityClasspath, int villagerProfession, int villagerCareer) {
+		
+		// keys: "NameTypes", "Professions", "ClassPaths", "AddOrRemove"
+		Map<String, ArrayList> mappedNamesAutomatic = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingAutomatic);
+		Map<String, ArrayList> mappedNamesClickable = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingClickable);
+		// keys: "Professions", "IDs", "VanillaProfMaps"
+		Map<String, ArrayList> mappedProfessions = GeneralConfig.unpackMappedProfessions(GeneralConfig.modProfessionMapping);
 		
 		String careerTag = "(";
 		
-		switch (villagerProfession) {
-		case 0: // Farmer profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += "Farmer";
-				break;
-			case 2:
-				careerTag += "Fisherman";
-				break;
-			case 3:
-				careerTag += "Shepherd";
-				break;
-			case 4:
-				careerTag += "Fletcher";
-				break;
-			default:
-				careerTag += "Farmer";
-				break;
-			}
-			break;
-		case 1: // Librarian profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += "Librarian";
-				break;
-			case 2:
-				careerTag += "Cartographer";
-				break;
-			default:
-				careerTag += "Librarian";
-				break;
-			}
-			break;
-		case 2: // Priest profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += "Cleric";
-				break;
-			default:
-				careerTag += "Cleric";
-				break;
-			}
-			break;
-		case 3: // Blacksmith profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += "Armorer";
-				break;
-			case 2:
-				careerTag += "Weapon Smith";
-				break;
-			case 3:
-				careerTag += "Tool Smith";
-				break;
-			default:
-				careerTag += "Blacksmith";
-				break;
-			}
-			break;
-		case 4: // Butcher profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += "Butcher";
-				break;
-			case 2:
-				careerTag += "Leatherworker";
-				break;
-			default:
-				careerTag += "Butcher";
-				break;
-			}
-			break;
-		case 5: // Nitwit profession
-			switch(villagerCareer) {
-			case 1:
-				careerTag += nitwitProfession;
-				break;
-			default:
-				careerTag += nitwitProfession;
-				break;
-			}
-			break;
+		// The entity is identified in the "clickable" or "automatic" config entry
+		if ( mappedNamesClickable.get("ClassPaths").contains(entityClasspath) ) {
+			careerTag += (String) ((mappedNamesClickable.get("Professions")).get( mappedNamesClickable.get("ClassPaths").indexOf(entityClasspath) ));
+			careerTag = careerTag.trim();
 		}
-		if (!(villagerProfession >= 0 && villagerProfession <= 5)) {
-			try {
-				String otherModProfString = otherModProfessions[ItemEventHandler.indexOfIntArr(otherModIDs, villagerProfession)];
-				otherModProfString = otherModProfString.replaceAll("\\(", "");
-				otherModProfString = otherModProfString.replaceAll("\\)", "");
-				otherModProfString = otherModProfString.trim();
-				
-				careerTag += otherModProfString;
+		else if ( mappedNamesAutomatic.get("ClassPaths").contains(entityClasspath) ) {
+			careerTag += (String) ((mappedNamesAutomatic.get("Professions")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClasspath) ));
+			careerTag = careerTag.trim();
+		}
+		
+		// Handle More Planets's Nibiru Villager
+		else if (entityClasspath.equals(ModObjects.MPNibiruVillagerClass) // 1.7 version
+				|| entityClasspath.equals(ModObjects.MPNibiruVillagerClassModern) // 1.10 version
+				) {
+			switch (villagerProfession%3) {
+			case 0: // Farmer profession
+				careerTag += "Farmer";
+				break;
+			case 1: // Librarian profession
+				careerTag += "Librarian";
+				break;
+			case 2: // Priest profession
+				careerTag += "Medic";
+				break;
+			}
+		}
+		
+		// Unfortunately, the I18n is client-side only, and this method is only called server-side.
+		// I have to plug in the English versions for BOTH sides.
+		
+		else { // Ordinary vanilla-style villager, even it's using non-vanilla profession and career IDs
+			
+			switch (villagerProfession) {
+			case 0: // Farmer profession
+				switch(villagerCareer) {
+				case 1:
+					//try {careerTag += I18n.format("entity.Villager.farmer");}
+					//catch (Exception e) {careerTag += "Farmer";}
+					careerTag += "Farmer";
+					break;
+				case 2:
+					//try {careerTag += I18n.format("entity.Villager.fisherman");}
+					//catch (Exception e) {careerTag += "Fisherman";}
+					careerTag += "Fisherman";
+					break;
+				case 3:
+					//try {careerTag += I18n.format("entity.Villager.shepherd");}
+					//catch (Exception e) {careerTag += "Shepherd";}
+					careerTag += "Shepherd";
+					break;
+				case 4:
+					//try {careerTag += I18n.format("entity.Villager.fletcher");}
+					//catch (Exception e) {careerTag += "Fletcher";}
+					careerTag += "Fletcher";
+					break;
+				default:
+					//try {careerTag += I18n.format("entity.Villager.farmer");}
+					//catch (Exception e) {careerTag += "Farmer";}
+					careerTag += "Farmer";
+					break;
 				}
-			catch (Exception e){
-				//If something went wrong in the profession mapping, return empty parentheses
+				break;
+			case 1: // Librarian profession
+				switch(villagerCareer) {
+				case 1:
+					//try {careerTag += I18n.format("entity.Villager.librarian");}
+					//catch (Exception e) {careerTag += "Librarian";}
+					careerTag += "Librarian";
+					break;
+				case 2:
+					//try {careerTag += I18n.format("entity.Villager.cartographer");}
+					//catch (Exception e) {careerTag += "Cartographer";}
+					careerTag += "Cartographer";
+					break;
+				default:
+					//try {careerTag += I18n.format("entity.Villager.librarian");}
+					//catch (Exception e) {careerTag += "Librarian";}
+					careerTag += "Librarian";
+					break;
+				}
+				break;
+			case 2: // Priest profession
+				switch(villagerCareer) {
+				case 1:
+					//try {careerTag += I18n.format("entity.Villager.cleric");}
+					//catch (Exception e) {careerTag += "Cleric";}
+					careerTag += "Cleric";
+					break;
+				default:
+					//try {careerTag += I18n.format("entity.Villager.priest");}
+					//catch (Exception e) {careerTag += "Priest";}
+					careerTag += "Priest";
+					break;
+				}
+				break;
+			case 3: // Blacksmith profession
+				switch(villagerCareer) {
+				case 1:
+					//try {careerTag += I18n.format("entity.Villager.armor");}
+					//catch (Exception e) {careerTag += "Armorer";}
+					careerTag += "Armorer";
+					break;
+				case 2:
+					//try {careerTag += I18n.format("entity.Villager.weapon");}
+					//catch (Exception e) {careerTag += "Weapon Smith";}
+					careerTag += "Weaponsmith"; // Changed in v3.1
+					break;
+				case 3:
+					//try {careerTag += I18n.format("entity.Villager.tool");}
+					//catch (Exception e) {careerTag += "Tool Smith";}
+					careerTag += "Toolsmith"; // Changed in v3.1
+					break;
+				case 4:
+					careerTag += "Mason"; // Added in v3.1
+					break;
+				default:
+					//try {careerTag += I18n.format("entity.Villager.blacksmith");}
+					//catch (Exception e) {careerTag += "Blacksmith";}
+					careerTag += "Blacksmith";
+					break;
+				}
+				break;
+			case 4: // Butcher profession
+				switch(villagerCareer) {
+				case 1:
+					//try {careerTag += I18n.format("entity.Villager.butcher");}
+					//catch (Exception e) {careerTag += "Butcher";}
+					careerTag += "Butcher";
+					break;
+				case 2:
+					//try {careerTag += I18n.format("entity.Villager.leather");}
+					//catch (Exception e) {careerTag += "Leatherworker";}
+					careerTag += "Leatherworker";
+					break;
+				default:
+					//try {careerTag += I18n.format("entity.Villager.butcher");}
+					//catch (Exception e) {careerTag += "Butcher";}
+					careerTag += "Butcher";
+					break;
+				}
+				break;
+			case 5: // Nitwit profession
+				String nitwitCareer = (
+						(GeneralConfig.nitwitProfession.trim()).equals("")
+						|| (GeneralConfig.nitwitProfession.toLowerCase().trim()).equals("null")
+						) ? "" :  GeneralConfig.nitwitProfession;
+				switch(villagerCareer) {
+				case 1:
+					careerTag += nitwitCareer;
+					break;
+				default:
+					careerTag += nitwitCareer;
+					break;
+				}
+				break;
+			}
+			if (!(villagerProfession >= 0 && villagerProfession <= 5)) { // This is a modded profession.
+				try {
+					String otherModProfString = (String) ((mappedProfessions.get("Professions")).get( mappedProfessions.get("IDs").indexOf(villagerProfession) ));
+					otherModProfString = otherModProfString.replaceAll("\\(", "");
+					otherModProfString = otherModProfString.replaceAll("\\)", "");
+					otherModProfString = otherModProfString.trim();
+					if ((otherModProfString.toLowerCase()).equals("null")) {otherModProfString = "";}
+					
+					careerTag += otherModProfString;
 					}
+				catch (Exception e){
+					//If something went wrong in the profession mapping, return empty parentheses
+					}
+			}
 		}
 		
 		careerTag += ")";
 		
+		if (careerTag.equals("()")) careerTag = "";
+		
 		return careerTag;
-	}
-
-
-	/**
-	 * Generate a profession tag to append to their name
-	 * @param villagerProfession: integer to represent profession (0 to 5)
-	 * @param villagerCareer: integer to represent career (0 before 1.8; 1+ otherwise)
-	 * @return
-	 */
-	public static String getCareerTag(int villagerProfession, int villagerCareer) {
-		return getCareerTag(villagerProfession, villagerCareer, "");
 	}
 	
+
 	/**
-	 * Generate a profession tag to append to their name
-	 * @param villagerProfession: integer to represent profession (0 to 5)
-	 * @param villagerCareer: integer to represent career (0 before 1.8; 1+ otherwise)
-	 * @return
+	 * Scans the input string and returns "true" if there is a particular series
+	 * of sub-strings within.
 	 */
-	public static String getNibiruCareerTag(int villagerProfession, int villagerCareer) {
+	private static boolean contentScan(String inputString) {
+
+		// Updated in v3.1trades
+		String[] filterList = new String[]{
+				//"avyngf", // Russian guy - left in because there is a stronghold with that name
+				//"erygvu", // Austrian guy - left in because Russian guy was left in
+				"erttva", // Black
+				"gbttns", // Sticks
+				"upgvo", // Lady dog
+				"gahp", // Lady place
+				"zvhd", // Inventive Nordic lady place
+				"xphs", // F
+				"gvuf", // Dook
+				"laans", // A belt pack that you wear
+				"mncf", // Mario Party 8 Oopsie
+				"lffhc", // Weakling
+				"rxvx", // K
+				"rybuffn", // Exit hole
+				"fvarc", // Protrusion and exit hole
+				"navtni", // Inset exit hole
+				"eranro", // Southern companion
+				//"rcne" // Snuggle - left in because some names have that string
+				"ghyf", // Loves to love
+				"rebuj", // Loves to love
+				"vngaru", // H toon
+				};
 		
-		String careerTag = "(";
-		
-		switch (villagerProfession%3) {
-		case 0: // Farmer profession
-			careerTag += "Farmer";
-			break;
-		case 1: // Librarian profession
-			careerTag += "Librarian";
-			break;
-		case 2: // Priest profession
-			careerTag += "Medic";
-			break;
+		for (String s : filterList) {
+			if ( ( inputString ).toLowerCase().contains( new StringBuilder( rot13(s) ).reverse().toString() ) ) {return true;}
 		}
-		careerTag += ")";
 		
-		return careerTag;
+		return false;
 	}
+	
+	
+	/**
+	 * Rot13 codec
+	 * Adapted from: http://introcs.cs.princeton.edu/java/31datatype/Rot13.java.html
+	 */
+	public static String rot13(String s) {
+		
+		StringBuilder out = new StringBuilder();
+		
+        for (int i = 0; i < s.length(); i++) {
+        	
+            char c = s.charAt(i);
+            if       (c >= 'a' && c <= 'm') c += 13;
+            else if  (c >= 'A' && c <= 'M') c += 13;
+            else if  (c >= 'n' && c <= 'z') c -= 13;
+            else if  (c >= 'N' && c <= 'Z') c -= 13;
+            
+            out.append(c);
+        }
+        return out.toString();
+    }
+	
 	
 }

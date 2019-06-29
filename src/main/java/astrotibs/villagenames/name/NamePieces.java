@@ -1,25 +1,28 @@
 package astrotibs.villagenames.name;
 
 public class NamePieces {
-	// Town types
 	
 	// Characters that are replaced:
 	// § with \u00a7
 	// Á with \u00c1
+	// É with \u00c9
 	// æ with \u00e6
 	// à with \u00e0
 	// á with \u00e1
 	// ã with \u00e3
 	// å with \u00e5
 	// ä with \u00e4
+	// É with \u00C9
 	// è with \u00e8
 	// é with \u00e9
 	// ë with \u00eb
+	// I with dot \u0130
 	// í with \u00ed
 	// ï with \u00ef
 	// ñ with \u00f1
 	// ò with \u00f2
 	// ó with \u00f3
+	// Ö with \u00d6
 	// ö with \u00f6
 	// ú with \u00fa
 	// ü with \u00fc
@@ -29,115 +32,62 @@ public class NamePieces {
 	
 	//Characters that can't be properly displayed:
 	// A with tilde: \u00c3
+	// ð with \u00f0
 	// a with macron: \u0101
+	// h with caron: \u030c
 	// s caron with \u0161
-	// s/comma with \u0219
+	// s grave with \u017e
+	// s comma with \u0219
 	// a breve with \u0103
 	// g with dot \u0121
 	// G with dot \u0120
 	// H with stroke \u0126
 	// o with two acutes \u0151
 	// h with stroke \u0128
+
 	
-	// Colors that can be used for a sign name
-	// 0=black, 1=dark_blue, 2=dark_green, 3=dark_aqua
-	// 4=dark_red, 5=dark_purple, 6=gold, 7=gray
-	// 8=dark_gray, 9=blue, a=green, b=aqua
-	// c=red, d=light_purple, e=yellow, f=white
+	// Removed color information in v3.1banner
 	
-	public static int[] codeColors_default = new int[] {
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //White, 18%
-			1, //Orange, 1%
-			4, 4, 4, 4, 4, 4, 4, 4, 4, //Yellow, 9%
-			9, 9, //Cyan, 2%
-			11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, //Blue 21%
-			13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, //Green, 13%
-			14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, //Red 31%
-			15, 15, 15, 15, 15, //Black 5%
-			-1 // If you call this, then call codeColors_remaining instead
-		};
-	public static int[] codeColors_remaining = new int[] { // Remaining colors
-			2,  // Magenta
-			3,  // Light blue
-			5,  // Lime
-			6,  // Pink
-			7,  // Gray
-			8,  // Silver
-			10, // Purple
-			12  // Brown
-		};
-	/*
-	 * Village name pieces
-	 */
 	
 	// Prefixes and suffixes
-	public static String[] prefix_default = new String[]{"East", "El", "Flying", "Fort", "Fort", "Fort de", "Great", "Half", "King", "Le", "La", "Monte", "Mount", "Mount", "New", "New", "Old", "North", "Port", "Port", "Port", "Port", "Port aux", "Port of", "Port of the", "Queen", "Saint", "Saint", "Saint", "Saint", "San", "San", "San", "San", "San", "San", "San", "San", "Santa", "Santo", "Santo", "S\u00e3o", "S\u00e3o", "South", "Sri", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "The", "West"};
-	public static String[] suffix_default = new String[]{"Bank", "Castle", "Cays", "Canyon", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "Cove", "Cove", "Cove", "de la Sierra",  "del Sol", "District", "Ferry", "Estate", "Hollow", "Inn", "Kotte", "Lake", "of the Hill", "of the Mountain", "of the Seas", "of the 7 Seas", "of the Valley", "Park", "Park", "Pine", "Point", "Point", "Port", "Port", "Town", "Town", "Town", "Town", "Town", "Town", "Town", "Village"};
+	public static String[] village_prefix_default = new String[]{"East", "El", "Flying", "Fort", "Fort", "Fort de", "Great", "Half", "King", "Le", "La", "Monte", "Mount", "Mount", "New", "New", "Old", "North", "Port", "Port", "Port", "Port", "Port aux", "Port of", "Port of the", "Queen", "Saint", "Saint", "Saint", "Saint", "San", "San", "San", "San", "San", "San", "San", "San", "Santa", "Santo", "Santo", "S\u00e3o", "S\u00e3o", "South", "Sri", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "The", "West"};
+	public static String[] village_suffix_default = new String[]{"Bank", "Castle", "Cays", "Canyon", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "Cove", "Cove", "Cove", "de la Sierra",  "del Sol", "District", "Ferry", "Estate", "Hollow", "Inn", "Kotte", "Lake", "of the Hill", "of the Mountain", "of the Seas", "of the 7 Seas", "of the Valley", "Park", "Park", "Pine", "Point", "Point", "Port", "Port", "Town", "Town", "Town", "Town", "Town", "Town", "Town", "Village"};
 	
 	// Single-syllable pieces
-	public static String[] oneSylBegin_default = new String[]{"A", "Ba", "Ba", "Be", "Bla", "Blue", "Bo", "Bra", "Bro", "Bu", "Ca", "Cru", "Fi", "Fi", "Fi", "Fra", "Fy", "Geo", "Geo", "Gra", "Gree", "Ha", "Jo", "Jo", "Jua", "Jua", "Ka", "Kie", "Kyi", "Li", "Me", "Mi", "Mi", "Mi", "Moo", "Na", "Nuu", "Nuu", "Pa", "Po", "Pra", "Pra", "Pre", "Pri", "Pri", "Que", "Re", "Roa", "Roa", "Ro", "Ro", "Schaa", "Seou", "Seou", "Si", "Shi", "Spai", "Tree", "Tu", "Tze", "U", "Wa", "Whi", "Yo"};
-	public static String[] oneSylEnd_default = new String[]{"ck", "d", "d", "d", "de", "de", "des", "fsk", "ft", "gue", "gue", "gue", "hn's", "hn's", "k", "k", "l", "l", "l", "lb", "le", "lm", "lse", "m", "me", "me", "n", "n", "n", "n", "n", "n", "nk", "nn", "nce", "nce", "nce", "ne", "nsk", "nsk", "pe", "r", "re", "rge", "rge", "rh", "rk", "rn", "rnt", "rshe", "sh", "sh", "st", "te", "v", "v", "ve", "wn", "x", "y", "z", "z"};
+	public static String[] village_oneSylBegin_default = new String[]{"A", "Ba", "Ba", "Be", "Bla", "Blue", "Bo", "Bra", "Bro", "Bu", "Ca", "Cru", "Fi", "Fi", "Fi", "Fra", "Fy", "Geo", "Geo", "Gra", "Gree", "Ha", "Jo", "Jo", "Jua", "Jua", "Ka", "Kie", "Kyi", "Li", "Me", "Mi", "Mi", "Mi", "Moo", "Na", "Nuu", "Nuu", "Pa", "Po", "Pra", "Pra", "Pre", "Pri", "Pri", "Que", "Re", "Roa", "Roa", "Ro", "Ro", "Schaa", "Seou", "Seou", "Si", "Shi", "Spai", "Tree", "Tu", "Tze", "U", "Wa", "Whi", "Yo"};
+	public static String[] village_oneSylEnd_default = new String[]{"ck", "d", "d", "d", "de", "de", "des", "fsk", "ft", "gue", "gue", "gue", "hn's", "hn's", "k", "k", "l", "l", "l", "lb", "le", "lm", "lse", "m", "me", "me", "n", "n", "n", "n", "n", "n", "nk", "nn", "nce", "nce", "nce", "ne", "nsk", "nsk", "pe", "r", "re", "rge", "rge", "rh", "rk", "rn", "rnt", "rshe", "sh", "sh", "st", "te", "v", "v", "ve", "wn", "x", "y", "z", "z"};
 	
 	// Syllable 1 transitional
-	public static String[] syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "Aa", "Ac", "Ac", "Al", "Al", "Al", "Al", "Al", "Al", "Am", "Am", "Am", "Ark", "At", "Ath", "Auck", "Ba", "Ba", "Ba", "Ba", "Ba", "Bagh", "Bagh", "Ban", "Ban", "Ban", "Ban", "Bang", "Bang", "Basse", "Basse", "Basse", "Basse", "Be", "Be", "Beau", "Bei", "Bei", "Bei", "Bel", "Bel", "Ber", "Ber", "Bis", "Bis", "Bish", "Bish", "Bran", "Bri", "Bridge", "Bridge", "Brus", "Brus", "Bur", "Bur", "Ca", "Cai", "Cai", "Cam", "Car", "Car", "Cas", "Cas", "Cay", "Cay", "Chi", "Cley", "Clif", "Clot", "Co", "Cock", "Col", "Con", "Conde", "Cor", "Cos", "Cos", "Cre", "Cre", "Cus", "Da", "Da", "Da", "Da", "De", "De", "Del", "Dha", "Dha", "Di", "Di", "Do", "Do", "Do", "Dol", "Doug", "Doug", "Du", "Du", "Dub", "Dub", "Dun", "Dus", "Dy", "E", "Ed", "Ed", "Elf", "Es", "Es", "Fa", "Fair", "Fal", "Fi", "Fi", "Free", "Free", "Ga", "Ga", "Gai", "Geor", "Geor", "Geor", "George", "George", "George", "Goats", "Gon", "Groz", "Gy", "Ha", "Har", "Hi", "Hong", "I", "Inns", "Is", "Is", "Ja", "James", "Ji", "Jo", "Jo", "Ju", "Ju", "Ju", "Ka", "Ka", "Ka", "Kai", "Kar", "Khar", "Kings", "Kings", "Kings", "Kings", "Kings", "Kings", "Ko", "Koh", "Kow", "Ku", "Ku", "La", "Li", "Li", "Lim", "Lind", "Lis", "Lis", "Lo", "Lo", "Lon", "Lon", "Lou", "Lou", "Lu", "Luo", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Mar", "Mel", "Mi", "Mid", "Mo", "Mores", "Mores", "Mos", "Mos", "Mum", "Mus", "Mus", "My", "My", "Myth", "Nan", "Nas", "Nas", "New", "Ni", "Ni", "Nia", "Nia", "Nouak", "Nouak", "On", "Or", "Os", "Os", "Pa", "Pa", "Pa", "Pau", "Pe", "Pe", "Pe", "Phnom", "Phnom", "Pi", "Pi", "Ply", "Pra", "Pra", "Pra", "Pur", "Pyong", "Pyong", "Que", "Qui", "Ra", "Re", "Rep", "Ri", "Ri", "Ri", "Ri", "Ro", "Ro", "Roc", "Sa", "Sa", "Sa", "Sai", "Sai", "Se", "Ses", "Shang", "Skop", "Skop", "Stan", "Stan", "Stock", "Stock", "Su", "Su", "Sur", "Syd", "Syl", "Tai", "Tai", "Tal", "Tal", "Tash", "Tash", "Te", "Teh", "Teh", "Temp", "Tha", "Thim", "Thim", "Tim", "To", "To", "To", "To", "Tok", "Tom", "T\u00f3r", "T\u00f3r", "Tow", "Tre", "Troi", "Tu", "Tu", "Va", "Val", "Vec", "Vi", "Vi", "Vi", "Vien", "Vien", "Vio", "War", "War", "War", "We", "Win", "Wind", "Wind", "Wu", "Xi", "Ya", "Ya", "Yan", "Yel", "Za", "Za", "Zo", "Z\u00fc"};
+	public static String[] village_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "Aa", "Ac", "Ac", "Al", "Al", "Al", "Al", "Al", "Al", "Am", "Am", "Am", "Ark", "At", "Ath", "Auck", "Ba", "Ba", "Ba", "Ba", "Ba", "Bagh", "Bagh", "Ban", "Ban", "Ban", "Ban", "Bang", "Bang", "Basse", "Basse", "Basse", "Basse", "Be", "Be", "Beau", "Bei", "Bei", "Bei", "Bel", "Bel", "Ber", "Ber", "Bis", "Bis", "Bish", "Bish", "Bran", "Bri", "Bridge", "Bridge", "Brus", "Brus", "Bur", "Bur", "Ca", "Cai", "Cai", "Cam", "Car", "Car", "Cas", "Cas", "Cay", "Cay", "Chi", "Cley", "Clif", "Clot", "Co", "Cock", "Col", "Con", "Conde", "Cor", "Cos", "Cos", "Cre", "Cre", "Cus", "Da", "Da", "Da", "Da", "De", "De", "Del", "Dha", "Dha", "Di", "Di", "Do", "Do", "Do", "Dol", "Doug", "Doug", "Du", "Du", "Dub", "Dub", "Dun", "Dus", "Dy", "E", "Ed", "Ed", "Elf", "Es", "Es", "Fa", "Fair", "Fal", "Fi", "Fi", "Free", "Free", "Ga", "Ga", "Gai", "Geor", "Geor", "Geor", "George", "George", "George", "Goats", "Gon", "Groz", "Gy", "Ha", "Har", "Hi", "Hong", "I", "Inns", "Is", "Is", "Ja", "James", "Ji", "Jo", "Jo", "Ju", "Ju", "Ju", "Ka", "Ka", "Ka", "Kai", "Kar", "Khar", "Kings", "Kings", "Kings", "Kings", "Kings", "Kings", "Ko", "Koh", "Kow", "Ku", "Ku", "La", "Li", "Li", "Lim", "Lind", "Lis", "Lis", "Lo", "Lo", "Lon", "Lon", "Lou", "Lou", "Lu", "Luo", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Mar", "Mel", "Mi", "Mid", "Mo", "Mores", "Mores", "Mos", "Mos", "Mum", "Mus", "Mus", "My", "My", "Myth", "Nan", "Nas", "Nas", "New", "Ni", "Ni", "Nia", "Nia", "Nouak", "Nouak", "On", "Or", "Os", "Os", "Pa", "Pa", "Pa", "Pau", "Pe", "Pe", "Pe", "Phnom", "Phnom", "Pi", "Pi", "Ply", "Pra", "Pra", "Pra", "Pur", "Pyong", "Pyong", "Que", "Qui", "Ra", "Re", "Rep", "Ri", "Ri", "Ri", "Ri", "Ro", "Ro", "Roc", "Sa", "Sa", "Sa", "Sai", "Sai", "Se", "Ses", "Shang", "Skop", "Skop", "Stan", "Stan", "Stock", "Stock", "Su", "Su", "Sur", "Syd", "Syl", "Tai", "Tai", "Tal", "Tal", "Tash", "Tash", "Te", "Teh", "Teh", "Temp", "Tha", "Thim", "Thim", "Tim", "To", "To", "To", "To", "Tok", "Tom", "T\u00f3r", "T\u00f3r", "Tow", "Tre", "Troi", "Tu", "Tu", "Va", "Val", "Vec", "Vi", "Vi", "Vi", "Vien", "Vien", "Vio", "War", "War", "War", "We", "Win", "Wind", "Wind", "Wu", "Xi", "Ya", "Ya", "Yan", "Yel", "Za", "Za", "Zo", "Z\u00fc"};
 	
 	// Syllable 2 terminal
-	public static String[] syl2Term_default = new String[]{"^Bal", "^Kong", "^Penh", "^Penh", "-Terre", "-Terre", "a", "a", "'an", "ba", "ba", "bai", "bai", "bat", "ber", "beye", "bliz", "blum", "bon", "bon", "bul", "bul", "bul", "brook", "burn", "by", "by", "cat", "cat", "chol", "chott", "chott", "co", "cow", "cow", "cra", "cra", "cre", "dad", "dad", "deel", "den", "don", "don", "door", "dor", "drid", "drid", "duz", "enne", "enne", "erre", "erre", "fax", "ga", "ga", "gar", "gart", "gate", "ge's", "ge's", "ge's", "giers", "giers", "gole", "gon", "gon", "gos", "grade", "grade", "greb", "greb", "gui", "gui", "ha", "ha", "hai", "ham", "heim", "herst", "hi", "hill", "hill", "hoek", "hoek", "holm", "holm", "ia", "ia", "is", "is", "i\u00fan", "je", "je", "jing", "jing", "jul", "ka", "ka", "kar", "kar", "kek", "kek", "kent", "kent", "ket", "kings'", "kok", "kok", "ku", "ku", "kul", "kyo", "kyo", "la", "la", "lamb", "land", "land", "las", "las", "l\u00e9", "l\u00e9", "lege", "lem", "let", "let", "ley", "ley", "ley", "li", "li", "li", "lin", "lin", "lin", "lin", "lin", "lin", "ling", "lize", "lo", "lo", "lo", "lo", "loom", "loon", "low", "ma", "ma", "man", "man", "m\u00e9", "m\u00e9", "m\u00e9", "mey", "mey", "mo", "mond", "mouth", "mouth", "mur", "naan", "nak", "ney", "nic", "nis", "nis", "nis", "no", "no", "noi", "non", "ny", "ol", "pan", "pei", "pei", "pers", "phu", "phu", "ple", "po", "port", "rac", "ra", "ra", "ran", "ran", "range", "rel", "ren", "ren", "rich", "ril", "ris", "ris", "ro", "ro", "ron", "ror", "ros", "rut", "rut", "sahl", "sau", "sau", "sau", "sau", "saw", "saw", "scent", "scent", "s\u00e9", "s\u00e9", "seau", "seau", "sels", "sels", "shavn", "shavn", "side", "son", "ta", "ta", "tai", "tair", "tam", "ter", "ter", "ter", "terre", "terre", "thar", "thens", "thens", "tiane", "tiane", "tio", "to", "ton", "ton", "ton", "ton", "ton", "tor", "tos", "toum", "town", "town", "town", "town", "town", "town", "town", "town", "town", "town", "tre", "tries", "tries", "va", "wait", "wait", "ward", "ward", "wen", "wich", "wood", "yadh", "yadh", "yang", "yang", "yang", "za", "zo", "zon", "zus", "zus"};
+	public static String[] village_syl2Term_default = new String[]{"^Bal", "^Kong", "^Penh", "^Penh", "-Terre", "-Terre", "a", "a", "'an", "ba", "ba", "bai", "bai", "bat", "ber", "beye", "bliz", "blum", "bon", "bon", "bul", "bul", "bul", "brook", "burn", "by", "by", "cat", "cat", "chol", "chott", "chott", "co", "cow", "cow", "cra", "cra", "cre", "dad", "dad", "deel", "den", "don", "don", "door", "dor", "drid", "drid", "duz", "enne", "enne", "erre", "erre", "fax", "ga", "ga", "gar", "gart", "gate", "ge's", "ge's", "ge's", "giers", "giers", "gole", "gon", "gon", "gos", "grade", "grade", "greb", "greb", "gui", "gui", "ha", "ha", "hai", "ham", "heim", "herst", "hi", "hill", "hill", "hoek", "hoek", "holm", "holm", "ia", "ia", "is", "is", "i\u00fan", "je", "je", "jing", "jing", "jul", "ka", "ka", "kar", "kar", "kek", "kek", "kent", "kent", "ket", "kings'", "kok", "kok", "ku", "ku", "kul", "kyo", "kyo", "la", "la", "lamb", "land", "land", "las", "las", "l\u00e9", "l\u00e9", "lege", "lem", "let", "let", "ley", "ley", "ley", "li", "li", "li", "lin", "lin", "lin", "lin", "lin", "lin", "ling", "lize", "lo", "lo", "lo", "lo", "loom", "loon", "low", "ma", "ma", "man", "man", "m\u00e9", "m\u00e9", "m\u00e9", "mey", "mey", "mo", "mond", "mouth", "mouth", "mur", "naan", "nak", "ney", "nic", "nis", "nis", "nis", "no", "no", "noi", "non", "ny", "ol", "pan", "pei", "pei", "pers", "phu", "phu", "ple", "po", "port", "rac", "ra", "ra", "ran", "ran", "range", "rel", "ren", "ren", "rich", "ril", "ris", "ris", "ro", "ro", "ron", "ror", "ros", "rut", "rut", "sahl", "sau", "sau", "sau", "sau", "saw", "saw", "scent", "scent", "s\u00e9", "s\u00e9", "seau", "seau", "sels", "sels", "shavn", "shavn", "side", "son", "ta", "ta", "tai", "tair", "tam", "ter", "ter", "ter", "terre", "terre", "thar", "thens", "thens", "tiane", "tiane", "tio", "to", "ton", "ton", "ton", "ton", "ton", "tor", "tos", "toum", "town", "town", "town", "town", "town", "town", "town", "town", "town", "town", "tre", "tries", "tries", "va", "wait", "wait", "ward", "ward", "wen", "wich", "wood", "yadh", "yadh", "yang", "yang", "yang", "za", "zo", "zon", "zus", "zus"};
 	// Syllable 2 transitional
-	public static String[] syl2Trans_default = new String[]{"^Chi", "^es", "^Pe", "'Dja", "'Dja", "a", "a", "a", "a", "a", "al", "an", "an", "ba", "ba", "ba", "bel", "ber", "bi", "bi", "ble", "blja", "blja", "bo", "bo", "bou", "bou", "bral", "bral", "bre", "bre", "bu", "bu", "bu", "cha", "cha", "ches", "ci", "cho", "co", "co", "da", "da", "da", "dain", "dams", "dams", "der", "der", "din", "dis", "dis", "do", "dor", "dor", "dur", "em", "em", "en", "en", "er", "ex", "fa", "fe", "fi", "fi", "fon", "fu", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "g\u00e5t", "ge", "gei", "go", "go", "go", "go", "go", "gu", "gu", "gua", "guer", "han", "i", "ing", "ju", "jum", "jum", "ka", "ka", "ka", "kar", "kar", "ke", "khu", "khu", "kir", "kja", "kja", "ku", "ku", "la", "la", "la", "la", "la", "laan", "lan", "lan", "lem", "lem", "lep", "let", "li", "li", "li", "li", "lin", "ling", "ling", "lips", "lo", "lo", "lom", "lon", "lon", "lotte", "lotte", "ma", "ma", "ma", "ma", "ma", "ma", "man", "man", "mas", "me", "m\u00e9", "m\u00e9", "mil", "min", "min", "mo", "mou", "mou", "mous", "mu", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "ne", "ni", "ni", "ni", "ni", "ni", "nos", "nos", "oun", "pa", "pa", "pa", "pa", "pa", "pe", "pe", "pen", "pen", "pi", "pi", "pi", "pi", "po", "po", "po", "pu", "pu", "pyi", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ran", "ran", "ran", "ras", "ras", "re", "re", "re", "re", "ren", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ro", "ro", "ro", "ro", "ro", "ron", "ru", "ru", "ru", "sa", "sa", "sa", "se", "se", "sha", "sha", "shan", "shan", "si", "si", "si", "si", "s\u00ed", "s\u00ed", "sin", "sin", "ster", "ster", "sun", "sun", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "tan", "te", "te", "te", "te", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "tin", "to", "to", "to", "to", "to", "to", "to", "to", "tra", "va", "va", "va", "va", "va", "va", "va", "va", "vern", "vi", "vo", "xi", "xi", "ya", "ya", "year", "year", "za", "za", "za", "zi"};
+	public static String[] village_syl2Trans_default = new String[]{"^Chi", "^es", "^Pe", "'Dja", "'Dja", "a", "a", "a", "a", "a", "al", "an", "an", "ba", "ba", "ba", "bel", "ber", "bi", "bi", "ble", "blja", "blja", "bo", "bo", "bou", "bou", "bral", "bral", "bre", "bre", "bu", "bu", "bu", "cha", "cha", "ches", "ci", "cho", "co", "co", "da", "da", "da", "dain", "dams", "dams", "der", "der", "din", "dis", "dis", "do", "dor", "dor", "dur", "em", "em", "en", "en", "er", "ex", "fa", "fe", "fi", "fi", "fon", "fu", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "g\u00e5t", "ge", "gei", "go", "go", "go", "go", "go", "gu", "gu", "gua", "guer", "han", "i", "ing", "ju", "jum", "jum", "ka", "ka", "ka", "kar", "kar", "ke", "khu", "khu", "kir", "kja", "kja", "ku", "ku", "la", "la", "la", "la", "la", "laan", "lan", "lan", "lem", "lem", "lep", "let", "li", "li", "li", "li", "lin", "ling", "ling", "lips", "lo", "lo", "lom", "lon", "lon", "lotte", "lotte", "ma", "ma", "ma", "ma", "ma", "ma", "man", "man", "mas", "me", "m\u00e9", "m\u00e9", "mil", "min", "min", "mo", "mou", "mou", "mous", "mu", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "ne", "ni", "ni", "ni", "ni", "ni", "nos", "nos", "oun", "pa", "pa", "pa", "pa", "pa", "pe", "pe", "pen", "pen", "pi", "pi", "pi", "pi", "po", "po", "po", "pu", "pu", "pyi", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ran", "ran", "ran", "ras", "ras", "re", "re", "re", "re", "ren", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ro", "ro", "ro", "ro", "ro", "ron", "ru", "ru", "ru", "sa", "sa", "sa", "se", "se", "sha", "sha", "shan", "shan", "si", "si", "si", "si", "s\u00ed", "s\u00ed", "sin", "sin", "ster", "ster", "sun", "sun", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "tan", "te", "te", "te", "te", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "tin", "to", "to", "to", "to", "to", "to", "to", "to", "tra", "va", "va", "va", "va", "va", "va", "va", "va", "vern", "vi", "vo", "xi", "xi", "ya", "ya", "year", "year", "za", "za", "za", "zi"};
 	
 	// Syllable 3 terminal
-	public static String[] syl3Term_default = new String[]{"^Minh", "'a", "'a", "a", "a", "a", "a", "a", "a", "a", "ah", "bard", "bat", "bat", "be", "be", "bi", "bi", "bo", "bo", "bourg", "bourg", "bul", "burg", "byen", "byen", "can", "can", "cas", "cas", "chi", "cle", "co", "co", "co", "cus", "da", "da", "da", "dam", "dam", "daw", "d\u00e9", "djan", "do", "dor", "dor", "down", "du", "du", "dzou", "dzou", "er", "er", "fi", "fi", "ford", "ga", "gar", "gen", "go", "go", "got", "got", "gua", "gua", "gwe", "gwe", "head", "heim", "ja", "je", "ka", "ka", "ka", "ki", "ki", "ki", "kir", "ko", "ko", "kry", "kry", "la", "la", "la", "la", "lah", "li", "li", "li", "li", "li", "li", "lia", "ma", "ma", "ma", "ma", "ma", "man", "mand", "mba", "mi", "mi", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "\u00f1a", "nas", "nau", "nau", "ne", "ni", "ni", "ni", "ning", "no", "nou", "nu", "ny", "pan", "pest", "pest", "po", "po", "pol", "pol", "pore", "pore", "quil", "ra", "ra", "ra", "ra", "ra", "re", "re", "rest", "rest", "ri", "rin", "ro", "ro", "ru", "ru", "ry", "sa", "sa", "sa", "sa", "stad", "stad", "ta", "ta", "ta", "ta", "ta", "t\u00e1", "t\u00e1", "tar", "tar", "tein", "ter", "ti", "ti", "tie", "tis", "to", "to", "to", "to", "ton", "ton", "ton", "ton", "town", "town", "ty", "us", "us", "van", "van", "vik", "vik", "ville", "ville", "ville", "ville", "wa", "wa", "youne"};	
+	public static String[] village_syl3Term_default = new String[]{"^Minh", "'a", "'a", "a", "a", "a", "a", "a", "a", "a", "ah", "bard", "bat", "bat", "be", "be", "bi", "bi", "bo", "bo", "bourg", "bourg", "bul", "burg", "byen", "byen", "can", "can", "cas", "cas", "chi", "cle", "co", "co", "co", "cus", "da", "da", "da", "dam", "dam", "daw", "d\u00e9", "djan", "do", "dor", "dor", "down", "du", "du", "dzou", "dzou", "er", "er", "fi", "fi", "ford", "ga", "gar", "gen", "go", "go", "got", "got", "gua", "gua", "gwe", "gwe", "head", "heim", "ja", "je", "ka", "ka", "ka", "ki", "ki", "ki", "kir", "ko", "ko", "kry", "kry", "la", "la", "la", "la", "lah", "li", "li", "li", "li", "li", "li", "lia", "ma", "ma", "ma", "ma", "ma", "man", "mand", "mba", "mi", "mi", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "\u00f1a", "nas", "nau", "nau", "ne", "ni", "ni", "ni", "ning", "no", "nou", "nu", "ny", "pan", "pest", "pest", "po", "po", "pol", "pol", "pore", "pore", "quil", "ra", "ra", "ra", "ra", "ra", "re", "re", "rest", "rest", "ri", "rin", "ro", "ro", "ru", "ru", "ry", "sa", "sa", "sa", "sa", "stad", "stad", "ta", "ta", "ta", "ta", "ta", "t\u00e1", "t\u00e1", "tar", "tar", "tein", "ter", "ti", "ti", "tie", "tis", "to", "to", "to", "to", "ton", "ton", "ton", "ton", "town", "town", "ty", "us", "us", "van", "van", "vik", "vik", "ville", "ville", "ville", "ville", "wa", "wa", "youne"};	
 	// Syllable 3 transitional
-	public static String[] syl3Trans_default = new String[]{"^A", "^A", "^A", "^A", "^Ai", "^Ai", "^Ba", "^Dha", "^Ga", "^Lum", "^Lum", "^Pa", "^Ro", "^Sa", "^Sa", "^Se", "^Se", "-No", "-U", "-U", "'a", "'a", "a", "a", "a", "a", "an", "baa", "blan", "bu", "bu", "bu", "ci", "ci", "ci", "ci", "ci", "ci", "di", "di", "di", "di", "dou", "dou", "e", "e", "e", "e", "fu", "fu", "ha", "ha", "i", "ja", "je", "je", "je", "je", "ka", "kun", "li", "li", "li", "ma", "ma", "ma", "ma", "ma", "me", "me", "na", "na", "na", "na", "nes", "ni", "ni", "ni", "o", "ra", "ra", "ra\u00ed", "re", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ru", "ru", "rul", "ry", "sa", "sa", "sa", "si", "si", "sko", "sko", "sla", "sla", "sou", "vi", "vi", "vi", "vi", "vi", "vi", "vo", "war"};
+	public static String[] village_syl3Trans_default = new String[]{"^A", "^A", "^A", "^A", "^Ai", "^Ai", "^Ba", "^Dha", "^Ga", "^Lum", "^Lum", "^Pa", "^Ro", "^Sa", "^Sa", "^Se", "^Se", "-No", "-U", "-U", "'a", "'a", "a", "a", "a", "a", "an", "baa", "blan", "bu", "bu", "bu", "ci", "ci", "ci", "ci", "ci", "ci", "di", "di", "di", "di", "dou", "dou", "e", "e", "e", "e", "fu", "fu", "ha", "ha", "i", "ja", "je", "je", "je", "je", "ka", "kun", "li", "li", "li", "ma", "ma", "ma", "ma", "ma", "me", "me", "na", "na", "na", "na", "nes", "ni", "ni", "ni", "o", "ra", "ra", "ra\u00ed", "re", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ru", "ru", "rul", "ry", "sa", "sa", "sa", "si", "si", "sko", "sko", "sla", "sla", "sou", "vi", "vi", "vi", "vi", "vi", "vi", "vo", "war"};
 	
 	// Syllable 4 terminal
-	public static String[] syl4Term_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "bad", "bi", "bo", "burg", "ca", "ca", "ca", "ce", "da", "fo", "gen", "gen", "go", "go", "go", "gou", "gou", "kert", "kert", "kro", "la", "la", "laam", "lem", "lem", "lem", "mud", "na", "na", "ne", "ne", "o", "o", "\u00f3n", "\u00f3n", "port", "pur", "pur", "ra", "ra", "ra", "ra", "ra", "res", "res", "rgh", "ri", "shu", "shu", "si", "si", "si", "so", "stad", "stad", "tar", "te", "te", "ti", "ti", "ti", "tor", "tu", "tu", "va", "va", "vo", "vo", "vo", "ya", "za"};
+	public static String[] village_syl4Term_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "bad", "bi", "bo", "burg", "ca", "ca", "ca", "ce", "da", "fo", "gen", "gen", "go", "go", "go", "gou", "gou", "kert", "kert", "kro", "la", "la", "laam", "lem", "lem", "lem", "mud", "na", "na", "ne", "ne", "o", "o", "\u00f3n", "\u00f3n", "port", "pur", "pur", "ra", "ra", "ra", "ra", "ra", "res", "res", "rgh", "ri", "shu", "shu", "si", "si", "si", "so", "stad", "stad", "tar", "te", "te", "ti", "ti", "ti", "tor", "tu", "tu", "va", "va", "vo", "vo", "vo", "ya", "za"};
 	// Syllable 4 transitional
-	public static String[] syl4Trans_default = new String[]{"^la", "^la", "ba", "ba", "de", "de", "de", "dri", "gal", "gal", "ham", "ham", "lo", "lo", "ma", "ma", "na", "na", "pi", "pi", "ri", "ri", "ri", "ri"};
+	public static String[] village_syl4Trans_default = new String[]{"^la", "^la", "ba", "ba", "de", "de", "de", "dri", "gal", "gal", "ham", "ham", "lo", "lo", "ma", "ma", "na", "na", "pi", "pi", "ri", "ri", "ri", "ri"};
 	
 	// Syllable 5 terminal
-	public static String[] syl5Term_default = new String[]{"a", "ba", "ba", "bo", "bo", "fa", "fa", "lie", "lie", "n", "n", "o", "o", "pa", "pa"};	
+	public static String[] village_syl5Term_default = new String[]{"a", "ba", "ba", "bo", "bo", "fa", "fa", "lie", "lie", "n", "n", "o", "o", "pa", "pa"};	
 	// Syllable 5 transitional
-	public static String[] syl5Trans_default = new String[]{"^Be", "^Be", "^Can", "^Can", "^Ve", "^Ve", "ne", "ri", "ri"};
+	public static String[] village_syl5Trans_default = new String[]{"^Be", "^Be", "^Can", "^Can", "^Ve", "^Ve", "ne", "ri", "ri"};
 	
 	// Syllable 6 terminal
-	public static String[] syl6Term_default = new String[]{"lla", "lla", "vo", "vo"};	
+	public static String[] village_syl6Term_default = new String[]{"lla", "lla", "vo", "vo"};	
 	// Syllable 6 transitional
-	public static String[] syl6Trans_default = new String[]{"ga", "ga", "pu", "ton", "ton"};
+	public static String[] village_syl6Trans_default = new String[]{"ga", "ga", "pu", "ton", "ton"};
 	
 	// Syllable 7 terminal
-	public static String[] syl7Term_default = new String[]{"ment", "ment", "ra", "wan", "wan"};
+	public static String[] village_syl7Term_default = new String[]{"ment", "ment", "ra", "wan", "wan"};
 	
-	
-	/*
-	 * Villager name pieces
-	 */
-	
-	// Single-syllable pieces
-	public static String[] villager_oneSylBegin_default = new String[]{"A", "A", "A", "Ai", "Ba", "Be", "Be", "Bi", "Bi", "Bi", "Bla", "Bo", "Bo", "Bra", "Bra", "Bru", "Bu", "Cai", "Cha", "Che", "Chri", "Chri", "Chri", "Ci", "Ci", "Ci", "Ci", "Ci", "Ci", "Ci", "Ci", "Clou", "Da", "Da", "Dao", "De", "De", "Dji", "Do", "Dua", "E", "Ea", "Ea", "Fa", "Fe", "Fi", "Flo", "Ga", "Gau", "Geo", "Geo", "Geo", "Geo", "Geo", "Geo", "Go", "Guo", "Guy", "Ha", "Hei", "Ho", "Hui", "Hui", "Ja", "Ja", "Ja", "Ja", "Ja", "Ja", "Ja", "Ja", "Ja", "Ja", "Jay", "Ji", "Ji", "Jia", "Jie", "Jo", "Jo", "Joe", "Joe", "Jua", "Ka", "Ka", "Ka", "Kai", "Ki", "Ko", "Kri", "La", "Li", "Li", "Lia", "Lia", "Lo", "Lu", "Lu", "Ma", "Ma", "Ma", "Ma", "Ma", "Mi", "Mi", "Mi", "Na", "Ne", "Ni", "Ni", "No", "Pau", "Pau", "Pe", "Pe", "Pu", "Qia", "Qio", "Rai", "Ray", "Re", "Re", "Ree", "Ree", "Ri", "Ro", "Ru", "Sco", "Sco", "Sco", "Sha", "Sha", "Shu", "Si", "Sji", "Smi", "Smi", "Smy", "Squa", "Tao", "Tha", "Tho", "Ti", "Ti", "To", "To", "To", "Tri", "We", "We", "Wei", "Wei", "Xia", "Xia", "Xu", "Ya", "Ya", "Yo", "Yu", "Ze", "Zhe", "Zo", "Zo", "Zo"};
-	public static String[] villager_oneSylEnd_default = new String[]{"b", "bs", "ce", "ck", "ck", "ck", "ck", "cke", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "de", "dge", "dge", "dge", "ff", "ff", "ff", "ggs", "hd", "hn", "hn", "k", "ke", "ke", "l", "l", "le", "les", "ll", "ll", "ll", "ll", "lm", "m", "m", "m", "m", "m", "m", "mes", "mes", "mes", "mes", "mie", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "n", "ne", "ne", "ne", "ne", "ne", "ne", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "ng", "nh", "nk", "nk", "nn", "nn", "nn", "ps", "r", "rc", "rc", "rc", "rge", "rge", "rge", "rk", "rk", "rl", "rl", "rles", "rn", "rn", "rn", "rth", "rtz", "s", "s", "s", "sch", "sh", "ss", "tch", "tch", "tch", "te", "te", "th", "th", "th", "th", "tt", "tt", "tt", "ve", "x"};
-	
-	// Syllable 1 transitional
-	public static String[] villager_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "Aa", "Aad", "Ab", "Ab", "Aer", "Ag", "Ah", "Ai", "Ai", "Al", "Am", "An", "An", "An", "An", "An", "An", "An", "An", "An", "An", "An", "Ar", "Ar", "Ar", "Ar", "As", "Ash", "Ash", "Ay", "Ba", "Ba", "Ba", "Ba", "Ba", "Bai", "Bar", "Bar", "Bar", "Be", "Be", "Ben", "Ben", "Ben", "Beth", "Bez", "Bi", "Bik", "Bil", "Bing", "Bis", "Bo", "Bor", "Bra", "Brad", "Bug", "Byb", "Ca", "Ca", "Ca", "Ca", "Ca", "Cag", "Cal", "Cal", "Ce", "Ce", "Ce", "Char", "Char", "Chi", "Chia", "Chlo", "Chlo", "Chris", "Chris", "Chry", "Cin", "Cin", "Cin", "Co", "Co", "Cry", "Cy", "Da", "Da", "Da", "Da", "Da", "Dai", "Dan", "Dar", "Dar", "De", "De", "De", "De", "Dex", "Di", "Di", "Di", "Do", "Do", "Do", "Do", "Do", "Dor", "Dra", "Dun", "Dun", "Dy", "Dy", "Dzog", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "Ed", "Ed", "Ei", "El", "El", "El", "El", "El", "El", "Em", "Em", "Em", "Em", "Em", "Em", "Em", "Em", "En", "Ex", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fa", "Fat", "Fat", "Fen", "Fen", "Fi", "Flo", "Fong", "Fran", "Fran", "Fre", "Fri", "Fu", "Fu", "Fu", "Ga", "Ga", "Ga", "Ga", "Ga", "Ga", "Gab", "Gae", "Gar", "Gar", "Gar", "Geor", "Geor", "Gi", "Gi", "Gil", "Gil", "Gil", "Gior", "Glo", "Go", "Gol", "Gol", "Gor", "Gret", "G\u00fcn", "Gung", "Guts", "Ha", "Ha", "Ha", "Ha", "Ha", "Ha", "Ha", "Ha", "Ha", "Ham", "Han", "Han", "Har", "Har", "Has", "Has", "Has", "He", "Hei", "Hei", "Hel", "Hen", "Hen", "Her", "Hi", "Hi", "Hi", "Hil", "Hil", "Ho", "Ho", "Hos", "Hos", "Hu", "Hus", "I", "I", "I", "I", "I", "I", "I", "I", "If", "If", "In", "In", "Io", "Ir", "Ja", "Ja", "Ja", "Jac", "Jac", "Jack", "Jay", "Jay", "Je", "Je", "Je", "Jen", "Jes", "Jo", "Jo", "Jo", "Jo", "Jo", "John", "John", "Ju", "Ju", "Ju", "Jun", "Ka", "Ka", "Ka", "Ka", "Kef", "Kel", "Ken", "Kha", "Ki", "Ki", "Ki", "Kil", "Klu", "Kok", "Kop", "Krish", "Ksen", "Ku", "La", "La", "La", "La", "Lak", "Lam", "Lau", "Lau", "Lau", "Le", "Le", "Le", "Le", "Le", "L\u00e9", "Lei", "Len", "Lew", "Li", "Li", "Li", "Li", "Lind", "Lo", "Lo", "Lo", "Lou", "Low", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Lu", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Maar", "Mah", "Mak", "Man", "Man", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mar", "Mau", "Max", "Me", "Me", "Me", "Meh", "Meh", "Mi", "Mi", "Mi", "Mi", "Mi", "Mi", "Mi", "Mi", "Mi", "Min", "Min", "Min", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mo", "Mon", "Mor", "Mor", "Mu", "Mu", "Mu", "Mu", "Muk", "Myr", "Na", "Na", "Na", "Na", "Na", "Na", "Na", "Ne", "Ne", "Ne", "Nea", "Nel", "Ner", "Ni", "Ni", "Ni", "Ni", "Ni", "No", "No", "No", "No", "No", "No", "No", "No", "No", "Nor", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "Od", "Pa", "Pa", "Pa", "Pal", "Pan", "Pan", "Pau", "Pe", "Phae", "Pho", "Pi", "Pi", "Po", "Po", "Pre", "Pri", "Quet", "Quis", "Ra", "Ra", "Ra", "Ra", "Rai", "Rai", "Ras", "Re", "Re", "Re", "Rhi", "Ri", "Ri", "Ri", "Ri", "Ri", "Ro", "Ro", "Ro", "Rob", "Ron", "Row", "Ru", "Ru", "Ru", "Ru", "Ry", "Ry", "Ry", "Sa", "Sa", "Sa", "Sa", "Sa", "Sa", "Sa", "Sad", "Sal", "San", "San", "San", "San", "San", "Sar", "Sar", "Sar", "Scar", "Scar", "Se", "Se", "Se", "Se", "Se", "Sei", "Sel", "Seo", "Sep", "Set", "Sev", "Sha", "She", "Shi", "Shri", "Shu", "Si", "Si", "So", "So", "So", "So", "So", "So", "So", "So", "So", "So", "So", "So", "So", "So", "Sof", "Som", "Sta", "Ste", "Ste", "Stel", "Stra", "Su", "Su", "Syl", "Ta", "Ta", "Ta", "Ta", "Ta", "Tak", "Tal", "Te", "Te", "Te", "Te", "Te", "Tel", "The", "Tho", "Tho", "Tho", "Ti", "Ti", "Ti", "Ti", "Ti", "Ti", "Ti", "Ti", "Tif", "Tif", "Tim", "To", "To", "To", "Tom", "Ton", "Tre", "Tri", "Tsu", "Tsu", "Twin", "U", "Ul", "Un", "Ur", "Va", "Ven", "Vi", "Vi", "Vic", "Vic", "Vik", "Vik", "Vin", "Vin", "Vin", "Wal", "War", "Wen", "Wen", "Wi", "Wil", "Wil", "Wil", "Wil", "Wil", "Wil", "Wil", "Wil", "Wil", "Xan", "Xe", "Xi", "Yas", "Ye", "Yous", "Yu", "Yu", "Yuf", "Zah", "Zan", "Zar", "Ze", "Ze", "Zeb", "Zen", "Zi", "Zig", "Zo", "Zo", "Zur"};
-	
-	// Syllable 2 terminal
-	public static String[] villager_syl2Term_default = new String[]{"^Paul", "^Wei", "-fen", "-hao", "-jun", "-yeon", "a", "a", "a", "a", "a", "ah", "ah", "ah", "ah", "ah", "ah", "am", "am", "am", "am", "am", "am", "an", "an", "an", "an", "an", "\u00e3o", "ba", "be", "bert", "bez", "bib", "bolt", "bos", "bul", "by", "by", "ca", "ca", "cal", "can", "can", "card", "cas", "cas", "cas", "ce", "cent", "cent", "chael", "chael", "chai", "chai", "chard", "chel", "chen", "cil", "cious", "cis", "co", "co", "cus", "cus", "cy", "da", "da", "da", "da", "dam", "dam", "dam", "dane", "de", "death", "deen", "del", "den", "den", "den", "den", "den", "des", "di", "di", "din", "do", "don", "dor", "dra", "dra", "dra", "drei", "drew", "drew", "dy", "dy", "dy", "dy", "dy", "dy", "e", "e", "el", "ell", "erre", "erts", "et", "ey", "fa", "fer", "fie", "fus", "ga", "ga", "ga", "gan", "gan", "gann", "gar", "ger", "ghen", "gi", "gi", "go", "go", "go", "gon", "gon", "gret", "gr\u00e9t", "grjet", "guel", "gus", "gy", "ha", "ha", "ha", "ha", "har", "he", "he", "hei", "helm", "ho", "i", "ia", "ia", "id", "iel", "im", "inj", "ior", "is", "is", "is", "ise", "ith", "ja", "jin", "jin", "jo", "jr", "ka", "ka", "ka", "ka", "ka", "kahn", "kain", "kas", "kas", "kau", "ke", "kel", "ki", "ki", "ko", "kol", "ku", "kub", "kub", "la", "la", "la", "la", "la", "la", "la", "lah", "lak", "lal", "lal", "lan", "lan", "land", "land", "land", "las", "layne", "led", "len", "lene", "les", "let", "lex", "lex", "ley", "ley", "li", "li", "li", "li", "liam", "liam", "liam", "liam", "liam", "liam", "lice", "lie", "lie", "lie", "lik", "lim", "lim", "lom", "los", "luf", "ly", "ly", "ly", "lyn", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "mak", "man", "mar", "mar", "marck", "mas", "mas", "mas", "mas", "med", "mer", "met", "mi", "mil", "mon", "m\u00f3n", "moud", "muh", "muh", "mus", "mus", "my", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "naa", "nan", "ne", "nei", "nes", "net", "neth", "ni", "nie", "no", "no", "non", "ny", "ny", "ny", "ny", "o", "o", "o", "o", "on", "on", "ott", "pe", "phie", "qing", "ra", "ra", "ra", "ra", "ra", "rad", "rah", "ram", "rav", "reet", "reh", "rell", "ren", "ren", "rene", "req", "ret", "ric", "rich", "rick", "rid", "rie", "rie", "rik", "rill", "rim", "rin", "rir", "rir", "ris", "ris", "rit", "ro", "ro", "rom", "ron", "ros", "ru", "rus", "ry", "ry", "ry", "ry", "ry", "ry", "ryl", "sa", "sa", "say", "sef", "sef", "sein", "seph", "sey", "sha", "shal", "shmi", "shoi", "sie", "sif", "sil", "sim", "sin", "son", "son", "son", "stal", "sti", "suf", "ta", "tan", "tan", "tar", "tem", "ten", "ter", "ter", "ter", "than", "than", "than", "ther", "tin", "tine", "tis", "to", "ton", "tor", "tos", "trice", "tur", "u", "uel", "va", "va", "va", "val", "van", "ven", "ves", "vey", "vi", "vid", "vin", "vin", "vin", "vine", "vis", "vit", "wa", "ward", "wu", "ya", "ya", "ya", "ya", "ya", "ya", "ya", "ya", "yep", "za", "zat", "ze", "zel", "zer", "zer"};
-	// Syllable 2 transitional
-	public static String[] villager_syl2Trans_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "an", "an", "bar", "bas", "bas", "bi", "bi", "bi", "bra", "bri", "bri", "bri", "ce", "ces", "chi", "c\u00ed", "c\u00ed", "cil", "cro", "da", "da", "dal", "de", "de", "de", "deg", "del", "del", "der", "di", "di", "di", "do", "dre", "du", "du", "e", "e", "e", "e", "e", "e", "fa", "fa", "fal", "fi", "fi", "fi", "fi", "fi", "fi", "fi", "fi", "fi", "fi", "f\u00ed", "f\u00ed", "ga", "ga", "ga", "ga", "ge", "gi", "gi", "gi", "gis", "gu", "gus", "gus", "ha", "ha", "ha", "ha", "ha", "ha", "ham", "ham", "ham", "ham", "ham", "ham", "ham", "ham", "hi", "hi", "i", "i", "i", "i", "i", "i", "i", "i", "ja", "ja", "ka", "ka", "ki", "ko", "ko", "ko", "ku", "la", "le", "le", "le", "le", "lea", "lek", "lex", "lex", "lex", "lex", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "li", "lis", "lo", "lo", "lu", "ly", "ma", "ma", "ma", "ma", "ma", "ma", "man", "me", "me", "me", "me", "me", "me", "mi", "mi", "mi", "mi", "mi", "mi", "mi", "mi", "mi", "mig", "ming", "mir", "my", "na", "na", "na", "na", "naz", "ni", "ni", "no", "no", "nu", "o", "o", "o", "o", "pa", "pan", "pha", "phi", "phi", "phi", "phi", "pu", "qa", "que", "ra", "ra", "ran", "re", "re", "re", "ren", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "r\u00ed", "r\u00ed", "r\u00ed", "rin", "ro", "ro", "rol", "ru", "ry", "ry", "ry", "sa", "sa", "scil", "se", "so", "so", "sta", "su", "su", "su", "ta", "ta", "ta", "ta", "tas", "te", "te", "te", "te", "the", "tho", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "to", "to", "to", "to", "to", "to", "to", "tou", "u", "u", "u", "um", "vaa", "ven", "vi", "ya", "zal", "ze", "zul"};
-	
-	// Syllable 3 terminal
-	public static String[] villager_syl3Term_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "am", "am", "am", "am", "am", "an", "an", "as", "as", "ba", "ba", "bert", "ca", "ca", "ca", "chi", "co", "da", "da", "da", "den", "dor", "dou", "el", "el", "elle", "fa", "garde", "ger", "go", "hill", "him", "id", "in", "ja", "ja", "ja", "ka", "ka", "ki", "ki", "ko", "ko", "ko", "la", "la", "la", "la", "la", "la", "la", "lah", "lah", "lat", "lene", "lin", "line", "lite", "lon", "lon", "los", "ly", "ly", "lyn", "lyn", "ma", "ma", "ma", "ma", "ma", "ma", "ma", "maa", "mad", "mad", "mad", "mad", "mad", "mad", "mad", "mar", "mat", "med", "med", "med", "med", "med", "med", "meh", "meh", "mesh", "mesh", "mesh", "meth", "mi", "min", "min", "mon", "mos", "mut", "my", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "nath", "ne", "ne", "nel", "nic", "nie", "no", "no", "non", "nor", "ny", "ny", "ny", "o", "o", "on", "os", "pa", "pher", "pher", "pu", "ra", "ra", "ra", "ra", "ra", "ra", "rant", "rat", "re", "re", "rey", "rin", "roth", "roth", "sa", "sa", "sha", "sine", "son", "son", "syl", "ta", "thy", "t\u00edn", "t\u00edn", "to", "to", "trix", "us", "va", "va", "va", "va", "ver", "ver", "ver", "ver", "ver", "way", "ya", "ya", "ya", "ya", "ya", "yah", "zo"};
-	// Syllable 3 transitional
-	public static String[] villager_syl3Trans_default = new String[]{"-A", "-Rah", "a", "a", "a", "a", "a", "a", "a", "a", "a", "an", "an", "an", "an", "baa", "bel", "bel", "can", "car", "ci", "c\u00f3", "do", "fis", "ga", "gu", "i", "i", "i", "ic", "li", "li", "li", "li", "li", "li", "lo", "lu", "ma", "me", "na", "ni", "ni", "no", "pho", "ri", "ri", "ri", "ri", "san", "sta", "ti", "ti", "to", "tro", "u", "vi", "vi", "vi", "vi", "vi", "vi", "vi", "za"};
-	
-	// Syllable 4 terminal
-	public static String[] villager_syl4Term_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "\u00e1n", "\u00e1n", "be", "beth", "cia", "cia", "dar", "der", "der", "der", "der", "go", "go", "go", "go", "ja", "la", "la", "la", "la", "li", "ma", "man", "mi", "mu", "na", "na", "na", "nin", "o", "on", "phe", "ra", "rii", "sia", "ta", "tar", "te"};
-	// Syllable 4 transitional
-	public static String[] villager_syl4Trans_default = new String[]{"^Car", "a", "gi", "nas", "o", "te"};
-	
-	// Syllable 5 terminal
-	public static String[] villager_syl5Term_default = new String[]{"a", "men", "ne", "ri", "sus", "tl"};
 	
 	
 	/*
@@ -172,6 +122,17 @@ public class NamePieces {
 	
 	// Syllable 5 terminal
 	public static String[] mineshaft_syl5Term_default = new String[]{"e", "ra", "ra", "ska", "ted", "thu", "ya"};	
+	// Syllable 5 transitional
+	public static String[] mineshaft_syl5Trans_default = new String[]{};
+	
+	// Syllable 6 terminal
+	public static String[] mineshaft_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] mineshaft_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] mineshaft_syl7Term_default = new String[]{};
+	
 	
 	
 	/*
@@ -206,6 +167,16 @@ public class NamePieces {
 
 	// Syllable 5 terminal
 	public static String[] stronghold_syl5Term_default = new String[]{"din", "m\u00e1n", "na", "ple"};	
+	// Syllable 5 transitional
+	public static String[] stronghold_syl5Trans_default = new String[]{};
+	
+	// Syllable 6 terminal
+	public static String[] stronghold_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] stronghold_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] stronghold_syl7Term_default = new String[]{};
 	
 	
 	
@@ -232,7 +203,7 @@ public class NamePieces {
 	// Syllable 3 terminal
 	public static String[] temple_syl3Term_default = new String[]{"a", "a", "a", "an", "an", "ba", "ba", "bas", "bo", "bourg", "burg", "burgh", "cles", "cuse", "da", "da", "do", "don", "dra", "en", "\u00e0re", "ers", "ga", "ga", "i", "ia", "ib", "ja", "ja", "la", "lat", "ler", "lin", "lo", "lus", "mes", "mis", "mon", "na", "na", "na", "na", "na", "na", "nec", "non", "nore", "nuc", "num", "nus", "o", "ol", "on", "on", "pa", "pos", "ra", "ra", "re", "ren", "ret", "ry", "sha", "si", "sus", "ta", "ta", "ta", "tal", "te", "ter", "ter", "tin", "to", "tum", "tus", "um", "us", "us", "va", "ville", "vis", "zel"};
 	// Syllable 3 transitional
-	public static String[] temple_syl3Trans_default = new String[]{"a", "bo", "bri", "bri", "de", "de", "di", "e", "e", "es", "es", "gal", "ge", "i", "i", "i", "i", "i", "la", "li", "me", "nar", "nen", "ni", "ni", "ny", "o", "pe", "pei", "pi", "po", "po", "por", "py", "ra", "ri", "ri", "sa", "scu", "scu", "shof", "so", "ta", "ta", "tei", "ter", "the", "ti", "ti", "ti", "to", "to", "u", "u", "un", "us", "wa", "zi"};
+	public static String[] temple_syl3Trans_default = new String[]{"a", "\u0151", "bo", "bri", "bri", "de", "de", "di", "e", "e", "es", "es", "gal", "ge", "i", "i", "i", "i", "i", "la", "li", "me", "nar", "nen", "ni", "ni", "ny", "pe", "pei", "pi", "po", "po", "por", "py", "ra", "ri", "ri", "sa", "scu", "scu", "shof", "so", "ta", "ta", "tei", "ter", "the", "ti", "ti", "ti", "to", "to", "u", "u", "un", "us", "wa", "zi"};
 
 	// Syllable 4 terminal
 	public static String[] temple_syl4Term_default = new String[]{"a", "a", "an", "an", "as", "ca", "do", "en", "er", "fen", "ga", "ga", "ja", "kos", "le", "lem", "li", "lis", "lis", "lon", "mak", "na", "ne", "ni", "ni", "nia", "no", "nos", "nus", "o", "on", "on", "qua", "ra", "ra", "ra", "rat", "re", "re", "ri", "ri", "sa", "sos", "te", "te", "tus", "tus", "um", "um", "us", "us", "zu"};
@@ -241,6 +212,16 @@ public class NamePieces {
 
 	// Syllable 5 terminal
 	public static String[] temple_syl5Term_default = new String[]{"cus", "ki", "ne", "nus", "on", "um"};
+	// Syllable 5 transitional
+	public static String[] temple_syl5Trans_default = new String[]{};
+	
+	// Syllable 6 terminal
+	public static String[] temple_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] temple_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] temple_syl7Term_default = new String[]{};
 	
 	
 	
@@ -253,30 +234,39 @@ public class NamePieces {
 	public static String[] fortress_suffix_default = new String[]{"Fortress"};
 	
 	// Single-syllable pieces
-	public static String[] fortress_oneSylBegin_default = new String[]{"He", "Sty"};
-	public static String[] fortress_oneSylEnd_default = new String[]{"ll", "x"};
+	public static String[] fortress_oneSylBegin_default = new String[]{"Gj\u00f6", "He", "He", "Sty"};
+	public static String[] fortress_oneSylEnd_default = new String[]{"l", "ll", "ll", "x"};
 	
 	// Syllable 1 transitional
-	public static String[] fortress_syl1Trans_default = new String[]{"A", "A", "A", "Ach", "Ach", "Aea", "As", "Cad", "Cae", "Cen", "Cer", "Char", "Chi", "Co", "Di", "Di", "E", "E", "Eu", "Fey", "Gor", "Ha", "Har", "Hec", "Hy", "Hyp", "Ir", "La", "Le", "Ler", "Me", "Me", "Mi", "Mict", "Mus", "Or", "Pa", "Pan", "Pe", "Per", "Phae", "Phle", "Plu", "Pro", "Rhad", "Soc", "Tar", "Than", "Ti", "Ti", "Xi"};
+	public static String[] fortress_syl1Trans_default = new String[]{"A", "A", "A", "A", "Ach", "Ach", "Aea", "As", "Cad", "Cae", "Cen", "Cer", "Char", "Chi", "Ci", "Co", "Di", "Di", "Dra", "Du", "E", "E", "E", "\u00c9l", "Eu", "Fey", "Gar", "Gjal", "Gor", "Ha", "Har", "Hec", "Hy", "Hyp", "Ir", "La", "Le", "Ler", "Me", "Me", "Mi", "Mict", "M\u00f3dh", "Mu", "Mus", "Na", "N\u00e1s", "Ni", "Ni", "Or", "Pa", "Pa", "Pan", "Pe", "Per", "Phae", "Phle", "Plu", "Pro", "Rhad", "Soc", "Ta", "Tar", "Than", "Ti", "Ti", "Tu", "Xi", "Yo", "You"};
 	
 	// Syllable 2 terminal
-	public static String[] fortress_syl2Term_default = new String[]{"cris", "cus", "des", "do", "dra", "dra", "gon", "lan", "lys", "march", "mus", "na", "nos", "nos", "on", "on", "py", "taur", "the", "to", "yu"};
+	public static String[] fortress_syl2Term_default = new String[]{"at", "byss", "cris", "cus", "des", "do", "dra", "dra", "du", "gon", "lan", "lys", "march", "mag", "mi", "mr", "mus", "na", "nos", "nos", "on", "on", "py", "taur", "the", "to", "tr\u00f6nd", "yu"};
 	// Syllable 2 transitional
-	public static String[] fortress_syl2Trans_default = new String[]{"a", "a", "a", "bal", "ber", "chil", "cy", "d\u00e6", "er", "gae", "gar", "ge", "kal", "le", "lec", "li", "me", "ne", "o", "pel", "phe", "pho", "ra", "ri", "ry", "se", "siph", "siph", "tar", "vad"};
+	public static String[] fortress_syl2Trans_default = new String[]{"a", "a", "a", "ba", "bal", "ber", "chil", "cy", "d\u00e6", "er", "fr", "fr", "gae", "gar", "ge", "gu", "j\u00fadh", "kal", "ku", "lar", "le", "lec", "li", "me", "ne", "o", "o", "pel", "phe", "pho", "ra", "ra", "re", "ri", "ri", "ry", "se", "siph", "siph", "ta", "tar", "vad"};
 	
 	// Syllable 3 terminal
-	public static String[] fortress_syl3Term_default = new String[]{"ba", "del", "heim", "la", "les", "ne", "on", "ra", "ra", "te", "tes", "tha", "thon", "to", "tos", "tus", "us", "us", "us", "us", "us"};
+	public static String[] fortress_syl3Term_default = new String[]{"ba", "br\u00fa", "bus", "del", "dhr", "heim", "heim", "hel", "ka", "la", "les", "lu", "ne", "nir", "on", "ra", "ra", "te", "tes", "tha", "thon", "to", "tos", "tus", "us", "us", "us", "us", "us"};
 	// Syllable 3 transitional
-	public static String[] fortress_syl3Trans_default = new String[]{"a", "da", "man", "mo", "no", "no", "o", "pho", "phy"};
+	public static String[] fortress_syl3Trans_default = new String[]{"a", "ci", "da", "man", "mo", "mu", "ne", "no", "no", "o", "pho", "phy"};
 	
 	// Syllable 4 terminal
-	public static String[] fortress_syl4Term_default = new String[]{"\u00eb", "\u00eb", "le", "mos", "ne", "ne", "thus"};
+	public static String[] fortress_syl4Term_default = new String[]{"ba", "\u00eb", "\u00eb", "la", "le", "mos", "ne", "ne", "thus"};
 	// Syllable 4 transitional
-	public static String[] fortress_syl4Trans_default = new String[]{"mi", "ni"};
+	public static String[] fortress_syl4Trans_default = new String[]{"mi", "ni", "ri"};
 	
 	// Syllable 5 terminal
-	public static String[] fortress_syl5Term_default = new String[]{"a", "um"};
+	public static String[] fortress_syl5Term_default = new String[]{"a", "a", "um"};
+	// Syllable 5 transitional
+	public static String[] fortress_syl5Trans_default = new String[]{};
 	
+	// Syllable 6 terminal
+	public static String[] fortress_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] fortress_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] fortress_syl7Term_default = new String[]{};
 	
 	
 	
@@ -294,20 +284,20 @@ public class NamePieces {
 	public static String[] monument_oneSylEnd_default = new String[]{"m", "s", "s", "t"};
 
 	// Syllable 1 transitional
-	public static String[] monument_syl1Trans_default = new String[]{"A", "A", "A", "Al", "An", "Ar", "At", "At", "Bai", "Bi", "Bou", "Ca", "Can", "Can", "Car", "Co", "Cu", "Di", "Dun", "Dwar", "Ei", "Ga", "Ge", "Ge", "Hamp", "He", "He", "He", "Kham", "Ki", "L", "Le", "Lu", "Ly", "Ma", "Mu", "Mu", "Na", "Na", "O", "O", "Pav", "Pha", "Phe", "Point", "Port", "Pu", "Quian", "R'l", "Ra", "Ra", "Ram", "Rha", "Rung", "Sa", "Sa", "Saef", "Sam", "Shi", "Su", "Ta", "Tar", "Tho", "Ti", "Tur", "Yo"};
+	public static String[] monument_syl1Trans_default = new String[]{"A", "A", "A", "Aa", "Al", "An", "Ar", "At", "At", "Bai", "Bi", "Bou", "Bu", "Ca", "Ca", "Can", "Can", "Car", "Co", "Cu", "Di", "Dun", "Dwar", "Ei", "Ga", "Ge", "Ge", "Hamp", "He", "He", "He", "He", "Kham", "Ki", "L", "Le", "Lu", "Ly", "Ma", "Mu", "Mu", "Na", "Na", "Neor", "O", "O", "O", "Pav", "Pha", "Phe", "Point", "Port", "Pu", "Quian", "R'l", "Ra", "Ra", "Ram", "Rha", "Rung", "Sa", "Sa", "Saef", "Sam", "Shi", "Su", "Ta", "Tar", "Tho", "Ti", "Tur", "Yo"};
 
 	// Syllable 2 terminal
-	public static String[] monument_syl2Term_default = new String[]{"ae", "an", "ba", "baj", "bhat", "cheng", "dao", "dum", "holt", "ia", "ka", "ka", "lit", "nah", "nis", "ra", "tezh", "til", "til", "ton", "wich", "yeh"};
+	public static String[] monument_syl2Term_default = new String[]{"ae", "an", "ba", "baj", "bhat", "cheng", "dao", "du", "dum", "holt", "ia", "ka", "ka", "lit", "nah", "nis", "ra", "ru", "tezh", "til", "til", "ton", "wich", "yeh"};
 	// Syllable 2 transitional
-	public static String[] monument_syl2Trans_default = new String[]{"^Ne", "^Ro", "bel", "but", "cho", "co", "de", "de", "ex", "gan", "gar", "gi", "ha", "hur", "ke", "la", "lae", "lan", "li", "li", "li", "li", "lo", "lo", "lys", "mi", "mu", "na", "na", "no", "o", "pi", "pol", "ra", "ra", "ran", "ro", "tes", "ti", "ti", "ting", "tre", "ven", "vens"};
+	public static String[] monument_syl2Trans_default = new String[]{"^Ne", "^Ro", "bel", "but", "cho", "co", "de", "de", "ex", "gan", "gar", "gi", "ha", "hur", "ke", "la", "lae", "lan", "le", "li", "li", "li", "li", "lo", "lo", "lys", "me", "mi", "mu", "na", "na", "no", "o", "pi", "pol", "ra", "ra", "ran", "ro", "ro", "tes", "ti", "ti", "ting", "tre", "ven", "vens", "x"};
 
 	// Syllable 3 terminal
-	public static String[] monument_syl3Term_default = new String[]{"a", "he", "ke", "ki", "lee", "nan", "nesse", "ni", "purn", "pus", "ro", "ser", "sos", "tis", "tis", "us", "us", "yal"};
+	public static String[] monument_syl3Term_default = new String[]{"a", "he", "ke", "ki", "lee", "na", "nan", "nesse", "ni", "purn", "pus", "ro", "ser", "sos", "tis", "tis", "us", "us", "yal", "yo"};
 	// Syllable 3 transitional
-	public static String[] monument_syl3Trans_default = new String[]{"'r", "^Ba", "^He", "^Pe", "^Ro", "^Si", "^U", "an", "ba", "ca", "cle", "clei", "e", "fa", "fa", "gor", "gu", "je", "ju", "ni", "os", "pe", "rho", "ri", "ta", "tho"};
+	public static String[] monument_syl3Trans_default = new String[]{"'r", "^Ba", "^He", "^Pe", "^Ro", "^Si", "^U", "an", "ba", "ca", "cle", "clei", "e", "fa", "fa", "gor", "gu", "je", "ju", "ni", "os", "pe", "rho", "ri", "ta", "tho", "tu", "u"};
 
 	// Syllable 4 terminal
-	public static String[] monument_syl4Term_default = new String[]{"a", "a", "cac", "dos", "har", "lig", "ni", "ni", "on", "on", "stad", "tri", "wi"};
+	public static String[] monument_syl4Term_default = new String[]{"a", "a", "cac", "can", "che", "dos", "har", "lig", "ni", "ni", "on", "on", "stad", "tri", "wang", "wi"};
 	// Syllable 4 transitional
 	public static String[] monument_syl4Trans_default = new String[]{"^An", "^Gwae", "a", "dri", "i", "i", "li", "lu", "na", "ni", "nu", "nu", "ran"};
 
@@ -318,7 +308,11 @@ public class NamePieces {
 
 	// Syllable 6 terminal
 	public static String[] monument_syl6Term_default = new String[]{"as", "da", "ram", "tu"};
-	
+	// Syllable 6 transitional
+	public static String[] monument_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] monument_syl7Term_default = new String[]{};
 	
 	
 	
@@ -355,7 +349,16 @@ public class NamePieces {
 	
 	// Syllable 5 terminal
 	public static String[] endcity_syl5Term_default = new String[]{"um"};
+	// Syllable 5 transitional
+	public static String[] endcity_syl5Trans_default = new String[]{};
 	
+	// Syllable 6 terminal
+	public static String[] endcity_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] endcity_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] endcity_syl7Term_default = new String[]{};
 	
 	
 	
@@ -392,7 +395,106 @@ public class NamePieces {
 
 	// Syllable 5 terminal
 	public static String[] mansion_syl5Term_default = new String[]{"sa"};
+	// Syllable 5 transitional
+	public static String[] mansion_syl5Trans_default = new String[]{};
+	
+	// Syllable 6 terminal
+	public static String[] mansion_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] mansion_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] mansion_syl7Term_default = new String[]{};
 	
 	
+	
+	
+	/*
+	 * Alien Village name pieces
+	 */
+	
+	// Prefix-Suffix pieces
+	public static String[] alienVillage_prefix_default = new String[]{};
+	public static String[] alienVillage_suffix_default = new String[]{};
+	
+	// Single-syllable pieces
+	public static String[] alienVillage_oneSylBegin_default = new String[]{"Bi", "Bla", "Bo", "Bo", "Cloo", "Da", "Ga", "Hei", "Hi", "Ko", "Kra", "Pe", "Pla", "Pri", "Ptha", "Roo", "Seu", "Sha", "Spei", "To", "Vhoo", "Wo", "Xo", "Ya", "Yi"};
+	public static String[] alienVillage_oneSylEnd_default = new String[]{"fft", "hr", "k", "ksh", "lff", "m", "nc", "nck", "nck", "nd", "nd", "nz", "pff", "re", "rg", "rl", "rp", "rt", "s", "ss", "st", "th", "th", "wes"};
+	
+	// Syllable 1 transitional
+	public static String[] alienVillage_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "Ab", "Ae", "Aes", "Ag", "Al", "Al", "Al", "Al", "Al", "Al", "Al", "Am", "An", "An", "An", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Arc", "As", "At", "Au", "Aus", "Baa", "Baal", "Bar", "Bel", "Bet", "Bil", "Bo", "Bo", "Bon", "Bos", "Bou", "Brad", "Bray", "Bri", "Bu", "Buck", "Byl", "Bz", "Ca", "Ca", "Ca", "Ca", "Ca", "Car", "Car", "Car", "Car", "Cau", "Cau", "Cel", "Cha", "Cle", "Cle", "Cog", "Con", "Con", "Cor", "Cris", "Cush", "Cy", "Da", "Da", "Dan", "Dar", "De", "De", "Di", "Di", "Dil", "Do", "Dop", "Dra", "Dzie", "E", "E", "Ep", "Et", "Eu", "Ex", "Fe", "Fe", "Fer", "Fi", "Flam", "Fo", "Fo", "Fres", "Fri", "Ful", "Fur", "G", "G", "G", "Ga", "Gal", "G\u00e4rt", "Gas", "Gas", "Gau", "Gay", "Ge", "Gei", "Gllo", "Glo", "Gly", "Gnarr", "Gra", "Gran", "Grim", "Gru", "Guet", "H", "Ha", "Had", "Had", "Hae", "Han", "Har", "Har", "Has", "He", "He", "He", "Hi", "Hi", "Ho", "Hu", "Hum", "Hum", "Huy", "Hy", "Hy", "Hy", "Im", "In", "In", "In", "Ir", "Jan", "Jann", "Ju", "K", "K", "K", "Kel", "Kor", "Kr", "Krie", "Kur", "Ky", "Ky", "L", "La", "Len", "Leusch", "Lie", "Lis", "Lit", "Lu", "Lun", "Lux", "M", "Ma", "Ma", "Maest", "Mai", "Man", "Mar", "Mar", "Mar", "Mau", "Maw", "May", "Med", "Men", "Men", "Mer", "Mer", "Mes", "Mich", "Mil", "Mir", "Mo", "Mor", "Mos", "Nec", "Ni", "Niu", "Niv", "Nu", "Nyil", "O", "O", "O", "O", "O", "Oc", "Og", "Op", "Op", "Pal", "Pal", "Par", "Pe", "Per", "Pet", "Ph", "Pher", "Pi", "Pi", "Pi", "Pit", "Pla", "Plei", "Plin", "Pnid", "Po", "Po", "Pro", "Pru", "Pu", "Py", "Rams", "R\u00e9", "Rec", "Rec", "Rei", "Rein", "Rep", "Rhei", "Rhyl", "Ri", "Ri", "Ri", "Rit", "Ro", "R\u00f6", "Ru", "Ru", "R\u00fcm", "San", "Sar", "Schr\u00f6", "Schr\u00f6", "Schr\u00f6", "Scil", "Se", "Sec", "Shag", "Sheep", "Shon", "Shu", "Sic", "Sieg", "Sir", "Smir", "Smy", "Snel", "So", "Sol", "Som", "Som", "Sor", "Spitz", "Spu", "Ster", "Stil", "Suc", "Sul", "Sum", "Sung", "Syl", "Syr", "Tae", "Tar", "Tau", "Te", "Tem", "Ter", "Tet", "The", "The", "Thu", "Thug", "Thy", "Ti", "Ti", "Tin", "Tos", "Tran", "Tri", "U", "U", "Un", "V", "Va", "Vas", "Ve", "Ven", "Ver", "Vi", "Vi", "Vig", "Vit", "Vix", "Vlad", "Von", "Wan", "We", "Whis", "Wu", "Xan", "Xe", "Xen", "Xi", "Xi", "Y", "Ya", "Ya", "Yad", "Yan", "Yar", "Yek", "Yg", "Yif", "Yil", "Yl", "Yli", "Yu", "Yug", "Z", "Za", "Za", "Zir", "Zly", "Zup"};
+	
+	// Syllable 2 terminal
+	public static String[] alienVillage_syl2Term_default = new String[]{"-Kthun", "-Mei", "-Yu", "'giath", "'in", "'yoth", "'zath", "\u00e6", "ban", "bau", "bey", "big", "bith", "blo", "boldt", "by", "cas", "chab", "cher", "chi", "chy", "clear", "co", "co", "col", "dath", "de", "de", "den", "dha", "dith", "dolf", "doth", "dra", "dr\u00e9", "er", "er", "erre", "fid", "fried", "ga", "gai", "gand", "gas", "gel", "gel", "gens", "ger", "gitte", "gol", "gon", "goth", "goth", "hi", "iell", "ip", "is", "itzsch", "iu", "kard", "kel", "ker", "ker", "kie", "ko", "kos", "la", "la", "land", "las", "le", "ler", "ley", "ley", "ley", "li", "lin", "lisle", "low", "ly", "man", "mans", "mar", "men", "mer", "mus", "na", "na", "nak", "narth", "nau", "ne", "nel", "ner", "ner", "ner", "nes", "ni", "nov", "on", "on", "oph", "oth", "pel", "pelt", "per", "p\u00e8re", "pes", "phes", "phun", "place", "ra", "ra", "ran", "rard", "ri", "ris", "ris", "ro", "rus", "ry", "sam", "sen", "sen", "shanks", "sold", "son", "sov", "steen", "ta", "ta", "tai", "tard", "ter", "ter", "ter", "thor", "ti", "tis", "tit", "to", "to", "ton", "trow", "tur", "ub", "us", "vard", "vaz", "ville", "vin", "vy", "wen", "win", "wing", "yeux", "zen"};
+	// Syllable 2 transitional
+	public static String[] alienVillage_syl2Trans_default = new String[]{"-Lus", "-Yar", "-yath", "'gil", "'gl", "'gy", "'ll", "'ni", "'nug", "'u", "'yi", "'yl", "^Cot", "a", "a", "ae", "ae", "al", "au", "ber", "bi", "bin", "bliv", "bold", "bri", "bul", "ca", "ca", "ca", "cci", "cel", "cel", "cel", "ces", "cha", "che", "chi", "chy", "ci", "cle", "clot", "co", "co", "co", "cor", "cor", "cor", "cre", "cund", "da", "dai", "dan", "de", "de", "de", "de", "di", "di", "di", "dil", "din", "din", "dro", "drus", "du", "e", "e", "e", "el", "el", "esh", "ga", "ga", "ga", "gae", "gas", "gen", "ghir", "gin", "gin", "go", "gor", "gric", "gu", "hi", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "is", "ka", "kar", "kra", "lah", "lar", "lee", "li", "lic", "lip", "lor", "lor", "mal", "mar", "math", "mi", "mi", "mi", "mil", "mo", "mor", "mor", "mor", "n", "nar", "ne", "ner", "ni", "ni", "no", "no", "o", "o", "o", "or", "pa", "par", "pat", "pel", "pel", "pen", "per", "per", "phae", "phon", "pi", "pol", "pol", "por", "por", "quil", "ra", "rak", "ral", "ren", "ren", "ri", "ri", "ro", "sal", "se", "sen", "sen", "si", "si", "si", "si", "stat", "su", "ta", "ta", "tan", "tar", "tat", "ter", "tha", "thi", "thur", "til", "til", "tor", "tra", "tred", "tru", "tu", "tu", "tum", "tyn", "u", "u", "un", "ves", "wul", "x", "ya", "za", "zar"};
+	
+	// Syllable 3 terminal
+	public static String[] alienVillage_syl3Term_default = new String[]{"-Ghun", "-Lih", "-Tha", "-Vho", "'ag", "'hx", "'mnon", "^Rho", "a", "a", "a", "chel", "cus", "des", "des", "di", "di", "di", "dum", "er", "er", "ev", "ga", "gen", "ger", "ger", "geuse", "haut", "hu", "huh", "i", "i", "i", "i", "i", "i", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "l", "la", "le", "leev", "lo", "lor", "los", "lu", "mir", "mur", "nac", "n\u00e6", "nak", "ni", "nil", "no", "nosh", "nu", "omph", "ov", "pus", "ra", "riffe", "ris", "rum", "rus", "sa", "sac", "shir", "siz", "ski", "sm", "son", "sus", "sus", "sus", "ta", "tas", "ter", "ter", "thon", "tia", "tis", "tius", "tius", "tlach", "tor", "tov", "tum", "um", "um", "um", "um", "um", "um", "um", "um", "um", "us", "us", "us", "us", "us", "us", "us", "us", "us", "vich", "x", "yand", "zer", "zy"};
+	// Syllable 3 transitional
+	public static String[] alienVillage_syl3Trans_default = new String[]{"-Al", "-ech", "-U", "^Na", "^Zac", "a", "a", "ae", "ba", "char", "chi", "ci", "cli", "de", "di", "do", "don", "e", "en", "fe", "ge", "gra", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "la", "lae", "lar", "lar", "len", "ler", "li", "li", "lon", "ma", "may", "me", "me", "mon", "na", "nel", "ni", "ni", "o", "o", "o", "o", "pat", "phan", "ri", "rus", "tar", "tat", "tat", "tat", "tat", "te", "thar", "thu", "ti", "ti", "tud", "van", "ver", "vi", "vi", "vi"};
+	
+	// Syllable 4 terminal
+	public static String[] alienVillage_syl4Term_default = new String[]{"'ya", "a", "ae", "ae", "chus", "da", "des", "des", "des", "di", "dov", "dru", "dus", "er", "ho", "i", "i", "is", "is", "is", "is", "is", "la", "li", "li", "lis", "mi", "nes", "nis", "no", "on", "ov", "ra", "ra", "ran", "ri", "rum", "tus", "tus", "tus", "um", "um", "us", "us", "us", "us", "us", "us", "us", "us", "us", "us", "us", "vis", "ya"};
+	// Syllable 4 transitional
+	public static String[] alienVillage_syl4Trans_default = new String[]{"an", "an", "chi", "dae", "en", "i", "i", "i", "i", "i", "i", "mi", "o", "ta", "tat", "tat", "tat", "tat", "tat", "tat", "tat", "ti"};
+	
+	// Syllable 5 terminal
+	public static String[] alienVillage_syl5Term_default = new String[]{"a", "ae", "des", "is", "is", "is", "is", "is", "is", "is", "le", "nis", "nis", "se", "sen", "um", "um", "us", "us", "us"};
+	// Syllable 5 transitional
+	public static String[] alienVillage_syl5Trans_default = new String[]{"ar", "ti"};
+	
+	// Syllable 6 terminal
+	public static String[] alienVillage_syl6Term_default = new String[]{"ae", "um"};
+	// Syllable 6 transitional
+	public static String[] alienVillage_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] alienVillage_syl7Term_default = new String[]{};
+	
+	
+	
+	/*custom
+	 * Custom name pieces
+	 * Village Names version 3.0 and on
+	 */
+	// Prefixes and suffixes
+	public static String[] custom_prefix_default = new String[]{};
+	public static String[] custom_suffix_default = new String[]{};
+	
+	// Single-syllable pieces
+	public static String[] custom_oneSylBegin_default = new String[]{};
+	public static String[] custom_oneSylEnd_default = new String[]{};
+
+	// Syllable 1 transitional
+	public static String[] custom_syl1Trans_default = new String[]{};
+
+	// Syllable 2 terminal
+	public static String[] custom_syl2Term_default = new String[]{};
+	// Syllable 2 transitional
+	public static String[] custom_syl2Trans_default = new String[]{};
+
+	// Syllable 3 terminal
+	public static String[] custom_syl3Term_default = new String[]{};
+	// Syllable 3 transitional
+	public static String[] custom_syl3Trans_default = new String[]{};
+
+	// Syllable 4 terminal
+	public static String[] custom_syl4Term_default = new String[]{};
+	// Syllable 4 transitional
+	public static String[] custom_syl4Trans_default = new String[]{};
+
+	// Syllable 5 terminal
+	public static String[] custom_syl5Term_default = new String[]{};
+	// Syllable 5 transitional
+	public static String[] custom_syl5Trans_default = new String[]{};
+	
+	// Syllable 6 terminal
+	public static String[] custom_syl6Term_default = new String[]{};
+	// Syllable 6 transitional
+	public static String[] custom_syl6Trans_default = new String[]{};
+
+	// Syllable 7 terminal
+	public static String[] custom_syl7Term_default = new String[]{};
 	
 }

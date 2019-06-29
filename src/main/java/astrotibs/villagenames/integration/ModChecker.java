@@ -5,43 +5,30 @@ import cpw.mods.fml.common.Loader;
 
 public class ModChecker {
 	
-	public static boolean isWitcheryLoaded;
-	public static boolean isGalacticraftLoaded;
-	public static boolean isMorePlanetsLoaded;
-	public static boolean isHardcoreEnderExpansionLoaded;
-	//public static boolean isATGLoaded;
-	//public static boolean isGanysSurfaceLoaded;
-	//public static boolean isRoguelikeDungeonsLoaded;
-	//public static boolean isFossilsAndArchaeologyLoaded; 
-	//public static boolean isTwilightForestLoaded;
-	//public static boolean isArtifactsLoaded;
-	//public static boolean isOptifineLoaded;
-	
-	public ModChecker() {
-		ModChecker.isWitcheryLoaded = Loader.isModLoaded("witchery");
-		ModChecker.isGalacticraftLoaded = Loader.isModLoaded("GalacticraftCore");
-		ModChecker.isMorePlanetsLoaded = Loader.isModLoaded("MorePlanet");
-		ModChecker.isHardcoreEnderExpansionLoaded = Loader.isModLoaded("HardcoreEnderExpansion");
-		//this.isATGLoaded = Loader.isModLoaded("ATG");
-		//this.isGanysSurfaceLoaded = Loader.isModLoaded("ganyssurface");
-		//this.isRoguelikeDungeonsLoaded = Loader.isModLoaded("Roguelike");
-		//this.isFossilsAndArchaeologyLoaded = Loader.isModLoaded("fossil");
-		//this.isTwilightForestLoaded = Loader.isModLoaded("TwilightForest");
-		//this.isArtifactsLoaded = Loader.isModLoaded("Artifacts");
-		//this.isOptifineLoaded = Loader.isModLoaded("OptiFine");
-	}
-	
-	public static void printSuccessMessage() {
-		if(isWitcheryLoaded) LogHelper.info("Detected mod: Witchery");
-		if(isGalacticraftLoaded) LogHelper.info("Detected mod: Galacticraft");
-		if(isMorePlanetsLoaded) LogHelper.info("Detected mod: More Planets");
-		if(isHardcoreEnderExpansionLoaded) LogHelper.info("Detected mod: Hardcore Ender Expansion");
+	public static void printDetectedMods() {
+		if( Loader.isModLoaded("witchery") ) LogHelper.info("Detected mod: Witchery");
+		//if(isGalacticraftLoaded) LogHelper.info("Detected mod: Galacticraft");
+		if( Loader.isModLoaded("MorePlanet") ) LogHelper.info("Detected mod: More Planets");
+		if( Loader.isModLoaded("MorePlanets") ) LogHelper.info("Detected mod: More Planets");
+		//if(isHardcoreEnderExpansionLoaded) LogHelper.info("Detected mod: Hardcore Ender Expansion");
+		if( Loader.isModLoaded("primitivemobs") ) LogHelper.info("Detected mod: Primitive Mobs");
 		//if(isATGLoaded) LogHelper.info("Detected mod: Alternate Terrain Generation");
-		//if(isGanysSurfaceLoaded) LogHelper.info("Detected mod: Gany's Surface");
 		//if(isRoguelikeDungeonsLoaded) LogHelper.info("Detected mod: Roguelike Dungeons");
 		//if(isFossilsAndArchaeologyLoaded) LogHelper.info("Detected mod: Fossils and Archeology Revival");
 		//if(isTwilightForestLoaded) LogHelper.info("Detected mod: The Twilight Forest");
-		//if(isArtifactsLoaded) LogHelper.info("Detected mod: Artifacts");
+		if( Loader.isModLoaded("Artifacts") ) LogHelper.info("Detected mod: Artifacts");
+		if( Loader.isModLoaded("Mariculture") ) LogHelper.info("Detected mod: Mariculture");
+		if( Loader.isModLoaded("etfuturum") ) LogHelper.info("Detected mod: Et Futurum");
+		if( Loader.isModLoaded("ganyssurface") ) LogHelper.info("Detected mod: Gany's Surface");
+		//if(isGanysNetherLoaded) LogHelper.info("Detected mod: Gany's Nether");
+		if( Loader.isModLoaded("chisel") ) LogHelper.info("Detected mod: Chisel");
+		if( Loader.isModLoaded("BiomesOPlenty") ) LogHelper.info("Detected mod: Biomes O' Plenty");
+		if( Loader.isModLoaded("bettervanilla") ) LogHelper.info("Detected mod: BetterVanilla");
+		if( Loader.isModLoaded("CarpentersBlocks") ) LogHelper.info("Detected mod: Carpenter's Blocks");
+		if( Loader.isModLoaded("harvestcraft") ) LogHelper.info("Detected mod: Pam's HarvestCraft");
+		if( Loader.isModLoaded("Botania") ) LogHelper.info("Detected mod: Botania");
+		if( Loader.isModLoaded("uptodate") ) LogHelper.info("Detected mod: UpToDateMod");
+		//if( Loader.isModLoaded("SpecialMobs") ) LogHelper.info("Detected mod: Special Mobs");
 		/*
 		if(isOptifineLoaded) {
 			LogHelper.info("Detected mod: Optifine");

@@ -6,8 +6,8 @@ import astrotibs.villagenames.block.color.BlockGlazedTerracotta;
 import astrotibs.villagenames.block.color.ItemBlockConcrete;
 import astrotibs.villagenames.block.color.ItemBlockConcretePowder;
 import astrotibs.villagenames.block.color.ItemBlockGlazedTerracotta;
-import astrotibs.villagenames.config.GeneralConfigHandler;
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 
@@ -29,7 +29,7 @@ public class ModBlocksVN {
 	// Concrete Powder
 	public static final BlockConcretePowder blockConcretePowder = new BlockConcretePowder("concretePowder");
 	public static void init() {
-		boolean addConcrete = GeneralConfigHandler.addConcrete;
+		boolean addConcrete = GeneralConfig.addConcrete;
 		
 		GameRegistry.registerBlock(lunarinGoldBlock, "lunarinGoldBlock");
 		GameRegistry.registerBlock(lunarinIronBlock, "lunarinIronBlock");

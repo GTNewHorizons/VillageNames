@@ -1,6 +1,5 @@
 package astrotibs.villagenames.block.color;
 
-import astrotibs.villagenames.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -37,7 +36,8 @@ public class ItemBlockConcretePowder extends ItemBlock
     {
         int metadata = stack.getItemDamage() % (BlockConcrete.subBlock.length);
         String itemName = super.getUnlocalizedName().substring(super.getUnlocalizedName().lastIndexOf(".") + 1);
-        return String.format("%s%s", "tile."+ Reference.MOD_ID.toLowerCase() + ":", "concretePowder" + "." + BlockConcrete.subBlock[metadata]);
+        //return String.format("%s%s", "tile."+ Reference.MOD_ID.toLowerCase() + ":", "concretePowder" + "." + BlockConcrete.subBlock[metadata]);
+        return String.format("%s%s", "tile.", "concrete_powder" + "." + BlockConcrete.subBlock[metadata]);
     }
     
 }

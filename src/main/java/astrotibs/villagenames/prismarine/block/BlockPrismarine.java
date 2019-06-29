@@ -1,7 +1,6 @@
 package astrotibs.villagenames.prismarine.block;
 
-import astrotibs.villagenames.config.GeneralConfigHandler;
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.config.GeneralConfig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.MapColor;
@@ -17,7 +16,7 @@ public class BlockPrismarine extends BlockGeneric implements IConfigurable {
 		setHardness(1.5F);
 		setResistance(10.0F);
 		setBlockTextureName("prismarine");
-		setBlockName(Reference.MOD_ID + "." + "prismarine_block");
+		setBlockName("prismarine"); //setBlockName(Reference.MOD_ID + "." + "prismarine_block");
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -37,17 +36,18 @@ public class BlockPrismarine extends BlockGeneric implements IConfigurable {
 
 		for (int i = 1; i < types.length; i++)
 			if ("".equals(types[i])) {
-				icons[i] = reg.registerIcon(Reference.MOD_ID + ":" + getTextureName() );
+				icons[i] = reg.registerIcon("minecraft" + ":" + getTextureName() );
 			}
 				
 			else {
-				icons[i] = reg.registerIcon(Reference.MOD_ID + ":" + getTextureName() + "_" + types[i] );
+				icons[i] = reg.registerIcon("minecraft" + ":" + getTextureName() + "_" + types[i] ); // The underscore only applies to textures, not to name
 			}
 	}
 	
 	@Override
 	public String getUnlocalizedName() {
-		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		//return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("tile.%s", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	// Block name?
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
@@ -56,7 +56,7 @@ public class BlockPrismarine extends BlockGeneric implements IConfigurable {
 	
 	@Override
 	public boolean isEnabled() {
-		return GeneralConfigHandler.addOceanMonuments;
+		return GeneralConfig.addOceanMonuments;
 	}
 	
     @Override

@@ -19,10 +19,10 @@ public class ItemBlockGeneric extends ItemBlock {
 			if ("".equals(name))
 				return getUnlocalizedName();
 			else
-				return getUnlocalizedName() + "_" + name;
+				return getUnlocalizedName() + "." + name; // period used to be underscore
 		}
 
-		return getUnlocalizedName() + "_" + stack.getItemDamage();
+		return getUnlocalizedName() + "." + stack.getItemDamage(); // period used to be underscore
 	}
 
 	@Override

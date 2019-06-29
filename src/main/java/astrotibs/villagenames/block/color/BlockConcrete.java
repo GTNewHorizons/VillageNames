@@ -2,9 +2,7 @@ package astrotibs.villagenames.block.color;
 
 import java.util.List;
 
-import astrotibs.villagenames.reference.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import astrotibs.villagenames.utility.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -73,7 +71,8 @@ public class BlockConcrete extends Block
 	public void registerBlockIcons(IIconRegister iicon)
     {
         for (int subs = 0; subs < 16; subs ++) {
-	        this.blockIcons[subs] = iicon.registerIcon(Reference.MOD_ID + ":concrete_"+subBlock[subs]);
+	        //this.blockIcons[subs] = iicon.registerIcon(Reference.MOD_ID + ":concrete_"+subBlock[subs]);
+        	this.blockIcons[subs] = iicon.registerIcon("minecraft:concrete_"+subBlock[subs]);
 	    }
     }
     

@@ -7,7 +7,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockSpongeVN extends BlockGeneric {
 
 	public BlockSpongeVN() {
-		super(Material.sponge, "", "wet");
+		super(Material.sponge, "dry", "wet");
 		setHardness(0.6F);
 		setStepSound(soundTypeGrass);
 		setBlockTextureName("sponge");
@@ -134,7 +134,8 @@ public class BlockSpongeVN extends BlockGeneric {
 	
 	@Override
 	public String getUnlocalizedName() {
-		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		//return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("tile.%s", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
 	
@@ -144,11 +145,14 @@ public class BlockSpongeVN extends BlockGeneric {
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[types.length];
 		for (int i = 0; i < types.length; i++)
-			if ("".equals(types[i])) {
-				icons[i] = reg.registerIcon(Reference.MOD_ID + ":" + getTextureName());
+			if ( types[i].equals("") ) {
+				icons[i] = reg.registerIcon("minecraft" + ":" + getTextureName() ); //reg.registerIcon(Reference.MOD_ID + ":" + getTextureName());
+			}
+			else if ( types[i].equals("dry") ) {
+				icons[i] = reg.registerIcon("minecraft" + ":" + getTextureName() ); //reg.registerIcon(Reference.MOD_ID + ":" + getTextureName());
 			}
 			else {
-				icons[i] = reg.registerIcon(Reference.MOD_ID + ":" + getTextureName() + "_" + types[i] );
+				icons[i] = reg.registerIcon("minecraft" + ":" + getTextureName() + "_" + types[i] ); //reg.registerIcon(Reference.MOD_ID + ":" + getTextureName() + "_" + types[i] );
 			}
 				
 	}

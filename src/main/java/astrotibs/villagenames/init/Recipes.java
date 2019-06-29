@@ -1,7 +1,7 @@
 package astrotibs.villagenames.init;
 
 import astrotibs.villagenames.block.ModBlocksVN;
-import astrotibs.villagenames.config.GeneralConfigHandler;
+import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
 import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,8 +14,6 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipes {
 	
-	public static boolean addConcrete = GeneralConfigHandler.addConcrete;
-	static boolean enablePrismarine = GeneralConfigHandler.addOceanMonuments;
 	static String[] oreDyeNames = new String[]{
 			"dyeWhite",
 			"dyeOrange",
@@ -50,7 +48,7 @@ public class Recipes {
 		// Turn Lunarin block back to ingots
 		GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(Items.iron_ingot, 6),	new ItemStack(ModBlocksVN.lunarinIronBlock) ));
 		
-		if (addConcrete) {
+		if (GeneralConfig.addConcrete) {
 			// Add recipes for Glazed Terracotta
 			for (int i = 0 ; i < 4; i++) {
 				GameRegistry.addSmelting(new ItemStack(Blocks.stained_hardened_clay, 1, i), new ItemStack(ModBlocksVN.glazedTerracotta, 1, i), 0.1F);
@@ -65,7 +63,7 @@ public class Recipes {
 					new ItemStack(Blocks.gravel, 1, 0), new ItemStack(Blocks.gravel, 1, 0), new ItemStack(Blocks.gravel, 1, 0), new ItemStack(Blocks.gravel, 1, 0) ));
 			}
 		}
-		if(enablePrismarine) {
+		if(GeneralConfig.addOceanMonuments) {
 			OreDictionary.registerOre("shardPrismarine", new ItemStack(ModItemsPrismarine.prismarine_shard));
 			OreDictionary.registerOre("crystalPrismarine", new ItemStack(ModItemsPrismarine.prismarine_crystals));
 			OreDictionary.registerOre("blockPrismarine", new ItemStack(ModBlocksPrismarine.blockPrismarine, 1, OreDictionary.WILDCARD_VALUE));

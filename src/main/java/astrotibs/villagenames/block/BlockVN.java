@@ -1,6 +1,6 @@
 package astrotibs.villagenames.block;
 
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

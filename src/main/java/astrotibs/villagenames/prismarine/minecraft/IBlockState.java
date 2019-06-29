@@ -1,7 +1,9 @@
 package astrotibs.villagenames.prismarine.minecraft;
 
-import com.google.common.collect.ImmutableMap;
 import java.util.Collection;
+
+import com.google.common.collect.ImmutableMap;
+
 import net.minecraft.block.Block;
 
 public interface IBlockState

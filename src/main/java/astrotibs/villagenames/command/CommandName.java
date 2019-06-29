@@ -21,23 +21,32 @@ public class CommandName extends CommandBase {
 	private static final String NAME_MONUMENT = "Monument";
 	private static final String NAME_ENDCITY = "EndCity";
 	private static final String NAME_MANSION = "Mansion";
-	private static final String NAME_ALIENVILLAGER = "AlienVillager";
+	private static final String NAME_DEMON = "Demon";
+	private static final String NAME_ANGEL = "Angel";
+	private static final String NAME_DRAGON = "Dragon";
+	private static final String NAME_GOLEM = "Golem";
+	private static final String NAME_ALIEN = "Alien";
 	private static final String NAME_ALIENVILLAGE = "AlienVillage";
-	private static final String NAME_HOBGOBLIN = "Hobgoblin";
+	private static final String NAME_GOBLIN = "Goblin";
 	private static final int maxLoops = 10; // Maximum number of outputs from the name generator command
 	private static final String[] nameChoices = {
-			NAME_VILLAGE,
-			NAME_VILLAGER,
+			NAME_ALIENVILLAGE,
+			NAME_ALIEN,
+			NAME_ANGEL,
+			NAME_DEMON,
+			NAME_DRAGON,
+			NAME_ENDCITY,
+			NAME_FORTRESS,
+			NAME_GOBLIN,
+			NAME_GOLEM,
+			NAME_MANSION,
 			NAME_MINESHAFT,
+			NAME_MONUMENT,
 			NAME_STRONGHOLD,
 			NAME_TEMPLE,
-			NAME_FORTRESS,
-			NAME_MONUMENT,
-			NAME_ENDCITY,
-			NAME_MANSION,
-			NAME_ALIENVILLAGER,
-			NAME_ALIENVILLAGE,
-			NAME_HOBGOBLIN};
+			NAME_VILLAGE,
+			NAME_VILLAGER
+			};
 	
 	
 	@Override
@@ -80,85 +89,12 @@ public class CommandName extends CommandBase {
 				// Add comma separation
 				if (i > 0) {outputString += ", ";}
 				
-				if (nameType.equalsIgnoreCase(NAME_VILLAGE)) {
-					arrayName = NameGenerator.newVillageName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_VILLAGER)) {
-					stringName = NameGenerator.newVillagerName();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_MINESHAFT)) {
-					arrayName = NameGenerator.newMineshaftName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_STRONGHOLD)) {
-					arrayName = NameGenerator.newStrongholdName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_TEMPLE)) {
-					arrayName = NameGenerator.newTempleName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_FORTRESS)) {
-					arrayName = NameGenerator.newFortressName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				
-				else if (nameType.equalsIgnoreCase(NAME_MONUMENT)) {
-					arrayName = NameGenerator.newMonumentName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_ENDCITY)) {
-					arrayName = NameGenerator.newEndCityName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_MANSION)) {
-					arrayName = NameGenerator.newMansionName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_ALIENVILLAGER)) {
-					stringName = NameGenerator.newAlienVillagerName();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_ALIENVILLAGE)) {
-					arrayName = NameGenerator.newAlienVillageName();
-					stringName = (arrayName[1]+" "+arrayName[2]+" "+arrayName[3]).trim();
-					outputString += stringName;
-					continue;
-				}
-				else if (nameType.equalsIgnoreCase(NAME_HOBGOBLIN)) {
-					stringName = NameGenerator.newHobgoblinName();
-					outputString += stringName;
-					continue;
-				}
-				// Not a valid command choice
-				else {
-					sender.addChatMessage( new ChatComponentText("§c"+getCommandUsage(null) ) );
-					break;
-				}
-				
+				String[] sa = NameGenerator.newRandomName(nameType);
+				stringName = (sa[1] + " " + sa[2] + " " + sa[3]).trim();
+				outputString += stringName;
 			}
 			sender.addChatMessage( new ChatComponentText("") );
-			sender.addChatMessage( new ChatComponentText(nameType+":") );
+			sender.addChatMessage( new ChatComponentText(nameType+" name" + (numberToMake==1 ? "" : "s" ) + ":") );
 			sender.addChatMessage( new ChatComponentText(outputString) );
         } 
 		

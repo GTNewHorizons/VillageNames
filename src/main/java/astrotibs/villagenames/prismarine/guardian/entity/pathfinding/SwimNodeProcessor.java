@@ -1,0 +1,96 @@
+package astrotibs.villagenames.prismarine.guardian.entity.pathfinding;
+
+import astrotibs.villagenames.prismarine.guardian.util.MathHelper1122;
+import astrotibs.villagenames.utility.BlockPos;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+
+public class SwimNodeProcessor extends NodeProcessor
+{
+    public void initProcessor(IBlockAccess iblockaccessIn, Entity entityIn)
+    {
+        super.initProcessor(iblockaccessIn, entityIn);
+    }
+
+    /**
+     * This method is called when all nodes have been processed and PathEntity is created.
+     * {@link net.minecraft.world.pathfinder.WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
+     * net.minecraft.world.pathfinder.WalkNodeProcessor#avoidsWater avoidsWater}
+     */
+    public void postProcess()
+    {
+        super.postProcess();
+    }
+
+    /**
+     * Returns given entity's position as PathPoint
+     */
+    public PathPointSwimmer getPathPointTo(Entity entityIn)
+    {
+        return this.openPoint( // TODO - added 0.5D to X and Z
+        		MathHelper1122.floor_double(entityIn.boundingBox.minX + 0.5D),
+        		MathHelper1122.floor_double(entityIn.boundingBox.minY + 0.5D),
+        		MathHelper1122.floor_double(entityIn.boundingBox.minZ + 0.5D));
+    	//return this.openPoint(MathHelper1122.floor_double(entityIn.getBoundingBox().minX), MathHelper1122.floor_double(entityIn.getBoundingBox().minY + 0.5D), MathHelper1122.floor_double(entityIn.getBoundingBox().minZ));
+    }
+
+    /**
+     * Returns PathPoint for given coordinates
+     */
+    public PathPointSwimmer getPathPointToCoords(Entity entityIn, double x, double y, double target)
+    {
+        return this.openPoint(MathHelper1122.floor_double(x - (double)(entityIn.width / 2.0F)), MathHelper1122.floor_double(y + 0.5D), MathHelper1122.floor_double(target - (double)(entityIn.width / 2.0F)));
+    }
+
+    public int findPathOptions(PathPointSwimmer[] pathOptions, Entity entityIn, PathPointSwimmer currentPoint, PathPointSwimmer targetPoint, float maxDistance)
+    {
+        int i = 0;
+
+        for (EnumFacing enumfacing : EnumFacing.values())
+        {
+        	PathPointSwimmer pathpoint = this.getSafePoint(entityIn, currentPoint.xCoord + enumfacing.getFrontOffsetX(), currentPoint.yCoord + enumfacing.getFrontOffsetY(), currentPoint.zCoord + enumfacing.getFrontOffsetZ());
+
+            if (pathpoint != null && !pathpoint.visited && pathpoint.distanceTo(targetPoint) < maxDistance)
+            {
+                pathOptions[i++] = pathpoint;
+            }
+        }
+
+        return i;
+    }
+
+    /**
+     * Returns a point that the entity can safely move to
+     */
+    private PathPointSwimmer getSafePoint(Entity entityIn, int x, int y, int z)
+    {
+        int i = this.func_176186_b(entityIn, x, y, z);
+        return i == -1 ? this.openPoint(x, y, z) : null;
+    }
+
+    private int func_176186_b(Entity entityIn, int x, int y, int z)
+    {
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+
+        for (int i = x; i < x + this.entitySizeX; ++i)
+        {
+            for (int j = y; j < y + this.entitySizeY; ++j)
+            {
+                for (int k = z; k < z + this.entitySizeZ; ++k)
+                {
+                    //Block block = this.blockaccess.getBlockState(blockpos$mutableblockpos.set(i, j, k)).getBlock();
+                	Block block = this.blockaccess.getBlock(i, j, k);
+                    if (block.getMaterial() != Material.water)
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+}

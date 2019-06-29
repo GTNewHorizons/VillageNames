@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import astrotibs.villagenames.block.ModBlocksVN;
-import astrotibs.villagenames.reference.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import astrotibs.villagenames.utility.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.MapColor;
@@ -75,7 +73,8 @@ public class BlockConcretePowder extends BlockFalling
 	public void registerBlockIcons(IIconRegister iicon)
     {
         for (int subs = 0; subs < 16; subs ++) {
-	        this.blockIcons[subs] = iicon.registerIcon(Reference.MOD_ID + ":concrete_powder_"+subBlock[subs]);
+	        //this.blockIcons[subs] = iicon.registerIcon(Reference.MOD_ID + ":concrete_powder_"+subBlock[subs]);
+        	this.blockIcons[subs] = iicon.registerIcon("minecraft:concrete_powder_"+subBlock[subs]);
 	    }
     }
     

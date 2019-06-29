@@ -2,7 +2,7 @@ package astrotibs.villagenames.prismarine;
 
 import java.awt.Color;
 
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.entity.passive.EntitySheep;

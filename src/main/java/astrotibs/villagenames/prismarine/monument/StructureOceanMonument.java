@@ -1,18 +1,17 @@
 package astrotibs.villagenames.prismarine.monument;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
-import astrotibs.villagenames.prismarine.minecraft.EnumFacing189;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import java.util.Map.Entry;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
+import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
+import astrotibs.villagenames.prismarine.minecraft.EnumFacing189;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,8 +36,8 @@ public class StructureOceanMonument extends MapGenStructure
     public static final int[] waterBiomesInt = new int[]{
     	BiomeGenBase.ocean.biomeID, BiomeGenBase.deepOcean.biomeID, BiomeGenBase.river.biomeID, BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID };
     
-    private static final List<BiomeGenBase.SpawnListEntry> field_175803_h = Lists.<BiomeGenBase.SpawnListEntry>newArrayList();
-
+    private static final List<BiomeGenBase.SpawnListEntry> MONUMENT_ENEMIES = Lists.<BiomeGenBase.SpawnListEntry>newArrayList(); //Used to be named field_175803_h
+    
     public StructureOceanMonument()
     {
         field_175800_f = 32; // spacing
@@ -197,21 +196,23 @@ public class StructureOceanMonument extends MapGenStructure
         return new StructureOceanMonument.StartMonument(this.worldObj, this.rand, chunkX, chunkZ);
     }
     
-    public List<BiomeGenBase.SpawnListEntry> func_175799_b()
+    public static List<BiomeGenBase.SpawnListEntry> getMonsters()//1.8 is named func_175799_b()
     {
-        return field_175803_h;
+        return MONUMENT_ENEMIES;
     }
 
     static
     {
-        //field_175803_h.add(new BiomeGenBase.SpawnListEntry(EntityGuardian.class, 1, 2, 4));
+    	//Inserted to allow Guardian generation!
+    	MONUMENT_ENEMIES.add(new BiomeGenBase.SpawnListEntry(EntityGuardian.class, 1, 2, 4));
     }
 
     public static class StartMonument extends StructureStart
         {
             private Set<ChunkCoordIntPair> field_175791_c = Sets.<ChunkCoordIntPair>newHashSet(); // processed (1.9.4)
             private boolean field_175790_d; // wasCreated (1.9.4)
-
+            private boolean func_175788_a_toggle=true; //Exists so that I can mimic 1.8's MapGenStructure.generateStructure requirement: structurestart.func_175788_a(chunkCoord)
+            
             public StartMonument()
             {
             }
@@ -246,13 +247,26 @@ public class StructureOceanMonument extends MapGenStructure
             @Override
 			public void generateStructure(World worldIn, Random rand, StructureBoundingBox structurebb)
             {
+            	// Addeed this to reverse-engineer 1.8's generateStructure(World, Random, ChunkCoordIntPair)
+            	ChunkCoordIntPair chunkCoord = new ChunkCoordIntPair( (structurebb.minX - 8)>>4, (structurebb.minZ - 8)>>4 );
+            	
                 if (!this.field_175790_d)
                 {
                     this.components.clear();
                     this.func_175789_b(worldIn, rand, this.func_143019_e(), this.func_143018_f());
                 }
                 
+                // I'm calling the below functions explicitly here
+                this.func_175787_b(chunkCoord);
+                //this.func_175788_a_toggle = this.func_175788_a(chunkCoord);
+                
                 super.generateStructure(worldIn, rand, structurebb);
+            }
+            
+            // I'm adding this in to mimic 1.8's MapGenStructure.generateStructure requirement: structurestart.func_175788_a(chunkCoord)
+            @Override
+            public boolean isSizeableStructure() {
+            	return this.func_175788_a_toggle;
             }
             
             /*
@@ -260,6 +274,8 @@ public class StructureOceanMonument extends MapGenStructure
              *  It is fired during MapGenStructure.generateStructuresInChunk()
              *  if (structurestart.isSizeableStructure() && structurestart.func_175788_a(chunkCoord) && structurestart.getBoundingBox().intersectsWith(i, j, i + 15, j + 15))
              *  The above if condition should be FALSE whenever return this.field_175791_c.contains(pair) and TRUE otherwise
+             *  
+             *  I believe this is used to prevent chunks from spawning in places they should not? Not sure.
              */
             public boolean func_175788_a(ChunkCoordIntPair pair)
             {
@@ -271,9 +287,12 @@ public class StructureOceanMonument extends MapGenStructure
              *  It is fired during MapGenStructure.generateStructuresInChunk()
              *  when (structurestart.isSizeableStructure() && structurestart.getBoundingBox().intersectsWith(k, l, k + 15, l + 15)) == true
              *  after structurestart.generateStructure(p_75051_1_, p_75051_2_, new StructureBoundingBox(k, l, k + 15, l + 15));
+             *  
+             *  It is used to compile the chunk coordinates for the 16 chunks involved in the Monument.
              */
             public void func_175787_b(ChunkCoordIntPair pair)
             {
+            	//super.func_175787_b(pair)
                 this.field_175791_c.add(pair);
             }
 
@@ -294,6 +313,8 @@ public class StructureOceanMonument extends MapGenStructure
                 }
 
                 tagCompound.setTag("Processed", nbttaglist);
+                
+                tagCompound.setBoolean("ElderGen", true); //Added this so I can retrogen Elder Guardians into previously-generated Monuments
             }
 
             //public void readFromNBT(NBTTagCompound tagCompound)

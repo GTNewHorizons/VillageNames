@@ -3,7 +3,7 @@ package astrotibs.villagenames.prismarine.block;
 import java.util.Random;
 
 import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -53,14 +53,16 @@ public class BlockSeaLantern extends Block{
 	
 	@Override
 	public String getUnlocalizedName() {
-		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+		return String.format("tile.%s", "seaLantern");
+		
 	}
 	
 	// Texture
 	@Override
 	@SideOnly(Side.CLIENT) // This method only exists on the client side. There is one for the server, too.
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+		//blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+		blockIcon = iconRegister.registerIcon("minecraft:sea_lantern");
 	}
 	
 	// Block name?

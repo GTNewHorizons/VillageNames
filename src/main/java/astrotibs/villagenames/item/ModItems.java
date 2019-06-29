@@ -1,6 +1,6 @@
 package astrotibs.villagenames.item;
 
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
@@ -13,35 +13,57 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * have my own.
  */
 public class ModItems {
-	public static final ItemVillageBook villageBook = new ItemVillageBook();
-	public static final ItemFortressBook fortressBook = new ItemFortressBook();
-	public static final ItemMineshaftBook mineshaftBook = new ItemMineshaftBook();
-	public static final ItemMansionBook mansionBook = new ItemMansionBook();
-	public static final ItemMonumentBook monumentBook = new ItemMonumentBook();
-	public static final ItemStrongholdBook strongholdBook = new ItemStrongholdBook();
-	public static final ItemTempleBook templeBook = new ItemTempleBook();
-	public static final ItemEndCityBook endcityBook = new ItemEndCityBook();
+	
 	public static final ItemCodex codex = new ItemCodex();
-	public static final ItemMoonVillageBook moonvillageBook = new ItemMoonVillageBook();
-	public static final ItemKoentusVillageBook koentusvillageBook = new ItemKoentusVillageBook();
-	public static final ItemFronosVillageBook fronosvillageBook = new ItemFronosVillageBook();
-	public static final ItemNibiruVillageBook nibiruvillageBook = new ItemNibiruVillageBook();
-	public static final ItemAbandonedBaseBook abandonedbasebook = new ItemAbandonedBaseBook();
+
+	public static final ItemVillageBook villageBook = new ItemVillageBook("villagebook");
+	public static final ItemVillageBook mineshaftBook = new ItemVillageBook("mineshaftbook");
+
+	// V3 temple types
+	public static final ItemVillageBook jungletempleBook = new ItemVillageBook("jungletemplebook");
+	public static final ItemVillageBook desertpyramidBook = new ItemVillageBook("desertpyramidbook");
+	public static final ItemVillageBook swamphutBook = new ItemVillageBook("swamphutbook");
+	public static final ItemVillageBook igloobook = new ItemVillageBook("igloobook");
+	
+	public static final ItemVillageBook templeBook = new ItemVillageBook("templebook");
+	public static final ItemVillageBook strongholdBook = new ItemVillageBook("strongholdbook");
+	public static final ItemVillageBook fortressBook = new ItemVillageBook("fortressbook");
+	public static final ItemVillageBook monumentBook = new ItemVillageBook("monumentbook");
+	public static final ItemVillageBook endcityBook = new ItemVillageBook("endcitybook");
+	public static final ItemVillageBook mansionBook = new ItemVillageBook("mansionbook");
+	
+	// Mod books
+	public static final ItemVillageBook moonvillageBook = new ItemVillageBook("moonvillagebook");
+	public static final ItemVillageBook koentusvillageBook = new ItemVillageBook("koentusvillagebook");
+	public static final ItemVillageBook fronosvillageBook = new ItemVillageBook("fronosvillagebook");
+	public static final ItemVillageBook nibiruvillageBook = new ItemVillageBook("nibiruvillagebook");
+	public static final ItemVillageBook abandonedbasebook = new ItemVillageBook("abandonedbasebook");
+	
 	
 	public static void init() {
-		GameRegistry.registerItem(villageBook, "villagebook");
-		GameRegistry.registerItem(fortressBook, "fortressbook");
-		GameRegistry.registerItem(mineshaftBook, "mineshaftbook");
-		GameRegistry.registerItem(mansionBook, "mansionbook");
-		GameRegistry.registerItem(monumentBook, "monumentbook");
-		GameRegistry.registerItem(strongholdBook, "strongholdbook");
-		GameRegistry.registerItem(templeBook, "templebook");
-		GameRegistry.registerItem(endcityBook, "endcitybook");
 		GameRegistry.registerItem(codex, "codex");
+		
+		GameRegistry.registerItem(villageBook, "villagebook");
+		GameRegistry.registerItem(mineshaftBook, "mineshaftbook");
+		GameRegistry.registerItem(jungletempleBook, "jungletemplebook");
+		GameRegistry.registerItem(desertpyramidBook, "desertpyramidbook");
+		GameRegistry.registerItem(swamphutBook, "swamphutbook");
+		GameRegistry.registerItem(igloobook, "igloobook");
+		GameRegistry.registerItem(templeBook, "templebook");
+		GameRegistry.registerItem(strongholdBook, "strongholdbook");
+		
+		GameRegistry.registerItem(monumentBook, "monumentbook");
+		GameRegistry.registerItem(mansionBook, "mansionbook");
+				
+		GameRegistry.registerItem(fortressBook, "fortressbook");
+		GameRegistry.registerItem(endcityBook, "endcitybook");
+		
+		// Mod books
 		GameRegistry.registerItem(moonvillageBook, "moonvillagebook");
 		GameRegistry.registerItem(koentusvillageBook, "koentusvillagebook");
 		GameRegistry.registerItem(fronosvillageBook, "fronosvillagebook");
 		GameRegistry.registerItem(nibiruvillageBook, "nibiruvillagebook");
 		GameRegistry.registerItem(abandonedbasebook, "abandonedbasebook");
+		
 	}
 }

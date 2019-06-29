@@ -2,41 +2,40 @@ package astrotibs.villagenames.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import astrotibs.villagenames.handler.ItemEventHandler;
-import astrotibs.villagenames.integration.ModChecker;
+import java.util.Map;
+import java.util.Random;
+
+import astrotibs.villagenames.VillageNames;
+import astrotibs.villagenames.banner.BannerGenerator;
+import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.handler.AchievementReward;
+import astrotibs.villagenames.handler.EntityInteractHandler;
+import astrotibs.villagenames.handler.WriteBookHandler;
 import astrotibs.villagenames.name.NameGenerator;
-import astrotibs.villagenames.nbt.VNWorldDataAbandonedBase;
-import astrotibs.villagenames.nbt.VNWorldDataEndIsland;
-import astrotibs.villagenames.nbt.VNWorldDataEndTower;
-import astrotibs.villagenames.nbt.VNWorldDataFortress;
-import astrotibs.villagenames.nbt.VNWorldDataFronosVillage;
-import astrotibs.villagenames.nbt.VNWorldDataKoentusVillage;
-import astrotibs.villagenames.nbt.VNWorldDataMineshaft;
-import astrotibs.villagenames.nbt.VNWorldDataMonument;
-import astrotibs.villagenames.nbt.VNWorldDataMoonVillage;
-import astrotibs.villagenames.nbt.VNWorldDataNibiruVillage;
-import astrotibs.villagenames.nbt.VNWorldDataStronghold;
-import astrotibs.villagenames.nbt.VNWorldDataTemple;
-import astrotibs.villagenames.nbt.VNWorldDataVillage;
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.nbt.VNWorldDataStructure;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.JsonSerializableSet;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureData;
 
 public class ItemCodex extends Item {
+	
+	//Random random = new Random();
+	
 	public ItemCodex() {
 		super();
 		this.setCreativeTab(CreativeTabs.tabMisc);
@@ -72,7 +71,9 @@ public class ItemCodex extends Item {
      * Called whenever this item is equipped and the right mouse button is pressed.
      */
     @Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+    	
+    	Random random = world.rand;
     	
     	if (!world.isRemote) {
     		
@@ -82,66 +83,105 @@ public class ItemCodex extends Item {
     			MapGenStructureData structureData;
     			World worldIn = player.worldObj;
     			int[ ] BB = new int[6];
+    			boolean playerIsInVillage = false; // Set to true if you're in a village; used for Ghost Town achievement.
     			
+    			// Form arrays of all the default stuff
+    			ArrayList<String> nameTypes = new ArrayList();
     			ArrayList<String> structureTypes = new ArrayList();
+    			ArrayList<String> structureTitles = new ArrayList();
+    			ArrayList<String> dimensionNames = new ArrayList();
+    			ArrayList<String> bookTypes = new ArrayList();
     			
-    			if (player.dimension==0) {
-    				// Player is in Overworld
-    				//structureTypes.add("Mansion");
+    			if (player.dimension==0) { // Player is in Overworld
+    				
+    				nameTypes.add("mansion");
+    				structureTypes.add("Mansion");
+    				structureTitles.add("Mansion");
+    				dimensionNames.add("");
+    				bookTypes.add("mansion");
+    				
+    				nameTypes.add("monument");
     				structureTypes.add("Monument");
-    				structureTypes.add("Mineshaft");
+    				structureTitles.add("Monument");
+    				dimensionNames.add("");
+    				bookTypes.add("monument");
+    				
+    				nameTypes.add("stronghold");
     				structureTypes.add("Stronghold");
+    				structureTitles.add("Stronghold");
+    				dimensionNames.add("");
+    				bookTypes.add("stronghold");
+
+    				nameTypes.add("temple");
     				structureTypes.add("Temple");
+    				structureTitles.add("Temple");
+    				dimensionNames.add("");
+    				bookTypes.add("temple");
+    				
+    				nameTypes.add("village");
     				structureTypes.add("Village");
+    				structureTitles.add("Village");
+    				dimensionNames.add("");
+    				bookTypes.add("village");
+    				
+    				// Mineshaft is last priority because there's so damn many of them.
+    				// I once had one overlap with a Stronghold, and the Codex only identified the Mineshaft.
+    				nameTypes.add("mineshaft");
+    				structureTypes.add("Mineshaft");
+    				structureTitles.add("Mineshaft");
+    				dimensionNames.add("");
+    				bookTypes.add("mineshaft");
+    				
     			}
-    			else if (player.dimension==-1) {
-    				// Player is in Nether
+    			else if (player.dimension==-1) { // Player is in Nether
+    				
+    				nameTypes.add("fortress");
     				structureTypes.add("Fortress");
+    				structureTitles.add("Fortress");
+    				dimensionNames.add("The Nether");
+    				bookTypes.add("fortress");
     			}
-    			else if (player.dimension==1) {
-    				// Player is in End
-    				//structureTypes.add("EndCity");
-    				if (ModChecker.isHardcoreEnderExpansionLoaded) {
-    					structureTypes.add("hardcoreenderdragon_EndTower");
-    					structureTypes.add("hardcoreenderdragon_EndIsland");
-    					}
-    			}
-    			else {
-    				// Catch-all for other mod structures, since I can't be CERTAIN about dimension...
-    				if (ModChecker.isGalacticraftLoaded) {
-        				structureTypes.add("MoonVillage");
-    				}
-    				if (ModChecker.isMorePlanetsLoaded) {
-        				structureTypes.add("KoentusVillage");
-    				}
-    				if (ModChecker.isMorePlanetsLoaded) {
-        				structureTypes.add("FronosVillage");
-    				}
-    				if (ModChecker.isMorePlanetsLoaded) {
-    					structureTypes.add("NibiruVillage");
-    				}
-    				if (ModChecker.isGalacticraftLoaded) {
-    					structureTypes.add("GC_AbandonedBase");
-    				}
+    			else if (player.dimension==1) { // Player is in End
+    				
+    				nameTypes.add("endcity");
+    				structureTypes.add("EndCity");
+    				structureTitles.add("End City");
+    				dimensionNames.add("The End");
+    				bookTypes.add("endcity");
     			}
     			
+    			// Add in custom structure types from the config
     			
+    			// keys: "NameTypes", "StructureTypes", "StructureTitles", "DimensionNames", "BookTypes", "ClassPaths"
+				Map<String, ArrayList> mappedModStructureNames = GeneralConfig.unpackModStructures(GeneralConfig.modStructureNames);
+				
+				nameTypes.addAll( mappedModStructureNames.get("NameTypes") );
+				structureTypes.addAll( mappedModStructureNames.get("StructureTypes") );
+				structureTitles.addAll( mappedModStructureNames.get("StructureTitles") );
+				dimensionNames.addAll( mappedModStructureNames.get("DimensionNames") );
+				bookTypes.addAll( mappedModStructureNames.get("BookTypes") );
+				
     			String headerTags = new String();
 				String namePrefix = new String();
 				String nameRoot = new String();
 				String nameSuffix = new String();
-    			String structureType = new String();
+    			String structureTitle = "";
+				String dimensionName = "";
+    			String bookType = "";
+    			
     			int signX = -1;
     			int signY = -1;
     			int signZ = -1;
     			
     			structureLoop:
-    			for (String s: structureTypes) {
-    				structureType = s;
+    			for (int i=0; i < structureTypes.size(); i++) {
+    				
     				try {
-        				structureData = (MapGenStructureData)worldIn.perWorldStorage.loadData(MapGenStructureData.class, s);
+    					// Load in the vanilla structure file
+        				structureData = (MapGenStructureData)worldIn.perWorldStorage.loadData(MapGenStructureData.class, structureTypes.get(i));
         				NBTTagCompound nbttagcompound = structureData.func_143041_a();
         				
+        				// Iterate through the entries
         				Iterator itr = nbttagcompound.func_150296_c().iterator();
         				
         				while (itr.hasNext()) {
@@ -153,54 +193,121 @@ public class ItemCodex extends Item {
         						NBTTagCompound nbttagcompound2 = (NBTTagCompound)nbtbase;
         						
         						try {
-        							int[] boundingBox = nbttagcompound2.getIntArray("BB");
-        							// Now check to see if the player is inside the feature
-        							if (
-    									   player.posX >= boundingBox[0]
-    									&& player.posY >= boundingBox[1]
-    									&& player.posZ >= boundingBox[2]
-    									&& player.posX <= boundingBox[3]
-    									&& player.posY <= boundingBox[4]
-    									&& player.posZ <= boundingBox[5]
-        								) {
-        								
-        								// Player is inside bounding box.
-        								int ChunkX = nbttagcompound2.getInteger("ChunkX");
-        								int ChunkZ = nbttagcompound2.getInteger("ChunkZ");
-        								
-        								String structureName;
-        								String[] structureInfoArray = ItemEventHandler.tryGetStructureInfo(s, boundingBox, worldIn);
-        								
-        								namePrefix = structureInfoArray[0];
-        								nameRoot = structureInfoArray[1];
-        								nameSuffix = structureInfoArray[2];
-        								
-        								// If none is found, these strings are "null" which parseInt does not like very much
-        								try {signX = Integer.parseInt(structureInfoArray[3]);} catch (Exception e) {}
-        								try {signY = Integer.parseInt(structureInfoArray[4]);} catch (Exception e) {}
-        								try {signZ = Integer.parseInt(structureInfoArray[5]);} catch (Exception e) {}
-        								
-        								// If a name was NOT returned, then we need to generate a new one, as is done below:
-        								
-        								int[] structureCoords = new int[] {
-												(boundingBox[0]+boundingBox[3])/2,
-												(boundingBox[1]+boundingBox[4])/2,
-												(boundingBox[2]+boundingBox[5])/2,
-												};
-        								
-        								if (structureInfoArray[0]==null && structureInfoArray[1]==null && structureInfoArray[2]==null) {
-        									//Structure has no name. Generate it here.
-        									
-        									if (s.equals("Village")) {
-        										VNWorldDataVillage data = VNWorldDataVillage.forWorld(world);
-        										structureInfoArray = NameGenerator.newVillageName();
+        							
+            						if ( !(structureTypes.get(i)).equals("Village")
+            								|| nbttagcompound2.getBoolean("Valid") // Either this is a village with a "valid" tag, or it's not a village.
+            								) {
+            							int[] boundingBox = nbttagcompound2.getIntArray("BB");
+            							// Now check to see if the player is inside the feature
+            							if (
+        									   player.posX >= boundingBox[0]
+        									&& player.posY >= boundingBox[1]
+        									&& player.posZ >= boundingBox[2]
+        									&& player.posX <= boundingBox[3]
+        									&& player.posY <= boundingBox[4]
+        									&& player.posZ <= boundingBox[5]
+            								) { // Player is inside bounding box.
+            								
+            								// Specifically check if this is a Village.
+            								// If so, you can pass this for checking the Ghost Town achievement.
+            								if (structureTypes.get(i).equals("Village")) {
+            										playerIsInVillage = true;
+            									}
+            								
+            								String structureName;
+            								String[] structureInfoArray = WriteBookHandler.tryGetStructureInfo(structureTypes.get(i), boundingBox, worldIn);
+            								
+            								namePrefix = structureInfoArray[0];
+            								nameRoot = structureInfoArray[1];
+            								nameSuffix = structureInfoArray[2];
+            								
+            								// If none is found, these strings are "null" which parseInt does not like very much
+            								try {signX = Integer.parseInt(structureInfoArray[3]);} catch (Exception e) {}
+            								try {signY = Integer.parseInt(structureInfoArray[4]);} catch (Exception e) {}
+            								try {signZ = Integer.parseInt(structureInfoArray[5]);} catch (Exception e) {}
+            								
+            								// If a name was NOT returned, then we need to generate a new one, as is done below:
+            								
+            								int[] structureCoords = new int[] {
+    												(boundingBox[0]+boundingBox[3])/2,
+    												(boundingBox[1]+boundingBox[4])/2,
+    												(boundingBox[2]+boundingBox[5])/2,
+    												};
+            								
+            								
+            								// Set a bunch of variables to be used to make the book
+            								bookType = bookTypes.get(i);
+            								structureTitle = structureTitles.get(i);
+            								dimensionName = dimensionNames.get(i);
+            								String structureType = structureTypes.get(i);
+            								
+            								// If you're in a Temple, figure out which kind specifically
+            								
+            								try {
+                					            if (structureType.equals("Temple")) {
+                					            	
+                					            	BiomeGenBase biomeYoureIn = world.getBiomeGenForCoords(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posZ));
+                					            	
+                					            	if (
+                					            			biomeYoureIn == BiomeGenBase.jungle || 
+                					            			biomeYoureIn == BiomeGenBase.jungleHills ||
+                					            			biomeYoureIn == BiomeGenBase.jungleEdge
+                					            			) {
+                					            		structureType = "JungleTemple";
+                					            		structureTitle = "Jungle Temple";
+                					            		bookType = "jungletemple";
+                					            	}
+                					            	else if (
+                					            			biomeYoureIn == BiomeGenBase.desert ||
+                					            			biomeYoureIn == BiomeGenBase.desertHills
+                					            			) {
+                					            		structureType = "DesertPyramid";
+                					            		structureTitle = "Desert Pyramid";
+                					            		bookType = "desertpyramid";
+                					            	}
+                					            	else if (biomeYoureIn == BiomeGenBase.swampland ) {
+                					            		structureType = "SwampHut";
+                					            		structureTitle = "Swamp Hut";
+                					            		bookType = "swamphut";
+                					            	}
+                					            	else if (
+                					            			biomeYoureIn == BiomeGenBase.icePlains ||
+                					            			biomeYoureIn == BiomeGenBase.coldTaiga ||
+                					            			biomeYoureIn == BiomeGenBase.iceMountains ||
+                					            			biomeYoureIn == BiomeGenBase.coldBeach ||
+                					            			biomeYoureIn == BiomeGenBase.coldTaigaHills
+                					            			) {
+                					            		structureType = "Igloo";
+                					            		structureTitle = "Igloo";
+                					            		bookType = "igloo";
+                					            	}
+                					            }
+            								}
+            								catch (Exception e) {} // Something went wrong, so it'll just use the default "temple" stuff.
+            								
+            								
+            								if (structureInfoArray[0]==null && structureInfoArray[1]==null && structureInfoArray[2]==null) {
+            									//Structure has no name. Generate it here.
+            									
+            									//forWorld(World world, String key, String toptagIn)
+            									VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_" + structureTypes.get(i), "NamedStructures");
+            									
+        										structureInfoArray = NameGenerator.newRandomName(nameTypes.get(i));
+
         										
-        										// Gotta copy this thing to each IF condition I think
+        										// Changed color block in v3.1banner
+        	                        			// Generate banner info, regardless of if we make a banner.
+        	                            		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1);
+        	                    				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
+        	                    				ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
+        	                    				ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
+        	                            		int townColorMeta = 15-colorArray.get(0);
+        	                            		
+        										
         										headerTags = structureInfoArray[0];
         										namePrefix = structureInfoArray[1];
         										nameRoot = structureInfoArray[2];
         										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
         										
         										// Make the data bundle to save to NBT
         										NBTTagList nbttaglist = new NBTTagList();
@@ -216,687 +323,100 @@ public class ItemCodex extends Item {
         										nbttagcompound1.setString("namePrefix", namePrefix);
         										nbttagcompound1.setString("nameRoot", nameRoot);
         										nbttagcompound1.setString("nameSuffix", nameSuffix);
+        										nbttagcompound1.setBoolean("fromCodex", true);
+        										if (!structureType.equals(structureTypes.get(i)) ) nbttagcompound1.setString("templeType", bookType);
+
+        										// Added in v3.1banner
+                                                // Form and append banner info
+        										// If you don't have a mod banner, this will not be added. It will be generated once you do.
+        	                                    if (villageBanner!=null) {nbttagcompound1.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
+        										
         										nbttaglist.appendTag(nbttagcompound1);
         										
         										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
+        										//NBTTagCompound tagCompound = data.getData();
         										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
+        										data.getData().setTag((namePrefix + " " + nameRoot + " " + nameSuffix).trim() + ", x" + signX + " y" + signY + " z" + signZ, nbttaglist);
         										data.markDirty();
-        										
-        									}
-        									else if (s.equals("Mineshaft")) {
-        										VNWorldDataMineshaft data = VNWorldDataMineshaft.forWorld(world);
-        										structureInfoArray = NameGenerator.newMineshaftName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("Stronghold")) {
-        										VNWorldDataStronghold data = VNWorldDataStronghold.forWorld(world);
-        										structureInfoArray = NameGenerator.newStrongholdName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("Temple")) {
-        										VNWorldDataTemple data = VNWorldDataTemple.forWorld(world);
-        										structureInfoArray = NameGenerator.newTempleName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("Fortress")) {
-        										VNWorldDataFortress data = VNWorldDataFortress.forWorld(world);
-        										structureInfoArray = NameGenerator.newFortressName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        									}
-        									
-        									else if (s.equals("Monument")) {
-        										VNWorldDataMonument data = VNWorldDataMonument.forWorld(world);
-        										structureInfoArray = NameGenerator.newMonumentName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									
-        									/*
-        									else if (s.equals("EndCity")) {
-        										VNWorldDataEndCity data = VNWorldDataEndCity.forWorld(world);
-        										structureInfoArray = NameGenerator.newEndCityName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									*/
-        									/*
-        									else if (s.equals("Mansion")) {
-        										VNWorldDataMansion data = VNWorldDataMansion.forWorld(world);
-        										structureInfoArray = NameGenerator.newMansionName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									*/
-        									else if (s.equals("MoonVillage")) {
-        										VNWorldDataMoonVillage data = VNWorldDataMoonVillage.forWorld(world);
-        										structureInfoArray = NameGenerator.newAlienVillageName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("KoentusVillage")) {
-        										VNWorldDataKoentusVillage data = VNWorldDataKoentusVillage.forWorld(world);
-        										structureInfoArray = NameGenerator.newAlienVillageName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("hardcoreenderdragon_EndTower")) {
-        										VNWorldDataEndTower data = VNWorldDataEndTower.forWorld(world);
-        										structureInfoArray = NameGenerator.newEndCityName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("hardcoreenderdragon_EndIsland")) {
-        										VNWorldDataEndIsland data = VNWorldDataEndIsland.forWorld(world);
-        										structureInfoArray = NameGenerator.newEndCityName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        										
-        									}
-        									else if (s.equals("FronosVillage")) {
-        										VNWorldDataFronosVillage data = VNWorldDataFronosVillage.forWorld(world);
-        										structureInfoArray = NameGenerator.newAlienVillageName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        									}
-        									else if (s.equals("NibiruVillage")) {
-        										VNWorldDataNibiruVillage data = VNWorldDataNibiruVillage.forWorld(world);
-        										structureInfoArray = NameGenerator.newAlienVillageName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        									}
-        									else if (s.equals("GC_AbandonedBase")) {
-        										VNWorldDataAbandonedBase data = VNWorldDataAbandonedBase.forWorld(world);
-        										structureInfoArray = NameGenerator.newAlienVillageName();
-        										
-        										// Gotta copy this thing to each IF condition I think
-        										headerTags = structureInfoArray[0];
-        										namePrefix = structureInfoArray[1];
-        										nameRoot = structureInfoArray[2];
-        										nameSuffix = structureInfoArray[3];
-        										int townColorMeta = 15;
-        										
-        										// Make the data bundle to save to NBT
-        										NBTTagList nbttaglist = new NBTTagList();
-        										
-        										NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-        										signX = structureCoords[0];
-        										signY = structureCoords[1];
-        										signZ = structureCoords[2];
-        										nbttagcompound1.setInteger("signX", signX);
-        										nbttagcompound1.setInteger("signY", signY);
-        										nbttagcompound1.setInteger("signZ", signZ);
-        										nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        										nbttagcompound1.setString("namePrefix", namePrefix);
-        										nbttagcompound1.setString("nameRoot", nameRoot);
-        										nbttagcompound1.setString("nameSuffix", nameSuffix);
-        										nbttaglist.appendTag(nbttagcompound1);
-        										
-        										// .getTagList() will return all the entries under the specific village name.
-        										NBTTagCompound tagCompound = data.getData();
-        										
-        										data.getData().setTag("x"+structureCoords[0]+"y"+structureCoords[1]+"z"+structureCoords[2]+"_fromcodex", nbttaglist);
-        										data.markDirty();
-        									}
-        									
-        									structureName = structureInfoArray[1]+" "+structureInfoArray[2]+" "+structureInfoArray[3];
-        									structureName = structureName.trim();
-        									
-        								}
-        								else {
-        									//Structure has a name. Unpack it here.
-        									structureName = structureInfoArray[0]+" "+structureInfoArray[1]+" "+structureInfoArray[2];
-        									structureName = structureName.trim();
-        								}
-        								        								
-        								break structureLoop;
-        								
-        							}
-        						
+            									
+            									structureName = structureInfoArray[1]+" "+structureInfoArray[2]+" "+structureInfoArray[3];
+            									structureName = structureName.trim();
+            								}
+            								else {
+            									//Structure has a name. Unpack it here.
+            									structureName = structureInfoArray[0]+" "+structureInfoArray[1]+" "+structureInfoArray[2];
+            									structureName = structureName.trim();
+            								}
+            								
+            								
+            								
+            								// --- Archaeologist Achievement --- //
+            								
+            								try { // I'm enclosing this whole thing in a try/catch just in case casting to EntityPlayerMP fails
+            									EntityPlayerMP playerMP = (EntityPlayerMP)player;
+                								
+            									// Get list of structures that the player used a Codex in
+                					            JsonSerializableSet jsonserializableset = (JsonSerializableSet)playerMP.func_147099_x().func_150870_b(VillageNames.archaeologist);
+
+                					            if (jsonserializableset == null) {
+                					            	// Load in the player statistics file and make a new JsonSerializableList
+                					                jsonserializableset = (JsonSerializableSet)playerMP.func_147099_x().func_150872_a(VillageNames.archaeologist, new JsonSerializableSet());
+                					            }
+                					            
+                					            // Add the structure type you searched into the list if it's not there already
+                					            jsonserializableset.add(structureType);
+                					            
+                					            // Now check the size of that thar list!
+                					            if (jsonserializableset.size() >= VillageNames.numberStructuresArchaeologist) {
+                					            	
+                					            	// Give the player the achievement if they do not have it already
+                					            	if ( !playerMP.func_147099_x().hasAchievementUnlocked(VillageNames.archaeologist) ) {
+                					            		player.triggerAchievement(VillageNames.archaeologist);
+                					            		AchievementReward.allFiveAchievements(playerMP);
+                					            	}
+                					            }
+                					            
+            								}
+            								catch (Exception e) {} // Any of the above was illegal; probably the casting?
+            								
+            					            
+            								// Since a valid structure was found, you can terminate the search here.
+            								break structureLoop;
+            							}
+            						}
+        							
+        							
         						}
         						catch (Exception e) {
         							// There's a tag like [23,-3] (chunk location) but there's no bounding box tag.
         						}
-        						
         					}
-        					
         				}
     				}
     				catch (Exception e) {
-    					
     				}
-    			
     			}
-    			// StructureLoop ends here
-    			
-    			// Actually form the book contents and write the book
-    			
-    			//Here are the contents of the book up front
-    			String bookContents = "\n\u00a7l";
-    			
-				// I don't care if the structure has a sign. We have to cut the name up into arbitrary sign strings for the book.
-    			String topLine;
-    			
-    			// These lines split top lines into two words
-    			if (structureType.equals("EndCity")) {topLine = "End City:";}
-    			else if (structureType.equals("MoonVillage")) {topLine = "Moon Village:";}
-    			else if (structureType.equals("KoentusVillage")) {topLine = "Koentus Village:";}
-    			else if (structureType.equals("hardcoreenderdragon_EndIsland")) {topLine = "Island Fortress:";}
-    			else if (structureType.equals("hardcoreenderdragon_EndTower")) {topLine = "End Tower:";}
-    			else if (structureType.equals("FronosVillage")) {topLine = "Fronos Village:";}
-    			else if (structureType.equals("NibiruVillage")) {topLine = "Nibiru Village:";}
-    			else if (structureType.equals("GC_AbandonedBase")) {topLine = "Abandoned Base:";}
-    			else {topLine = structureType+":";}
-    			
-    			String sign0 = new String();
-    			String sign1 = new String();
-    			String sign2 = new String();
-    			String sign3 = new String();
-    			
-    			
-    			if ( (namePrefix.length() + 1 + nameRoot.length()) > 15 ) {
-					// Prefix+Root is too long, so move prefix to line 1
-					sign0 = headerTags+ topLine.trim();
-					sign1 = namePrefix.trim();
-					if ( (nameRoot.length() + 1 + nameSuffix.length()) > 15 ) {
-						// Root+Suffix is too long, so move suffix to line 3
-						sign2 = nameRoot.trim();
-						sign3 = nameSuffix.trim();
-					}
-					else {
-						// Fit Root+Suffix onto line 2
-						sign2 = (nameRoot+" "+nameSuffix).trim();
-					}
-				}
-				else if ( (namePrefix.length() + 1 + nameRoot.length() + 1 + nameSuffix.length()) <= 15 ) {
-					// Whole name fits on one line! Put it all on line 2.
-					sign1 = headerTags+ topLine;
-					sign2 = (namePrefix+" "+nameRoot+" "+nameSuffix).trim();
-				}
-				else {
-					// Only Prefix and Root can fit together on line 2.
-					sign1 = headerTags+ topLine.trim();
-					sign2 = (namePrefix+" "+nameRoot).trim();
-					sign3 = nameSuffix.trim();
-				}
-			
-    			// Add name of town
-    			bookContents += "\u00a7r"+topLine;
-    			
-    			if (sign0.length()==0) {
-    				bookContents += "\n" + "\u00a7l"+sign2;
-    			}
-    			else {
-    				bookContents += "\u00a7l"+sign1 + "\n" + "\u00a7l"+sign2;
-    			}
-    			bookContents +=
-    					"\n" + "\u00a7l"+sign3 + 
-    					"\n\n" +
-    					"\u00a7rLocated at:\n"+
-    					"\u00a7rx = \u00a7l"+signX+"\u00a7r\ny = \u00a7l"+signY+"\u00a7r\nz = \u00a7l"+signZ;
-    			
-    			// These lines clarify when a feature is not on the Overworld
-    			if (player.dimension==-1) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Nether)\n";
-    			}
-    			else if (player.dimension==1) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(End dimension)\n";
-    			}
-    			else if (structureType.equals("MoonVillage")) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Moon)\n";
-    			}
-    			else if (structureType.equals("KoentusVillage")) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Koentus)\n";
-    			}
-    			else if (structureType.equals("FronosVillage")) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Fronos)\n";
-    			}
-    			else if (structureType.equals("NibiruVillage")) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Nibiru)\n";
-    			}
-    			else if (structureType.equals("GC_AbandonedBase")) {
-    				bookContents +=
-    						"\n" +
-    						"\u00a7r(Asteroid Belt)\n";
-    			}
-    			
-    			List<String> pages = new ArrayList<String>();
-    			
-    			ItemStack book = new ItemStack(ModItems.villageBook);
-    			
-    			// Change the icon up depending on surroundings
-    			if (structureType.equals("Village")) {book = new ItemStack(ModItems.villageBook);}
-    			else if (structureType.equals("Mineshaft")) {book = new ItemStack(ModItems.mineshaftBook);}
-    			else if (structureType.equals("Stronghold")) {book = new ItemStack(ModItems.strongholdBook);}
-    			else if (structureType.equals("Temple")) {book = new ItemStack(ModItems.templeBook);}
-    			else if (structureType.equals("Monument")) {book = new ItemStack(ModItems.monumentBook);}
-    			else if (structureType.equals("Mansion")) {book = new ItemStack(ModItems.mansionBook);}
-    			else if (structureType.equals("Fortress")) {book = new ItemStack(ModItems.fortressBook);}
-    			else if (structureType.equals("MoonVillage")) {book = new ItemStack(ModItems.moonvillageBook);}
-    			else if (structureType.equals("KoentusVillage")) {book = new ItemStack(ModItems.koentusvillageBook);}
-    			else if (structureType.equals("hardcoreenderdragon_EndIsland")) {book = new ItemStack(ModItems.endcityBook);}
-    			else if (structureType.equals("hardcoreenderdragon_EndTower")) {book = new ItemStack(ModItems.endcityBook);}
-    			else if (structureType.equals("FronosVillage")) {book = new ItemStack(ModItems.fronosvillageBook);}
-    			else if (structureType.equals("NibiruVillage")) {book = new ItemStack(ModItems.nibiruvillageBook);}
-    			else if (structureType.equals("GC_AbandonedBase")) {book = new ItemStack(ModItems.abandonedbasebook);}
-    			
-    			if (book.stackTagCompound == null) {
-    				book.setTagCompound(new NBTTagCompound());
-    			}
-    			
-    			String nameCompound = namePrefix + " " +  nameRoot + " " + nameSuffix;
-    			String authorName = player.getDisplayName();
-    			
-    			// Set the title
-    			book.stackTagCompound.setString("title", nameCompound.trim() );
-    			// Set the author
-    			book.stackTagCompound.setString("author", authorName );
-    			
-    			// Set the book's contents
-    			NBTTagList pagesTag = new NBTTagList();
-    			
-    			// Page 1, with the feature information
-    			pagesTag.appendTag(new NBTTagString(bookContents));
-    			
-    			book.stackTagCompound.setTag("pages", pagesTag);
     			
     			// Don't make a book if the sign coords are all -1.
     			
     			if (signX!=-1 && signY!=-1 && signZ!=-1) {
-    				// Consume Book
-    				player.inventory.consumeInventoryItem(Items.book);
-        			player.inventory.consumeInventoryItem(ModItems.codex);
-        			
-        			// Give the book to the player
-        	        EntityItem eitem = (player).entityDropItem(book, 1);
-        	        eitem.delayBeforeCanPickup = 0; //No delay: directly into the inventory!
+    				
+    				// Generate a book using my brand-new handy dandy method
+        			WriteBookHandler.codexWriteNewVillageBook (
+        					bookType, player.getDisplayName(),
+        					signX, signY, signZ,
+        					structureTitle, dimensionName,
+        					namePrefix, nameRoot, nameSuffix,
+        					player, world.villageCollectionObj.findNearestVillage(
+        							MathHelper.floor_double(player.posX),
+        							MathHelper.floor_double(player.posY),
+        							MathHelper.floor_double(player.posZ),
+        							EntityInteractHandler.villageRadiusBuffer), playerIsInVillage
+        					);
+    				}
     			}
-    			
-    			
-    		}
-    		else {
-    		}
     	}
-    	
-    	
-		return itemStack;
+		return itemStack; // Return what was passed in, because the codexWriteNewVillageBook method actually creates the book
 	}
     
 }

@@ -1,6 +1,6 @@
 package astrotibs.villagenames.item;
 
-import astrotibs.villagenames.reference.Reference;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -17,14 +17,14 @@ import net.minecraft.world.World;
 
 // Example copied from Pam's Harvestcraft
 public class ItemVillageBook extends ItemEditableBook {
-	public ItemVillageBook() {
+	
+	public ItemVillageBook(String unlocalizedName) { // As of version 3, you can just register all the book variations through this class.
 		super();
-		setUnlocalizedName("villagebook");
-		setTextureName(Reference.MOD_ID.toLowerCase() + ":" + "villagebook");
+		setUnlocalizedName(unlocalizedName);//"villagebook"
+		setTextureName(Reference.MOD_ID.toLowerCase() + ":" + unlocalizedName);//"villagebook"
 		this.setCreativeTab(CreativeTabs.tabMisc);
 		this.setMaxStackSize(1);
 	}
-	
 	
 	@Override
     public String getUnlocalizedName()
@@ -49,7 +49,6 @@ public class ItemVillageBook extends ItemEditableBook {
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
-	
 	
 	private NBTTagList putContents(NBTTagList bookTagList) {
 		NBTTagCompound tag = new NBTTagCompound();

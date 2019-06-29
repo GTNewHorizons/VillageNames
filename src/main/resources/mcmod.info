@@ -2,14 +2,14 @@
 {
   "modid": "VillageNames",
   "name": "Village Names",
-  "description": "Generates random names for villagers, villages, and other structures.",
-  "version": "2.0",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "description": "",
+  "version": "",
+  "mcversion": "",
+  "url": "minecraft.curseforge.com/projects/village-names",
   "updateUrl": "",
   "authorList": ["AstroTibs"],
-  "credits": "Pahimar, whrrgarbl, maexono, GotoLink",
-  "logoFile": "assets/villagenames/vnbanner.png",
+  "credits": "",
+  "logoFile": "",
   "screenshots": [],
   "dependencies": []
 }

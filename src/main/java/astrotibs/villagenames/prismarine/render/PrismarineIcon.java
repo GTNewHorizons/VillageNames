@@ -20,14 +20,14 @@ public class PrismarineIcon extends TextureAtlasSprite {
 		fanimationMetadata = ReflectionHelper.findField(TextureAtlasSprite.class, "animationMetadata", "field_110982_k");
 		fanimationMetadata.setAccessible(true);
 	}
-
+	
 	@Override
 	public void updateAnimation() {
 		super.updateAnimation();
 		try {
 			updateAnimationInterpolated();
-		} catch (Exception e) {
 		}
+		catch (Exception e) {}
 	}
 
 	private void updateAnimationInterpolated() throws IllegalArgumentException, IllegalAccessException {

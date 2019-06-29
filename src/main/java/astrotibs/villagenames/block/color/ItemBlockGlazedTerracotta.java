@@ -1,6 +1,5 @@
 package astrotibs.villagenames.block.color;
 
-import astrotibs.villagenames.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -38,9 +37,12 @@ public class ItemBlockGlazedTerracotta extends ItemBlock
         int metadata = stack.getItemDamage() % (BlockGlazedTerracotta.subBlock.length);
         int batch = Integer.parseInt(super.getUnlocalizedName().substring(super.getUnlocalizedName().length()-1));
         String itemName = super.getUnlocalizedName().substring(super.getUnlocalizedName().lastIndexOf(".") + 1);
-        return String.format("%s%s", "tile."+
-        		Reference.MOD_ID.toLowerCase() + ":",
-        		itemName.substring(0,itemName.length()-1) + "." + 
-        		BlockGlazedTerracotta.subBlock[((metadata%4)+(batch-1)*4)]);
+        //return String.format("%s%s", "tile."+
+        //		Reference.MOD_ID.toLowerCase() + ":",
+        //		itemName.substring(0,itemName.length()-1) + "." + 
+        //		BlockGlazedTerracotta.subBlock[((metadata%4)+(batch-1)*4)]);
+        return String.format("%s", "tile."+
+        		itemName.substring(0,itemName.length()-1) + 
+        		BlockGlazedTerracotta.subBlockUnloc[((metadata%4)+(batch-1)*4)]);
     }
 }
