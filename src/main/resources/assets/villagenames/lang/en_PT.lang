@@ -5,4 +5,4 @@ item.villagenames:villagebook.name=Pillage Book
 tile.villagenames:lunarinGoldBrick.name=Lunarrin Style Gold Bullion
 tile.villagenames:lunarinIronBrick.name=Lunarrin Style Cannon Fodder
 
-# Added dummy line to help gitgud recognize the file as changed
+# v3.1.1a - Added dummy line to help gitgud recognize the file as changed
