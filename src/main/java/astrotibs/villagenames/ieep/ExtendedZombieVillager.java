@@ -94,30 +94,38 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
     
     public void pickRandomProfessionAndCareer() {
         if (this.profession <= -1 && this.career <= -1 && (this.hasValidData == null || !this.hasValidData)) {
-            int p = this.myWorld.rand.nextInt(6); // Uniformly distributed between 0 and 5
+            
+        	int p = this.myWorld.rand.nextInt(6); // Uniformly distributed between 0 and 5
             int c = -1;
             
-				switch(p) {
+            // Added break conditions in v3.1.1 to actually properly select sub-professions for zombie villagers 
+			switch(p) {
 				
 				case 0: // FARMER
 					c = 1 + this.myWorld.rand.nextInt(4);
-				
+					break;
+					
 				case 1: // LIBRARIAN
 					c = 1 + this.myWorld.rand.nextInt(2);
-				
+					break;
+					
 				case 2: // PRIEST
 					c = 1;// + this.myWorld.rand.nextInt(1);
-				
+					break;
+					
 				case 3: // BLACKSMITH
 					c = 1 + this.myWorld.rand.nextInt(3);
-				
+					break;
+					
 				case 4: // BUTCHER
 					c = 1 + this.myWorld.rand.nextInt(2);
-				
+					break;
+					
 				case 5: // NITWIT
 					c = 1;// + this.myWorld.rand.nextInt(1);
+					break;
 			}
-				
+			
 	    	this.setProfession(p);
 	        this.setCareer(c);
         }

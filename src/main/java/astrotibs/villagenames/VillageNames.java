@@ -4,6 +4,7 @@ import java.io.File;
 
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.block.ModBlocksVN;
+import astrotibs.villagenames.command.CommandBanner;
 import astrotibs.villagenames.command.CommandName;
 import astrotibs.villagenames.config.ConfigInit;
 import astrotibs.villagenames.config.GeneralConfig;
@@ -325,6 +326,7 @@ public final class VillageNames {
 	{
 	    // register server commands
 		event.registerServerCommand(new CommandName());
+		event.registerServerCommand(new CommandBanner()); // Added in v3.1.1
 	}
 	
 	/*

@@ -1,5 +1,7 @@
 package astrotibs.villagenames.client.model;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
@@ -13,7 +15,7 @@ import net.minecraft.entity.Entity;
  */
 
 @SideOnly(Side.CLIENT)
-public class EFModelZombieVillager extends ModelZombie {
+public class ModelZombieVillagerModern extends ModelZombie {
 	
 	// Added in v3.1
 	public ModelRenderer zombieVillagerHeadwear;
@@ -21,7 +23,7 @@ public class EFModelZombieVillager extends ModelZombie {
 	public ModelRenderer zombieVillagerHatRimLow;
 	
 	// Changed in v3.1
-	public EFModelZombieVillager(float headScale) {
+	public ModelZombieVillagerModern(float headScale) {
 		this(headScale, 0F, 64, 64);
 	}
 	
@@ -31,7 +33,7 @@ public class EFModelZombieVillager extends ModelZombie {
     }	
 	
 	// Changed in v3.1
-	public EFModelZombieVillager(float headScale, float noseY, int textureFileWidth, int textureFileHeight) {
+	public ModelZombieVillagerModern(float headScale, float noseY, int textureFileWidth, int textureFileHeight) {
 		
 		// Changed in v3.1
 		super(headScale, noseY, textureFileWidth, textureFileHeight);
@@ -121,8 +123,27 @@ public class EFModelZombieVillager extends ModelZombie {
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		
-		this.zombieVillagerHeadwear.render(f5);
-		this.zombieVillagerHatRimHigh.render(f5);
-		this.zombieVillagerHatRimLow.render(f5);
+		// Fixed in v3.1.1 - Child hats and rims render properly
+		// summon Zombie ~ ~ ~ {IsVillager:1, IsBaby:1}
+        if (this.isChild)
+        {
+            float f6 = 1.4F; // Scaledown factor
+            
+            GL11.glPushMatrix();
+            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+            GL11.glTranslatef(0.0F, 16.0F * f5, 0.0F);
+            
+            this.zombieVillagerHeadwear.render(f5);
+    		this.zombieVillagerHatRimHigh.render(f5);
+    		this.zombieVillagerHatRimLow.render(f5);
+            
+            GL11.glPopMatrix();
+        }
+        else
+        {
+            this.zombieVillagerHeadwear.render(f5);
+    		this.zombieVillagerHatRimHigh.render(f5);
+    		this.zombieVillagerHatRimLow.render(f5);
+        }
 	}
 }

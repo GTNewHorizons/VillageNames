@@ -12,7 +12,7 @@ import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -341,7 +341,7 @@ public class BannerGenerator {
 					{ new String[]{}, new int[]{}, new String[]{ba1 ? (ba1a ? "tl" : "tr") : (ba1a ? "bl" : "br")}, new int[]{-2} }, // Zambia
 					{ new String[]{"ss", "cs", b3 ? "bt" : "tt"}, new int[]{-2, -2, -2}, new String[]{}, new int[]{} }, // Zimbabwe
 					// Custom flaggy stuff that's otherwise unused patterns
-					{ new String[]{b1 ? "bri" : (b1a ? "gra" : "gru")}, new int[]{-2}, new String[]{ ba1 ? "cbo" : "sku" }, new int[]{-2} }
+					{ new String[]{"FORCEACCENT", b1 ? "bri" : (b1a ? "gra" : "gru")}, new int[]{-2}, new String[]{ ba1 ? "cbo" : "sku" }, new int[]{-2} }, // v3.1.1 added FORCEACCENT notation
 					
 			};
 			
@@ -351,9 +351,20 @@ public class BannerGenerator {
 			baseColors = (int[]) nationBaseTemplates[chosencountry][1];
 			
 			// Choose the accent
-			chosencountry = random.nextInt(nationBaseTemplates.length);
-			accentTemplate = (String[]) nationBaseTemplates[chosencountry][2];
-			accentColors = (int[]) nationBaseTemplates[chosencountry][3];
+			// v3.1.1 - Force an accent if the base template contains the FORCEACCENT key in slot 0
+			while (true)
+			{
+				chosencountry = random.nextInt(nationBaseTemplates.length);
+				accentTemplate = (String[]) nationBaseTemplates[chosencountry][2];
+				accentColors = (int[]) nationBaseTemplates[chosencountry][3];
+				
+				if (baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT") && accentTemplate.length == 0) {continue;} // Not valid. Try again.
+				break;
+			}
+			
+			// v3.1.1 - simplifies calculations below
+			int baseTemplateLengthWithoutTriggers = baseTemplate.length - ((baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT")) ? 1 : 0);
+			int accentTemplateLengthWithoutTriggers = accentTemplate.length - ((accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND")) ? 1 : 0);
 			
 			// Do a bunch of checks. If passed, break out.
 			boolean illegalcolors = false;
@@ -368,8 +379,8 @@ public class BannerGenerator {
 				}
 			}
 			if (
-					baseTemplate.length == 0 && // There is no base pattern, and... 
-					((accentColors.length == 1 && accentColors[0] != -2) // ...the single accent pattern doesn't add any new colors
+					baseTemplateLengthWithoutTriggers == 0 && // There is no base pattern, and... 
+					((accentColors.length  == 1 && accentColors[0] != -2) // ...the single accent pattern doesn't add any new colors
 					|| (accentColors.length == 2 &&
 					(accentColors[0] != -2 && accentColors[1] != -2) // ...the double accent pattern doesn't add any new colors
 					))
@@ -379,11 +390,13 @@ public class BannerGenerator {
 				continue;
 			}
 			
+			
+			
 			if(
-					baseTemplate.length == baseColors.length
-					&& (accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) == accentColors.length
-					&& (baseTemplate.length + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) <= 6 // You are limited to six layers in survival
-					&& (baseTemplate.length + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) > 0 // I'd rather not have completely blank banners
+					baseTemplateLengthWithoutTriggers == baseColors.length // Changed in v3.1.1
+					&& (accentTemplate.length - ((accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND")) ? 1 : 0)) == accentColors.length
+					&& (baseTemplateLengthWithoutTriggers + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) <= 6 // You are limited to six layers in survival
+					&& (baseTemplateLengthWithoutTriggers + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) > 0 // I'd rather not have completely blank banners
 					)
 			{
 				break;
@@ -474,10 +487,12 @@ public class BannerGenerator {
 		
 		// Add in the base template and colors
 		int colorint = 1;
-		for (int i=0; i<baseTemplate.length; i++)
+		boolean isAccentForced = (baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT")); // Added in v3.1.1
+		
+		for (int i=0; i < baseTemplate.length - (isAccentForced ? 1 : 0); i++) // Changed in v3.1.1
 		{
 			// Add pattern piece
-			patternArray.add(baseTemplate[i]);
+			patternArray.add(baseTemplate[i+(isAccentForced ? 1 : 0)]); // Changed in v3.1.1
 			
 			// Add color value
 			if (baseColors[i]==-2) // -2 indicates "draw a new color"
@@ -582,6 +597,8 @@ public class BannerGenerator {
             nbttagcompound1 = nbttagcompound;
         }
         
+        // TODO - Et Futurum and Gany's Surface use reverse order for dye color meta, which is normal order for block color meta.
+        // This will need to change to accommodate mods that use normal dye meta order.
         nbttagcompound1.setInteger("Base", 15-(patternColors.get(0) & 15));
         
         NBTTagList nbttaglist = null;
@@ -606,6 +623,8 @@ public class BannerGenerator {
         {
         	patterntag = new NBTTagCompound();
             patterntag.setString("Pattern", patterns.get(i));
+            // TODO - Et Futurum and Gany's Surface use reverse order for dye color meta, which is normal order for block color meta.
+            // This will need to change to accommodate mods that use normal dye meta order.
             patterntag.setInteger("Color", 15-(patternColors.get(i+1) & 15));
             nbttaglist.appendTag(patterntag);
         }
@@ -647,25 +666,25 @@ public class BannerGenerator {
 	 * creating it if necessary. It also returns the village's name.
 	 * ONLY run this with !world.isRemote
 	 */
-	public static Object[] getVillageBannerData(EntityVillager villager)
+	public static Object[] getVillageBannerData(EntityLivingBase entity) // v3.1.1 - Changed to EntityLivingBase to allow the player to be an argument
 	{
 		NBTTagCompound bannerNBT = new NBTTagCompound(); // The thing we're after
 		String locationFullName = ""; // Also returned, in case it's useful.
 		
-		if (!villager.worldObj.isRemote)
+		if (!entity.worldObj.isRemote)
 		{
 			// Generate banner info, regardless of if we make a banner.
-    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, -1);
+    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, -1);
 			ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 			ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 			ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
 			
 			if (villageBanner==null) {return null;} // Not using a supported mod with banners
 			
-    		int townColorMeta = 15-colorArray.get(0);
+    		int townColorMeta = 15-colorArray.get(0); // This is properly supposed to be reverse dye meta color, because this is block meta color.
     		
 			
-			Village villageNearTarget = villager.worldObj.villageCollectionObj.findNearestVillage((int)villager.posX, (int)villager.posY, (int)villager.posZ, EntityInteractHandler.villageRadiusBuffer);
+			Village villageNearTarget = entity.worldObj.villageCollectionObj.findNearestVillage((int)entity.posX, (int)entity.posY, (int)entity.posZ, EntityInteractHandler.villageRadiusBuffer);
 	        
 			if (villageNearTarget != null)
 			{
@@ -675,7 +694,7 @@ public class BannerGenerator {
 				int centerZ = villageNearTarget.getCenter().posZ; // Village Z position
 				
 				// Let's see if we can find a sign near that located village center!
-				VNWorldDataStructure data = VNWorldDataStructure.forWorld(villager.worldObj, "villagenames3_Village", "NamedStructures");
+				VNWorldDataStructure data = VNWorldDataStructure.forWorld(entity.worldObj, "villagenames3_Village", "NamedStructures");
 				NBTTagCompound tagCompound = data.getData();
 				Set tagmapKeyset = tagCompound.func_150296_c(); //Gets the town key list: "coordinates"
 				
@@ -705,7 +724,7 @@ public class BannerGenerator {
 		            
 		            
 		            // Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
-		            Village villageNearSign = villager.worldObj.villageCollectionObj.findNearestVillage(townX, townY, townZ, EntityInteractHandler.villageRadiusBuffer);
+		            Village villageNearSign = entity.worldObj.villageCollectionObj.findNearestVillage(townX, townY, townZ, EntityInteractHandler.villageRadiusBuffer);
 		            
 		            
 		            if (villageNearSign == villageNearTarget) { // There is a match between the nearest village to this villager and the nearest village to the sign
@@ -715,7 +734,7 @@ public class BannerGenerator {
 		            	
 		            	// Re-Generate banner info so that we can use the pre-generated village color
 			    		int previousTownColor = villagetagcompound.getInteger("townColor");
-		            	newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, 15-previousTownColor); // Banner vs block colors are in reverse order
+		            	newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, 15-previousTownColor); // This is properly supposed to be reverse dye meta color, because this is block meta color.
 						patternArray = (ArrayList<String>) newRandomBanner[0];
 						colorArray = (ArrayList<Integer>) newRandomBanner[1];
 						villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);

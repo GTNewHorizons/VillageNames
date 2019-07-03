@@ -193,6 +193,9 @@ public class GeneralConfig {
 				"dragon-angel|Ender Dragon|chylex.hee.entity.boss.EntityBossDragon|add",
 				"demon|Ender Demon|chylex.hee.entity.boss.EntityBossEnderDemon|add",
 				
+				// Et Futurum
+				"dragon-angel|Ender Dragon|ganymedes01.etfuturum.entities.EntityRespawnedDragon|add",
+				
 				// Village Names
 				"alien-golem|Elder Guardian|"+Reference.elderGuardianClass+"|add", // NOT AN ACTUAL CLASSPATH: hard-coded in EntityInteractHandler.java
 				

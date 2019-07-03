@@ -248,7 +248,7 @@ public class EventTracker
         
         zombie.setCanPickUpLoot(false);
         
-        // Strip gear
+    	// Strip gear
         for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
         
     }

@@ -14,6 +14,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.common.ForgeHooks;
 
 /**
  * Adapted from Jabelar's tutorials"
@@ -23,26 +24,31 @@ import net.minecraft.util.EnumChatFormatting;
 public class VersionChecker implements Runnable {
 	
 	private static boolean isLatestVersion = false;
+	private static boolean warnaboutfailure = false; // Added in v3.1.1
     private static String latestVersion = "";
     
 	@Override
 	public void run() {
+		
         InputStream in = null;
+        
         try {
             in = new URL(Reference.VERSION_CHECKER_URL).openStream();
         } 
-        catch
-        // Exception generalized for v 3.0.3
-        (Exception e)  {
-            e.printStackTrace();
-        } 
+        catch 
+        (Exception e)  {} // Blanked in v3.1.1
         
         try {
             latestVersion = IOUtils.readLines(in).get(0);
         }
-        // Exception generalized for v 3.0.3
         catch (Exception e)  {
-            e.printStackTrace();
+        	
+        	if (!warnaboutfailure) {
+        		// Added in v3.1.1
+        		LogHelper.error("Could not connect with server to compare " + Reference.MOD_NAME + " version");
+        		LogHelper.error("You can check for new versions at "+Reference.URL);
+        		warnaboutfailure=true;
+        	}
         }
         finally {
             IOUtils.closeQuietly(in);
@@ -103,8 +109,8 @@ public class VersionChecker implements Runnable {
                 				" is available! Get it at:"
                 		 ));
                 event.player.addChatComponentMessage(
-                		new ChatComponentText(
-                				EnumChatFormatting.GRAY + Reference.URL + EnumChatFormatting.RESET
+                		ForgeHooks.newChatWithLinks(Reference.URL // Made clickable in v3.1.1
+                				//EnumChatFormatting.GRAY + Reference.URL + EnumChatFormatting.RESET
                 		 ));
                 // V3.0.1: Moved inside the "if" condition so that it will only stop version checking when it's confirmed
                 VillageNames.haveWarnedVersionOutOfDate = true;

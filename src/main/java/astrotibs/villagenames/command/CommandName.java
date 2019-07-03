@@ -28,11 +28,13 @@ public class CommandName extends CommandBase {
 	private static final String NAME_ALIEN = "Alien";
 	private static final String NAME_ALIENVILLAGE = "AlienVillage";
 	private static final String NAME_GOBLIN = "Goblin";
+	private static final String NAME_CUSTOM = "Custom"; // Added in v3.1.1
 	private static final int maxLoops = 10; // Maximum number of outputs from the name generator command
 	private static final String[] nameChoices = {
 			NAME_ALIENVILLAGE,
 			NAME_ALIEN,
 			NAME_ANGEL,
+			NAME_CUSTOM, // Added in v3.1.1
 			NAME_DEMON,
 			NAME_DRAGON,
 			NAME_ENDCITY,

@@ -1,5 +1,9 @@
 package astrotibs.villagenames.client.renderer.entity;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import astrotibs.villagenames.client.model.ModelVillagerModern;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
@@ -7,8 +11,11 @@ import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderVillager;
+import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -83,6 +90,60 @@ public class RenderVillagerModern extends RenderVillager {
     private static final ResourceLocation defaultOldSmith = new ResourceLocation("textures/entity/villager/smith.png");
     private static final ResourceLocation defaultOldButcher = new ResourceLocation("textures/entity/villager/butcher.png");
 	
+	
+	
+
+    /**
+     * Added in v3.1.1: machinery for modular textures, adapted from RenderHorse
+     */
+    
+    //private String[] layeredTextureAddressArray = new String[4]; // Holds the different layer textures as resource address strings
+    private static final Map skinComboHashmap = Maps.newHashMap(); // Populates a hash map with various combinations so you don't have to constantly ascertain them on the fly
+    //private String skinComboHashKey; // String that will be the hashmap key corresponding to the particular biome/career combination
+    
+    // Made this 2D so that I can always make sure to add the proper key
+    private static final String[][] biomeTypeTextures = new String[][] {
+    		{villagerTypePlains.toString(), "pla"},
+    		{villagerTypeMagical.toString(), "mag"},
+    		{villagerTypeHighland.toString(), "hig"},
+    		{villagerTypeForest.toString(), "for"},
+    		{villagerTypeAquatic.toString(), "aqu"},
+    		{villagerTypeJungle.toString(), "jun"},
+    		{villagerTypeSwamp.toString(), "swa"},
+    		{villagerTypeTaiga.toString(), "tai"},
+    		{villagerTypeDesert.toString(), "des"},
+    		{villagerTypeSavanna.toString(), "sav"},
+    		{villagerTypeMushroom.toString(), "mus"},
+    		{villagerTypeSnow.toString(), "sno"},
+    		{villagerTypeEnd.toString(), "end"},
+    		{villagerTypeNether.toString(), "net"},
+    		};
+    
+    private static final String[][] careerTextures = new String[][] {
+    	{villagerProfessionFarmer.toString(), "far"}, // 0
+    	{villagerProfessionFisherman.toString(), "fis"},
+    	{villagerProfessionShepherd.toString(), "she"},
+    	{villagerProfessionFletcher.toString(), "fle"},
+    	{villagerProfessionLibrarian.toString(), "lib"}, // 4
+    	{villagerProfessionCartographer.toString(), "car"},
+    	{villagerProfessionCleric.toString(), "cle"}, // 6
+    	{villagerProfessionArmorer.toString(), "arm"},
+    	{villagerProfessionWeaponsmith.toString(), "wea"},
+    	{villagerProfessionToolsmith.toString(), "too"}, // 9
+    	{villagerProfessionMason.toString(), "mas"},
+    	{villagerProfessionButcher.toString(), "but"}, // 11
+    	{villagerProfessionLeatherworker.toString(), "lea"},
+    	{villagerProfessionNitwit.toString(), "nit"}, //13
+    	};
+    
+    private static final String[][] profLevelTextures = new String[][] {
+    	{villagerProfessionLevelStone.toString(), "pl1"},
+    	{villagerProfessionLevelIron.toString(), "pl2"},
+    	{villagerProfessionLevelGold.toString(), "pl3"},
+    	{villagerProfessionLevelEmerald.toString(), "pl4"},
+    	{villagerProfessionLevelDiamond.toString(), "pl5"},
+    	};
+    
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
@@ -95,7 +156,7 @@ public class RenderVillagerModern extends RenderVillager {
 				&& villager.getProfession() <= 5
 				)
 		{
-			return villagerBaseSkin;
+			return this.getHashmappedSkinCombo(villager);
 		}
 		else
 		{
@@ -117,169 +178,135 @@ public class RenderVillagerModern extends RenderVillager {
 		    }
 		}
 	}
-	
+    
+    private ResourceLocation getHashmappedSkinCombo(EntityVillager villager)
+    {
+        String s = this.getModularVillagerTexture(villager);
+        ResourceLocation resourcelocation = (ResourceLocation)skinComboHashmap.get(s);
+        
+        if (resourcelocation == null)
+        {
+            resourcelocation = new ResourceLocation(s);
+            Minecraft.getMinecraft().getTextureManager().loadTexture(resourcelocation, new LayeredTexture(this.getVariantTexturePaths(villager)));
+            skinComboHashmap.put(s, resourcelocation);
+        }
+
+        return resourcelocation;
+    }
 
     /**
-     * Queries whether should render the specified pass or not.
+     * Index 0 will be the string array providing the rendering layers for the skin.
+     * Index 1 will be the rendering hash key.
      */
-	/*
-    @Override
-    protected int shouldRenderPass(EntityLivingBase entity, int passNumber, float progress)
+    @SideOnly(Side.CLIENT)
+    private Object[] setModularVillagerTexturePaths(EntityVillager villager)
     {
-    	if (entity instanceof EntityVillager)
-    	{
-    		return this.shouldRenderPass((EntityVillager)entity, passNumber, progress);
-    	}
-    	else
-    	{
-    		return super.shouldRenderPass(entity, passNumber, progress);
-    	}
+    	final ExtendedVillager ev = ExtendedVillager.get(villager);
+    	
+        String skinComboHashKey = "villager/";
+        
+        String[] layeredTextureAddressArray = new String[4]; 
+        
+        // Reset the layer array
+        layeredTextureAddressArray[0] = villagerBaseSkin.toString();
+        layeredTextureAddressArray[1] = null;
+        layeredTextureAddressArray[2] = null;
+        layeredTextureAddressArray[3] = null;
+        
+        // Set the indexing values, and clamp them just in case
+        int biometype = MathHelper.clamp_int(ev.getBiomeType(), 0, biomeTypeTextures.length-1);
+        int career = GeneralConfig.villagerCareers ? ev.getCareer() : -1;
+        int proflevel = MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
+        
+        // Use the profession and career values to zero in on the value stored in the careerTextures array
+        int careerIndex = 0;
+        switch (ev.getProfession())
+        {
+	    	case 0: // Farmer type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 0; break;
+		    		case 2: careerIndex = 1; break;
+		    		case 3: careerIndex = 2; break;
+		    		case 4: careerIndex = 3; break;
+	    		}
+	    		break;
+	    		
+	    	case 1: // Librarian type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 4; break;
+		    		case 2: careerIndex = 5; break;
+	    		}
+	    		break;
+	    		
+	    	case 2: // Priest type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 6; break;
+	    		}
+	    		break;
+	    		
+	    	case 3: // Smith type
+	    		switch (career)
+	    		{
+		    		case 1: careerIndex = 7; break;
+		    		case 2: careerIndex = 8; break;
+		    		default:
+		    		case 3: careerIndex = 9; break;
+		    		case 4: careerIndex = 10; break;
+	    		}
+	    		break;
+	    		
+	    	case 4: // Butcher type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 11; break;
+		    		case 2: careerIndex = 12; break;
+	    		}
+	    		break;
+	    		
+	    	case 5: // Nitwit type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 13; break;
+	    		}
+	    		break;
+	    		
+	    	default: // No profession skin
+        }
+        
+        // Set the biome type
+        layeredTextureAddressArray[1] = biomeTypeTextures[biometype][0];
+        skinComboHashKey = skinComboHashKey + biomeTypeTextures[biometype][1];
+        
+        // Set the career
+        layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
+        skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+        
+        // Set the profession level
+        layeredTextureAddressArray[3] = profLevelTextures[proflevel][0];
+        skinComboHashKey = skinComboHashKey + "_" + profLevelTextures[proflevel][1];
+        
+        //return skinComboHashKey;
+        return new Object[] {layeredTextureAddressArray, skinComboHashKey};
     }
-    */
-	
-    /**
-     * Queries whether should render the specified pass or not.
-     */
-	@Override
-    protected int shouldRenderPass(EntityVillager villager, int passNumber, float progress)
+    
+    @SideOnly(Side.CLIENT)
+    public String getModularVillagerTexture(EntityVillager villager)
     {
-		if (villager.getProfession() >= 0 && villager.getProfession() <= 5)
-		{
-			// Biome type skins
-			if (GeneralConfig.modernVillagerSkins && passNumber == 1)
-			{
-				switch ((ExtendedVillager.get(villager)).getBiomeType())
-				{
-					case 11:
-						this.bindTexture(villagerTypeSnow); break;
-					case 9:
-						this.bindTexture(villagerTypeSavanna); break;
-					case 8:
-						this.bindTexture(villagerTypeDesert); break;
-					case 3:
-						this.bindTexture(villagerTypeForest); break;
-					case 7:
-						this.bindTexture(villagerTypeTaiga); break;
-					case 6:
-						this.bindTexture(villagerTypeSwamp); break;
-					case 5:
-						this.bindTexture(villagerTypeJungle); break;
-					case 4:
-						this.bindTexture(villagerTypeAquatic); break;
-					case 2:
-						this.bindTexture(villagerTypeHighland); break;
-					case 10:
-						this.bindTexture(villagerTypeMushroom); break;
-					case 1:
-						this.bindTexture(villagerTypeMagical); break;
-					case 13:
-						this.bindTexture(villagerTypeNether); break;
-					case 12:
-						this.bindTexture(villagerTypeEnd); break;
-					default:
-					case 0:
-						this.bindTexture(villagerTypePlains); break;
-				}
-				return passNumber;
-			}
-			
-			// Profession skins
-			else if (GeneralConfig.modernVillagerSkins && passNumber == 2)
-	        {
-	        	int career = GeneralConfig.villagerCareers ? (ExtendedVillager.get(villager)).getCareer() : -1;
-				
-			    switch (villager.getProfession())
-			    {
-		        case 0: // Farmer type
-		        	switch (career)
-		        	{
-		        	default:
-		        	case 1:
-		        		this.bindTexture(villagerProfessionFarmer); break;
-		        	case 2:
-		        		this.bindTexture(villagerProfessionFisherman); break;
-		        	case 3:
-		        		this.bindTexture(villagerProfessionShepherd); break;
-		        	case 4:
-		        		this.bindTexture(villagerProfessionFletcher); break;
-		        	}
-		        	return passNumber;
-		        	
-		        case 1: // Librarian type
-		        	switch (career)
-		        	{
-		        	default:
-		        	case 1:
-		        		this.bindTexture(villagerProfessionLibrarian); break;
-		        	case 2:
-		        		this.bindTexture(villagerProfessionCartographer); break;
-		        	}
-		        	return passNumber;
-		        	
-		        case 2: // Priest type
-		        	switch (career)
-		        	{
-		        	default:
-		        	case 1:
-		        		this.bindTexture(villagerProfessionCleric); break;
-		        	}
-		        	return passNumber;
-		        	
-		        case 3: // Smith type
-		        	switch (career)
-		        	{
-		        	case 1:
-		        		this.bindTexture(villagerProfessionArmorer); break;
-		        	case 2:
-		        		this.bindTexture(villagerProfessionWeaponsmith); break;
-		        	default:
-		        	case 3:
-		        		this.bindTexture(villagerProfessionToolsmith); break;
-		        	case 4:
-		        		this.bindTexture(villagerProfessionMason); break;
-		        	}
-		        	return passNumber;
-		        	
-		        case 4: // Butcher type
-		        	switch (career)
-		        	{
-		        	default:
-		        	case 1:
-		        		this.bindTexture(villagerProfessionButcher); break;
-		        	case 2:
-		        		this.bindTexture(villagerProfessionLeatherworker); break;
-		        	}
-		        	return passNumber;
-		        	
-		        case 5: // Butcher type
-		        	switch (career)
-		        	{
-		        	default:
-		        	case 1:
-		        		this.bindTexture(villagerProfessionNitwit); break;
-		        	}
-		        	return passNumber;
-		        default: // No profession skin
-			    }
-	        }
-			
-			// Profession levels
-			else if (GeneralConfig.modernVillagerSkins && passNumber == 3)
-			{
-				final int profLevel = (ExtendedVillager.get(villager)).getProfessionLevel();
-				if (profLevel <= 0) {return -1;}
-				else if (profLevel >= 5) {this.bindTexture(villagerProfessionLevelDiamond); return passNumber;}
-				switch (profLevel)
-				{
-					case 1: this.bindTexture(villagerProfessionLevelStone); return passNumber;
-					case 2: this.bindTexture(villagerProfessionLevelIron); return passNumber;
-					case 3: this.bindTexture(villagerProfessionLevelGold); return passNumber;
-					case 4: this.bindTexture(villagerProfessionLevelEmerald); return passNumber;
-				}
-			}
-		}
-		
-        return -1;
+    	return (String) (setModularVillagerTexturePaths(villager))[1];
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public String[] getVariantTexturePaths(EntityVillager villager)
+    {
+    	return (String[]) (this.setModularVillagerTexturePaths(villager))[0];
     }
     
 }

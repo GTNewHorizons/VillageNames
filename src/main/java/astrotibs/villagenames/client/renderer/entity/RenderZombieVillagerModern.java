@@ -1,19 +1,26 @@
 package astrotibs.villagenames.client.renderer.entity;
 
-import astrotibs.villagenames.client.model.EFModelZombieVillager;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
+import astrotibs.villagenames.client.model.ModelZombieVillagerModern;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedZombieVillager;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -80,7 +87,7 @@ public class RenderZombieVillagerModern extends RenderBiped
     
 	
     private ModelBiped field_82434_o;
-    private EFModelZombieVillager zombieVillagerModel;
+    private ModelZombieVillagerModern zombieVillagerModel;
     protected ModelBiped field_82437_k;
     protected ModelBiped field_82435_l;
     protected ModelBiped field_82436_m;
@@ -92,8 +99,8 @@ public class RenderZombieVillagerModern extends RenderBiped
     {
         super(new ModelZombie(), 0.5F, 1.0F);
         this.field_82434_o = this.modelBipedMain;
-        this.zombieVillagerModel = new EFModelZombieVillager(0);
-        this.setRenderPassModel(new EFModelZombieVillager(0.1F));
+        this.zombieVillagerModel = new ModelZombieVillagerModern(0);
+        this.setRenderPassModel(new ModelZombieVillagerModern(0.1F));
     }
     
     @Override
@@ -103,162 +110,17 @@ public class RenderZombieVillagerModern extends RenderBiped
         this.field_82425_h = new ModelZombie(0.5F, true);
         this.field_82437_k = this.field_82423_g;
         this.field_82435_l = this.field_82425_h;
-        this.field_82436_m = new EFModelZombieVillager(0);
-        this.field_82433_n = new EFModelZombieVillager(0);
+        this.field_82436_m = new ModelZombieVillagerModern(0);
+        this.field_82433_n = new ModelZombieVillagerModern(0);
     }
-
+    
     /**
      * Queries whether should render the specified pass or not.
      */
+    // Reset to vanilla style - v3.1.1
     protected int shouldRenderPass(EntityZombie zombie, int passNumber, float progress)
     {
         this.modelSetter(zombie); // Whether or not this will render as a villager-type zombie
-        
-        if (
-        		!(zombie instanceof EntityPigZombie)
-        		&& zombie.isVillager()
-        		)
-        {
-        	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
-        	
-        	if (ezv.getProfession() >= 0 && ezv.getProfession() <= 5)
-    		{
-    			// Biome type skins
-    			if (GeneralConfig.modernVillagerSkins && passNumber == 2)
-    			{
-    				switch (ezv.getBiomeType())
-    				{
-    					case 11:
-    						this.bindTexture(zombieVillagerTypeSnow); break;
-    					case 9:
-    						this.bindTexture(zombieVillagerTypeSavanna); break;
-    					case 8:
-    						this.bindTexture(zombieVillagerTypeDesert); break;
-    					case 3:
-    						this.bindTexture(zombieVillagerTypeForest); break;
-    					case 7:
-    						this.bindTexture(zombieVillagerTypeTaiga); break;
-    					case 6:
-    						this.bindTexture(zombieVillagerTypeSwamp); break;
-    					case 5:
-    						this.bindTexture(zombieVillagerTypeJungle); break;
-    					case 4:
-    						this.bindTexture(zombieVillagerTypeAquatic); break;
-    					case 2:
-    						this.bindTexture(zombieVillagerTypeHighland); break;
-    					case 10:
-    						this.bindTexture(zombieVillagerTypeMushroom); break;
-    					case 1:
-    						this.bindTexture(zombieVillagerTypeMagical); break;
-    					case 13:
-    						this.bindTexture(zombieVillagerTypeNether); break;
-    					case 12:
-    						this.bindTexture(zombieVillagerTypeEnd); break;
-    					default:
-    					case 0:
-    						this.bindTexture(zombieVillagerTypePlains); break;
-    				}
-    				return passNumber;
-    			}
-    			
-    			// Profession skins
-    			else if (GeneralConfig.modernVillagerSkins && passNumber == 3)
-    	        {
-    				int career = GeneralConfig.villagerCareers ? ezv.getCareer() : -1;
-    				
-    			    switch (ezv.getProfession())
-    			    {
-    		        case 0: // Farmer type
-    		        	switch (career)
-    		        	{
-    		        	default:
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionFarmer); break;
-    		        	case 2:
-    		        		this.bindTexture(zombieVillagerProfessionFisherman); break;
-    		        	case 3:
-    		        		this.bindTexture(zombieVillagerProfessionShepherd); break;
-    		        	case 4:
-    		        		this.bindTexture(zombieVillagerProfessionFletcher); break;
-    		        	}
-    		        	return passNumber;
-    		        	
-    		        case 1: // Librarian type
-    		        	switch (career)
-    		        	{
-    		        	default:
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionLibrarian); break;
-    		        	case 2:
-    		        		this.bindTexture(zombieVillagerProfessionCartographer); break;
-    		        	}
-    		        	return passNumber;
-    		        	
-    		        case 2: // Priest type
-    		        	switch (career)
-    		        	{
-    		        	default:
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionCleric); break;
-    		        	}
-    		        	return passNumber;
-    		        	
-    		        case 3: // Smith type
-    		        	switch (career)
-    		        	{
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionArmorer); break;
-    		        	case 2:
-    		        		this.bindTexture(zombieVillagerProfessionWeaponsmith); break;
-    		        	default:
-    		        	case 3:
-    		        		this.bindTexture(zombieVillagerProfessionToolsmith); break;
-    		        	case 4:
-    		        		this.bindTexture(zombieVillagerProfessionMason); break;
-    		        	}
-    		        	return passNumber;
-    		        	
-    		        case 4: // Butcher type
-    		        	switch (career)
-    		        	{
-    		        	default:
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionButcher); break;
-    		        	case 2:
-    		        		this.bindTexture(zombieVillagerProfessionLeatherworker); break;
-    		        	}
-    		        	return passNumber;
-    		        	
-    		        case 5: // Butcher type
-    		        	switch (career)
-    		        	{
-    		        	default:
-    		        	case 1:
-    		        		this.bindTexture(zombieVillagerProfessionNitwit); break;
-    		        	}
-    		        	return passNumber;
-    		        default: // No profession skin
-    			    }
-    	        }
-    			/*
-    			// Profession levels
-    			else if (
-        				GeneralConfig.modernVillagerSkins
-        				&& passNumber == 4
-        				)
-        		{
-        			switch (ezv.getProfessionLevel())
-        			{
-        				case 1: this.bindTexture(zombieVillagerProfessionLevelStone); return passNumber;
-        				case 2: this.bindTexture(zombieVillagerProfessionLevelIron); return passNumber;
-        				case 3: this.bindTexture(zombieVillagerProfessionLevelGold); return passNumber;
-        				case 4: this.bindTexture(zombieVillagerProfessionLevelEmerald); return passNumber;
-        				case 5: this.bindTexture(zombieVillagerProfessionLevelDiamond); return passNumber;
-        			}
-        		}*/
-    		}
-        }
-        
         return super.shouldRenderPass((EntityLiving)zombie, passNumber, progress);
     }
 	
@@ -273,31 +135,7 @@ public class RenderZombieVillagerModern extends RenderBiped
         this.modelSetter(zombie);
         super.doRender((EntityLiving)zombie, x, y, z, entityYaw, partialTicks);
     }
-
     
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(EntityZombie zombie)
-    {
-    	if (zombie instanceof EntityPigZombie) { // Is a zombie pigman
-    		return zombiePigmanTextures;
-    	}
-    	else if ( zombie.isVillager() ) // Is a zombie villager
-    	{
-    		if (GeneralConfig.modernVillagerSkins)
-    		{
-    			return zombieVillagerBaseSkin;
-    		}
-    		else
-    		{
-    			return zombieVillagerTextures;
-    		}
-        } 
-        else { // Is an ordinary zombie
-            return zombieTextures; // The default zombie skin
-        }
-    }
     
 
     protected void renderEquippedItems(EntityZombie p_77029_1_, float p_77029_2_)
@@ -312,10 +150,10 @@ public class RenderZombieVillagerModern extends RenderBiped
         {
             if (this.field_82431_q != this.zombieVillagerModel.func_82897_a())
             {
-                this.zombieVillagerModel = new EFModelZombieVillager(0);
+                this.zombieVillagerModel = new ModelZombieVillagerModern(0);
                 this.field_82431_q = this.zombieVillagerModel.func_82897_a();
-                this.field_82436_m = new EFModelZombieVillager(0);
-                this.field_82433_n = new EFModelZombieVillager(0);
+                this.field_82436_m = new ModelZombieVillagerModern(0);
+                this.field_82433_n = new ModelZombieVillagerModern(0);
             }
 
             this.mainModel = this.zombieVillagerModel;
@@ -431,4 +269,214 @@ public class RenderZombieVillagerModern extends RenderBiped
     {
         this.doRender((EntityZombie)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
+    
+    
+    
+    /**
+     * Added in v3.1.1: machinery for modular textures, adapted from RenderHorse
+     */
+    
+    // summon Zombie ~ ~ ~ {IsVillager:1}
+    
+    //private String[] layeredTextureAddressArray = new String[4]; // Holds the different layer textures as resource address strings
+    private static final Map skinComboHashmap = Maps.newHashMap(); // Populates a hash map with various combinations so you don't have to constantly ascertain them on the fly
+    //private String skinComboHashKey; // String that will be the hashmap key corresponding to the particular biome/career combination
+    
+    // Made this 2D so that I can always make sure to add the proper key
+    private static final String[][] biomeTypeTextures = new String[][] {
+    		{zombieVillagerTypePlains.toString(), "pla"},
+    		{zombieVillagerTypeMagical.toString(), "mag"},
+    		{zombieVillagerTypeHighland.toString(), "hig"},
+    		{zombieVillagerTypeForest.toString(), "for"},
+    		{zombieVillagerTypeAquatic.toString(), "aqu"},
+    		{zombieVillagerTypeJungle.toString(), "jun"},
+    		{zombieVillagerTypeSwamp.toString(), "swa"},
+    		{zombieVillagerTypeTaiga.toString(), "tai"},
+    		{zombieVillagerTypeDesert.toString(), "des"},
+    		{zombieVillagerTypeSavanna.toString(), "sav"},
+    		{zombieVillagerTypeMushroom.toString(), "mus"},
+    		{zombieVillagerTypeSnow.toString(), "sno"},
+    		{zombieVillagerTypeEnd.toString(), "end"},
+    		{zombieVillagerTypeNether.toString(), "net"},
+    		};
+    
+    private static final String[][] careerTextures = new String[][] {
+    	{zombieVillagerProfessionFarmer.toString(), "far"}, // 0
+    	{zombieVillagerProfessionFisherman.toString(), "fis"},
+    	{zombieVillagerProfessionShepherd.toString(), "she"},
+    	{zombieVillagerProfessionFletcher.toString(), "fle"},
+    	{zombieVillagerProfessionLibrarian.toString(), "lib"}, // 4
+    	{zombieVillagerProfessionCartographer.toString(), "car"},
+    	{zombieVillagerProfessionCleric.toString(), "cle"}, // 6
+    	{zombieVillagerProfessionArmorer.toString(), "arm"},
+    	{zombieVillagerProfessionWeaponsmith.toString(), "wea"},
+    	{zombieVillagerProfessionToolsmith.toString(), "too"}, // 9
+    	{zombieVillagerProfessionMason.toString(), "mas"},
+    	{zombieVillagerProfessionButcher.toString(), "but"}, // 11
+    	{zombieVillagerProfessionLeatherworker.toString(), "lea"},
+    	{zombieVillagerProfessionNitwit.toString(), "nit"}, //13
+    	};
+    
+    private static final String[][] profLevelTextures = new String[][] {
+    	{zombieVillagerProfessionLevelStone.toString(), "pl1"},
+    	{zombieVillagerProfessionLevelIron.toString(), "pl2"},
+    	{zombieVillagerProfessionLevelGold.toString(), "pl3"},
+    	{zombieVillagerProfessionLevelEmerald.toString(), "pl4"},
+    	{zombieVillagerProfessionLevelDiamond.toString(), "pl5"},
+    	};
+    
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    protected ResourceLocation getEntityTexture(EntityZombie zombie)
+    {
+    	if (zombie instanceof EntityPigZombie) { // Is a zombie pigman
+    		return zombiePigmanTextures;
+    	}
+    	else if ( zombie.isVillager() ) // Is a zombie villager
+    	{
+    		if (GeneralConfig.modernVillagerSkins)
+    		{
+    			return this.getHashmappedSkinCombo(zombie);
+    		}
+    		else
+    		{
+    			return zombieVillagerTextures;
+    		}
+        } 
+        else { // Is an ordinary zombie
+            return zombieTextures; // The default zombie skin
+        }
+    }
+    
+    private ResourceLocation getHashmappedSkinCombo(EntityZombie zombievillager)
+    {
+        String s = this.getModularZombieVillagerTexture(zombievillager);
+        ResourceLocation resourcelocation = (ResourceLocation)skinComboHashmap.get(s);
+        
+        if (resourcelocation == null)
+        {
+            resourcelocation = new ResourceLocation(s);
+            Minecraft.getMinecraft().getTextureManager().loadTexture(resourcelocation, new LayeredTexture(this.getVariantTexturePaths(zombievillager)));
+            skinComboHashmap.put(s, resourcelocation);
+        }
+
+        return resourcelocation;
+    }
+    
+    /**
+     * Index 0 will be the string array providing the rendering layers for the skin.
+     * Index 1 will be the rendering hash key.
+     */
+    @SideOnly(Side.CLIENT)
+    private Object[] setModularZombieVillagerTexturePaths(EntityZombie zombievillager)
+    {
+    	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombievillager);
+    	
+        String skinComboHashKey = "zombievillager/";
+        
+        String[] layeredTextureAddressArray = new String[4]; 
+        
+        // Reset the layer array
+        layeredTextureAddressArray[0] = zombieVillagerBaseSkin.toString();
+        layeredTextureAddressArray[1] = null;
+        layeredTextureAddressArray[2] = null;
+        layeredTextureAddressArray[3] = null;
+        
+        // Set the indexing values, and clamp them just in case
+        int biometype = MathHelper.clamp_int(ezv.getBiomeType(), 0, biomeTypeTextures.length-1);
+        int career = GeneralConfig.villagerCareers ? ezv.getCareer() : -1;
+        int proflevel = MathHelper.clamp_int(ezv.getProfessionLevel(), 0, profLevelTextures.length-1);
+        
+        // Use the profession and career values to zero in on the value stored in the careerTextures array
+        int careerIndex = 0;
+        switch (ezv.getProfession())
+        {
+	    	case 0: // Farmer type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 0; break;
+		    		case 2: careerIndex = 1; break;
+		    		case 3: careerIndex = 2; break;
+		    		case 4: careerIndex = 3; break;
+	    		}
+	    		break;
+	    		
+	    	case 1: // Librarian type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 4; break;
+		    		case 2: careerIndex = 5; break;
+	    		}
+	    		break;
+	    		
+	    	case 2: // Priest type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 6; break;
+	    		}
+	    		break;
+	    		
+	    	case 3: // Smith type
+	    		switch (career)
+	    		{
+		    		case 1: careerIndex = 7; break;
+		    		case 2: careerIndex = 8; break;
+		    		default:
+		    		case 3: careerIndex = 9; break;
+		    		case 4: careerIndex = 10; break;
+	    		}
+	    		break;
+	    		
+	    	case 4: // Butcher type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 11; break;
+		    		case 2: careerIndex = 12; break;
+	    		}
+	    		break;
+	    		
+	    	case 5: // Nitwit type
+	    		switch (career)
+	    		{
+		    		default:
+		    		case 1: careerIndex = 13; break;
+	    		}
+	    		break;
+	    		
+	    	default: // No profession skin
+        }
+        
+        // Set the biome type
+        layeredTextureAddressArray[1] = biomeTypeTextures[biometype][0];
+        skinComboHashKey = skinComboHashKey + biomeTypeTextures[biometype][1];
+        
+        // Set the career
+        layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
+        skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+        
+        // Set the profession level
+        layeredTextureAddressArray[3] = null;//profLevelTextures[proflevel][0]; // Left off for now: no need to see prof level
+        skinComboHashKey = skinComboHashKey + "_" + profLevelTextures[proflevel][1];
+        
+        //return skinComboHashKey;
+        return new Object[] {layeredTextureAddressArray, skinComboHashKey};
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public String getModularZombieVillagerTexture(EntityZombie zombievillager)
+    {
+    	return (String) (setModularZombieVillagerTexturePaths(zombievillager))[1];
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public String[] getVariantTexturePaths(EntityZombie zombievillager)
+    {
+    	return (String[]) (this.setModularZombieVillagerTexturePaths(zombievillager))[0];
+    }
+    
 }

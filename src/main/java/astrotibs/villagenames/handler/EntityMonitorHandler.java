@@ -183,7 +183,6 @@ public class EntityMonitorHandler
                     }
 
                     // If not, assign a random profession
-                    
                     if (GeneralConfig.villagerCareers) {
                     	ezv.pickRandomProfessionAndCareer();
                     }
@@ -191,7 +190,7 @@ public class EntityMonitorHandler
                     	ezv.pickRandomProfession();
                     }
                 }
-
+                
                 if (GeneralConfig.debugMessages) {
                     LogHelper.info("EntityMonitorHandler > Custom name [" + zombie.getCustomNameTag() + "]");
                     LogHelper.info("EntityMonitorHandler > Profession [" + ezv.getProfession() + "]");
@@ -437,11 +436,10 @@ public class EntityMonitorHandler
             	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
             	if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
             	
-            	zombie.setCanPickUpLoot(false);
-            	
             	// Strip gear
+            	zombie.setCanPickUpLoot(false);
                 for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
-                
+            	
     			if ((zombie.ticksExisted + zombie.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
     					{
     				//if (ezv.getBiomeType() < 0) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
