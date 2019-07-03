@@ -61,6 +61,8 @@ public class GeneralConfig {
 	
 	public static boolean modernVillagerSkins; // Changed in v3.1
 	
+	public static boolean moddedVillagerHeadwear; // Added in v3.1.1
+	
 	public static boolean villagerCareers;
 	public static boolean treasureTrades;
 	public static boolean LEGACYTRADESFALSE = false; // I don't want to allow these old trades.
@@ -129,6 +131,9 @@ public class GeneralConfig {
 	    // Added in v3.1
 	    modernVillagerTrades = config.getBoolean("Modern Villager Trades", "villager professions", true, "Use JE 1.14 / BE 1.12 trade offerings and add the Mason villager");
 	    enableNitwit = config.getBoolean("Nitwit Villager", "villager professions", true, "Enable 1.11 NitWit Villagers");
+	    
+	    // Added in v3.1.1
+	    moddedVillagerHeadwear = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: renders the headwear layer for non-vanilla villager professions, if one exists.");
 	    
 	    
 	    zombieCureCatalysts = config.getStringList("Zombie Cure Catalysts", "villager professions", new String[]{

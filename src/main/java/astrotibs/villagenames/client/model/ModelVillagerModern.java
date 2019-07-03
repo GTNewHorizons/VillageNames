@@ -1,5 +1,6 @@
 package astrotibs.villagenames.client.model;
 
+import astrotibs.villagenames.config.GeneralConfig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
@@ -112,8 +113,11 @@ public class ModelVillagerModern extends ModelVillager
 				entity instanceof EntityVillager
 				// Below conditions specify only vanilla villagers
 				&& ((EntityVillager)entity).getProfession() >= 0
-				&& ((EntityVillager)entity).getProfession() <= 5
-				)
+				&& ( // Added condition on 3.1.1 to allow villager cowls
+						((EntityVillager)entity).getProfession() <= 5
+						|| GeneralConfig.moddedVillagerHeadwear
+					)
+			)
 		{
 			this.villagerHeadwear.render(f5);
 			this.villagerHatRimHigh.render(f5);
