@@ -145,3 +145,5 @@ achievement.ghosttown.desc=Create a Village Book for an empty village
 
 achievement.laputa=§cFidelity
 achievement.laputa.desc=Befriend a lonely golem
+
+# Added dummy line to help gitgud recognize the file as changed

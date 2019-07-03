@@ -4,3 +4,5 @@ item.villagenames:villagebook.name=Pillage Book
 # Block localizations
 tile.villagenames:lunarinGoldBrick.name=Lunarrin Style Gold Bullion
 tile.villagenames:lunarinIronBrick.name=Lunarrin Style Cannon Fodder
+
+# Added dummy line to help gitgud recognize the file as changed
