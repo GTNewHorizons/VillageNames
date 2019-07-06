@@ -49,13 +49,8 @@ public class WellDecorateEvent {
 			
 			Random random = event.world.rand;
 			
-			boolean wellSlabs = GeneralConfig.wellSlabs;
-		    boolean nameSign = GeneralConfig.nameSign;
-		    boolean wellBoundary = GeneralConfig.wellBoundary;
-		    boolean wellKillSwitch = GeneralConfig.wellDecorations;
-		    boolean addConcrete = GeneralConfig.addConcrete;
-		    boolean concreteWell = GeneralConfig.concreteWell;
-		    
+			// v3.1.2 - Removed config pre-load values to be more human readable 
+			
 			int i = (event.chunkX << 4) + 8;//Villages are offset
 			int k = (event.chunkZ << 4) + 8;
 			int y;
@@ -359,7 +354,7 @@ public class WellDecorateEvent {
             		    			            
             		    			        }
                                     		
-            		    			        if (wellKillSwitch && nameSign) {
+            		    			        if (GeneralConfig.wellDecorations && GeneralConfig.nameSign) {
                                         		// Cobblestone wall pole and sign proper
                                         		event.world.setBlock(x+signXOffset, y+1, z+signZOffset, Blocks.cobblestone_wall);
                                         		event.world.setBlock(x+signXOffset, y+2, z+signZOffset, Blocks.standing_sign, signOrientation, 2); //Last field 2 for some reason please
@@ -368,7 +363,7 @@ public class WellDecorateEvent {
                                     		// Added in v3.1banner
                                     		if (
                                     				villageBanner != null &&
-                                    				wellKillSwitch && GeneralConfig.villageBanners && signLocation!=bannerLocation
+                                    						GeneralConfig.wellDecorations && GeneralConfig.villageBanners && signLocation!=bannerLocation
                                     				) {
                                     			
                                     			event.world.setBlock(x+bannerXOffset, y+1, z+bannerZOffset, Blocks.cobblestone_wall);
@@ -391,36 +386,30 @@ public class WellDecorateEvent {
                                     			
                                     		}
                                     		
-            		    			        if (wellKillSwitch && wellBoundary) {
-                                        		// Clay base OR concrete
-                                        		BlockConcrete concreteBlock = ModBlocksVN.blockConcrete;
-                                        		Block roofGlazedBlock = ModBlocksVN.glazedTerracotta;
-                                        		switch (townColorMeta/4) {
-	                                        		case 0: roofGlazedBlock = ModBlocksVN.glazedTerracotta; break;
-	                                        		case 1: roofGlazedBlock = ModBlocksVN.glazedTerracotta2; break;
-	                                        		case 2: roofGlazedBlock = ModBlocksVN.glazedTerracotta3; break;
-	                                        		case 3: roofGlazedBlock = ModBlocksVN.glazedTerracotta4; break;
-                                        		}
-                                    			if (addConcrete && concreteWell) {
+            		    			        if (GeneralConfig.wellDecorations && GeneralConfig.wellBoundary) {
+                                        		
+            		                        	// v3.1.2 - Allow concrete well decoration even if Village Names concrete is unavailable 
+            		                        	Object[] tryConcrete = ModObjects.chooseModConcrete(townColorMeta);
+            		                        	
+            		    			        	// Clay base OR concrete
+                                    			if (tryConcrete != null && GeneralConfig.concreteWell) {
+                                    				
+                                    				// v3.1.2 - Moved inside this if condition to pre-empt crashes
+                                    				
+                                    				// v3.1.2 - replace strict VN concrete with possible other concretes
+                                    				Block concreteBlock = (Block) tryConcrete[0];
+            		                        		int concreteMeta = (Integer) tryConcrete[1];
+                                    				
                                     				// Generate new-style concrete
                                     				for (int pedY = y-3; pedY <= y; pedY++) {
                                     					for (int rimi = 2; rimi > -3; rimi--) {
                                         					// This builds the rim around the well
-                                            				event.world.setBlock(x+(signXOffset/2*rimi), pedY,z+signZOffset, concreteBlock, townColorMeta, 2); // The one under the sign when rimi=2
-                                            				event.world.setBlock(x+signXOffset, pedY,z+(-signZOffset/2*(1+rimi)), concreteBlock, townColorMeta, 2);
-                                            				event.world.setBlock(x-(signXOffset*3/2), pedY,z+(signZOffset/2*rimi), concreteBlock, townColorMeta, 2);
-                                            				event.world.setBlock(x+(-signXOffset/2*(1+rimi)), pedY,z-(signZOffset*3/2), concreteBlock, townColorMeta, 2);
+                                            				event.world.setBlock(x+(signXOffset/2*rimi), pedY,z+signZOffset, concreteBlock, concreteMeta, 2); // The one under the sign when rimi=2
+                                            				event.world.setBlock(x+signXOffset, pedY,z+(-signZOffset/2*(1+rimi)), concreteBlock, concreteMeta, 2);
+                                            				event.world.setBlock(x-(signXOffset*3/2), pedY,z+(signZOffset/2*rimi), concreteBlock, concreteMeta, 2);
+                                            				event.world.setBlock(x+(-signXOffset/2*(1+rimi)), pedY,z-(signZOffset*3/2), concreteBlock, concreteMeta, 2);
                                         				}
                                     				}
-                                    				
-                                    				// Set glazed terracotta in well roof!
-                                    				int metaSpin = random.nextInt(4)+4;
-                                    				int metaChirality = random.nextBoolean() ? 1 : -1;
-                                    				
-                                    				event.world.setBlock(x, y+4, z, roofGlazedBlock, ((metaSpin)*4)%16+townColorMeta%4, 2);
-                                    				event.world.setBlock(x, y+4, z-(signZOffset/2), roofGlazedBlock, ((metaSpin+(metaChirality*1))*4)%16+townColorMeta%4, 2);
-                                    				event.world.setBlock(x-(signXOffset/2), y+4, z-(signZOffset/2), roofGlazedBlock, ((metaSpin+(metaChirality*2))*4)%16+townColorMeta%4, 2);
-                                    				event.world.setBlock(x-(signXOffset/2), y+4, z, roofGlazedBlock, ((metaSpin+(metaChirality*3))*4)%16+townColorMeta%4, 2);
                                     				
                                     			}
                                     			else {
@@ -428,7 +417,41 @@ public class WellDecorateEvent {
                                     				for (int pedY = y-3; pedY <= y; pedY++) {
                                     					event.world.setBlock(x+signXOffset,pedY,z+signZOffset, Blocks.stained_hardened_clay, townColorMeta, 2);	
                                     				}
-                                    			}                                        		
+                                    			}
+                                    			
+                                    			// v3.1.2 - Moved to after the concrete decoration just in case you're using different mod combos for concrete and GT
+                                    			// v3.1.2 - Allow concrete well decoration even if Village Names concrete is unavailable 
+                                    			int metaSpin = random.nextInt(4)+4; // I've got to add 4 because modulo doesn't work properly with negative numbers :P
+                                    			Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColorMeta, (metaSpin)%4);
+            		                        	
+            		    			        	// Clay base OR concrete
+                                    			if (tryGlazedTerracotta != null && GeneralConfig.concreteWell) {
+                                    				
+                                        			// Set glazed terracotta in well roof!
+                                            		
+                                    				int metaChirality = random.nextBoolean() ? 1 : -1; // Determines "rotation handedness" of blocks as they're placed around the well
+                                    				
+                                    				event.world.setBlock(
+                                    						x, y+4, z,
+                                    						(Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2);
+                                    				
+                                    				tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColorMeta, (metaSpin + metaChirality)%4 );
+                                    				event.world.setBlock(
+                                    						x, y+4, z-(signZOffset/2),
+                                    						(Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2);
+                                    				
+                                    				tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColorMeta, (metaSpin + metaChirality*2)%4 );
+                                    				event.world.setBlock(
+                                    						x-(signXOffset/2), y+4, z-(signZOffset/2),
+                                    						(Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2);
+                                    				
+                                    				tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColorMeta, (metaSpin + metaChirality*3)%4 );
+                                    				event.world.setBlock(
+                                    						x-(signXOffset/2), y+4, z,
+                                    						(Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2);
+                                        			
+                                    			}
+                                    			
                                     		}
             		    			        
                                     		// Okay now that the three components have been generated
@@ -469,7 +492,7 @@ public class WellDecorateEvent {
                                     		}
                                     		
                                     		// Put the stuff on the sign.
-                                    		if (wellKillSwitch && nameSign) event.world.setTileEntity(x+signXOffset, y+2, z+signZOffset, signContents);
+                                    		if (GeneralConfig.wellDecorations && GeneralConfig.nameSign) event.world.setTileEntity(x+signXOffset, y+2, z+signZOffset, signContents);
                                     		
                                     		// Make the data bundle to save to NBT
                                     		NBTTagList nbttaglist = new NBTTagList();
@@ -507,7 +530,7 @@ public class WellDecorateEvent {
                                 		
                                 	}
                                 	
-                                	if (wellKillSwitch && wellSlabs) {
+                                	if (GeneralConfig.wellDecorations && GeneralConfig.wellSlabs) {
                                     	field = listOpaque.remove(1);
                                         event.world.setBlock(field[0], field[1] + 1, field[2], Blocks.stone_slab);
                                         field = listOpaque.remove(2);

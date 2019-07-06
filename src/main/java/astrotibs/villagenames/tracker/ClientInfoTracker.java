@@ -206,7 +206,7 @@ public class ClientInfoTracker
         if (
         		entity instanceof EntityVillager
         		&& ((EntityVillager)entity).getProfession() >=0
-        		&& ((EntityVillager)entity).getProfession() <=5
+        		//&& ((EntityVillager)entity).getProfession() <=5 Removed in v3.2 to ensure syncing
         		) {
             ClientInfoTracker.syncModernVillagerMessage((EntityVillager)entity);
         }

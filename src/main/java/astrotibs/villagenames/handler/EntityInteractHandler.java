@@ -46,6 +46,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureData;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -85,7 +86,7 @@ public class EntityInteractHandler {
 	public void onEntityInteract(EntityInteractEvent event) {
 		
 		// This was used to verify server-client syncing of Careers
-		/*
+		
 		if (GeneralConfig.debugMessages && event.target instanceof EntityVillager)
 		{
 			EntityVillager villager = (EntityVillager)event.target;
@@ -118,7 +119,7 @@ public class EntityInteractHandler {
 				LogHelper.info("SYNC CHECKING Profession: " + ezv.getProfession() + ", Career: " + career + ", BiomeType: " + ezv.getBiomeType() + ", ProfessionLevel: " + profLevel);
 			}
 		}
-		*/
+		
 		
 		// summon Zombie ~ ~ ~ {IsVillager:1}
 		

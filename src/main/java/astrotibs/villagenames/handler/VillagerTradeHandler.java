@@ -15,6 +15,7 @@ import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -1797,19 +1798,19 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							{
 								// Clay to Emerald
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.clay_ball, FunctionsVN.modernTradeCostBySlot(10, 1, nextSlotToFill, 3) ),
+										new ItemStack( Items.clay_ball, FunctionsVN.modernTradeCostBySlot(10, 1, nextSlotToFill, 1) ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								// Emerald to Brick
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 1) ),
 										new ItemStack( Items.brick, 10 ) ) );
 								// Stone to Emerald
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Item.getItemFromBlock(Blocks.stone), FunctionsVN.modernTradeCostBySlot(20, 1, nextSlotToFill, 3), 0 ),
+										new ItemStack( Item.getItemFromBlock(Blocks.stone), FunctionsVN.modernTradeCostBySlot(20, 1, nextSlotToFill, 2), 0 ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								// Emerald to Chiseled Stone Brick
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
 										new ItemStack( Item.getItemFromBlock(Blocks.stonebrick), 4, 3 ) ) );
 							}
 							
@@ -1817,31 +1818,33 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 						// Level 4: Expert
 						if (nextSlotToFill == 4)
 						{
+							
+							// Emerald to Glazed Terracotta
 							for (int i=0; i<2 ; i++) {
-								// Emerald to Glazed Terracotta
-								if (GeneralConfig.addConcrete)
+								
+								color1 = random.nextInt(16);
+								Object[] glazedTerracottaObject = ModObjects.chooseModGlazedTerracotta(color1, 0);
+								
+								if (glazedTerracottaObject[0] != null)
 								{
-									color1 = random.nextInt(16);
 									recipeList.add(new MerchantRecipe(
 											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
 											new ItemStack( Item.getItemFromBlock(
-													color1 < 4 ? ModBlocksVN.glazedTerracotta :
-													color1 < 8 ? ModBlocksVN.glazedTerracotta2 :
-													color1 < 12 ? ModBlocksVN.glazedTerracotta3 :
-																	ModBlocksVN.glazedTerracotta4
-													), 1, color1%4 ) ) );
-									// Possible second Emerald to Terracotta
-									color2 = random.nextInt(16);
-									if (color2 != color1) {
-										recipeList.add(new MerchantRecipe(
-												new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
-												new ItemStack( Item.getItemFromBlock(
-														color2 < 4 ? ModBlocksVN.glazedTerracotta :
-														color2 < 8 ? ModBlocksVN.glazedTerracotta2 :
-														color2 < 12 ? ModBlocksVN.glazedTerracotta3 :
-																		ModBlocksVN.glazedTerracotta4
-														), 1, color2%4 ) ) );
-									}
+													(Block)glazedTerracottaObject[0]
+													), 1, (Integer)glazedTerracottaObject[1] ) ) );
+								}
+								
+								
+								// Possible second Emerald to Terracotta
+								color2 = random.nextInt(16);
+								glazedTerracottaObject = ModObjects.chooseModGlazedTerracotta(color2, 0);
+								
+								if (color2 != color1 && glazedTerracottaObject[0] != null) {
+									recipeList.add(new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Item.getItemFromBlock(
+													(Block)glazedTerracottaObject[0]
+													), 1, (Integer)glazedTerracottaObject[1] ) ) );
 								}
 							}
 

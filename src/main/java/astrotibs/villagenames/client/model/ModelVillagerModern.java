@@ -60,33 +60,6 @@ public class ModelVillagerModern extends ModelVillager
 		this.villagerHatRimLow.cubeList.add(new ModelPlane(this.villagerHatRimLow, rimLowTextureOffsetX, rimLowTextureOffsetY, -8F, -5F, -8F, 16, 0, 16, 0.0F));
 		this.villagerHatRimLow.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 		
-		/*
-		// Copied over from ModelVillager: used to "puff out" additional layers
-        this.villagerHead = (new ModelRenderer(this)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.villagerHead.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
-        this.villagerHead.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale);
-        this.villagerNose = (new ModelRenderer(this)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.villagerNose.setRotationPoint(0.0F, noseY - 2.0F, 0.0F);
-        this.villagerNose.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, headScale);
-        this.villagerHead.addChild(this.villagerNose);
-        this.villagerBody = (new ModelRenderer(this)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.villagerBody.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
-        this.villagerBody.setTextureOffset(16, 20).addBox(-4.0F, 0.0F, -3.0F, 8, 12, 6, headScale);
-        this.villagerBody.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, headScale + 0.5F);
-        this.villagerArms = (new ModelRenderer(this)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.villagerArms.setRotationPoint(0.0F, 0.0F + noseY + 2.0F, 0.0F);
-        this.villagerArms.setTextureOffset(44, 22).addBox(-8.0F, -2.0F, -2.0F, 4, 8, 4, headScale);
-        this.villagerArms.setTextureOffset(44, 22).addBox(4.0F, -2.0F, -2.0F, 4, 8, 4, headScale);
-        this.villagerArms.setTextureOffset(40, 38).addBox(-4.0F, 2.0F, -2.0F, 8, 4, 4, headScale);
-        this.rightVillagerLeg = (new ModelRenderer(this, 0, 22)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.rightVillagerLeg.setRotationPoint(-2.0F, 12.0F + noseY, 0.0F);
-        this.rightVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, headScale);
-        this.leftVillagerLeg = (new ModelRenderer(this, 0, 22)).setTextureSize(textureFileWidth, textureFileHeight);
-        this.leftVillagerLeg.mirror = true;
-        this.leftVillagerLeg.setRotationPoint(2.0F, 12.0F + noseY, 0.0F);
-        this.leftVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, headScale);
-		*/
-		
 	}
 
 	@Override
@@ -109,19 +82,21 @@ public class ModelVillagerModern extends ModelVillager
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		
-		if (
-				entity instanceof EntityVillager
-				// Below conditions specify only vanilla villagers
-				&& ((EntityVillager)entity).getProfession() >= 0
-				&& ( // Added condition on 3.1.1 to allow villager cowls
-						((EntityVillager)entity).getProfession() <= 5
-						|| GeneralConfig.moddedVillagerHeadwear
-					)
-			)
+		// Changed in v3.2 to accommodate config-specifiable professions
+		int prof = ((EntityVillager)entity).getProfession();
+		
+		if (entity instanceof EntityVillager)
 		{
+			if (prof > 5 && !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof)) // This is a non-vanilla villager profession and is not whitelisted
+			{
+				// Is in the blacklist, or headwear is turned off at large
+				if (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) || !GeneralConfig.moddedVillagerHeadwear) {return;}
+			}
+			
 			this.villagerHeadwear.render(f5);
 			this.villagerHatRimHigh.render(f5);
 			this.villagerHatRimLow.render(f5);
 		}
 	}
+	
 }

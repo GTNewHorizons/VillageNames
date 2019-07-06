@@ -1,5 +1,6 @@
 package astrotibs.villagenames.integration;
 
+import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
 import net.minecraft.block.Block;
@@ -47,9 +48,10 @@ public class ModObjects {
 	public static final String PMSheepmanSmithUnlocalized = "entity.primitivemobs.SheepmanSmith.name";
 	
 	
-	// --------------------------------------------- //
-	// --- Blocks and items reference for trades --- //
-	// --------------------------------------------- //
+	// ------------------------------------------------------------ //
+	// --- Blocks and items reference for trades and generation --- //
+	// ------------------------------------------------------------ //
+	
 	
 	// --- Blocks --- //
 	
@@ -65,6 +67,44 @@ public class ModObjects {
 	public static final String stoneEF = "etfuturum:stone";
 	public static final String stoneGS = "ganyssurface:18Stones";
 	public static final String stoneUTD = "uptodate:stone";
+	
+	// Concrete
+	public static final String concreteUTD = "uptodate:concrete";
+	public static final String concreteWhiteEF = "etfuturum:concrete_white";
+	public static final String concreteOrangeEF = "etfuturum:concrete_orange";
+	public static final String concreteMagentaEF = "etfuturum:concrete_magenta";
+	public static final String concreteLightBlueEF = "etfuturum:concrete_lightBlue";
+	public static final String concreteYellowEF = "etfuturum:concrete_yellow";
+	public static final String concreteLimeEF = "etfuturum:concrete_lime";
+	public static final String concretePinkEF = "etfuturum:concrete_pink";
+	public static final String concreteGrayEF = "etfuturum:concrete_gray";
+	public static final String concreteSilverEF = "etfuturum:concrete_silver";
+	public static final String concreteCyanEF = "etfuturum:concrete_cyan";
+	public static final String concretePurpleEF = "etfuturum:concrete_purple";
+	public static final String concreteBlueEF = "etfuturum:concrete_blue";
+	public static final String concreteBrownEF = "etfuturum:concrete_brown";
+	public static final String concreteGreenEF = "etfuturum:concrete_green";
+	public static final String concreteRedEF = "etfuturum:concrete_red";
+	public static final String concreteBlackEF = "etfuturum:concrete_black";
+	
+	// Glazed Terracotta
+	public static final String glazedTerracottaWhiteUTD = "uptodate:glazed_terracotta_white";
+	public static final String glazedTerracottaOrangeUTD = "uptodate:glazed_terracotta_orange";
+	public static final String glazedTerracottaMagentaUTD = "uptodate:glazed_terracotta_magenta";
+	public static final String glazedTerracottaLightBlueUTD = "uptodate:glazed_terracotta_light_blue";
+	public static final String glazedTerracottaYellowUTD = "uptodate:glazed_terracotta_yellow";
+	public static final String glazedTerracottaLimeUTD = "uptodate:glazed_terracotta_lime";
+	public static final String glazedTerracottaPinkUTD = "uptodate:glazed_terracotta_pink";
+	public static final String glazedTerracottaGrayUTD = "uptodate:glazed_terracotta_gray";
+	public static final String glazedTerracottaLightGrayUTD = "uptodate:glazed_terracotta_light_gray";
+	public static final String glazedTerracottaCyanUTD = "uptodate:glazed_terracotta_cyan";
+	public static final String glazedTerracottaPurpleUTD = "uptodate:glazed_terracotta_purple";
+	public static final String glazedTerracottaBlueUTD = "uptodate:glazed_terracotta_blue";
+	public static final String glazedTerracottaBrownUTD = "uptodate:glazed_terracotta_brown";
+	public static final String glazedTerracottaGreenUTD = "uptodate:glazed_terracotta_green";
+	public static final String glazedTerracottaRedUTD = "uptodate:glazed_terracotta_red";
+	public static final String glazedTerracottaBlackUTD = "uptodate:glazed_terracotta_black";
+	
 	
 	// --- Items --- //
 	
@@ -108,6 +148,109 @@ public class ModObjects {
 	// --------------------------- //
 	
 	
+	
+	// Concrete - added in v3.1.2
+	public static Object[] chooseModConcrete(int meta)
+	{
+		String[] modprioritylist = GeneralConfig.modConcrete;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+
+			if (mod.toLowerCase().equals("villagenames") && GeneralConfig.addConcrete)
+			{
+				return new Object[]{ModBlocksVN.blockConcrete, new Integer(meta)};
+			}
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.concreteUTD);
+				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (meta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.concreteWhiteEF); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.concreteOrangeEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.concreteMagentaEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.concreteLightBlueEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.concreteYellowEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.concreteLimeEF); break;
+					case 6: modblock = Block.getBlockFromName(ModObjects.concretePinkEF); break;
+					case 7: modblock = Block.getBlockFromName(ModObjects.concreteGrayEF); break;
+					case 8: modblock = Block.getBlockFromName(ModObjects.concreteSilverEF); break;
+					case 9: modblock = Block.getBlockFromName(ModObjects.concreteCyanEF); break;
+					case 10: modblock = Block.getBlockFromName(ModObjects.concretePurpleEF); break;
+					case 11: modblock = Block.getBlockFromName(ModObjects.concreteBlueEF); break;
+					case 12: modblock = Block.getBlockFromName(ModObjects.concreteBrownEF); break;
+					case 13: modblock = Block.getBlockFromName(ModObjects.concreteGreenEF); break;
+					case 14: modblock = Block.getBlockFromName(ModObjects.concreteRedEF); break;
+					case 15: modblock = Block.getBlockFromName(ModObjects.concreteBlackEF); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, new Integer(0)};}
+			}
+		}
+		return null;
+	}
+	
+	// Glazed Terracotta - added in v3.1.2
+	public static Object[] chooseModGlazedTerracotta(int colorMeta, int orientationMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modGlazedTerracotta;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+
+			if (mod.toLowerCase().equals("villagenames") && GeneralConfig.addConcrete)
+			{
+				switch (colorMeta/4)
+				{
+					case 0: modblock = ModBlocksVN.glazedTerracotta; break;
+					case 1: modblock = ModBlocksVN.glazedTerracotta2; break;
+					case 2: modblock = ModBlocksVN.glazedTerracotta3; break;
+					case 3: modblock = ModBlocksVN.glazedTerracotta4; break;
+				}
+				
+				// The Village Names schematic is:
+				// blockType = colorMeta/4 (as seen above)
+				// color metas increment by 1, but cycle every 4
+				// Rotations increment by 4
+				
+				// Thus:
+				int convolvedMeta = colorMeta%4 + 4*orientationMeta;
+				
+				return new Object[]{modblock, new Integer(convolvedMeta)};
+			}
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (colorMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaWhiteUTD); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaOrangeUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaMagentaUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLightBlueUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaYellowUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLimeUTD); break;
+					case 6: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaPinkUTD); break;
+					case 7: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaGrayUTD); break;
+					case 8: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLightGrayUTD); break;
+					case 9: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaCyanUTD); break;
+					case 10: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaPurpleUTD); break;
+					case 11: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlueUTD); break;
+					case 12: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBrownUTD); break;
+					case 13: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaGreenUTD); break;
+					case 14: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaRedUTD); break;
+					case 15: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlackUTD); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};}
+			}
+		}
+		return null;
+	}
 	
 	
 	// Banner
@@ -266,7 +409,6 @@ public class ModObjects {
 			}
 		}
 		return null;
-		
 	}
 	
 	// Diorite

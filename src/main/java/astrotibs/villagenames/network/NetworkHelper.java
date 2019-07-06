@@ -69,7 +69,7 @@ public class NetworkHelper
     				//&& (
 					message.getEntityID() > 0
 					&& message.getProfession() >= 0
-					&& message.getProfession() <= 5
+					//&& message.getProfession() <= 5 // v3.2 - Deactivated to allow modded modular villager skins
 					//&& message.getCareer() > 0 // Deactivated to allow Nitwit syncing
     				//		)
             		) { 

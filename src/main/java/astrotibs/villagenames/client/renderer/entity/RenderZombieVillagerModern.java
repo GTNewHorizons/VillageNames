@@ -1,5 +1,6 @@
 package astrotibs.villagenames.client.renderer.entity;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -387,79 +388,141 @@ public class RenderZombieVillagerModern extends RenderBiped
         int biometype = MathHelper.clamp_int(ezv.getBiomeType(), 0, biomeTypeTextures.length-1);
         int career = GeneralConfig.villagerCareers ? ezv.getCareer() : -1;
         int proflevel = MathHelper.clamp_int(ezv.getProfessionLevel(), 0, profLevelTextures.length-1);
+
         
-        // Use the profession and career values to zero in on the value stored in the careerTextures array
-        int careerIndex = 0;
-        switch (ezv.getProfession())
-        {
-	    	case 0: // Farmer type
-	    		switch (career)
-	    		{
-		    		default:
-		    		case 1: careerIndex = 0; break;
-		    		case 2: careerIndex = 1; break;
-		    		case 3: careerIndex = 2; break;
-		    		case 4: careerIndex = 3; break;
-	    		}
-	    		break;
-	    		
-	    	case 1: // Librarian type
-	    		switch (career)
-	    		{
-		    		default:
-		    		case 1: careerIndex = 4; break;
-		    		case 2: careerIndex = 5; break;
-	    		}
-	    		break;
-	    		
-	    	case 2: // Priest type
-	    		switch (career)
-	    		{
-		    		default:
-		    		case 1: careerIndex = 6; break;
-	    		}
-	    		break;
-	    		
-	    	case 3: // Smith type
-	    		switch (career)
-	    		{
-		    		case 1: careerIndex = 7; break;
-		    		case 2: careerIndex = 8; break;
-		    		default:
-		    		case 3: careerIndex = 9; break;
-		    		case 4: careerIndex = 10; break;
-	    		}
-	    		break;
-	    		
-	    	case 4: // Butcher type
-	    		switch (career)
-	    		{
-		    		default:
-		    		case 1: careerIndex = 11; break;
-		    		case 2: careerIndex = 12; break;
-	    		}
-	    		break;
-	    		
-	    	case 5: // Nitwit type
-	    		switch (career)
-	    		{
-		    		default:
-		    		case 1: careerIndex = 13; break;
-	    		}
-	    		break;
-	    		
-	    	default: // No profession skin
-        }
+        // Re-arranged in v3.2
         
-        // Set the biome type
+        // ---------------------------- //
+        // --- PART 0: set the skin --- //
+        // ---------------------------- //
+        
+        // TODO
+        
+        
+        // ---------------------------------- //
+        // --- PART 1: set the biome type --- //
+        // ---------------------------------- //
+        
         layeredTextureAddressArray[1] = biomeTypeTextures[biometype][0];
         skinComboHashKey = skinComboHashKey + biomeTypeTextures[biometype][1];
         
-        // Set the career
-        layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
-        skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
         
-        // Set the profession level
+        // ----------------------------- //
+        // --- PART 2: set the career--- //
+        // ----------------------------- //
+        
+        int indexofmodprof = GeneralConfig.professionID_a.indexOf(ezv.getProfession());
+
+        if ( 
+        		ezv.getProfession() > 5 // Is non-vanilla
+        		&& indexofmodprof > -1 // Has a skin asset mapping
+        		//&& !((String) (moddedVillagerCareerSkins.get("zombieCareerAsset")).get(indexofmodprof)).equals("") ) // That mapping isn't blank
+        		)
+        {
+        	// This is a modded profession ID with a supported skin -- possibly.
+        	
+        	// If there is no zombie or non-zombie version, just default the asset to the Nitwit style.
+        	ResourceLocation modCareerSkin = zombieVillagerProfessionNitwit;
+        	String profRootName = "nit"; 
+        	
+        	// First check if there is an explicit zombie profession texture.
+        	profRootName = ((String) (GeneralConfig.zombieCareerAsset_a).get(indexofmodprof));
+        	
+        	if (profRootName.equals(""))
+        	{
+        		// There is none, so check the non-zombie version
+        		profRootName = ((String) (GeneralConfig.careerAsset_a).get(indexofmodprof));
+	        	
+        		if (!profRootName.equals(""))
+        		{
+        			// A non-zombie texture was found.
+                	modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/"+profRootName+".png");
+        		}
+        	}
+        	else
+        	{
+        		// A zombie texture was found.
+        		modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/"+profRootName+".png");
+        	}
+        	
+            layeredTextureAddressArray[2] = modCareerSkin.toString();
+            skinComboHashKey = skinComboHashKey + "_" + profRootName;
+        }
+        else // This is vanilla skin or is otherwise unsupported
+        {
+        	// Use the profession and career values to zero in on the value stored in the careerTextures array
+            int careerIndex = 0;
+            switch (ezv.getProfession())
+            {
+    	    	case 0: // Farmer type
+    	    		switch (career)
+    	    		{
+    		    		default:
+    		    		case 1: careerIndex = 0; break;
+    		    		case 2: careerIndex = 1; break;
+    		    		case 3: careerIndex = 2; break;
+    		    		case 4: careerIndex = 3; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	case 1: // Librarian type
+    	    		switch (career)
+    	    		{
+    		    		default:
+    		    		case 1: careerIndex = 4; break;
+    		    		case 2: careerIndex = 5; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	case 2: // Priest type
+    	    		switch (career)
+    	    		{
+    		    		default:
+    		    		case 1: careerIndex = 6; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	case 3: // Smith type
+    	    		switch (career)
+    	    		{
+    		    		case 1: careerIndex = 7; break;
+    		    		case 2: careerIndex = 8; break;
+    		    		default:
+    		    		case 3: careerIndex = 9; break;
+    		    		case 4: careerIndex = 10; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	case 4: // Butcher type
+    	    		switch (career)
+    	    		{
+    		    		default:
+    		    		case 1: careerIndex = 11; break;
+    		    		case 2: careerIndex = 12; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	case 5: // Nitwit type
+    	    		switch (career)
+    	    		{
+    		    		default:
+    		    		case 1: careerIndex = 13; break;
+    	    		}
+    	    		break;
+    	    		
+    	    	default: // No profession skin
+            }
+            
+            // Set the career
+            layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
+            skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+        }
+
+        
+        // ---------------------------------------- //
+        // --- PART 3: set the profession level --- //
+        // ---------------------------------------- //
+        
         layeredTextureAddressArray[3] = null;//profLevelTextures[proflevel][0]; // Left off for now: no need to see prof level
         skinComboHashKey = skinComboHashKey + "_" + profLevelTextures[proflevel][1];
         

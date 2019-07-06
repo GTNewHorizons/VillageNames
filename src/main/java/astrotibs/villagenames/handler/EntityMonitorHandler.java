@@ -1254,19 +1254,6 @@ public class EntityMonitorHandler
 							}
 						}
 						
-						if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
-						
-						// Added in v3.1
-						if ((villager.ticksExisted + villager.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
-								{
-							ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
-							// Sends a ping to everyone within 80 blocks
-							NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
-							VillageNames.VNNetworkWrapper.sendToAllAround(
-									new MessageModernVillagerSkin(villager.getEntityId(), profession, career, ev.getBiomeType(), professionLevel),
-									targetPoint);
-								}
-						
 						break;
                 	}
 					
@@ -1284,6 +1271,19 @@ public class EntityMonitorHandler
 				//buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
 			}
         	
+			// v3.2 moved outside trade monitor so that non-vanilla can be sync-checked
+			if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
+						
+			if ((villager.ticksExisted + villager.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
+					{
+				ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
+				// Sends a ping to everyone within 80 blocks
+				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
+				VillageNames.VNNetworkWrapper.sendToAllAround(
+						new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel),
+						targetPoint);
+					}
+			
         }
         
         // Monitor the player for purposes of the village reputations achievements
