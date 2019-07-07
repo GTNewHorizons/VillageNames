@@ -121,11 +121,21 @@ public class EventTracker
         		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ),
         		villager.getCustomNameTag(),
         		new Object[] {
+        				
         				villager.getProfession(),
+        				
+        				// Changed in v3.2 to actually use ieep
+        				(GeneralConfig.villagerCareers) ? ieep.getCareer() : 0,
+						villager.isChild(),
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1, // Added in v3.1
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1 // Added in v3.1
+        						
+        				/*
         				(GeneralConfig.villagerCareers) ? (ExtendedVillager.get(villager)).getCareer() : 0,
         				villager.isChild(),
         				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getBiomeType() : -1, // Added in v3.1
         				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getProfessionLevel() : -1 // Added in v3.1
+        				*/
         				}
         		);
     }
@@ -145,7 +155,7 @@ public class EventTracker
         		);
     }
     
-    public EventTracker(EntityZombie zombie, ExtendedZombieVillager properties) {
+    public EventTracker(EntityZombie zombie, ExtendedZombieVillager ieep) {
         //this(zombie.getEntityId(), zombie.getPosition(1.0F), zombie.getCustomNameTag(), properties);
     	this(
     			zombie.getEntityId(),
@@ -155,11 +165,11 @@ public class EventTracker
     			zombie.getCustomNameTag(), 
     			 // Added Object structure in v3.1
     			new Object[] {
-    					properties.getProfession(),
-        				(GeneralConfig.villagerCareers) ? (properties).getCareer() : 0,
+    					ieep.getProfession(),
+        				(GeneralConfig.villagerCareers) ? (ieep).getCareer() : 0,
         				zombie.isChild(),
-        				(GeneralConfig.modernVillagerSkins) ? properties.getBiomeType() : -1,
-        				(GeneralConfig.modernVillagerSkins) ? properties.getProfessionLevel() : -1
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1,
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1
         				}
     			);
     }

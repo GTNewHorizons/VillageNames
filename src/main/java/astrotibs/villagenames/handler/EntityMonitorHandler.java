@@ -1273,9 +1273,27 @@ public class EntityMonitorHandler
         	
 			// v3.2 moved outside trade monitor so that non-vanilla can be sync-checked
 			if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
-						
-			if ((villager.ticksExisted + villager.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
+			
+			if (
+					(villager.ticksExisted + villager.getEntityId())%5 == 0 // Ticks intermittently, modulated so villagers don't deliberately sync.
+					&& ev.getProfession() >= 0 && (ev.getProfession() <=5 || GeneralConfig.professionID_a.indexOf(ev.getProfession())>-1) // This villager ID is specified in the configs
+					)
 					{
+				
+				// Initialize the buying list so that the badge displays
+				MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
+				if (buyingList == null)
+				{
+					try {
+						Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
+								EntityVillager.class, villager, new String[]{"addDefaultEquipmentAndRecipies", "func_70950_c"},
+								Integer.TYPE
+								);
+						addDefaultEquipmentAndRecipies_m.invoke(villager, 1);
+						}
+            		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");}
+				}
+				
 				ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
 				// Sends a ping to everyone within 80 blocks
 				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
@@ -1283,7 +1301,6 @@ public class EntityMonitorHandler
 						new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel),
 						targetPoint);
 					}
-			
         }
         
         // Monitor the player for purposes of the village reputations achievements

@@ -2,11 +2,15 @@ package astrotibs.villagenames.client.model;
 
 import org.lwjgl.opengl.GL11;
 
+import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.ieep.ExtendedZombieVillager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityVillager;
 
 /**
  * Copied from Et Futurum
@@ -123,27 +127,41 @@ public class ModelZombieVillagerModern extends ModelZombie {
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		
-		// Fixed in v3.1.1 - Child hats and rims render properly
-		// summon Zombie ~ ~ ~ {IsVillager:1, IsBaby:1}
-        if (this.isChild)
-        {
-            float f6 = 1.4F; // Scaledown factor
-            
-            GL11.glPushMatrix();
-            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
-            GL11.glTranslatef(0.0F, 16.0F * f5, 0.0F);
-            
-            this.zombieVillagerHeadwear.render(f5);
-    		this.zombieVillagerHatRimHigh.render(f5);
-    		this.zombieVillagerHatRimLow.render(f5);
-            
-            GL11.glPopMatrix();
-        }
-        else
-        {
-            this.zombieVillagerHeadwear.render(f5);
-    		this.zombieVillagerHatRimHigh.render(f5);
-    		this.zombieVillagerHatRimLow.render(f5);
-        }
+		if (entity instanceof EntityZombie && ((EntityZombie)entity).isVillager())
+		{
+			// Changed in v3.2 to accommodate config-specifiable professions
+			final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(((EntityZombie)entity));
+			int prof = ezv.getProfession();
+			
+			if (prof > 5 && !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof)) // This is a non-vanilla villager profession and is not whitelisted
+			{
+				// Is in the blacklist, or headwear is turned off at large
+				if (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) || !GeneralConfig.moddedVillagerHeadwear) {return;}
+			}
+			
+			// Fixed in v3.1.1 - Child hats and rims render properly
+			// summon Zombie ~ ~ ~ {IsVillager:1, IsBaby:1}
+	        if (this.isChild)
+	        {
+	            float f6 = 1.4F; // Scaledown factor
+	            
+	            GL11.glPushMatrix();
+	            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+	            GL11.glTranslatef(0.0F, 16.0F * f5, 0.0F);
+	            
+	            this.zombieVillagerHeadwear.render(f5);
+	    		this.zombieVillagerHatRimHigh.render(f5);
+	    		this.zombieVillagerHatRimLow.render(f5);
+	            
+	            GL11.glPopMatrix();
+	        }
+	        else
+	        {
+	            this.zombieVillagerHeadwear.render(f5);
+	    		this.zombieVillagerHatRimHigh.render(f5);
+	    		this.zombieVillagerHatRimLow.render(f5);
+	        }
+		}
+		
 	}
 }

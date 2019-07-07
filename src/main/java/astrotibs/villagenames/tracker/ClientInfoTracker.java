@@ -229,7 +229,7 @@ public class ClientInfoTracker
             properties.setCareer(msg.getCareer());
             properties.setBiomeType(msg.getBiomeType());
             properties.setProfessionLevel(msg.getProfessionLevel());;
-        } 
+        }
     }
     
     

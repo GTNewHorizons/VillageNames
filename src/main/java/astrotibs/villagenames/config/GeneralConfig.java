@@ -151,7 +151,14 @@ public class GeneralConfig {
 	    moddedVillagerHeadwear = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: renders the headwear layer for non-vanilla villager professions, if one exists.");
 	    
 	    // Added in v3.2
-	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{},
+	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{
+				"14", // Growthcraft Apiarist
+				"80", // Forestry Apiarist
+				"-190", // Thaumcraft Wizard
+				"-191", // Thaumcraft Banker
+				"-6156", // Open Blocks Music Merchant
+				"7766", // Growthcraft Community Edition Apiarist
+	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers. A normal value will be whitelisted: it will display that villager's headwear layer even if Modded Villager Headwear is false. "
 	    		+ "Adding a negative sign in front of the ID int will blacklist the profession so that its headwear layer never renders.");
 	    
@@ -192,7 +199,7 @@ public class GeneralConfig {
 	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers to render in the modular skin style. Format is: careerAsset|zombieCareerAsset|professionID\n"+
 	    		"careerAsset: career skin png to be overlaid onto the villager, located in assets\\"+Reference.MOD_ID.toLowerCase()+"\\textures\\entity\\villager\\profession\n"+
-	    				"The default values are all the ones available in "+Reference.MOD_NAME+". You can access custom values with a resourcepack.\n"
+	    				"The default values are all available in "+Reference.MOD_NAME+". You can access custom values with a resourcepack.\n"
 	    						+ "zombieCareerAsset: a zombie career png, located in the corresponding zombie_villager directory. You may leave this value blank, in which case it will use the non-zombie career overlay.\n"
 	    						+ "professionID: the ID associated with the mod profession.");
 	    
@@ -795,8 +802,8 @@ public class GeneralConfig {
 			
 			// Place entries into variables
 			try {careerAsset = splitEntry[0].trim();}                       catch (Exception e) {}
-			try {zombieCareerAsset = splitEntry[1].trim();} catch (Exception e) {}
-			try {professionID = Integer.parseInt(splitEntry[2].trim());}     catch (Exception e) {}
+			try {zombieCareerAsset = splitEntry[1].trim();} 				catch (Exception e) {}
+			try {professionID = Integer.parseInt(splitEntry[2].trim());}    catch (Exception e) {}
 			
 			if(!careerAsset.equals("")) { // Something was actually assigned in the try block
 				careerAsset_a.add(careerAsset);

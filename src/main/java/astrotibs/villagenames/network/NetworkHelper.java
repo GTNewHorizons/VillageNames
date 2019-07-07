@@ -99,7 +99,7 @@ public class NetworkHelper
      */
     public static void sendZombieVillagerProfessionMessage(int zombieId, ExtendedZombieVillager properties, EntityPlayer target) {
         if (
-        		( GeneralConfig.villagerCareers && (zombieId > 0 && properties != null && properties.getProfession() >= 0 && properties.getCareer() > 0) )
+        		( GeneralConfig.villagerCareers && (zombieId > 0 && properties != null && properties.getProfession() >= 0 && properties.getCareer() >= 0) ) // Career 0 condition v3.2 to allow non-standard profs
         		|| ( zombieId > 0 && properties != null && properties.getProfession() >= 0 )
         		) 
         {
