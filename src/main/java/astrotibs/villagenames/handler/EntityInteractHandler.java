@@ -46,7 +46,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureData;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -86,7 +85,7 @@ public class EntityInteractHandler {
 	public void onEntityInteract(EntityInteractEvent event) {
 		
 		// This was used to verify server-client syncing of Careers
-		
+		/*
 		if (GeneralConfig.debugMessages && event.target instanceof EntityVillager)
 		{
 			EntityVillager villager = (EntityVillager)event.target;
@@ -103,6 +102,7 @@ public class EntityInteractHandler {
 						+ ", Career: " + (ExtendedVillager.get(villager)).getCareer()
 						+ ", BiomeType: " + (ExtendedVillager.get(villager)).getBiomeType()
 						+ ", ProfessionLevel: " + (ExtendedVillager.get(villager)).getProfessionLevel()
+						+ ", SkinTone: " + (ExtendedVillager.get(villager)).getSkinTone()
 						);
 			}
 		}
@@ -116,10 +116,12 @@ public class EntityInteractHandler {
 			{
 				int career = ezv.getCareer();
 				int profLevel = ezv.getProfessionLevel();
-				LogHelper.info("SYNC CHECKING Profession: " + ezv.getProfession() + ", Career: " + career + ", BiomeType: " + ezv.getBiomeType() + ", ProfessionLevel: " + profLevel);
+				LogHelper.info("SYNC CHECKING Profession: " + ezv.getProfession() + ", Career: " + career + ", BiomeType: " + ezv.getBiomeType() + ", ProfessionLevel: " + profLevel
+						+ ", SkinTone: " + ezv.getSkinTone() //v3.2
+						);
 			}
 		}
-		
+		*/
 		
 		// summon Zombie ~ ~ ~ {IsVillager:1}
 		
@@ -250,7 +252,10 @@ public class EntityInteractHandler {
 										: "")
 								+ (GeneralConfig.modernVillagerSkins ? ", Profession Level: " + (ExtendedVillager.get((EntityVillager) target)).getProfessionLevel() // Added in v3.1
 										: "")
-								+ ", Mapped profession: " + villagerMappedProfession);
+								+ ", Mapped profession: " + villagerMappedProfession
+								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedVillager.get((EntityVillager) target)).getSkinTone() // Added in v3.2
+										: "")
+								);
 					}
 					catch (Exception e) {} // This is some kind of non-standard zombie
 					
@@ -265,6 +270,8 @@ public class EntityInteractHandler {
 								+ (GeneralConfig.modernVillagerSkins ? ", BiomeType: " + (ExtendedZombieVillager.get((EntityZombie) target)).getBiomeType() // Added in v3.1
 										: "")
 								+ (GeneralConfig.modernVillagerSkins ? ", Profession Level: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfessionLevel() // Added in v3.1
+										: "")
+								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedZombieVillager.get((EntityZombie) target)).getSkinTone() // Added in v3.2
 										: "")
 								);
 						}

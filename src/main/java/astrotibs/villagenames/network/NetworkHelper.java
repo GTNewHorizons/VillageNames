@@ -36,21 +36,22 @@ public class NetworkHelper
 	 * Server -> Client 
 	 */
 	// Deployment
-    public static void sendModernVillagerSkinMessage(int villagerID, ExtendedVillager properties, EntityPlayer target) {
+    public static void sendModernVillagerSkinMessage(int villagerID, ExtendedVillager ev, EntityPlayer target) {
         if (
 				GeneralConfig.villagerCareers
 				&& (
 						villagerID > 0
-						&& properties != null
-						&& properties.getCareer() > 0)
+						&& ev != null
+						&& ev.getCareer() > 0)
         		) 
         {
             MessageModernVillagerSkin message = new MessageModernVillagerSkin(
             		villagerID,
-            		properties.getProfession(),
-            		properties.getCareer(),
-            		properties.getBiomeType(), // Updated in v3.1
-            		properties.getProfessionLevel() // Updated in v3.1
+            		ev.getProfession(),
+            		ev.getCareer(),
+            		ev.getBiomeType(), // Updated in v3.1
+            		ev.getProfessionLevel(), // Updated in v3.1
+            		ev.getSkinTone()
             		);
             
             // Sends a message to the player, with the zombie extra info
@@ -108,7 +109,8 @@ public class NetworkHelper
             		properties.getProfession(),
             		properties.getCareer(),
             		properties.getBiomeType(), // Updated in v3.1
-            		properties.getProfessionLevel() // Updated in v3.1
+            		properties.getProfessionLevel(), // Updated in v3.1
+            		properties.getSkinTone() // v3.2
             		);
             if (GeneralConfig.debugMessages) { // Debug
             	//LogHelper.info("** Sending Message: Zombie Profession **");

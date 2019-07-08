@@ -1,6 +1,5 @@
 package astrotibs.villagenames.client.renderer.entity;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -388,7 +387,7 @@ public class RenderZombieVillagerModern extends RenderBiped
         int biometype = MathHelper.clamp_int(ezv.getBiomeType(), 0, biomeTypeTextures.length-1);
         int career = GeneralConfig.villagerCareers ? ezv.getCareer() : -1;
         int proflevel = MathHelper.clamp_int(ezv.getProfessionLevel(), 0, profLevelTextures.length-1);
-
+        
         
         // Re-arranged in v3.2
         
@@ -396,7 +395,7 @@ public class RenderZombieVillagerModern extends RenderBiped
         // --- PART 0: set the skin --- //
         // ---------------------------- //
         
-        // TODO
+        // TODO - Maybe I'll add differing zombie skin tones in the future.
         
         
         // ---------------------------------- //

@@ -118,6 +118,11 @@ public class VNGuiConfig extends GuiConfig
 		subCats.add( new ConfigElement(cc) );
 		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
 		
+		// Added in v3.2
+		cc = GeneralConfig.config.getCategory("villager skin tones");
+		cc.setComment("Show biome-based skin tone variation (requires Modern Villager Profession Skins to be true)");
+		subCats.add( new ConfigElement(cc) );
+		
 		cc = GeneralConfig.config.getCategory("miscellaneous");
 		cc.setComment("Activate debug messages here");
 		subCats.add( new ConfigElement(cc) );

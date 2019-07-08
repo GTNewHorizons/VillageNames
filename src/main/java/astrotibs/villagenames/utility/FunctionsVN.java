@@ -912,4 +912,105 @@ public class FunctionsVN {
     	}
     }
     
+    // Added in v3.2
+	/**
+	 * Determine the skinTone of the biome the entity is currently in
+	 */
+	public static int returnSkinToneForEntityLocation(EntityLiving entity)
+	{
+		BiomeGenBase entityBiome = entity.worldObj.getBiomeGenForCoords((int)entity.posX, (int)entity.posZ);
+		return biomeToSkinTone(entityBiome, new Random());
+	}
+	
+	/**
+	 * Inputs a biome and returns a randomized skin tone value.
+	 * Values are drawn from a Gaussian distribution and then rounded to the nearest integer.
+	 * The mean value of the distribution is the sum of values associated with each biome tag. Most are 0 but some increase or decrease.
+	 * The StDev value decreases as the Poisson error for number of biome tags that have non-zero value.
+	 * Config values determine the overall StDev scale, and how quickly the StDev shrinks with number of biome tags.
+	 * Possible output values range from -4 (darkest) to 3 (lightest) with 0 being the standard Minecraft villager.
+	 */
+	public static int biomeToSkinTone(BiomeGenBase biome, Random random)
+	{
+		// Get a list of tags for this biome
+		BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
+		
+		// Now check the type list, modifying the median for particular biomes.
+		int skin_mu = 0; // Center of the Gaussian distribution; start as 0 (default villager)
+		int skin_tags = 0; // How many skin-altering tags were counted
+		
+		for (BiomeDictionary.Type type : typeTags)
+		{
+			// Cold, snowy, high-latitude values lighten skin:
+			if (type==BiomeDictionary.Type.COLD)
+			{
+				skin_mu += 2;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.CONIFEROUS)
+			{
+				skin_mu += 2;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.MOUNTAIN)
+			{
+				skin_mu += 1;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.SNOWY)
+			{
+				skin_mu += 2;
+				skin_tags++;
+				continue;
+			}
+			
+			// Hot, dry, low-latitude values darken skin:
+			if (type==BiomeDictionary.Type.HOT)
+			{
+				skin_mu -= 2;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.SAVANNA)
+			{
+				skin_mu -= 3;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.JUNGLE)
+			{
+				skin_mu -= 1;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.MESA)
+			{
+				skin_mu -= 1;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.SANDY)
+			{
+				skin_mu -= 1;
+				skin_tags++;
+				continue;
+			}
+		}
+		
+		// Now, draw a Gaussian-distributed random value centered on skin_mu:
+		
+		// Standard deviation, reduced by number of skin tags found and influenced by user's config values
+		float sigma = MathHelper.sqrt_double( 1D/(skin_tags*GeneralConfig.villagerSkinToneVarianceAnnealing + 1D) ) * GeneralConfig.villagerSkinToneVarianceScale; 
+		double skin_r = random.nextGaussian()*sigma + skin_mu;
+		int chosen_skin = MathHelper.clamp_int((int) Math.round(skin_r), -4, 3);
+		
+		LogHelper.info("skin_mu: " + skin_mu + ", skin_tags: " + skin_tags + ", chosen_skin: " + chosen_skin);
+		
+		// Return this value clamped to the darkest and lightest values
+		return chosen_skin;
+	}
+    
 }

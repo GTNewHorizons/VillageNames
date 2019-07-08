@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Random;
 
 import astrotibs.villagenames.banner.BannerGenerator;
-import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;

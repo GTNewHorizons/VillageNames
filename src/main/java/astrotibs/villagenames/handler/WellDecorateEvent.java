@@ -8,8 +8,6 @@ import java.util.Set;
 
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.banner.TileEntityBanner;
-import astrotibs.villagenames.block.ModBlocksVN;
-import astrotibs.villagenames.block.color.BlockConcrete;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;

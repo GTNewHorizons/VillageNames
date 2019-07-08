@@ -1,6 +1,5 @@
 package astrotibs.villagenames.client.renderer.entity;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -40,59 +39,71 @@ public class RenderVillagerModern extends RenderVillager {
 	// --- Skin resource elements --- //
 	// ------------------------------ //
 	
+	// Added in v3.2
+	static final String VAD = "textures/entity/villager/"; // Villager address, because it's used so damn much
+	static final String MIDLC = (Reference.MOD_ID).toLowerCase(); // Same with Mod ID
+	
 	// Base skin texture
-	private static final ResourceLocation villagerBaseSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/villager.png");
+	private static final ResourceLocation villagerBaseSkin = new ResourceLocation(MIDLC, VAD + "villager.png");
 	
 	// Biome-based types
-	private static final ResourceLocation villagerTypeDesert  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/desert.png");
-	private static final ResourceLocation villagerTypeJungle  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/jungle.png");
-	private static final ResourceLocation villagerTypePlains  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/plains.png");
-	private static final ResourceLocation villagerTypeSavanna = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/savanna.png");
-	private static final ResourceLocation villagerTypeSnow    = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/snow.png");
-	private static final ResourceLocation villagerTypeSwamp   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/swamp.png");
-	private static final ResourceLocation villagerTypeTaiga   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/taiga.png");
+	private static final ResourceLocation villagerTypeDesert  = new ResourceLocation(MIDLC, VAD + "type/desert.png");
+	private static final ResourceLocation villagerTypeJungle  = new ResourceLocation(MIDLC, VAD + "type/jungle.png");
+	private static final ResourceLocation villagerTypePlains  = new ResourceLocation(MIDLC, VAD + "type/plains.png");
+	private static final ResourceLocation villagerTypeSavanna = new ResourceLocation(MIDLC, VAD + "type/savanna.png");
+	private static final ResourceLocation villagerTypeSnow    = new ResourceLocation(MIDLC, VAD + "type/snow.png");
+	private static final ResourceLocation villagerTypeSwamp   = new ResourceLocation(MIDLC, VAD + "type/swamp.png");
+	private static final ResourceLocation villagerTypeTaiga   = new ResourceLocation(MIDLC, VAD + "type/taiga.png");
 	// Custom biome types
-	private static final ResourceLocation villagerTypeForest   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/forest.png");
-	private static final ResourceLocation villagerTypeAquatic  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/aquatic.png");
-	private static final ResourceLocation villagerTypeHighland = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/highland.png");
-	private static final ResourceLocation villagerTypeMushroom = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/mushroom.png");
-	private static final ResourceLocation villagerTypeMagical  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/magical.png");
-	private static final ResourceLocation villagerTypeNether   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/nether.png");
-	private static final ResourceLocation villagerTypeEnd      = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/type/end.png");
+	private static final ResourceLocation villagerTypeForest   = new ResourceLocation(MIDLC, VAD + "type/forest.png");
+	private static final ResourceLocation villagerTypeAquatic  = new ResourceLocation(MIDLC, VAD + "type/aquatic.png");
+	private static final ResourceLocation villagerTypeHighland = new ResourceLocation(MIDLC, VAD + "type/highland.png");
+	private static final ResourceLocation villagerTypeMushroom = new ResourceLocation(MIDLC, VAD + "type/mushroom.png");
+	private static final ResourceLocation villagerTypeMagical  = new ResourceLocation(MIDLC, VAD + "type/magical.png");
+	private static final ResourceLocation villagerTypeNether   = new ResourceLocation(MIDLC, VAD + "type/nether.png");
+	private static final ResourceLocation villagerTypeEnd      = new ResourceLocation(MIDLC, VAD + "type/end.png");
 	
 	// Profession-based layer
-	private static final ResourceLocation villagerProfessionArmorer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/armorer.png");
-	private static final ResourceLocation villagerProfessionButcher = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/butcher.png");
-	private static final ResourceLocation villagerProfessionCartographer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/cartographer.png");
-	private static final ResourceLocation villagerProfessionCleric = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/cleric.png");
-	private static final ResourceLocation villagerProfessionFarmer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/farmer.png");
-	private static final ResourceLocation villagerProfessionFisherman = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/fisherman.png");
-	private static final ResourceLocation villagerProfessionFletcher = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/fletcher.png");
-	private static final ResourceLocation villagerProfessionLeatherworker = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/leatherworker.png");
-	private static final ResourceLocation villagerProfessionLibrarian = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/librarian.png");
-	private static final ResourceLocation villagerProfessionMason = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/mason.png");
-	private static final ResourceLocation villagerProfessionNitwit = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/nitwit.png");
-	private static final ResourceLocation villagerProfessionShepherd = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/shepherd.png");
-	private static final ResourceLocation villagerProfessionToolsmith = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/toolsmith.png");
-	private static final ResourceLocation villagerProfessionWeaponsmith = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/weaponsmith.png");
+	private static final ResourceLocation villagerProfessionArmorer = new ResourceLocation(MIDLC, VAD + "profession/armorer.png");
+	private static final ResourceLocation villagerProfessionButcher = new ResourceLocation(MIDLC, VAD + "profession/butcher.png");
+	private static final ResourceLocation villagerProfessionCartographer = new ResourceLocation(MIDLC, VAD + "profession/cartographer.png");
+	private static final ResourceLocation villagerProfessionCleric = new ResourceLocation(MIDLC, VAD + "profession/cleric.png");
+	private static final ResourceLocation villagerProfessionFarmer = new ResourceLocation(MIDLC, VAD + "profession/farmer.png");
+	private static final ResourceLocation villagerProfessionFisherman = new ResourceLocation(MIDLC, VAD + "profession/fisherman.png");
+	private static final ResourceLocation villagerProfessionFletcher = new ResourceLocation(MIDLC, VAD + "profession/fletcher.png");
+	private static final ResourceLocation villagerProfessionLeatherworker = new ResourceLocation(MIDLC, VAD + "profession/leatherworker.png");
+	private static final ResourceLocation villagerProfessionLibrarian = new ResourceLocation(MIDLC, VAD + "profession/librarian.png");
+	private static final ResourceLocation villagerProfessionMason = new ResourceLocation(MIDLC, VAD + "profession/mason.png");
+	private static final ResourceLocation villagerProfessionNitwit = new ResourceLocation(MIDLC, VAD + "profession/nitwit.png");
+	private static final ResourceLocation villagerProfessionShepherd = new ResourceLocation(MIDLC, VAD + "profession/shepherd.png");
+	private static final ResourceLocation villagerProfessionToolsmith = new ResourceLocation(MIDLC, VAD + "profession/toolsmith.png");
+	private static final ResourceLocation villagerProfessionWeaponsmith = new ResourceLocation(MIDLC, VAD + "profession/weaponsmith.png");
 	
 	// Profession level purses
-	private static final ResourceLocation villagerProfessionLevelStone = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession_level/stone.png");
-	private static final ResourceLocation villagerProfessionLevelIron = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession_level/iron.png");
-	private static final ResourceLocation villagerProfessionLevelGold = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession_level/gold.png");
-	private static final ResourceLocation villagerProfessionLevelEmerald = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession_level/emerald.png");
-	private static final ResourceLocation villagerProfessionLevelDiamond = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession_level/diamond.png");
+	private static final ResourceLocation villagerProfessionLevelStone = new ResourceLocation(MIDLC, VAD + "profession_level/stone.png");
+	private static final ResourceLocation villagerProfessionLevelIron = new ResourceLocation(MIDLC, VAD + "profession_level/iron.png");
+	private static final ResourceLocation villagerProfessionLevelGold = new ResourceLocation(MIDLC, VAD + "profession_level/gold.png");
+	private static final ResourceLocation villagerProfessionLevelEmerald = new ResourceLocation(MIDLC, VAD + "profession_level/emerald.png");
+	private static final ResourceLocation villagerProfessionLevelDiamond = new ResourceLocation(MIDLC, VAD + "profession_level/diamond.png");
 	
 	// Vanilla textures
-    private static final ResourceLocation defaultOldNitwit = new ResourceLocation("textures/entity/villager/villager.png");
-    private static final ResourceLocation defaultOldFarmer = new ResourceLocation("textures/entity/villager/farmer.png");
-    private static final ResourceLocation defaultOldLibrarian = new ResourceLocation("textures/entity/villager/librarian.png");
-    private static final ResourceLocation defaultOldPriest = new ResourceLocation("textures/entity/villager/priest.png");
-    private static final ResourceLocation defaultOldSmith = new ResourceLocation("textures/entity/villager/smith.png");
-    private static final ResourceLocation defaultOldButcher = new ResourceLocation("textures/entity/villager/butcher.png");
+    private static final ResourceLocation defaultOldNitwit = new ResourceLocation(VAD + "villager.png");
+    private static final ResourceLocation defaultOldFarmer = new ResourceLocation(VAD + "farmer.png");
+    private static final ResourceLocation defaultOldLibrarian = new ResourceLocation(VAD + "librarian.png");
+    private static final ResourceLocation defaultOldPriest = new ResourceLocation(VAD + "priest.png");
+    private static final ResourceLocation defaultOldSmith = new ResourceLocation(VAD + "smith.png");
+    private static final ResourceLocation defaultOldButcher = new ResourceLocation(VAD + "butcher.png");
 	
-	
-	
+	// Added in v3.2: Skin tones, arranged lightest to darkest
+    private static final ResourceLocation villageSkinToneLight3 = new ResourceLocation(MIDLC, VAD + "skintone/l3.png");
+    private static final ResourceLocation villageSkinToneLight2 = new ResourceLocation(MIDLC, VAD + "skintone/l2.png");
+    private static final ResourceLocation villageSkinToneLight1 = new ResourceLocation(MIDLC, VAD + "skintone/l1.png");
+    private static final ResourceLocation villageSkinToneMedium = new ResourceLocation(MIDLC, VAD + "skintone/m0.png"); // Identical to default skin
+    private static final ResourceLocation villageSkinToneDark1 = new ResourceLocation(MIDLC, VAD + "skintone/d1.png");
+    private static final ResourceLocation villageSkinToneDark2 = new ResourceLocation(MIDLC, VAD + "skintone/d2.png");
+    private static final ResourceLocation villageSkinToneDark3 = new ResourceLocation(MIDLC, VAD + "skintone/d3.png");
+    private static final ResourceLocation villageSkinToneDark4 = new ResourceLocation(MIDLC, VAD + "skintone/d4.png");
+    
 
     /**
      * Added in v3.1.1: machinery for modular textures, adapted from RenderHorse
@@ -101,6 +112,19 @@ public class RenderVillagerModern extends RenderVillager {
     //private String[] layeredTextureAddressArray = new String[4]; // Holds the different layer textures as resource address strings
     private static final Map skinComboHashmap = Maps.newHashMap(); // Populates a hash map with various combinations so you don't have to constantly ascertain them on the fly
     //private String skinComboHashKey; // String that will be the hashmap key corresponding to the particular biome/career combination
+    
+    // Added in v3.2 - skin tones
+    // Made this 2D so that I can always make sure to add the proper key
+    private static final String[][] skintoneTextures = new String[][] {
+    		{villageSkinToneDark4.toString(), "std4"},
+    		{villageSkinToneDark3.toString(), "std3"},
+    		{villageSkinToneDark2.toString(), "std2"},
+    		{villageSkinToneDark1.toString(), "std1"},
+    		{villageSkinToneMedium.toString(), "stm0"},
+    		{villageSkinToneLight1.toString(), "stl1"},
+    		{villageSkinToneLight2.toString(), "stl2"},
+    		{villageSkinToneLight3.toString(), "stl3"},
+    		};
     
     // Made this 2D so that I can always make sure to add the proper key
     private static final String[][] biomeTypeTextures = new String[][] {
@@ -210,7 +234,7 @@ public class RenderVillagerModern extends RenderVillager {
         String[] layeredTextureAddressArray = new String[4]; 
         
         // Reset the layer array
-        layeredTextureAddressArray[0] = villagerBaseSkin.toString();
+        layeredTextureAddressArray[0] = villagerBaseSkin.toString(); // Leaving this in by default just in case something goes wrong
         layeredTextureAddressArray[1] = null;
         layeredTextureAddressArray[2] = null;
         layeredTextureAddressArray[3] = null;
@@ -219,6 +243,8 @@ public class RenderVillagerModern extends RenderVillager {
         int biometype = MathHelper.clamp_int(ev.getBiomeType(), 0, biomeTypeTextures.length-1);
         int career = GeneralConfig.villagerCareers ? ev.getCareer() : -1;
         int proflevel = MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
+        int skinTone_i = GeneralConfig.villagerSkinTones ? ev.getSkinTone() : 0;
+        MathHelper.clamp_int(skinTone_i = (skinTone_i == -99 ? 0 : skinTone_i)+4, 0, skintoneTextures.length-1); // Added in v3.2
         
         
         // Re-arranged in v3.2
@@ -227,7 +253,8 @@ public class RenderVillagerModern extends RenderVillager {
         // --- PART 0: set the skin --- //
         // ---------------------------- //
         
-        // TODO
+        layeredTextureAddressArray[0] = skintoneTextures[skinTone_i][0];
+        skinComboHashKey = skinComboHashKey + skintoneTextures[skinTone_i][1];
         
         
         // ---------------------------------- //
@@ -252,7 +279,7 @@ public class RenderVillagerModern extends RenderVillager {
         	// This is a modded profession ID with a supported skin
         	
         	final String profRootName = (String) (GeneralConfig.careerAsset_a.get(indexofmodprof));
-        	final ResourceLocation modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/"+profRootName+".png");
+        	final ResourceLocation modCareerSkin = new ResourceLocation(MIDLC, VAD + "profession/"+profRootName+".png");
         	
             layeredTextureAddressArray[2] = modCareerSkin.toString();
             skinComboHashKey = skinComboHashKey + "_" + profRootName;

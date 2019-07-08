@@ -93,7 +93,9 @@ public class GeneralConfig {
 	// Added in v3.2
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
-	
+    public static boolean villagerSkinTones;
+    public static float villagerSkinToneVarianceAnnealing;
+    public static float villagerSkinToneVarianceScale;
 	
 	public static void init(File configFile) {
 		if (config == null) {
@@ -154,14 +156,13 @@ public class GeneralConfig {
 	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{
 				"14", // Growthcraft Apiarist
 				"80", // Forestry Apiarist
-				"-190", // Thaumcraft Wizard
-				"-191", // Thaumcraft Banker
+				"-190", // Thaumcraft Wizard -- turned off because of hat brim rendering issues
+				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
 				"-6156", // Open Blocks Music Merchant
 				"7766", // Growthcraft Community Edition Apiarist
 	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers. A normal value will be whitelisted: it will display that villager's headwear layer even if Modded Villager Headwear is false. "
 	    		+ "Adding a negative sign in front of the ID int will blacklist the profession so that its headwear layer never renders.");
-	    
 	    
 	    // Extract the values and populate the white and black lists
 	    for (String prof_s : moddedVillagerHeadwearGraylist)
@@ -209,6 +210,16 @@ public class GeneralConfig {
 	    zombieCareerAsset_a = (ArrayList<String>)moddedVillagerCareerSkins.get("zombieCareerAsset");
 	    professionID_a = (ArrayList<Integer>)moddedVillagerCareerSkins.get("professionID");
 	    
+
+	    villagerSkinTones = config.getBoolean("Display Skin Tones", "villager skin tones", true, "Display Gaussian-distributed random skin tones assigned to villagers");
+	    villagerSkinToneVarianceAnnealing = config.getFloat("Skin Tone Variance Annealing", "villager skin tones", 8F/3, 0, Float.MAX_VALUE,
+	    		"Statistical variance in skin tone for a population decreases as the number of skin-tone-affecting biome tags increases.\n"
+	    		+ "Setting this value to zero eliminates that effect, making skin tone vary equally everywhere (aside from culling to the darkest/lightest tones).\n"
+	    		+ "Increasing this value makes skin tone variation less likely in qualifying biomes.");
+	    villagerSkinToneVarianceScale = config.getFloat("Skin Tone Variance Scale", "villager skin tones", 1F, 0, Float.MAX_VALUE,
+	    		"Proportionality constant for variance everywhere, irrespective of biome. Set this to zero for absolutely no variation for a given biome.\n"
+	    		+ "Skin tones are culled to the darkest and lightest values, so setting this arbitrarily high will result in ONLY the darkest or lightest villagers.\n"
+	    		+ "I estimate that the distribution is flattest, and thus population variance is maximized, around a value of about 2.6.");
 	    
 	    zombieCureCatalysts = config.getStringList("Zombie Cure Catalysts", "villager professions", new String[]{
  				"vanilla|net.minecraft.block.BlockBed|tile.bed|-1",

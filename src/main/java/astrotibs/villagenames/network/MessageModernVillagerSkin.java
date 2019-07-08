@@ -20,12 +20,15 @@ public class MessageModernVillagerSkin implements IMessage
 {
 	// Constructors
 	public MessageModernVillagerSkin() {}
-    public MessageModernVillagerSkin(int entityID, int profession, int career, int biomeType, int professionLevel) {
+    public MessageModernVillagerSkin(int entityID, int profession, int career, int biomeType, int professionLevel
+    		, int skinTone // Added in v3.2
+    		) {
         this.entityID = entityID;
         this.profession = profession;
         this.career = career;
         this.biomeType = biomeType;
         this.professionLevel = professionLevel;
+        this.skinTone = skinTone; // v3.2
     }
     
     // Fields to be used by this message
@@ -34,6 +37,7 @@ public class MessageModernVillagerSkin implements IMessage
     private int career;
     private int biomeType;
     private int professionLevel;
+    private int skinTone; // V3.2
     
     
     // Getters
@@ -42,6 +46,7 @@ public class MessageModernVillagerSkin implements IMessage
     public int getEntityID() {return this.entityID;}
     public int getBiomeType() {return this.biomeType;}
     public int getProfessionLevel() {return this.professionLevel;}
+    public int getSkinTone() {return this.skinTone;} // v3.2
     
 
     // Reads the packet
@@ -53,6 +58,7 @@ public class MessageModernVillagerSkin implements IMessage
         this.career = buf.readInt();
         this.biomeType = buf.readInt();
         this.professionLevel = buf.readInt();
+        this.skinTone = buf.readInt(); // v3.2
         // note - maybe use ByteBufUtils
     }
 
@@ -66,6 +72,7 @@ public class MessageModernVillagerSkin implements IMessage
         buf.writeInt(this.career);
         buf.writeInt(this.biomeType);
         buf.writeInt(this.professionLevel);
+        buf.writeInt(this.skinTone); // v3.2
     }
 
     
@@ -85,6 +92,9 @@ public class MessageModernVillagerSkin implements IMessage
         r.append(this.getBiomeType());
         r.append(", Profession Level = ");
         r.append(this.getProfessionLevel());
+        // v3.2
+        r.append(", Skin Tone = ");
+        r.append(this.getSkinTone());
         
         return r.toString();
     }

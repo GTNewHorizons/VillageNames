@@ -149,18 +149,24 @@ public class EntityMonitorHandler
             
             ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
             
-    		// Try to assign a biome number if this villager has none.
-            if (ezv.getBiomeType() <0)
-            {
-            	ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));
-            }
-
             // Renovated in v3.1
             if (event.world.isRemote) {
                 // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
                 ClientInfoTracker.SyncZombieMessage(zombie);
             }
             else {
+            	
+            	// Moved into server-side world in v3.2
+        		// Try to assign a biome number if this villager has none.
+                if (ezv.getBiomeType() <0)
+                {
+                	ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));
+                }
+                
+                // Added in v3.2
+                if (ezv.getSkinTone() == -99)
+                {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
+                
             	
                 // Looks on the event tracker for a villager that just died
                 //final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER, zombie.getPosition(1.0F));//zombie.getPosition());
@@ -241,18 +247,30 @@ public class EntityMonitorHandler
                     ServerInfoTracker.removeCuredZombiesFromTracker(event.world, tracked.getEntityID());
 
                 }
+                
+                // Moved inside server-side check in v3.2
+        		// Try to assign a biome number if this villager has none.
+                if (
+                		ev != null
+                		//&& villager.getProfession() >=0
+                		//&& villager.getProfession() <=5
+                		&& (ExtendedVillager.get(villager)).getBiomeType()<0
+                		)
+                {
+                	(ExtendedVillager.get(villager)).setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
+                }
+                
+                // v3.2 Try to assign a skin tone number if this villager has none.
+                if (
+                		ev != null
+                		&& (ExtendedVillager.get(villager)).getSkinTone()==-99
+                		)
+                {
+                	(ExtendedVillager.get(villager)).setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));
+                }
+                
             }
             
-    		// Try to assign a biome number if this villager has none.
-            if (
-            		ev != null
-            		//&& villager.getProfession() >=0
-            		//&& villager.getProfession() <=5
-            		&& (ExtendedVillager.get(villager)).getBiomeType()<0
-            		)
-            {
-            	(ExtendedVillager.get(villager)).setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
-            }
             
         }
         
@@ -435,6 +453,7 @@ public class EntityMonitorHandler
             {
             	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
             	if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
+            	if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));} // Added in v3.2
             	
             	// Strip gear
             	zombie.setCanPickUpLoot(false);
@@ -447,7 +466,7 @@ public class EntityMonitorHandler
     				// Sends a ping to everyone within 80 blocks
     				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(zombie.dimension, zombie.lastTickPosX, zombie.lastTickPosY, zombie.lastTickPosZ, 16*5);
     				VillageNames.VNNetworkWrapper.sendToAllAround(
-    						new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel()),
+    						new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()), // v3.2
     						targetPoint);
     					}
             }
@@ -1273,6 +1292,7 @@ public class EntityMonitorHandler
         	
 			// v3.2 moved outside trade monitor so that non-vanilla can be sync-checked
 			if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
+			if (ev.getSkinTone()==-99) {ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));} // v3.2
 			
 			if (
 					(villager.ticksExisted + villager.getEntityId())%5 == 0 // Ticks intermittently, modulated so villagers don't deliberately sync.
@@ -1298,7 +1318,7 @@ public class EntityMonitorHandler
 				// Sends a ping to everyone within 80 blocks
 				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
 				VillageNames.VNNetworkWrapper.sendToAllAround(
-						new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel),
+						new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel, ev.getSkinTone()),
 						targetPoint);
 					}
         }
