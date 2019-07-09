@@ -195,6 +195,7 @@ public class EventTracker
         // Added in v3.1
         final int biomeType = (Integer) extraInfo[3];
         final int professionLevel = (Integer) extraInfo[4];
+        final int skinTone = (Integer) extraInfo[5]; // Added in v3.2
         
         // Custom name
         //if (this.getCustomName() != "") {
@@ -257,7 +258,7 @@ public class EventTracker
         // Added in v3.2
         // SkinTone
         if (ieep.getSkinTone() == -99) {ieep.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
-        else {ieep.setSkinTone(biomeType);}
+        else {ieep.setSkinTone(skinTone);}
         
         
         // ProfessionLevel
@@ -346,7 +347,8 @@ public class EventTracker
         // Added in v3.1
         final int biomeType = (Integer) extraInfo[3];
         final int professionLevel = (Integer) extraInfo[4];
-        
+        final int skinTone = (Integer) extraInfo[5]; // Added in v3.2
+
         String customName = this.getCustomName();
         
         // Renovated in v3.1
@@ -397,8 +399,7 @@ public class EventTracker
         // Added in v3.2
         // SkinTone
         if (ieep.getSkinTone() == -99) {ieep.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
-        else {ieep.setSkinTone(biomeType);}
-        
+        else {ieep.setSkinTone(skinTone);}
     }
     
 

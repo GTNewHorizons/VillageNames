@@ -210,9 +210,9 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         else {
             this.profession = properties.getInteger(ProfessionKey);
             this.career = properties.getInteger(CareerKey);
-            this.biomeType = properties.getInteger(biomeKey); // Added in v3.1
+            this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1; // Added in v3.1
             this.professionLevel = properties.getInteger(professionLevelKey); // Added in v3.1
-            this.skinTone = properties.getInteger(skinToneKey); // Added in v3.2
+            this.skinTone = properties.hasKey(skinToneKey) ? properties.getInteger(skinToneKey) : -99; // Added in v3.2
             this.hasValidData = properties.getBoolean(InitializedKey);
         }
 

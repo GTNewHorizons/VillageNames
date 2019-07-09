@@ -919,7 +919,9 @@ public class FunctionsVN {
 	public static int returnSkinToneForEntityLocation(EntityLiving entity)
 	{
 		BiomeGenBase entityBiome = entity.worldObj.getBiomeGenForCoords((int)entity.posX, (int)entity.posZ);
-		return biomeToSkinTone(entityBiome, new Random());
+		int chosenSkin = biomeToSkinTone(entityBiome, new Random());
+		//entity.setCustomNameTag("Skin: " + chosenSkin);
+		return chosenSkin;
 	}
 	
 	/**
@@ -944,11 +946,29 @@ public class FunctionsVN {
 			// Cold, snowy, high-latitude values lighten skin:
 			if (type==BiomeDictionary.Type.COLD)
 			{
-				skin_mu += 2;
+				skin_mu += 1;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.WET)
+			{
+				skin_mu += 1;
 				skin_tags++;
 				continue;
 			}
 			if (type==BiomeDictionary.Type.CONIFEROUS)
+			{
+				skin_mu += 2;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.NETHER)
+			{
+				skin_mu += 2;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.END)
 			{
 				skin_mu += 2;
 				skin_tags++;
@@ -970,13 +990,19 @@ public class FunctionsVN {
 			// Hot, dry, low-latitude values darken skin:
 			if (type==BiomeDictionary.Type.HOT)
 			{
-				skin_mu -= 2;
+				skin_mu -= 1;
+				skin_tags++;
+				continue;
+			}
+			if (type==BiomeDictionary.Type.DRY)
+			{
+				skin_mu -= 1;
 				skin_tags++;
 				continue;
 			}
 			if (type==BiomeDictionary.Type.SAVANNA)
 			{
-				skin_mu -= 3;
+				skin_mu -= 2;
 				skin_tags++;
 				continue;
 			}
@@ -992,12 +1018,6 @@ public class FunctionsVN {
 				skin_tags++;
 				continue;
 			}
-			if (type==BiomeDictionary.Type.SANDY)
-			{
-				skin_mu -= 1;
-				skin_tags++;
-				continue;
-			}
 		}
 		
 		// Now, draw a Gaussian-distributed random value centered on skin_mu:
@@ -1007,7 +1027,8 @@ public class FunctionsVN {
 		double skin_r = random.nextGaussian()*sigma + skin_mu;
 		int chosen_skin = MathHelper.clamp_int((int) Math.round(skin_r), -4, 3);
 		
-		LogHelper.info("skin_mu: " + skin_mu + ", skin_tags: " + skin_tags + ", chosen_skin: " + chosen_skin);
+		//chosen_skin = 3;
+		//LogHelper.info("skin_mu: " + skin_mu + ", skin_tags: " + skin_tags + ", chosen_skin: " + chosen_skin);
 		
 		// Return this value clamped to the darkest and lightest values
 		return chosen_skin;
