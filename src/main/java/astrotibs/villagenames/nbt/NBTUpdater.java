@@ -212,11 +212,28 @@ public class NBTUpdater {
 					&& world.provider.dimensionId==0
 					) { // Player is in the Overworld
 				
-				MapGenStructureData structureData;
+				MapGenStructureData structureData = null; // v3.2.1
 				try {
-					structureData = (MapGenStructureData)event.world.perWorldStorage.loadData(MapGenStructureData.class, "Temple");
-					NBTTagCompound nbttagcompound = structureData.func_143041_a();
 					
+					// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+	        		NBTTagCompound nbttagcompound = null;
+
+	        		try
+	        		{
+	        			structureData = (MapGenStructureData)event.world.perWorldStorage.loadData(MapGenStructureData.class, "Temple");
+	        			nbttagcompound = structureData.func_143041_a();
+	        		}
+	        		catch (Exception e)
+	        		{
+	        			try
+	            		{
+	            			structureData = (MapGenStructureData)event.world.perWorldStorage.loadData(MapGenStructureData.class, "OTGTemple");
+	            			nbttagcompound = structureData.func_143041_a();
+	            		}
+	            		catch (Exception e1) {}
+	        		}
+					
+	        		
 					Iterator itr = nbttagcompound.func_150296_c().iterator();
 					
 					while (itr.hasNext()) { // Go through list of already-generated Desert Pyramids

@@ -282,13 +282,14 @@ public class WriteBookHandler {
         double dx;
         double dy;
         double dz;
-    	int[] nearestMineshaftXYZ = nearestStructureLoc("Mineshaft", event);
-    	int[] nearestStrongholdXYZ = nearestStructureLoc("Stronghold", event);
-    	int[] nearestTempleXYZ = nearestStructureLoc("Temple", event);
+
+        // v3.2.1 - Initialize these as empty and assign values later as needed. Results in improved performance, especially with Open Terrain Generator.
+    	int[] nearestMineshaftXYZ = new int[3];
+    	int[] nearestStrongholdXYZ = new int[3];
+    	int[] nearestTempleXYZ = new int[3];
     	int[] nearestVillageXYZ = new int[3];
-    	int[] nearestMonumentXYZ = nearestStructureLoc("Monument", event);
-    	int[] nearestMansionXYZ = nearestStructureLoc("Mansion", event);
-    	
+    	int[] nearestMonumentXYZ = new int[3];
+    	int[] nearestMansionXYZ = new int[3];
     	
     	List vlist = event.entityPlayer.worldObj.villageCollectionObj.getVillageList();
     	
@@ -321,9 +322,27 @@ public class WriteBookHandler {
     	
 
     	// Also calculate the second-closest by manually going through the .dat file:
+
     	
-    	MapGenStructureData structureData = (MapGenStructureData)event.entityPlayer.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
-		NBTTagCompound nbttagcompound = structureData.func_143041_a();
+    	// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+		
+		MapGenStructureData structureData;
+		NBTTagCompound nbttagcompound = null;
+		
+		try
+		{
+			structureData = (MapGenStructureData)event.entityPlayer.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
+			nbttagcompound = structureData.func_143041_a();
+		}
+		catch (Exception e) // Village.dat does not exist
+		{
+			try
+    		{
+    			structureData = (MapGenStructureData)event.entityPlayer.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "OTGVillage");
+    			nbttagcompound = structureData.func_143041_a();
+    		}
+    		catch (Exception e1) {} // OTGVillage.dat does not exist
+		}
 		
 		Iterator itr = nbttagcompound.func_150296_c().iterator();
 
@@ -368,27 +387,15 @@ public class WriteBookHandler {
 				catch (Exception e) {}
 			}
 		}
+
 		
-		
-    	// Calculate the square distances here, setting them to doublemax when not found
-    	double mineshaftDistSq = 
-    			(nearestMineshaftXYZ[0]==0 && nearestMineshaftXYZ[1]==0 && nearestMineshaftXYZ[2]==0) ? Double.MAX_VALUE :
-    			(nearestMineshaftXYZ[0]-targetX)*(nearestMineshaftXYZ[0]-targetX) + (nearestMineshaftXYZ[1]-targetY)*(nearestMineshaftXYZ[1]-targetY) + (nearestMineshaftXYZ[2]-targetZ)*(nearestMineshaftXYZ[2]-targetZ);
-        double strongholdDistSq =
-        		(nearestStrongholdXYZ[0]==0 && nearestStrongholdXYZ[1]==0 && nearestStrongholdXYZ[2]==0) ? Double.MAX_VALUE :
-        		(nearestStrongholdXYZ[0]-targetX)*(nearestStrongholdXYZ[0]-targetX) + (nearestStrongholdXYZ[1]-targetY)*(nearestStrongholdXYZ[1]-targetY) + (nearestStrongholdXYZ[2]-targetZ)*(nearestStrongholdXYZ[2]-targetZ);;
-        double templeDistSq =
-        		(nearestTempleXYZ[0]==0 && nearestTempleXYZ[1]==0 && nearestTempleXYZ[2]==0) ? Double.MAX_VALUE :
-        		(nearestTempleXYZ[0]-targetX)*(nearestTempleXYZ[0]-targetX) + (nearestTempleXYZ[1]-targetY)*(nearestTempleXYZ[1]-targetY) + (nearestTempleXYZ[2]-targetZ)*(nearestTempleXYZ[2]-targetZ);;
-        double villageDistSq =
-        		(nearestVillageXYZ[0]==0 && nearestVillageXYZ[1]==0 && nearestVillageXYZ[2]==0) ? Double.MAX_VALUE :
-        		(nearestVillageXYZ[0]-targetX)*(nearestVillageXYZ[0]-targetX) + (nearestVillageXYZ[1]-targetY)*(nearestVillageXYZ[1]-targetY) + (nearestVillageXYZ[2]-targetZ)*(nearestVillageXYZ[2]-targetZ);;
-        double monumentDistSq =
-        		(nearestMonumentXYZ[0]==0 && nearestMonumentXYZ[1]==0 && nearestMonumentXYZ[2]==0) ? Double.MAX_VALUE :
-        		(nearestMonumentXYZ[0]-targetX)*(nearestMonumentXYZ[0]-targetX) + (nearestMonumentXYZ[1]-targetY)*(nearestMonumentXYZ[1]-targetY) + (nearestMonumentXYZ[2]-targetZ)*(nearestMonumentXYZ[2]-targetZ);;
-    	double mansionDistSq =
-    			(nearestMansionXYZ[0]==0 && nearestMansionXYZ[1]==0 && nearestMansionXYZ[2]==0) ? Double.MAX_VALUE :
-        		(nearestMansionXYZ[0]-targetX)*(nearestMansionXYZ[0]-targetX) + (nearestMansionXYZ[1]-targetY)*(nearestMansionXYZ[1]-targetY) + (nearestMansionXYZ[2]-targetZ)*(nearestMansionXYZ[2]-targetZ);;
+		// v3.2.1 - initialize these as blank and only calculate them as required.
+    	double mineshaftDistSq = Double.MAX_VALUE;
+        double strongholdDistSq = Double.MAX_VALUE;
+        double templeDistSq = Double.MAX_VALUE;
+        double villageDistSq = Double.MAX_VALUE;
+        double monumentDistSq = Double.MAX_VALUE;
+    	double mansionDistSq = Double.MAX_VALUE;
     	
         
 		double[] villagerCoords = {event.target.posX, event.target.posY, event.target.posZ};
@@ -424,6 +431,12 @@ public class WriteBookHandler {
         switch (villagerMappedProfession) {
 	        case 0: // Villager is a Farmer
 	        	
+	        	// v3.2.1 - calculate distances here
+	        	nearestMonumentXYZ = nearestStructureLoc("Monument", event);
+	        	monumentDistSq =
+		    		(nearestMonumentXYZ[0]==0 && nearestMonumentXYZ[1]==0 && nearestMonumentXYZ[2]==0) ? Double.MAX_VALUE :
+		    		(nearestMonumentXYZ[0]-targetX)*(nearestMonumentXYZ[0]-targetX) + (nearestMonumentXYZ[1]-targetY)*(nearestMonumentXYZ[1]-targetY) + (nearestMonumentXYZ[2]-targetZ)*(nearestMonumentXYZ[2]-targetZ);
+	        	
 	        	if (villagerCareer == 2
 	        		&& monumentDistSq <= maxStructureDistance*maxStructureDistance) {
 	        		// Villager is a fisherman. Find an ocean monument.
@@ -431,6 +444,12 @@ public class WriteBookHandler {
         			closestCoords = nearestMonumentXYZ;
 	        	}
 	        	else {
+
+	        		// v3.2.1 - calculate distances here
+		        	villageDistSq =
+		        		(nearestVillageXYZ[0]==0 && nearestVillageXYZ[1]==0 && nearestVillageXYZ[2]==0) ? Double.MAX_VALUE :
+		        		(nearestVillageXYZ[0]-targetX)*(nearestVillageXYZ[0]-targetX) + (nearestVillageXYZ[1]-targetY)*(nearestVillageXYZ[1]-targetY) + (nearestVillageXYZ[2]-targetZ)*(nearestVillageXYZ[2]-targetZ);
+		        	
 	        		// Villager is another kind of farmer, or a fisherman didn't report a Monument.
 	        		if (villageDistSq <= maxStructureDistance*maxStructureDistance) {
 	        			// Village found. Write a page about it.
@@ -442,6 +461,18 @@ public class WriteBookHandler {
 	        	break;
 	        	
 	        case 1: // Villager is a Librarian. Find a Stronghold or a Woodland Mansion.
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestStrongholdXYZ = nearestStructureLoc("Stronghold", event);
+	        	strongholdDistSq =
+	        		(nearestStrongholdXYZ[0]==0 && nearestStrongholdXYZ[1]==0 && nearestStrongholdXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestStrongholdXYZ[0]-targetX)*(nearestStrongholdXYZ[0]-targetX) + (nearestStrongholdXYZ[1]-targetY)*(nearestStrongholdXYZ[1]-targetY) + (nearestStrongholdXYZ[2]-targetZ)*(nearestStrongholdXYZ[2]-targetZ);
+	        	
+	        	// v3.2.1 - calculate distances here
+	        	nearestMansionXYZ = nearestStructureLoc("Mansion", event);
+	        	mansionDistSq =
+	        			(nearestMansionXYZ[0]==0 && nearestMansionXYZ[1]==0 && nearestMansionXYZ[2]==0) ? Double.MAX_VALUE :
+	            		(nearestMansionXYZ[0]-targetX)*(nearestMansionXYZ[0]-targetX) + (nearestMansionXYZ[1]-targetY)*(nearestMansionXYZ[1]-targetY) + (nearestMansionXYZ[2]-targetZ)*(nearestMansionXYZ[2]-targetZ);
 	        	
 	        	if (strongholdDistSq <= maxStructureDistance*maxStructureDistance*strongholdCoefSquared
 	        		&& strongholdDistSq < mansionDistSq) {
@@ -458,6 +489,18 @@ public class WriteBookHandler {
 	        	break;
 	        	
 	        case 2: // Villager is a Priest. Find a temple.
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestTempleXYZ = nearestStructureLoc("Temple", event);
+	        	templeDistSq =
+	        		(nearestTempleXYZ[0]==0 && nearestTempleXYZ[1]==0 && nearestTempleXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestTempleXYZ[0]-targetX)*(nearestTempleXYZ[0]-targetX) + (nearestTempleXYZ[1]-targetY)*(nearestTempleXYZ[1]-targetY) + (nearestTempleXYZ[2]-targetZ)*(nearestTempleXYZ[2]-targetZ);
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestMonumentXYZ = nearestStructureLoc("Monument", event);
+	        	monumentDistSq =
+		    		(nearestMonumentXYZ[0]==0 && nearestMonumentXYZ[1]==0 && nearestMonumentXYZ[2]==0) ? Double.MAX_VALUE :
+		    		(nearestMonumentXYZ[0]-targetX)*(nearestMonumentXYZ[0]-targetX) + (nearestMonumentXYZ[1]-targetY)*(nearestMonumentXYZ[1]-targetY) + (nearestMonumentXYZ[2]-targetZ)*(nearestMonumentXYZ[2]-targetZ);
 	        	
 	        	if (villagerCareer == 0 && !GeneralConfig.villagerCareers // If the priest's career is 0--only plausible in 1.7.10--then perhaps find a Monument instead
 	        		&& monumentDistSq <= maxStructureDistance*maxStructureDistance
@@ -475,7 +518,13 @@ public class WriteBookHandler {
 	        	break;
 	        	
 	        case 3: // Villager is a Blacksmith. Find a mineshaft.
-        		
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestMineshaftXYZ = nearestStructureLoc("Mineshaft", event);
+	        	mineshaftDistSq = 
+	    			(nearestMineshaftXYZ[0]==0 && nearestMineshaftXYZ[1]==0 && nearestMineshaftXYZ[2]==0) ? Double.MAX_VALUE :
+	    			(nearestMineshaftXYZ[0]-targetX)*(nearestMineshaftXYZ[0]-targetX) + (nearestMineshaftXYZ[1]-targetY)*(nearestMineshaftXYZ[1]-targetY) + (nearestMineshaftXYZ[2]-targetZ)*(nearestMineshaftXYZ[2]-targetZ);
+	        	
 	        	if (mineshaftDistSq <= maxStructureDistance*maxStructureDistance) {
         			// Mineshaft found. Write a page about it.
         			closestStructure = "Mineshaft";
@@ -484,7 +533,18 @@ public class WriteBookHandler {
 	        	break;
 	        	
 	        case 4: // Villager is a Butcher. Find a temple or a village.
-        			        	
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestTempleXYZ = nearestStructureLoc("Temple", event);
+	        	templeDistSq =
+	        		(nearestTempleXYZ[0]==0 && nearestTempleXYZ[1]==0 && nearestTempleXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestTempleXYZ[0]-targetX)*(nearestTempleXYZ[0]-targetX) + (nearestTempleXYZ[1]-targetY)*(nearestTempleXYZ[1]-targetY) + (nearestTempleXYZ[2]-targetZ)*(nearestTempleXYZ[2]-targetZ);
+	        	
+	        	// v3.2.1 - calculate distances here
+	        	villageDistSq =
+	        		(nearestVillageXYZ[0]==0 && nearestVillageXYZ[1]==0 && nearestVillageXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestVillageXYZ[0]-targetX)*(nearestVillageXYZ[0]-targetX) + (nearestVillageXYZ[1]-targetY)*(nearestVillageXYZ[1]-targetY) + (nearestVillageXYZ[2]-targetZ)*(nearestVillageXYZ[2]-targetZ);
+	        	
 	        	if (villageDistSq <= maxStructureDistance*maxStructureDistance
     			&& villageDistSq < templeDistSq) {
         			// Only a Village has been legally detected. Report that.
@@ -503,7 +563,13 @@ public class WriteBookHandler {
 	        	// No structure planned at this time
 	        	//nitwitRadius = Double.MAX_VALUE; // Guarantees search result
 	        	double nitwitMax = Double.MAX_VALUE;
-	        	
+
+	        	// v3.2.1 - calculate distances here
+	        	nearestStrongholdXYZ = nearestStructureLoc("Stronghold", event);
+	        	strongholdDistSq =
+	        		(nearestStrongholdXYZ[0]==0 && nearestStrongholdXYZ[1]==0 && nearestStrongholdXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestStrongholdXYZ[0]-targetX)*(nearestStrongholdXYZ[0]-targetX) + (nearestStrongholdXYZ[1]-targetY)*(nearestStrongholdXYZ[1]-targetY) + (nearestStrongholdXYZ[2]-targetZ)*(nearestStrongholdXYZ[2]-targetZ);
+		        
 	        	// Check Stronghold distance first because of the extra coefficient
         		if (strongholdDistSq <= nitwitRadius*nitwitRadius*strongholdCoefSquared) {
         			// Stronghold may be the closest structure.
@@ -511,7 +577,12 @@ public class WriteBookHandler {
         			closestStructure = "Stronghold";
         			closestCoords = nearestStrongholdXYZ;
         		}
-
+        		
+	    		// v3.2.1 - calculate distances here
+	        	villageDistSq =
+	        		(nearestVillageXYZ[0]==0 && nearestVillageXYZ[1]==0 && nearestVillageXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestVillageXYZ[0]-targetX)*(nearestVillageXYZ[0]-targetX) + (nearestVillageXYZ[1]-targetY)*(nearestVillageXYZ[1]-targetY) + (nearestVillageXYZ[2]-targetZ)*(nearestVillageXYZ[2]-targetZ);
+	        	
         		if (villageDistSq <= nitwitRadius*nitwitRadius 
         				&& villageDistSq <= nitwitMax) {
         			// Village may be the closest structure.
@@ -519,7 +590,13 @@ public class WriteBookHandler {
         			closestStructure = "Village";
         			closestCoords = nearestVillageXYZ;
         		}
-        		
+
+	    		// v3.2.1 - calculate distances here
+	    		nearestMineshaftXYZ = nearestStructureLoc("Mineshaft", event);
+	        	mineshaftDistSq = 
+	    			(nearestMineshaftXYZ[0]==0 && nearestMineshaftXYZ[1]==0 && nearestMineshaftXYZ[2]==0) ? Double.MAX_VALUE :
+	    			(nearestMineshaftXYZ[0]-targetX)*(nearestMineshaftXYZ[0]-targetX) + (nearestMineshaftXYZ[1]-targetY)*(nearestMineshaftXYZ[1]-targetY) + (nearestMineshaftXYZ[2]-targetZ)*(nearestMineshaftXYZ[2]-targetZ);
+	        	
         		if (mineshaftDistSq <= nitwitRadius*nitwitRadius 
         				&& mineshaftDistSq <= nitwitMax ) {
         			// Mineshaft may be the closest structure.
@@ -527,7 +604,13 @@ public class WriteBookHandler {
         			closestStructure = "Mineshaft";
         			closestCoords = nearestMineshaftXYZ;
         		}
-        		
+
+	    		// v3.2.1 - calculate distances here
+	    		nearestTempleXYZ = nearestStructureLoc("Temple", event);
+	        	templeDistSq =
+	        		(nearestTempleXYZ[0]==0 && nearestTempleXYZ[1]==0 && nearestTempleXYZ[2]==0) ? Double.MAX_VALUE :
+	        		(nearestTempleXYZ[0]-targetX)*(nearestTempleXYZ[0]-targetX) + (nearestTempleXYZ[1]-targetY)*(nearestTempleXYZ[1]-targetY) + (nearestTempleXYZ[2]-targetZ)*(nearestTempleXYZ[2]-targetZ);
+	        	
         		if (templeDistSq  <= nitwitRadius*nitwitRadius 
         				&& templeDistSq <= nitwitMax ) {
         			// Temple may be the closest structure.
@@ -535,6 +618,12 @@ public class WriteBookHandler {
         			closestStructure = "Temple";
         			closestCoords = nearestTempleXYZ;
         		}
+
+	        	// v3.2.1 - calculate distances here
+	    		nearestMonumentXYZ = nearestStructureLoc("Monument", event);
+	        	monumentDistSq =
+		    		(nearestMonumentXYZ[0]==0 && nearestMonumentXYZ[1]==0 && nearestMonumentXYZ[2]==0) ? Double.MAX_VALUE :
+		    		(nearestMonumentXYZ[0]-targetX)*(nearestMonumentXYZ[0]-targetX) + (nearestMonumentXYZ[1]-targetY)*(nearestMonumentXYZ[1]-targetY) + (nearestMonumentXYZ[2]-targetZ)*(nearestMonumentXYZ[2]-targetZ);
 	        	
         		if (monumentDistSq  <= nitwitRadius*nitwitRadius 
         				&& monumentDistSq <= nitwitMax ) {
@@ -543,6 +632,12 @@ public class WriteBookHandler {
         			closestStructure = "Monument";
         			closestCoords = nearestMonumentXYZ;
         		}
+
+	        	// v3.2.1 - calculate distances here
+	    		nearestMansionXYZ = nearestStructureLoc("Mansion", event);
+	        	mansionDistSq =
+	        			(nearestMansionXYZ[0]==0 && nearestMansionXYZ[1]==0 && nearestMansionXYZ[2]==0) ? Double.MAX_VALUE :
+	            		(nearestMansionXYZ[0]-targetX)*(nearestMansionXYZ[0]-targetX) + (nearestMansionXYZ[1]-targetY)*(nearestMansionXYZ[1]-targetY) + (nearestMansionXYZ[2]-targetZ)*(nearestMansionXYZ[2]-targetZ);
 	        	
         		if (mansionDistSq  <= nitwitRadius*nitwitRadius 
         				&& mansionDistSq <= nitwitMax ) {

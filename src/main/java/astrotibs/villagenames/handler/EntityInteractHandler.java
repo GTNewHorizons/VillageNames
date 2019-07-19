@@ -370,9 +370,27 @@ public class EntityInteractHandler {
 				
 				try{
 					// Load in the vanilla structure file
-					MapGenStructureData structureData = (MapGenStructureData)world.perWorldStorage.loadData(MapGenStructureData.class, "Village");
-    				NBTTagCompound nbttagcompound = structureData.func_143041_a();
-    				
+					
+					// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+
+					MapGenStructureData structureData;
+		    		NBTTagCompound nbttagcompound = null;
+		    		
+		    		try
+		    		{
+		    			structureData = (MapGenStructureData)world.perWorldStorage.loadData(MapGenStructureData.class, "Village");
+		    			nbttagcompound = structureData.func_143041_a();
+		    		}
+		    		catch (Exception e) // Village.dat does not exist
+		    		{
+		    			try
+		        		{
+		        			structureData = (MapGenStructureData)world.perWorldStorage.loadData(MapGenStructureData.class, "OTGVillage");
+		        			nbttagcompound = structureData.func_143041_a();
+		        		}
+		        		catch (Exception e1) {} // OTGVillage.dat does not exist
+		    		}
+					
     				// Iterate through the entries
     				Iterator itr = nbttagcompound.func_150296_c().iterator();
     				

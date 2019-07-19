@@ -25,10 +25,37 @@ public class ReputationHandler {
      */
     public static int getVNReputationForPlayer(EntityPlayerMP player, String villageTopTag, Village village)
     {
-    	MapGenStructureData structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
-    	NBTTagCompound nbttagcompound = structureData.func_143041_a(); // Key entry list
-    	NBTBase nbtbase = nbttagcompound.getTag( villageTopTag ); // Retrieve the specific village as indicated by villageTopTag
-    	NBTTagCompound villageTag = (NBTTagCompound)nbtbase; // Cast this as a tag compound
+    	
+    	// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+		
+		MapGenStructureData structureData = null;
+		NBTTagCompound nbttagcompound = null;
+		
+		try
+		{
+			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
+			nbttagcompound = structureData.func_143041_a();
+		}
+		catch (Exception e) // Village.dat does not exist
+		{
+			try
+    		{
+    			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "OTGVillage");
+    			nbttagcompound = structureData.func_143041_a();
+    		}
+    		catch (Exception e1) {} // OTGVillage.dat does not exist
+		}
+    	
+		// v3.2.1 - Put it all in a try/catch thanks to OTG
+		NBTTagCompound villageTag = null;
+		
+		try
+		{
+			NBTBase nbtbase = nbttagcompound.getTag( villageTopTag ); // Retrieve the specific village as indicated by villageTopTag
+	    	villageTag = (NBTTagCompound)nbtbase; // Cast this as a tag compound
+		}
+		catch (Exception e) {}
+		
     	NBTTagCompound playerReps = new NBTTagCompound();
     	int VNPlayerRep = 0; // Defaults to zero
     	boolean returnDefaultRep = false; // This is flagged as "true" if we're forced to return default reputation.
@@ -138,9 +165,26 @@ public class ReputationHandler {
 		
 		// First, check to see if the player is in a village bounding box as defined in Village.dat
 		// If so, check to see if the player is also in a village as defined in villages.dat
-		
-    	MapGenStructureData structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
-		NBTTagCompound nbttagcompound = structureData.func_143041_a();
+
+		// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+
+		MapGenStructureData structureData;
+		NBTTagCompound nbttagcompound = null;
+
+		try
+		{
+			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
+			nbttagcompound = structureData.func_143041_a();
+		}
+		catch (Exception e) // Village.dat does not exist
+		{
+			try
+    		{
+    			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "OTGVillage");
+    			nbttagcompound = structureData.func_143041_a();
+    		}
+    		catch (Exception e1) {} // OTGVillage.dat does not exist
+		}
 		
 		Iterator itr = nbttagcompound.func_150296_c().iterator();
 
