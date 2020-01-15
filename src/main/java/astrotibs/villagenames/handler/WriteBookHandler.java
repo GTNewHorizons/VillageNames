@@ -187,14 +187,17 @@ public class WriteBookHandler {
             	// All the machinery to make a second page should only work if the villager is named.
             	// Alternatively, do not require a name if you have the "Name Villagers" flag off.
             	
-            	String structureHintPageText = makeSecondPage(
-            			event, targetClassPath, villageYouAreIn,
-            			locX, locY, locZ,
-            			playerRep, targetProfession, targetCareer, targetTradeCount );
-            	
-            	if (!structureHintPageText.equals("")) { // Add a second page!
-            		pagesTag.appendTag(new NBTTagString(structureHintPageText));
-            	}
+        		// Put second page call into try/catch - v3.2.2
+        		try {
+        			String structureHintPageText = makeSecondPage(
+                			event, targetClassPath, villageYouAreIn,
+                			locX, locY, locZ,
+                			playerRep, targetProfession, targetCareer, targetTradeCount );
+        			if (!structureHintPageText.equals("")) { // Add a second page!
+                		pagesTag.appendTag(new NBTTagString(structureHintPageText));
+                	}
+        		}
+        		catch (Exception e) {}
             }
         }
         		

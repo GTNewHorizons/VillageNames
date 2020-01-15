@@ -65,8 +65,8 @@ public class GeneralConfig {
 	
 	// Added in v3.2
 	public static String[] moddedVillagerHeadwearGraylist;
-	public static ArrayList<Integer> moddedVillagerHeadwearWhitelist = new ArrayList<Integer>();;
-	public static ArrayList<Integer> moddedVillagerHeadwearBlacklist = new ArrayList<Integer>();;
+	public static ArrayList<Integer> moddedVillagerHeadwearWhitelist = new ArrayList<Integer>();
+	public static ArrayList<Integer> moddedVillagerHeadwearBlacklist = new ArrayList<Integer>();
 	
 	// Added in v3.2
 	public static String[] moddedVillagerModularSkins;
