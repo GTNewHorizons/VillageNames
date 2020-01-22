@@ -148,7 +148,7 @@ public class GeneralConfig {
 	    // Changed in 3.1
 	    modernVillagerSkins = config.getBoolean("Modern Villager Profession Skins", "villager professions", true, "Use the composite 1.14 Villager skins");
 	    // Added in v3.2.3
-	    modernZombieSkins = config.getBoolean("Modern Villager Profession Skins", "villager professions", true, "Use the composite 1.14 Zombie skins");
+	    modernZombieSkins = config.getBoolean("Modern Zombie Profession Skins", "villager professions", true, "Use the composite 1.14 Zombie skins");
 	    // Added in v3.1
 	    modernVillagerTrades = config.getBoolean("Modern Villager Trades", "villager professions", true, "Use JE 1.14 / BE 1.12 trade offerings and add the Mason villager");
 	    enableNitwit = config.getBoolean("Nitwit Villager", "villager professions", true, "Enable 1.11 NitWit Villagers");
@@ -156,7 +156,7 @@ public class GeneralConfig {
 	    // Added in v3.1.1
 	    moddedVillagerHeadwear = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: renders the headwear layer for non-vanilla villager professions, if one exists.");
 	    
-	    removeMobArmor = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: automatically removes armor from villagers and zombies to avoid a rendering bug.");
+	    removeMobArmor = config.getBoolean("Remove Armor for Modern Skins", "villager professions", true, "If modern skins are enabled: automatically removes armor from villagers and zombies to avoid a rendering bug.");
 	    
 	    // Added in v3.2
 	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{
