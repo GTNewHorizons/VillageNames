@@ -3,7 +3,13 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "http://crystal.lss233.com.aslf.top/repositories/minecraft"
+			// This came packaged from Forge as http://files.minecraftforge.net/maven
+			// On Jan 15 2020, The Central Repository began requiring HTTPS repo requests, as opposed to HTTP.
+			// See: https://support.sonatype.com/hc/en-us/articles/360041287334
+			// Absolute Legend Lss233 on the Chinese forums mcbbs.net created a mirror repo
+			// Because, while slow, it's still faster than Forge downloads to China.
+			// So far it can still be accessed, allowing 1.7.10 development.
         }
         maven {
             name = "sonatype"

@@ -869,7 +869,7 @@ public class NameGenerator {
 		return careerTag;
 	}
 	
-
+	
 	/**
 	 * Scans the input string and returns "true" if there is a particular series
 	 * of sub-strings within.

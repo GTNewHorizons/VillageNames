@@ -455,9 +455,13 @@ public class EntityMonitorHandler
             	if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
             	if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));} // Added in v3.2
             	
-            	// Strip gear
-            	zombie.setCanPickUpLoot(false);
-                for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
+            	// Only strip gear if modern villager skins are on - v3.2.3
+            	if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
+            	{
+            		// Strip gear
+                	zombie.setCanPickUpLoot(false);
+                    for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
+            	}
             	
     			if ((zombie.ticksExisted + zombie.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
     					{

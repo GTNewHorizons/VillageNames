@@ -335,7 +335,7 @@ public class RenderZombieVillagerModern extends RenderBiped
     	}
     	else if ( zombie.isVillager() ) // Is a zombie villager
     	{
-    		if (GeneralConfig.modernVillagerSkins)
+    		if (GeneralConfig.modernZombieSkins) // v3.2.3
     		{
     			return this.getHashmappedSkinCombo(zombie);
     		}

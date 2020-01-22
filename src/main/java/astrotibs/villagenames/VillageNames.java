@@ -180,7 +180,7 @@ public final class VillageNames {
 			StructureOceanMonumentPieces.registerOceanMonumentPieces();
 						
 			// Register Guardian stuff here
-			EntityRegistry.registerGlobalEntityID(EntityGuardian.class, "Guardian", EntityRegistry.findGlobalUniqueEntityId(), 0x5A7A6C, 0xE57E3E);
+			EntityRegistry.registerGlobalEntityID(EntityGuardian.class, GeneralConfig.alternateGuardianNamespace ? "Guardian_VN" : "Guardian", EntityRegistry.findGlobalUniqueEntityId(), 0x5A7A6C, 0xE57E3E);
 			//RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
 			MinecraftForge.EVENT_BUS.register(new SpawnEventListener());
 			LogHelper.info("Ocean Monuments, Prismarine, Guardians, and Sponges registered");

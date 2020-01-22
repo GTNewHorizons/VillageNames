@@ -28,6 +28,7 @@ public class GeneralConfig {
 	public static boolean addConcrete;
 	public static boolean concreteWell;
 	public static boolean addOceanMonuments;
+	public static boolean alternateGuardianNamespace; // v3.2.3
 	public static boolean addIgloos;
 	public static boolean biomedictIgloos; // Added in v3.1
 	
@@ -60,8 +61,9 @@ public class GeneralConfig {
 	public static boolean allowInGameConfig;
 	
 	public static boolean modernVillagerSkins; // Changed in v3.1
-	
+	public static boolean modernZombieSkins; // Added in v3.2.3
 	public static boolean moddedVillagerHeadwear; // Added in v3.1.1
+	public static boolean removeMobArmor; // v3.2.3
 	
 	// Added in v3.2
 	public static String[] moddedVillagerHeadwearGraylist;
@@ -145,6 +147,8 @@ public class GeneralConfig {
 	    
 	    // Changed in 3.1
 	    modernVillagerSkins = config.getBoolean("Modern Villager Profession Skins", "villager professions", true, "Use the composite 1.14 Villager skins");
+	    // Added in v3.2.3
+	    modernZombieSkins = config.getBoolean("Modern Villager Profession Skins", "villager professions", true, "Use the composite 1.14 Zombie skins");
 	    // Added in v3.1
 	    modernVillagerTrades = config.getBoolean("Modern Villager Trades", "villager professions", true, "Use JE 1.14 / BE 1.12 trade offerings and add the Mason villager");
 	    enableNitwit = config.getBoolean("Nitwit Villager", "villager professions", true, "Enable 1.11 NitWit Villagers");
@@ -152,9 +156,13 @@ public class GeneralConfig {
 	    // Added in v3.1.1
 	    moddedVillagerHeadwear = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: renders the headwear layer for non-vanilla villager professions, if one exists.");
 	    
+	    removeMobArmor = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: automatically removes armor from villagers and zombies to avoid a rendering bug.");
+	    
 	    // Added in v3.2
 	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{
 				"14", // Growthcraft Apiarist
+				"-15", // Apple & Milk & Tea's Cafe Master -- turned off because I enjoy his sexy hair v3.2.3
+				"44", // Village Taverns's Shepherdess -- turned on to better differentiate from the vanilla Shepherd v3.2.3
 				"80", // Forestry Apiarist
 				"-190", // Thaumcraft Wizard -- turned off because of hat brim rendering issues
 				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
@@ -181,6 +189,12 @@ public class GeneralConfig {
 	    moddedVillagerModularSkins = config.getStringList("Modded Villager Modular Skins", "villager professions", new String[]{
 				"gc_brewer||10", // Growthcraft
 				"gc_apiarist||14", // Growthcraft
+		        "amt_cafemaster||15", // Apple & Milk & Tea --v3.2.3
+		        "amt_warehousemanager||16", // Apple & Milk & Tea --v3.2.3
+		        "vt_barwench||42", // Village Taverns --v3.2.3
+		        "vt_hostler||43", // Village Taverns --v3.2.3
+		        "vt_shepherdess||44", // Village Taverns --v3.2.3
+		        "vt_baker||45", // Village Taverns --v3.2.3
 				"msm_swordsmith||66", // More Swords mod version 2
 				"for_apiarist|for_apiarist|80", // Forestry
 				"for_arborist|for_arborist|81", // Forestry
@@ -254,6 +268,8 @@ public class GeneralConfig {
 	    debugMessages = config.getBoolean("Debug messages", "miscellaneous", false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
 	    pyramidTerracotta = config.getBoolean("Pyramid Terracotta", "miscellaneous", true, "Replace the wool blocks in desert pyramids with terracotta as in 1.8+");
 	    addOceanMonuments = config.getBoolean("Add Monuments", "miscellaneous", true, "Generate Ocean Monuments, Prismarine, Guardians, and absorbent Sponges");
+	    alternateGuardianNamespace = config.getBoolean("Alternate Guardian Namespace", "miscellaneous", false, "WARNING: TOGGLING THIS VALUE WILL REMOVE OR REPLACE ALL CURRENTLY-SPAWNED GUARDIANS FROM YOUR WORLD, INCLUDING ELDERS!\n"
+	    		+"Set this to true if you have fatal conflicts loading another mod using the entity name minecraft:Guardian by instead using the name minecraft:Guardian_VN."); // v3.2.3
 	    addIgloos = config.getBoolean("Add Igloos", "miscellaneous", true, "Generate Igloos from 1.9+");
 	    // Added in v3.1
 	    biomedictIgloos = config.getBoolean("Allow Igloos in modded biomes", "miscellaneous", false, "Igloos can generate in mods' snowy plains biomes, rather than just vanilla's Ice Plains and Cold Taiga");
@@ -486,6 +502,12 @@ public class GeneralConfig {
 		// New mod profession mapping
 		modProfessionMapping = config.getStringList("Mod Professions", "Mod Integration", new String[]{
 				"Brewer|10|0", // Growthcraft
+		        "Cafe Master|15|0", // Apple & Milk & Tea --v3.2.3
+		        "Warehouse Manager|16|0", // Apple & Milk & Tea --v3.2.3
+		        "Bar Wench|42|0", // Village Taverns --v3.2.3
+		        "Hostler|43|0", // Village Taverns --v3.2.3
+		        "Shepherd|44|0", // Village Taverns --v3.2.3
+		        "Baker|45|0", // Village Taverns --v3.2.3
 				"Apiarist|14|4", // Growthcraft
 				"Swordsmith|66|5", // More Swords mod version 2
 				"Apiarist|80|4", // Forestry

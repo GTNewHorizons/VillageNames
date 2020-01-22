@@ -226,16 +226,18 @@ public class EntityInteractHandler {
 			// Convert a non-vanilla profession into a vanilla one for the purposes of generating a hint page
 			Map<String, ArrayList> mappedProfessions = GeneralConfig.unpackMappedProfessions(GeneralConfig.modProfessionMapping);
 	    	 // If the below fails, do none
-	    	
-	    	try {
-	    		villagerMappedProfession =  
-	    				(Integer) ((targetProfession >= 0 && targetProfession <= 5)
-	    				? targetProfession : ((mappedProfessions.get("VanillaProfMaps")).get( mappedProfessions.get("IDs").indexOf(targetProfession) )));
-	    		}
-	    	catch (Exception e) {
-	    		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID. Check your formatting!");
-	    		}
-	    	
+			
+			if (target instanceof EntityVillager) { // Put this into if block -v3.2.3
+		    	try {
+		    		villagerMappedProfession =  
+		    				(Integer) ((targetProfession >= 0 && targetProfession <= 5)
+		    				? targetProfession : ((mappedProfessions.get("VanillaProfMaps")).get( mappedProfessions.get("IDs").indexOf(targetProfession) )));
+		    		}
+		    	catch (Exception e) {
+		    		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID. Check your formatting!");
+		    		}
+			} // v3.2.3
+			
 	    	// Primitive Mobs hard coding for career detection
 	    	if (targetClassPath.equals( ModObjects.PMTravelingMerchantClass ) )
 					{villagerMappedProfession = GeneralConfig.PMMerchantProfessionMap;}
@@ -269,13 +271,13 @@ public class EntityInteractHandler {
 				else if (target instanceof EntityZombie && !(target instanceof EntityPigZombie)) {
 						try {
 						LogHelper.info(
-								  (GeneralConfig.modernVillagerSkins ? "Zombie Profession: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfession()
+								  (GeneralConfig.modernZombieSkins ? "Zombie Profession: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfession()
 										: "") 
-								+ ((GeneralConfig.villagerCareers && GeneralConfig.modernVillagerSkins) ? ", Career: " + (ExtendedZombieVillager.get((EntityZombie) target)).getCareer()
+								+ ((GeneralConfig.villagerCareers && GeneralConfig.modernZombieSkins) ? ", Career: " + (ExtendedZombieVillager.get((EntityZombie) target)).getCareer()
 										: "")
-								+ (GeneralConfig.modernVillagerSkins ? ", BiomeType: " + (ExtendedZombieVillager.get((EntityZombie) target)).getBiomeType() // Added in v3.1
+								+ (GeneralConfig.modernZombieSkins ? ", BiomeType: " + (ExtendedZombieVillager.get((EntityZombie) target)).getBiomeType() // Added in v3.1
 										: "")
-								+ (GeneralConfig.modernVillagerSkins ? ", Profession Level: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfessionLevel() // Added in v3.1
+								+ (GeneralConfig.modernZombieSkins ? ", Profession Level: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfessionLevel() // Added in v3.1
 										: "")
 								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedZombieVillager.get((EntityZombie) target)).getSkinTone() // Added in v3.2
 										: "")
@@ -610,7 +612,7 @@ public class EntityInteractHandler {
 					EntityVillager villager = (EntityVillager)target;
 					if ( targetAge >= 0 ) { // Villager is an adult.
 						
-						if ( villageNearTarget == null) {//) || player.dimension != 0 ) { // There is no town.
+						if ( villageNearTarget == null) { // Remove dimension limitation - v3.2.2
 							if (!world.isRemote) {villagerConfused(player);}
 						}
 						else { // There is a town.

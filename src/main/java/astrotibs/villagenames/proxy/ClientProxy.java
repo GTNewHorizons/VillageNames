@@ -53,6 +53,10 @@ public class ClientProxy extends CommonProxy {
         {
         	//RenderingRegistry.registerEntityRenderingHandler(EntityZombie.class, new VNRenderZombie()); // Villagers with multiple professions
         	RenderingRegistry.registerEntityRenderingHandler(EntityVillager.class, new RenderVillagerModern()); // Modern modular villagers
+        }
+        // Added in v3.2.3
+        if (GeneralConfig.modernZombieSkins)
+        {
         	RenderingRegistry.registerEntityRenderingHandler(EntityZombie.class, new RenderZombieVillagerModern());  // Modern modular zombie villagers
         }
         	
