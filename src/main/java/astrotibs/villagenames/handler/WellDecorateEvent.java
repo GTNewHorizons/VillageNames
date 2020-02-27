@@ -35,6 +35,15 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
  */
 public class WellDecorateEvent {
 	
+	//@SubscribeEvent // For messing around with village generation
+	public void populateEvent(PopulateChunkEvent event)
+	{
+		if (!event.world.isRemote && event.hasVillageGenerated && GeneralConfig.debugMessages)
+		{
+			LogHelper.info("event.chunkProvider " + event.chunkProvider);
+		}
+	}
+	
 	//Random random = new Random();
 	
 	@SubscribeEvent

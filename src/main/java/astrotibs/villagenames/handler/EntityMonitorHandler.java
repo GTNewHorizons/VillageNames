@@ -21,6 +21,7 @@ import astrotibs.villagenames.tracker.ServerInfoTracker;
 import astrotibs.villagenames.tracker.ServerInfoTracker.EventType;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -534,8 +535,8 @@ public class EntityMonitorHandler
         
         // --- Monitoring villager trades --- //
         
-        else if ( event.entity instanceof EntityVillager
-        		&& !event.entity.worldObj.isRemote) {
+        else if ( event.entity.getClass().toString().substring(6).equals(Reference.villagerClass) // Explicit vanilla villager class - v3.2.4
+				&& !event.entity.worldObj.isRemote) {
         	
         	EntityVillager villager = (EntityVillager) event.entity;
         	ExtendedVillager ev = ExtendedVillager.get( villager );

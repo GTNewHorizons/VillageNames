@@ -108,6 +108,7 @@ tile.sponge.name=Inert Sponge
 tile.sponge.dry.name=Sponge
 tile.sponge.wet.name=Wet Sponge
 entity.Guardian.name=Guardian
+entity.Guardian_VN.name=Guardian
 
 # Villager careers/professions
 entity.Villager.farmer=Farmer
