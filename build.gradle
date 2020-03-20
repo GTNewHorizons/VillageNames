@@ -4,17 +4,22 @@ buildscript {
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
-			// Mirror: http://crystal.lss233.com.oglrtic.cn/repositories/minecraft/
-			// Backup: https://lss233.com/artifactory/minecraft
 			// 
 			// This came packaged from Forge as http://files.minecraftforge.net/maven
 			// On Jan 15 2020, The Central Repository began requiring HTTPS repo requests, as opposed to HTTP.
 			// See: https://support.sonatype.com/hc/en-us/articles/360041287334
+			// If go into /gradle/wrapper/gradle-wrapper.properties and change
+			// gradle-2.0-bin.zip to gradle-2.6-bin.zip things seem to work again.
+			//
 			// Absolute Legend Lss233 on the Chinese forums mcbbs.net created a mirror repo
 			// Because, while slow, it's still faster than Forge downloads to China.
 			// So far it can still be accessed, allowing 1.7.10 development.
 			// Here is Lss233 asking for this repo to be included in Forge, which was rejected:
 			// https://github.com/MinecraftForge/ForgeGradle/issues/558
+			//
+			// Mirror: http://crystal.lss233.com.oglrtic.cn/repositories/minecraft/
+			// Backup: https://lss233.com/artifactory/minecraft
+
         }
         maven {
             name = "sonatype"

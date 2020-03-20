@@ -7,24 +7,24 @@ import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import astrotibs.villagenames.config.AlienConfigHandler;
-import astrotibs.villagenames.config.AlienVillageConfigHandler;
-import astrotibs.villagenames.config.AngelConfigHandler;
-import astrotibs.villagenames.config.CustomConfigHandler;
-import astrotibs.villagenames.config.DemonConfigHandler;
-import astrotibs.villagenames.config.DragonConfigHandler;
-import astrotibs.villagenames.config.EndCityConfigHandler;
-import astrotibs.villagenames.config.FortressConfigHandler;
 import astrotibs.villagenames.config.GeneralConfig;
-import astrotibs.villagenames.config.GoblinConfigHandler;
-import astrotibs.villagenames.config.GolemConfigHandler;
-import astrotibs.villagenames.config.MansionConfigHandler;
-import astrotibs.villagenames.config.MineshaftConfigHandler;
-import astrotibs.villagenames.config.MonumentConfigHandler;
-import astrotibs.villagenames.config.StrongholdConfigHandler;
-import astrotibs.villagenames.config.TempleConfigHandler;
-import astrotibs.villagenames.config.VillageConfigHandler;
-import astrotibs.villagenames.config.VillagerConfigHandler;
+import astrotibs.villagenames.config.pieces.AlienConfigHandler;
+import astrotibs.villagenames.config.pieces.AlienVillageConfigHandler;
+import astrotibs.villagenames.config.pieces.AngelConfigHandler;
+import astrotibs.villagenames.config.pieces.CustomConfigHandler;
+import astrotibs.villagenames.config.pieces.DemonConfigHandler;
+import astrotibs.villagenames.config.pieces.DragonConfigHandler;
+import astrotibs.villagenames.config.pieces.EndCityConfigHandler;
+import astrotibs.villagenames.config.pieces.FortressConfigHandler;
+import astrotibs.villagenames.config.pieces.GoblinConfigHandler;
+import astrotibs.villagenames.config.pieces.GolemConfigHandler;
+import astrotibs.villagenames.config.pieces.MansionConfigHandler;
+import astrotibs.villagenames.config.pieces.MineshaftConfigHandler;
+import astrotibs.villagenames.config.pieces.MonumentConfigHandler;
+import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
+import astrotibs.villagenames.config.pieces.TempleConfigHandler;
+import astrotibs.villagenames.config.pieces.VillageConfigHandler;
+import astrotibs.villagenames.config.pieces.VillagerConfigHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.LogHelper;
 
@@ -46,9 +46,9 @@ public class NameGenerator {
 	 * [2] root name -- this is the CORE NAME of interest
 	 * [3] suffix
 	 */
-	public static String[] newRandomName(String nameType) {
-		
-		Random random = new Random(); // Overwrites world random because of simultaneity issues
+	public static String[] newRandomName(String nameType)
+	{
+		Random random = new Random(); // Use a new random rather than the world's random because of simultaneity issues
 		
 		// Unpack nameType into multiple possible name pools
 		
@@ -61,352 +61,397 @@ public class NameGenerator {
 		
 		// Step 0: initialize empty syllable pools, into which will be added specific source pools
 		String[] prefix = new String[]{};
+		String[] root_initial = new String[]{};
+		String[] root_sylBegin = new String[]{};
+		String[] root_terminal = new String[]{};
 		String[] suffix = new String[]{};
 		
-		String[] syl1begin = new String[]{};  String[] syl1end = new String[]{};
-						                      String[] syl1trans = new String[]{};
-		String[] syl2term = new String[]{};   String[] syl2trans = new String[]{};
-		String[] syl3term = new String[]{};   String[] syl3trans = new String[]{};
-		String[] syl4term = new String[]{};   String[] syl4trans = new String[]{};
-		String[] syl5term = new String[]{};   String[] syl5trans = new String[]{};
-		String[] syl6term = new String[]{};   String[] syl6trans = new String[]{};
-						                      String[] syl7term = new String[]{};
+		float prefix_chance = 0F;
+		float suffix_chance = 0F;
+		int numnames;
+		int normalization = 0;
+		ArrayList<Integer> pooled_length_weights = new ArrayList<Integer>();
+		
 		
 	    // Load in syllable pieces
 		
-		//if (nameType.toLowerCase().trim().equals("village")) {
-		if ( Arrays.asList(nameType_a).contains("village") ) {
-			prefix =    ArrayUtils.addAll(prefix, VillageConfigHandler.village_prefix);
-			suffix =    ArrayUtils.addAll(suffix, VillageConfigHandler.village_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, VillageConfigHandler.village_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, VillageConfigHandler.village_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, VillageConfigHandler.village_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, VillageConfigHandler.village_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, VillageConfigHandler.village_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, VillageConfigHandler.village_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, VillageConfigHandler.village_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, VillageConfigHandler.village_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, VillageConfigHandler.village_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, VillageConfigHandler.village_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, VillageConfigHandler.village_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, VillageConfigHandler.village_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, VillageConfigHandler.village_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, VillageConfigHandler.village_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("village") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, VillageConfigHandler.village_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, VillageConfigHandler.village_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, VillageConfigHandler.village_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, VillageConfigHandler.village_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, VillageConfigHandler.village_suffix);
+			
+			numnames = NamePieces.village_root_initial_default.length();
+			prefix_chance += (VillageConfigHandler.prefix_chance * numnames);
+			suffix_chance += (VillageConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<VillageConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+VillageConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(VillageConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("temple")) {
-		if ( Arrays.asList(nameType_a).contains("temple") ) {
-			prefix =    ArrayUtils.addAll(prefix, TempleConfigHandler.temple_prefix);
-			suffix =    ArrayUtils.addAll(suffix, TempleConfigHandler.temple_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, TempleConfigHandler.temple_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, TempleConfigHandler.temple_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, TempleConfigHandler.temple_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, TempleConfigHandler.temple_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, TempleConfigHandler.temple_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, TempleConfigHandler.temple_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, TempleConfigHandler.temple_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, TempleConfigHandler.temple_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, TempleConfigHandler.temple_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, TempleConfigHandler.temple_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, TempleConfigHandler.temple_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, TempleConfigHandler.temple_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, TempleConfigHandler.temple_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, TempleConfigHandler.temple_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("temple") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, TempleConfigHandler.temple_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, TempleConfigHandler.temple_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, TempleConfigHandler.temple_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, TempleConfigHandler.temple_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, TempleConfigHandler.temple_suffix);
+			
+			numnames = NamePieces.temple_root_initial_default.length();
+			prefix_chance += (TempleConfigHandler.prefix_chance * numnames);
+			suffix_chance += (TempleConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<TempleConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+TempleConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(TempleConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("mineshaft")) {
-		if ( Arrays.asList(nameType_a).contains("mineshaft") ) {
-			prefix =    ArrayUtils.addAll(prefix, MineshaftConfigHandler.mineshaft_prefix);
-			suffix =    ArrayUtils.addAll(suffix, MineshaftConfigHandler.mineshaft_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, MineshaftConfigHandler.mineshaft_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, MineshaftConfigHandler.mineshaft_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, MineshaftConfigHandler.mineshaft_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, MineshaftConfigHandler.mineshaft_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, MineshaftConfigHandler.mineshaft_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, MineshaftConfigHandler.mineshaft_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, MineshaftConfigHandler.mineshaft_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, MineshaftConfigHandler.mineshaft_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, MineshaftConfigHandler.mineshaft_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, MineshaftConfigHandler.mineshaft_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, MineshaftConfigHandler.mineshaft_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, MineshaftConfigHandler.mineshaft_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, MineshaftConfigHandler.mineshaft_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, MineshaftConfigHandler.mineshaft_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("mineshaft") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, MineshaftConfigHandler.mineshaft_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, MineshaftConfigHandler.mineshaft_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, MineshaftConfigHandler.mineshaft_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, MineshaftConfigHandler.mineshaft_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, MineshaftConfigHandler.mineshaft_suffix);
+			
+			numnames = NamePieces.mineshaft_root_initial_default.length();
+			prefix_chance += (MineshaftConfigHandler.prefix_chance * numnames);
+			suffix_chance += (MineshaftConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<MineshaftConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+MineshaftConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(MineshaftConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("fortress")) {
-		if ( Arrays.asList(nameType_a).contains("fortress") ) {
-			prefix =    ArrayUtils.addAll(prefix, FortressConfigHandler.fortress_prefix);
-			suffix =    ArrayUtils.addAll(suffix, FortressConfigHandler.fortress_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, FortressConfigHandler.fortress_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, FortressConfigHandler.fortress_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, FortressConfigHandler.fortress_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, FortressConfigHandler.fortress_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, FortressConfigHandler.fortress_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, FortressConfigHandler.fortress_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, FortressConfigHandler.fortress_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, FortressConfigHandler.fortress_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, FortressConfigHandler.fortress_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, FortressConfigHandler.fortress_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, FortressConfigHandler.fortress_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, FortressConfigHandler.fortress_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, FortressConfigHandler.fortress_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, FortressConfigHandler.fortress_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("fortress") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, FortressConfigHandler.fortress_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, FortressConfigHandler.fortress_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, FortressConfigHandler.fortress_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, FortressConfigHandler.fortress_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, FortressConfigHandler.fortress_suffix);
+			
+			numnames = NamePieces.fortress_root_initial_default.length();
+			prefix_chance += (FortressConfigHandler.prefix_chance * numnames);
+			suffix_chance += (FortressConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<FortressConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+FortressConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(FortressConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("stronghold")) {
-		if ( Arrays.asList(nameType_a).contains("stronghold") ) {
-			prefix =    ArrayUtils.addAll(prefix, StrongholdConfigHandler.stronghold_prefix);
-			suffix =    ArrayUtils.addAll(suffix, StrongholdConfigHandler.stronghold_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, StrongholdConfigHandler.stronghold_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, StrongholdConfigHandler.stronghold_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, StrongholdConfigHandler.stronghold_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, StrongholdConfigHandler.stronghold_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, StrongholdConfigHandler.stronghold_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, StrongholdConfigHandler.stronghold_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, StrongholdConfigHandler.stronghold_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, StrongholdConfigHandler.stronghold_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, StrongholdConfigHandler.stronghold_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, StrongholdConfigHandler.stronghold_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, StrongholdConfigHandler.stronghold_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, StrongholdConfigHandler.stronghold_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, StrongholdConfigHandler.stronghold_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, StrongholdConfigHandler.stronghold_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("stronghold") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, StrongholdConfigHandler.stronghold_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, StrongholdConfigHandler.stronghold_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, StrongholdConfigHandler.stronghold_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, StrongholdConfigHandler.stronghold_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, StrongholdConfigHandler.stronghold_suffix);
+			
+			numnames = NamePieces.stronghold_root_initial_default.length();
+			prefix_chance += (StrongholdConfigHandler.prefix_chance * numnames);
+			suffix_chance += (StrongholdConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<StrongholdConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+StrongholdConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(StrongholdConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("monument")) {
-		if ( Arrays.asList(nameType_a).contains("monument") ) {
-			prefix =    ArrayUtils.addAll(prefix, MonumentConfigHandler.monument_prefix);
-			suffix =    ArrayUtils.addAll(suffix, MonumentConfigHandler.monument_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, MonumentConfigHandler.monument_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, MonumentConfigHandler.monument_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, MonumentConfigHandler.monument_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, MonumentConfigHandler.monument_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, MonumentConfigHandler.monument_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, MonumentConfigHandler.monument_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, MonumentConfigHandler.monument_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, MonumentConfigHandler.monument_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, MonumentConfigHandler.monument_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, MonumentConfigHandler.monument_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, MonumentConfigHandler.monument_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, MonumentConfigHandler.monument_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, MonumentConfigHandler.monument_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, MonumentConfigHandler.monument_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("monument") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, MonumentConfigHandler.monument_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, MonumentConfigHandler.monument_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, MonumentConfigHandler.monument_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, MonumentConfigHandler.monument_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, MonumentConfigHandler.monument_suffix);
+			
+			numnames = NamePieces.monument_root_initial_default.length();
+			prefix_chance += (MonumentConfigHandler.prefix_chance * numnames);
+			suffix_chance += (MonumentConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<MonumentConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+MonumentConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(MonumentConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("endcity")) {
-		if ( Arrays.asList(nameType_a).contains("endcity") ) {
-			prefix =    ArrayUtils.addAll(prefix, EndCityConfigHandler.endcity_prefix);
-			suffix =    ArrayUtils.addAll(suffix, EndCityConfigHandler.endcity_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, EndCityConfigHandler.endcity_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, EndCityConfigHandler.endcity_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, EndCityConfigHandler.endcity_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, EndCityConfigHandler.endcity_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, EndCityConfigHandler.endcity_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, EndCityConfigHandler.endcity_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, EndCityConfigHandler.endcity_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, EndCityConfigHandler.endcity_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, EndCityConfigHandler.endcity_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, EndCityConfigHandler.endcity_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, EndCityConfigHandler.endcity_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, EndCityConfigHandler.endcity_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, EndCityConfigHandler.endcity_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, EndCityConfigHandler.endcity_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("endcity") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, EndCityConfigHandler.endcity_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, EndCityConfigHandler.endcity_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, EndCityConfigHandler.endcity_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, EndCityConfigHandler.endcity_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, EndCityConfigHandler.endcity_suffix);
+			
+			numnames = NamePieces.endcity_root_initial_default.length();
+			prefix_chance += (EndCityConfigHandler.prefix_chance * numnames);
+			suffix_chance += (EndCityConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<EndCityConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+EndCityConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(EndCityConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("mansion")) {
-		if ( Arrays.asList(nameType_a).contains("mansion") ) {
-			prefix =    ArrayUtils.addAll(prefix, MansionConfigHandler.mansion_prefix);
-			suffix =    ArrayUtils.addAll(suffix, MansionConfigHandler.mansion_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, MansionConfigHandler.mansion_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, MansionConfigHandler.mansion_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, MansionConfigHandler.mansion_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, MansionConfigHandler.mansion_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, MansionConfigHandler.mansion_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, MansionConfigHandler.mansion_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, MansionConfigHandler.mansion_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, MansionConfigHandler.mansion_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, MansionConfigHandler.mansion_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, MansionConfigHandler.mansion_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, MansionConfigHandler.mansion_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, MansionConfigHandler.mansion_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, MansionConfigHandler.mansion_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, MansionConfigHandler.mansion_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("mansion") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, MansionConfigHandler.mansion_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, MansionConfigHandler.mansion_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, MansionConfigHandler.mansion_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, MansionConfigHandler.mansion_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, MansionConfigHandler.mansion_suffix);
+			
+			numnames = NamePieces.mansion_root_initial_default.length();
+			prefix_chance += (MansionConfigHandler.prefix_chance * numnames);
+			suffix_chance += (MansionConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<MansionConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+MansionConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(MansionConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("alienvillager")) {
-		if ( Arrays.asList(nameType_a).contains("alien") ) {
-			prefix =    ArrayUtils.addAll(prefix, AlienConfigHandler.alien_prefix);
-			suffix =    ArrayUtils.addAll(suffix, AlienConfigHandler.alien_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, AlienConfigHandler.alien_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, AlienConfigHandler.alien_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, AlienConfigHandler.alien_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, AlienConfigHandler.alien_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, AlienConfigHandler.alien_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, AlienConfigHandler.alien_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, AlienConfigHandler.alien_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, AlienConfigHandler.alien_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, AlienConfigHandler.alien_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, AlienConfigHandler.alien_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, AlienConfigHandler.alien_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, AlienConfigHandler.alien_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, AlienConfigHandler.alien_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, AlienConfigHandler.alien_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("alien") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, AlienConfigHandler.alien_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, AlienConfigHandler.alien_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, AlienConfigHandler.alien_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, AlienConfigHandler.alien_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, AlienConfigHandler.alien_suffix);
+			
+			numnames = NamePiecesEntities.alien_root_initial_default.length();
+			prefix_chance += (AlienConfigHandler.prefix_chance * numnames);
+			suffix_chance += (AlienConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<AlienConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+AlienConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(AlienConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("alienvillage")) {
-		if ( Arrays.asList(nameType_a).contains("alienvillage") ) {
-			prefix =    ArrayUtils.addAll(prefix, AlienVillageConfigHandler.alienVillage_prefix);
-			suffix =    ArrayUtils.addAll(suffix, AlienVillageConfigHandler.alienVillage_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, AlienVillageConfigHandler.alienVillage_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, AlienVillageConfigHandler.alienVillage_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, AlienVillageConfigHandler.alienVillage_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, AlienVillageConfigHandler.alienVillage_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, AlienVillageConfigHandler.alienVillage_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, AlienVillageConfigHandler.alienVillage_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, AlienVillageConfigHandler.alienVillage_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, AlienVillageConfigHandler.alienVillage_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, AlienVillageConfigHandler.alienVillage_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, AlienVillageConfigHandler.alienVillage_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, AlienVillageConfigHandler.alienVillage_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, AlienVillageConfigHandler.alienVillage_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, AlienVillageConfigHandler.alienVillage_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, AlienVillageConfigHandler.alienVillage_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("alienvillage") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, AlienVillageConfigHandler.alienvillage_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, AlienVillageConfigHandler.alienvillage_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, AlienVillageConfigHandler.alienvillage_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, AlienVillageConfigHandler.alienvillage_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, AlienVillageConfigHandler.alienvillage_suffix);
+			
+			numnames = NamePieces.alienvillage_root_initial_default.length();
+			prefix_chance += (AlienVillageConfigHandler.prefix_chance * numnames);
+			suffix_chance += (AlienVillageConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<AlienVillageConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+AlienVillageConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(AlienVillageConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("goblin")) {
-		if ( Arrays.asList(nameType_a).contains("goblin") ) {
-			prefix =    ArrayUtils.addAll(prefix, GoblinConfigHandler.goblin_prefix);
-			suffix =    ArrayUtils.addAll(suffix, GoblinConfigHandler.goblin_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, GoblinConfigHandler.goblin_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, GoblinConfigHandler.goblin_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, GoblinConfigHandler.goblin_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, GoblinConfigHandler.goblin_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, GoblinConfigHandler.goblin_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, GoblinConfigHandler.goblin_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, GoblinConfigHandler.goblin_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, GoblinConfigHandler.goblin_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, GoblinConfigHandler.goblin_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, GoblinConfigHandler.goblin_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, GoblinConfigHandler.goblin_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, GoblinConfigHandler.goblin_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, GoblinConfigHandler.goblin_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, GoblinConfigHandler.goblin_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("goblin") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, GoblinConfigHandler.goblin_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, GoblinConfigHandler.goblin_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, GoblinConfigHandler.goblin_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, GoblinConfigHandler.goblin_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, GoblinConfigHandler.goblin_suffix);
+			
+			numnames = NamePiecesEntities.goblin_root_initial_default.length();
+			prefix_chance += (GoblinConfigHandler.prefix_chance * numnames);
+			suffix_chance += (GoblinConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<GoblinConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+GoblinConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(GoblinConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("golem")) {
-		if ( Arrays.asList(nameType_a).contains("golem") ) {
-			prefix =    ArrayUtils.addAll(prefix, GolemConfigHandler.golem_prefix);
-			suffix =    ArrayUtils.addAll(suffix, GolemConfigHandler.golem_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, GolemConfigHandler.golem_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, GolemConfigHandler.golem_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, GolemConfigHandler.golem_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, GolemConfigHandler.golem_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, GolemConfigHandler.golem_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, GolemConfigHandler.golem_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, GolemConfigHandler.golem_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, GolemConfigHandler.golem_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, GolemConfigHandler.golem_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, GolemConfigHandler.golem_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, GolemConfigHandler.golem_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, GolemConfigHandler.golem_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, GolemConfigHandler.golem_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, GolemConfigHandler.golem_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("golem") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, GolemConfigHandler.golem_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, GolemConfigHandler.golem_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, GolemConfigHandler.golem_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, GolemConfigHandler.golem_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, GolemConfigHandler.golem_suffix);
+			
+			numnames = NamePiecesEntities.golem_root_initial_default.length();
+			prefix_chance += (GolemConfigHandler.prefix_chance * numnames);
+			suffix_chance += (GolemConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<GolemConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+GolemConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(GolemConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("demon")) {
-		if ( Arrays.asList(nameType_a).contains("demon") ) {
-			prefix =    ArrayUtils.addAll(prefix, DemonConfigHandler.demon_prefix);
-			suffix =    ArrayUtils.addAll(suffix, DemonConfigHandler.demon_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, DemonConfigHandler.demon_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, DemonConfigHandler.demon_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, DemonConfigHandler.demon_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, DemonConfigHandler.demon_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, DemonConfigHandler.demon_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, DemonConfigHandler.demon_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, DemonConfigHandler.demon_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, DemonConfigHandler.demon_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, DemonConfigHandler.demon_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, DemonConfigHandler.demon_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, DemonConfigHandler.demon_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, DemonConfigHandler.demon_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, DemonConfigHandler.demon_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, DemonConfigHandler.demon_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("demon") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, DemonConfigHandler.demon_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, DemonConfigHandler.demon_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, DemonConfigHandler.demon_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, DemonConfigHandler.demon_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, DemonConfigHandler.demon_suffix);
+			
+			numnames = NamePiecesEntities.demon_root_initial_default.length();
+			prefix_chance += (DemonConfigHandler.prefix_chance * numnames);
+			suffix_chance += (DemonConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<DemonConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+DemonConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(DemonConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("angel")) {
-		if ( Arrays.asList(nameType_a).contains("angel") ) {
-			prefix =    ArrayUtils.addAll(prefix, AngelConfigHandler.angel_prefix);
-			suffix =    ArrayUtils.addAll(suffix, AngelConfigHandler.angel_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, AngelConfigHandler.angel_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, AngelConfigHandler.angel_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, AngelConfigHandler.angel_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, AngelConfigHandler.angel_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, AngelConfigHandler.angel_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, AngelConfigHandler.angel_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, AngelConfigHandler.angel_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, AngelConfigHandler.angel_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, AngelConfigHandler.angel_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, AngelConfigHandler.angel_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, AngelConfigHandler.angel_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, AngelConfigHandler.angel_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, AngelConfigHandler.angel_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, AngelConfigHandler.angel_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("angel") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, AngelConfigHandler.angel_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, AngelConfigHandler.angel_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, AngelConfigHandler.angel_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, AngelConfigHandler.angel_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, AngelConfigHandler.angel_suffix);
+			
+			numnames = NamePiecesEntities.angel_root_initial_default.length();
+			prefix_chance += (AngelConfigHandler.prefix_chance * numnames);
+			suffix_chance += (AngelConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<AngelConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+AngelConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(AngelConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("dragon")) {
-		if ( Arrays.asList(nameType_a).contains("dragon") ) {
-			prefix =    ArrayUtils.addAll(prefix, DragonConfigHandler.dragon_prefix);
-			suffix =    ArrayUtils.addAll(suffix, DragonConfigHandler.dragon_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, DragonConfigHandler.dragon_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, DragonConfigHandler.dragon_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, DragonConfigHandler.dragon_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, DragonConfigHandler.dragon_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, DragonConfigHandler.dragon_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, DragonConfigHandler.dragon_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, DragonConfigHandler.dragon_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, DragonConfigHandler.dragon_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, DragonConfigHandler.dragon_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, DragonConfigHandler.dragon_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, DragonConfigHandler.dragon_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, DragonConfigHandler.dragon_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, DragonConfigHandler.dragon_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, DragonConfigHandler.dragon_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("dragon") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, DragonConfigHandler.dragon_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, DragonConfigHandler.dragon_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, DragonConfigHandler.dragon_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, DragonConfigHandler.dragon_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, DragonConfigHandler.dragon_suffix);
+			
+			numnames = NamePiecesEntities.dragon_root_initial_default.length();
+			prefix_chance += (DragonConfigHandler.prefix_chance * numnames);
+			suffix_chance += (DragonConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<DragonConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+DragonConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(DragonConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
-		//else if (nameType.toLowerCase().trim().equals("custom")) {
-		if ( Arrays.asList(nameType_a).contains("custom") ) {
-			prefix =    ArrayUtils.addAll(prefix, CustomConfigHandler.custom_prefix);
-			suffix =    ArrayUtils.addAll(suffix, CustomConfigHandler.custom_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, CustomConfigHandler.custom_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, CustomConfigHandler.custom_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, CustomConfigHandler.custom_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, CustomConfigHandler.custom_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, CustomConfigHandler.custom_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, CustomConfigHandler.custom_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, CustomConfigHandler.custom_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, CustomConfigHandler.custom_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, CustomConfigHandler.custom_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, CustomConfigHandler.custom_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, CustomConfigHandler.custom_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, CustomConfigHandler.custom_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, CustomConfigHandler.custom_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, CustomConfigHandler.custom_syl7Term);
+		if ( Arrays.asList(nameType_a).contains("custom") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, CustomConfigHandler.custom_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, CustomConfigHandler.custom_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, CustomConfigHandler.custom_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, CustomConfigHandler.custom_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, CustomConfigHandler.custom_suffix);
+			
+			numnames = NamePieces.custom_root_initial_default.length();
+			prefix_chance += (CustomConfigHandler.prefix_chance * numnames);
+			suffix_chance += (CustomConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<CustomConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+CustomConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(CustomConfigHandler.syllable_count_weighting[i]);}
+			}
 		}
 		// It's possible the player made a mistake and no name pieces were correctly entered. If so, default to "villager"
 		if ( 
-				Arrays.asList(nameType_a).contains("villager") // User deliberately chose "villager"
-				|| (syl1begin.length + syl1trans.length) <= 0  // No previous entries were chosen
-				) {
-			if ( !Arrays.asList(nameType_a).contains("villager") && (syl1begin.length + syl1trans.length) <= 0 )
-				{ if (GeneralConfig.debugMessages) LogHelper.error("Submitted nameType contained no valid entries! Defaulting to Villager name pool."); }
-			prefix =    ArrayUtils.addAll(prefix, VillagerConfigHandler.villager_prefix);
-			suffix =    ArrayUtils.addAll(suffix, VillagerConfigHandler.villager_suffix);
-			syl1begin = ArrayUtils.addAll(syl1begin, VillagerConfigHandler.villager_oneSylBegin);
-			syl1end =   ArrayUtils.addAll(syl1end, VillagerConfigHandler.villager_oneSylEnd);
-			syl1trans = ArrayUtils.addAll(syl1trans, VillagerConfigHandler.villager_syl1Trans);
-			syl2term =  ArrayUtils.addAll(syl2term, VillagerConfigHandler.villager_syl2Term);
-			syl2trans = ArrayUtils.addAll(syl2trans, VillagerConfigHandler.villager_syl2Trans);
-			syl3term =  ArrayUtils.addAll(syl3term, VillagerConfigHandler.villager_syl3Term);
-			syl3trans = ArrayUtils.addAll(syl3trans, VillagerConfigHandler.villager_syl3Trans);
-			syl4term =  ArrayUtils.addAll(syl4term, VillagerConfigHandler.villager_syl4Term);
-			syl4trans = ArrayUtils.addAll(syl4trans, VillagerConfigHandler.villager_syl4Trans);
-			syl5term =  ArrayUtils.addAll(syl5term, VillagerConfigHandler.villager_syl5Term);
-			syl5trans = ArrayUtils.addAll(syl5trans, VillagerConfigHandler.villager_syl5Trans);
-			syl6term =  ArrayUtils.addAll(syl6term, VillagerConfigHandler.villager_syl6Term);
-			syl6trans = ArrayUtils.addAll(syl6trans, VillagerConfigHandler.villager_syl6Trans);
-			syl7term =  ArrayUtils.addAll(syl7term, VillagerConfigHandler.villager_syl7Term);
+				Arrays.asList(nameType_a).contains("villager") // OR, the user deliberately chose "villager"
+				|| root_initial.length <= 0  // No previous entries were chosen
+				)
+		{
+			if (!Arrays.asList(nameType_a).contains("villager") && (root_initial.length <= 0))
+			{if (GeneralConfig.debugMessages) LogHelper.error("Submitted nameType contained no valid entries! Defaulting to Villager name pool.");}
+			
+			prefix =        ArrayUtils.addAll(prefix, VillagerConfigHandler.villager_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, VillagerConfigHandler.villager_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, VillagerConfigHandler.villager_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, VillagerConfigHandler.villager_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, VillagerConfigHandler.villager_suffix);
+			
+			numnames = NamePiecesEntities.villager_root_initial_default.length();
+			prefix_chance += (VillagerConfigHandler.prefix_chance * numnames);
+			suffix_chance += (VillagerConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<VillagerConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+VillagerConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(VillagerConfigHandler.syllable_count_weighting[i]);}
+			}
+		}
+		// Normalize prefix/suffix probabilities based on the pools provided
+		if (normalization > 0)
+		{
+			prefix_chance /= normalization;
+			suffix_chance /= normalization;
 		}
 		
 		// The three pieces of interest
 		String r_prefix = "";
 		String r_suffix = "";
 		String rootName = "";
+		
+		int rootname_syllable_inserts = 1; // How many syllables are inserted between the name's starting and ending half-syllables
 		
 		// These integers will get iterated over every time a root generation fails.
 		// An exception is thrown if one gets to 50--pretty generous, if I say so.
@@ -418,250 +463,211 @@ public class NameGenerator {
 		int repeatedChar = 0;
 		int filterFail = 0;
 		
-		int r; // Integer used for randomizing
-		
 		// Step 1: Generate a prefix.
-		if ( (syl1begin.length + syl1trans.length) > 0) { // There are starting syllables.
-			
-			if ( (syl1begin.length + syl1trans.length) > prefix.length) { // There are more starting syllables than prefixes, as should be the case.
-				r = random.nextInt(syl1begin.length + syl1trans.length);
-				if (r < prefix.length) r_prefix=prefix[r]; // Prefix generated
-				if (prefix.length >= (syl1begin.length + syl1trans.length) && GeneralConfig.debugMessages) LogHelper.warn(nameType + " has more prefixes than first syllables!");
-			}
-			else { // There are fewer starting syllables than prefixes, which is abnormal. Just pick a random prefix.
-				r_prefix = (prefix.length>0) ? prefix[random.nextInt(prefix.length)] : "";
-			}
+		if (
+				random.nextFloat() < prefix_chance
+				&& normalization > 0
+				&& prefix.length > 0
+				)
+		{
+			r_prefix = (prefix[random.nextInt(prefix.length)]).trim();
 		}
-		else LogHelper.error(nameType + " has no entries for the first syllable!");
 		
-		
-		// Step 3: Generate a suffix.
-		//r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
-		if ( (syl1begin.length + syl1trans.length) > 0) { // There are starting syllables.
-			
-			if ( (syl1begin.length + syl1trans.length) > suffix.length) { // There are more starting syllables than suffixes, as should be the case.
-				r = random.nextInt(syl1begin.length + syl1trans.length);
-				if (r < suffix.length) r_suffix=suffix[r]; // Suffix generated
-				if (suffix.length >= (syl1begin.length + syl1trans.length) && GeneralConfig.debugMessages) LogHelper.warn(nameType + " has more suffixes than first syllables!");
-			}
-			else { // There are fewer starting syllables than suffixes, which is abnormal. Just pick a random suffix.
-				r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
-			}
-		}
 		
 		// Step 2: Generate a proper (root) name.
 		
 		// The while loop continues until a valid name is generated or an exception is thrown
-		while (true) {
+		while (true)
+		{
+			// Determine how long this name will be
 			
-			// Step 2.1: Determine whether or not this will be a one-syllable name
-			if ( (syl1begin.length + syl1trans.length) <= 0 ) { // There is no first syllable to choose from!
-				
-				String errorMessage = "Name type " + nameType + " has no syllable 1 entries! No name can be constructed!";
+    		// Compute the total weight of all items together
+    		int totalWeight = 0;
+    		
+    		for (int i=0; i<pooled_length_weights.size(); i++) {totalWeight += pooled_length_weights.get(i);}
+    		
+    		if (totalWeight <= 0)
+			{
+				String errorMessage = "Name type " + nameType +" total syllable weighting was non-positive! Check the weighting values in your configs.";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 			}
-			else {
-				r = random.nextInt(syl1begin.length + syl1trans.length);
-				if (r < syl1begin.length) { // This will be a monosyllabic name.
-					rootName = syl1begin[r];
-					// Now try to generate an end cap
-					r = random.nextInt(syl1begin.length);
-					if (r < syl1end.length) { // Add an ending part to the syllable
-						rootName += syl1end[r];
-					}
-					if ( syl1end.length > syl1begin.length && GeneralConfig.debugMessages) LogHelper.warn("Name type " + nameType + " has more one-syllable ending pieces than beginning pieces!");
-
-					// The root name was created. It is one syllable long.
+    		
+    		// Now choose a random index
+    		int randomObject = random.nextInt(totalWeight);
+    		for (int i = 0; i < pooled_length_weights.size(); ++i)
+    		{
+    			randomObject -= pooled_length_weights.get(i);
+    		    if (randomObject <= 0)
+    		    {
+    		    	rootname_syllable_inserts = i; // We've determined the length of the name.
+    		        break;
+    		    }
+    		}
+    		
+    		// Step 2.1: Generate the beginning sound of the name
+			if (root_initial.length <= 0)
+			{
+				String errorMessage = "Name type " + nameType + " has no root-initial entries! No name can be constructed!";
+				LogHelper.fatal(errorMessage);
+				throw new RuntimeException(errorMessage);
+			}
+			else
+			{
+				rootName = root_initial[random.nextInt(root_initial.length)];
+			}
+			
+			// Step 2.2: Generate some number of inserted syllables
+			for (int i=0; i<rootname_syllable_inserts; i++)
+			{
+				if (root_sylBegin.length <= 0)
+				{
+					String errorMessage = "Name type " + nameType + " has no root-syllable entries! You need at least one, even if it's the blank entry character: ~";
+					LogHelper.error(errorMessage);
+					rootName += "~";
 				}
-				else { // This will be a polysyllabic name.
-					// Start with a 1-syl transitional name
-					rootName = syl1trans[r-syl1begin.length];
-					
-					// Step 2.2: Determine whether to stop at syllable 2 or continue to a third
-					if ( (syl2term.length + syl2trans.length) <= 0 ) { // There is no second syllable to choose from!
-						if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 1 entries, but no syllable 2 entries!");
-						// The root name was created. It is one syllable long, but it has ended on a transitional syllable.
-					}
-					else {
-						r = random.nextInt(syl2term.length + syl2trans.length);
-						if (r < syl2term.length) { // This name will terminate at syllable 2.
-							rootName += syl2term[r];
-						}
-						else { // This name will go on to a third syllable.
-							rootName += syl2trans[r-syl2term.length];
-							
-							// Step 2.3: Determine whether to stop at syllable 3 or continue to a fourth
-							if ( (syl3term.length + syl3trans.length) <= 0 ) { // There is no third syllable to choose from!
-								if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 2 entries, but no syllable 3 entries!");
-								// The root name was created. It is two syllables long, but it has ended on a transitional syllable.
-							}
-							else {
-								r = random.nextInt(syl3term.length + syl3trans.length);
-								if (r < syl3term.length) { // This name will terminate at syllable 3.
-									rootName += syl3term[r];
-								}
-								else { // This name will go on to a fourth syllable.
-									rootName += syl3trans[r-syl3term.length];
-									
-									// Step 2.4: Determine whether to stop at syllable 4 or continue to a fifth
-									if ( (syl4term.length + syl4trans.length) <= 0 ) { // There is no fourth syllable to choose from!
-										if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 3 entries, but no syllable 4 entries!");
-										// The root name was created. It is three syllables long, but it has ended on a transitional syllable.
-									}
-									else {
-										r = random.nextInt(syl4term.length + syl4trans.length);
-										if (r < syl4term.length) { // This name will terminate at syllable 4.
-											rootName += syl4term[r];
-										}
-										else { // This name will go on to a fifth syllable.
-											rootName += syl4trans[r-syl4term.length];
-											
-											// Step 2.5: Determine whether to stop at syllable 5 or continue to a sixth
-											if ( (syl5term.length + syl5trans.length) <= 0 ) { // There is no fifth syllable to choose from!
-												if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 4 entries, but no syllable 5 entries!");
-												// The root name was created. It is four syllables long, but it has ended on a transitional syllable.
-											}
-											else {
-												r = random.nextInt(syl5term.length + syl5trans.length);
-												if (r < syl5term.length) { // This name will terminate at syllable 5.
-													rootName += syl5term[r];
-												}
-												else { // This name will go on to a sixth syllable.
-													rootName += syl5trans[r-syl5term.length];
-													
-													// Step 2.6: Determine whether to stop at syllable 6 or continue to a seventh
-													if ( (syl6term.length + syl6trans.length) <= 0 ) { // There is no sixth syllable to choose from!
-														if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 5 entries, but no syllable 6 entries!");
-														// The root name was created. It is five syllables long, but it has ended on a transitional syllable.
-													}
-													else {
-														r = random.nextInt(syl6term.length + syl6trans.length);
-														if (r < syl6term.length) { // This name will terminate at syllable 6.
-															rootName += syl6term[r];
-														}
-														else { // This name will go on to a seventh syllable.
-															rootName += syl6trans[r-syl6term.length];
-															
-															// Step 2.7: Generate a seventh syllable
-															if ( syl7term.length <= 0 ) { // There is no seventh syllable to choose from!
-																if (GeneralConfig.debugMessages) LogHelper.error("Name type " + nameType + " has transitional syllable 6 entries, but no syllable 7 entries!");
-																// The root name was created. It is six syllables long, but it has ended on a transitional syllable.
-															}
-															else {
-																r = random.nextInt(syl7term.length);
-																rootName += syl7term[r];
-																// Ended on syllable 7.
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+				else
+				{
+					rootName += root_sylBegin[random.nextInt(root_sylBegin.length)];
 				}
 			}
+			
+			// Step 2.3: Generate the ending sound of the name, if any
+			if (root_terminal.length <= 0)
+			{
+				String errorMessage = "Name type " + nameType + " has no root-terminal entries! You need at least one, even if it's the blank entry character: ~";
+				LogHelper.error(errorMessage);
+				rootName += "~";
+			}
+			else
+			{
+				rootName += root_terminal[random.nextInt(root_terminal.length)];
+			}
+			
 			
 			// Step 2V: clean up for validation
 			
 			rootName = rootName.trim();
 						
-			// Replace carots here with INTENTIONAL spaces.
-			rootName = rootName.replaceAll("\\^", " ");
+			// Remove any spaces
+			rootName = rootName.replace(" ", "");
+			// Replace underscores here with INTENTIONAL spaces.
+			rootName = rootName.replaceAll("\\_", " ");
+			// Replace carots with nothing, because they were used as blank placeholders
+			rootName = rootName.replace("^", "");
 			
 			// I have to reject this (root) name if it's not within the allotted size threshold.
 			// Also I should ensure the last three characters are not all the same.
 			
-			if ( rootName.length() <= 15 ) {
-				if ( rootName.length() >= 3 ) {
+			if ( rootName.length() <= 15 )
+			{
+				if ( rootName.length() >= 3 )
+				{
 					// Now, make sure the same characters don't appear in the name three times in a row
 					char[] nameRootArray = rootName.toLowerCase().toCharArray();
 					int consecutives = 0;
-					for(int ci = 0; ci < nameRootArray.length-2; ci++) {
-						if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2]) {
+					for(int ci = 0; ci < nameRootArray.length-2; ci++)
+					{
+						if (nameRootArray[ci] == nameRootArray[ci+1] && nameRootArray[ci] == nameRootArray[ci+2])
+						{
 							consecutives++; 
 						}
 					}
-					if (consecutives == 0) {
+					if (consecutives == 0)
+					{
 						// Do a content scan
-						if ( !contentScan(rootName) ) {
+						if ( !contentScan(rootName) )
+						{
 							// Passes all the checks! Accept the name!
 							break;
 						}
 						// Something caught the attention of the filter 
 						filterFail++;
 					}
-					else {
+					else
+					{
 						repeatedChar++; // Detected three of the same letter in a row.
 					}
 					
 				}
 				// Now ensure that a two-letter name isn't the same letter twice.
-				else if (rootName.length() == 2) {
-					if ( rootName.toLowerCase().charAt(0) != rootName.toLowerCase().charAt(1) ) {
-						// Passes all the checks! Accept the name!
-		    			break;
+				else if (rootName.length() == 2)
+				{
+					if ( rootName.toLowerCase().charAt(0) != rootName.toLowerCase().charAt(1) )
+					{
+						// Do a content scan
+						if ( !contentScan(rootName) )
+						{
+							// Passes all the checks! Accept the name!
+							break;
+						}
+						// Something caught the attention of the filter 
+						filterFail++;
 					}
 				}
-				else if (rootName.length() > 0) {
+				else if (rootName.length() > 0)
+				{
 					sizeUnderflow++; // Root name is too short.
 				}
 				else blankRoot++; // Root name is blank.
 			}
-			else { // Root name is too long.
+			else
+			{ // Root name is too long.
 				sizeOverflow++;
 			}
 			
-			// Step 2X
+			// Step 2X: The Graveyard
 			// If we counted too many invalid name attempts, throw an exception
-			if (sizeOverflow>=tooManyFailures) {
+			if (sizeOverflow>=tooManyFailures)
+			{
 				String errorMessage = "Name type " + nameType +" names are too long! Check your syllable lengths.";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 				//r_prefix = rootName = r_suffix = "";
 				//break;
-				}
-			if (sizeUnderflow>=tooManyFailures) {
+			}
+			if (sizeUnderflow>=tooManyFailures)
+			{
 				String errorMessage = "Name type " + nameType +" names are too short! Check your syllables configs.";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 				//r_prefix = rootName = r_suffix = "";
 				//break;
-				}
-			if (blankRoot>=tooManyFailures) {
+			}
+			if (blankRoot>=tooManyFailures)
+			{
 				String errorMessage = "Name type " + nameType +" Produced blank names! Check your syllable configs.";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 				//r_prefix = rootName = r_suffix = "";
 				//break;
-				}
-			if (repeatedChar>=tooManyFailures) {
+			}
+			if (repeatedChar>=tooManyFailures)
+			{
 				String errorMessage = "Name type " + nameType +" has too many consecutive repeated letters! Check your syllable configs.";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 				//r_prefix = rootName = r_suffix = "";
 				//break;
-				}
-			if (filterFail>=tooManyFailures) {
+			}
+			if (filterFail>=tooManyFailures)
+			{
 				String errorMessage = "Name type " + nameType +" has tripped the content filter too many times. Are you being naughty?";
 				LogHelper.fatal(errorMessage);
 				throw new RuntimeException(errorMessage);
 				//r_prefix = rootName = r_suffix = "";
 				//break;
-				}
+			}
 		}
 		
-		// Step 3: Generate a suffix
-		// This is is identical to generating a prefix: it checks against the length of the 1-syl lists.
-		r_suffix = (suffix.length>0) ? suffix[random.nextInt(suffix.length)] : "";
-				
-		if ( (syl1begin.length + syl1trans.length) > 0) {
-			if (suffix.length >= (syl1begin.length + syl1trans.length)) LogHelper.warn(nameType + " should have fewer prefixes than first syllable entries!");
-			else if ( random.nextInt( syl1begin.length + syl1trans.length ) >= suffix.length) r_suffix = ""; // No suffix
+		// Step 3: Generate a suffix.
+		if (
+				random.nextFloat() < suffix_chance
+				&& normalization > 0
+				&& suffix.length > 0
+				)
+		{
+			r_suffix = (suffix[random.nextInt(suffix.length)]).trim();
 		}
 		
 		// Step 4: Grab a header tag.
@@ -870,41 +876,77 @@ public class NameGenerator {
 	}
 	
 	
+	private static final String[] filterIfAnywhere = new String[]
+	{
+		"erttva", // Blck
+		"gbttns", // Stx
+		"upgvo", // Ldy arfr
+		"xphs", // F
+		"gvuf", // S
+		"laans", // Belt
+		"mncf", // Mario Party 8
+		"lffhc", // Flower
+		// Exits
+		"rybuffn", "fvarc", "navtni",
+		"eranro", // Beyond border
+		"ghyf", "rebuj", "gfvcne", // Lvs
+		"vngaru", // H
+		"qybxphp", // watch and let
+	};
+	
+	private static final String[] filterIfEntire = new String[]
+	{
+		// R guy n fam
+		"avyngf", "rvzzbp", "frvzzbp", "grvibf", "fgrvibf",
+		// A guy n fam
+		"erygvu", "vmna", "fvmna",
+		// arise chicken
+		"xpbp", "fxpbp",
+		// chicken says
+		"xphp", "fxphp", "qrxphp",
+		// seed
+		"rcne", "frcne", "qrcne", "lrcne", "tavcne",
+		// K
+		"rxvx",	"frxvx",
+		// Ldy zn
+		"gahp", "fgahp", "lgahp", "zvhd", "fzvhd", "lzzvhd",
+		// arise donkey
+		"ffn", "frffn",
+		// /b
+		"tns", "ftns", "ttns", "fttns", "lttns",
+		// one type
+		"bzbu", "fbzbu",
+		// slow
+		"qengre", "fqengre", "qrqengre",
+		// particips
+		"rug", "na", "sb", "sv", "ab", "ba", "av", "gv", "fv", "vf", "zn", "nz", "fn", "un", "ah", "vu", "frl",
+		"rz", "lz", "ub", "eb", "ro", "jb", "zh", "rj", "jr", "jn", "bl", "hu", "fh", "ch", "bg",
+		"anz", "arz", "lbo", "flbo", "anzbj", "arzbj", "yevt", "fyevt", "ru", "ur",
+		"cnep", "fcnep", "lccnep", "qrccnep",
+		"aznq", "faznq", "ynan", "fhan", "frfhan",
+		"zhp", "fzhp", "lzzhp", "trzf", "mmvw", "zfvw", "zbz", "jbj",
+		"rrc",
+		"ffvc", "lffvc", "qrffvc", "erffvc", "frffvc",
+	};
+	
 	/**
 	 * Scans the input string and returns "true" if there is a particular series
 	 * of sub-strings within.
 	 */
-	private static boolean contentScan(String inputString) {
-
-		// Updated in v3.1trades
-		String[] filterList = new String[]{
-				//"avyngf", // Russian guy - left in because there is a stronghold with that name
-				//"erygvu", // Austrian guy - left in because Russian guy was left in
-				"erttva", // Black
-				"gbttns", // Sticks
-				"upgvo", // Lady dog
-				"gahp", // Lady place
-				"zvhd", // Inventive Nordic lady place
-				"xphs", // F
-				"gvuf", // Dook
-				"laans", // A belt pack that you wear
-				"mncf", // Mario Party 8 Oopsie
-				"lffhc", // Weakling
-				"rxvx", // K
-				"rybuffn", // Exit hole
-				"fvarc", // Protrusion and exit hole
-				"navtni", // Inset exit hole
-				"eranro", // Southern companion
-				//"rcne" // Snuggle - left in because some names have that string
-				"ghyf", // Loves to love
-				"rebuj", // Loves to love
-				"vngaru", // H toon
-				};
-		
-		for (String s : filterList) {
-			if ( ( inputString ).toLowerCase().contains( new StringBuilder( rot13(s) ).reverse().toString() ) ) {return true;}
+	private static boolean contentScan(String inputString)
+	{
+		// Scan string for match anywhere 
+		for (String s : filterIfAnywhere)
+		{
+			if ((inputString).trim().toLowerCase().contains((new StringBuilder(rot13(s))).reverse().toString())) {return true;}
+		}
+		// Return true if entire string matches
+		for (String s : filterIfEntire)
+		{
+			if ((inputString).trim().toLowerCase().equals((new StringBuilder(rot13(s))).reverse().toString())) {return true;}
 		}
 		
+		// No matches : return false
 		return false;
 	}
 	
@@ -913,12 +955,12 @@ public class NameGenerator {
 	 * Rot13 codec
 	 * Adapted from: http://introcs.cs.princeton.edu/java/31datatype/Rot13.java.html
 	 */
-	public static String rot13(String s) {
-		
+	public static String rot13(String s)
+	{
 		StringBuilder out = new StringBuilder();
 		
-        for (int i = 0; i < s.length(); i++) {
-        	
+        for (int i = 0; i < s.length(); i++)
+        {
             char c = s.charAt(i);
             if       (c >= 'a' && c <= 'm') c += 13;
             else if  (c >= 'A' && c <= 'M') c += 13;

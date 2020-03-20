@@ -24,6 +24,7 @@ public class NamePieces {
 	// ó with \u00f3
 	// Ö with \u00d6
 	// ö with \u00f6
+	// ù with \u00f9
 	// ú with \u00fa
 	// ü with \u00fc
 	// û with \u00fb
@@ -44,229 +45,164 @@ public class NamePieces {
 	// H with stroke \u0126
 	// o with two acutes \u0151
 	// h with stroke \u0128
-
-	
-	// Removed color information in v3.1banner
 	
 	
-	// Prefixes and suffixes
-	public static String[] village_prefix_default = new String[]{"East", "El", "Flying", "Fort", "Fort", "Fort de", "Great", "Half", "King", "Le", "La", "Monte", "Mount", "Mount", "New", "New", "Old", "North", "Port", "Port", "Port", "Port", "Port aux", "Port of", "Port of the", "Queen", "Saint", "Saint", "Saint", "Saint", "San", "San", "San", "San", "San", "San", "San", "San", "Santa", "Santo", "Santo", "S\u00e3o", "S\u00e3o", "South", "Sri", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "St.", "The", "West"};
-	public static String[] village_suffix_default = new String[]{"Bank", "Castle", "Cays", "Canyon", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "City", "Cove", "Cove", "Cove", "de la Sierra",  "del Sol", "District", "Ferry", "Estate", "Hollow", "Inn", "Kotte", "Lake", "of the Hill", "of the Mountain", "of the Seas", "of the 7 Seas", "of the Valley", "Park", "Park", "Pine", "Point", "Point", "Port", "Port", "Town", "Town", "Town", "Town", "Town", "Town", "Town", "Village"};
+	/*
+	 * Village
+	 */
+	public static final String village_prefix_default =
+			"Bandar, Bandar, East, El, Flying, Fort, Half, King, La, Le, Monte, Mount, New, New, North, Old, Port, Port, Port, Port, Port, Port, Port, Queen, S\u00e3o, S\u00e3o, Saint, Saint, Saint, Saint, San, San, San, San, San, San, San, San, Santa, Santo, Santo, South, Sri, St., St., St., St., St., St., St., St., The, The, Valley, West"
+			;
 	
-	// Single-syllable pieces
-	public static String[] village_oneSylBegin_default = new String[]{"A", "Ba", "Ba", "Be", "Bla", "Blue", "Bo", "Bra", "Bro", "Bu", "Ca", "Cru", "Fi", "Fi", "Fi", "Fra", "Fy", "Geo", "Geo", "Gra", "Gree", "Ha", "Jo", "Jo", "Jua", "Jua", "Ka", "Kie", "Kyi", "Li", "Me", "Mi", "Mi", "Mi", "Moo", "Na", "Nuu", "Nuu", "Pa", "Po", "Pra", "Pra", "Pre", "Pri", "Pri", "Que", "Re", "Roa", "Roa", "Ro", "Ro", "Schaa", "Seou", "Seou", "Si", "Shi", "Spai", "Tree", "Tu", "Tze", "U", "Wa", "Whi", "Yo"};
-	public static String[] village_oneSylEnd_default = new String[]{"ck", "d", "d", "d", "de", "de", "des", "fsk", "ft", "gue", "gue", "gue", "hn's", "hn's", "k", "k", "l", "l", "l", "lb", "le", "lm", "lse", "m", "me", "me", "n", "n", "n", "n", "n", "n", "nk", "nn", "nce", "nce", "nce", "ne", "nsk", "nsk", "pe", "r", "re", "rge", "rge", "rh", "rk", "rn", "rnt", "rshe", "sh", "sh", "st", "te", "v", "v", "ve", "wn", "x", "y", "z", "z"};
+	public static final String village_root_initial_default = 
+			"A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, Aa, Ash, Au, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Bai, Be, Be, Be, Be, Be, Be, Be, Be, Beau, Bei, Bei, Bei, Bi, Bi, Bi, Bi, Bi, Bloe, Bo, Bo, Bo, Bra, Bra, Bra, Bra, Bra, Bra, Bra, Bri, Bri, Bri, Bru, Bru, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bue, Bue, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Cai, Cai, Cay, Cay, Ce, Cha, Cha, Cha, Chi, Chi, Cley, Cli, Clo, Co, Co, Co, Co, Co, Co, Co, Co, Co, Co, Co, Co, Co, Conde, Cre, Cre, Cru, Cu, Da, Da, Da, Da, Da, Da, De, De, De, Dha, Dha, Di, Di, Dji, Dji, Do, Do, Do, Do, Do, Do, Do, Dou, Dou, Dou, Du, Du, Du, Du, Du, Du, Du, Du, Dy, E, E, E, E, E, E, E, Ed, Ed, Fa, Fa, Fa, Fai, Fi, Fi, Fi, Fi, Fi, Fi, Fra, Free, Free, Fu, Fu, Fy, Ga, Ga, Ga, Ga, Gai, Geo, Geo, Geo, Geo, Geo, Geo, Geo, Geo, Gi, Gi, Go, Goa, Gree, Gro, Gu, Gu, Gua, Gua, Gua, Gy, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Ha, He, He, He, He, Hi, Ho, Ho, Ho, Ho, I, I, I, I, I, I, Ja, Ja, Ja, Ja, Ja, Je, Je, Je, Ji, Jo, Jo, Jo, Jo, Jo, Ju, Ju, Ju, Jua, Jua, Ka, Ka, Ka, Ka, Ka, Ka, Ka, Ka, Ka, Ka, Kai, Kha, Ki, Ki, Ki, Ki, Ki, Ki, Ki, Ki, Ki, Ki, Kie, Ko, Ko, Ko, Ko, Ku, Ku, Ku, Kua, Kua, Kyi, La, La, Li, Li, Li, Li, Li, Li, Li, Li, Li, Li, Li, Lju, Lju, Lo, Lo, Lo, Lo, Lo, Lo, Lo, Lou, Lou, Lu, Lu, Lu, Lu, Lu, Lu, Lu, Luo, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Mba, Me, Me, Me, Me, Mi, Mi, Mi, Mi, Mi, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Mo, Moo, More, More, Mu, Mu, Mu, My, My, My, N, N, N, Na, Na, Na, Na, Na, Nai, Nai, Nay, Ne, Ni, Ni, Ni, Ni, Nia, Nia, Nou, Nou, Noua, Noua, Nu, Nu, Nuu, Nuu, O, O, O, O, O, O, O, Oua, Oua, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pau, Pe, Pe, Pe, Phi, Phno, Phno, Pi, Pi, Ply, Po, Po, Po, Po, Pra, Pra, Pra, Pra, Pra, Pre, Pre, Pri, Pri, Pri, Pri, Pu, Pyo, Pyo, Que, Que, Qui, Ra, Ra, Re, Re, Rey, Rey, Ri, Ri, Ri, Ri, Ro, Ro, Ro, Ro, Ro, Roa, Roa, Sa, Sa, Sa, Sa, Sa, Sa, Sa, Sa, Sa, Sa, Sa, Sai, Sai, Schaa, Se, Se, Se, Se, Se, Seou, Seou, Sha, Shi, Si, Si, Si, Sko, Sko, So, So, Spai, Sta, Sta, Ste, Ste, Sto, Sto, Su, Su, Su, Su, Su, Sy, Sy, T, T, T\u00f3, T\u00f3, Ta, Ta, Ta, Ta, Ta, Ta, Ta, Tai, Tai, Te, Te, Te, Te, Te, Te, Tha, Thi, Thi, Thi, Ti, Ti, Ti, Ti, Ti, Ti, To, To, To, To, To, To, To, To, Tre, Tree, Tri, Tri, Troi, Tskhi, Tskhi, Tu, Tu, Tu, Tze, U, U, U, Va, Va, Va, Va, Va, Va, Ve, Vi, Vi, Vi, Vi, Vi, Vi, Vi, Vi, Vie, Vie, Wa, Wa, Wa, Wa, Wa, We, We, Wi, Wi, Wi, Wi, Wi, Wu, Xi, Ya, Ya, Ya, Ya, Ya, Ye, Ye, Yo, Z\u00fc, Za, Za, Zo"
+			;
+		
+	public static final String village_root_sylBegin_default =
+			"_Chi, _Pe, 'a, 'Dja, 'Dja, a, a, a, a, a, a, ba, ba, ba, ba, ba, bai, be, beye, bi, bi, bi, bli, bli, bli, blja, blja, bo, bo, bo, bou, bou, bra, bra, bre, bre, bu, bu, bu, bu, bu, ccra, ccra, cha, cha, che, cho, cho, ci, ckbu, cke, ckho, ckho, ckla, co, co, cre, cto, cto, cto, da, da, da, da, da, dai, ddi, ddi, de, dee, dga, dgeto, dgeto, dgo, dgo, di, dney, do, doo, dri, dri, du, e, e, e, e, e, e, e, fa, fe, fi, fi, fto, fu, g\u00e5, ga, ga, ga, ga, ga, ga, ga, ga, ga, ga, ga, ga, ge, ghda, ghda, gla, gla, go, go, go, go, go, go, gre, gre, gu, gu, gua, gue, ha, ha, ha, hli, hra, hra, i, i, i\u00fa, ia, ia, ji, ju, ju, ju, ka, ka, ka, ka, ka, ka, ka, kcho, kcho, ke, khu, khu, kja, kja, kku, ku, ku, ku, ku, kyo, kyo, l\u00e9, l\u00e9, la, la, la, la, la, la, la, la, laa, lba, lbroo, le, le, lex, lfhei, lga, lgie, lgie, lgra, lgra, lhi, li, li, li, li, li, li, li, li, li, lka, lle, lle, lle, lle, llege, lley, lli, lli, lli, lma, lmo, lmo, lni, lni, lo, lo, lo, lo, lo, lo, loo, lpa, lsi, lsi, ltai, lva, lva, lvi, m_Pe, m_Pe, m\u00e9, m\u00e9, m\u00e9, m\u00e9, m\u00e9, ma, ma, ma, ma, ma, ma, ma, mbai, mbe, mdu, mesto, mey, mey, mfo, mhe, mi, mi, mi, mma, mma, mou, mou, mou, mou, mpa, mpa, mphi, mphu, mphu, mpo, mra, msi, mste, mste, mu, mu, n_Ba, na, na, na, na, na, na, na, na, na, na, na, na, na, na, naa, nbe, ndblu, ndhoe, ndhoe, ndo, ndo, ndo, ndo, ndo, ng_Ko, nga, nga, nga, nga, nghai, ngko, ngko, ngo, ngspo, ngsto, ngsto, ngsto, ngsto, ngsto, ngui, ngui, ngya, ngya, ngyea, ngyea, nhi, ni, ni, ni, ni, ni, ni, ni, nji, nju, nka, nley, nley, nnsmou, no, no, no, no, no, noi, nra, nro, nro, nsha, nsha, nta, nta, nta, nte, nte, nti, nti, ntia, ntia, nto, nva, nva, nwi, nzi, ou, pa, pa, pa, pe, pe, pe, pe, pei, pei, pi, pi, pi, pi, pje, pje, pli, po, po, po, pu, pu, pyi, r_Sa, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, ra, rble, re, re, re, re, re, re, re, rfa, rga, rge, rge, rge, rgei, rgeto, rgeto, rgeto, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, rkha, rki, rli, rli, rli, rlo, rlo, rlo, rme, rna, rne, ro, ro, ro, ro, ro, ro, ro, ro, ro, ro, ro, rpe, rre, rsa, rsa, rsha, rsha, rto, rtou, ru, ru, ru, ru, ru, rwe, s\u00e9, s\u00e9, s\u00ed, sa, sa, sa, sa, sbo, sbo, sby, sby, sca, sca, sce, sce, sco, sco, sco, se, se, seau, seau, sha, sha, shga, shga, shi, shke, shke, shke, shke, si, si, si, si, si, sla, sla, slo, slo, sma, sma, smo, ssau, ssau, ssau, ssau, sse, sse, sse-Te, sse-Te, ssete, ssete, sta, sta, sta, sta, sta, ste, stha, sti, sti, sto, sto, sto, strie, strie, su, su, ta, ta, ta, ta, tai, te, te, te, te, the, the, thma, thma, tho, thri, ti, ti, ti, ti, tin, tio, to, to, to, to, to, tra, tre, tswoo, tta, tto, va, va, va, va, va, ve, vo, wa, wa, wai, wai, wbu, wloo, wso, xe, xe, xi, xi, ya, ya, ya, ya, ya, za, za, zny, zo, zo, zu, zu, zza, zza,"
+			+ "_Be, _Be, _Dha, _Ga, _Lu, _Lu, _Mi, _Pa, _Ro, -No, -U, -U, 'a, 'a, 'a, 'a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, ba, ba, ba, bi, bi, bla, bo, ca, ca, ca, ca, chi, ci, ci, ci, ci, cle, co, co, co, da, deau, di, di, di, di, dja, do, do, dou, dou, dzou, dzou, e, e, e, e, e, e, fi, fi, fu, fu, ga, go, go, gua, gua, hea, i, ja, ja, je, je, je, ka, ka, ka, ki, ki, ko, ko, kry, kry, ku, la, la, la, la, laa, lhei, li, li, li, li, li, li, li, li, li, lia, lla, lta, lta, lto, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, mba, mbo, mbou, mbou, mbu, mbu, me, me, mi, mi, msta, msta, msto, msto, n_Ba, n_Sa, na, na, na, na, na, na, na, na, na, na, na, na, na, na, na, na, nau, nau, nbaa, nbe, nbe, nbu, nbu, nci, nci, nd\u00e9, nda, nda, nda, ndo, ndu, ndu, ne, nge, ngo, ngo, ngto, ngto, ngto, ngwe, ngwe, nha, nha, ni, ni, ni, ni, ni, ni, ni, nje, nje, nki, nki, nna, nna, nne, no, nou, ntei, nto, nu, ny, o, pa, pe, pe, po, po, po, ppo, psbu, qui, ra, ra, ra, ra, ra\u00ed, rbye, rbye, rda, rda, re, re, re, re, rga, ri, ri, ri, ri, ri, ri, ri, ri, rka, rma, rnfo, ro, ro, ro, ro, ro, rra, rra, rra, rre, rta, rta, ru, ru, ru, ru, rul, ry, ry, s_A, s_A, s_Ai, s_Ai, sa, sa, sa, sa, sa, sa, sa, scu, si, si, sko, sko, sla, sla, spo, spo, ssou, ste, t\u00e1, t\u00e1, t\u00f1a, ta, ta, ti, ti, tie, to, to, to, tta, tte_A, tte_A, ty, u, u, va, va, vi, vi, vi, vi, vi, vi, vi, vi, vi, vi, vi, vi, vo, wa, wa, wa, you,"
+			+ "\u00f3, \u00f3, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, ba, ba, ba, bi, bo, ca, ca, ce, de, de, fo, ga, ga, ga, ga, ge, ge, go, go, go, gou, gou, ha, ha, ke, ke, kro, la, la, le, le, le, lo, lo, ma, ma, mpu, mpu, mu, na, na, na, na, nca, nda, ndri, ne, ne, o, o, pi, pi, po, r, ra, ra, ra, ra, ra, rde, re, re, ri, ri, ri, sbu, shu, shu, si, si, si, so, sta, sta, ta, te, te, ti, ti, ti, to, tu, tu, va, va, vo, vo, vo, ya, za,"
+			+ "a, ba, ba, bo, bo, fa, fa, lie, lie, lpa, lpa, m, m, ne, o, o, ri, ri, wa, wa,"
+			+ "pu, vo, vo,"
+			+ "ra"
+			;
 	
-	// Syllable 1 transitional
-	public static String[] village_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "Aa", "Ac", "Ac", "Al", "Al", "Al", "Al", "Al", "Al", "Am", "Am", "Am", "Ark", "At", "Ath", "Auck", "Ba", "Ba", "Ba", "Ba", "Ba", "Bagh", "Bagh", "Ban", "Ban", "Ban", "Ban", "Bang", "Bang", "Basse", "Basse", "Basse", "Basse", "Be", "Be", "Beau", "Bei", "Bei", "Bei", "Bel", "Bel", "Ber", "Ber", "Bis", "Bis", "Bish", "Bish", "Bran", "Bri", "Bridge", "Bridge", "Brus", "Brus", "Bur", "Bur", "Ca", "Cai", "Cai", "Cam", "Car", "Car", "Cas", "Cas", "Cay", "Cay", "Chi", "Cley", "Clif", "Clot", "Co", "Cock", "Col", "Con", "Conde", "Cor", "Cos", "Cos", "Cre", "Cre", "Cus", "Da", "Da", "Da", "Da", "De", "De", "Del", "Dha", "Dha", "Di", "Di", "Do", "Do", "Do", "Dol", "Doug", "Doug", "Du", "Du", "Dub", "Dub", "Dun", "Dus", "Dy", "E", "Ed", "Ed", "Elf", "Es", "Es", "Fa", "Fair", "Fal", "Fi", "Fi", "Free", "Free", "Ga", "Ga", "Gai", "Geor", "Geor", "Geor", "George", "George", "George", "Goats", "Gon", "Groz", "Gy", "Ha", "Har", "Hi", "Hong", "I", "Inns", "Is", "Is", "Ja", "James", "Ji", "Jo", "Jo", "Ju", "Ju", "Ju", "Ka", "Ka", "Ka", "Kai", "Kar", "Khar", "Kings", "Kings", "Kings", "Kings", "Kings", "Kings", "Ko", "Koh", "Kow", "Ku", "Ku", "La", "Li", "Li", "Lim", "Lind", "Lis", "Lis", "Lo", "Lo", "Lon", "Lon", "Lou", "Lou", "Lu", "Luo", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Ma", "Mar", "Mel", "Mi", "Mid", "Mo", "Mores", "Mores", "Mos", "Mos", "Mum", "Mus", "Mus", "My", "My", "Myth", "Nan", "Nas", "Nas", "New", "Ni", "Ni", "Nia", "Nia", "Nouak", "Nouak", "On", "Or", "Os", "Os", "Pa", "Pa", "Pa", "Pau", "Pe", "Pe", "Pe", "Phnom", "Phnom", "Pi", "Pi", "Ply", "Pra", "Pra", "Pra", "Pur", "Pyong", "Pyong", "Que", "Qui", "Ra", "Re", "Rep", "Ri", "Ri", "Ri", "Ri", "Ro", "Ro", "Roc", "Sa", "Sa", "Sa", "Sai", "Sai", "Se", "Ses", "Shang", "Skop", "Skop", "Stan", "Stan", "Stock", "Stock", "Su", "Su", "Sur", "Syd", "Syl", "Tai", "Tai", "Tal", "Tal", "Tash", "Tash", "Te", "Teh", "Teh", "Temp", "Tha", "Thim", "Thim", "Tim", "To", "To", "To", "To", "Tok", "Tom", "T\u00f3r", "T\u00f3r", "Tow", "Tre", "Troi", "Tu", "Tu", "Va", "Val", "Vec", "Vi", "Vi", "Vi", "Vien", "Vien", "Vio", "War", "War", "War", "We", "Win", "Wind", "Wind", "Wu", "Xi", "Ya", "Ya", "Yan", "Yel", "Za", "Za", "Zo", "Z\u00fc"};
+	public static final String village_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, 's, 's, 's, b, b, c, c, ch, ch, d, d, d, d, d, d, d, d, d, d, d, d, d, d, de, de, de, de, de, des, dh, dh, fsk, ft, gh, gue, gue, gue, h, h, hl, hn, hn, k, k, k, k, k, k, k, k, k, k, k, k, l, l, l, l, l, l, l, l, l, l, l, l, l, l, l, l, l, l', lb, le, le, ll, ll, lle, lle, lle, lle, lm, lm, lm, ls, ls, lse, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, mb, me, me, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, nce, nce, nce, nd, nd, nd, nd, ne, ne, ne, ne, ng, ng, ng, ng, ng, ng, ng, ng, nh, nh, nh, nn, nne, nne, ns, ns, nsk, nsk, nt, nt, nt, nt, pe, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, rd, rd, rd, rd, re, re, re, rg, rg, rg, rg, rge, rge, rh, rk, rn, rn, rnt, rre, rre, rre, rre, rre, rre, rs, rs, rs, rshe, rst, rt, rt, rt, rt, rt, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, sh, sh, st, st, st, st, st, t, t, t, t, t, t, t, t, t, t, t, t, t, te, th, th, tt, tt, v, v, ve, vn, vn, w, w, w, w, w, wn, wn, wn, wn, wn, wn, wn, wn, wn, wn, wn, wn, wn, x, x, z, z, z, z, ze"
+			;
 	
-	// Syllable 2 terminal
-	public static String[] village_syl2Term_default = new String[]{"^Bal", "^Kong", "^Penh", "^Penh", "-Terre", "-Terre", "a", "a", "'an", "ba", "ba", "bai", "bai", "bat", "ber", "beye", "bliz", "blum", "bon", "bon", "bul", "bul", "bul", "brook", "burn", "by", "by", "cat", "cat", "chol", "chott", "chott", "co", "cow", "cow", "cra", "cra", "cre", "dad", "dad", "deel", "den", "don", "don", "door", "dor", "drid", "drid", "duz", "enne", "enne", "erre", "erre", "fax", "ga", "ga", "gar", "gart", "gate", "ge's", "ge's", "ge's", "giers", "giers", "gole", "gon", "gon", "gos", "grade", "grade", "greb", "greb", "gui", "gui", "ha", "ha", "hai", "ham", "heim", "herst", "hi", "hill", "hill", "hoek", "hoek", "holm", "holm", "ia", "ia", "is", "is", "i\u00fan", "je", "je", "jing", "jing", "jul", "ka", "ka", "kar", "kar", "kek", "kek", "kent", "kent", "ket", "kings'", "kok", "kok", "ku", "ku", "kul", "kyo", "kyo", "la", "la", "lamb", "land", "land", "las", "las", "l\u00e9", "l\u00e9", "lege", "lem", "let", "let", "ley", "ley", "ley", "li", "li", "li", "lin", "lin", "lin", "lin", "lin", "lin", "ling", "lize", "lo", "lo", "lo", "lo", "loom", "loon", "low", "ma", "ma", "man", "man", "m\u00e9", "m\u00e9", "m\u00e9", "mey", "mey", "mo", "mond", "mouth", "mouth", "mur", "naan", "nak", "ney", "nic", "nis", "nis", "nis", "no", "no", "noi", "non", "ny", "ol", "pan", "pei", "pei", "pers", "phu", "phu", "ple", "po", "port", "rac", "ra", "ra", "ran", "ran", "range", "rel", "ren", "ren", "rich", "ril", "ris", "ris", "ro", "ro", "ron", "ror", "ros", "rut", "rut", "sahl", "sau", "sau", "sau", "sau", "saw", "saw", "scent", "scent", "s\u00e9", "s\u00e9", "seau", "seau", "sels", "sels", "shavn", "shavn", "side", "son", "ta", "ta", "tai", "tair", "tam", "ter", "ter", "ter", "terre", "terre", "thar", "thens", "thens", "tiane", "tiane", "tio", "to", "ton", "ton", "ton", "ton", "ton", "tor", "tos", "toum", "town", "town", "town", "town", "town", "town", "town", "town", "town", "town", "tre", "tries", "tries", "va", "wait", "wait", "ward", "ward", "wen", "wich", "wood", "yadh", "yadh", "yang", "yang", "yang", "za", "zo", "zon", "zus", "zus"};
-	// Syllable 2 transitional
-	public static String[] village_syl2Trans_default = new String[]{"^Chi", "^es", "^Pe", "'Dja", "'Dja", "a", "a", "a", "a", "a", "al", "an", "an", "ba", "ba", "ba", "bel", "ber", "bi", "bi", "ble", "blja", "blja", "bo", "bo", "bou", "bou", "bral", "bral", "bre", "bre", "bu", "bu", "bu", "cha", "cha", "ches", "ci", "cho", "co", "co", "da", "da", "da", "dain", "dams", "dams", "der", "der", "din", "dis", "dis", "do", "dor", "dor", "dur", "em", "em", "en", "en", "er", "ex", "fa", "fe", "fi", "fi", "fon", "fu", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "ga", "g\u00e5t", "ge", "gei", "go", "go", "go", "go", "go", "gu", "gu", "gua", "guer", "han", "i", "ing", "ju", "jum", "jum", "ka", "ka", "ka", "kar", "kar", "ke", "khu", "khu", "kir", "kja", "kja", "ku", "ku", "la", "la", "la", "la", "la", "laan", "lan", "lan", "lem", "lem", "lep", "let", "li", "li", "li", "li", "lin", "ling", "ling", "lips", "lo", "lo", "lom", "lon", "lon", "lotte", "lotte", "ma", "ma", "ma", "ma", "ma", "ma", "man", "man", "mas", "me", "m\u00e9", "m\u00e9", "mil", "min", "min", "mo", "mou", "mou", "mous", "mu", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "ne", "ni", "ni", "ni", "ni", "ni", "nos", "nos", "oun", "pa", "pa", "pa", "pa", "pa", "pe", "pe", "pen", "pen", "pi", "pi", "pi", "pi", "po", "po", "po", "pu", "pu", "pyi", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ra", "ran", "ran", "ran", "ras", "ras", "re", "re", "re", "re", "ren", "ri", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ro", "ro", "ro", "ro", "ro", "ron", "ru", "ru", "ru", "sa", "sa", "sa", "se", "se", "sha", "sha", "shan", "shan", "si", "si", "si", "si", "s\u00ed", "s\u00ed", "sin", "sin", "ster", "ster", "sun", "sun", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "ta", "tan", "te", "te", "te", "te", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "ti", "tin", "to", "to", "to", "to", "to", "to", "to", "to", "tra", "va", "va", "va", "va", "va", "va", "va", "va", "vern", "vi", "vo", "xi", "xi", "ya", "ya", "year", "year", "za", "za", "za", "zi"};
+	public static final String village_suffix_default =
+			"Bank, Cantonment, Cantonment, Canyon, Castle, Cays, City, Cove, Cove, de la Sierra, del Sol, District, Estate, Ferry, Hill, Hollow, Inn, Kotte, Lake, Mountain, of the Sea, Park, Park, Pine, Point, Point, Port, Port, Town, Town, Town, Town, Town, Town, Town, Valley, Vella, Vella, Village"
+			;
 	
-	// Syllable 3 terminal
-	public static String[] village_syl3Term_default = new String[]{"^Minh", "'a", "'a", "a", "a", "a", "a", "a", "a", "a", "ah", "bard", "bat", "bat", "be", "be", "bi", "bi", "bo", "bo", "bourg", "bourg", "bul", "burg", "byen", "byen", "can", "can", "cas", "cas", "chi", "cle", "co", "co", "co", "cus", "da", "da", "da", "dam", "dam", "daw", "d\u00e9", "djan", "do", "dor", "dor", "down", "du", "du", "dzou", "dzou", "er", "er", "fi", "fi", "ford", "ga", "gar", "gen", "go", "go", "got", "got", "gua", "gua", "gwe", "gwe", "head", "heim", "ja", "je", "ka", "ka", "ka", "ki", "ki", "ki", "kir", "ko", "ko", "kry", "kry", "la", "la", "la", "la", "lah", "li", "li", "li", "li", "li", "li", "lia", "ma", "ma", "ma", "ma", "ma", "man", "mand", "mba", "mi", "mi", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "\u00f1a", "nas", "nau", "nau", "ne", "ni", "ni", "ni", "ning", "no", "nou", "nu", "ny", "pan", "pest", "pest", "po", "po", "pol", "pol", "pore", "pore", "quil", "ra", "ra", "ra", "ra", "ra", "re", "re", "rest", "rest", "ri", "rin", "ro", "ro", "ru", "ru", "ry", "sa", "sa", "sa", "sa", "stad", "stad", "ta", "ta", "ta", "ta", "ta", "t\u00e1", "t\u00e1", "tar", "tar", "tein", "ter", "ti", "ti", "tie", "tis", "to", "to", "to", "to", "ton", "ton", "ton", "ton", "town", "town", "ty", "us", "us", "van", "van", "vik", "vik", "ville", "ville", "ville", "ville", "wa", "wa", "youne"};	
-	// Syllable 3 transitional
-	public static String[] village_syl3Trans_default = new String[]{"^A", "^A", "^A", "^A", "^Ai", "^Ai", "^Ba", "^Dha", "^Ga", "^Lum", "^Lum", "^Pa", "^Ro", "^Sa", "^Sa", "^Se", "^Se", "-No", "-U", "-U", "'a", "'a", "a", "a", "a", "a", "an", "baa", "blan", "bu", "bu", "bu", "ci", "ci", "ci", "ci", "ci", "ci", "di", "di", "di", "di", "dou", "dou", "e", "e", "e", "e", "fu", "fu", "ha", "ha", "i", "ja", "je", "je", "je", "je", "ka", "kun", "li", "li", "li", "ma", "ma", "ma", "ma", "ma", "me", "me", "na", "na", "na", "na", "nes", "ni", "ni", "ni", "o", "ra", "ra", "ra\u00ed", "re", "ri", "ri", "ri", "ri", "ri", "ri", "ro", "ro", "ru", "ru", "rul", "ry", "sa", "sa", "sa", "si", "si", "sko", "sko", "sla", "sla", "sou", "vi", "vi", "vi", "vi", "vi", "vi", "vo", "war"};
-	
-	// Syllable 4 terminal
-	public static String[] village_syl4Term_default = new String[]{"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "bad", "bi", "bo", "burg", "ca", "ca", "ca", "ce", "da", "fo", "gen", "gen", "go", "go", "go", "gou", "gou", "kert", "kert", "kro", "la", "la", "laam", "lem", "lem", "lem", "mud", "na", "na", "ne", "ne", "o", "o", "\u00f3n", "\u00f3n", "port", "pur", "pur", "ra", "ra", "ra", "ra", "ra", "res", "res", "rgh", "ri", "shu", "shu", "si", "si", "si", "so", "stad", "stad", "tar", "te", "te", "ti", "ti", "ti", "tor", "tu", "tu", "va", "va", "vo", "vo", "vo", "ya", "za"};
-	// Syllable 4 transitional
-	public static String[] village_syl4Trans_default = new String[]{"^la", "^la", "ba", "ba", "de", "de", "de", "dri", "gal", "gal", "ham", "ham", "lo", "lo", "ma", "ma", "na", "na", "pi", "pi", "ri", "ri", "ri", "ri"};
-	
-	// Syllable 5 terminal
-	public static String[] village_syl5Term_default = new String[]{"a", "ba", "ba", "bo", "bo", "fa", "fa", "lie", "lie", "n", "n", "o", "o", "pa", "pa"};	
-	// Syllable 5 transitional
-	public static String[] village_syl5Trans_default = new String[]{"^Be", "^Be", "^Can", "^Can", "^Ve", "^Ve", "ne", "ri", "ri"};
-	
-	// Syllable 6 terminal
-	public static String[] village_syl6Term_default = new String[]{"lla", "lla", "vo", "vo"};	
-	// Syllable 6 transitional
-	public static String[] village_syl6Trans_default = new String[]{"ga", "ga", "pu", "ton", "ton"};
-	
-	// Syllable 7 terminal
-	public static String[] village_syl7Term_default = new String[]{"ment", "ment", "ra", "wan", "wan"};
-	
+	public static final int[] village_syllable_count_weights = new int[]{
+			57, 273, 206, 90, 17, 2, 1
+			};
 	
 	
 	/*
 	 * Mineshaft name pieces
 	 */
+	public static final String mineshaft_prefix_default =
+			"Big, Big, Black, Blue, East, East, El, El, El, El, Golden, Golden, Great, Green, High, Lake, Las, Little, Long, Low, Lower, Monte, Mount, Mount, Mount, New, New, New, New, North, North, Old, Parc, Qaf, Qaf, Red, Roter, San, San, Six, South, South, St., St., Upper, West, West, white"
+			;
 	
-	// Prefixes and suffixes
-	public static String[] mineshaft_prefix_default = new String[]{"Big", "Black", "Blue", "East", "East", "El", "El", "El", "El", "Golden", "Golden", "Great", "Green", "High", "Lake", "Las", "Little", "Long", "Low", "Lower", "Monte", "Mount", "Mount", "Mount", "New", "New", "New", "New", "North", "North", "Old", "Parc", "Qaf", "Qaf", "Red", "Roter", "San", "San", "South", "South", "St.", "St.", "Upper", "West", "West", "White"};
-	public static String[] mineshaft_suffix_default = new String[]{"Bell", "Bridge", "Canyon", "Cave", "Cliff", "Cliff", "Corner", "Crag", "Creek", "Creek", "Creek", "Creek", "Dam", "Dam", "Dam", "del Diablo", "des Iles", "Down", "Down", "Earth", "Eye", "Falls", "Golden", "Grande", "Green", "Grove", "Hall", "Hill", "Hill", "Hill", "Hill", "Hills", "Jungle", "Lake", "Lake", "Lake", "Lake", "Lake", "Leg", "Loch", "Main", "Main", "Main", "Main", "Main", "Main", "Main", "Mascot", "Mia", "Mill", "Mill", "Moss", "Mountain", "Park", "Park", "Park", "Pit", "Point", "Point", "River", "River", "River", "Shaft", "Shore", "Tree", "Tunnel", "Velho"};
+	public static final String mineshaft_root_initial_default =
+			"A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, Age, Ape, Ay, B\u00e4, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Ba, Bau, Be, Be, Be, Be, Be, Be, Bea, Bea, Bi, Bi, Bi, Bi, Bi, Bla, Blue, Bo, Bo, Boo, Bou, Boy, Bra, Bre, Bri, Bri, Bro, Bro, Bro, Broo, Brou, Bru, Bru, Bru, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bu, Bw, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Cau, Ce, Ce, Ch\u00f9i, Cha, Cha, Cha, Cha, Che, Chi, Chi, Ci, Cli, Cli, Cli, Cli, Cli, Cli, Clo, Co, Co, Co, Co, Co, Co, Co, Co, Co, Co, Coo, Cra, Crei, Cri, Cro, Cy, Da, Da, Da, Da, Da, Da, De, Di, Di, Do, Do, Do, Do, Dru, Dvoi, E, E, E, E, E, E, Fa, Fa, Fe, Fe, Fe, Fi, Fi, Fle, Flee, Fo, Fo, Fra, Fro, Froo, Ga, Ga, Ga, Ge, Ge, Geo, Gi, Gi, Gi, Gi, Gi, Gla, Glei, Go, Goo, Gra, Gre, Gree, Gree, Gu, Gui, Gwa, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Hay, He, He, He, He, He, Hi, Hi, Hi, Hi, Hi, Hi, Hi, Ho, Ho, Ho, Ho, Hu, Hu, I, I, I, I, I, I, Ja, Jo, Jo, Ju, Jua, Ka, Ka, Ka, Ka, Ka, Ka, Ka, Ke, Ke, Ke, Ke, Kee, Kho, Ki, Ki, Ki, Ki, Ki, Ki, Ki, Kii, Klo, Ko, Ko, Ko, Kra, Kre, Ku, Ku, L\u00f8, La, La, La, La, La, La, Le, Le, Li, Li, Li, Lo, Lo, Lu, Lu, Lu, Ly, M\u00e9, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Ma, May, Me, Mi, Mi, Mi, Mi, Mi, Mo, Mo, Mo, Mo, Mo, Mo, Mu, Mu, Mu, Na, Na, Na, Na, Na, Ne, Ne, Neui, No, No, No, No, Noo, Nu, O, O, O, O, O, O, Oa, Oa, Ou, P, P\u00eb, Pa, Pa, Pa, Pa, Pa, Pa, Pa, Pau, Pe, Pe, Pe, Pe, Pe, Phoe, Pi, Pi, Plea, Plu, Pre, Pri, Prie, Pro, Pro, Pu, Py, Qui, Qui, Ra, Ra, Ra, Ra, Ra, Ray, Re, Re, Ri, Ri, Ro, Rou, Ru, Sa, Sa, Sa, Schuy, Se, Se, Se, Sea, Sha, Sha, Shi, Shu, Si, Si, Sli, Smi, Smu, Sna, Snae, So, Sou, Spa, Spri, Sta, Sta, Sta, Stave, Ste, Stee, Stee, Sti, Stra, Stro, Stu, Su, Su, Su, Su, Su, Su, Ta, Ta, Ta, Ta, Ta, Tau, Te, Te, Tha, The, Tho, Thu, Ti, Ti, To, To, Trea, Tu, Tu, Tu, Ty, Ty, U, U, Va, Vi, Vla, Wa, Wa, Wa, Wa, Wa, We, We, We, Whi, Wi, Wi, Wi, Wi, Wi, Wi, Wi, Wi, Wi, Wie, Wo, Wri, Wu, Wy, Ye, Yo, You, Yu, Za, Zi, Zo, Zo"
+			;
+			
+	public static final String mineshaft_root_sylBegin_default =
+			"_To, a, a, a, a, a, a, bbi, bbi, be, be, be, be, be, bfie, bi, bi, bi, bu, bu, chi, chni, ckbi, cke, cki, ckie, ckle, cko, cno, co, cro, cto, da, da, da, da, da, da, ddi, dfo, dfo, dgee, dgewa, dgeway, di, di, dley, dswo, du, dve, dwa, dwe, dy, e, f, fe, ffeau, ffie, fie, fl\u00f3, fto, fto, ga, ga, ga, ga, ggi, ggle, ghto, ghto, gla, gne, gu, h\u00e4, ha, hna, hnso, i, i, i, je, ka, kda, ke, ke, ke, khou, kie, kke, kna, ku, ky, la, la, la, la, la, laa, lau, lbe, lbi, lby, lde, ldesley, ldo, ldwa, le, leswoo, ley, ley, lfe, lga, lgie, lgoo, lhou, li, li, li, li, li, llcre, llcro, lle, llei, llfa, llgro, lli, lli, lli, lli, lli, llia, llie, llve, lma, lma, lmai, lmoy, lmy, lnhu, lo, lp\u00fa, lphi, lqi, lroo, lse, lse, lstho, ltby, lto, lto, lu, lu, lu, lva, lve, ly, lya, ma, ma, me, me, mesta, mesta, mfu, mi, mie, mla, mme, mme, mmi, mmo, mni, mro, mta, na, na, na, nco, ncy, ncy, nda, nde, ndee, ndho, ndle, ndle, ndo, ndre, ndri, ndso, ndso, ndso, ndwoo, ne, ne, nesi, nesu, nga, nghi, ngma, ngsbe, ngsbu, nhei, ni, ni, ni, ni, ni, ni, ni, ni, nkgru, nkli, nla, nlei, nlou, nme, nna, nne, nne, nne, nni, nno, nny, nny, no, nri, nro, nse, nshi, nsi, nsley, nsley, nso, nswi, nswi, nte, nte, ntga, nto, ntre, ntwoo, nty, nty, nve, nwoo, nye, nzewi, o, pi, po, ppe, ppe, ppe, psto, pu, pu, ra, ra, ra, ra, ra, rba, rchtree, rcro, rcu, rdi, rdy, re, re, reoa, rga, rgo, rgo, rgrea, rgrea, rgy, ri, ri, ri, rkfie, rkha, rkshi, rley, rli, rli, rlo, rma, rmi, rmi, rna, rnbu, rnda, rni, ro, ro, ro, ro, rra, rra, rray, rre, rro, rro, rroi, rsema, rsha, rsley, rsley, rso, rso, rte, rthla, rthu, rthu, rto, rto, ru, rve, rwa, rwi, rwo, s\u00e9, sa, sa, sbe, sca, sco, se, sfo, she, shee, sio, ska, sley, sley, sma, sma, so, so, sshi, sta, ste, ste, stley, sto, sto, stray, sty, sya, ta, ta, tche, tche, tche, te, tfie, tha, the, thlee, tla, tley, to, tra, tte, tti, ttle, ttle, ttle, tto, tto, tto, twoo, ve, ve, ve, wa, we, we, wla, wle, wso, xey, yo, yu, ze, zu,"
+			+ "_Ba, _Bu, _To, \u00f1o, a, a, a, a, ba, ba, ba, bou, bu, ca, ca, ca, chae, chee, co, co, czka, de, dee, dko, do, do, dre, dy, e, fo, i, ke, ku, ku, l\u00e4, la, le, ley, li, lla, lla, llta, lsbe, lu, lu, lu, ma, ma, mi, mpi, mpto, mu, n_Co, n-Uu, na, na, na, na, na, na, na, nau, nba, nda, ndwa, nga, nge, ngley, ngto, ngto, ngto, nhu, ni, ni, nke, nmi, nne, nni, no, no, nsvi, ntry, ntu, nwoo, o, pi, qua, r, ra, ra, ra, rca, rcy, rdie, re, rei, rfie, ri, ri, ri, rley, rley, rlie, rmi, rna, rni, ro, rpe, rse, rsha, rso, rwoo, ry, ry, sa, sa, sby, se, sha, shi, sho, so, so, so, sque, sto, ta, te, te, ti, tia, to, to, to, to, tvi, va, va, ve, ve, vni, wa, wa, wa, wa, ye, z\u00eb,"
+			+ "a, a, a, ca, ca, che, da, do, do, e, ga, hu, i, ka, ka, le, lgoi, lmi, lu, na, nda, ndi, no, nte, ntei, ntha, ra, rgw, rra, rry, rry, rsa, ry, ry, ry, shi, shi, si, ska, stine, t\u00fa, ta, ta, thi, tio, tr\u00eb, vaa, w,"
+			+ "e, nska, ra, ra, te, thu, ya"
+			;
 	
-	// Single-syllable pieces
-	public static String[] mineshaft_oneSylBegin_default = new String[]{"A", "Ay", "Ba", "B\u00e4", "Be", "Be", "Bea", "Boo", "Boy", "Cha", "Che", "Ch\u00f9i", "Cli", "Cli", "Co", "Co", "Cro", "Da", "Da", "Da", "Do", "Fe", "Fe", "Fi", "Flee", "Fo", "Fo", "Fro", "Froo", "Geo", "Gi", "Ha", "Hay", "Hi", "Hi", "Ho", "I", "Ka", "Kho", "La", "May", "Me", "Mi", "Na", "Neui", "Noo", "Pi", "Pi", "Prie", "Qui", "Ra", "Ra", "Ru", "Sli", "Smi", "Sna", "Sta", "Stee", "Ta", "To", "Va", "Wa", "We", "We", "Whi", "Wri", "Ye"};
-	public static String[] mineshaft_oneSylEnd_default = new String[]{"c", "ce", "d", "dge", "ff", "ffs", "g", "g's", "ght", "k", "k", "ke", "l", "le", "le", "le", "lk", "ll", "ll", "ll", "lls", "lm", "lm", "m", "m", "m", "m", "mbe", "me", "n", "n", "n", "nce", "nd", "ne", "nn", "ns", "nsch", "p", "p", "r", "r", "r", "r", "rce", "rd", "rge's", "rke", "rn", "rr", "rshe", "rst", "s", "s", "ss", "st", "t", "t", "th", "th", "vd", "ves", "w", "w", "we", "wk"};
+	public static final String mineshaft_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, c, c, c, c, ce, ch, ch, ck, ck, ck, ck, ck, d, d, d, d, d, d, d, d, d, d, d, de, de, dge, ff, ffs, ft, ft, ft, g, g's, ge, gh, ght, h, h, j, j, k, k, k, ke, ke, ke, ks, l, l, l, l, l, l, l, l, l, ld, ld, ld, ld, lds, le, le, le, le, le, le, le, le, lk, ll, ll, ll, ll, ll, ll, ll, ll, ll, ll, lle, lle, lls, lls, lm, lm, ls, m, m, m, m, m, m, m, m, mbe, me, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, nce, nd, nd, nd, nd, nds, ne, ne, ne, ne, ng, ng, ng, ng, ng, nks, nn, ns, ns, ns, nsch, nt, nt, nt, p, p, p, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, rce, rd, rd, rd, rd, rd, rd, re, re, re, re, rg, rg, rg, rg, rge, rgh, rke, rke, rn, rn, rpe, rr, rs, rs, rs, rshe, rst, rst, rt, rth, rth, s, s, s, s, s, s, s, s, s, s, s, s, se, se, se, sh, sh, ss, st, st, t, t, t, t, t, t, t, t, t, th, th, tt, vd, ve, ve, ves, ves, w, w, w, w, w, w, we, wk, ws, x, x, z"
+			;
 	
-	// Syllable 1 transitional
-	public static String[] mineshaft_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "A", "A", "A", "Ad", "Ag", "Age", "Al", "Al", "Al", "Al", "Ald", "Ape", "Ar", "Ar", "Ar", "Ast", "At", "Ba", "Bal", "Bal", "Bar", "Barn", "Bat", "Bath", "Baus", "Bean", "Bed", "Bed", "Ber", "Bes", "Bi", "Bick", "Bils", "Bir", "Birch", "Black", "Blue", "Bo", "Boch", "Boul", "Brad", "Bren", "Bridge", "Brins", "Bro", "Brods", "Bronze", "Brook", "Brough", "Brun", "Bruns", "Bu", "Buck", "Buck", "Bul", "Bul", "Bull", "Bur", "Bur", "Bur", "Bur", "Bur", "Bwll", "Ca", "Ca", "Ca", "Cal", "Cam", "Can", "Can", "Car", "Ce", "Cen", "Chal", "Chan", "Chat", "Chi", "Chif", "Ci", "Cli", "Clif", "Clif", "Clip", "Clo", "Co", "Co", "Con", "Cool", "Cop", "Cop", "Cop", "Cor", "Cor", "Cran", "Creigh", "Cris", "Cyn", "Dal", "Dan", "Dar", "Den", "Di", "Dis", "Do", "Dol", "Dom", "Drum", "Dvoi", "E", "Eck", "El", "El", "Em", "Es", "Fa", "Fan", "Fern", "Fish", "Flet", "Frank", "Ga", "Gal", "Gar", "Ger", "Get", "Gi", "Gi", "Gib", "Gid", "Gla", "Glei", "Gol", "Goon", "Gras", "Green", "Green", "Gres", "Gui", "Gun", "Gwa", "Ha", "Hal", "Har", "Har", "Har", "Hat", "Hed", "Hen", "Hen", "Her", "Her", "Hi", "Hig", "Hil", "Hill", "Hill", "Home", "Home", "Horn", "Hun", "Husk", "I", "I", "I", "I", "Ja", "Jo", "John", "Jua", "Jun", "Ka", "Ka", "Ka", "Kal", "Kan", "Kath", "Kee", "Kel", "Ken", "Kent", "Kers", "Ki", "Ki", "Kii", "Kil", "Kiln", "Kin", "Kings", "Kit", "Klo", "Ko", "Kof", "Kongs", "Kras", "Krem", "Ku", "Ku", "La", "Lac", "Law", "Law", "Lax", "Leck", "Les", "Li", "Lin", "Lit", "Lo", "L\u00f8k", "Long", "Lu", "Lu", "Lu", "Ly", "Ma", "Ma", "Ma", "Ma", "Malt", "Man", "Mar", "Mar", "Mar", "Mark", "Math", "McAr", "McAr", "McCau", "McIn", "M\u00e9", "Mi", "Mi", "Mil", "Mitch", "Mo", "Mo", "Mor", "Mor", "Mos", "Mos", "Mu", "Mul", "Mur", "Na", "Na", "Na", "Nant", "Ne", "New", "None", "Nor", "Norse", "North", "Nun", "O", "O", "O", "O", "O", "Oak", "Oak", "Or", "Out", "P", "Pa", "Pa", "Pa", "Pa", "Pad", "Par", "Park", "Paul", "Pe", "Pen", "Pen", "Pen", "Per", "P\u00ebr", "Phoe", "Pleas", "Plu", "Pre", "Prim", "Pro", "Pron", "Pu", "Py", "Quin", "Rab", "Rag", "Ram", "Ray", "Re", "Re", "Ridge", "Ris", "Rol", "Round", "Sa", "Sal", "Sand", "Schuy", "Se", "Sea", "Sem", "Ser", "Sha", "Shan", "Shire", "Shut", "Sil", "Sis", "Smug", "Snae", "So", "Sou", "Spa", "Spring", "Stan", "Stan", "Stave", "Steet", "Ster", "Sti", "Strat", "Strong", "Stub", "Sul", "Sum", "Sun", "Sun", "Sun", "Sut", "Ta", "Ta", "Tan", "Tas", "Tau", "Tel", "Ten", "Thas", "Thek", "Tho", "Thur", "Tin", "Tins", "Tow", "Tread", "Tu", "Tu", "Tuf", "Tyldes", "Tyne", "U", "U", "Vic", "Vlah", "Wa", "Wales", "War", "Wat", "West", "Wi", "Wi", "Wie", "Wil", "Wil", "Wil", "Wind", "Wind", "Wind", "Wit", "Wors", "Wu", "Wy", "York", "You", "Yu", "Zas", "Zink", "Zo", "Zoll"};
-	
-	// Syllable 2 terminal
-	public static String[] mineshaft_syl2Term_default = new String[]{"all", "ant", "ant", "ar", "banks", "berg", "berg", "berg", "bin", "bird", "bird", "bit", "burgh", "by", "by", "ca", "chell", "cher", "co", "con", "crest", "croft", "croft", "croft", "cy", "cy", "da", "dale", "dale", "dale", "dall", "dan", "dee", "den", "dic", "din", "don", "dred", "dril", "dy", "ell", "ells", "er", "er", "er", "ey", "fa", "feau", "fell", "fer", "field", "field", "field", "field", "ford", "ford", "ford", "gaj", "gan", "gans", "gar", "gart", "gee", "gie", "gler", "go", "greave", "greaves", "grove", "gus", "gyle", "ham", "hill", "hole", "houn", "house", "hurst", "i", "ie", "ing", "itt", "jek", "ken", "ken", "kiep", "la", "lan", "land", "land", "lands", "lar", "las", "leen", "leigh", "lein", "ler", "lers", "les", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "ley", "liam", "lin", "lin", "lin", "ling", "ling", "ling", "llie", "l\u00f3n", "lot", "lou", "lun", "main", "man", "man", "man", "man", "max", "mer", "met", "mier", "mond", "moy", "my", "na", "na", "nar", "nel", "ner", "new", "nish", "nix", "nor", "ny", "o", "oaks", "os", "per", "per", "phin", "pin", "pol", "p\u00fan", "ra", "ra", "ra", "ray", "ray", "ren", "rine", "ris", "rise", "ro", "rock", "rock", "ron", "root", "rose", "rows", "sa", "s\u00e9", "sens", "sham", "sheen", "shi", "shine", "shire", "side", "side", "sion", "son", "son", "son", "sor", "sor", "sor", "stake", "stake", "stone", "such", "ta", "tar", "ter", "ters", "tez", "thorpe", "thur", "thur", "tle", "tle", "to", "to", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "tree", "ty", "tyn", "tyre", "vel", "ver", "vers", "warke", "was", "wash", "way", "well", "wen", "wick", "wick", "wing", "wood", "wood", "wood", "wood", "wood", "worth", "worth", "y", "zels", "zus"};
-	// Syllable 2 transitional
-	public static String[] mineshaft_syl2Trans_default = new String[]{"^To", "a", "amp", "an", "an", "av", "ber", "ber", "ber", "ber", "ber", "bi", "bi", "bil", "bu", "bu", "bu", "chi", "cov", "cu", "da", "da", "da", "der", "di", "ding", "dle", "dle", "do", "du", "dy", "er", "fie", "fn", "ga", "gar", "gins", "go", "goor", "gru", "ha", "h\u00e4", "hei", "i", "i", "i", "i", "i", "ing", "ka", "ke", "ker", "ku", "la", "la", "la", "la", "laan", "lau", "len", "li", "li", "li", "li", "licz", "ling", "ling", "lo", "lu", "lu", "lym", "ma", "ma", "ma", "ma", "mels", "mer", "mer", "mfu", "mi", "mis", "mit", "na", "na", "nall", "nas", "ne", "ne", "ner", "ni", "ni", "ni", "ni", "ni", "ning", "no", "no", "ny", "o", "ol", "per", "pu", "pu", "qi", "ra", "ra", "ra", "ra", "ran", "ren", "res", "ri", "ro", "roi", "ru", "sa", "se", "se", "se", "so", "sol", "son", "ta", "tar", "te", "te", "ten", "ter", "ti", "tle", "to", "ton", "ton", "tre", "va", "ve", "ven", "ven", "ver", "ver", "wa", "wa", "yad", "yan", "yel", "yo", "yu"};
-	
-	// Syllable 3 terminal
-	public static String[] mineshaft_syl3Term_default = new String[]{"-Uul", "a", "a", "a", "age", "bach", "bah", "ban", "berg", "bou", "by", "ca", "ca", "car", "carn", "chael", "chee", "deen", "den", "die", "do", "dor", "dre", "dy", "ein", "fields", "ger", "i", "ic", "ka", "ken", "ko", "la", "l\u00e4", "laj", "las", "les", "ley", "ley", "ley", "lie", "mi", "mi", "na", "na", "na", "nant", "naut", "nda", "ndwa", "net", "ni", "nke", "no", "no", "\u00f1o", "on", "pic", "pin", "ra", "ren", "rw", "ry", "set", "shaw", "shaw", "shi", "shore", "son", "son", "son", "ta", "tah", "te", "ter", "ti", "tian", "to", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "ton", "try", "ture", "van", "van", "ville", "ville", "wa", "wa", "wood", "wood", "y", "ye", "z\u00eb"};	
-	// Syllable 3 transitional
-	public static String[] mineshaft_syl3Trans_default = new String[]{"^Bat", "^Bur", "^Co", "^Tol", "a", "a", "ar", "bas", "bu", "co", "con", "cy", "en", "er", "ey", "fon", "hu", "i", "i", "ku", "ku", "lu", "lu", "lu", "ma", "ma", "mi", "mu", "na", "na", "ni", "ni", "ni", "per", "quar", "que", "ra", "ra", "ri", "ri", "ro", "sa", "sal", "sen", "so", "ver", "wa", "was"};
-	
-	// Syllable 4 terminal
-	public static String[] mineshaft_syl4Term_default = new String[]{"a", "a", "a", "ca", "can", "da", "do", "do", "ed", "gan", "goi", "gwm", "ka", "ka", "ka", "lu", "mi", "ndi", "non", "ra", "ra", "rës", "ry", "ry", "ry", "ry", "sal", "shi", "shi", "si", "ta", "ta", "te", "tein", "thal", "thi", "tine", "tion", "t\u00fan", "wr", "y"};
-	// Syllable 4 transitional
-	public static String[] mineshaft_syl4Trans_default = new String[]{"chen", "da", "hu", "i", "le", "na", "vaa"};
-	
-	// Syllable 5 terminal
-	public static String[] mineshaft_syl5Term_default = new String[]{"e", "ra", "ra", "ska", "ted", "thu", "ya"};	
-	// Syllable 5 transitional
-	public static String[] mineshaft_syl5Trans_default = new String[]{};
-	
-	// Syllable 6 terminal
-	public static String[] mineshaft_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] mineshaft_syl6Trans_default = new String[]{};
+	public static final String mineshaft_suffix_default =
+			"Bell, Bridge, Canyon, Cave, Cliff, Cliff, Corner, Crag, Creek, Creek, Creek, Creek, Dam, Dam, Dam, del Diablo, des Iles, Down, Down, Earth, Eye, Falls, Grande, Green, Grove, Hall, Hill, Hill, Hill, Hill, Hills, Jungle, Lake, Lake, Lake, Lake, Lake, Leg, Loch, Main, Main, Main, Main, Main, Main, Main, Mascot, Mia, Mill, Mill, Moss, Mountain, Park, Park, Park, Pit, Point, Point, Queen, River, River, River, Shaft, Shore, Tree, Tunnel, Velho"
+			;
 
-	// Syllable 7 terminal
-	public static String[] mineshaft_syl7Term_default = new String[]{};
-	
+	public static final int[] mineshaft_syllable_count_weights = new int[]{
+			67, 241, 99, 41, 7
+			};
 	
 	
 	/*
 	 * Stronghold name pieces
 	 */
-
-	// Prefixes and suffixes
-	public static String[] stronghold_prefix_default = new String[]{"A", "Devils", "Great", "Great", "Per", "Santa"};
-	public static String[] stronghold_suffix_default = new String[]{"Box", "Castle", "Citadel", "Citadel", "Eredo", "Fortress", "Fortress", "Fortress", "Hill", "Shrine", "Subterrane", "Zuu"};
-
-	// Single-syllable pieces
-	public static String[] stronghold_oneSylBegin_default = new String[]{"Gri", "Hei", "Ja", "Kli", "Me", "Sto", "Wa", "Yo"};
-	public static String[] stronghold_oneSylEnd_default = new String[]{"de", "m", "n", "n", "rk", "s", "t", "tz"};
-
-	// Syllable 1 transitional
-	public static String[] stronghold_syl1Trans_default = new String[]{"A", "A", "\u00c1", "Af", "Al", "Al", "Am", "An", "At", "Au", "Ba", "Ba", "Bag", "Bar", "Bar", "Bat", "Bei", "Bir", "Bou", "Brim", "Cai", "Cha", "Cha", "Ches", "Con", "Con", "Cor", "Cor", "Cot", "Czech", "Da", "Der", "Di", "Du", "Du", "El", "Er", "Fa", "Fa", "Flo", "Flod", "Ger", "G\u00f6", "Gor", "Gus", "Ha", "He", "Hex", "Hil", "Hin", "Hu", "In", "Jang", "Je", "Je", "Je", "Jus", "Ka", "Ke", "Ko", "Krem", "Kum", "Lon", "Lu", "Lu", "M", "Ma", "Man", "Mar", "Me", "Mes", "Mie", "Mo", "Mont", "New", "Ni", "Ni", "Of", "Pacz", "Pan", "Pan", "Pet", "Ports", "Qry", "Quang", "Ra", "Rha", "Ru", "Sac", "Sax", "Se", "Sen", "Ser", "Ser", "Si", "Sieg", "Sta", "Su", "Sung", "Svea", "Tlax", "Tor", "Tra", "Tri", "Val", "Vic", "Vis", "Xi"};
-
-	// Syllable 2 terminal
-	public static String[] stronghold_syl2Term_default = new String[]{"'an", "^Lev", "^Ng\u00e3i", "als", "ax", "bin", "bo", "borg", "by", "co", "den", "don", "fa", "fried", "gan", "go", "gu", "gush", "jan", "jing", "ka", "k\u00f3w", "lin", "lin", "mouth", "nar", "no", "on", "os", "pel", "pent", "pine", "ro", "ry", "sea", "sel", "seong", "stone", "sus", "tav", "ter", "tor", "vas", "wy"};
-	// Syllable 2 transitional
-	public static String[] stronghold_syl2Trans_default = new String[]{"a", "ba", "bhal", "brov", "brov", "by", "ca", "cas", "ce", "co", "de", "de", "den", "di", "do", "dri", "dzyr", "e", "e", "ghe", "gi", "gle", "la", "lan", "le", "let", "lo", "ma", "ma", "man", "mo", "na", "ne", "ner", "ni", "ni", "o", "o", "ra", "rak", "re", "res", "ri", "ri", "ri", "ro", "ru", "say", "se", "si", "stan", "ster", "ta", "tax", "ter", "tin", "to", "to", "to", "tra", "ve", "vi", "vi", "yar"};
-
-	// Syllable 3 terminal
-	public static String[] stronghold_syl3Term_default = new String[]{"a", "a", "an", "an", "as", "bla", "burg", "cae", "cho", "dam", "garh", "gur", "heim", "kot", "la", "la", "lon", "mon", "na", "na", "ne", "nik", "nik", "nin", "not", "ra", "rus", "sa", "sia", "ta", "tia", "tis", "tle", "tov", "tus", "y", "zecz"};	
-	// Syllable 3 transitional
-	public static String[] stronghold_syl3Trans_default = new String[]{"^Ve", "a", "ba", "di", "gus", "hu", "i", "i", "i", "li", "li", "lo", "men", "mil", "mu", "ne", "ri", "ri", "sa", "si", "slo", "sta", "su", "ti", "va", "vir", "vir"};
-
-	// Syllable 4 terminal
-	public static String[] stronghold_syl4Term_default = new String[]{"a", "a", "an", "an", "cus", "dras", "ke", "ke", "k\u0131r", "lem", "lion", "na", "na", "no", "on", "ra", "ri", "ros", "sia", "ta", "ta", "t\u00e1", "vak"};
-	// Syllable 4 transitional
-	public static String[] stronghold_syl4Trans_default = new String[]{"a", "lin", "no", "ra"};
-
-	// Syllable 5 terminal
-	public static String[] stronghold_syl5Term_default = new String[]{"din", "m\u00e1n", "na", "ple"};	
-	// Syllable 5 transitional
-	public static String[] stronghold_syl5Trans_default = new String[]{};
+	public static final String stronghold_prefix_default =
+			"A, Devil's, Great, Great, Per, Santa"
+			;
 	
-	// Syllable 6 terminal
-	public static String[] stronghold_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] stronghold_syl6Trans_default = new String[]{};
-
-	// Syllable 7 terminal
-	public static String[] stronghold_syl7Term_default = new String[]{};
+	public static final String stronghold_root_initial_default =
+			"\u00c1, A, A, A, A, A, A, A, A, Au, Ba, Ba, Ba, Ba, Ba, Ba, Bei, Bi, Bou, Bri, Cai, Cha, Cha, Che, Co, Co, Co, Co, Co, Cze, Da, De, Di, Du, E, E, Fa, Fa, Flo, Flo, G\u00f6, Ge, Go, Gri, Gu, Ha, He, He, Hei, Hi, Hi, Hu, I, Ja, Ja, Je, Je, Je, Ju, Ka, Ke, Kli, Ko, Kre, Ku, Lo, Lu, Lu, M, Ma, Ma, Ma, Me, Me, Me, Mie, Mo, Mo, Ne, Ni, Ni, O, Pa, Pa, Pa, Pe, Po, Qry, Qua, Ra, Rha, Ru, Sa, Sa, Se, Se, Se, Se, Si, Sie, Sta, Sto, Su, Su, Svea, Tla, To, Tra, Tri, Va, Vi, Vi, Wa, Xi, Yo"
+			;
+			
+	public static final String stronghold_root_sylBegin_default =
+			"'a, al, ba, bo, bro, by, cho, co, co, csay, cto, czk\u00f3, dde, di, dri, dzy, e, e, ffa, fri, gfrie, ggu, gi, go, ja, ji, ka, la, lbi, le, li, lle, lo, lpine, lsea, lva, ma, ma, mbha, mli, mo, mste, msto, na, na, nde, nde, ndo, ndo, ne, ng_Ng\u00e3i, ngbo, ngle, ngseo, ni, ni, nne, no, nsta, nto, ntra, ntse, nwy, o, o, pe, r_Le, ra, ra, rce, rde, re, rga, rghe, rgu, ri, ri, rma, ro, rpe, rra, rre, rry, rtsmou, ru, rvi, sby, se, ssi, sta, ste, sti, su, ta, ta, tla, to, tro, tte, tto, ve, vi, wca, xa, xca, xo, ya,"
+			+ "a, a, a, a, a, bla, cae, cho, di, gu, gu, hu, i, kli, ko, la, la, lga, li, lo, lo, me, mi, mo, mu, na, na, nbu, ne, ne, ni, ni, ni, no, nti, ntu, ra, rba, rda, rhei, ri, ri, ru, ry, rze, s_Ve, sa, sa, si, sia, slo, sta, stle, su, ti, tia, to, tta, va, vi, vi, vni, xa,"
+			+ "a, a, a, a, a, cu, dra, k\u0131, le, lio, na, na, nli, no, no, o, ra, ra, ri, rke, rke, ro, sia, sta, t\u00e1, ta, va,"
+			+ "di, m\u00e1, nna, ple"
+			;
 	
+	public static final String stronghold_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, cz, d, de, k, k, l, l, m, m, m, m, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, ne, ng, ng, nt, r, r, r, r, r, rg, rg, rh, rk, s, s, s, s, s, s, s, s, s, s, s, s, sh, t, t, t, th, tz, v, v, v, w, x"
+			;
+	
+	public static final String stronghold_suffix_default =
+			"Box, Castle, Citadel, Citadel, Eredo, Fortress, Fortress, Fortress, Hill, Shrine, Subterrane, Zuu"
+			;
+
+	public static final int[] stronghold_syllable_count_weights = new int[]{
+			8, 44, 36, 23, 4
+			};
 	
 	
 	/*
 	 * Temple name pieces
 	 */
-
-	// Prefixes and suffixes
-	public static String[] temple_prefix_default = new String[]{"Abu", "Abu", "Beit", "Divus", "Jebel", "Jebel", "Mater", "Saint", "San", "San", "San", "Santa", "Santa", "Santo"};
-	public static String[] temple_suffix_default = new String[]{"Hill", "Magna", "Qim"};
-
-	// Single-syllable pieces
-	public static String[] temple_oneSylBegin_default = new String[]{"A", "Ba", "Baa", "Bor", "Cae", "Cou", "Da", "De", "Do", "F\u00e2", "Ge", "Ma", "Mu", "Pea", "Ra", "Si", "Spe", "U", "Vi", "Zeu"};
-	public static String[] temple_oneSylEnd_default = new String[]{"c", "ce", "g", "gh", "l", "l", "lg", "n", "r", "rf", "rr", "rs", "rx", "s", "s", "s", "t", "x"};
-
-	// Syllable 1 transitional
-	public static String[] temple_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "A", "A", "A", "A", "Al", "Alt", "An", "An", "An", "Aph", "Ar", "Ar", "As", "At", "At", "Au", "Au", "Ba", "Ba", "Baal", "Bac", "Bar", "Bar", "Bel", "B\u00f3", "Bor", "Bug", "Car", "Car", "Cas", "Cen", "Ch\00e2te", "Cig", "Clau", "Cle", "Con", "Con", "Con", "Cor", "C\u00f3r", "Cu", "Dak", "De", "De", "Den", "Di", "Di", "Di", "Di", "Do", "Do", "Do", "Do", "E", "E", "E", "E", "E", "E", "Ech", "Er", "Es", "Esh", "Faus", "Fer", "Fi", "Fle", "G", "Ga", "Ge", "Gha", "Giu", "G\u00f6r", "Gran", "Grien", "Ha", "Ha", "Ha", "Ha", "Ha", "Hag", "He", "He", "He", "He", "He", "Heil", "Heph", "Her", "Her", "Hi", "I", "I", "Ja", "Je", "Jor", "Ju", "Ju", "Ju", "Ka", "Kar", "Kha", "Koen", "Kor", "Kur", "La", "Le", "Lep", "Lep", "Li", "Lon", "Lu", "Lux", "Ly", "Lyd", "M", "Ma", "Ma", "Ma", "Ma", "Mack", "Mart", "Men", "Mer", "Mer", "Met", "Mi", "Mi", "Mont", "Mou", "Mu", "Nep", "Nep", "Ni", "Nym", "O", "O", "O", "Pa", "Pa", "Pan", "Pan", "Par", "Pe", "Per", "Phi", "Po", "Po", "Pol", "Por", "Pri", "Pris", "Pu", "Qa", "Qa", "Qer", "Rad", "Re", "Ro", "Ro", "Ro", "Rom", "Ros", "S", "Sa", "Sa", "Saf", "San", "Sar", "Sch\u00fcn", "Se", "Se", "Se", "Se", "Se", "Se", "Sem", "Sha", "Si", "Si", "Sim", "Skor", "So", "So", "Sy", "Sym", "Ta", "Ta", "Ta", "Taf", "Tan", "Tar", "Tau", "Te", "Te", "Tet", "Thu", "Tim", "To", "Ton", "Tra", "Tr\u00e9", "Tu", "Ur", "Var", "Ve", "Ve", "V\u00e9", "Vei", "Ver", "Ves", "Ves", "Ves", "Vin", "Wa", "Wa", "War", "West", "Xan", "Xem", "Y", "Zag", "Zan"};
-
-	// Syllable 2 terminal
-	public static String[] temple_syl2Term_default = new String[]{"ba", "bek", "bel", "berg", "bii", "bil", "blains", "bod", "b\u00fchl", "ca", "calfe", "chus", "cole", "cord", "cure", "dan", "di", "di", "din", "don", "don", "dun", "feh", "fra", "fu", "gag", "gar", "gin", "gos", "grat", "ha", "jan", "ka", "kal", "la", "latte", "leb", "li", "lux", "ma", "mae", "matt", "min", "mos", "moun", "mun", "na", "na", "na", "nak", "neb", "neh", "net", "ney", "no", "non", "noum", "nus", "nus", "nus", "or", "ra", "r\u00e9e", "res", "ri", "ron", "sha", "sins", "sis", "sone", "sr", "ta", "tard", "tas", "ten", "tis", "tis", "to", "tor", "tra", "tune", "turn", "wa", "wern", "xay", "zon", "zor"};
-	// Syllable 2 transitional
-	public static String[] temple_syl2Trans_default = new String[]{"a", "a", "a", "bach", "bas", "beit", "ber", "ber", "bur", "c\u00e1n", "ci", "cle", "cord", "cos", "cra", "cro", "cu", "cu", "dé", "di", "di", "di", "do", "dri", "dri", "e", "gan", "ge", "ge", "ger", "ges", "gi", "gou", "gus", "gus", "har", "hou", "i", "ib", "ig", "ig", "im", "jus", "ka", "la", "lab", "lai", "les", "li", "li", "li", "lin", "lip", "lo", "ma", "me", "me", "men", "mer", "mi", "mi", "mo", "mo", "mo", "nain", "naj", "ne", "ne", "ner", "ni", "n\u00f3", "nog", "nus", "o", "o", "o", "o", "o", "pas", "pas", "pe", "pha", "pha", "phae", "phe", "pho", "phy", "pi", "pil", "pol", "qa", "ra", "ra", "ra", "ra", "rai", "ran", "raw", "re", "rech", "res", "ri", "ri", "ro", "ro", "r\u00f3", "roc", "ru", "saw", "sei", "si", "sip", "sy", "tas", "te", "te", "te", "the", "the", "the", "ti", "to", "t\u00f3", "ton", "tor", "tra", "tro", "tu", "tu", "u", "ud", "ug", "un", "ve", "ve", "vi", "wil", "xi", "xi", "\u017ea", "zer"};
-
-	// Syllable 3 terminal
-	public static String[] temple_syl3Term_default = new String[]{"a", "a", "a", "an", "an", "ba", "ba", "bas", "bo", "bourg", "burg", "burgh", "cles", "cuse", "da", "da", "do", "don", "dra", "en", "\u00e0re", "ers", "ga", "ga", "i", "ia", "ib", "ja", "ja", "la", "lat", "ler", "lin", "lo", "lus", "mes", "mis", "mon", "na", "na", "na", "na", "na", "na", "nec", "non", "nore", "nuc", "num", "nus", "o", "ol", "on", "on", "pa", "pos", "ra", "ra", "re", "ren", "ret", "ry", "sha", "si", "sus", "ta", "ta", "ta", "tal", "te", "ter", "ter", "tin", "to", "tum", "tus", "um", "us", "us", "va", "ville", "vis", "zel"};
-	// Syllable 3 transitional
-	public static String[] temple_syl3Trans_default = new String[]{"a", "\u0151", "bo", "bri", "bri", "de", "de", "di", "e", "e", "es", "es", "gal", "ge", "i", "i", "i", "i", "i", "la", "li", "me", "nar", "nen", "ni", "ni", "ny", "pe", "pei", "pi", "po", "po", "por", "py", "ra", "ri", "ri", "sa", "scu", "scu", "shof", "so", "ta", "ta", "tei", "ter", "the", "ti", "ti", "ti", "to", "to", "u", "u", "un", "us", "wa", "zi"};
-
-	// Syllable 4 terminal
-	public static String[] temple_syl4Term_default = new String[]{"a", "a", "an", "an", "as", "ca", "do", "en", "er", "fen", "ga", "ga", "ja", "kos", "le", "lem", "li", "lis", "lis", "lon", "mak", "na", "ne", "ni", "ni", "nia", "no", "nos", "nus", "o", "on", "on", "qua", "ra", "ra", "ra", "rat", "re", "re", "ri", "ri", "sa", "sos", "te", "te", "tus", "tus", "um", "um", "us", "us", "zu"};
-	// Syllable 4 transitional
-	public static String[] temple_syl4Trans_default = new String[]{"a", "i", "nan", "ne", "stei", "ti"};
-
-	// Syllable 5 terminal
-	public static String[] temple_syl5Term_default = new String[]{"cus", "ki", "ne", "nus", "on", "um"};
-	// Syllable 5 transitional
-	public static String[] temple_syl5Trans_default = new String[]{};
+	public static final String temple_prefix_default =
+			"Abu, Abu, Beit, Divus, Jebel, Jebel, Mater, Saint, San, San, San, Santa, Santa, Santo"
+			;
 	
-	// Syllable 6 terminal
-	public static String[] temple_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] temple_syl6Trans_default = new String[]{};
+	public static final String temple_root_initial_default =
+			"A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, Au, Au, B\u00f3, Ba, Ba, Ba, Ba, Ba, Ba, Baa, Baa, Be, Bo, Bor, Bu, C\u00f3, Ca, Ca, Ca, Cae, Ce, Ch\u00e2, Ci, Clau, Cle, Co, Co, Co, Co, Cou, Cu, Da, Da, De, De, De, De, Di, Di, Di, Di, Do, Do, Do, Do, Do, E, E, E, E, E, E, E, E, E, E, F\u00e2, Fau, Fe, Fi, Fle, G, G\u00f6, Ga, Ge, Ge, Gha, Giu, Gra, Grie, Ha, Ha, Ha, Ha, Ha, Ha, He, He, He, He, He, He, He, He, Hei, Hi, I, I, Ja, Je, Jo, Ju, Ju, Ju, Ka, Ka, Kha, Ko, Koe, Ku, La, Le, Le, Le, Li, Lo, Lu, Lu, Ly, Ly, M, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Me, Me, Me, Me, Mi, Mi, Mo, Mou, Mu, Mu, Ne, Ne, Ni, Ny, O, O, O, Pa, Pa, Pa, Pa, Pa, Pe, Pe, Pea, Phi, Po, Po, Po, Po, Pri, Pri, Pu, Qa, Qa, Qe, Ra, Ra, Re, Ro, Ro, Ro, Ro, Ro, S, Sa, Sa, Sa, Sa, Sa, Sch\u00f6, Se, Se, Se, Se, Se, Se, Se, Sha, Si, Si, Si, Si, Sko, So, So, Spe, Sy, Sy, Ta, Ta, Ta, Ta, Ta, Ta, Tau, Te, Te, Te, Thu, Ti, To, To, Tr\u00e9, Tra, Tu, U, U, V\u00e9, Va, Ve, Ve, Ve, Ve, Ve, Ve, Vei, Vi, Vi, Wa, Wa, Wa, We, Xa, Xe, Y, Za, Za, Zeu"
+			;
+			
+	public static final String temple_root_sylBegin_default =
+			"\u017ea, a, a, ba, be, bei, bii, blai, bo, bu, cchu, chnou, ckwi, co, cro, ddi, di, di, di, dney, do, dri, dri, e, ffe, fli, fra, ga, ga, ge, ge, ge, gga, ghou, gi, gi, gi, gno, gou, gra, gu, gu, ha, ha, ja, kka, la, la, la, la, lai, lbe, lc\u00e1, le, le, li, li, li, li, li, llu, lo, ltba, lve, ma, ma, mae, mbe, me, me, me, mi, mi, mi, mna, mne, mo, mo, mo, mphae, mpho, mu, mu, mxi, n\u00f3, na, na, nai, nb\u00fc, nbi, nci, nco, nco, ncra, nd\u00e9, ndo, ndun, ne, ne, nge, ni, ni, nka, nma, nne, nni, nnu, no, no, nta, nte, nthe, ntju, nto, nu, nu, nu, nxay, o, o, o, o, o, pe, pha, pha, pha, phe, phro, phy, pi, pi, po, psi, pti, pto, ptu, qa, r\u00f3, ra, ra, ra, ra, ra, rai, rba, rbe, rco, rcu, rcu, rcu, rda, rdi, rdi, rdo, re, re, rfu, rgo, ri, ri, ri, ri, rka, rmo, rna, rna, rne, rne, ro, ro, ro, rr\u00e9e, rra, rre, rre, rsi, rsi, rta, rtbe, rte, rthe, rto, rtu, ru, rxi, s, sa, sca, scle, sei, sha, shmou, si, sme, so, spa, spa, st\u00f3, sta, sti, sto, stte, sy, tca, te, teli, the, to, tra, tra, tra, tro, tta, tti, tu, tu, u, u, u, ve, vi, wa, we, xo, ze, zo, zo,"
+			+ "\u00e0, a, a, a, a, a, a, ba, ba, bba, bo, bou, bri, bsha, chta, chthe, cle, cto, cu, da, da, de, de, di, dna, do, e, e, e, e, e, e, ga, ge, gga, gni, gsho, gtu, i, i, i, ia, ja, ja, jdra, la, la, li, lle, lli, llo, lu, mbri, me, mi, mo, na, na, na, na, na, na, ndo, ne, ne, nga, ni, no, nta, nte, nti, nto, nu, nu, nu, nvi, ny, o, o, o, o, pe, pi, po, po, po, po, ppa, ppei, py, r\u00e1, ra, ra, rbo, rdi, re, re, ri, ri, ri, rme, rno, rnu, rra, rta, rva, ry, sa, sbu, scu, scu, si, si, so, sre, ssi, sta, sta, ste, stei, sti, stu, su, su, ta, te, te, ti, ti, tla, to, u, u, u, u, u, vi, wbu, wwa, ze, zi,"
+			+ "a, a, a, a, a, a, ca, e, e, ffe, ga, ga, ja, ko, le, le, li, li, li, lo, lzu, ma, na, na, ne, ne, ni, ni, nia, no, no, nstei, nte, nu, o, o, o, qua, ra, ra, ra, ra, rdo, re, re, ri, ri, ri, rti, so, ssa, stu, stu, te, u, u, u, u,"
+			+ "cu, ne, nki, nu, o, u"
+			;
+	
+	public static final String temple_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, b, b, b, c, c, c, ce, d, g, g, gh, h, h, hl, k, k, k, l, l, l, l, l, l, l, l, le, lfe, lg, lle, m, m, m, m, m, m, m, m, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, ne, ne, ns, ns, r, r, r, r, r, r, r, r, r, r, rd, rd, re, re, re, rf, rg, rg, rg, rgh, rn, rn, rr, rs, rs, rx, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, se, t, t, t, t, t, t, tt, tte, x, x"
+			;
+	
+	public static final String temple_suffix_default =
+			"Hill, Magna, Qim"
+			;
 
-	// Syllable 7 terminal
-	public static String[] temple_syl7Term_default = new String[]{};
+	public static final int[] temple_syllable_count_weights = new int[]{
+			20, 87, 83, 52, 6
+			};
 	
 	
 	
 	/*
 	 * Fortress name pieces
 	 */
+	public static final String fortress_prefix_default =
+			"Nether"
+			;
 	
-	// Prefixes and suffixes
-	public static String[] fortress_prefix_default = new String[]{"Nether"};
-	public static String[] fortress_suffix_default = new String[]{"Fortress"};
+	public static final String fortress_root_initial_default =
+			"\u00c9, A, A, A, A, A, A, A, Aea, Ca, Cae, Ce, Ce, Cha, Chi, Ci, Co, Di, Di, Dra, Du, E, E, E, Eu, Fey, Ga, Gj\u00f6, Gja, Go, Ha, Ha, He, He, He, Hy, Hy, I, La, Le, Le, M\u00f3, Me, Me, Mi, Mi, Mu, Mu, N\u00e1, Na, Ni, Ni, O, Pa, Pa, Pa, Pe, Pe, Phae, Phle, Plu, Pro, Rha, So, Sty, Ta, Ta, Tha, Ti, Ti, Tu, Xi, Yo, You"
+			;
+			
+	public static final String fortress_root_sylBegin_default =
+			"a, ba, ba, by, ca, che, chi, chly, cra, cri, ctla, cu, cy, da, de, dhgu, dmu, do, dra, dra, du, f, fl, ga, gae, ge, ku, le, le, li, lj\u00fa, lla, ma, ma, me, mi, na, nd\u00e6, ne, no, ntau, o, o, o, pno, ra, rbe, re, rgo, ri, ri, rka, rm, rna, ro, rphe, rpy, rse, rta, ry, si, si, spe, spho, str\u00f6, ta, the, to, va, yu,"
+			+ "bu, ci, cto, da, de, dh, dhni, dne, hei, ka, la, lba, lhe, lhei, lla, lle, lu, ma, mo, mu, ne, no, no, pha, pho, pho, phy, ra, ra, rbr\u00fa, ro, rtha, ru, ru, te, te, tho, to, tu, u, u, u,"
+			+ "\u00eb, \u00eb, ba, la, le, mi, mo, ne, ne, ni, nthu, ri,"
+			+ "a, a, u"
+			;
 	
-	// Single-syllable pieces
-	public static String[] fortress_oneSylBegin_default = new String[]{"Gj\u00f6", "He", "He", "Sty"};
-	public static String[] fortress_oneSylEnd_default = new String[]{"l", "ll", "ll", "x"};
+	public static final String fortress_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, g, l, l, l, ll, ll, m, m, m, n, n, n, n, n, n, nd, r, r, r, r, rch, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, ss, t, x"
+			;
 	
-	// Syllable 1 transitional
-	public static String[] fortress_syl1Trans_default = new String[]{"A", "A", "A", "A", "Ach", "Ach", "Aea", "As", "Cad", "Cae", "Cen", "Cer", "Char", "Chi", "Ci", "Co", "Di", "Di", "Dra", "Du", "E", "E", "E", "\u00c9l", "Eu", "Fey", "Gar", "Gjal", "Gor", "Ha", "Har", "Hec", "Hy", "Hyp", "Ir", "La", "Le", "Ler", "Me", "Me", "Mi", "Mict", "M\u00f3dh", "Mu", "Mus", "Na", "N\u00e1s", "Ni", "Ni", "Or", "Pa", "Pa", "Pan", "Pe", "Per", "Phae", "Phle", "Plu", "Pro", "Rhad", "Soc", "Ta", "Tar", "Than", "Ti", "Ti", "Tu", "Xi", "Yo", "You"};
-	
-	// Syllable 2 terminal
-	public static String[] fortress_syl2Term_default = new String[]{"at", "byss", "cris", "cus", "des", "do", "dra", "dra", "du", "gon", "lan", "lys", "march", "mag", "mi", "mr", "mus", "na", "nos", "nos", "on", "on", "py", "taur", "the", "to", "tr\u00f6nd", "yu"};
-	// Syllable 2 transitional
-	public static String[] fortress_syl2Trans_default = new String[]{"a", "a", "a", "ba", "bal", "ber", "chil", "cy", "d\u00e6", "er", "fr", "fr", "gae", "gar", "ge", "gu", "j\u00fadh", "kal", "ku", "lar", "le", "lec", "li", "me", "ne", "o", "o", "pel", "phe", "pho", "ra", "ra", "re", "ri", "ri", "ry", "se", "siph", "siph", "ta", "tar", "vad"};
-	
-	// Syllable 3 terminal
-	public static String[] fortress_syl3Term_default = new String[]{"ba", "br\u00fa", "bus", "del", "dhr", "heim", "heim", "hel", "ka", "la", "les", "lu", "ne", "nir", "on", "ra", "ra", "te", "tes", "tha", "thon", "to", "tos", "tus", "us", "us", "us", "us", "us"};
-	// Syllable 3 transitional
-	public static String[] fortress_syl3Trans_default = new String[]{"a", "ci", "da", "man", "mo", "mu", "ne", "no", "no", "o", "pho", "phy"};
-	
-	// Syllable 4 terminal
-	public static String[] fortress_syl4Term_default = new String[]{"ba", "\u00eb", "\u00eb", "la", "le", "mos", "ne", "ne", "thus"};
-	// Syllable 4 transitional
-	public static String[] fortress_syl4Trans_default = new String[]{"mi", "ni", "ri"};
-	
-	// Syllable 5 terminal
-	public static String[] fortress_syl5Term_default = new String[]{"a", "a", "um"};
-	// Syllable 5 transitional
-	public static String[] fortress_syl5Trans_default = new String[]{};
-	
-	// Syllable 6 terminal
-	public static String[] fortress_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] fortress_syl6Trans_default = new String[]{};
+	public static final String fortress_suffix_default =
+			"Fortress"
+			;
 
-	// Syllable 7 terminal
-	public static String[] fortress_syl7Term_default = new String[]{};
+	public static final int[] fortress_syllable_count_weights = new int[]{
+			4, 28, 30, 9, 3
+			};
 	
 	
 	
@@ -274,45 +210,33 @@ public class NamePieces {
 	 * Monument name pieces
 	 * Version 1.8 on
 	 */
+	public static final String monument_prefix_default =
+			"Dread, Lost, Odd, Sunken"
+			;
 	
-	// Prefixes and suffixes
-	public static String[] monument_prefix_default = new String[]{"Dread", "Lost", "Odd", "Sunken"};
-	public static String[] monument_suffix_default = new String[]{"Heart", "Mausoleum", "Tomb", "Tongue"};
+	public static final String monument_root_initial_default =
+			"A, A, A, A, A, A, A, A, Aa, Bai, Bi, Bou, Bu, Ca, Ca, Ca, Ca, Can, Co, Cu, Di, Dwa, Ei, Ga, Ge, Ge, Ha, He, He, He, He, Kha, Ki, L, Le, Lo, Lu, Ly, Ma, Ma, Mu, Mu, Na, Na, Ne, Ne, O, O, O, Pa, Pha, Phe, Po, Pu, Quia, R, Ra, Ra, Ra, Rha, Ru, Sa, Sa, Sa, Sae, Shi, Su, Ta, Ta, Tho, Ti, Tu, Y, Ya, Yo"
+			;
+			
+	public static final String monument_root_sylBegin_default =
+			"'lye, a, ae, ba, be, che, co, de, du, du, fti, ga, gi, ha, hu, ia, ka, ke, la, lae, le, le, li, li, li, li, lo, ly, mba, mbha, mbu, me, mi, mpto, mu, na, na, na, ncho, ndao, ngho, ni, no, nti, ntre, o, o, po, ra, ra, ra, ra, rde, rga, rka, ro, ro, ro, rpi, rt_Ro, rte, ru, te, ti, ti, ti, tla, tli, ve, ve, vlo,"
+			+ "_Pe, _Ro, ', a, ba, ca, cle, clei, fa, fa, go, gu, ke, ki, l_Ba, le, lee, na, ne, nghe, ni, ni, nje, nse, nspu, ntho, nti, o, pe, pu, r_U, rho, ri, rju, rxna, s_He, sso, t_Si, ta, ti, tu, u, u, u, xa, ya, yo,"
+			+ "a, a, a, ca, ca, che, do, ha, i, li, li, lu, na, ndri, ni, ni, ni, nu, nu, o, o, r_Gwae, ra, ri, s_A, sta, tri, wa, wi,"
+			+ "a, a, a, a, ko, lo, nca, ndre, no, o, o, pu, wa,"
+			+ "a, nda, ra, tu"
+			;
+	
+	public static final String monument_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, c, d, d, g, h, h, j, k, l, l, l, lt, m, m, m, n, n, n, n, n, n, n, ng, ng, r, r, rn, s, s, s, s, s, s, s, s, s, s, s, s, sse, t, t, t, zh"
+			;
+	
+	public static final String monument_suffix_default =
+			"Heart, Mausoleum, Point, Tomb, Tongue"
+			;
 
-	// Single-syllable pieces
-	public static String[] monument_oneSylBegin_default = new String[]{"Lo", "Ma", "Y", "Ya"};
-	public static String[] monument_oneSylEnd_default = new String[]{"m", "s", "s", "t"};
-
-	// Syllable 1 transitional
-	public static String[] monument_syl1Trans_default = new String[]{"A", "A", "A", "Aa", "Al", "An", "Ar", "At", "At", "Bai", "Bi", "Bou", "Bu", "Ca", "Ca", "Can", "Can", "Car", "Co", "Cu", "Di", "Dun", "Dwar", "Ei", "Ga", "Ge", "Ge", "Hamp", "He", "He", "He", "He", "Kham", "Ki", "L", "Le", "Lu", "Ly", "Ma", "Mu", "Mu", "Na", "Na", "Neor", "O", "O", "O", "Pav", "Pha", "Phe", "Point", "Port", "Pu", "Quian", "R'l", "Ra", "Ra", "Ram", "Rha", "Rung", "Sa", "Sa", "Saef", "Sam", "Shi", "Su", "Ta", "Tar", "Tho", "Ti", "Tur", "Yo"};
-
-	// Syllable 2 terminal
-	public static String[] monument_syl2Term_default = new String[]{"ae", "an", "ba", "baj", "bhat", "cheng", "dao", "du", "dum", "holt", "ia", "ka", "ka", "lit", "nah", "nis", "ra", "ru", "tezh", "til", "til", "ton", "wich", "yeh"};
-	// Syllable 2 transitional
-	public static String[] monument_syl2Trans_default = new String[]{"^Ne", "^Ro", "bel", "but", "cho", "co", "de", "de", "ex", "gan", "gar", "gi", "ha", "hur", "ke", "la", "lae", "lan", "le", "li", "li", "li", "li", "lo", "lo", "lys", "me", "mi", "mu", "na", "na", "no", "o", "pi", "pol", "ra", "ra", "ran", "ro", "ro", "tes", "ti", "ti", "ting", "tre", "ven", "vens", "x"};
-
-	// Syllable 3 terminal
-	public static String[] monument_syl3Term_default = new String[]{"a", "he", "ke", "ki", "lee", "na", "nan", "nesse", "ni", "purn", "pus", "ro", "ser", "sos", "tis", "tis", "us", "us", "yal", "yo"};
-	// Syllable 3 transitional
-	public static String[] monument_syl3Trans_default = new String[]{"'r", "^Ba", "^He", "^Pe", "^Ro", "^Si", "^U", "an", "ba", "ca", "cle", "clei", "e", "fa", "fa", "gor", "gu", "je", "ju", "ni", "os", "pe", "rho", "ri", "ta", "tho", "tu", "u"};
-
-	// Syllable 4 terminal
-	public static String[] monument_syl4Term_default = new String[]{"a", "a", "cac", "can", "che", "dos", "har", "lig", "ni", "ni", "on", "on", "stad", "tri", "wang", "wi"};
-	// Syllable 4 transitional
-	public static String[] monument_syl4Trans_default = new String[]{"^An", "^Gwae", "a", "dri", "i", "i", "li", "lu", "na", "ni", "nu", "nu", "ran"};
-
-	// Syllable 5 terminal
-	public static String[] monument_syl5Term_default = new String[]{"a", "a", "a", "a", "cak", "lod", "no", "on", "os"};
-	// Syllable 5 transitional
-	public static String[] monument_syl5Trans_default = new String[]{"dre", "kon", "pu", "wa"};
-
-	// Syllable 6 terminal
-	public static String[] monument_syl6Term_default = new String[]{"as", "da", "ram", "tu"};
-	// Syllable 6 transitional
-	public static String[] monument_syl6Trans_default = new String[]{};
-
-	// Syllable 7 terminal
-	public static String[] monument_syl7Term_default = new String[]{};
+	public static final int[] monument_syllable_count_weights = new int[]{
+			4, 24, 18, 16, 9, 4
+			};
 	
 	
 	
@@ -320,45 +244,32 @@ public class NamePieces {
 	 * EndCity name pieces
 	 * Version 1.9 on
 	 */
+	public static final String endcity_prefix_default =
+			"End, Mag, T\u00edr"
+			;
 	
-	// Prefixes and suffixes
-	public static String[] endcity_prefix_default = new String[]{"End", "Mag", "T\u00f3r na"};
-	public static String[] endcity_suffix_default = new String[]{"City"};
+	public static final String endcity_root_initial_default =
+			"A, A, A, A, Ba, Brah, Ca, Ca, Ce, Ce, Cha, Di, Dy, E, E, E, E, E, Eu, Eu, Ga, Gai, Hau, Hea, Hla, I, I, I, I, I, Ju, Ka, Ko, Lu, Ma, Ma, Ma, Me, Me, Mi, Mi, Moo, N\u00f3, Ne, Ni, O, Pa, Plu, Pu, Rhe, Sa, Sa, Se, Su, Te, Te, Ti, Tla, Tri, U, U, U, U, Va, Ve, Yh, Yo"
+			;
+			
+	public static final String endcity_root_sylBegin_default =
+			"a, a, a, be, bi, cha, da, de, ke, la, la, la, le, le, lha, lli, lo, lo, ltha, lti, ly, ly, ma, ma, mbri, me, mi, mme, na, nce, nde, nga, ni, nnw, nu, ny, o, o, pi, ptu, ra, ra, rco, rcu, re, re, rga, ri, ri, rna, ro, ro, rra, rza, sga, ta, thy, ti, to, to, tu, ve,"
+			+ "a, ca, e, e, ka, la, lla, ma, me, me, mo, nda, ne, ne, ni, no, no, nu, pa, pe, pha, pu, rla, rne, ro, ru, ry, sa, si, sto, te, th-Lee, to, tro,"
+			+ "\u00ef, a, cia, du, ke, ni, ra, ry, tu, u,"
+			+ "u"
+			;
 	
-	// Single-syllable pieces
-	public static String[] endcity_oneSylBegin_default = new String[]{"I", "Ma", "Me", "Moo", "N\u00f3"};
-	public static String[] endcity_oneSylEnd_default = new String[]{"b", "g", "ll", "n", "rs"};
+	public static final String endcity_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, b, b, de, g, k, k, kh, l, l, ll, ll, m, m, n, n, n, n, n, n, n, n, n, n, n, nd, ne, r, r, r, rd, rn, rs, s, s, s, s, s, s, s, s, s, th, th, th"
+			;
 	
-	// Syllable 1 transitional
-	public static String[] endcity_syl1Trans_default = new String[]{"A", "A", "Ann", "As", "Bar", "Brah", "Cal", "Car", "Ce", "Ce", "Cha", "Di", "Dy", "E", "E", "E", "E", "En", "Eu", "Eu", "Ga", "Gai", "Hau", "Heav", "Hla", "I", "I", "Il", "In", "Ju", "Ka", "Kol", "Lu", "Ma", "Ma", "Mer", "Mi", "Mi", "Nep", "Ni", "O", "Pan", "Plu", "Pur", "Rhe", "Sar", "Sat", "Se", "Sum", "Te", "Ter", "Ti", "Tla", "Tri", "U", "Ul", "Ul", "Um", "Val", "Ve", "Yh", "Yo"};
-	
-	// Syllable 2 terminal
-	public static String[] endcity_syl2Term_default = new String[]{"a", "a", "dath", "den", "en", "gard", "lar", "mas", "mi", "na", "nath", "nith", "nus", "o", "ob", "ra", "res", "ris", "ron", "thar", "thys", "till", "to", "ton", "tune", "urn", "wn", "zakh"};
-	// Syllable 2 transitional
-	public static String[] endcity_syl2Trans_default = new String[]{"a", "ar", "ber", "bi", "bri", "ce", "cha", "co", "cu", "de", "ga", "ga", "hal", "ke", "lath", "le", "le", "lis", "lo", "ly", "ly", "ma", "me", "mer", "ny", "o", "pi", "ra", "ran", "re", "ri", "ro", "ta", "ti"};
-	
-	// Syllable 3 terminal
-	public static String[] endcity_syl3Term_default = new String[]{"-Leen", "a", "can", "da", "el", "el", "ka", "la", "land", "mede", "ne", "ne", "nek", "nok", "non", "nus", "on", "pa", "ru", "ry", "sa", "ter", "to", "tron"};
-	// Syllable 3 transitional
-	public static String[] endcity_syl3Trans_default = new String[]{"la", "ma", "me", "mo", "ni", "pe", "pha", "pu", "si", "to"};
-	
-	// Syllable 4 terminal
-	public static String[] endcity_syl4Term_default = new String[]{"a", "cia", "dus", "\u00efs", "ke", "ra", "ry", "tus", "um"};
-	// Syllable 4 transitional
-	public static String[] endcity_syl4Trans_default = new String[]{"ni"};
-	
-	// Syllable 5 terminal
-	public static String[] endcity_syl5Term_default = new String[]{"um"};
-	// Syllable 5 transitional
-	public static String[] endcity_syl5Trans_default = new String[]{};
-	
-	// Syllable 6 terminal
-	public static String[] endcity_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] endcity_syl6Trans_default = new String[]{};
+	public static final String endcity_suffix_default =
+			"City"
+			;
 
-	// Syllable 7 terminal
-	public static String[] endcity_syl7Term_default = new String[]{};
+	public static final int[] endcity_syllable_count_weights = new int[]{
+			5, 28, 24, 9, 1
+			};
 	
 	
 	
@@ -366,45 +277,32 @@ public class NamePieces {
 	 * Mansion name pieces
 	 * Version 1.11 on
 	 */
+	public static final String mansion_prefix_default =
+			"Flower of, Golden, Grey, Life of, North, Silver, The, The, The, The, The, The, The, The, The, The, The, White"
+			;
 	
-	// Prefixes and suffixes
-	public static String[] mansion_prefix_default = new String[]{"East", "Flower of", "Golden", "Grey", "Life of", "North", "Silver", "South", "The", "The", "The", "The", "The", "The", "The", "The", "West", "White"};
-	public static String[] mansion_suffix_default = new String[]{"Air", "Brook", "Castle", "Castle", "Castle", "Castle", "Castle", "Champ", "Chateau", "Ch\u00e2teau", "Court", "Court", "Creek", "Farms", "Ferry", "Grove", "Hacienda", "Hall", "Hall", "Hall", "Hall", "Hall", "Hall", "Hall", "Hall", "Hill", "Hill", "Hill", "Hill", "Hill", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "House", "Lawn", "Lodge", "Lodge", "Manor", "Manor", "Manor", "Manor", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Mansion", "Meadows", "Oaks", "Palace", "Park", "Pond", "Ranch", "Ridge", "Royal", "Terrace", "Terrace", "Villa", "Villa", "Way"};
-
-	// Single-syllable pieces
-	public static String[] mansion_oneSylBegin_default = new String[]{"Be", "Be", "Bo", "Brae", "Bray", "Cha", "Coe", "Da", "Du", "E", "Fleu", "Fri", "Hay", "Hea", "Hi", "Hy", "Ka", "Ly", "McCu", "Mi", "O", "Pa", "Pay", "R\u00ea", "Rei", "Ro", "Sea", "Wa", "Zi"};
-	public static String[] mansion_oneSylEnd_default = new String[]{"ck", "d", "de", "es", "ff", "hn", "ke", "l", "ldt", "les", "ll", "lle", "lls", "lm", "ne", "ne", "r", "rls", "rs", "rst", "s", "s", "se", "se", "ve", "wn", "z"};
-
-	// Syllable 1 transitional
-	public static String[] mansion_syl1Trans_default = new String[]{"'I", "Al", "An", "An", "Ar", "Ar", "Ard", "Ash", "Bel", "Bel", "Bilt", "Blairs", "Brea", "Ca", "Car", "Cas", "Col", "Cor", "Dar", "Dum", "El", "Esch", "Fair", "Fi", "Flor", "Gal", "Ge", "Glen", "Grey", "Ha", "Har", "Hemp", "Hob", "Hope", "Hun", "Hy", "I", "In", "In", "Ky", "Lynne", "Mar", "Mar", "Mea", "Mir", "Mont", "Ne", "O", "O", "Ow", "Pa", "Pa", "Pa", "Pal", "Pem", "Pens", "Pop", "Pres", "Ral", "Re", "Ri", "Ryn", "Se", "Se", "Sea", "Sha", "Sha", "Shel", "Shin", "Ti", "To", "Town", "Twi", "Un", "Ver", "Vit", "War", "White", "White", "Win", "Wing", "Wing", "Wood", "Xan", "Yad"};
-
-	// Syllable 2 terminal
-	public static String[] mansion_syl2Term_default = new String[]{"ble", "bor", "bor", "broke", "burg", "burne", "caim", "ces", "chre", "den", "den", "der", "ding", "do", "dow", "dow", "field", "hall", "ham", "kers", "kuit", "la", "lais", "lais", "land", "lar", "lea", "light", "man", "marsh", "mont", "more", "more", "mours", "ra", "sailles", "send", "ser", "stead", "ston", "stone", "stowe", "tle", "ton", "view", "well", "wers", "wet", "wood", "wood", "wood"};
-	// Syllable 2 transitional
-	public static String[] mansion_syl2Trans_default = new String[]{"-a", "a", "a", "a", "bar", "der", "di", "dle", "dow", "er", "ge", "he", "is", "la", "lin", "ling", "lo", "met", "mi", "name", "ne", "ne", "o", "ren", "ro", "ros", "ter", "ting", "tor", "ve", "v\u00e9", "ver", "ver", "vo"};
-
-	// Syllable 3 terminal
-	public static String[] mansion_syl3Term_default = new String[]{"^Brook", "^Hour", "a", "d\u00e8re", "du", "gel", "gher", "gie", "ka", "lands", "li", "li", "lo", "ni", "o", "rie", "san", "side", "sky", "sol", "son", "thur", "to", "ton", "ton", "ton", "wood"};
-	// Syllable 3 transitional
-	public static String[] mansion_syl3Trans_default = new String[]{"-La", "a", "an", "fa", "i", "i", "la"};
-
-	// Syllable 4 terminal
-	public static String[] mansion_syl4Term_default = new String[]{"o"};
-	// Syllable 4 transitional
-	public static String[] mansion_syl4Trans_default = new String[]{"^Neck", "ble", "da", "go", "ni", "ty"};
-
-	// Syllable 5 terminal
-	public static String[] mansion_syl5Term_default = new String[]{"sa"};
-	// Syllable 5 transitional
-	public static String[] mansion_syl5Trans_default = new String[]{};
+	public static final String mansion_root_initial_default =
+			"'I, A, A, A, A, A, A, A, Be, Be, Be, Be, Bi, Blai, Bo, Brae, Bray, Brea, Ca, Ca, Ca, Cha, Co, Co, Coe, Da, Da, Du, Du, E, E, E, Fai, Fi, Fleu, Flo, Fri, Ga, Ge, Gle, Grey, Ha, Ha, Hay, He, Hea, Hi, Ho, Ho, Hu, Hy, Hy, I, I, I, Ka, Ky, Ly, Ly, Ma, Ma, McCu, Mea, Mi, Mi, Mo, Ne, O, O, O, O, Pa, Pa, Pa, Pa, Pa, Pay, Pe, Pe, Po, Pre, R\u00ea, Ra, Re, Rei, Ri, Ro, Ry, Se, Se, Sea, Sea, Sha, Sha, She, Shi, Ti, To, To, Twi, U, Ve, Vi, Wa, Wa, Whi, Whi, Wi, Wi, Wi, Woo, Xa, Ya, Zi"
+			;
+			
+	public static final String mansion_root_sylBegin_default =
+			"bble, ce, chre, ddo, dle, dlea, do, do, do, he, ke, kui, la, lai, lai, lbu, lde, li, lla, lli, lme, lmo, lo, lsto, lsto, ltmo, lv\u00e9, mba, mbro, mi, mou, mpstea, na, ncai, nde, ndi, ngdi, nge, ngwoo, ni, nna, nnewoo, nra, nsmo, nta, nte, nti, nwoo, o, pewe, pla, r-a, ra, rbo, rbo, rbu, rde, rdro, re, rfie, rha, rla, rli, rne, rne, ro, rsai, rsde, schma, she, stle, sto, sto, teha, tema, tto, ve, ve, ve, vie, vo, we, we, wnse, wse,"
+			+ "_Hou, -La, a, d\u00e8, du, ge, ghe, gie, ka, la, la, li, li, lo, mea, na, ngto, ngto, ni, ni, o, ri, rie, rsi, rsky, rso, rthu, rto, rwoo, sfa, so, ssa, tto, w_Broo,"
+			+ "ble, da, go, n_Ne, ni, o, ty,"
+			+ "sa"
+			;
 	
-	// Syllable 6 terminal
-	public static String[] mansion_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] mansion_syl6Trans_default = new String[]{};
+	public static final String mansion_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ck, ck, d, d, d, d, d, d, de, de, es, ff, ght, hn, k, ke, ke, l, l, l, ld, ldt, les, ll, ll, ll, lle, lles, lls, lm, m, m, n, n, n, n, n, n, n, n, n, nd, nd, nds, ne, ne, ne, ng, nt, r, r, r, r, r, r, r, r, r, re, re, re, rg, rls, rne, rs, rs, rs, rs, rsh, rst, s, s, s, s, s, se, se, t, t, ve, w, w, w, we, wn, z"
+			;
+	
+	public static final String mansion_suffix_default =
+			"Air, Brook, Castle, Castle, Castle, Castle, Castle, Ch\u00e2teau, Champ, Chateau, Court, Court, Creek, Farms, Ferry, Grove, Hacienda, Hall, Hall, Hall, Hall, Hall, Hall, Hall, Hall, Hill, Hill, Hill, Hill, Hill, House, House, House, House, House, House, House, House, House, House, House, House, House, House, House, Lawn, Lodge, Lodge, Manor, Manor, Manor, Manor, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Mansion, Meadows, Oaks, Palace, Park, Pond, Ranch, Ridge, Royal, Terrace, Terrace, Villa, Villa, Way"
+			;
 
-	// Syllable 7 terminal
-	public static String[] mansion_syl7Term_default = new String[]{};
+	public static final int[] mansion_syllable_count_weights = new int[]{
+			29, 51, 27, 6, 1
+			};
 	
 	
 	
@@ -412,89 +310,59 @@ public class NamePieces {
 	/*
 	 * Alien Village name pieces
 	 */
+	public static final String alienvillage_prefix_default =
+			""
+			;
 	
-	// Prefix-Suffix pieces
-	public static String[] alienVillage_prefix_default = new String[]{};
-	public static String[] alienVillage_suffix_default = new String[]{};
+	public static final String alienvillage_root_initial_default =
+			"A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, Ae, Ae, Au, Au, B, Ba, Baa, Baa, Be, Be, Bi, Bi, Bla, Bo, Bo, Bo, Bo, Bo, Bo, Bou, Bra, Bray, Bri, Bu, Bu, By, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Ca, Cau, Cau, Ce, Cha, Cle, Cle, Cloo, Co, Co, Co, Co, Cri, Cu, Cy, Da, Da, Da, Da, Da, De, De, Di, Di, Di, Do, Do, Dra, Dzie, E, E, E, E, E, Eu, Fe, Fe, Fe, Fi, Fla, Fo, Fo, Fre, Fri, Fu, Fu, G, G, G, G\u00e4, Ga, Ga, Ga, Ga, Ga, Gau, Gay, Ge, Gei, Gllo, Glo, Gly, Gna, Gra, Gra, Gri, Gru, Gue, H, Ha, Ha, Ha, Ha, Ha, Ha, Ha, Hae, He, He, He, Hei, Hi, Hi, Hi, Ho, Hu, Hu, Hu, Huy, Hy, Hy, Hy, I, I, I, I, I, Ja, Ja, Ju, K, K, K, K, Ke, Ko, Ko, Kra, Krie, Ku, Ky, Ky, L, La, Le, Leu, Li, Li, Lie, Lu, Lu, Lu, M, Ma, Ma, Ma, Ma, Ma, Ma, Ma, Mae, Mai, Mau, May, Me, Me, Me, Me, Me, Me, Mi, Mi, Mi, Mo, Mo, Mo, Ne, Ni, Ni, Ni, Niu, Nu, Nyi, O, O, O, O, O, O, O, O, O, Pa, Pa, Pa, Pe, Pe, Pe, Pe, Ph, Phe, Pi, Pi, Pi, Pi, Pla, Pla, Plei, Pli, Pni, Po, Po, Pri, Pro, Pru, Ptha, Pu, Py, R\u00e9, R\u00f6, R\u00fc, Ra, Re, Re, Re, Rei, Rei, Rhei, Rhy, Ri, Ri, Ri, Ri, Ro, Roo, Ru, Ru, Sa, Sa, Schr\u00f6, Schr\u00f6, Schr\u00f6, Sci, Se, Se, Seu, Sha, Sha, Shee, Sho, Shu, Si, Si, Sie, Smi, Smy, Sne, So, So, So, So, So, Spei, Spi, Spu, Ste, Sti, Su, Su, Su, Su, Sy, Sy, Ta, Tae, Tau, Te, Te, Te, Te, The, The, Thu, Thu, Thy, Ti, Ti, Ti, To, To, Tra, Tri, U, U, U, V, Va, Va, Ve, Ve, Ve, Vhoo, Vi, Vi, Vi, Vi, Vi, Vla, Vo, Wa, We, Whi, Wo, Wu, Xa, Xe, Xe, Xi, Xi, Xo, Y, Y, Y, Ya, Ya, Ya, Ya, Ya, Ya, Ye, Yi, Yi, Yi, Yli, Yu, Yu, Z, Za, Za, Zi, Zly, Zu"
+			;
+			
+	public static final String alienvillage_root_sylBegin_default =
+			"-Lu, 'gi, 'gy, 'i, 'nu, 'u, 'y, 'yi, 'yo, 'za, a, a, ae, au, ba, bau, bbi, bey, bi, bi, bli, bu, ca, ca, cce, cchi, cci, cci, ce, cha, che, che, chy, ckla, cle, clea, clo, co, co, co, co, cre, cta, cta, cta, cti, cu, dda, ddi, de, de, de, di, di, di, di, di, di, dlee, dley, dley, do, do, e, e, e, e, e, fi, fne, g, g'gia, ga, ga, ga, ga, ga, ge, ge, ge, gfrie, ggai, ggli, ggo, ggo, gi, gi, gne, gni, go, go, gri, hi, i, i, iu, ka, kie, ko, kra, ku, l-Ya, l-ya, l'g, la, lae, lblo, lde, ldha, ldro, le, ley, lgo, li, li, li, li, li, li, li, li, li, lko, lla, lla, lle, lli, lly, lmi, lmi, lo, lo, lpe, lphe, lpho, lpi, ltai, lve, lvi, ma, ma, ma, ma, ma, mbo, mbo, mbri, me, mi, mke, mma, mne, mni, mni, mo, mo, mo, mo, mp\u00e8, mpo, msde, mu, n_Co, n-Yu, na, na, na, nau, nco, nda, ndai, nde, ndi, ndr\u00e9, ndra, ndru, ne, ne, ne, ng-Mei, nge, nge, nghi, ngu, nhi, ni, ni, ni, ni, ni, nie, nna, nnse, no, no, no, nqui, nse, nstee, nsu, nti, nto, o, o, o, o, o, pa, pe, pe, pe, pe, pe, phae, phu, pi, pla, po, po, ppe, ppe, ppo, psha, pso, pu, r', ra, ra, ra, ra, ra, ra, ra, rbi, rby, rca, rce, rcha, rche, rchi, rchy, rco, rctu, rda, rde, rdi, rdu, re, re, rga, rga, rgae, rgi, rgo, rgo, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, rka, rka, rke, rke, rlo, rme, rmi, rna, rne, rno, ro, ro, rpa, rr-Kthu, rry, rsa, rse, rse, rta, rti, rti, rtne, ru, ru, rva, rwi, rza, sa, sca, schne, sco, sco, sco, shma, si, si, si, si, sne, so, spa, spe, sse, ssi, sta, ste, stli, sto, stra, stu, stu, t, t\u00e6, ta, ta, ta, te, te, te, tha, thi, tho, thu, tla, to, to, to, tre, tru, tta, tte, tti, ttro, tu, ty, tya, tzbe, u, va, vi, vi, vy, we, wi, wso, wu, xce, xu, yeu, z'ni, za, ze, zla,"
+			+ "_Na, -A, -Li, -U, 'h, a, a, ba, cha, che, chi, ci, ci, cli, co, cu, de, de, de, di, do, do, du, e, e, e, e, e, g-Tha, ge, gra, h-e, i, i, i, i, i, i, i, khu, l, l_Za, l'mno, la, la, lae, ldi, ldi, ldti, le, lee, lfe, lgeu, lhau, lhu, li, li, li, lla, lla, lle, lle, lli, llo, llo, llya, lmay, lo, ls, lski, lso, lu, lze, ma, me, me, mi, mni, mo, mu, n\u00e6, na, nae, ndi, ndi, ne, nga, nge, nge, ni, ni, ni, ni, ni, ni, ni, nni, no, no, nsu, nti, nti, ntla, nu, nu, nu, o, o, o, o, pa, pha, ppu, ra, ra, ra, rdi, rge, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, ri, rlo, rna, rna, rra, rtiu, ru, ru, ru, ru, ru, ru, sa, sh-Vho, shi, so, ssa, ssi, ssu, sta, ste, su, t, ta, ta, ta, ta, ta, te, te, th_Rho, th-Ghu, tha, tho, thu, ti, tia, tiu, to, to, tta, tu, tu, tu, tu, u, u, u, u, u, u, u, u, u, u, u, va, ve, vi, vi, vi, vi, vi, x'a, zy,"
+			+ "a, ae, ae, ch'ya, cra, da, dae, de, de, de, di, do, du, e, e, ho, i, i, i, la, ldru, li, li, lli, mi, mi, ndi, ne, ni, ni, ni, no, no, nta, nti, ntu, o, o, ra, ra, ra, rchi, rchu, ri, ri, ri, ru, ru, si, ta, ta, ta, ta, ta, ta, ta, ti, ti, ti, ti, tra, tu, tu, u, u, u, u, u, u, u, u, u, u, u, u, vi, ya,"
+			+ "a, a, ae, de, le, ni, ni, nse, nti, nu, se, ti, ti, ti, ti, ti, ti, ti, u, u, u, u,"
+			+ "ae, ru"
+			;
 	
-	// Single-syllable pieces
-	public static String[] alienVillage_oneSylBegin_default = new String[]{"Bi", "Bla", "Bo", "Bo", "Cloo", "Da", "Ga", "Hei", "Hi", "Ko", "Kra", "Pe", "Pla", "Pri", "Ptha", "Roo", "Seu", "Sha", "Spei", "To", "Vhoo", "Wo", "Xo", "Ya", "Yi"};
-	public static String[] alienVillage_oneSylEnd_default = new String[]{"fft", "hr", "k", "ksh", "lff", "m", "nc", "nck", "nck", "nd", "nd", "nz", "pff", "re", "rg", "rl", "rp", "rt", "s", "ss", "st", "th", "th", "wes"};
+	public static final String alienvillage_root_terminal_default =
+			"^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, ^, b, b, c, c, ce, ch, ch, d, d, ffe, fft, g, g, h, h, hr, k, k, k, ksh, l, l, l, l, l, l, l, l, l, l, ld, ldt, lf, lff, ll, lle, lt, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, mph, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, nc, nck, nck, nd, nd, nd, nd, nd, ng, nks, ns, ns, nz, p, pff, ph, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, rd, rd, rd, rd, re, re, rg, rl, rp, rre, rt, rth, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, s, se, sh, sle, ss, st, t, t, th, th, th, th, th, th, th, th, th, th, th, th, tte, tzsch, v, v, v, v, v, v, v, v, w, w, wes, x, x, x, z, z"
+			;
 	
-	// Syllable 1 transitional
-	public static String[] alienVillage_syl1Trans_default = new String[]{"A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "Ab", "Ae", "Aes", "Ag", "Al", "Al", "Al", "Al", "Al", "Al", "Al", "Am", "An", "An", "An", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Ar", "Arc", "As", "At", "Au", "Aus", "Baa", "Baal", "Bar", "Bel", "Bet", "Bil", "Bo", "Bo", "Bon", "Bos", "Bou", "Brad", "Bray", "Bri", "Bu", "Buck", "Byl", "Bz", "Ca", "Ca", "Ca", "Ca", "Ca", "Car", "Car", "Car", "Car", "Cau", "Cau", "Cel", "Cha", "Cle", "Cle", "Cog", "Con", "Con", "Cor", "Cris", "Cush", "Cy", "Da", "Da", "Dan", "Dar", "De", "De", "Di", "Di", "Dil", "Do", "Dop", "Dra", "Dzie", "E", "E", "Ep", "Et", "Eu", "Ex", "Fe", "Fe", "Fer", "Fi", "Flam", "Fo", "Fo", "Fres", "Fri", "Ful", "Fur", "G", "G", "G", "Ga", "Gal", "G\u00e4rt", "Gas", "Gas", "Gau", "Gay", "Ge", "Gei", "Gllo", "Glo", "Gly", "Gnarr", "Gra", "Gran", "Grim", "Gru", "Guet", "H", "Ha", "Had", "Had", "Hae", "Han", "Har", "Har", "Has", "He", "He", "He", "Hi", "Hi", "Ho", "Hu", "Hum", "Hum", "Huy", "Hy", "Hy", "Hy", "Im", "In", "In", "In", "Ir", "Jan", "Jann", "Ju", "K", "K", "K", "Kel", "Kor", "Kr", "Krie", "Kur", "Ky", "Ky", "L", "La", "Len", "Leusch", "Lie", "Lis", "Lit", "Lu", "Lun", "Lux", "M", "Ma", "Ma", "Maest", "Mai", "Man", "Mar", "Mar", "Mar", "Mau", "Maw", "May", "Med", "Men", "Men", "Mer", "Mer", "Mes", "Mich", "Mil", "Mir", "Mo", "Mor", "Mos", "Nec", "Ni", "Niu", "Niv", "Nu", "Nyil", "O", "O", "O", "O", "O", "Oc", "Og", "Op", "Op", "Pal", "Pal", "Par", "Pe", "Per", "Pet", "Ph", "Pher", "Pi", "Pi", "Pi", "Pit", "Pla", "Plei", "Plin", "Pnid", "Po", "Po", "Pro", "Pru", "Pu", "Py", "Rams", "R\u00e9", "Rec", "Rec", "Rei", "Rein", "Rep", "Rhei", "Rhyl", "Ri", "Ri", "Ri", "Rit", "Ro", "R\u00f6", "Ru", "Ru", "R\u00fcm", "San", "Sar", "Schr\u00f6", "Schr\u00f6", "Schr\u00f6", "Scil", "Se", "Sec", "Shag", "Sheep", "Shon", "Shu", "Sic", "Sieg", "Sir", "Smir", "Smy", "Snel", "So", "Sol", "Som", "Som", "Sor", "Spitz", "Spu", "Ster", "Stil", "Suc", "Sul", "Sum", "Sung", "Syl", "Syr", "Tae", "Tar", "Tau", "Te", "Tem", "Ter", "Tet", "The", "The", "Thu", "Thug", "Thy", "Ti", "Ti", "Tin", "Tos", "Tran", "Tri", "U", "U", "Un", "V", "Va", "Vas", "Ve", "Ven", "Ver", "Vi", "Vi", "Vig", "Vit", "Vix", "Vlad", "Von", "Wan", "We", "Whis", "Wu", "Xan", "Xe", "Xen", "Xi", "Xi", "Y", "Ya", "Ya", "Yad", "Yan", "Yar", "Yek", "Yg", "Yif", "Yil", "Yl", "Yli", "Yu", "Yug", "Z", "Za", "Za", "Zir", "Zly", "Zup"};
-	
-	// Syllable 2 terminal
-	public static String[] alienVillage_syl2Term_default = new String[]{"-Kthun", "-Mei", "-Yu", "'giath", "'in", "'yoth", "'zath", "\u00e6", "ban", "bau", "bey", "big", "bith", "blo", "boldt", "by", "cas", "chab", "cher", "chi", "chy", "clear", "co", "co", "col", "dath", "de", "de", "den", "dha", "dith", "dolf", "doth", "dra", "dr\u00e9", "er", "er", "erre", "fid", "fried", "ga", "gai", "gand", "gas", "gel", "gel", "gens", "ger", "gitte", "gol", "gon", "goth", "goth", "hi", "iell", "ip", "is", "itzsch", "iu", "kard", "kel", "ker", "ker", "kie", "ko", "kos", "la", "la", "land", "las", "le", "ler", "ley", "ley", "ley", "li", "lin", "lisle", "low", "ly", "man", "mans", "mar", "men", "mer", "mus", "na", "na", "nak", "narth", "nau", "ne", "nel", "ner", "ner", "ner", "nes", "ni", "nov", "on", "on", "oph", "oth", "pel", "pelt", "per", "p\u00e8re", "pes", "phes", "phun", "place", "ra", "ra", "ran", "rard", "ri", "ris", "ris", "ro", "rus", "ry", "sam", "sen", "sen", "shanks", "sold", "son", "sov", "steen", "ta", "ta", "tai", "tard", "ter", "ter", "ter", "thor", "ti", "tis", "tit", "to", "to", "ton", "trow", "tur", "ub", "us", "vard", "vaz", "ville", "vin", "vy", "wen", "win", "wing", "yeux", "zen"};
-	// Syllable 2 transitional
-	public static String[] alienVillage_syl2Trans_default = new String[]{"-Lus", "-Yar", "-yath", "'gil", "'gl", "'gy", "'ll", "'ni", "'nug", "'u", "'yi", "'yl", "^Cot", "a", "a", "ae", "ae", "al", "au", "ber", "bi", "bin", "bliv", "bold", "bri", "bul", "ca", "ca", "ca", "cci", "cel", "cel", "cel", "ces", "cha", "che", "chi", "chy", "ci", "cle", "clot", "co", "co", "co", "cor", "cor", "cor", "cre", "cund", "da", "dai", "dan", "de", "de", "de", "de", "di", "di", "di", "dil", "din", "din", "dro", "drus", "du", "e", "e", "e", "el", "el", "esh", "ga", "ga", "ga", "gae", "gas", "gen", "ghir", "gin", "gin", "go", "gor", "gric", "gu", "hi", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "is", "ka", "kar", "kra", "lah", "lar", "lee", "li", "lic", "lip", "lor", "lor", "mal", "mar", "math", "mi", "mi", "mi", "mil", "mo", "mor", "mor", "mor", "n", "nar", "ne", "ner", "ni", "ni", "no", "no", "o", "o", "o", "or", "pa", "par", "pat", "pel", "pel", "pen", "per", "per", "phae", "phon", "pi", "pol", "pol", "por", "por", "quil", "ra", "rak", "ral", "ren", "ren", "ri", "ri", "ro", "sal", "se", "sen", "sen", "si", "si", "si", "si", "stat", "su", "ta", "ta", "tan", "tar", "tat", "ter", "tha", "thi", "thur", "til", "til", "tor", "tra", "tred", "tru", "tu", "tu", "tum", "tyn", "u", "u", "un", "ves", "wul", "x", "ya", "za", "zar"};
-	
-	// Syllable 3 terminal
-	public static String[] alienVillage_syl3Term_default = new String[]{"-Ghun", "-Lih", "-Tha", "-Vho", "'ag", "'hx", "'mnon", "^Rho", "a", "a", "a", "chel", "cus", "des", "des", "di", "di", "di", "dum", "er", "er", "ev", "ga", "gen", "ger", "ger", "geuse", "haut", "hu", "huh", "i", "i", "i", "i", "i", "i", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "is", "l", "la", "le", "leev", "lo", "lor", "los", "lu", "mir", "mur", "nac", "n\u00e6", "nak", "ni", "nil", "no", "nosh", "nu", "omph", "ov", "pus", "ra", "riffe", "ris", "rum", "rus", "sa", "sac", "shir", "siz", "ski", "sm", "son", "sus", "sus", "sus", "ta", "tas", "ter", "ter", "thon", "tia", "tis", "tius", "tius", "tlach", "tor", "tov", "tum", "um", "um", "um", "um", "um", "um", "um", "um", "um", "us", "us", "us", "us", "us", "us", "us", "us", "us", "vich", "x", "yand", "zer", "zy"};
-	// Syllable 3 transitional
-	public static String[] alienVillage_syl3Trans_default = new String[]{"-Al", "-ech", "-U", "^Na", "^Zac", "a", "a", "ae", "ba", "char", "chi", "ci", "cli", "de", "di", "do", "don", "e", "en", "fe", "ge", "gra", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "la", "lae", "lar", "lar", "len", "ler", "li", "li", "lon", "ma", "may", "me", "me", "mon", "na", "nel", "ni", "ni", "o", "o", "o", "o", "pat", "phan", "ri", "rus", "tar", "tat", "tat", "tat", "tat", "te", "thar", "thu", "ti", "ti", "tud", "van", "ver", "vi", "vi", "vi"};
-	
-	// Syllable 4 terminal
-	public static String[] alienVillage_syl4Term_default = new String[]{"'ya", "a", "ae", "ae", "chus", "da", "des", "des", "des", "di", "dov", "dru", "dus", "er", "ho", "i", "i", "is", "is", "is", "is", "is", "la", "li", "li", "lis", "mi", "nes", "nis", "no", "on", "ov", "ra", "ra", "ran", "ri", "rum", "tus", "tus", "tus", "um", "um", "us", "us", "us", "us", "us", "us", "us", "us", "us", "us", "us", "vis", "ya"};
-	// Syllable 4 transitional
-	public static String[] alienVillage_syl4Trans_default = new String[]{"an", "an", "chi", "dae", "en", "i", "i", "i", "i", "i", "i", "mi", "o", "ta", "tat", "tat", "tat", "tat", "tat", "tat", "tat", "ti"};
-	
-	// Syllable 5 terminal
-	public static String[] alienVillage_syl5Term_default = new String[]{"a", "ae", "des", "is", "is", "is", "is", "is", "is", "is", "le", "nis", "nis", "se", "sen", "um", "um", "us", "us", "us"};
-	// Syllable 5 transitional
-	public static String[] alienVillage_syl5Trans_default = new String[]{"ar", "ti"};
-	
-	// Syllable 6 terminal
-	public static String[] alienVillage_syl6Term_default = new String[]{"ae", "um"};
-	// Syllable 6 transitional
-	public static String[] alienVillage_syl6Trans_default = new String[]{};
+	public static final String alienvillage_suffix_default =
+			""
+			;
 
-	// Syllable 7 terminal
-	public static String[] alienVillage_syl7Term_default = new String[]{};
+	public static final int[] alienvillage_syllable_count_weights = new int[]{
+			25, 158, 123, 55, 20, 2
+			};
 	
 	
 	
-	/*custom
+	/*
 	 * Custom name pieces
-	 * Village Names version 3.0 and on
 	 */
-	// Prefixes and suffixes
-	public static String[] custom_prefix_default = new String[]{};
-	public static String[] custom_suffix_default = new String[]{};
+	public static final String custom_prefix_default =
+			""
+			;
 	
-	// Single-syllable pieces
-	public static String[] custom_oneSylBegin_default = new String[]{};
-	public static String[] custom_oneSylEnd_default = new String[]{};
-
-	// Syllable 1 transitional
-	public static String[] custom_syl1Trans_default = new String[]{};
-
-	// Syllable 2 terminal
-	public static String[] custom_syl2Term_default = new String[]{};
-	// Syllable 2 transitional
-	public static String[] custom_syl2Trans_default = new String[]{};
-
-	// Syllable 3 terminal
-	public static String[] custom_syl3Term_default = new String[]{};
-	// Syllable 3 transitional
-	public static String[] custom_syl3Trans_default = new String[]{};
-
-	// Syllable 4 terminal
-	public static String[] custom_syl4Term_default = new String[]{};
-	// Syllable 4 transitional
-	public static String[] custom_syl4Trans_default = new String[]{};
-
-	// Syllable 5 terminal
-	public static String[] custom_syl5Term_default = new String[]{};
-	// Syllable 5 transitional
-	public static String[] custom_syl5Trans_default = new String[]{};
+	public static final String custom_root_initial_default =
+			"No"
+			; 
+			
+	public static final String custom_root_sylBegin_default =
+			""
+			;
 	
-	// Syllable 6 terminal
-	public static String[] custom_syl6Term_default = new String[]{};
-	// Syllable 6 transitional
-	public static String[] custom_syl6Trans_default = new String[]{};
+	public static final String custom_root_terminal_default =
+			"tch"
+			;
+	
+	public static final String custom_suffix_default =
+			""
+			;
 
-	// Syllable 7 terminal
-	public static String[] custom_syl7Term_default = new String[]{};
+	public static final int[] custom_syllable_count_weights = new int[]{1, 0, 0, 0, 0, 0, 0};
 	
 }

@@ -1,9 +1,9 @@
 package astrotibs.villagenames.proxy;
 
 import astrotibs.villagenames.VillageNames;
-import astrotibs.villagenames.config.ConfigInGame;
 import astrotibs.villagenames.config.ConfigReloader;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.gui.ConfigInGame;
 import astrotibs.villagenames.handler.EntityInteractHandler;
 import astrotibs.villagenames.handler.SpawnNamingHandler;
 import astrotibs.villagenames.handler.WellDecorateEvent;

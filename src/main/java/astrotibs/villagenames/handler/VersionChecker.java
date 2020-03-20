@@ -11,6 +11,7 @@ import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -63,12 +64,12 @@ public class VersionChecker implements Runnable {
 	
     public boolean isLatestVersion()
     {
-     return isLatestVersion;
+    	return isLatestVersion;
     }
     
     public String getLatestVersion()
     {
-     return latestVersion;
+    	return latestVersion;
     }
 	
     /**
@@ -80,15 +81,18 @@ public class VersionChecker implements Runnable {
     public void onPlayerTickEvent(PlayerTickEvent event) {
     	
         if (
-        		event.player.worldObj.isRemote 
-                
-        		) {
+        		event.player.worldObj.isRemote
+        		&& event.phase == Phase.END // Stops doubling the checks unnecessarily -- v3.2.4
+            	&& event.player.ticksExisted<=50
+    			&& event.player.ticksExisted%10==0
+        		)
+        {
         	// V3.0.1: Used to repeat the version check
         	if (
-        			event.player.ticksExisted<=50
-        			&& event.player.ticksExisted%10==0
-        			&& latestVersion.equals("")
-        			) {
+        			(latestVersion.equals(null) || latestVersion.equals(""))
+        			&& !warnaboutfailure // Skip the "run" if a failure was detected
+        			)
+        	{
         		run();
         	}
         	// Ordinary version checker
@@ -96,11 +100,11 @@ public class VersionChecker implements Runnable {
         			!VillageNames.haveWarnedVersionOutOfDate
             		&& GeneralConfig.versionChecker
             		&& !VillageNames.versionChecker.isLatestVersion()
-            		&& !latestVersion.equals("")
             		&& !latestVersion.equals(null)
+            		&& !latestVersion.equals("")
             		&& !(Reference.VERSION).contains("DEV")
-            		&& event.player.ticksExisted<=50 // Version 3.0.1: to make sure this goes through
-        			) {
+        			)
+        	{
         		
                 event.player.addChatComponentMessage(
                 		new ChatComponentText(
@@ -116,7 +120,7 @@ public class VersionChecker implements Runnable {
                 VillageNames.haveWarnedVersionOutOfDate = true;
         	}
         	
-          }
+        }
     	
     }
     

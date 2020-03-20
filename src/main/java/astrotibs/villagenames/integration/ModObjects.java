@@ -108,6 +108,13 @@ public class ModObjects {
 	
 	// --- Items --- //
 	
+	// Boats
+	public static final String boatBirchUTD = "uptodate:item_boat_birch";
+	public static final String boatSpruceUTD = "uptodate:item_boat_spruce";
+	public static final String boatDarkOakUTD = "uptodate:item_boat_dark_oak";
+	public static final String boatJungleUTD = "uptodate:item_boat_jungle";
+	public static final String boatAcaciaUTD = "uptodate:item_boat_acacia";
+	
 	// Colored beds
 	public static final String coloredBedBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
@@ -119,6 +126,10 @@ public class ModObjects {
 	// Dyes
 	public static final String miscBOP = "BiomesOPlenty:misc"; // Usually used for dyes
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
+	public static final String dyeUTD = "uptodate:dye";
+	
+	// Sweet Berries
+	public static final String sweetBerriesUTD = "uptodate:sweet_berries";
 	
 	// Mutton
 	public static final String muttonRawEF = "etfuturum:mutton_raw";
@@ -586,7 +597,103 @@ public class ModObjects {
 		return null;
 	}
 	
+	
+	
 	// Dye
+	public static ItemStack chooseModBlueDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 28);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModBlackDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 9);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModBrownDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 32);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModWhiteDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 27);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+		}
+		return null;
+	}
 	
 	// Raw Mutton
 	public static ItemStack chooseModRawMutton()

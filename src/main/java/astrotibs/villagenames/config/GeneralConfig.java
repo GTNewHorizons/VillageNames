@@ -32,14 +32,6 @@ public class GeneralConfig {
 	public static boolean addIgloos;
 	public static boolean biomedictIgloos; // Added in v3.1
 	
-	public static boolean thornsSound;
-	public static boolean squidSounds;
-	public static boolean witchSounds;
-	public static boolean bucketSounds;
-	public static boolean hangingSounds;
-	public static boolean furnaceSounds;
-	public static boolean enderSounds;
-	
 	public static boolean codexChestLoot;
 	public static boolean versionChecker;
 	
@@ -95,12 +87,19 @@ public class GeneralConfig {
 	// Added in v3.2
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
+	public static String[] modDye;
+	
+	
     public static boolean villagerSkinTones;
     public static float villagerSkinToneVarianceAnnealing;
     public static float villagerSkinToneVarianceScale;
 	
-	public static void init(File configFile) {
-		if (config == null) {
+    
+    
+	public static void init(File configFile) 
+	{
+		if (config == null)
+		{
 			config = new Configuration(configFile);
 			loadConfiguration();
 		}
@@ -126,17 +125,6 @@ public class GeneralConfig {
 	    concreteWell = config.getBoolean("Concrete Well", "World of Color", true, "Whether to decorate wells with Concrete and Glazed Terracotta instead of stained clay");
 	    
 	    
-	    
-	    
-	    //--------------Sounds category--------------//
-	    thornsSound = config.getBoolean("Thorns", "Sounds", true, "Play the 1.9+ Thorns enchantment sound effects (This flag is handled SERVER-side only)");
-	    squidSounds = config.getBoolean("Squid", "Sounds", true, "Play the 1.9+ Squid sound effects (This flag is handled SERVER-side only)");
-	    witchSounds = config.getBoolean("Witch", "Sounds", true, "Play the 1.9+ Witch sound effects (This flag is handled SERVER-side only)");
-	    bucketSounds = config.getBoolean("Bucket", "Sounds", true, "Play the 1.9+ Bucket sound effects (This flag is handled SERVER-side only)");
-	    hangingSounds = config.getBoolean("Hanging", "Sounds", true, "Play the 1.9+ Painting, Item Frame, and Lead Knot sound effects (This flag is handled SERVER-side only)");
-	    furnaceSounds = config.getBoolean("Furnace", "Sounds", true, "Play the 1.9+ Furnace crackle sound effects (This flag is handled CLIENT-side only)");
-	    enderSounds = config.getBoolean("Ender Eye", "Sounds", true, "Play the 1.12+ Ender Eye sound effects (This flag is handled SERVER-side only)");
-
 	    
 	    //---------------Professions-----------------//
 	    villagerCareers = config.getBoolean("Villager Careers", "villager professions", true, "Assign 1.8+ Career subdivisions to vanilla Professions. Trading is still 1.7 style, but merchant offers will be more progression-based. "
@@ -275,17 +263,17 @@ public class GeneralConfig {
 	    biomedictIgloos = config.getBoolean("Allow Igloos in modded biomes", "miscellaneous", false, "Igloos can generate in mods' snowy plains biomes, rather than just vanilla's Ice Plains and Cold Taiga");
 	    
 	    
-	    //--------------Entity Names-----------------//
+	    //--------------Names-----------------//
 	    
-	    nameEntities = config.getBoolean("Entity names", "Entity Names", true, "Entities reveal their names when you right-click them, or automatically if so assigned.");
-	    addJobToName = config.getBoolean("Entity professions", "Entity Names", false, "An entity's name also includes its profession/title. You may need to right-click the entity to update its name plate.");
-	    nameGolems = config.getBoolean("Golem names", "Entity Names", true, "Right-click village Golems to learn their name.");
+	    nameEntities = config.getBoolean("Entity names", "Naming", true, "Entities reveal their names when you right-click them, or automatically if so assigned.");
+	    addJobToName = config.getBoolean("Entity professions", "Naming", false, "An entity's name also includes its profession/title. You may need to right-click the entity to update its name plate.");
+	    nameGolems = config.getBoolean("Golem names", "Naming", true, "Right-click village Golems to learn their name.");
 	    
-	    nitwitProfession = config.getString("Nitwit Profession", "Entity Names", "", "The career displayed for a Nitwit");
+	    nitwitProfession = config.getString("Nitwit Profession", "Naming", "", "The career displayed for a Nitwit");
 	    
 		// Automatic Names
 		
-		modNameMappingAutomatic = config.getStringList("Automatic Names", "Entity Names", new String[]{
+		modNameMappingAutomatic = config.getStringList("Automatic Names", "Naming", new String[]{
 				
 				// Minecraft
 				//"demon||net.minecraft.entity.boss.EntityWither|add",
@@ -369,7 +357,7 @@ public class GeneralConfig {
 
 		// Clickable Names
 	    
-		modNameMappingClickable = config.getStringList("Clickable Names", "Entity Names", new String[]{
+		modNameMappingClickable = config.getStringList("Clickable Names", "Naming", new String[]{
 				
 				// Galacticraft
 				"alien||micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager",
@@ -427,6 +415,14 @@ public class GeneralConfig {
  				"Priority order for referencing concrete for well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
 		
+	    modDye = config.getStringList("Mod Priority: Dye", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"biomesoplenty",
+ 				"mariculture",
+ 				},
+ 				"Priority order for referencing dye for villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{
  				"villagenames",
 	    		"uptodate",

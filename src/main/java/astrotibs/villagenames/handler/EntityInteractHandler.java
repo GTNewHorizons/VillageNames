@@ -61,29 +61,30 @@ public class EntityInteractHandler {
 	// This will only be used for getting the class path to a block
 	@SubscribeEvent
 	//@SideOnly(Side.CLIENT)
-	public void onPlayerInteractEvent(PlayerInteractEvent event) {
+	public void onPlayerInteractEvent(PlayerInteractEvent event)
+	{
 		if ( 
-				GeneralConfig.debugMessages
-				//&& (
-				//		event.entityPlayer.inventory.getCurrentItem().getItem() == Items.paper
-				//		||event.entityPlayer.inventory.getCurrentItem().getItem() == Items.book )
-				&& !event.entityPlayer.worldObj.isRemote
+				!event.entityPlayer.worldObj.isRemote
 				&& event.action == Action.RIGHT_CLICK_BLOCK
-				) {
+				&& GeneralConfig.debugMessages
+				)
+		{
 			Block targetBlock = event.world.getBlock(event.x, event.y, event.z);
 			int targetBlockMeta = event.world.getBlockMetadata(event.x, event.y, event.z);
+			
 			String targetBlockUnlocName = targetBlock.getUnlocalizedName();
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "Class path of this block: " + targetBlock.getClass().toString().substring(6) ));
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "Unlocalized name: " + targetBlockUnlocName ));
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "Meta value: " + targetBlockMeta ));
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "" ));
 		}
+		
 	}
 	
 	
 	@SubscribeEvent(receiveCanceled=true)
-	public void onEntityInteract(EntityInteractEvent event) {
-		
+	public void onEntityInteract(EntityInteractEvent event)
+	{
 		// This was used to verify server-client syncing of Careers
 		/*
 		if (GeneralConfig.debugMessages && event.target instanceof EntityVillager)
@@ -1019,7 +1020,10 @@ public class EntityInteractHandler {
 			//------------------------------//
 			
 			// If you're holding anything else (or nothing), check to see if the target is a Villager, Village Golem, or entry from the config list.
-			else if (!world.isRemote) {
+			else if (!world.isRemote)
+			{
+				// Update villager trades on interaction
+				if (event.target instanceof EntityVillager) {FunctionsVN.monitorVillagerTrades((EntityVillager) event.target);}
 				
 				// Entity is a custom clickable config entry.
 				if ( mappedNamesClickable.get("ClassPaths").contains(targetClassPath) ) {
