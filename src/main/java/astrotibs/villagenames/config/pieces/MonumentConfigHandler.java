@@ -49,15 +49,15 @@ public class MonumentConfigHandler
 
 		
 		
-		syllable_count_weighting = config.get("Syllable Count Weighting", "Monument Syllable Pool", NamePieces.monument_syllable_count_weights,
+		syllable_count_weighting = config.get("Monument Syllable Pool", "Syllable Count Weighting", NamePieces.monument_syllable_count_weights,
 				"How often core names of various lengths are generated. The number in the Nth row is the weighting for N-syllable names.").getIntList();
 		
 		prefix_chance = config.getFloat("Prefix Chance", "Monument Syllable Pool",
-				monument_root_initial.length <= 0 ? 0 : ((float)monument_prefix.length)/monument_root_initial.length, 0.0F, 1.0F,
+				(monument_root_initial.length-1) <= 0 ? 0 : ((float)monument_prefix.length-1)/(monument_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a prefix.");
 		
 		suffix_chance = config.getFloat("Suffix Chance", "Monument Syllable Pool",
-				monument_root_initial.length <= 0 ? 0 : ((float)monument_suffix.length)/monument_root_initial.length, 0.0F, 1.0F,
+				(monument_root_initial.length-1) <= 0 ? 0 : ((float)monument_suffix.length-1)/(monument_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a suffix.");
 		
 		

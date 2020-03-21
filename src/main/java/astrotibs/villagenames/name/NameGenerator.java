@@ -462,15 +462,47 @@ public class NameGenerator {
 		int sizeUnderflow = 0;
 		int repeatedChar = 0;
 		int filterFail = 0;
+		int prefixsuffixFail = 0;
 		
-		// Step 1: Generate a prefix.
-		if (
-				random.nextFloat() < prefix_chance
-				&& normalization > 0
-				&& prefix.length > 0
-				)
+		while (true)
 		{
-			r_prefix = (prefix[random.nextInt(prefix.length)]).trim();
+			// Step 1: Generate a prefix.
+			r_prefix="";
+			if (
+					random.nextFloat() < prefix_chance
+					&& normalization > 0
+					&& prefix.length > 0
+					)
+			{
+				r_prefix = (prefix[random.nextInt(prefix.length)]).trim();
+			}
+			
+			// Step 3: Generate a suffix.
+			r_suffix="";
+			if (
+					random.nextFloat() < suffix_chance
+					&& normalization > 0
+					&& suffix.length > 0
+					)
+			{
+				r_suffix = (suffix[random.nextInt(suffix.length)]).trim();
+			}
+			
+			if (
+					r_prefix.equals("")
+					|| r_suffix.equals("")
+					|| !r_prefix.equals(r_suffix)
+					)
+			{break;}
+			else
+			{
+				if (++prefixsuffixFail>=tooManyFailures)
+				{
+					String errorMessage = "Name type " + nameType +" Matched too many prefixes and suffixes! Check your syllable configs.";
+					LogHelper.fatal(errorMessage);
+					throw new RuntimeException(errorMessage);
+				}
+			}
 		}
 		
 		
@@ -658,16 +690,6 @@ public class NameGenerator {
 				//r_prefix = rootName = r_suffix = "";
 				//break;
 			}
-		}
-		
-		// Step 3: Generate a suffix.
-		if (
-				random.nextFloat() < suffix_chance
-				&& normalization > 0
-				&& suffix.length > 0
-				)
-		{
-			r_suffix = (suffix[random.nextInt(suffix.length)]).trim();
 		}
 		
 		// Step 4: Grab a header tag.
