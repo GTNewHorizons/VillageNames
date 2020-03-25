@@ -84,6 +84,7 @@ public class GeneralConfig {
 	public static String[] modBanner;
 	public static String[] modBeetroot;
 	public static String[] modMutton;
+	public static String[] modKelp;
 	// Added in v3.2
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
@@ -462,7 +463,13 @@ public class GeneralConfig {
  				},
  				"Priority order for referencing Mutton for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
-	    	    
+	    
+	    modKelp = config.getStringList("Mod Priority: Kelp", "Mod Integration", new String[]{
+ 				"mariculture",
+	    		"biomesoplenty",
+ 				},
+ 				"Priority order for referencing Kelp for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
 		
 		// Mapping for modded structures, and the creatures that can name them
 		modStructureNames = config.getStringList("Mod Structures", "Mod Integration", new String[]{

@@ -190,8 +190,20 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								// Egg to Emerald in BE
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 										new ItemStack( Items.egg, FunctionsVN.modernTradeCostBySlot(16, 0, nextSlotToFill, 4) ),
-										new ItemStack( Items.emerald, 1 ) )  );
+										new ItemStack( Items.emerald, 1 ) ) );
 								// This is Suspicious Stew in Java
+								while (true)
+								{
+									moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewUTD);
+									if (moditem != null) {
+										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+												new ItemStack( Items.emerald, 1 ),
+												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(1 + (random.nextBoolean()? 1 : 0), 1, nextSlotToFill, 4),
+														random.nextInt(10) // One of ten types
+														)
+												) ); break;}
+									break;
+								}
 							}
 							
 							// Level 5: Master
@@ -2009,12 +2021,12 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								}
 								
 								// BE: Emerald to Cooked Mutton
-								moditemstack = ModObjects.chooseModRawMutton();
+								moditemstack = ModObjects.chooseModCookedMutton();
 								if (moditemstack!=null)
 								{
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(8, 1, nextSlotToFill, 2) ),
-											new ItemStack( moditemstack.getItem(), 1 ) ) );
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(4, 1, nextSlotToFill, 2) ) ) );
 								}
 								
 							}
@@ -2047,7 +2059,19 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							// Level 4: Expert
 							if (nextSlotToFill == 4 || nextSlotToFill > 5)
 							{
-								// TODO - Dried Kelp Block to Emerald
+								// Dried Kelp Block to Emerald
+								moditemstack = ModObjects.chooseModKelpBlock();
+								if (moditemstack!=null)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack(
+													moditemstack.getItem(),
+													// Could be one (kelp wrap) or nine (individual kelp)
+													MathHelper.clamp_int(FunctionsVN.modernTradeCostBySlot(10, 1, nextSlotToFill, 4)*moditemstack.stackSize, 1, 64),
+													moditemstack.getItemDamage() ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									break;
+								}
 							}
 							// Level 5: Master
 							if (nextSlotToFill >= 5)

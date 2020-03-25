@@ -128,8 +128,10 @@ public class ModObjects {
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
 	public static final String dyeUTD = "uptodate:dye";
 	
-	// Sweet Berries
-	public static final String sweetBerriesUTD = "uptodate:sweet_berries";
+	// Kelp and Kelp Accessories
+	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
+	public static final String kelpWrapMC = "Mariculture:food"; // Use meta 8
+	public static final String kelpDriedBOP = "BiomesOPlenty:coral1"; // Use meta 11 
 	
 	// Mutton
 	public static final String muttonRawEF = "etfuturum:mutton_raw";
@@ -141,13 +143,18 @@ public class ModObjects {
 	public static final String muttonRawUTD = "uptodate:raw_mutton";
 	public static final String muttonCookedUTD = "uptodate:cooked_mutton";
 	
-	
 	// Rabbit
 	public static final String rabbitHideEF = "etfuturum:rabbit_hide";
 	public static final String rabbitFootEF = "etfuturum:rabbit_foot";
 	public static final String rabbitRawEF = "etfuturum:rabbit_raw";
 	public static final String rabbitCookedEF = "etfuturum:rabbit_cooked";
 	public static final String rabbitStewEF = "etfuturum:rabbit_stew";
+	
+	// Suspicious Stew
+	public static final String suspiciousStewUTD = "uptodate:suspicious_stew";
+
+	// Sweet Berries
+	public static final String sweetBerriesUTD = "uptodate:sweet_berries";
 	
 	// Tipped arrows
 	public static final String tippedArrowEF = "etfuturum:tipped_arrow";
@@ -665,6 +672,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 32);}
 			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
 		}
 		return null;
 	}
@@ -690,6 +702,29 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+		}
+		return null;
+	}
+	
+	// Kelp
+	public static ItemStack chooseModKelpBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modKelp;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.kelpWrapMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
+			}
+			else if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.kelpDriedBOP);
+				if (moditem != null) {return new ItemStack(moditem, 9, 11);} // Use nine because BoP doesn't have a way to consolidate them
 			}
 		}
 		return null;
@@ -771,6 +806,7 @@ public class ModObjects {
 	
 	// Rabbit Foot
 	
+	// Suspicious Stew
 	 
 	
 	
