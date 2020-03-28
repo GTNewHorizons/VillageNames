@@ -4,6 +4,7 @@ import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -104,6 +105,10 @@ public class ModObjects {
 	public static final String glazedTerracottaGreenUTD = "uptodate:glazed_terracotta_green";
 	public static final String glazedTerracottaRedUTD = "uptodate:glazed_terracotta_red";
 	public static final String glazedTerracottaBlackUTD = "uptodate:glazed_terracotta_black";
+	
+	// Grass Path
+	public static final String grassPathUTD = "uptodate:grass_path";
+	public static final String grassPathEF = "etfuturum:grass_path";
 	
 	
 	// --- Items --- //
@@ -578,6 +583,32 @@ public class ModObjects {
 		}
 		return null;
 	}
+	
+	
+	// Selects a modded Grass Path block if able; returns Gravel otherwise.
+	public static Block chooseModPathBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modGrassPath;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return Blocks.gravel;
+	}
+	
+	
 	
 	
 	// Beetroot

@@ -3,6 +3,8 @@ package astrotibs.villagenames.utility;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
@@ -25,11 +27,60 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
 // Added in v3.1
 public class FunctionsVN {
+	
+	public static enum VillageType
+	{
+		PLAINS, DESERT, TAIGA, SAVANNA, SNOWY;
+		
+		/**
+		 * Determine the biometype to generate village buildings
+		 */
+		public static VillageType returnVillageTypeFromBiome(World world, int posX, int posZ)
+		{
+			BiomeGenBase biome = world.getBiomeGenForCoords(posX, posZ);
+			BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
+			
+			// Ordered by personal priority. The first of these to be fulfilled gets returned
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return TAIGA;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return SAVANNA;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SNOWY) {return SNOWY;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SANDY) {return DESERT;}}
+			//for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.PLAINS) {return PLAINS;}}
+			
+			// If none apply, send back Plains
+			return PLAINS;
+		}
+	}
+	
+	public static enum WoodType
+	{
+		OAK, SPRUCE, JUNGLE, BIRCH, ACACIA, DARK_OAK;
+		
+		/**
+		 * Determine the wood type to return for a given biome
+		 */
+		public static WoodType returnWoodTypeFromBiome(World world, int posX, int posZ)
+		{
+			BiomeGenBase biome = world.getBiomeGenForCoords(posX, posZ);
+			
+			if (biome.biomeName.toLowerCase().contains("birch")) {return BIRCH;}
+			if (biome.biomeName.toLowerCase().contains("roofed forest")) {return DARK_OAK;}
+			
+			BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return SPRUCE;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.JUNGLE) {return JUNGLE;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return ACACIA;}}
+			
+			// If none apply, send back Oak
+			return OAK;
+		}
+	}
 	
 	/**
 	 * Determine the biometype of the biome the entity is currently in
@@ -1897,4 +1948,56 @@ public class FunctionsVN {
 		return (new String[]{"acacia", "birch", "darkoak", "jungle", "oak", "spruce"})[entity.getRNG().nextInt(6)];
 	}
 	
+	/**
+	 * Returns the median value of an int array.
+	 * If the returned value is a halfway point, round up or down depending on if the average value is higher or lower than the median.
+	 * If it's the same, specify based on roundup parameter.
+	 */
+	public static int medianIntArray(ArrayList<Integer> array, boolean roundup)
+	{
+		if (array.size() <=0) return -1;
+		
+		Collections.sort(array);
+		
+		if (array.size() % 2 == 0)
+		{
+			// Array is even-length. Find average of the middle two values.
+			int totalElements = array.size();
+			int sumOfMiddleTwo = array.get(totalElements / 2) + array.get(totalElements / 2 - 1);
+			
+			if (sumOfMiddleTwo%2==0)
+			{
+				// Average of middle two values is integer
+				return sumOfMiddleTwo/2;
+			}
+			else
+			{
+				// Average of middle two is half-integer.
+				// Round this based on whether the average is higher.
+				double median = (double)sumOfMiddleTwo/2;
+				
+				double average = 0;
+				for (int i : array) {average += i;}
+				average /= array.size();
+				
+				if (average < median)
+				{
+					return MathHelper.floor_double(median);
+				}
+				else if (average > median)
+				{
+					return MathHelper.ceiling_double_int(median);
+				}
+				else
+				{
+					return roundup ? MathHelper.ceiling_double_int(median) : MathHelper.floor_double(median);
+				}
+			}
+		}
+		else
+		{
+			// Array is odd-length. Take the middle value.
+			return array.get(array.size()/2);
+		}
+	}
 }

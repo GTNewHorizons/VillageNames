@@ -37,6 +37,8 @@ import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import astrotibs.villagenames.proxy.CommonProxy;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
+import astrotibs.villagenames.village.MapGenVillageVN;
+import astrotibs.villagenames.village.StructureVillagePiecesVN;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -55,6 +57,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraftforge.common.MinecraftForge;
 
 /*
@@ -148,7 +151,8 @@ public final class VillageNames
 			ChestLootHandler.init();
 		}
 		
-		if (GeneralConfig.addOceanMonuments) { // Monuments, Prismarine, Guardians, Sponges
+		if (GeneralConfig.addOceanMonuments)
+		{ // Monuments, Prismarine, Guardians, Sponges
 			// Register Prismarine stuff here
 			ModBlocksPrismarine.init();
 			ModItemsPrismarine.init();
@@ -166,12 +170,29 @@ public final class VillageNames
 			
 		}
 		
-		if (GeneralConfig.addIgloos) {
+		if (GeneralConfig.addIgloos)
+		{
 			GameRegistry.registerWorldGenerator(new IglooGeneratorIWG(), 0);
 			MapGenStructureIO.registerStructure(VNMapGenIgloo.Start.class, "Temple");
 			VNComponentIglooPieces.registerScatteredFeaturePieces();
 			ChestLootHandler.iglooChest();
 			LogHelper.info("Registered Igloo generation");
+		}
+		
+		// New village generator
+		if (GeneralConfig.newVillageGenerator)
+		{
+			// New village generator
+			MapGenStructureIO.registerStructure(MapGenVillageVN.Start.class, "MapGenVillageVN");
+			
+			// Structure components
+	        MapGenStructureIO.func_143031_a(StructureVillagePiecesVN.PathVN.class, "VNPath"); // Well
+	        MapGenStructureIO.func_143031_a(StructureVillagePiecesVN.PlainsMeetingPoint1.class, "VNPlMP1"); // Well
+	        
+	        // Listener that interrupts old village generation with the new one
+			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );
+			
+			LogHelper.info("Registered new Village generator");
 		}
 		
 		
