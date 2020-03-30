@@ -187,13 +187,13 @@ public class MapGenVillageVN extends MapGenVillage
             {
                 StructureComponent structurecomponent;
                 
-                if (paths.isEmpty())
+                if (paths.isEmpty()) // There are components remaining, but no paths
                 {
                     counter = random.nextInt(components.size());
                     structurecomponent = (StructureComponent)components.remove(counter);
                     structurecomponent.buildComponent(start, this.components, random);
                 }
-                else
+                else // There are paths remaining, but no components
                 {
                     counter = random.nextInt(paths.size());
                     structurecomponent = (StructureComponent)paths.remove(counter);

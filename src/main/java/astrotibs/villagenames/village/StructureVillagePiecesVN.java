@@ -118,8 +118,9 @@ public class StructureVillagePiecesVN
     /**
      * Discover the y coordinate that will serve as the ground level of the supplied BoundingBox.
      * (An ACTUAL median of all the levels in the BB's horizontal rectangle).
+     * Use outlineOnly if you'd like to tally only the boundary values.
      */
-    protected int getMedianGroundLevelBody(World world, StructureBoundingBox boundingBox)
+    protected static int getMedianGroundLevel(World world, StructureBoundingBox boundingBox, boolean outlineOnly)
     {
     	ArrayList<Integer> i = new ArrayList<Integer>();
     	
@@ -129,7 +130,13 @@ public class StructureVillagePiecesVN
             {
                 if (boundingBox.isVecInside(l, 64, k))
                 {
-                    i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel()));
+                	if (!outlineOnly || (outlineOnly && (k==boundingBox.minZ || k==boundingBox.maxZ || l==boundingBox.minX || l==boundingBox.maxX)))
+                	{
+                		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel())); // getAverageGroundLevel returns 64
+                		//LogHelper.info("height " + world.getTopSolidOrLiquidBlock(l, k) + " at " + l + " " + k);
+                		i.add(world.getTopSolidOrLiquidBlock(l, k));
+                	}
+                    
                 }
             }
         }
@@ -140,40 +147,124 @@ public class StructureVillagePiecesVN
     /**
      * Biome-specific block replacement
      */
-    protected static Block getBiomeSpecificBlock(Block block, int meta, StructureVillagePieces.Start startPiece)
+    protected static Object[] getBiomeSpecificBlock(Block block, int meta, StructureVillagePiecesVN.StartVN startPiece)
     {
-    	// Post Forge event
+    	// TODO - use vanilla fences and gates in 1.8
+    	
+    	if (startPiece.materialType == FunctionsVN.MaterialType.SPRUCE)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 1};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 1};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(1), 0};}
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(1), 0};}
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.BIRCH)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 2};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 2};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(2), 0};}
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(2), 0};}
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.birch_stairs, meta};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +2: meta==8? 8 +2 : meta};}
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 2};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 3};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(3), 0};}
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};}
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};}
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.ACACIA)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + 0};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 4};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(4), 0};}
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(4), 0};}
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.acacia_stairs, meta};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +4: meta==8? 8 +4 : meta};}
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 4};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.DARK_OAK)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + 1};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 5};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(5), 0};}
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(5), 0};}
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.dark_oak_stairs, meta};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +5: meta==8? 8 +5 : meta};}
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 5};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.SAND)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};} // Jungle planks
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(3), 0};} // Jungle fence
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};} // Jungle fence gate
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
+        	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
+        	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
+        	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};} // Jungle slab
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};} // Jungle double slab
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
+        {
+        	//if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.hardened_clay, 0};} // No log change
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with biome
+        	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.brick_stairs, meta};}
+        	if (block == Blocks.gravel)                        {return new Object[]{Blocks.hardened_clay, 0};}
+        	if (block == Blocks.dirt)                          {return new Object[]{Blocks.clay, 0};}
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.SNOW)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.packed_ice, 0};}
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.packed_ice, 0};}
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.snow, 0};}
+        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(1), 0};} // Spruce fence
+        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(1), 0};} // Spruce fence
+        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
+        	if (block == Blocks.gravel)                        {return new Object[]{Blocks.packed_ice, 0};}
+        	if (block == Blocks.dirt)                          {return new Object[]{Blocks.snow, 0};}
+        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};} // Spruce slab
+        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};} // Spruce double slab
+        }
+        if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
+        {
+        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Cap on all six sides
+        	if (block == Blocks.planks)                        {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
+        }
+        
+        // Post Forge event
         BiomeEvent.GetVillageBlockID event = new BiomeEvent.GetVillageBlockID(startPiece == null ? null : startPiece.biome, block, meta);
         MinecraftForge.TERRAIN_GEN_BUS.post(event);
-        if (event.getResult() == Result.DENY) return event.replacement;
+        if (event.getResult() == Result.DENY) return new Object[]{event.replacement, meta};
         
-        // Replace the block if this is a deserty boi
-        if (startPiece.inDesert)
-        {
-            if (block == Blocks.log || block == Blocks.log2) {return Blocks.sandstone;}
-            if (block == Blocks.cobblestone)                 {return Blocks.sandstone;}
-            if (block == Blocks.planks)                      {return Blocks.sandstone;}
-            if (block == Blocks.oak_stairs)                  {return Blocks.sandstone_stairs;}
-            if (block == Blocks.stone_stairs)                {return Blocks.sandstone_stairs;}
-            if (block == Blocks.gravel)                      {return Blocks.sandstone;}
-        }
-
-        return block;
+        return new Object[]{block, meta};
     }
     
     /**
      * Used to determine what path block to place into the world
+     * Returns the height at which the block was placed
      */
-    protected static void setPathSpecificBlock(World world, StructureVillagePieces.Start startPiece, int meta, int posX, int posY, int posZ)
+    protected static int setPathSpecificBlock(World world, StructureVillagePiecesVN.StartVN startPiece, int meta, int posX, int posY, int posZ)
     {
     	int seaLevel = 63; //TODO - actually call sea level in later versions
     	
     	Block blockToReplace = world.getBlock(posX, posY, posZ);
     	
-    	Block grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, startPiece);
-    	Block planks = getBiomeSpecificBlock(Blocks.planks, 0, startPiece);
-    	Block gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece);
-    	Block cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece);
+    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, startPiece);
+    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, startPiece);
+    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece);
+    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece);
     	
     	if (posY < seaLevel) {posY = seaLevel-1;}
     	
@@ -184,28 +275,61 @@ public class StructureVillagePiecesVN
     		// Replace grass with grass path
     		if (surfaceBlock instanceof BlockGrass && world.isAirBlock(posX, posY+1, posZ))
     		{
-    			world.setBlock(posX, posY, posZ, grassPath, 0, 2);
-    			break;
+    			world.setBlock(posX, posY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
+    			return posY;
     		}
     		
     		// Replace liquid with planks. Let's hope this isn't liquid you dumb banana
     		if (surfaceBlock.getMaterial().isLiquid())
     		{
-    			world.setBlock(posX, posY, posZ, planks, 0, 2);
-    			break;
+    			world.setBlock(posX, posY, posZ, (Block)planks[0], (Integer)planks[1], 2);
+    			return posY;
     		}
     		
     		// Replace sand or standstone with reinforced gravel
     		if (surfaceBlock instanceof BlockSand || surfaceBlock instanceof BlockSandStone)
     		{
-    			world.setBlock(posX, posY, posZ, gravel, 0, 2);
-    			world.setBlock(posX, posY-1, posZ, cobblestone, 0, 2);
-    			break;
+    			world.setBlock(posX, posY, posZ, (Block)gravel[0], (Integer)gravel[1], 2);
+    			world.setBlock(posX, posY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return posY;
     		}
     		
     		posY -=1;
     	}
+		return -1;
     }
+    
+    /**
+     * Contracts bounding box by amount specified in X, Y, Z
+     */
+    public static StructureBoundingBox contractBB(StructureBoundingBox structureBoundingBox, int xAmount, int yAmount, int zAmount)
+    {
+    	return new StructureBoundingBox(
+    			structureBoundingBox.minX+MathHelper.abs_int(xAmount),
+    			structureBoundingBox.minY+MathHelper.abs_int(yAmount),
+    			structureBoundingBox.minZ+MathHelper.abs_int(zAmount),
+    			structureBoundingBox.maxX-MathHelper.abs_int(xAmount),
+    			structureBoundingBox.maxY-MathHelper.abs_int(yAmount),
+    			structureBoundingBox.maxZ-MathHelper.abs_int(zAmount)
+    			);
+    }
+    
+    /**
+     * Contracts bounding box by specified X, Z amount
+     */
+    public static StructureBoundingBox contractBB(StructureBoundingBox structureBoundingBox, int xAmount, int zAmount)
+    {
+    	return contractBB(structureBoundingBox, xAmount, 0, zAmount);
+    }
+    
+    /**
+     * Contracts bounding box by specified amount in all dimensions
+     */
+    public static StructureBoundingBox contractBB(StructureBoundingBox structureBoundingBox, int amount)
+    {
+    	return contractBB(structureBoundingBox, amount, amount, amount);
+    }
+    
     
     
     // --------------------------------- //    
@@ -214,6 +338,38 @@ public class StructureVillagePiecesVN
     
     // --- General --- //
     
+    // Start
+    public static class StartVN extends StructureVillagePieces.Start
+    {
+    	// Set them to defaults here
+    	FunctionsVN.VillageType villageType = FunctionsVN.VillageType.NULL;
+    	FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.NULL;
+    	Block biomeCobblestoneBlock; int biomeCobblestoneMeta;
+    	Block biomePlankBlock; int biomePlankMeta;
+    	Block biomeGravelBlock; int biomeGravelMeta;
+    	Block biomeFenceBlock; Block biomeFenceGateBlock;
+    	
+        public StartVN() {}
+
+        public StartVN(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
+        {
+            super(chunkManager, componentType, random, posX, posZ, components, terrainType);
+            
+            // Set biome tags
+		    this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);
+	    	this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);
+		    
+            // Establish generic building materials
+        	Object[] blockObject;
+        	blockObject = getBiomeSpecificBlock(Blocks.cobblestone, 0, this); this.biomeCobblestoneBlock = (Block)blockObject[0]; this.biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = getBiomeSpecificBlock(Blocks.planks, 0, this); this.biomePlankBlock = (Block)blockObject[0]; this.biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = getBiomeSpecificBlock(Blocks.gravel, 0, this); this.biomeGravelBlock = (Block)blockObject[0]; this.biomeGravelMeta = (Integer)blockObject[1];
+        	blockObject = getBiomeSpecificBlock(Blocks.fence, 0, this); this.biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = getBiomeSpecificBlock(Blocks.fence_gate, 0, this); this.biomeFenceGateBlock = (Block)blockObject[0];
+        }
+    }
+    
+    // Path
     public static class PathVN extends StructureVillagePieces.Road
     {
         private int averageGroundLevel;
@@ -327,10 +483,7 @@ public class StructureVillagePiecesVN
                     	// Gets ground level, so long as it's not leaves or other foliage
                         int k = world.getTopSolidOrLiquidBlock(i, j) - 1;
                         
-                        // TODO - specific block here
-                        LogHelper.info("Path block to be replaced: " + world.getBlock(i, k, j) + " at " + i + " " + k + " " + j);
-                        
-                        setPathSpecificBlock(world, startPiece_reflected, 0, i, k, j);
+                        setPathSpecificBlock(world, (StartVN)startPiece_reflected, 0, i, k, j);
                     }
                 }
             }
@@ -340,10 +493,12 @@ public class StructureVillagePiecesVN
     }
     
     
+    
+    
     // --- Plains --- //
     
     // Well
-    public static class PlainsMeetingPoint1 extends StructureVillagePieces.Start
+    public static class PlainsMeetingPoint1 extends StartVN
     {
     	int xoffset = 2; int zoffset = 2; // Offsets from vanilla
 
@@ -353,10 +508,12 @@ public class StructureVillagePiecesVN
 	    
 		public PlainsMeetingPoint1() {}
 		
-		public PlainsMeetingPoint1(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List p_i2104_6_, int p_i2104_7_)
+		public PlainsMeetingPoint1(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
 		{
-		    super(chunkManager, componentType, random, posX, posZ, p_i2104_6_, p_i2104_7_);
+		    super(chunkManager, componentType, random, posX, posZ, components, terrainType);
 		    
+	    	if (GeneralConfig.debugMessages) {LogHelper.info("Village type: " + this.villageType + ", material type: " + this.materialType);}
+	    	
 		    // Establish orientation
             this.coordBaseMode = random.nextInt(4);
             switch (this.coordBaseMode)
@@ -384,39 +541,49 @@ public class StructureVillagePiecesVN
         /**
          * Construct the well
          */
-        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBoundingBox)
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
-        	
-            if (this.field_143015_k < 0)
+        	if (this.field_143015_k < 0)
             {
-                this.field_143015_k = this.getAverageGroundLevel(world, structureBoundingBox);
-
+                //this.field_143015_k = getMedianGroundLevel(world, structureBB, true);//this.getAverageGroundLevel(world, structureBoundingBox);
+        		this.field_143015_k = getMedianGroundLevel(world,
+        				new StructureBoundingBox(
+        						this.boundingBox.minX, this.boundingBox.minZ,
+        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				true);
+        		
+                if (GeneralConfig.debugMessages)
+                {
+                	LogHelper.info("Average ground level for well: " + this.field_143015_k + " at " + (this.boundingBox.minX+this.boundingBox.maxX)/2 + " " + (this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+                }
+                
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + (wellHeight-1) - wellDepthDecrease, 0);
             }
             
             // The well gets filled completely with water first
-            this.fillWithBlocks(world, structureBoundingBox, 1+xoffset, 0+wellDepthDecrease, 1+zoffset, 4+xoffset, 12, 4+zoffset, Blocks.cobblestone, Blocks.flowing_water, false);
+            //this.fillWithBlocks(world, structureBoundingBox, 1+xoffset, 0+wellDepthDecrease, 1+zoffset, 4+xoffset, 12, 4+zoffset, this.biomeCobblestoneBlock, Blocks.flowing_water, false);
+            this.fillWithMetadataBlocks(world, structureBB, 1+xoffset, 0+wellDepthDecrease, 1+zoffset, 4+xoffset, 12, 4+zoffset, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, false);
+            this.fillWithBlocks(world, structureBB, 2+xoffset, 1+wellDepthDecrease, 2+zoffset, 3+xoffset, 12, 3+zoffset, Blocks.flowing_water, Blocks.flowing_water, false); // Water
             
             // I believe this replaces the top water level with air
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 2+xoffset, 12, 2+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 3+xoffset, 12, 2+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 2+xoffset, 12, 3+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 3+xoffset, 12, 3+zoffset, structureBoundingBox);
+            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 2+xoffset, 12, 2+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 3+xoffset, 12, 2+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 2+xoffset, 12, 3+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 3+xoffset, 12, 3+zoffset, structureBB);
             
             // Well support posts
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1+xoffset, 13, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1+xoffset, 14, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 4+xoffset, 13, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 4+xoffset, 14, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1+xoffset, 13, 4+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1+xoffset, 14, 4+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 4+xoffset, 13, 4+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 4+xoffset, 14, 4+zoffset, structureBoundingBox);
+            for (int i : new int[]{1, 4})
+            {
+                for (int j : new int[]{1, 4})
+                {
+                	this.fillWithBlocks(world, structureBB, i+xoffset, 13, j+zoffset, i+xoffset, 14, j+zoffset, this.biomeFenceBlock, this.biomeFenceBlock, false);
+                }
+            }
             
             // Roof of the well
-            this.fillWithBlocks(world, structureBoundingBox, 1+xoffset, 15, 1+zoffset, 4+xoffset, 15, 4+zoffset, Blocks.cobblestone, Blocks.cobblestone, false);
+            this.fillWithMetadataBlocks(world, structureBB, 1+xoffset, 15, 1+zoffset, 4+xoffset, 15, 4+zoffset, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, false);
             
             // Line the well with cobblestone and ensure the spaces above are clear
             for (int i = 0; i <= 5; ++i)
@@ -425,44 +592,62 @@ public class StructureVillagePiecesVN
                 {
                     if (j == 0 || j == 5 || i == 0 || i == 5)
                     {
-                        //this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, j+xoffset, 10+yoffset, i+zoffset, structureBoundingBox);
-                        this.placeBlockAtCurrentPosition(world, Blocks.cobblestone, 0, j+xoffset, 11, i+zoffset, structureBoundingBox);
-                        this.clearCurrentPositionBlocksUpwards(world, j+xoffset, 12, i+zoffset, structureBoundingBox);
+                    	this.placeBlockAtCurrentPosition(world, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, j+xoffset, 11, i+zoffset, structureBB);
+                    	this.fillWithMetadataBlocks(world, structureBB, j+xoffset, 0+wellDepthDecrease, i+zoffset, j+xoffset, 11, i+zoffset, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, this.biomeCobblestoneBlock, this.biomeCobblestoneMeta, false);
+                        this.clearCurrentPositionBlocksUpwards(world, j+xoffset, 12, i+zoffset, structureBB);
                     }
                 }
             }
             
             // Over-lid torches
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1+xoffset, 16, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1+xoffset, 16, 4+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4+xoffset, 16, 1+zoffset, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4+xoffset, 16, 4+zoffset, structureBoundingBox);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1+xoffset, 16, 1+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1+xoffset, 16, 4+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4+xoffset, 16, 1+zoffset, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4+xoffset, 16, 4+zoffset, structureBB);
             
             // Encircle the well with path
             Block pathBlock = ModObjects.chooseModPathBlock();
-            
-            for (int i = 1; i <= 8; ++i)
+        	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece"});
+        	for (int i = 1; i <= 8; ++i)
             {
                 for (int j = 1; j <= 8; ++j)
                 {
                     if (j == 1 || j == 8 || i == 1 || i == 8)
                     {
-                        this.placeBlockAtCurrentPosition(world, pathBlock, 0, j, 10, i, structureBoundingBox);
-                        this.clearCurrentPositionBlocksUpwards(world, j, 11, i, structureBoundingBox);
+                    	// Gets ground level, so long as it's not leaves or other foliage
+                        //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
+                    	int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                        if (k > -1)
+                        {
+                        	setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                       	}
                     }
                 }
             }
             // Add path nodules at the end
             for (int i : new int[]{3,4,5,6})
             {
-            	this.placeBlockAtCurrentPosition(world, pathBlock, 0, 0, 10, i, structureBoundingBox);
-                this.clearCurrentPositionBlocksUpwards(world,         0, 11, i, structureBoundingBox);
-                this.placeBlockAtCurrentPosition(world, pathBlock, 0, 9, 10, i, structureBoundingBox);
-                this.clearCurrentPositionBlocksUpwards(world,         9, 11, i, structureBoundingBox);
-                this.placeBlockAtCurrentPosition(world, pathBlock, 0, i, 10, 0, structureBoundingBox);
-                this.clearCurrentPositionBlocksUpwards(world,         i, 11, 0, structureBoundingBox);
-                this.placeBlockAtCurrentPosition(world, pathBlock, 0, i, 10, 9, structureBoundingBox);
-                this.clearCurrentPositionBlocksUpwards(world,         i, 11, 9, structureBoundingBox);
+            	for (int j : new int[]{0,9})
+            	{
+                    //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
+            		int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                    if (k > -1)
+                    {
+                    	//setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                    	setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
+                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                   	}
+                    
+                    //k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+j, this.getBoundingBox().minZ+i) - 1;
+                    k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
+                    if (k > -1)
+                    {
+                    	//setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+j, k, this.getBoundingBox().minZ+i);
+                    	setPathSpecificBlock(world, this, 0, this.getXWithOffset(j, i), k, this.getZWithOffset(j, i));
+                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1, i, structureBB);
+                   	}
+            	}
             }
             
             return true;

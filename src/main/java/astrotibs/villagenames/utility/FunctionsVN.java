@@ -29,53 +29,94 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraftforge.common.BiomeDictionary;
 
 // Added in v3.1
 public class FunctionsVN {
 	
+	// Represents the 1.14+ village types
 	public static enum VillageType
 	{
+		NULL,
 		PLAINS, DESERT, TAIGA, SAVANNA, SNOWY;
 		
 		/**
 		 * Determine the biometype to generate village buildings
 		 */
-		public static VillageType returnVillageTypeFromBiome(World world, int posX, int posZ)
+		public static VillageType getVillageTypeFromBiome(World world, int posX, int posZ)
 		{
 			BiomeGenBase biome = world.getBiomeGenForCoords(posX, posZ);
+			return getVillageTypeFromBiome(biome);
+		}
+		public static VillageType getVillageTypeFromBiome(WorldChunkManager worldChunkManager, int posX, int posZ)
+		{
+			BiomeGenBase biome = worldChunkManager.getBiomeGenAt(posX, posZ);
+			return getVillageTypeFromBiome(biome);
+		}
+		public static VillageType getVillageTypeFromBiome(BiomeGenBase biome)
+		{
 			BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
 			
 			// Ordered by personal priority. The first of these to be fulfilled gets returned
+			if (biome.biomeName.toLowerCase().contains("taiga")) {return TAIGA;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return TAIGA;}}
+			if (biome.biomeName.toLowerCase().contains("savanna")) {return SAVANNA;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return SAVANNA;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SNOWY) {return SNOWY;}}
+			if (biome.biomeName.toLowerCase().contains("desert")) {return DESERT;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SANDY) {return DESERT;}}
 			//for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.PLAINS) {return PLAINS;}}
 			
 			// If none apply, send back Plains
 			return PLAINS;
 		}
+		
 	}
 	
-	public static enum WoodType
+	public static enum MaterialType
 	{
-		OAK, SPRUCE, JUNGLE, BIRCH, ACACIA, DARK_OAK;
+		NULL,
+		OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK,
+		SAND, MESA, SNOW, MUSHROOM; // Added three more for special non-wood cases
 		
 		/**
 		 * Determine the wood type to return for a given biome
 		 */
-		public static WoodType returnWoodTypeFromBiome(World world, int posX, int posZ)
+		public static MaterialType getMaterialTemplateForBiome(World world, int posX, int posZ)
 		{
 			BiomeGenBase biome = world.getBiomeGenForCoords(posX, posZ);
-			
+			return getMaterialTemplateForBiome(biome);
+		}
+		public static MaterialType getMaterialTemplateForBiome(WorldChunkManager worldChunkManager, int posX, int posZ)
+		{
+			BiomeGenBase biome = worldChunkManager.getBiomeGenAt(posX, posZ);
+			return getMaterialTemplateForBiome(biome);
+		}
+		public static MaterialType getMaterialTemplateForBiome(BiomeGenBase biome)
+		{
 			if (biome.biomeName.toLowerCase().contains("birch")) {return BIRCH;}
 			if (biome.biomeName.toLowerCase().contains("roofed forest")) {return DARK_OAK;}
 			
 			BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
+			if (biome.biomeName.toLowerCase().contains("taiga")) {return SPRUCE;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return SPRUCE;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.JUNGLE) {return JUNGLE;}}
+			if (biome.biomeName.toLowerCase().contains("taiga")) {return SPRUCE;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return ACACIA;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MESA) {return MESA;}}
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MUSHROOM) {return MUSHROOM;}}
+			
+			// Special handler for snowy:
+			boolean isSnowy = false;
+			for (BiomeDictionary.Type type : typeTags)
+			{
+				if (type==BiomeDictionary.Type.SNOWY) {isSnowy=true;}
+				if (type==BiomeDictionary.Type.DENSE || type==BiomeDictionary.Type.FOREST || type==BiomeDictionary.Type.LUSH || type==BiomeDictionary.Type.SPARSE) {isSnowy=false; break;}
+			}
+			if (isSnowy) {return SNOW;}
+			
+			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SANDY) {return SAND;}}
 			
 			// If none apply, send back Oak
 			return OAK;
@@ -1959,6 +2000,8 @@ public class FunctionsVN {
 		
 		Collections.sort(array);
 		
+		//if (GeneralConfig.debugMessages) {LogHelper.info("array: " + array);}
+		
 		if (array.size() % 2 == 0)
 		{
 			// Array is even-length. Find average of the middle two values.
@@ -1968,6 +2011,7 @@ public class FunctionsVN {
 			if (sumOfMiddleTwo%2==0)
 			{
 				// Average of middle two values is integer
+				//LogHelper.info("Median chosen type A: " + sumOfMiddleTwo/2);
 				return sumOfMiddleTwo/2;
 			}
 			else
@@ -1982,14 +2026,17 @@ public class FunctionsVN {
 				
 				if (average < median)
 				{
+					//LogHelper.info("Median chosen type B: " + MathHelper.floor_double(median) );
 					return MathHelper.floor_double(median);
 				}
 				else if (average > median)
 				{
+					//LogHelper.info("Median chosen type C: " + MathHelper.ceiling_double_int(median) );
 					return MathHelper.ceiling_double_int(median);
 				}
 				else
 				{
+					//LogHelper.info("Median chosen type D: " + (roundup ? MathHelper.ceiling_double_int(median) : MathHelper.floor_double(median)));
 					return roundup ? MathHelper.ceiling_double_int(median) : MathHelper.floor_double(median);
 				}
 			}
@@ -1997,6 +2044,7 @@ public class FunctionsVN {
 		else
 		{
 			// Array is odd-length. Take the middle value.
+			//LogHelper.info("Median chosen type E: " + array.get(array.size()/2));
 			return array.get(array.size()/2);
 		}
 	}

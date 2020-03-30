@@ -88,6 +88,43 @@ public class ModObjects {
 	public static final String concreteRedEF = "etfuturum:concrete_red";
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
 	
+	// Fence
+	public static final String fenceOakGS = "ganyssurface:fence_0";
+	public static final String fenceSpruceGS = "ganyssurface:fence_1";
+	public static final String fenceBirchGS = "ganyssurface:fence_2";
+	public static final String fenceJungleGS = "ganyssurface:fence_3";
+	public static final String fenceAcaciaGS = "ganyssurface:fence_4";
+	public static final String fenceDarkOakGS = "ganyssurface:fence_5";
+	public static final String fenceOakEF = "etfuturum:fence_oak";
+	public static final String fenceSpruceEF = "etfuturum:fence_spruce";
+	public static final String fenceBirchEF = "etfuturum:fence_birch";
+	public static final String fenceJungleEF = "etfuturum:fence_jungle";
+	public static final String fenceAcaciaEF = "etfuturum:fence_acacia";
+	public static final String fenceDarkOakEF = "etfuturum:fence_dark_oak";
+	public static final String fenceSpruceUTD = "uptodate:fence_spruce";
+	public static final String fenceBirchUTD = "uptodate:fence_birch";
+	public static final String fenceJungleUTD = "uptodate:fence_jungle";
+	public static final String fenceAcaciaUTD = "uptodate:fence_acacia";
+	public static final String fenceDarkOakUTD = "uptodate:fence_dark_oak";
+	
+	// Fence Gate
+	public static final String fenceGateOakGS = "ganyssurface:fence_gate_0";
+	public static final String fenceGateSpruceGS = "ganyssurface:fence_gate_1";
+	public static final String fenceGateBirchGS = "ganyssurface:fence_gate_2";
+	public static final String fenceGateJungleGS = "ganyssurface:fence_gate_3";
+	public static final String fenceGateAcaciaGS = "ganyssurface:fence_gate_4";
+	public static final String fenceGateDarkOakGS = "ganyssurface:fence_gate_5";
+	public static final String fenceGateSpruceEF = "etfuturum:fence_gate_spruce";
+	public static final String fenceGateBirchEF = "etfuturum:fence_gate_birch";
+	public static final String fenceGateJungleEF = "etfuturum:fence_gate_jungle";
+	public static final String fenceGateAcaciaEF = "etfuturum:fence_gate_acacia";
+	public static final String fenceGateDarkOakEF = "etfuturum:fence_gate_dark_oak";
+	public static final String fenceGateSpruceUTD = "uptodate:fence_gate_spruce";
+	public static final String fenceGateBirchUTD = "uptodate:fence_gate_birch";
+	public static final String fenceGateJungleUTD = "uptodate:fence_gate_jungle";
+	public static final String fenceGateAcaciaUTD = "uptodate:fence_gate_acacia";
+	public static final String fenceGateDarkOakUTD = "uptodate:fence_gate_dark_oak";
+	
 	// Glazed Terracotta
 	public static final String glazedTerracottaWhiteUTD = "uptodate:glazed_terracotta_white";
 	public static final String glazedTerracottaOrangeUTD = "uptodate:glazed_terracotta_orange";
@@ -216,6 +253,109 @@ public class ModObjects {
 			}
 		}
 		return null;
+	}
+	
+	// Fence
+	public static Block chooseModFence(int materialMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modFence;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.fenceOakEF); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakEF); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.fenceOakGS); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.fence;
+	}
+	
+	// Fence Gate
+	public static Block chooseModFenceGate(int materialMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modFenceGate;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakEF); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.fenceGateOakGS); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.fence_gate;
 	}
 	
 	// Glazed Terracotta - added in v3.1.2

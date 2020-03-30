@@ -91,6 +91,8 @@ public class GeneralConfig {
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
 	public static String[] modDye;
+	public static String[] modFence;
+	public static String[] modFenceGate;
 	
 	
     public static boolean villagerSkinTones;
@@ -564,6 +566,22 @@ public class GeneralConfig {
  				"Priority order for referencing dye for villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
+	    modFence = config.getStringList("Mod Priority: Fence", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"etfuturum",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modFenceGate = config.getStringList("Mod Priority: Fence Gate", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"etfuturum",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{
  				"villagenames",
 	    		"uptodate",
@@ -589,8 +607,8 @@ public class GeneralConfig {
  				);
 		
 	    modGrassPath = config.getStringList("Mod Priority: Grass Path", "Mod Integration", new String[]{
-	    		"uptodate",
  				"etfuturum",
+	    		"uptodate",
  				},
  				"Priority order for referencing Grass Path blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
