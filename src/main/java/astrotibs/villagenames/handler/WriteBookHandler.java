@@ -822,10 +822,11 @@ public class WriteBookHandler {
 
     		// Added in v3.1banner
     		// Generate banner info specifically to obtain a village color
-    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1);
+    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1,-1);
 			ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 			ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
     		int townColorMeta = 15-colorArray.get(0);
+    		int townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1); 
     		
     		int signX = structureCoords[0];
     		int signY = structureCoords[1];
@@ -840,6 +841,7 @@ public class WriteBookHandler {
             nbttagcompound1.setInteger("signY", signY);
             nbttagcompound1.setInteger("signZ", signZ);
             nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
+            nbttagcompound1.setInteger("townColor2", townColorMeta2);
             nbttagcompound1.setString("namePrefix", namePrefix);
             nbttagcompound1.setString("nameRoot", nameRoot);
             nbttagcompound1.setString("nameSuffix", nameSuffix);

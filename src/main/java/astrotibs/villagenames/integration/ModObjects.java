@@ -88,7 +88,7 @@ public class ModObjects {
 	public static final String concreteRedEF = "etfuturum:concrete_red";
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
 	
-	// Door
+	// Door // TODO - Remove in 1.8
 	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
 	public static final String doorBirchGS = "ganyssurface:doorBirch";
 	public static final String doorJungleGS = "ganyssurface:doorJungle";
@@ -100,7 +100,7 @@ public class ModObjects {
 	public static final String doorAcaciaUTD = "uptodate:door_acacia";
 	public static final String doorDarkOakUTD = "uptodate:door_dark_oak";
 	
-	// Fence
+	// Fence // TODO - Remove in 1.8
 	public static final String fenceOakGS = "ganyssurface:fence_0";
 	public static final String fenceSpruceGS = "ganyssurface:fence_1";
 	public static final String fenceBirchGS = "ganyssurface:fence_2";
@@ -119,7 +119,7 @@ public class ModObjects {
 	public static final String fenceAcaciaUTD = "uptodate:fence_acacia";
 	public static final String fenceDarkOakUTD = "uptodate:fence_dark_oak";
 	
-	// Fence Gate
+	// Fence Gate // TODO - Remove in 1.8
 	public static final String fenceGateOakGS = "ganyssurface:fence_gate_0";
 	public static final String fenceGateSpruceGS = "ganyssurface:fence_gate_1";
 	public static final String fenceGateBirchGS = "ganyssurface:fence_gate_2";
@@ -155,11 +155,18 @@ public class ModObjects {
 	public static final String glazedTerracottaRedUTD = "uptodate:glazed_terracotta_red";
 	public static final String glazedTerracottaBlackUTD = "uptodate:glazed_terracotta_black";
 	
-	// Grass Path
+	// Grass Path // TODO - Remove in 1.9?
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
 	
-	// Wooden Trapdoor
+	// Wooden Sign // TODO - Remove in 1.8
+	public static final String signSpruceGS = "ganyssurface:sign1";
+	public static final String signBirchGS = "ganyssurface:sign2";
+	public static final String signJungleGS = "ganyssurface:sign3";
+	public static final String signAcaciaGS = "ganyssurface:sign4";
+	public static final String signDarkOakGS = "ganyssurface:sign5";
+	
+	// Wooden Trapdoor // TODO - Remove in 1.8
 	public static final String trapdoorSpruceGS = "ganyssurface:trapdoor1";
 	public static final String trapdoorBirchGS = "ganyssurface:trapdoor2";
 	public static final String trapdoorJungleGS = "ganyssurface:trapdoor3";
@@ -814,9 +821,28 @@ public class ModObjects {
 		return Blocks.gravel;
 	}
 	
+	// Sign
+	public static Block chooseModWoodenSign(int materialMeta, boolean standing)
+	{
+		if (materialMeta==0) {return standing? Blocks.standing_sign : Blocks.wall_sign;}
+		
+		Block modblock=null;
+		
+		switch (materialMeta)
+		{
+			case 1: modblock = Block.getBlockFromName(ModObjects.signSpruceGS); break;
+			case 2: modblock = Block.getBlockFromName(ModObjects.signBirchGS); break;
+			case 3: modblock = Block.getBlockFromName(ModObjects.signJungleGS); break;
+			case 4: modblock = Block.getBlockFromName(ModObjects.signAcaciaGS); break;
+			case 5: modblock = Block.getBlockFromName(ModObjects.signDarkOakGS); break;
+		}
+		if (modblock != null) {return modblock;}
+		
+		// If all else fails, grab the vanilla version
+		return standing? Blocks.standing_sign : Blocks.wall_sign;
+	}
+	
 	// Trap door
-
-	// Door
 	public static Block chooseModWoodenTrapdoor(int materialMeta)
 	{
 		if (materialMeta==0) {return Blocks.trapdoor;}

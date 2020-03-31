@@ -56,7 +56,7 @@ public class WellDecorateEvent {
 	public void onPopulating(PopulateChunkEvent.Post event) {
 		
 		if (
-				event.hasVillageGenerated && event.world.provider.dimensionId == 0
+				event.hasVillageGenerated && event.world.provider.dimensionId == 0 && !GeneralConfig.newVillageGenerator
 				&& !event.world.isRemote
 				) {
 			
@@ -237,13 +237,13 @@ public class WellDecorateEvent {
                                 			
                                 			// Changed color block in v3.1banner
                                 			// Generate banner info, regardless of if we make a banner.
-                                    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(event.world.rand, -1);
+                                    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(event.world.rand, -1, -1);
                             				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                             				ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
                             				
                             				ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
                                     		int townColorMeta = 15-colorArray.get(0);
-                                    		
+                                    		int townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1);
                                 			
                                     		// ---------------------------------------- //
                                     		// -------- Determine Village Size -------- //
@@ -258,7 +258,7 @@ public class WellDecorateEvent {
                                     		int villageArea = -1; // If a village area value is not ascertained, this will remain as -1.
                                     		
                                     		// Try via NBT access
-
+                                    		
                                     		// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
                                     		
                                     		MapGenStructureData structureData;
@@ -386,7 +386,8 @@ public class WellDecorateEvent {
             		    			            if ( (signX-townX)*(signX-townX) + (signY-townY)*(signY-townY) + (signZ-townZ)*(signZ-townZ) <= radiussearch*radiussearch ) {
             		    			            	// This village already has a name.
             		    			            	townColorMeta = tagList.getInteger("townColor");//Too annoying. Just generate a random one.
-                                            		namePrefix = tagList.getString("namePrefix");
+                                            		townColorMeta2 = tagList.getInteger("townColor2");
+            		    			            	namePrefix = tagList.getString("namePrefix");
                                             		nameRoot = tagList.getString("nameRoot");
                                             		nameSuffix = tagList.getString("nameSuffix");
             		    			            	break;
@@ -542,6 +543,7 @@ public class WellDecorateEvent {
                                             nbttagcompound1.setInteger("signY", signY);
                                             nbttagcompound1.setInteger("signZ", signZ);
                                             nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
+                                            nbttagcompound1.setInteger("townColor2", townColorMeta2);
                                             nbttagcompound1.setString("namePrefix", namePrefix);
                                             nbttagcompound1.setString("nameRoot", nameRoot);
                                             nbttagcompound1.setString("nameSuffix", nameSuffix);

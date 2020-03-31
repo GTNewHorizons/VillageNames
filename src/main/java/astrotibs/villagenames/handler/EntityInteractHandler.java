@@ -698,11 +698,12 @@ public class EntityInteractHandler {
 
 	                        		// Changed color block in v3.1banner
                         			// Generate banner info, regardless of if we make a banner.
-                            		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1);
+                            		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1, -1);
                     				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                     				ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
                     				ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
                             		int townColorMeta = 15-colorArray.get(0);
+                            		int townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1);
                             		
                             		// Make the data bundle to save to NBT
 	                        		NBTTagList nbttaglist = new NBTTagList();
@@ -712,6 +713,7 @@ public class EntityInteractHandler {
 	                                nbttagcompound1.setInteger("signY", centerY);
 	                                nbttagcompound1.setInteger("signZ", centerZ);
 	                                nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
+	                                nbttagcompound1.setInteger("townColor2", townColorMeta2);
 	                                nbttagcompound1.setString("namePrefix", namePrefix);
 	                                nbttagcompound1.setString("nameRoot", nameRoot);
 	                                nbttagcompound1.setString("nameSuffix", nameSuffix);
@@ -906,7 +908,7 @@ public class EntityInteractHandler {
 												namePrefix = structureInfoArray[1];
 												nameRoot = structureInfoArray[2];
 												nameSuffix = structureInfoArray[3];
-												int townColorMeta = 15;
+												int townColorMeta = 15; int townColorMeta2 = 0;
 												
 												// Make the data bundle to save to NBT
 												NBTTagList nbttaglist = new NBTTagList();
@@ -919,6 +921,7 @@ public class EntityInteractHandler {
 												nbttagcompound1.setInteger("signY", signY);
 												nbttagcompound1.setInteger("signZ", signZ);
 												nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
+												nbttagcompound1.setInteger("townColor2", townColorMeta2);
 												nbttagcompound1.setString("namePrefix", namePrefix);
 												nbttagcompound1.setString("nameRoot", nameRoot);
 												nbttagcompound1.setString("nameSuffix", nameSuffix);

@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.init.Blocks;
@@ -135,12 +136,6 @@ public class MapGenVillageVN extends MapGenVillage
     				{
     					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
     					
-    					if (GeneralConfig.debugMessages)
-    					{
-    						LogHelper.info(Reference.MOD_NAME +
-    							" village started at x="+(chunkX * 16 + 8)+" z="+(chunkZ * 16 + 8)
-    							+" in biome "+ biome.biomeName+", biome id: "+biome.biomeID);
-    					}
     					return true;
     				}
     			}
@@ -168,10 +163,26 @@ public class MapGenVillageVN extends MapGenVillage
             super(chunkX, chunkZ);
             
             // My modified version, which allows the user to disable each building
-            List list = StructureVillagePiecesVN.getStructureVillageWeightedPieceList(random, villageSize);
+            List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize);
             
-            // Generate the "start" component (Well) and add it to the list
-            StructureVillagePiecesVN.PlainsMeetingPoint1 start = new StructureVillagePiecesVN.PlainsMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+            // Generate the "start" component and add it to the list
+            StructureVillageVN.StartVN start = null;
+            
+            // Select a starter at random
+            switch (random.nextInt(2))
+            {
+            	default:
+	            case 0: // Fountain 
+	            	start = new PlainsStructures.PlainsFountain01(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+	            	break;
+	            case 1: // Well
+	            	start = new PlainsStructures.PlainsMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+	            	break;
+	            case 2:
+	            	break;
+	            case 3:
+	            	break;
+            }
             
             // Add well to the component list
             this.components.add(start);

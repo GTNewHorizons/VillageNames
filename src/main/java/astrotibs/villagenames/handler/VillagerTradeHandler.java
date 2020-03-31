@@ -1256,7 +1256,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 	    							
 	    							if (trialbannerstack != null)
 	    							{
-	    								Object[] newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, -1);
+	    								Object[] newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, -1, -1);
 		    							ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 		    							ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 		    							

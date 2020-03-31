@@ -38,7 +38,8 @@ import astrotibs.villagenames.proxy.CommonProxy;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.MapGenVillageVN;
-import astrotibs.villagenames.village.StructureVillagePiecesVN;
+import astrotibs.villagenames.village.StructureVillageVN;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -186,8 +187,9 @@ public final class VillageNames
 			MapGenStructureIO.registerStructure(MapGenVillageVN.Start.class, "MapGenVillageVN");
 			
 			// Structure components
-	        MapGenStructureIO.func_143031_a(StructureVillagePiecesVN.PathVN.class, "VNPath"); // Well
-	        MapGenStructureIO.func_143031_a(StructureVillagePiecesVN.PlainsMeetingPoint1.class, "VNPlMP1"); // Well
+	        MapGenStructureIO.func_143031_a(StructureVillageVN.PathVN.class, "VNPath"); // Path
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFountain01.class, "VNPlF01"); // Fountain
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Well
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );

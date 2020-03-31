@@ -20,6 +20,45 @@ import net.minecraft.village.Village;
 
 public class BannerGenerator {
 	
+	// Array of color metas and corresponding weights
+	public static int[] colorMeta = new int[]{
+			0, // Black
+			1, // Red
+			2, // Green
+			3, // Brown
+			4, // Blue
+			5, // Purple
+			6, // Cyan
+			7, // Light Gray
+			8, // Gray
+			9, // Pink
+			10, // Lime
+			11, // Yellow
+			12, // Light Blue
+			13, // Magenta
+			14, // Orange
+			15 // White
+			};
+	
+	public static double[] colorWeights = new double[]{
+			121D/3, // Black
+			335D/2, // Red
+			81D, // Green
+			3D, // Brown
+			953D/12, // Blue
+			1D, // Purple
+			10D, // Cyan
+			1D, // Light Gray
+			1D, // Gray
+			1D/2, // Pink
+			15D, // Lime
+			229D/3, // Yellow
+			33D, // Light Blue
+			1D/2, // Magenta
+			65/6D, // Orange
+			409D/3 // White
+	};
+	
 	/**
 	 * Generates a random banner pattern based on internal Markovian values
 	 * for how flag pieces come together in real life.
@@ -28,8 +67,7 @@ public class BannerGenerator {
 	 * This is intended for backward compatibility with villages that have a previously generated "village color."
 	 * Enter a value below 0 to ignore this and draw a random value for the banner.
 	 */
-	
-	public static Object[] randomBannerArrays(Random random, int forceBannerColor)
+	public static Object[] randomBannerArrays(Random random, int forceBannerColor, int forceBannerColor2)
 	{
 		
 		int chosencountry;
@@ -419,51 +457,12 @@ public class BannerGenerator {
 		}
 		
 		
-		// Array of color metas and corresponding weights
-		int[] colorMeta = new int[]{
-				0, // Black
-				1, // Red
-				2, // Green
-				3, // Brown
-				4, // Blue
-				5, // Purple
-				6, // Cyan
-				7, // Light Gray
-				8, // Gray
-				9, // Pink
-				10, // Lime
-				11, // Yellow
-				12, // Light Blue
-				13, // Magenta
-				14, // Orange
-				15 // White
-				};
-		
-		double[] colorWeights = new double[]{
-				121D/3, // Black
-				335D/2, // Red
-				81D, // Green
-				3D, // Brown
-				953D/12, // Blue
-				1D, // Purple
-				10D, // Cyan
-				1D, // Light Gray
-				1D, // Gray
-				1D/2, // Pink
-				15D, // Lime
-				229D/3, // Yellow
-				33D, // Light Blue
-				1D/2, // Magenta
-				65/6D, // Orange
-				409D/3 // White
-		};
-		
-		
 		ArrayList<Integer> bannerColors = new ArrayList<Integer>();
 		
 		while (bannerColors.size() < colorcount)
 		{
 			if (forceBannerColor>=0 && bannerColors.size()==0) {bannerColors.add(forceBannerColor);} // In case you're backporting a banner for a previously created village
+			if (forceBannerColor2>=0 && bannerColors.size()==1)  {bannerColors.add(forceBannerColor2);}
 			
 			int newpotentialcolor = (Integer) FunctionsVN.weightedRandom(colorMeta, colorWeights, random);
 			// Search through the already-collected numbers and see if this new one is unique
@@ -674,7 +673,7 @@ public class BannerGenerator {
 		if (!entity.worldObj.isRemote)
 		{
 			// Generate banner info, regardless of if we make a banner.
-    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, -1);
+    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, -1, -1);
 			ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 			ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 			ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
@@ -682,7 +681,7 @@ public class BannerGenerator {
 			if (villageBanner==null) {return null;} // Not using a supported mod with banners
 			
     		int townColorMeta = 15-colorArray.get(0); // This is properly supposed to be reverse dye meta color, because this is block meta color.
-    		
+    		int townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1);
 			
 			Village villageNearTarget = entity.worldObj.villageCollectionObj.findNearestVillage((int)entity.posX, (int)entity.posY, (int)entity.posZ, EntityInteractHandler.villageRadiusBuffer);
 	        
@@ -734,7 +733,9 @@ public class BannerGenerator {
 		            	
 		            	// Re-Generate banner info so that we can use the pre-generated village color
 			    		int previousTownColor = villagetagcompound.getInteger("townColor");
-		            	newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, 15-previousTownColor); // This is properly supposed to be reverse dye meta color, because this is block meta color.
+			    		int previousTownColor2 = -1;
+			    		if (villagetagcompound.hasKey("townColor2")) {previousTownColor2 = villagetagcompound.getInteger("townColor2");}
+		            	newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, 15-previousTownColor, 15-previousTownColor2); // This is properly supposed to be reverse dye meta color, because this is block meta color.
 						patternArray = (ArrayList<String>) newRandomBanner[0];
 						colorArray = (ArrayList<Integer>) newRandomBanner[1];
 						villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
@@ -790,6 +791,7 @@ public class BannerGenerator {
 		            nbttagcompound1.setInteger("signY", centerY);
 		            nbttagcompound1.setInteger("signZ", centerZ);
 		            nbttagcompound1.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
+		            nbttagcompound1.setInteger("townColor2", townColorMeta2);
 		            nbttagcompound1.setString("namePrefix", namePrefix);
 		            nbttagcompound1.setString("nameRoot", nameRoot);
 		            nbttagcompound1.setString("nameSuffix", nameSuffix);

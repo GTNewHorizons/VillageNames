@@ -5,6 +5,7 @@ import java.util.List;
 
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.integration.ModObjects;
+import astrotibs.villagenames.utility.LogHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -24,7 +25,7 @@ public class CommandBanner extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "§c/"+getCommandName()+" <forced base color OR \"village\"> (optional)";
+		return "\u00a7c/"+getCommandName()+" <color1 OR \"village\"> (optional), <color2> (optional)";
 	}
 	
 	@Override
@@ -40,20 +41,25 @@ public class CommandBanner extends CommandBase {
 			
 			EntityPlayer entity = getCommandSenderAsPlayer(sender);
 			
-			String argument = ""; // Defaults to "generate new base color" if no argument is provided
+			String[] arguments = new String[]{"", ""};
 			
 			if (args.length==1)
 			{
-				argument = args[0];
+				arguments[0] = args[0];
 			}
-			else if (args.length > 1)
+			else if (args.length==2)
+			{
+				arguments[0] = args[0];
+				arguments[1] = args[1];
+			}
+			else if (args.length > 2)
 			{
 				sender.addChatMessage( new ChatComponentText(getCommandUsage(null)) );
 				return;
 			}
 			
 			// Player wants to retrieve the banner for the current village
-			if (argument.toLowerCase().equals("village") && getCommandSenderAsPlayer(sender) != null)
+			if (arguments[0].toLowerCase().equals("village") && getCommandSenderAsPlayer(sender) != null)
 			{
 				Object[] villageBannerData = BannerGenerator.getVillageBannerData(entity);
 				NBTTagCompound bannerNBT = new NBTTagCompound();
@@ -76,50 +82,68 @@ public class CommandBanner extends CommandBase {
 				}
 			}
 			
-			// Player wants to create a random banner with a specific base color
-			if (argument.equals("-1")) {
-				sender.addChatMessage( new ChatComponentText("Unknown color: -1") );
-				return;
-				} 
-			else if (argument.toLowerCase().equals("black")) {argument = "0";}
-			else if (argument.toLowerCase().equals("red")) {argument = "1";}
-			else if (argument.toLowerCase().equals("green")) {argument = "2";}
-			else if (argument.toLowerCase().equals("brown")) {argument = "3";}
-			else if (argument.toLowerCase().equals("blue")) {argument = "4";}
-			else if (argument.toLowerCase().equals("purple")) {argument = "5";}
-			else if (argument.toLowerCase().equals("cyan")) {argument = "6";}
-			else if (argument.toLowerCase().equals("light_gray")) {argument = "7";}
-			else if (argument.toLowerCase().equals("lightgray")) {argument = "7";}
-			else if (argument.toLowerCase().equals("silver")) {argument = "7";}
-			else if (argument.toLowerCase().equals("gray")) {argument = "8";}
-			else if (argument.toLowerCase().equals("pink")) {argument = "9";}
-			else if (argument.toLowerCase().equals("lime")) {argument = "10";}
-			else if (argument.toLowerCase().equals("yellow")) {argument = "11";}
-			else if (argument.toLowerCase().equals("light_blue")) {argument = "12";}
-			else if (argument.toLowerCase().equals("lightblue")) {argument = "12";}
-			else if (argument.toLowerCase().equals("magenta")) {argument = "13";}
-			else if (argument.toLowerCase().equals("orange")) {argument = "14";}
-			else if (argument.toLowerCase().equals("white")) {argument = "15";}
+			for (int i=0; i<arguments.length; i++)
+			{
+				// Player wants to create a random banner with a specific base color
+				if (arguments[i].equals("-1")) {
+					sender.addChatMessage( new ChatComponentText("Unknown color: -1") );
+					return;
+					} 
+				else if (arguments[i].toLowerCase().equals("black")) {arguments[i] = "0";}
+				else if (arguments[i].toLowerCase().equals("red")) {arguments[i] = "1";}
+				else if (arguments[i].toLowerCase().equals("green")) {arguments[i] = "2";}
+				else if (arguments[i].toLowerCase().equals("brown")) {arguments[i] = "3";}
+				else if (arguments[i].toLowerCase().equals("blue")) {arguments[i] = "4";}
+				else if (arguments[i].toLowerCase().equals("purple")) {arguments[i] = "5";}
+				else if (arguments[i].toLowerCase().equals("cyan")) {arguments[i] = "6";}
+				else if (arguments[i].toLowerCase().equals("light_gray")) {arguments[i] = "7";}
+				else if (arguments[i].toLowerCase().equals("lightgray")) {arguments[i] = "7";}
+				else if (arguments[i].toLowerCase().equals("silver")) {arguments[i] = "7";}
+				else if (arguments[i].toLowerCase().equals("gray")) {arguments[i] = "8";}
+				else if (arguments[i].toLowerCase().equals("pink")) {arguments[i] = "9";}
+				else if (arguments[i].toLowerCase().equals("lime")) {arguments[i] = "10";}
+				else if (arguments[i].toLowerCase().equals("yellow")) {arguments[i] = "11";}
+				else if (arguments[i].toLowerCase().equals("light_blue")) {arguments[i] = "12";}
+				else if (arguments[i].toLowerCase().equals("lightblue")) {arguments[i] = "12";}
+				else if (arguments[i].toLowerCase().equals("magenta")) {arguments[i] = "13";}
+				else if (arguments[i].toLowerCase().equals("orange")) {arguments[i] = "14";}
+				else if (arguments[i].toLowerCase().equals("white")) {arguments[i] = "15";}
+			}
 			
 			// Convert number argument to an actual integer
-			int forcedbasemeta = -1;
-			try {forcedbasemeta = argument.equals("") ? -1 : Integer.parseInt(argument);}
-			catch (Exception e) {
-				sender.addChatMessage( new ChatComponentText("Unknown color: " + argument) );
+			int forcedmeta = -1;
+			int forcedmeta2 = -1;
+			
+			try {forcedmeta = arguments[0].equals("") ? -1 : Integer.parseInt(arguments[0]);}
+			catch (Exception e)
+			{
+				sender.addChatMessage( new ChatComponentText("Unknown color: " + arguments[0]) );
+				return;
+			}
+			try {forcedmeta2 = arguments[1].equals("") ? -1 : Integer.parseInt(arguments[1]);}
+			catch (Exception e)
+			{
+				sender.addChatMessage( new ChatComponentText("Unknown color: " + arguments[1]) );
 				return;
 			}
 			
 			// User submitted a non-color meta number
-			if (forcedbasemeta > 15 || forcedbasemeta < -1)
+			if (forcedmeta > 15 || forcedmeta < -1)
 			{
-				sender.addChatMessage( new ChatComponentText("Unknown color: " + forcedbasemeta) );
+				sender.addChatMessage( new ChatComponentText("Unknown color: " + forcedmeta) );
+				return;
+			}
+			// User submitted a non-color meta number
+			if (forcedmeta2 > 15 || forcedmeta2 < -1)
+			{
+				sender.addChatMessage( new ChatComponentText("Unknown color: " + forcedmeta2) );
 				return;
 			}
 			
 			// Generate a random banner, perhaps using argument as a forced base color
 			if (getCommandSenderAsPlayer(sender) != null && getCommandSenderAsPlayer(sender) instanceof EntityPlayer)
 			{
-				Object[] newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, forcedbasemeta);
+				Object[] newRandomBanner = BannerGenerator.randomBannerArrays(entity.worldObj.rand, forcedmeta, forcedmeta2);
 				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 				ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 				

@@ -38,7 +38,6 @@ public class FunctionsVN {
 	// Represents the 1.14+ village types
 	public static enum VillageType
 	{
-		NULL,
 		PLAINS, DESERT, TAIGA, SAVANNA, SNOWY;
 		
 		/**
@@ -76,7 +75,6 @@ public class FunctionsVN {
 	
 	public static enum MaterialType
 	{
-		NULL,
 		OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK,
 		SAND, MESA, SNOW, MUSHROOM; // Added three more for special non-wood cases
 		
