@@ -93,7 +93,8 @@ public class GeneralConfig {
 	public static String[] modDye;
 	public static String[] modFence;
 	public static String[] modFenceGate;
-	
+	public static String[] modDoor;
+	public static String[] modWoodenTrapdoor;
 	
     public static boolean villagerSkinTones;
     public static float villagerSkinToneVarianceAnnealing;
@@ -580,6 +581,20 @@ public class GeneralConfig {
  				"ganyssurface",
  				},
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modDoor = config.getStringList("Mod Priority: Door", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Doors for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modWoodenTrapdoor = config.getStringList("Mod Priority: Trapdoor", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{

@@ -88,6 +88,18 @@ public class ModObjects {
 	public static final String concreteRedEF = "etfuturum:concrete_red";
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
 	
+	// Door
+	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
+	public static final String doorBirchGS = "ganyssurface:doorBirch";
+	public static final String doorJungleGS = "ganyssurface:doorJungle";
+	public static final String doorAcaciaGS = "ganyssurface:doorAcacia";
+	public static final String doorDarkOakGS = "ganyssurface:doorDark_oak";
+	public static final String doorSpruceUTD = "uptodate:door_spruce";
+	public static final String doorBirchUTD = "uptodate:door_birch";
+	public static final String doorJungleUTD = "uptodate:door_jungle";
+	public static final String doorAcaciaUTD = "uptodate:door_acacia";
+	public static final String doorDarkOakUTD = "uptodate:door_dark_oak";
+	
 	// Fence
 	public static final String fenceOakGS = "ganyssurface:fence_0";
 	public static final String fenceSpruceGS = "ganyssurface:fence_1";
@@ -146,6 +158,20 @@ public class ModObjects {
 	// Grass Path
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
+	
+	// Wooden Trapdoor
+	public static final String trapdoorSpruceGS = "ganyssurface:trapdoor1";
+	public static final String trapdoorBirchGS = "ganyssurface:trapdoor2";
+	public static final String trapdoorJungleGS = "ganyssurface:trapdoor3";
+	public static final String trapdoorAcaciaGS = "ganyssurface:trapdoor4";
+	public static final String trapdoorDarkOakGS = "ganyssurface:trapdoor5";
+	public static final String trapdoorSpruceUTD = "uptodate:trap_door_spruce";
+	public static final String trapdoorBirchUTD = "uptodate:trap_door_birch";
+	public static final String trapdoorJungleUTD = "uptodate:trap_door_jungle";
+	public static final String trapdoorAcaciaUTD = "uptodate:trap_door_acacia";
+	public static final String trapdoorDarkOakUTD = "uptodate:trap_door_dark_oak";
+	
+	
 	
 	
 	// --- Items --- //
@@ -253,6 +279,46 @@ public class ModObjects {
 			}
 		}
 		return null;
+	}
+	
+	// Door
+	public static Block chooseModDoor(int materialMeta)
+	{
+		if (materialMeta==0) {return Blocks.wooden_door;}
+		
+		String[] modprioritylist = GeneralConfig.modDoor;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.wooden_door;
 	}
 	
 	// Fence
@@ -746,6 +812,48 @@ public class ModObjects {
 			}
 		}
 		return Blocks.gravel;
+	}
+	
+	// Trap door
+
+	// Door
+	public static Block chooseModWoodenTrapdoor(int materialMeta)
+	{
+		if (materialMeta==0) {return Blocks.trapdoor;}
+		
+		String[] modprioritylist = GeneralConfig.modWoodenTrapdoor;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.trapdoorSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.trapdoorBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.trapdoorJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.trapdoorAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.trapdoorDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.trapdoorSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.trapdoorBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.trapdoorJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.trapdoorAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.trapdoorDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.trapdoor;
 	}
 	
 	

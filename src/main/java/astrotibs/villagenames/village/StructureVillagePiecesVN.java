@@ -18,6 +18,7 @@ import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -149,8 +150,9 @@ public class StructureVillagePiecesVN
      */
     protected static Object[] getBiomeSpecificBlock(Block block, int meta, StructureVillagePiecesVN.StartVN startPiece)
     {
-    	// TODO - use vanilla fences and gates in 1.8
+    	if (startPiece.materialType.equals(null)) {return new Object[]{block, meta};}
     	
+    	// TODO - use vanilla fences and gates in 1.8
     	if (startPiece.materialType == FunctionsVN.MaterialType.SPRUCE)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 1};}
@@ -160,6 +162,8 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};}
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.BIRCH)
         {
@@ -170,16 +174,21 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.birch_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +2: meta==8? 8 +2 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 2};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(2), meta};}
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(2), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 3};}
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};} // Regular sandstone
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};}
         	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(3), 0};}
         	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};}
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};}
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.ACACIA)
         {
@@ -190,6 +199,8 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.acacia_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +4: meta==8? 8 +4 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 4};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(4), meta};}
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
@@ -200,6 +211,8 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.dark_oak_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +5: meta==8? 8 +5 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 5};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(5), meta};}
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.SAND)
         {
@@ -214,6 +227,10 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};} // Jungle slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};} // Jungle double slab
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};} // Jungle door
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};} // Jungle trapdoor
+        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 1: meta==11? 9 : meta};} // Sandstone slab
+        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 4};} // Brick double slab
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
         {
@@ -222,6 +239,8 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.brick_stairs, meta};}
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.hardened_clay, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.clay, 0};}
+        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 4: meta==11? 12 : meta};} // Brick slab
+        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 1};} // Sandstone double slab
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.SNOW)
         {
@@ -235,6 +254,8 @@ public class StructureVillagePiecesVN
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.snow, 0};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};} // Spruce slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};} // Spruce double slab
+        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};} // Spruce door
+        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};} // Spruce trapdoor
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
@@ -250,6 +271,7 @@ public class StructureVillagePiecesVN
         
         return new Object[]{block, meta};
     }
+    
     
     /**
      * Used to determine what path block to place into the world
@@ -367,6 +389,11 @@ public class StructureVillagePiecesVN
         	blockObject = getBiomeSpecificBlock(Blocks.fence, 0, this); this.biomeFenceBlock = (Block)blockObject[0];
         	blockObject = getBiomeSpecificBlock(Blocks.fence_gate, 0, this); this.biomeFenceGateBlock = (Block)blockObject[0];
         }
+        
+        // Beth had this great idea to publicly call these protected methods lmao :'C
+        public int getXWithOffsetPublic(int xOffset, int zOffset) {return this.getXWithOffset(xOffset, zOffset);}
+        public int getYWithOffsetPublic(int yOffset) {return this.getYWithOffset(yOffset);}
+        public int getZWithOffsetPublic(int xOffset, int zOffset) {return this.getZWithOffset(xOffset, zOffset);}
     }
     
     // Path
@@ -598,6 +625,17 @@ public class StructureVillagePiecesVN
                     }
                 }
             }
+            
+            // How to place mod doors
+            /*
+            for (int i : new int[]{0,1})
+            {
+            	this.placeBlockAtCurrentPosition(world, ModObjects.chooseModDoor(2), this.getMetadataWithOffset(Blocks.wooden_door, 0) + 8*i, 5+xoffset, 12+i, 2+zoffset, structureBB);
+            	this.placeBlockAtCurrentPosition(world, ModObjects.chooseModDoor(3), this.getMetadataWithOffset(Blocks.wooden_door, 1) + 8*i, 2+xoffset, 12+i, 0+zoffset, structureBB);
+            	this.placeBlockAtCurrentPosition(world, ModObjects.chooseModDoor(4), this.getMetadataWithOffset(Blocks.wooden_door, 2) + 8*i, 0+xoffset, 12+i, 2+zoffset, structureBB);
+            	this.placeBlockAtCurrentPosition(world, ModObjects.chooseModDoor(5), this.getMetadataWithOffset(Blocks.wooden_door, 3) + 8*i, 2+xoffset, 12+i, 5+zoffset, structureBB);
+            }
+            */
             
             // Over-lid torches
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1+xoffset, 16, 1+zoffset, structureBB);

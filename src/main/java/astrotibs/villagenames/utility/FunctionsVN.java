@@ -102,7 +102,7 @@ public class FunctionsVN {
 			if (biome.biomeName.toLowerCase().contains("taiga")) {return SPRUCE;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return SPRUCE;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.JUNGLE) {return JUNGLE;}}
-			if (biome.biomeName.toLowerCase().contains("taiga")) {return SPRUCE;}
+			if (biome.biomeName.toLowerCase().contains("savanna")) {return ACACIA;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return ACACIA;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MESA) {return MESA;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MUSHROOM) {return MUSHROOM;}}
