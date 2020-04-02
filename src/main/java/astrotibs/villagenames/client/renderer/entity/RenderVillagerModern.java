@@ -271,88 +271,90 @@ public class RenderVillagerModern extends RenderVillager {
         
         int indexofmodprof = GeneralConfig.professionID_a.indexOf(ev.getProfession());
         
-        if ( 
-        		ev.getProfession() > 5 // Is non-vanilla
-        		&& indexofmodprof > -1 // Has a skin asset mapping
-        		&& !((String) GeneralConfig.careerAsset_a.get(indexofmodprof)).equals("") ) // That mapping isn't blank
+        if (!villager.isChild())
         {
-        	// This is a modded profession ID with a supported skin
-        	
-        	final String profRootName = (String) (GeneralConfig.careerAsset_a.get(indexofmodprof));
-        	final ResourceLocation modCareerSkin = new ResourceLocation(MIDLC, VAD + "profession/"+profRootName+".png");
-        	
-            layeredTextureAddressArray[2] = modCareerSkin.toString();
-            skinComboHashKey = skinComboHashKey + "_" + profRootName;
+	        if ( 
+	        		ev.getProfession() > 5 // Is non-vanilla
+	        		&& indexofmodprof > -1 // Has a skin asset mapping
+	        		&& !((String) GeneralConfig.careerAsset_a.get(indexofmodprof)).equals("") ) // That mapping isn't blank
+	        {
+	        	// This is a modded profession ID with a supported skin
+	        	
+	        	final String profRootName = (String) (GeneralConfig.careerAsset_a.get(indexofmodprof));
+	        	final ResourceLocation modCareerSkin = new ResourceLocation(MIDLC, VAD + "profession/"+profRootName+".png");
+	        	
+	            layeredTextureAddressArray[2] = modCareerSkin.toString();
+	            skinComboHashKey = skinComboHashKey + "_" + profRootName;
+	        }
+	        else // This is vanilla skin or is otherwise unsupported
+	        {
+	            int careerIndex = 0;
+	            switch (ev.getProfession())
+	            {
+	    	    	case 0: // Farmer type
+	    	    		switch (career)
+	    	    		{
+	    		    		default:
+	    		    		case 1: careerIndex = 0; break;
+	    		    		case 2: careerIndex = 1; break;
+	    		    		case 3: careerIndex = 2; break;
+	    		    		case 4: careerIndex = 3; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	case 1: // Librarian type
+	    	    		switch (career)
+	    	    		{
+	    		    		default:
+	    		    		case 1: careerIndex = 4; break;
+	    		    		case 2: careerIndex = 5; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	case 2: // Priest type
+	    	    		switch (career)
+	    	    		{
+	    		    		default:
+	    		    		case 1: careerIndex = 6; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	case 3: // Smith type
+	    	    		switch (career)
+	    	    		{
+	    		    		case 1: careerIndex = 7; break;
+	    		    		case 2: careerIndex = 8; break;
+	    		    		default:
+	    		    		case 3: careerIndex = 9; break;
+	    		    		case 4: careerIndex = 10; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	case 4: // Butcher type
+	    	    		switch (career)
+	    	    		{
+	    		    		default:
+	    		    		case 1: careerIndex = 11; break;
+	    		    		case 2: careerIndex = 12; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	case 5: // Nitwit type
+	    	    		switch (career)
+	    	    		{
+	    		    		default:
+	    		    		case 1: careerIndex = 13; break;
+	    	    		}
+	    	    		break;
+	    	    		
+	    	    	default: // No profession skin
+	            }
+	            
+	            // Set the career
+	            layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
+	            skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+	        }
         }
-        else // This is vanilla skin or is otherwise unsupported
-        {
-            int careerIndex = 0;
-            switch (ev.getProfession())
-            {
-    	    	case 0: // Farmer type
-    	    		switch (career)
-    	    		{
-    		    		default:
-    		    		case 1: careerIndex = 0; break;
-    		    		case 2: careerIndex = 1; break;
-    		    		case 3: careerIndex = 2; break;
-    		    		case 4: careerIndex = 3; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	case 1: // Librarian type
-    	    		switch (career)
-    	    		{
-    		    		default:
-    		    		case 1: careerIndex = 4; break;
-    		    		case 2: careerIndex = 5; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	case 2: // Priest type
-    	    		switch (career)
-    	    		{
-    		    		default:
-    		    		case 1: careerIndex = 6; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	case 3: // Smith type
-    	    		switch (career)
-    	    		{
-    		    		case 1: careerIndex = 7; break;
-    		    		case 2: careerIndex = 8; break;
-    		    		default:
-    		    		case 3: careerIndex = 9; break;
-    		    		case 4: careerIndex = 10; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	case 4: // Butcher type
-    	    		switch (career)
-    	    		{
-    		    		default:
-    		    		case 1: careerIndex = 11; break;
-    		    		case 2: careerIndex = 12; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	case 5: // Nitwit type
-    	    		switch (career)
-    	    		{
-    		    		default:
-    		    		case 1: careerIndex = 13; break;
-    	    		}
-    	    		break;
-    	    		
-    	    	default: // No profession skin
-            }
-            
-            // Set the career
-            layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
-            skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
-        }
-        
         
         // ---------------------------------------- //
         // --- PART 3: set the profession level --- //

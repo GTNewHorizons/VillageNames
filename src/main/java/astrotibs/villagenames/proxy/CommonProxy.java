@@ -9,7 +9,6 @@ import astrotibs.villagenames.handler.SpawnNamingHandler;
 import astrotibs.villagenames.handler.WellDecorateEvent;
 import astrotibs.villagenames.item.ModItems;
 import astrotibs.villagenames.utility.Reference;
-import astrotibs.villagenames.village.MapGenVillageVN;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

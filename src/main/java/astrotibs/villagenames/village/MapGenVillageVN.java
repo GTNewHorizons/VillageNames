@@ -3,16 +3,14 @@ package astrotibs.villagenames.village;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.LogHelper;
-import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
@@ -22,10 +20,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Road;
 import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 
@@ -215,7 +211,7 @@ public class MapGenVillageVN extends MapGenVillage
             this.updateBoundingBox();
             counter = 0;
             Iterator iterator = this.components.iterator();
-
+            
             while (iterator.hasNext())
             {
                 StructureComponent structurecomponent_temp = (StructureComponent)iterator.next();

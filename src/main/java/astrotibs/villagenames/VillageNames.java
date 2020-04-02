@@ -58,7 +58,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraftforge.common.MinecraftForge;
 
 /*
@@ -303,6 +302,7 @@ public final class VillageNames
 		PROXY.registerEvents();
 		// Added in v3.1banner
 		GameRegistry.registerTileEntity(TileEntityBanner.class, Reference.MOD_ID + ".banner");
+		//GameRegistry.registerTileEntity(TileEntityWoodSign.class, Reference.MOD_ID + ".sign"); // VillageNames.sign // ganyssurface.wood_sign
 		// key handling
 		
 	}

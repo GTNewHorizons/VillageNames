@@ -1,5 +1,6 @@
 package astrotibs.villagenames.ieep;
 
+import astrotibs.villagenames.config.GeneralConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.nbt.NBTTagCompound;
@@ -89,7 +90,7 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
     public void pickRandomProfession()
     {
         if (this.profession <= -1 && (this.hasValidData == null || !this.hasValidData)) {
-            int p = this.myWorld.rand.nextInt(6); // Uniformly distributed between 0 and 5
+            int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0 and 5
             this.setProfession(p);
         }
     }
@@ -102,7 +103,7 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
     public void pickRandomProfessionAndCareer() {
         if (this.profession <= -1 && this.career <= -1 && (this.hasValidData == null || !this.hasValidData)) {
             
-        	int p = this.myWorld.rand.nextInt(6); // Uniformly distributed between 0 and 5
+        	int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0 and 5
             int c = -1;
             
             // Added break conditions in v3.1.1 to actually properly select sub-professions for zombie villagers 
@@ -121,7 +122,7 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
 					break;
 					
 				case 3: // BLACKSMITH
-					c = 1 + this.myWorld.rand.nextInt(3);
+					c = 1 + this.myWorld.rand.nextInt(GeneralConfig.modernVillagerTrades ? 4 : 3);
 					break;
 					
 				case 4: // BUTCHER

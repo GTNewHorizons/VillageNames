@@ -1,6 +1,5 @@
 package astrotibs.villagenames.village;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,12 +8,12 @@ import java.util.Set;
 
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
-import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -22,6 +21,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSandStone;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -36,7 +36,6 @@ import net.minecraft.world.gen.structure.MapGenStructureData;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.minecraft.world.gen.structure.StructureVillagePieces.Village;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -172,8 +171,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.BIRCH)
         {
@@ -186,8 +185,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 2};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(2), meta};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(2), meta};}
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(2, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(2, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(2, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(2, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
         {
@@ -201,8 +200,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};}
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.ACACIA)
         {
@@ -215,8 +214,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 4};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(4), meta};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
@@ -229,8 +228,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 5};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(5), meta};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.SAND)
         {
@@ -249,8 +248,8 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};} // Jungle trapdoor
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 1: meta==11? 9 : meta};} // Sandstone slab
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 4};} // Brick double slab
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
         {
@@ -276,8 +275,8 @@ public class StructureVillageVN
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};} // Spruce double slab
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};} // Spruce door
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};} // Spruce trapdoor
-        	if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta};}
-        	if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
+        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta};}
+        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
@@ -433,7 +432,11 @@ public class StructureVillageVN
         		namePrefix = villagetagcompound.getString("namePrefix");
         		nameRoot = villagetagcompound.getString("nameRoot");
         		nameSuffix = villagetagcompound.getString("nameSuffix");
-        		
+        		/*
+        		LogHelper.info("Village detected at " + posX + " " + posY + " " + posZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+        		LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+        		LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
+        		*/
         		// Check if it has a second color
         		townColorMeta2 = townColorMeta;
         		// Second color is already explicitly registered
@@ -481,6 +484,7 @@ public class StructureVillageVN
     	
     	
     	// Position was not determined to be inside any previous village. Generate a name and such for the new one.
+    	villagetagcompound = new NBTTagCompound();
     	
 		MapGenStructureData structureData;
 		NBTTagCompound nbttagcompound = null;
@@ -642,6 +646,84 @@ public class StructureVillageVN
 		return signContents;
     }
     
+    /**
+     * Creates a villager of the specified profession/career/age.
+     * A profession of -1 means return a random one. Whether this is vanilla only or from all registered will be determined by the configs.
+     * Any career greater than 0 requires the career system to be true.
+     */
+    public static EntityVillager makeVillagerWithProfession(World world, Random random, int profession, int career, int age)
+    {
+		EntityVillager entityvillager = new EntityVillager(world);
+		
+		// Set profession
+		if (profession==-1)
+		{
+			if (GeneralConfig.spawnModdedVillagers)
+			{
+				VillagerRegistry.applyRandomTrade(entityvillager, random);
+				
+				// Equally weight career subdivisions
+				if (entityvillager.getProfession()>=0 && entityvillager.getProfession()<=4 && GeneralConfig.villagerCareers)
+				{
+					ExtendedVillager ieep = ExtendedVillager.get(entityvillager);
+					
+					switch(random.nextInt(GeneralConfig.modernVillagerTrades ? 13 : 12))
+					{
+						default:
+						case 0: // Farmer | Farmer
+							profession = 0; career = 1; break;
+						case 1: // Farmer | Fisherman
+							profession = 0; career = 2; break;
+						case 2: // Farmer | Shepherd
+							profession = 0; career = 3; break;
+						case 3: // Farmer | Fletcher
+							profession = 0; career = 4; break;
+						case 4: // Librarian | Librarian
+							profession = 1; career = 1; break;
+						case 5: // Librarian | Cartographer
+							profession = 1; career = 2; break;
+						case 6: // Priest | Cleric
+							profession = 2; career = 1; break;
+						case 7: // Blacksmith | Armorer
+							profession = 3; career = 1; break;
+						case 8: // Blacksmith | Weaponsmith
+							profession = 3; career = 2; break;
+						case 9: // Blacksmith | Toolsmith
+							profession = 3; career = 3; break;
+						case 10: // Butcher | Butcher
+							profession = 4; career = 1; break;
+						case 11: // Butcher | Leatherworker
+							profession = 4; career = 2; break;
+						case 12: // Blacksmith | Mason
+							profession = 3; career = 4; break;
+					}
+					entityvillager.setProfession(profession);
+					ieep.setCareer(career);
+				}
+			}
+			else
+			{
+				entityvillager.setProfession(GeneralConfig.enableNitwit ? random.nextInt(6) : random.nextInt(5));
+			}
+		}
+		else
+		{
+			entityvillager.setProfession(profession);
+			
+			// Set career
+			if (career > 0 && GeneralConfig.villagerCareers)
+			{
+				ExtendedVillager ieep = ExtendedVillager.get(entityvillager);
+				ieep.setCareer(career);
+			}
+		}
+		
+		// Set age
+		entityvillager.setGrowingAge(age);
+		
+		return entityvillager;
+    }
+    
     
     
     // -------------------------- //    
@@ -655,6 +737,7 @@ public class StructureVillageVN
     	// Set them to defaults here
     	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
     	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
+    	public boolean villagersGenerated = false;
     	
         public StartVN() {}
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.integration.ModObjects;
-import astrotibs.villagenames.utility.LogHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

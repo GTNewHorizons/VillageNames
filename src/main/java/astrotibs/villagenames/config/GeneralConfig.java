@@ -117,6 +117,7 @@ public class GeneralConfig {
 	public static boolean structureLegacyLargeFarm;
 	public static boolean structureLegacySmithy;
 	public static boolean structureLegacyChurch;
+	public static boolean spawnModdedVillagers;
 	
 	public static void init(File configFile) 
 	{
@@ -146,6 +147,9 @@ public class GeneralConfig {
 		structureLegacyLargeFarm = config.getBoolean("Structure: Legacy Large Farm", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
 		structureLegacySmithy = config.getBoolean("Structure: Legacy Smithy", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
 		structureLegacyChurch = config.getBoolean("Structure: Legacy Church", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
+		
+		// Misc
+		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Villages", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
 		
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", "Villages",
 				new String[] {

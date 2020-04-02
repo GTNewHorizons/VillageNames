@@ -158,14 +158,14 @@ public class ModObjects {
 	// Grass Path // TODO - Remove in 1.9?
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
-	
+	/*
 	// Wooden Sign // TODO - Remove in 1.8
 	public static final String signSpruceGS = "ganyssurface:sign1";
 	public static final String signBirchGS = "ganyssurface:sign2";
 	public static final String signJungleGS = "ganyssurface:sign3";
 	public static final String signAcaciaGS = "ganyssurface:sign4";
 	public static final String signDarkOakGS = "ganyssurface:sign5";
-	
+	*/
 	// Wooden Trapdoor // TODO - Remove in 1.8
 	public static final String trapdoorSpruceGS = "ganyssurface:trapdoor1";
 	public static final String trapdoorBirchGS = "ganyssurface:trapdoor2";
@@ -820,7 +820,7 @@ public class ModObjects {
 		}
 		return Blocks.gravel;
 	}
-	
+	/*
 	// Sign
 	public static Block chooseModWoodenSign(int materialMeta, boolean standing)
 	{
@@ -841,7 +841,7 @@ public class ModObjects {
 		// If all else fails, grab the vanilla version
 		return standing? Blocks.standing_sign : Blocks.wall_sign;
 	}
-	
+	*/
 	// Trap door
 	public static Block chooseModWoodenTrapdoor(int materialMeta)
 	{

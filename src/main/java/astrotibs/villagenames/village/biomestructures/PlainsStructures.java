@@ -1,18 +1,25 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import astrotibs.villagenames.banner.BannerGenerator;
+import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
-import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
@@ -144,8 +151,9 @@ public class PlainsStructures
                    	}
             	}
             }
+            
 
-            // Sign
+        	// Sign
             int signX = this.getXWithOffset(4, 2);
             int signY = this.getYWithOffset(2);
             int signZ = this.getZWithOffset(4, 2);
@@ -155,17 +163,63 @@ public class PlainsStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-    		// Do the below if you want to make the sign stand up
-    		NBTTagCompound signCompound = new NBTTagCompound();
-    		signContents.writeToNBT(signCompound);
-    		// Add the standing tag as per Gany's Surface
-    		signCompound.setBoolean("IsStanding", true);
-    		signContents.readFromNBT(signCompound);
-    		
-    		world.setTileEntity(signX, signY, signZ, signContents);
     		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
-    		world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
     		
+    		world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
+    		
+    		
+    		// Banner
+    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+    		if (testForBanner!=null)
+			{
+    			int bannerX = this.getXWithOffset(8, 6);
+                int bannerY = this.getYWithOffset(2);
+                int bannerZ = this.getZWithOffset(8, 6);
+                int bannerFacing = 3; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
+                
+				// Set the banner and its orientation
+				world.setBlock(bannerX, bannerY, bannerZ, testForBanner );
+				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode)*4)%16, 2);
+				
+				// Set the tile entity
+				TileEntity tilebanner = new TileEntityBanner();
+				NBTTagCompound modifystanding = new NBTTagCompound();
+				tilebanner.writeToNBT(modifystanding);
+				modifystanding.setBoolean("IsStanding", true);
+				tilebanner.readFromNBT(modifystanding);
+				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+				
+    			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+        		
+        		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+			}
+    		
+    		
+    		// Villagers
+            if (!this.villagersGenerated)
+            {
+            	this.villagersGenerated=true;
+            	
+        		for (int[] ia : new int[][]{
+        			{6, 1, 1, -1, 0},
+        			{1, 1, 2, -1, 0},
+        			{1, 1, 7, -1, 0},
+        			})
+        		{
+        			EntityVillager entityvillager = new EntityVillager(world);
+        			
+        			// Nitwits more often than not
+        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]), (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
+        		}
+            }
+            
             return true;
         }
     }
@@ -208,7 +262,7 @@ public class PlainsStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 1, this.getComponentType());
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 1, this.getComponentType());
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 3, this.getComponentType());
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - wellHeight, this.boundingBox.maxZ + 1, 0, this.getComponentType());
@@ -233,13 +287,11 @@ public class PlainsStructures
         						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
         				true);
         		
-                //if (GeneralConfig.debugMessages) {LogHelper.info("Average ground level for well: " + this.field_143015_k + " at " + (this.boundingBox.minX+this.boundingBox.maxX)/2 + " " + (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
-                
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + (wellHeight-1) - wellDepthDecrease, 0);
             }
-            
+        	
             // The well gets filled completely with water first
             //this.fillWithBlocks(world, structureBoundingBox, 1+xoffset, 0+wellDepthDecrease, 1+zoffset, 4+xoffset, 12, 4+zoffset, this.biomeCobblestoneBlock, Blocks.flowing_water, false);
             this.fillWithMetadataBlocks(world, structureBB, 1+xoffset, 0+wellDepthDecrease, 1+zoffset, 4+xoffset, 12, 4+zoffset, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
@@ -341,7 +393,7 @@ public class PlainsStructures
             }
             
 
-            // Sign
+        	// Sign
             int signX = this.getXWithOffset(6, 7);
             int signY = this.getYWithOffset(12);
             int signZ = this.getZWithOffset(6, 7);
@@ -351,17 +403,72 @@ public class PlainsStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-    		// Do the below if you want to make the sign stand up
-    		NBTTagCompound signCompound = new NBTTagCompound();
-    		signContents.writeToNBT(signCompound);
-    		// Add the standing tag as per Gany's Surface
-    		signCompound.setBoolean("IsStanding", true);
-    		signContents.readFromNBT(signCompound);
-    		
-    		world.setTileEntity(signX, signY, signZ, signContents);
     		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
+    		
+    		// Banner
+    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+    		if (testForBanner!=null)
+			{
+    			int bannerX = this.getXWithOffset(8, 6);
+                int bannerY = this.getYWithOffset(11);
+                int bannerZ = this.getZWithOffset(8, 6);
+                int bannerFacing = 3; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
+
+				// Set the banner and its orientation
+				world.setBlock(bannerX, bannerY, bannerZ, testForBanner );
+				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode)*4)%16, 2);
+				
+				// Set the tile entity
+				TileEntity tilebanner = new TileEntityBanner();
+				NBTTagCompound modifystanding = new NBTTagCompound();
+				tilebanner.writeToNBT(modifystanding);
+				modifystanding.setBoolean("IsStanding", true);
+				tilebanner.readFromNBT(modifystanding);
+				
+				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+				
+    			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+        		
+        		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+			}
+    		
+    		
+    		// Villagers
+            if (!this.villagersGenerated)
+            {
+            	this.villagersGenerated=true;
+            	
+        		for (int[] ia : new int[][]{
+        			{1, 11, 8, -1, 0},
+        			{8, 11, 8, -1, 0},
+        			})
+        		{
+        			EntityVillager entityvillager = new EntityVillager(world);
+        			
+        			// Nitwits more often than not
+        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]), (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
+        		}
+        		
+        		/*
+        		int villagerX, villagerY, villagerZ;
+        		
+        		villagerX = 1; villagerY = 11; villagerZ = 8;
+        		EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, -1);
+    			entityvillager.setLocationAndAngles((double)this.getXWithOffset(villagerX, villagerZ) + 0.5D, (double)this.getYWithOffset(villagerY), (double)this.getZWithOffset(villagerX, villagerZ) + 0.5D,
+                		random.nextFloat()*360F, 0.0F);
+                world.spawnEntityInWorld(entityvillager);*/
+                //LogHelper.info("Spawned villager at well at " + this.getXWithOffset(villagerX, villagerZ) + " " + this.getYWithOffset(villagerY) + " " + this.getZWithOffset(villagerX, villagerZ));
+            }
+            
             return true;
         }
     }
