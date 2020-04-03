@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
-import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -165,20 +164,13 @@ public class MapGenVillageVN extends MapGenVillage
             StructureVillageVN.StartVN start = null;
             
             // Select a starter at random
-            switch (random.nextInt(2))
-            {
-            	default:
-	            case 0: // Fountain 
-	            	start = new PlainsStructures.PlainsFountain01(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
-	            	break;
-	            case 1: // Well
-	            	start = new PlainsStructures.PlainsMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
-	            	break;
-	            case 2:
-	            	break;
-	            case 3:
-	            	break;
-            }
+            StructureVillageVN.StartVN[] plainsStarters = new StructureVillageVN.StartVN[] {
+            		new PlainsStructures.PlainsFountain01(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Fountain
+            		new PlainsStructures.PlainsMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Well
+            };
+            
+            start = plainsStarters[random.nextInt(plainsStarters.length)];
+            
             
             // Add well to the component list
             this.components.add(start);
