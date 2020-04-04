@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSandStone;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -29,10 +31,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.MathHelper;
+import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.structure.MapGenStructureData;
+import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
@@ -74,6 +79,81 @@ public class StructureVillageVN
 
         return arraylist;
     }
+    
+    
+    // Pasted in from StructureVillagePieces so that I can access it, particularly to expand the allowed village biomes
+    // This prepares a new path component to build upon
+    public static StructureComponent getNextVillageStructureComponent(StructureVillagePieces.Start start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    {
+        if (componentType > 50)
+        {
+            return null;
+        }
+        else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112)
+        {
+        	
+			// Attach another structure
+			Method getNextVillageComponent_reflected = ReflectionHelper.findMethod(
+					StructureVillagePieces.class, null, new String[]{"getNextVillageComponent", "func_75081_c"},
+					StructureVillagePieces.Start.class, List.class, Random.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE
+					);
+			
+			StructureVillagePieces.Village village = null;
+			
+			try
+			{
+				village = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);
+			}
+    		catch (Exception e)
+			{
+    			if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke StructureVillagePieces.getNextVillageComponent method");
+    		}
+			
+        	//StructureVillagePieces.Village village = StructureVillagePieces.getNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
+			
+            if (village != null)
+            {
+                int medianX = (village.getBoundingBox().minX + village.getBoundingBox().maxX) / 2;
+                int medianZ = (village.getBoundingBox().minZ + village.getBoundingBox().maxZ) / 2;
+                int rangeX = village.getBoundingBox().maxX - village.getBoundingBox().minX;
+                int rangeZ = village.getBoundingBox().maxZ - village.getBoundingBox().minZ;
+                int bboxWidth = rangeX > rangeZ ? rangeX : rangeZ;
+
+                // Replaces the ordinary "areBiomesViable" method with one that uses the VN biome config list
+                BiomeGenBase biome = start.getWorldChunkManager().getBiomeGenAt(medianX, medianZ);
+            	
+            	if (GeneralConfig.spawnBiomesNames != null) // Biome list is not empty
+        		{
+        			for (int i = 0; i < GeneralConfig.spawnBiomesNames.length; i++)
+        			{
+        				if (GeneralConfig.spawnBiomesNames[i].equals(biome.biomeName))
+        				{
+        					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
+        					
+        					components.add(village);
+                            start.field_74932_i.add(village);
+                            return village;
+        				}
+        			}
+        		}
+            	/*
+                if (start.getWorldChunkManager().areBiomesViable(medianX, medianZ, bboxWidth / 2 + 4, MapGenVillage.villageSpawnBiomes))
+                {
+                    components.add(village);
+                    start.field_74932_i.add(village);
+                    return village;
+                }
+                */
+            }
+
+            return null;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
     
     // Pasted in from StructureVillagePieces so that I can access it
     // This prepares a new path component to build upon
@@ -124,6 +204,36 @@ public class StructureVillageVN
         }
     }
     
+    
+    /**
+     * Returns the space above the topmost block that is solid or liquid. Does not count leaves or other foliage
+     */
+    public static int getAboveTopmostSolidOrLiquidBlockVN(World world, int posX, int posZ)
+    {
+        Chunk chunk = world.getChunkFromBlockCoords(posX, posZ);
+        int x = posX;
+        int z = posZ;
+        int k = chunk.getTopFilledSegment() + 15;
+        posX &= 15;
+        
+        for (posZ &= 15; k > 0; --k)
+        {
+            Block block = chunk.getBlock(posX, k, posZ);
+
+            if (block.getMaterial().blocksMovement() && block.getMaterial() != Material.leaves && !block.isFoliage(world, x, k, z))
+            {
+                return k + 1;
+            }
+            else if (block.getMaterial().isLiquid())
+            {
+            	return k + 1;
+            }
+        }
+        
+        return -1;
+    }
+    
+    
     /**
      * Discover the y coordinate that will serve as the ground level of the supplied BoundingBox.
      * (An ACTUAL median of all the levels in the BB's horizontal rectangle).
@@ -143,7 +253,7 @@ public class StructureVillageVN
                 	{
                 		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel())); // getAverageGroundLevel returns 64
                 		//LogHelper.info("height " + world.getTopSolidOrLiquidBlock(l, k) + " at " + l + " " + k);
-                		i.add(world.getTopSolidOrLiquidBlock(l, k));
+                		i.add(getAboveTopmostSolidOrLiquidBlockVN(world, l, k));
                 		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel()));
                 	}
                 }
@@ -310,13 +420,15 @@ public class StructureVillageVN
     }
     */
     
+    public static int seaLevel = 63; //TODO - actually call sea level in later versions
+	
+    
     /**
      * Used to determine what path block to place into the world
      * Returns the height at which the block was placed
      */
     public static int setPathSpecificBlock(World world, StructureVillageVN.StartVN startPiece, int meta, int posX, int posY, int posZ)
     {
-    	int seaLevel = 63; //TODO - actually call sea level in later versions
     	
     	Block blockToReplace = world.getBlock(posX, posY, posZ);
     	
@@ -337,19 +449,19 @@ public class StructureVillageVN
     			world.setBlock(posX, posY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
     			return posY;
     		}
-    		
-    		// Replace liquid with planks. Let's hope this isn't liquid you dumb banana
-    		if (surfaceBlock.getMaterial().isLiquid())
-    		{
-    			world.setBlock(posX, posY, posZ, (Block)planks[0], (Integer)planks[1], 2);
-    			return posY;
-    		}
-    		
-    		// Replace sand or standstone with reinforced gravel
-    		if (surfaceBlock instanceof BlockSand || surfaceBlock instanceof BlockSandStone)
+
+    		// Replace sand or standstone or lava with cobblestone
+    		if (surfaceBlock instanceof BlockSand || surfaceBlock instanceof BlockSandStone || surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava)
     		{
     			world.setBlock(posX, posY, posZ, (Block)gravel[0], (Integer)gravel[1], 2);
     			world.setBlock(posX, posY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return posY;
+    		}
+    		
+    		// Replace liquid with planks.
+    		if (surfaceBlock.getMaterial().isLiquid())
+    		{
+    			world.setBlock(posX, posY, posZ, (Block)planks[0], (Integer)planks[1], 2);
     			return posY;
     		}
     		
@@ -402,43 +514,55 @@ public class StructureVillageVN
         int townX; int townY; int townZ;
 		NBTTagCompound villagetagcompound = new NBTTagCompound();
 		
+		int villageRadiusBuffer = 16;
+		
 		// First, search through all previously generated VN villages and see if this is inside
     	// the bounding box of one of them.
     	
-    	VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
-    	NBTTagCompound tagCompound = data.getData();
-    	Set tagmapKeyset = tagCompound.func_150296_c(); //Gets the town key list: "coordinates"
-    	Iterator itr = tagmapKeyset.iterator();
-    	
-    	while(itr.hasNext())
-    	{
-    		Object element = itr.next();
-    		townSignEntry = element.toString(); //Text name of village header (e.g. "Kupei, x191 y73 z187")
-    		//The only index that has data is 0:
-    		NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
-            villagetagcompound = nbttaglist.getCompoundTagAt(0);
+		
+		// --- TRY 1: See if the village already exists in the vanilla collection object and try to match it to this village --- //
+		
+		
+		Village villageNearTarget = world.villageCollectionObj.findNearestVillage(posX, posY, posZ, villageRadiusBuffer);
+		
+		if (villageNearTarget != null) // There is a town.
+		{
+			int villageRadius = villageNearTarget.getVillageRadius();
+			int popSize = villageNearTarget.getNumVillagers();
+			int centerX = villageNearTarget.getCenter().posX; // Village X position
+			int centerY = villageNearTarget.getCenter().posY; // Village Y position
+			int centerZ = villageNearTarget.getCenter().posZ; // Village Z position
+			
+			// Let's see if we can find a sign near that located village center!
+			VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
+			// .getTagList() will return all the entries under the specific village name.
+			NBTTagCompound tagCompound = data.getData();
+			Set tagmapKeyset = tagCompound.func_150296_c(); // Gets the town key list: "coordinates"
 
-            townX = villagetagcompound.hasKey("signX") ? villagetagcompound.getInteger("signX") : Integer.MAX_VALUE;
-            townY = villagetagcompound.hasKey("signY") ? villagetagcompound.getInteger("signY") : Integer.MAX_VALUE;
-            townZ = villagetagcompound.hasKey("signZ") ? villagetagcompound.getInteger("signZ") : Integer.MAX_VALUE;
-            
-            int radiussearch = 32;
-            if (
-            		villagetagcompound.hasKey("signX") && villagetagcompound.hasKey("signY") && villagetagcompound.hasKey("signZ")
-            		&& (posX-townX)*(posX-townX) + (posZ-townZ)*(posZ-townZ) <= radiussearch*radiussearch
-            		)
-            {
-            	// This village already has a name.
-            	townColorMeta = villagetagcompound.getInteger("townColor");
-        		namePrefix = villagetagcompound.getString("namePrefix");
-        		nameRoot = villagetagcompound.getString("nameRoot");
-        		nameSuffix = villagetagcompound.getString("nameSuffix");
-        		/*
-        		LogHelper.info("Village detected at " + posX + " " + posY + " " + posZ + " - it's " + nameRoot + " listed under " + townSignEntry);
-        		LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
-        		LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
-        		*/
-        		// Check if it has a second color
+			Iterator itr = tagmapKeyset.iterator();
+			
+			//Placeholders for villagenames.dat tags
+			boolean signLocated = false; //Use this to record whether or not a sign was found
+			boolean isColony = false; //Use this to record whether or not the village was naturally generated
+			
+			while(itr.hasNext()) // Going through the list of VN villages
+			{
+				Object element = itr.next();
+				townSignEntry = element.toString(); //Text name of village header (e.g. "x535y80z39")
+				//The only index that has data is 0:
+				NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
+	            villagetagcompound = nbttaglist.getCompoundTagAt(0);
+				
+				// Retrieve the "sign" coordinates
+				townColorMeta = villagetagcompound.getInteger("townColor");
+				townX = villagetagcompound.getInteger("signX");
+				townY = villagetagcompound.getInteger("signY");
+				townZ = villagetagcompound.getInteger("signZ");
+				namePrefix = villagetagcompound.getString("namePrefix");
+				nameRoot = villagetagcompound.getString("nameRoot");
+				nameSuffix = villagetagcompound.getString("nameSuffix");
+				
+				// Check if it has a second color
         		townColorMeta2 = townColorMeta;
         		// Second color is already explicitly registered
         		if (villagetagcompound.hasKey("townColor2")) {townColorMeta2 = villagetagcompound.getInteger("townColor2");}
@@ -478,13 +602,106 @@ public class StructureVillageVN
             		tagCompound.setTag(townSignEntry, nbttaglist);
             		data.markDirty();
         		}
-        		
-            	return villagetagcompound;
-            }
-    	}
+				
+				// Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
+				Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, villageRadiusBuffer);
+				
+				isColony = villagetagcompound.getBoolean("isColony");
+				
+				if (villageNearSign == villageNearTarget) // There is a match between the nearest village to this villager and the nearest village to the sign
+				{
+					signLocated = true;
+					
+					return villagetagcompound;
+				}
+			}
+		}
+		
+		
+		// --- TRY 2: compare this sign position with stored VN sign positions and see if you're within range of one of them --- // 
+		
+		VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
+		NBTTagCompound tagCompound = data.getData();
+		Set tagmapKeyset = tagCompound.func_150296_c(); //Gets the town key list: "coordinates"
+		Iterator itr = tagmapKeyset.iterator();
+
+		while(itr.hasNext())
+		{
+			Object element = itr.next();
+			townSignEntry = element.toString(); //Text name of village header (e.g. "Kupei, x191 y73 z187")
+			//The only index that has data is 0:
+			NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
+			villagetagcompound = nbttaglist.getCompoundTagAt(0);
+
+			townX = villagetagcompound.hasKey("signX") ? villagetagcompound.getInteger("signX") : Integer.MAX_VALUE;
+			townY = villagetagcompound.hasKey("signY") ? villagetagcompound.getInteger("signY") : Integer.MAX_VALUE;
+			townZ = villagetagcompound.hasKey("signZ") ? villagetagcompound.getInteger("signZ") : Integer.MAX_VALUE;
+			
+			int radiussearch = 32;
+			if (
+					villagetagcompound.hasKey("signX") && villagetagcompound.hasKey("signY") && villagetagcompound.hasKey("signZ")
+					&& (posX-townX)*(posX-townX) + (posZ-townZ)*(posZ-townZ) <= radiussearch*radiussearch
+					)
+			{
+				// This village already has a name.
+				townColorMeta = villagetagcompound.getInteger("townColor");
+				namePrefix = villagetagcompound.getString("namePrefix");
+				nameRoot = villagetagcompound.getString("nameRoot");
+				nameSuffix = villagetagcompound.getString("nameSuffix");
+				/*
+				LogHelper.info("Village detected at " + posX + " " + posY + " " + posZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+				LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+				LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
+				*/
+				// Check if it has a second color
+				townColorMeta2 = townColorMeta;
+				// Second color is already explicitly registered
+				if (villagetagcompound.hasKey("townColor2")) {townColorMeta2 = villagetagcompound.getInteger("townColor2");}
+				// Try to extract second color from banner colors
+				else
+				{
+					if (villagetagcompound.hasKey("BlockEntityTag", 10))
+					{
+						bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
+						if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
+						{
+							NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
+							
+							for (int i=0; i < nbttaglistPattern.tagCount(); i++)
+							{
+								NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
+								if (patterntag.hasKey("Color") && patterntag.getInteger("Color")!=townColorMeta)
+								{
+									townColorMeta2 = patterntag.getInteger("Color");
+								}
+							}
+						}
+					}
+					// Village does not have banner info. Make some.
+					else
+					{
+						while (townColorMeta2==townColorMeta)
+						{
+							townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random);
+						}
+					}
+					
+					villagetagcompound.setInteger("townColor2", townColorMeta2);
+					
+					// Replace the old tag
+					nbttaglist.func_150304_a(0, villagetagcompound);
+					tagCompound.setTag(townSignEntry, nbttaglist);
+					data.markDirty();
+				}
+				
+				return villagetagcompound;
+			}
+		}
+		
+		
+		// --- TRY 3: just make a new VN entry --- //
+		
     	
-    	
-    	// Position was not determined to be inside any previous village. Generate a name and such for the new one.
     	villagetagcompound = new NBTTagCompound();
     	
 		MapGenStructureData structureData;
@@ -506,45 +723,6 @@ public class StructureVillageVN
     		catch (Exception e1) {} // OTGVillage.dat does not exist
 		}
 		
-		// At this point, you may or may not have data to work with.
-		try
-		{
-			Iterator itr0 = nbttagcompound.func_150296_c().iterator();
-			
-			while (itr0.hasNext()) // Go through every village in the Village.nbt list
-			{
-				Object element0 = itr0.next();
-				NBTBase nbtbase = nbttagcompound.getTag(element0.toString());
-				
-				if (nbtbase.getId() == 10) // 10 is a tag compound
-				{
-					try
-					{
-						NBTTagCompound nbttagcompound2 = (NBTTagCompound)nbtbase;
-						
-						int[] boundingBox = nbttagcompound2.getIntArray("BB");
-						
-						// Check to see if the position is inside the village
-						if (
-								   posX >= boundingBox[0] && posY >= boundingBox[1] && posZ >= boundingBox[2]
-								&& posX <= boundingBox[3] && posY <= boundingBox[4] && posZ <= boundingBox[5]
-								)
-						{
-							int ChunkX = nbttagcompound2.getInteger("ChunkX");
-							int ChunkZ = nbttagcompound2.getInteger("ChunkZ");
-							villageArea = (boundingBox[3]-boundingBox[0])*(boundingBox[3]-boundingBox[0]);
-							
-							if (GeneralConfig.debugMessages) {LogHelper.info("Village located at ChunkX: " + ChunkX + ", ChunkZ: " + ChunkZ + " with area " + villageArea);}
-						}
-					}
-					catch (Exception e)
-					{
-						if (GeneralConfig.debugMessages) {LogHelper.warn("Village bounding box could not be determined.");}
-					}
-				}
-			}
-		}
-		catch (Exception e) {} // Failed to evaluate the bounding box
 		
 		int topLineRand = random.nextInt(4);
 		
@@ -580,6 +758,7 @@ public class StructureVillageVN
         if (villageBanner!=null) {villagetagcompound.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
 
         nbttaglist.appendTag(villagetagcompound);
+        
         // Save the data under a "Villages" entry with unique name based on sign coords
         data.getData().setTag((namePrefix + " " + nameRoot + " " + nameSuffix).trim() + ", x" + posX + " y" + posY + " z" + posZ, nbttaglist);
 		data.markDirty();

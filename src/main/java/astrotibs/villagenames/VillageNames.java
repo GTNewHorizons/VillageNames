@@ -40,6 +40,7 @@ import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN;
+import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -189,9 +190,12 @@ public final class VillageNames
 			// Structure components
 	        MapGenStructureIO.func_143031_a(StructureVillageVN.PathVN.class, "VNPath"); // Path
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFountain01.class, "VNPlF01"); // Fountain
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Well
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Plains Well
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint2.class, "VNPlMP2"); // Market
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint3.class, "VNPlMP3"); // Tree
+	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint1.class, "VNDeMP1"); // Fountain and Building
+	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint2.class, "VNDeMP2"); // Desert Well
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );

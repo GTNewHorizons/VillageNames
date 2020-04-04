@@ -217,7 +217,7 @@ public class ItemCodex extends Item {
         								
         								// Specifically check if this is a Village.
         								// If so, you can pass this for checking the Ghost Town achievement.
-        								if (structureTypes.get(i).equals("Village") && structureTypes.get(i).equals("OTGVillage")) // v3.2.1
+        								if (structureTypes.get(i).equals("Village") || structureTypes.get(i).equals("OTGVillage")) // v3.2.1
         								{
         									playerIsInVillage = true;
         								}

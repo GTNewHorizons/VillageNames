@@ -258,7 +258,7 @@ public class PlainsStructures
     		}
     		else
     		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 3); // 2 is "send change to clients without block update notification"
+    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
         		world.setTileEntity(signX, signY, signZ, signContents);
     		}
     		
@@ -608,7 +608,7 @@ public class PlainsStructures
     		}
     		else
     		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 3); // 2 is "send change to clients without block update notification"
+    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
         		world.setTileEntity(signX, signY, signZ, signContents);
     		}
     		
@@ -771,10 +771,6 @@ public class PlainsStructures
         	int townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	
-        	// Level the market ground with grass and then insert grass paths
-        	
-        	// Foundational dirt
-        	this.fillWithBlocks(world, structureBB, 0, -3, 0, 7, -1, 14, Blocks.dirt, Blocks.dirt, false);
         	// Top layer is grass
         	this.fillWithBlocks(world, structureBB, 0, 0, 0, 7, 0, 14, Blocks.grass, Blocks.grass, false);
         	// Clear above
@@ -785,6 +781,10 @@ public class PlainsStructures
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
+        	
+        	// Foundation
+        	for (int x = 0; x <= 7; ++x) {for (int z = 0; z <= 14; ++z) {this.func_151554_b(world, Blocks.dirt, 0, x, -1, z, structureBB);}}
+        	
         	// Set grass paths
         	for (int[] offset_xy : new int[][]{
         		{0, 2}, {0, 3}, 
@@ -886,7 +886,7 @@ public class PlainsStructures
     		}
     		else
     		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 3); // 2 is "send change to clients without block update notification"
+    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
         		world.setTileEntity(signX, signY, signZ, signContents);
     		}
     		
@@ -1041,8 +1041,6 @@ public class PlainsStructures
         	
         	// Level the ground with grass and then insert grass paths
         	
-        	// Foundational dirt
-        	this.fillWithBlocks(world, structureBB, 0, -2, 0, 10, -1, 10, Blocks.dirt, Blocks.dirt, false);
         	// Top layer is grass
         	this.fillWithBlocks(world, structureBB, 0, 0, 0, 10, 0, 10, Blocks.grass, Blocks.grass, false);
         	// Clear above
@@ -1053,6 +1051,9 @@ public class PlainsStructures
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
+        	
+        	// Foundation
+        	for (int x = 0; x <= 10; ++x) {for (int z = 0; z <= 10; ++z) {this.func_151554_b(world, Blocks.dirt, 0, x, -1, z, structureBB);}}
         	
         	// Set grass paths
         	for (int[] offset_xy : new int[][]{
@@ -1104,6 +1105,7 @@ public class PlainsStructures
         	{
         		this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, offset_xy[0], 1, offset_xy[1], structureBB);
         	}
+        	this.placeBlockAtCurrentPosition(world, Blocks.yellow_flower, 0, 3, 1, 1, structureBB);
         	
         	
         	// Tree
