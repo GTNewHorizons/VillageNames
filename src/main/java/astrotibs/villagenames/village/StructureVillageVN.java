@@ -144,6 +144,7 @@ public class StructureVillageVN
                 		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel())); // getAverageGroundLevel returns 64
                 		//LogHelper.info("height " + world.getTopSolidOrLiquidBlock(l, k) + " at " + l + " " + k);
                 		i.add(world.getTopSolidOrLiquidBlock(l, k));
+                		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel()));
                 	}
                 }
             }
@@ -421,10 +422,10 @@ public class StructureVillageVN
             townY = villagetagcompound.hasKey("signY") ? villagetagcompound.getInteger("signY") : Integer.MAX_VALUE;
             townZ = villagetagcompound.hasKey("signZ") ? villagetagcompound.getInteger("signZ") : Integer.MAX_VALUE;
             
-            int radiussearch = 16;
+            int radiussearch = 32;
             if (
             		villagetagcompound.hasKey("signX") && villagetagcompound.hasKey("signY") && villagetagcompound.hasKey("signZ")
-            		&& (posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ) <= radiussearch*radiussearch
+            		&& (posX-townX)*(posX-townX) + (posZ-townZ)*(posZ-townZ) <= radiussearch*radiussearch
             		)
             {
             	// This village already has a name.
@@ -575,7 +576,7 @@ public class StructureVillageVN
         villagetagcompound.setString("nameSuffix", nameSuffix);
         
         // Form and append banner info
-        // If you don't have a mod banner, this will not be added. It will be generated once you do.
+        // If you don't have a mod banner, this will not be added (bc crash). It will be generated once you do.
         if (villageBanner!=null) {villagetagcompound.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
 
         nbttaglist.appendTag(villagetagcompound);

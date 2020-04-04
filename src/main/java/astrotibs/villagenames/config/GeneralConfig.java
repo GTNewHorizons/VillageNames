@@ -117,7 +117,10 @@ public class GeneralConfig {
 	public static boolean structureLegacyLargeFarm;
 	public static boolean structureLegacySmithy;
 	public static boolean structureLegacyChurch;
+	
+	// Misc new village stuff
 	public static boolean spawnModdedVillagers;
+	public static boolean decorateVillageCenter;
 	
 	public static void init(File configFile) 
 	{
@@ -131,27 +134,28 @@ public class GeneralConfig {
 	protected static void loadConfiguration()
 	{
 		
-		// --- Villages --- //
-		newVillageGenerator = config.getBoolean("Village Generator", "Villages", true, "Use replacement village generation system. You may need to deactivate village generation from other mods.");
-		newVillageSize = config.getInt("Village Size", "Villages", 1, 1, 10, "How large villages are. Vanilla is 1. Requires Village Generator to be true.");
-		newVillageSpacingMedian = config.getInt("Village Spacing: Median", "Villages", 20, 1, 100, "Median distance between villages. Vanilla is 20. Only used with Village Generator.");
-		newVillageSpacingSpread = config.getInt("Village Spacing: Range", "Villages", 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12. Only used with Village Generator.");
+		// --- New Villages --- //
+		newVillageGenerator = config.getBoolean("Activate New Village Generator", "VN 4 Villages", true, "Use replacement village generation system. You may need to deactivate village generation from other mods. All other settings in this section require this to be true.");
+		newVillageSize = config.getInt("Village Size", "VN 4 Villages", 1, 1, 10, "How large villages are. Vanilla is 1.");
+		newVillageSpacingMedian = config.getInt("Village Spacing: Median", "VN 4 Villages", 20, 1, 100, "Median distance between villages. Vanilla is 20.");
+		newVillageSpacingSpread = config.getInt("Village Spacing: Range", "VN 4 Villages", 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12.");
 		
 		// Old Village buildings
-		structureLegacyHut = config.getBoolean("Structure: Legacy Hut", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacySmallHouse = config.getBoolean("Structure: Legacy Small House", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacyLargeHouse = config.getBoolean("Structure: Legacy Large House", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacyButcherShop = config.getBoolean("Structure: Legacy Butcher's Shop", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacyLibrary = config.getBoolean("Structure: Legacy Library", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacySmallFarm = config.getBoolean("Structure: Legacy Small Farm", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacyLargeFarm = config.getBoolean("Structure: Legacy Large Farm", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacySmithy = config.getBoolean("Structure: Legacy Smithy", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
-		structureLegacyChurch = config.getBoolean("Structure: Legacy Church", "Villages", false, "Whether this structure can generate in villages. Only used with Village Generator.");
+		structureLegacyHut = config.getBoolean("Structure: Legacy Hut", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacySmallHouse = config.getBoolean("Structure: Legacy Small House", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacyLargeHouse = config.getBoolean("Structure: Legacy Large House", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacyButcherShop = config.getBoolean("Structure: Legacy Butcher's Shop", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacyLibrary = config.getBoolean("Structure: Legacy Library", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacySmallFarm = config.getBoolean("Structure: Legacy Small Farm", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacyLargeFarm = config.getBoolean("Structure: Legacy Large Farm", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacySmithy = config.getBoolean("Structure: Legacy Smithy", "VN 4 Villages", false, "Whether this structure can generate in villages.");
+		structureLegacyChurch = config.getBoolean("Structure: Legacy Church", "VN 4 Villages", false, "Whether this structure can generate in villages.");
 		
 		// Misc
-		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Villages", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
+		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "VN 4 Villages", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
+		decorateVillageCenter = config.getBoolean("Decorate village center", "VN 4 Villages", true, "Whether to decorate the town center with concrete, terracotta, banners, etc. based on the village's colors");
 		
-		spawnBiomesNames = config.getStringList("Spawn Biome Names", "Villages",
+		spawnBiomesNames = config.getStringList("Spawn Biome Names", "VN 4 Villages",
 				new String[] {
 						// Vanilla
 						"Plains",

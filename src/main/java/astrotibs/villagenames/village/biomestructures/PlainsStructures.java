@@ -46,10 +46,10 @@ public class PlainsStructures
             {
 	            case 0: // North
 	            case 2: // South
-                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 8, 68, posZ + 8);
+                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 8, 67, posZ + 8);
                     break;
                 default: // 1: East; 3: West
-                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 8, 68, posZ + 8);
+                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 8, 67, posZ + 8);
             }
 
             //StructureVillageVN.establishBiomeBlocks(this, posX, posZ);
@@ -60,10 +60,14 @@ public class PlainsStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			// Southward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+			// Northward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			// Eastward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
 		}
     	
 		/*
@@ -88,11 +92,20 @@ public class PlainsStructures
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
             
+        	// Generate or otherwise obtain village name and banner and colors
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        			this.getXWithOffset(4, 4),
+        			this.getYWithOffset(2),
+        			this.getZWithOffset(4, 4));
+        	int townColor = villageNBTtag.getInteger("townColor");
+        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	
+        	
         	// Clear out area
         	this.fillWithAir(world, structureBB, 2, 1, 2, 6, 4, 6);
         	
             // Basin bottom
-            this.fillWithMetadataBlocks(world, structureBB, 2, 0, 2, 6, 0, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            this.fillWithMetadataBlocks(world, structureBB, 2, -1, 2, 6, 0, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             
             // Torches at the corners
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 1, 2, structureBB);
@@ -100,13 +113,61 @@ public class PlainsStructures
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 1, 2, structureBB);
             this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 1, 6, structureBB);
             
-            // Basin rim
-            this.fillWithMetadataBlocks(world, structureBB, 2, 1, 3, 6, 1, 5, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            if (GeneralConfig.decorateVillageCenter)
+            {
+            	// Basin rim
+            	Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
+            	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
+            	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
+            	
+            	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 3, 6, 1, 5, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+                this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+                
+                // Under-torch GT
+                int metaSpin = random.nextInt(4)+4;
+                Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin)%4);
+                if (tryGlazedTerracotta != null)
+                {
+                	int metaChirality = random.nextBoolean() ? 1 : -1; // Determines "rotation handedness" of blocks as they're placed around the well
+                    
+                	this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2, 0, 2, structureBB);
+                	tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality)%4);
+                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2, 0, 6, structureBB);
+                    tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*2)%4);
+                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 6, structureBB);
+                    tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*3)%4);
+                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 2, structureBB);
+                }
+                else
+                {
+                    this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 2, 0, 2, structureBB);
+                    this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 2, 0, 6, structureBB);
+                    this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 6, 0, 2, structureBB);
+                    this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 6, 0, 6, structureBB);
+                }
+            }
+            else
+            {
+            	// Basin rim
+                this.fillWithMetadataBlocks(world, structureBB, 2, 1, 3, 6, 1, 5, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            }
+            
             this.fillWithAir(world, structureBB, 3, 1, 3, 5, 1, 5);
             
             // Spout
-            this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 2, 4, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            if (GeneralConfig.decorateVillageCenter)
+            {
+            	Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
+            	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
+            	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
+            	
+            	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 2, 4, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            }
+            else
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 2, 4, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            }
             this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 3, 4, structureBB);
             
             // Encircle the well with path
@@ -158,7 +219,7 @@ public class PlainsStructures
             int signX = this.getXWithOffset(signXBB, signZBB);
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
-    		NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random, signX, signY, signZ);
+    		
     		String namePrefix = villageNBTtag.getString("namePrefix");
     		String nameRoot = villageNBTtag.getString("nameRoot");
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -198,49 +259,52 @@ public class PlainsStructures
     		}
     		
     		
-        	// Banner
-    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-    		if (testForBanner!=null)
-			{
-    			int bannerXBB = 8;
-    			int bannerYBB = 1;
-    			int bannerZBB = 6;
-    			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
-    			int bannerY = this.getYWithOffset(bannerYBB);
-                int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                int bannerFacing = 2; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
-                
-                // Clear the spaces around the banner
-                /*
-                for (int i=0; i < (bannerFacing%2==0 ? 3 : 2); i++)
-                {
-                	for (int j=0; j < (bannerFacing%2==0 ? 2 : 3); j++)
-                	{
-                		this.clearCurrentPositionBlocksUpwards(world, bannerXBB+i+(bannerFacing==1 ? 0 : -1), bannerYBB, bannerZBB+j+(bannerFacing==0 ? 0 : -1), structureBB);
-                	}
-                }
-                 */
-                // Place a cobblestone foundation
-                this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-                
-            	// Set the banner and its orientation
-				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tilebanner = new TileEntityBanner();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tilebanner.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tilebanner.readFromNBT(modifystanding);
-				ItemStack villageBanner = ModObjects.chooseModBannerItem();
-				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
-				
-    			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
-        		
-        		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
-			}
-    		
+    		if (GeneralConfig.decorateVillageCenter)
+    		{
+    			// Banner
+        		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+        		if (testForBanner!=null)
+    			{
+        			int bannerXBB = 8;
+        			int bannerYBB = 1;
+        			int bannerZBB = 6;
+        			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
+        			int bannerY = this.getYWithOffset(bannerYBB);
+                    int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
+                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
+                    
+                    // Clear the spaces around the banner
+                    /*
+                    for (int i=0; i < (bannerFacing%2==0 ? 3 : 2); i++)
+                    {
+                    	for (int j=0; j < (bannerFacing%2==0 ? 2 : 3); j++)
+                    	{
+                    		this.clearCurrentPositionBlocksUpwards(world, bannerXBB+i+(bannerFacing==1 ? 0 : -1), bannerYBB, bannerZBB+j+(bannerFacing==0 ? 0 : -1), structureBB);
+                    	}
+                    }
+                     */
+                    // Place a cobblestone foundation
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    
+                	// Set the banner and its orientation
+    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				
+    				// Set the tile entity
+    				TileEntity tilebanner = new TileEntityBanner();
+    				NBTTagCompound modifystanding = new NBTTagCompound();
+    				tilebanner.writeToNBT(modifystanding);
+    				modifystanding.setBoolean("IsStanding", true);
+    				tilebanner.readFromNBT(modifystanding);
+    				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+    				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+    				
+        			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+            		
+            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+    			}
+    		}
+        	
     		
     		// Villagers
             if (!this.villagersGenerated)
@@ -310,10 +374,14 @@ public class PlainsStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 1, this.getComponentType());
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 3, this.getComponentType());
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			// Southward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - wellHeight, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 1, this.getComponentType());
+        	// Northward
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ - 1, 2, this.getComponentType());
+        	// Eastward
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - wellHeight, this.boundingBox.minZ + 4, 3, this.getComponentType());
 		}
 		
 		/*
@@ -323,6 +391,7 @@ public class PlainsStructures
         {
         	Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_slab, 3, this); Block biomeCobblestoneSlabBlock = (Block)blockObject[0]; int biomeCobblestoneSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
         	
@@ -331,8 +400,8 @@ public class PlainsStructures
                 //this.field_143015_k = StructureVillagePiecesVN.getMedianGroundLevel(world, structureBB, true);//this.getAverageGroundLevel(world, structureBoundingBox);
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
         				new StructureBoundingBox(
-        						this.boundingBox.minX, this.boundingBox.minZ,
-        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        						this.boundingBox.minX+1, this.boundingBox.minZ+1,
+        						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
         				true);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
@@ -340,10 +409,29 @@ public class PlainsStructures
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + (wellHeight-1) - wellDepthDecrease, 0);
             }
         	
+        	
+        	// Generate or otherwise obtain village name and banner and colors
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        			this.getXWithOffset(4, 4),
+        			this.getYWithOffset(12),
+        			this.getZWithOffset(4, 4));
+        	int townColor = villageNBTtag.getInteger("townColor");
+        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	
+        	
             // The well gets filled completely with water first
             //this.fillWithBlocks(world, structureBoundingBox, 3, 0+wellDepthDecrease, 3, 6, 12, 6, this.biomeCobblestoneBlock, Blocks.flowing_water, false);
             this.fillWithMetadataBlocks(world, structureBB, 3, 0+wellDepthDecrease, 3, 6, 12, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             this.fillWithBlocks(world, structureBB, 4, 1+wellDepthDecrease, 4, 5, 12, 5, Blocks.flowing_water, Blocks.flowing_water, false); // Water
+            
+            // Well rim
+            if (GeneralConfig.decorateVillageCenter)
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, 4, 12, 3, 5, 12, 3, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 4, 12, 6, 5, 12, 6, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 3, 12, 4, 3, 12, 5, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 6, 12, 4, 6, 12, 5, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
+            }
             
             // I believe this replaces the top water level with air
             this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 4, 12, 4, structureBB);
@@ -363,6 +451,28 @@ public class PlainsStructures
             // Roof of the well
             this.fillWithMetadataBlocks(world, structureBB, 3, 15, 3, 6, 15, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             
+            if (GeneralConfig.decorateVillageCenter)
+            {
+            	int metaSpin = random.nextInt(4)+4;
+            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin)%4);
+            	if (tryGlazedTerracotta != null)
+            	{
+            		int metaChirality = random.nextBoolean() ? 1 : -1; // Determines "rotation handedness" of blocks as they're placed around the well
+            		
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 15, 4, structureBB);
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality)%4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 15, 5, structureBB);
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*2)%4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 15, 5, structureBB);
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*3)%4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 15, 4, structureBB);
+            	}
+            	else
+            	{
+            		this.fillWithMetadataBlocks(world, structureBB, 4, 15, 4, 5, 15, 5, Blocks.stained_hardened_clay, townColor2, Blocks.stained_hardened_clay, townColor2, false);
+            	}
+            }
+            
             // Line the well with cobblestone and ensure the spaces above are clear
             for (int i = 2; i <= 7; ++i)
             {
@@ -370,8 +480,18 @@ public class PlainsStructures
                 {
                     if (j == 2 || j == 7 || i == 2 || i == 7)
                     {
-                    	//this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, j, 11, i, structureBB);
-                    	this.fillWithMetadataBlocks(world, structureBB, j, 0+wellDepthDecrease, i, j, 11, i, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    	if (GeneralConfig.decorateVillageCenter)
+                    	{
+                    		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
+                    		Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
+                    		if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
+                    		
+                    		this.fillWithMetadataBlocks(world, structureBB, j, 0+wellDepthDecrease, i, j, 11, i, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+                    	}
+                    	else
+                    	{
+                    		this.fillWithMetadataBlocks(world, structureBB, j, 0+wellDepthDecrease, i, j, 11, i, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    	}
                         this.clearCurrentPositionBlocksUpwards(world, j, 12, i, structureBB);
                     }
                 }
@@ -448,7 +568,7 @@ public class PlainsStructures
             int signX = this.getXWithOffset(signXBB, signZBB);
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
-    		NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random, signX, signY, signZ);
+    		
     		String namePrefix = villageNBTtag.getString("namePrefix");
     		String nameRoot = villageNBTtag.getString("nameRoot");
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -488,48 +608,52 @@ public class PlainsStructures
     		}
     		
     		
-    		// Banner
-    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-    		if (testForBanner!=null)
-			{
-                int bannerXBB = 8;
-    			int bannerYBB = 11;
-    			int bannerZBB = 6;
-    			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
-    			int bannerY = this.getYWithOffset(bannerYBB);
-                int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
-                
-                // Clear the spaces around the banner
-                /*
-                for (int i=0; i < (bannerFacing%2==0 ? 3 : 2); i++)
-                {
-                	for (int j=0; j < (bannerFacing%2==0 ? 2 : 3); j++)
-                	{
-                		this.clearCurrentPositionBlocksUpwards(world, bannerXBB+i+(bannerFacing==1 ? 0 : -1), bannerYBB, bannerZBB+j+(bannerFacing==0 ? 0 : -1), structureBB);
-                	}
-                }*/
-                
-                // Place a cobblestone foundation
-                this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-                
-            	// Set the banner and its orientation
-				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tilebanner = new TileEntityBanner();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tilebanner.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tilebanner.readFromNBT(modifystanding);
-				ItemStack villageBanner = ModObjects.chooseModBannerItem();
-				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
-				
-    			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
-        		
-        		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
-			}
+    		if (GeneralConfig.decorateVillageCenter)
+    		{
+    			// Banner
+        		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+        		if (testForBanner!=null)
+    			{
+                    int bannerXBB = 8;
+        			int bannerYBB = 11;
+        			int bannerZBB = 6;
+        			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
+        			int bannerY = this.getYWithOffset(bannerYBB);
+                    int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
+                    int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
+                    
+                    // Clear the spaces around the banner
+                    /*
+                    for (int i=0; i < (bannerFacing%2==0 ? 3 : 2); i++)
+                    {
+                    	for (int j=0; j < (bannerFacing%2==0 ? 2 : 3); j++)
+                    	{
+                    		this.clearCurrentPositionBlocksUpwards(world, bannerXBB+i+(bannerFacing==1 ? 0 : -1), bannerYBB, bannerZBB+j+(bannerFacing==0 ? 0 : -1), structureBB);
+                    	}
+                    }*/
+                    
+                    // Place a cobblestone foundation
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    
+                	// Set the banner and its orientation
+    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				
+    				// Set the tile entity
+    				TileEntity tilebanner = new TileEntityBanner();
+    				NBTTagCompound modifystanding = new NBTTagCompound();
+    				tilebanner.writeToNBT(modifystanding);
+    				modifystanding.setBoolean("IsStanding", true);
+    				tilebanner.readFromNBT(modifystanding);
+    				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+    				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+    				
+        			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+            		
+            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+    			}
+    		}
+    		
     		
     		
     		// Villagers
@@ -540,6 +664,271 @@ public class PlainsStructures
         		for (int[] ia : new int[][]{
         			{1, 11, 8, -1, 0},
         			{8, 11, 8, -1, 0},
+        			})
+        		{
+        			EntityVillager entityvillager = new EntityVillager(world);
+        			
+        			// Nitwits more often than not
+        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			
+        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+        			
+        			if (villagerY > -1)
+        			{
+        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                        		random.nextFloat()*360F, 0.0F);
+                        world.spawnEntityInWorld(entityvillager);
+        			}
+        		}
+            }
+            
+            return true;
+        }
+    }
+    
+    
+
+    // --- Market --- //
+    
+    public static class PlainsMeetingPoint2 extends StartVN
+    {
+	    public PlainsMeetingPoint2() {}
+		
+		public PlainsMeetingPoint2(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
+		{
+		    super(chunkManager, componentType, random, posX, posZ, components, terrainType);
+		    
+		    // Establish orientation
+            this.coordBaseMode = random.nextInt(4);
+            switch (this.coordBaseMode)
+            {
+                case 0:
+                case 2:
+                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 7, 72, posZ + 14);
+                    break;
+                default:
+                    this.boundingBox = new StructureBoundingBox(posX, 64, posZ, posX + 14, 72, posZ + 7);
+            }
+		}
+		
+		/*
+		 * Add the paths that lead outward from this structure
+		 */
+		public void buildComponent(StructureComponent start, List components, Random random)
+		{
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 2 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 10 : 1), 1, this.getComponentType());
+			// Northward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 10 : this.coordBaseMode==2 ? 1 : 2), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			// Eastward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 6 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 6 : 1), 3, this.getComponentType());
+		}
+		
+		/*
+		 * Construct the structure
+		 */
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+        {
+        	Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 0, this); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	
+        	if (this.field_143015_k < 0)
+            {
+        		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
+        				new StructureBoundingBox(
+        						this.boundingBox.minX, this.boundingBox.minZ,
+        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				true);
+        		
+                if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
+
+                this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
+            }
+        	
+        	
+        	// Generate or otherwise obtain village name and banner and colors
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        			this.getXWithOffset(4, 4),
+        			this.getYWithOffset(12),
+        			this.getZWithOffset(4, 4));
+        	int townColor = villageNBTtag.getInteger("townColor");
+        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	
+        	
+        	// Level the market ground with grass and then insert grass paths
+        	
+        	// Foundational dirt
+        	this.fillWithBlocks(world, structureBB, 0, -3, 0, 7, -1, 14, Blocks.dirt, Blocks.dirt, false);
+        	// Top layer is grass
+        	this.fillWithBlocks(world, structureBB, 0, 0, 0, 7, 0, 14, Blocks.grass, Blocks.grass, false);
+        	// Clear above
+        	for (int i=0; i<=7; i++)
+        	{
+        		for (int j=0; j<=14; j++)
+            	{
+        			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
+            	}
+        	}
+        	// Set grass paths
+        	for (int[] offset_xy : new int[][]{
+        		{0, 2}, {0, 3}, 
+        		{1, 0}, {1, 2}, {1, 3}, {1, 4}, {1, 13}, {1, 14}, 
+        		{2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 12}, {2, 13}, {2, 14}, 
+        		{3, 0}, {3, 1}, {3, 2}, {3, 4}, {3, 7}, {3, 9}, {3, 10}, {3, 11}, {3, 12}, {3, 13}, 
+        		{4, 3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 9}, 
+        		{5, 2}, {5, 3}, {5, 4}, {5, 5}, {5, 7}, {5, 8}, {5, 10}, {5, 12}, 
+        		{6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 11}, {6, 12},
+        		{7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}, {7, 8}, {7, 9}, {7, 11}, 
+        	})
+        	{
+        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(offset_xy[0], offset_xy[1]), this.getYWithOffset(0), this.getZWithOffset(offset_xy[0], offset_xy[1]));
+        	}
+        	
+        	// Unkempt grass
+        	this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, 0, 1, 8, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, 1, 1, 7, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, 1, 1, 12, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, 4, 1, 10, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 0, 4, 1, 11, structureBB);
+        	
+        	// Stalls
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 1, 7, 1, 1, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
+        	this.fillWithBlocks(world, structureBB, 4, 0, 1, 7, 0, 1, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithBlocks(world, structureBB, 4, 1, 0, 4, 3, 0, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 4, 1, 2, 4, 3, 2, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 7, 1, 0, 7, 3, 0, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 4, 0, 7, 4, 2, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 0, 6, 4, 2, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 0, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 2, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 1, structureBB);
+        	
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 5, 2, 1, 8, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
+        	this.fillWithBlocks(world, structureBB, 2, 0, 5, 2, 0, 8, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithBlocks(world, structureBB, 1, 1, 5, 1, 3, 5, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 1, 1, 8, 1, 3, 8, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 3, 1, 8, 3, 3, 8, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 3, 1, 5, 3, 3, 5, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 1, 4, 5, 3, 4, 8, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 1, 4, 6, 3, 4, 7, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 1, 4, 7, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 2, 4, 6, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 3, 4, 7, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 5, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 8, structureBB);
+        	
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 13, 7, 1, 13, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
+        	this.fillWithBlocks(world, structureBB, 4, 0, 13, 7, 0, 13, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithBlocks(world, structureBB, 4, 1, 12, 4, 3, 12, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 4, 1, 14, 4, 3, 14, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithBlocks(world, structureBB, 7, 1, 12, 7, 3, 12, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 4, 12, 7, 4, 14, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 12, 6, 4, 14, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 12, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 13, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 14, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 13, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 13, structureBB);
+        	
+        	        	        	
+            // Sign
+            int signXBB = 2;
+			int signYBB = 2;
+			int signZBB = 10;
+            int signX = this.getXWithOffset(signXBB, signZBB);
+            int signY = this.getYWithOffset(signYBB);
+            int signZ = this.getZWithOffset(signXBB, signZBB);
+    		
+    		String namePrefix = villageNBTtag.getString("namePrefix");
+    		String nameRoot = villageNBTtag.getString("nameRoot");
+    		String nameSuffix = villageNBTtag.getString("nameSuffix");
+    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+    		
+    		int signFacing = 1; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
+    		
+    		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, signXBB, signYBB-1, signZBB, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, signXBB, signYBB-2, signZBB, structureBB);
+        	
+    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
+    		{
+    			// Set the sign and its orientation
+				world.setBlock(signX, signY, signZ, biomeSignBlock);
+				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 3);
+				
+				// Set the tile entity
+				TileEntity tileModSign = new TileEntityWoodSign();
+				NBTTagCompound modifystanding = new NBTTagCompound();
+				tileModSign.writeToNBT(modifystanding);
+				modifystanding.setBoolean("IsStanding", true);
+				tileModSign.readFromNBT(modifystanding);
+				
+        		world.setTileEntity(signX, signY, signZ, tileModSign);
+    		}
+    		else
+    		{
+    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 3); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+    		}
+    		
+    		
+    		if (GeneralConfig.decorateVillageCenter)
+    		{
+    			// Banner
+        		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+        		if (testForBanner!=null)
+    			{
+                    int bannerXBB = 6;
+        			int bannerYBB = 1;
+        			int bannerZBB = 4;
+        			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
+        			int bannerY = this.getYWithOffset(bannerYBB);
+                    int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
+                    int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
+                    
+                    // Place a cobblestone foundation
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    
+                	// Set the banner and its orientation
+    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				
+    				// Set the tile entity
+    				TileEntity tilebanner = new TileEntityBanner();
+    				NBTTagCompound modifystanding = new NBTTagCompound();
+    				tilebanner.writeToNBT(modifystanding);
+    				modifystanding.setBoolean("IsStanding", true);
+    				tilebanner.readFromNBT(modifystanding);
+    				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+    				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+    				
+        			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+            		
+            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+    			}
+    		}
+    		
+    		
+    		
+    		// Villagers
+            if (!this.villagersGenerated)
+            {
+            	this.villagersGenerated=true;
+            	
+        		for (int[] ia : new int[][]{
+        			{6, 1, 6, -1, 0},
+        			{5, 1, 8, -1, 0},
+        			{5, 1, 10, -1, 0},
         			})
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
