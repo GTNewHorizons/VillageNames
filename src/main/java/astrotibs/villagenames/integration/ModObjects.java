@@ -159,6 +159,9 @@ public class ModObjects {
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
 	
+	// Sandstone Wall
+	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
+	
 	// Wooden Sign // TODO - Remove in 1.8
 	public static final String signSpruceGS = "ganyssurface:sign1";
 	public static final String signBirchGS = "ganyssurface:sign2";

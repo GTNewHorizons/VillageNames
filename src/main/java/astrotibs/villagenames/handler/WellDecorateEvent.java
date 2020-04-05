@@ -773,17 +773,15 @@ public class WellDecorateEvent {
 													// Replace the wool block
 													event.world.setBlock((event.chunkX << 4)+i, k, (event.chunkZ << 4)+j, Blocks.stained_hardened_clay, woolmeta, 2);
 													
+													if (GeneralConfig.debugMessages) LogHelper.info("Replacing desert pyramid wool at " + ((event.chunkX << 4)+i) + " " + k + " " + ((event.chunkZ << 4)+j));
 												}
 											}
 										}
 									}
 								}
 								
-								if (GeneralConfig.debugMessages) LogHelper.info("Replacing desert pyramid wool at " + (boundingBox[0]+boundingBox[3])/2 + " " + (boundingBox[2]+boundingBox[5])/2);
-								
 								nbttagcompound2.setBoolean("VNWoolReplaced", true);
 								structureData.setDirty(true);
-								
 							}
 						}
 						catch (Exception e) {

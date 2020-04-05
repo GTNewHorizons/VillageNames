@@ -7,6 +7,7 @@ import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
+import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
@@ -128,20 +129,32 @@ public class PlainsStructures
                 this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
                 
                 // Under-torch GT
-                int metaSpin = random.nextInt(4)+4;
-                Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin)%4);
-                if (tryGlazedTerracotta != null)
-                {
-                	int metaChirality = random.nextBoolean() ? 1 : -1; // Determines "rotation handedness" of blocks as they're placed around the well
-                    
-                	this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2, 0, 2, structureBB);
-                	tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality)%4);
-                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 2, 0, 6, structureBB);
-                    tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*2)%4);
-                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 6, structureBB);
-                    tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*3)%4);
-                    this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 2, structureBB);
-                }
+            	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
+            	
+            	BlockPos uvw = new BlockPos(2, 0, 2); // Starting position of the block cluster. Use lowest X, Z.
+            	BlockPos uvw2 = uvw;
+            	int metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4; // Procedural based on block X, Y, Z 
+            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            	
+            	if (tryGlazedTerracotta != null)
+            	{
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		
+            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		uvw2 = uvw2.south(4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		
+            		uvw = uvw.west(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		uvw2 = uvw2.west(4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		
+            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		uvw2 = uvw2.north(4);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            	}
                 else
                 {
                     this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 2, 0, 2, structureBB);
@@ -458,19 +471,27 @@ public class PlainsStructures
             
             if (GeneralConfig.decorateVillageCenter)
             {
-            	int metaSpin = random.nextInt(4)+4;
-            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin)%4);
+            	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
+            	
+            	BlockPos uvw = new BlockPos(4, 15, 4); // Starting position of the block cluster. Use lowest X, Z.
+            	int metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4; // Procedural based on block X, Y, Z 
+            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            	
             	if (tryGlazedTerracotta != null)
             	{
-            		int metaChirality = random.nextBoolean() ? 1 : -1; // Determines "rotation handedness" of blocks as they're placed around the well
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 15, 4, structureBB);
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality)%4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 15, 5, structureBB);
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*2)%4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 15, 5, structureBB);
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, (metaSpin + metaChirality*3)%4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 15, 4, structureBB);
+            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
+            		
+            		uvw = uvw.west(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
+            		
+            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             	}
             	else
             	{
