@@ -34,19 +34,21 @@ public class VersionChecker implements Runnable {
         InputStream in = null;
         
         try {
-            in = new URL(Reference.VERSION_CHECKER_URL).openStream();
+        	URL url = new URL(Reference.VERSION_CHECKER_URL);
+        	LogHelper.info("Query: " + url.getQuery());
+            in = url.openStream();
         } 
         catch 
-        (Exception e)  {} // Blanked in v3.1.1
+        (Exception e)  {LogHelper.error("Could not connect with server to compare " + Reference.MOD_NAME + " version");} // Blanked in v3.1.1
         
         try {
             latestVersion = IOUtils.readLines(in).get(0);
         }
-        catch (Exception e)  {
+        catch (Exception e) {
         	
         	if (!warnaboutfailure) {
         		// Added in v3.1.1
-        		LogHelper.error("Could not connect with server to compare " + Reference.MOD_NAME + " version");
+        		LogHelper.error("Failed to compare " + Reference.MOD_NAME + " version");
         		LogHelper.error("You can check for new versions at "+Reference.URL);
         		warnaboutfailure=true;
         	}

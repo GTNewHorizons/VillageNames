@@ -132,28 +132,24 @@ public class PlainsStructures
             	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
             	
             	BlockPos uvw = new BlockPos(2, 0, 2); // Starting position of the block cluster. Use lowest X, Z.
-            	BlockPos uvw2 = uvw;
             	int metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4; // Procedural based on block X, Y, Z 
             	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             	
             	if (tryGlazedTerracotta != null)
             	{
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.south(4); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		uvw2 = uvw2.south(4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.west(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.west(4); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		uvw2 = uvw2.west(4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.north(4); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		uvw2 = uvw2.north(4);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw2.getX(), uvw2.getY(), uvw2.getZ(), structureBB);
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             	}
                 else
                 {
@@ -340,14 +336,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
@@ -481,15 +472,15 @@ public class PlainsStructures
             	{
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.south(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.west(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.west(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.north(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             	}
@@ -698,14 +689,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
@@ -967,14 +953,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
@@ -1288,14 +1269,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             

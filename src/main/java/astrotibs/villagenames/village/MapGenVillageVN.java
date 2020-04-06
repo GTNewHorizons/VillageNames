@@ -177,11 +177,11 @@ public class MapGenVillageVN extends MapGenVillage
             StructureVillageVN.StartVN[] desertStarters = new StructureVillageVN.StartVN[]
             {
             	//new DesertStructures.DesertMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Fountain with structure
-            	new DesertStructures.DesertMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Desert well
-            	//new DesertStructures.DesertMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Desert market
+            	//new DesertStructures.DesertMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Desert well
+            	new DesertStructures.DesertMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Desert market
             };
             
-            start = plainsStarters[random.nextInt(plainsStarters.length)];
+            start = desertStarters[random.nextInt(desertStarters.length)];
             
             
             // Add well to the component list

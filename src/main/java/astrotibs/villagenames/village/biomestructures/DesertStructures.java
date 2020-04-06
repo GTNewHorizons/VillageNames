@@ -103,8 +103,8 @@ public class DesertStructures
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
         				new StructureBoundingBox(
-        						this.boundingBox.minX, this.boundingBox.minZ,
-        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        						this.boundingBox.minX+1, this.boundingBox.minZ+1,
+        						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
         				true);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
@@ -163,11 +163,12 @@ public class DesertStructures
             this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 3, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
             if (GeneralConfig.decorateVillageCenter)
         	{
-        		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
+        		/*Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
             	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
             	
-            	this.placeBlockAtCurrentPosition(world, concreteBlock, concreteMeta, 4, 4, 4, structureBB);
+            	this.placeBlockAtCurrentPosition(world, concreteBlock, concreteMeta, 4, 4, 4, structureBB);*/
+            	this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor2, 4, 4, 4, structureBB);
         	}
         	else
         	{
@@ -271,14 +272,9 @@ public class DesertStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
@@ -342,8 +338,8 @@ public class DesertStructures
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
         				new StructureBoundingBox(
-        						this.boundingBox.minX, this.boundingBox.minZ,
-        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        						this.boundingBox.minX+1, this.boundingBox.minZ+1,
+        						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
         				true);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
@@ -434,15 +430,15 @@ public class DesertStructures
             	{
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.south(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.west(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.west(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             		
-            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
+            		uvw = uvw.north(); metaCycle = (metaCycle+1)%4;
             		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
             		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
             	}
@@ -539,7 +535,7 @@ public class DesertStructures
         		for (int[] ia : new int[][]{
         			{10, 1, 8, -1, 0},
         			{1, 1, 10, -1, 0},
-        			{1, 7, 10, -1, 0},
+        			{7, 1, 10, -1, 0},
         			})
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
@@ -548,14 +544,9 @@ public class DesertStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
@@ -598,13 +589,13 @@ public class DesertStructures
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode<=1 ? 5 : 4), 1, this.getComponentType());
+			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 7 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 5 : 4), 1, this.getComponentType());}
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode>=2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 ? 5 : this.coordBaseMode==2 ? 1 : 7), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode>=2 ? 5 : 4), 3, this.getComponentType());
+			if (this.coordBaseMode!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 6 : 1), 3, this.getComponentType());}
 		}
     	
 		/*
@@ -621,8 +612,8 @@ public class DesertStructures
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
         				new StructureBoundingBox(
-        						this.boundingBox.minX, this.boundingBox.minZ,
-        						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        						this.boundingBox.minX+2, this.boundingBox.minZ+2,
+        						this.boundingBox.maxX-2, this.boundingBox.maxZ-2), // Set the bounding box version as this bounding box but with Y going from 0 to 512
         				true);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
@@ -632,114 +623,210 @@ public class DesertStructures
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
-        			this.getXWithOffset(6, 4),
-        			this.getYWithOffset(2),
-        			this.getZWithOffset(6, 4));
+        			this.getXWithOffset(8, 2),
+        			this.getYWithOffset(3),
+        			this.getZWithOffset(8, 2));
         	int townColor = villageNBTtag.getInteger("townColor");
         	int townColor2 = villageNBTtag.getInteger("townColor2");
         	
-        	// Set sandstone ground and clear area above
-        	this.fillWithBlocks(world, structureBB, 1, 0, 1, 10, 0, 10, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 1, 1, 1, 10, 5, 10);
         	
-        	// Fill foundation
-        	for (int x = 1; x <= 10; ++x)
-            {
-	        	for (int z = 1; z <= 10; ++z)
-	            {
-	                this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB);
-                }
-            }
+        	// Set ground and clear area above
+        	int fillXmin; int fillZmin; int fillXmax; int fillZmax; int clearToHeight = 5;
         	
-        	// Path hitches at the ends
-        	this.fillWithBlocks(world, structureBB, 0, 0, 5, 0, 0, 7, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 0, 1, 5, 0, 5, 7);
-        	for (int w = 5; w <= 7; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, 0, -1, w, structureBB);}
-        	this.fillWithBlocks(world, structureBB, 11, 0, 4, 11, 0, 6, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 11, 1, 4, 11, 5, 6);
-        	for (int w = 4; w <= 6; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, 11, -1, w, structureBB);}
-        	this.fillWithBlocks(world, structureBB, 4, 0, 0, 6, 0, 0, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 4, 1, 0, 6, 5, 0);
-        	for (int w = 4; w <= 6; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 0, structureBB);}
-        	this.fillWithBlocks(world, structureBB, 5, 0, 11, 7, 0, 11, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 5, 1, 11, 7, 5, 11);
-        	for (int w = 5; w <= 7; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 11, structureBB);}
+        	for (Object[] o : new Object[][]{
+        		// minX, maxX, minZ, maxZ, groundY, structureHeight, surfaceBlock, surfaceMeta, subsurfaceBlock, subsurfaceMeta 
+        		{0, 0, 7, 12, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{1, 2, 4, 12, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{1, 2, 14, 14, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{0, 2, 13, 13, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{2, 2, 3, 3, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{3, 3, 14, 14, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{3, 3, 1, 13, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{3, 3, 0, 0, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{4, 4, 2, 14, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{4, 4, 0, 1, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{5, 9, 0, 14, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{10, 11, 0, 13, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{12, 12, 1, 13, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{12, 12, 0, 0, -1, 5, Blocks.sandstone, 0, Blocks.sandstone, 0},
+        		{13, 13, 0, 12, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        		{14, 14, 3, 11, 0, 5, Blocks.sand, 0, Blocks.sandstone, 0},
+        	})
+        	{
+        		this.fillWithMetadataBlocks(world, structureBB, (Integer)o[0], (Integer)o[4], (Integer)o[2], (Integer)o[1], (Integer)o[4], (Integer)o[3], (Block)o[6], (Integer)o[7], (Block)o[6], (Integer)o[7], false);
+            	this.fillWithAir(world, structureBB, (Integer)o[0], Math.max((Integer)o[4], 0)+1, (Integer)o[2], (Integer)o[1], (Integer)o[5], (Integer)o[3]);
+            	for (int x = (Integer)o[0]; x <= (Integer)o[1]; ++x) {for (int z = (Integer)o[2]; z <= (Integer)o[3]; ++z) {this.func_151554_b(world, (Block)o[8], (Integer)o[9], x, -1, z, structureBB);}}
+        	}
+        	// Set sandstone in certain places
+        	this.fillWithBlocks(world, structureBB, 7, 0, 0, 7, 0, 4, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 10, 0, 0, 10, 0, 3, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 8, 0, 1, 9, 0, 1, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 8, 0, 3, 9, 0, 3, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 8, 0, 4, 13, 0, 4, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 8, 0, 9, 13, 0, 9, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 8, 0, 5, 8, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 13, 0, 5, 13, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 10, 0, 6, 11, 0, 7, Blocks.sandstone, Blocks.sandstone, false);
+        	this.fillWithBlocks(world, structureBB, 14, 0, 6, 14, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
         	
-        	// Set sand underneath the fountain
-        	this.fillWithBlocks(world, structureBB, 3, 0, 3, 8, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
         	
-        	// Set well rim
+        	// Fountain
+        	
+        	// Rim
         	if (GeneralConfig.decorateVillageCenter)
         	{
-        		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
-            	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
+        		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
+            	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
             	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
             	
-            	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 3, 8, 1, 8, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 9, 1, 5, 12, 1, 8, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	
+            	/*
+            	tryConcrete = ModObjects.chooseModConcrete(townColor2);
+            	concreteBlock = Blocks.stained_hardened_clay; concreteMeta = townColor2;
+            	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
+            	
+            	this.fillWithMetadataBlocks(world, structureBB, 8, 0, 4, 8, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 13, 0, 4, 13, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 9, 0, 4, 12, 0, 4, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	this.fillWithMetadataBlocks(world, structureBB, 9, 0, 9, 12, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
+            	*/
+            	//this.fillWithMetadataBlocks(world, structureBB, 9, 1, 7, 10, 1, 8, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
         	}
         	else
         	{
-        		this.fillWithMetadataBlocks(world, structureBB, 3, 1, 3, 8, 1, 8, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+        		this.fillWithMetadataBlocks(world, structureBB, 9, 1, 5, 12, 1, 8, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
         	}
         	
-        	// Water in the fountain
-            this.fillWithBlocks(world, structureBB, 4, 1, 4, 7, 1, 7, Blocks.flowing_water, Blocks.flowing_water, false);
-            
-            // Sandstone slab roof
-            this.fillWithMetadataBlocks(world, structureBB, 4, 4, 4, 7, 4, 7, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
-            
-        	// Columns
-            this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 4, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-            this.fillWithMetadataBlocks(world, structureBB, 4, 1, 7, 4, 4, 7, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-            this.fillWithMetadataBlocks(world, structureBB, 7, 1, 7, 7, 4, 7, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-            this.fillWithMetadataBlocks(world, structureBB, 7, 1, 4, 7, 4, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-            
-            // Torches
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 4, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 5, 4, structureBB);
-            
-            // Roof of the well
-            if (GeneralConfig.decorateVillageCenter)
-            {
-            	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
-            	
-            	BlockPos uvw = new BlockPos(5, 4, 5); // Starting position of the block cluster. Use lowest X, Z.
-            	int metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4; // Procedural based on block X, Y, Z 
-            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            	
-            	if (tryGlazedTerracotta != null)
-            	{
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
-            		
-            		uvw = uvw.north(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
-            		
-            		uvw = uvw.east(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
-            		
-            		uvw = uvw.south(); metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4;
-            		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor2, metaCycle);
-            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
-            	}
-            	else
-            	{
-            		this.fillWithMetadataBlocks(world, structureBB, 5, 4, 5, 6, 4, 6, Blocks.stained_hardened_clay, townColor2, Blocks.stained_hardened_clay, townColor2, false);
-            	}
-            }
-            else
-            {
-            	this.fillWithBlocks(world, structureBB, 5, 4, 5, 6, 4, 6, Blocks.sandstone, Blocks.sandstone, false);
-            }
-            
-            
+        	
+        	// Corner posts
+    		this.placeBlockAtCurrentPosition(world, Blocks.sandstone, 2, 9, 1, 5, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.sandstone, 2, 9, 1, 8, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.sandstone, 2, 12, 1, 8, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.sandstone, 2, 12, 1, 5, structureBB);
+        	// Top the corners
+    		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 1, 9, 2, 5, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 1, 9, 2, 8, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 1, 12, 2, 8, structureBB);
+    		this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 1, 12, 2, 5, structureBB);
+        	
+    		// Fill with water
+    		this.fillWithBlocks(world, structureBB, 10, 1, 6, 11, 1, 7, Blocks.flowing_water, Blocks.flowing_water, false);
+    		
+    		
+    		// Market stalls
+    		
+    		// Frames
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 0, 7, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 0, 10, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 2, 10, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 4, 0, 10, 4, 2, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
+    		this.fillWithAir(world, structureBB, 8, 4, 1, 9, 4, 1);
+    		
+    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 5, 1, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 5, 5, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 7, 5, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 7, 1, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 1, 5, 5, 5, 5, 7, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
+    		this.fillWithAir(world, structureBB, 2, 5, 6, 4, 5, 6);
+    		
+    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 11, 4, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 11, 7, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 14, 4, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 4, 4, 11, 7, 4, 14, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
+    		this.fillWithAir(world, structureBB, 5, 4, 12, 6, 4, 13);
+    		
+    		// Stall contents
+    		
+    		// Glazed terracotta
+    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        	
+        	if (tryGlazedTerracotta != null)
+        	{
+        		// Square under square awning
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 13, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 13, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 12, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 12, structureBB);
+        		
+        		// Halved square under strip awning
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 2, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 2, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 0, structureBB);
+        		
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 0, structureBB);
+        	}
+        	else
+        	{
+        		// Square under awning
+        		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 12, 6, 1, 13, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 0, false);
+        		
+        		// Halved square under strip awning
+        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 0, 9, 1, 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, false);
+        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 2, 9, 1, 2, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, false);
+        	}
+    		
+        	// Cut stone and stairs
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 6, 4, 1, 6, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.sandstone_stairs, this.getMetadataWithOffset(Blocks.sandstone_stairs, 0), 1, 1, 6, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.sandstone_stairs, this.getMetadataWithOffset(Blocks.sandstone_stairs, 1), 5, 1, 6, structureBB);
+        	
+        	// Various decorations
+        	this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, 5, 1, 0, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.hay_block, this.coordBaseMode%2==1 ? 8 : 4, 3, 1, 2, structureBB);
+        	
+    		// Flower pots
+        	// 1: red flower; 2: yellow flower
+        	// 3-6: oak, spruce, birch, jungle saplings
+        	// 7-8: red/brown mushrooms
+        	// 9: cactus; 10: dead bush; 11: fern
+        	// 12-13: acacia, dark oak saplings
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 0, 1, 7, structureBB); // cactus
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 3, 1, 7, structureBB); // cactus
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 2, 2, 6, structureBB); // cactus
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 4, 2, 6, structureBB); // cactus
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 9, 2, 2, structureBB); // cactus
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 1, 1, 4, structureBB); // dead bush
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 2, 1, 5, structureBB); // dead bush
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 2, 1, 7, structureBB); // dead bush
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 3, 2, 6, structureBB); // dead bush
+        	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 4, 1, 5, structureBB); // dead bush
+        	
+        	// Lantern decor
+        	for (int[] uvw : new int[][]{
+    			{1, 1, 11},
+    			{12, 1, 12},
+    			{13, 1, 0},
+    			{14, 1, 3},
+        	})
+        	{
+        		// Base
+        		this.fillWithMetadataBlocks(world, structureBB, uvw[0], uvw[1], uvw[2], uvw[0], uvw[1]+1, uvw[2], Blocks.sandstone, 2, Blocks.sandstone, 2, false);
+        		// Tip
+                if (GeneralConfig.decorateVillageCenter) {this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor, uvw[0], uvw[1]+2, uvw[2], structureBB);}
+            	else {this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uvw[0], uvw[1]+2, uvw[2], structureBB);}
+        		// Torch
+                this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, uvw[0], uvw[1]+3, uvw[2], structureBB);
+        	}
+        	
         	// Sign
             int signXBB = 8;
-			int signYBB = 1;
-			int signZBB = 1;
+			int signYBB = 2;
+			int signZBB = 2;
             int signX = this.getXWithOffset(signXBB, signZBB);
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
@@ -755,7 +842,7 @@ public class DesertStructures
     		{
     			// Set the sign and its orientation
 				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==4 ? 2 : 0))*4)%16, 2);
+				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
 				
 				// Set the tile entity
 				TileEntity tileModSign = new TileEntityWoodSign();
@@ -771,8 +858,7 @@ public class DesertStructures
     			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
         		world.setTileEntity(signX, signY, signZ, signContents);
     		}
-    		
-    		
+        	
     		if (GeneralConfig.decorateVillageCenter)
     		{
     			// Banner
@@ -781,11 +867,11 @@ public class DesertStructures
     			{
         			int bannerXBB = 10;
         			int bannerYBB = 1;
-        			int bannerZBB = 10;
+        			int bannerZBB = 11;
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 3; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
+                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
@@ -816,9 +902,9 @@ public class DesertStructures
             	this.villagersGenerated=true;
             	
         		for (int[] ia : new int[][]{
-        			{10, 1, 8, -1, 0},
-        			{1, 1, 10, -1, 0},
-        			{1, 7, 10, -1, 0},
+        			{6, 1, 5, -1, 0},
+        			{8, 1, 10, -1, 0},
+        			{11, 1, 10, -1, 0},
         			})
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
@@ -827,14 +913,11 @@ public class DesertStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			int villagerY = world.getTopSolidOrLiquidBlock(this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			if (villagerY > -1)
-        			{
-        				entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, villagerY, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                        		random.nextFloat()*360F, 0.0F);
-                        world.spawnEntityInWorld(entityvillager);
-        			}
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
         		}
             }
             
