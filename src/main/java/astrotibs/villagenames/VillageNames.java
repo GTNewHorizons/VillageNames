@@ -42,6 +42,7 @@ import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -192,10 +193,12 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFountain01.class, "VNPlF01"); // Fountain
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Plains Well
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint2.class, "VNPlMP2"); // Plains Market
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint3.class, "VNPlMP3"); // Tree
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint3.class, "VNPlMP3"); // Central Tree
 	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint1.class, "VNDeMP1"); // Fountain and Building
 	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint2.class, "VNDeMP2"); // Desert Well
 	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint3.class, "VNDeMP3"); // Desert Market
+	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint1.class, "VNTaMP1"); // Grass patch with two structures
+	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint2.class, "VNTaMP2"); // Taiga Well
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

@@ -8,7 +8,6 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
-import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -785,12 +784,10 @@ public class PlainsStructures
         	{
         		for (int j=0; j<=14; j++)
             	{
+        			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
-        	
-        	// Foundation
-        	for (int x = 0; x <= 7; ++x) {for (int z = 0; z <= 14; ++z) {this.func_151554_b(world, Blocks.dirt, 0, x, -1, z, structureBB);}}
         	
         	// Set grass paths
         	for (int[] offset_xy : new int[][]{
@@ -1050,12 +1047,10 @@ public class PlainsStructures
         	{
         		for (int j=0; j<=10; j++)
             	{
+        			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
-        	
-        	// Foundation
-        	for (int x = 0; x <= 10; ++x) {for (int z = 0; z <= 10; ++z) {this.func_151554_b(world, Blocks.dirt, 0, x, -1, z, structureBB);}}
         	
         	// Set grass paths
         	for (int[] offset_xy : new int[][]{

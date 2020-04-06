@@ -84,7 +84,7 @@ public class VNGuiConfig extends GuiConfig
 		cc.setComment("Change things like well decorations, name formats, and Codex/book settings");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("vn 4 villages");
+		cc = GeneralConfig.config.getCategory("village generator");
 		cc.setComment("Village buildings and generation system");
 		cc.setRequiresWorldRestart(true); // This category can't be edited while a world is running
 		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect

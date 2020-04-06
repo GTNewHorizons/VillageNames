@@ -1,6 +1,5 @@
 package astrotibs.villagenames.village.biomestructures;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
@@ -9,10 +8,8 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
-import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
@@ -80,12 +77,10 @@ public class DesertStructures
 			if (this.coordBaseMode%2==0)
 			{
 				strucX=this.boundingBox.maxX + 1; strucZ=this.boundingBox.minZ + random.nextInt(3)+1; coordBaseMode=3;
-				//strucX=this.boundingBox.maxX + 1; strucZ=this.boundingBox.minZ + 0; coordBaseMode=3;
 			}
 			else 
 			{
 				strucX=this.boundingBox.minX + random.nextInt(3)+1; strucZ=this.boundingBox.maxZ + 1; coordBaseMode=0;
-				//strucX=this.boundingBox.minX + 1; strucZ=this.boundingBox.maxZ + 1; coordBaseMode=0;
 			}
 			
 			StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, strucX, this.boundingBox.minY, strucZ, coordBaseMode, this.getComponentType());
@@ -122,14 +117,23 @@ public class DesertStructures
         	
         	// Set sandstone ground and clear area above
         	this.fillWithBlocks(world, structureBB, 3, 0, 0, 9, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 3, 1, 0, 9, 5, 8);
-        	for (int x = 3; x <= 9; ++x) {for (int z = 0; z <= 8; ++z) {this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB);}}
+        	for (int x = 3; x <= 9; ++x) {for (int z = 0; z <= 8; ++z)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, x, 1, z, structureBB);
+        	}}
         	this.fillWithBlocks(world, structureBB, 1, 0, 1, 2, 0, 7, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 1, 1, 1, 2, 5, 7);
-        	for (int x = 1; x <= 2; ++x) {for (int z = 1; z <= 7; ++z) {this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB);}}
+        	for (int x = 1; x <= 2; ++x) {for (int z = 1; z <= 7; ++z)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, x, 1, z, structureBB);
+        	}}
         	this.fillWithBlocks(world, structureBB, 0, 0, 3, 0, 0, 5, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 0, 1, 3, 0, 5, 5);
-        	for (int x = 0; x <= 0; ++x) {for (int z = 3; z <= 5; ++z) {this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB);}}
+        	for (int x = 0; x <= 0; ++x) {for (int z = 3; z <= 5; ++z)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, x, 1, z, structureBB);
+        	}}
         	
         	// Set well rim
         	if (GeneralConfig.decorateVillageCenter)
@@ -357,30 +361,42 @@ public class DesertStructures
         	
         	// Set sandstone ground and clear area above
         	this.fillWithBlocks(world, structureBB, 1, 0, 1, 10, 0, 10, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 1, 1, 1, 10, 5, 10);
         	
         	// Fill foundation
         	for (int x = 1; x <= 10; ++x)
             {
 	        	for (int z = 1; z <= 10; ++z)
 	            {
-	                this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB);
+	                this.func_151554_b(world, Blocks.sandstone, 0, x, -1, z, structureBB); // Foundation
+	                this.clearCurrentPositionBlocksUpwards(world, x, 1, z, structureBB);
                 }
             }
         	
         	// Path hitches at the ends
         	this.fillWithBlocks(world, structureBB, 0, 0, 5, 0, 0, 7, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 0, 1, 5, 0, 5, 7);
-        	for (int w = 5; w <= 7; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, 0, -1, w, structureBB);}
+        	for (int w = 5; w <= 7; ++w)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, 0, -1, w, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, 0, 1, w, structureBB);
+        	}
         	this.fillWithBlocks(world, structureBB, 11, 0, 4, 11, 0, 6, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 11, 1, 4, 11, 5, 6);
-        	for (int w = 4; w <= 6; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, 11, -1, w, structureBB);}
+        	for (int w = 4; w <= 6; ++w)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, 11, -1, w, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, 11, 1, w, structureBB);
+        	}
         	this.fillWithBlocks(world, structureBB, 4, 0, 0, 6, 0, 0, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 4, 1, 0, 6, 5, 0);
-        	for (int w = 4; w <= 6; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 0, structureBB);}
+        	for (int w = 4; w <= 6; ++w)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 0, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, w, 1, 0, structureBB);
+        	}
         	this.fillWithBlocks(world, structureBB, 5, 0, 11, 7, 0, 11, Blocks.sandstone, Blocks.sandstone, false);
-        	this.fillWithAir(world, structureBB, 5, 1, 11, 7, 5, 11);
-        	for (int w = 5; w <= 7; ++w) {this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 11, structureBB);}
+        	for (int w = 5; w <= 7; ++w)
+        	{
+        		this.func_151554_b(world, Blocks.sandstone, 0, w, -1, 11, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, w, 1, 11, structureBB);
+        	}
         	
         	// Set sand underneath the fountain
         	this.fillWithBlocks(world, structureBB, 3, 0, 3, 8, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
@@ -589,13 +605,13 @@ public class DesertStructures
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Southward
-			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 7 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 5 : 4), 1, this.getComponentType());}
-			// Northward
-			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 ? 5 : this.coordBaseMode==2 ? 1 : 7), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
-			// Eastward
-			if (this.coordBaseMode!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 6 : 1), 3, this.getComponentType());}
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 1, this.getComponentType());
+        	// Northward
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
+        	// Eastward
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 3, this.getComponentType());
 		}
     	
 		/*
@@ -654,8 +670,11 @@ public class DesertStructures
         	})
         	{
         		this.fillWithMetadataBlocks(world, structureBB, (Integer)o[0], (Integer)o[4], (Integer)o[2], (Integer)o[1], (Integer)o[4], (Integer)o[3], (Block)o[6], (Integer)o[7], (Block)o[6], (Integer)o[7], false);
-            	this.fillWithAir(world, structureBB, (Integer)o[0], Math.max((Integer)o[4], 0)+1, (Integer)o[2], (Integer)o[1], (Integer)o[5], (Integer)o[3]);
-            	for (int x = (Integer)o[0]; x <= (Integer)o[1]; ++x) {for (int z = (Integer)o[2]; z <= (Integer)o[3]; ++z) {this.func_151554_b(world, (Block)o[8], (Integer)o[9], x, -1, z, structureBB);}}
+            	for (int x = (Integer)o[0]; x <= (Integer)o[1]; ++x) {for (int z = (Integer)o[2]; z <= (Integer)o[3]; ++z)
+            	{
+            		this.func_151554_b(world, (Block)o[8], (Integer)o[9], x, (Integer)o[4]-1, z, structureBB); // Foundation
+            		this.clearCurrentPositionBlocksUpwards(world, (Integer)o[0], Math.max((Integer)o[4], 0)+1, (Integer)o[2], structureBB);
+            	}}
         	}
         	// Set sandstone in certain places
         	this.fillWithBlocks(world, structureBB, 7, 0, 0, 7, 0, 4, Blocks.sandstone, Blocks.sandstone, false);
