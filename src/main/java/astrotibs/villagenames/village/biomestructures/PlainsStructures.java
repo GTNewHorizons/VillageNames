@@ -8,6 +8,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
+import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -182,7 +183,7 @@ public class PlainsStructures
             }
             this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 3, 4, structureBB);
             
-            // Encircle the well with path
+            // Encircle the fountain with path
             Block pathBlock = ModObjects.chooseModPathBlock();
         	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece"});
         	for (int i = 1; i <= 7; ++i)
@@ -192,11 +193,11 @@ public class PlainsStructures
                     if (j == 1 || j == 7 || i == 1 || i == 7)
                     {
                     	// Gets ground level, so long as it's not leaves or other foliage
-                    	int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                    	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                         if (k > -1)
                         {
                         	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
-                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                        	}
                     }
                 }
@@ -207,18 +208,18 @@ public class PlainsStructures
             {
             	for (int j : new int[]{0,8})
             	{
-            		int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+            		int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                     if (k > -1)
                     {
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
-                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                    	}
                     
-                    k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
+                    k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
                     if (k > -1)
                     {
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(j, i), k, this.getZWithOffset(j, i));
-                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1, i, structureBB);
+                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1-this.boundingBox.minY, i, structureBB);
                    	}
             	}
             }
@@ -249,31 +250,14 @@ public class PlainsStructures
             	}
             }
     		*/
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+    		
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner    		
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -296,7 +280,9 @@ public class PlainsStructures
                     }
                      */
                     // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -335,7 +321,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+        			
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)k + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}
@@ -542,11 +530,11 @@ public class PlainsStructures
                     {
                     	// Gets ground level, so long as it's not leaves or other foliage
                         //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
-                    	int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                    	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                         if (k > -1)
                         {
                             StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
-                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                        	}
                     }
                 }
@@ -557,21 +545,21 @@ public class PlainsStructures
             	for (int j : new int[]{0,9})
             	{
                     //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
-            		int k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+            		int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                     if (k > -1)
                     {
                     	//StructureVillagePiecesVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
-                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1, j, structureBB);
+                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                    	}
                     
                     //k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+j, this.getBoundingBox().minZ+i) - 1;
-                    k = world.getTopSolidOrLiquidBlock(this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
+                    k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
                     if (k > -1)
                     {
                     	//StructureVillagePiecesVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+j, k, this.getBoundingBox().minZ+i);
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(j, i), k, this.getZWithOffset(j, i));
-                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1, i, structureBB);
+                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1-this.boundingBox.minY, i, structureBB);
                    	}
             	}
             }
@@ -602,31 +590,14 @@ public class PlainsStructures
             	}
             }
     		*/
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+    		
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -649,7 +620,9 @@ public class PlainsStructures
                     }*/
                     
                     // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -688,7 +661,9 @@ public class PlainsStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+        			
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)k + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}
@@ -748,6 +723,7 @@ public class PlainsStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 0, this); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
@@ -776,9 +752,10 @@ public class PlainsStructures
         	int townColor = villageNBTtag.getInteger("townColor");
         	int townColor2 = villageNBTtag.getInteger("townColor2");
         	
+        	// TODO - replace most Blocks.dirt with biomeDirt
         	
         	// Top layer is grass
-        	this.fillWithBlocks(world, structureBB, 0, 0, 0, 7, 0, 14, Blocks.grass, Blocks.grass, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 0, 0, 0, 7, 0, 14, biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
         	// Clear above
         	for (int i=0; i<=7; i++)
         	{
@@ -873,31 +850,13 @@ public class PlainsStructures
     		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, signXBB, signYBB-1, signZBB, structureBB);
     		this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, signXBB, signYBB-2, signZBB, structureBB);
         	
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -910,7 +869,9 @@ public class PlainsStructures
                     int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -995,6 +956,7 @@ public class PlainsStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
+			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Southward
 			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
 			// Westward
@@ -1012,6 +974,7 @@ public class PlainsStructures
         {
         	Object[] blockObject;	
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, this); Block biomeStoneStairsBlock = (Block)blockObject[0];
@@ -1041,7 +1004,7 @@ public class PlainsStructures
         	// Level the ground with grass and then insert grass paths
         	
         	// Top layer is grass
-        	this.fillWithBlocks(world, structureBB, 0, 0, 0, 10, 0, 10, Blocks.grass, Blocks.grass, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 0, 0, 0, 10, 0, 10, biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
         	// Clear above
         	for (int i=0; i<=10; i++)
         	{
@@ -1169,6 +1132,7 @@ public class PlainsStructures
 			int signZBB = 0;
 			int signZBB2 = 10;
             int signX = this.getXWithOffset(signXBB, signZBB);
+            int signX2 = this.getXWithOffset(signXBB, signZBB2);
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
             int signZ2 = this.getZWithOffset(signXBB, signZBB2);
@@ -1183,36 +1147,16 @@ public class PlainsStructures
     		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		int signFacing2 = 0;
     		
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlock(signX, signY, signZ2, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, this.getMetadataWithOffset(Blocks.ladder, 3), 2);
-				world.setBlockMetadataWithNotify(signX, signY, signZ2, this.getMetadataWithOffset(Blocks.ladder, 2), 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-        		world.setTileEntity(signX, signY, signZ2, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, new int[]{2,4,3,5}[this.coordBaseMode], 2); // 2 is "send change to clients without block update notification"
-    			world.setBlock(signX, signY, signZ2, biomeSignBlock, new int[]{3,5,2,4}[this.coordBaseMode], 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-        		world.setTileEntity(signX, signY, signZ2, signContents2);
-    		}
     		
+			world.setBlock(signX, signY, signZ, biomeSignBlock, new int[]{2,5,3,4}[this.coordBaseMode], 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX2, signY, signZ2, biomeSignBlock, new int[]{3,4,2,5}[this.coordBaseMode], 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
+    		world.setTileEntity(signX2, signY, signZ2, signContents2);
+
     		
+			// Banner    		
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -1225,7 +1169,9 @@ public class PlainsStructures
                     int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);

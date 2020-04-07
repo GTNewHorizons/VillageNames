@@ -11,6 +11,7 @@ import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
@@ -96,6 +97,7 @@ public class TaigaStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;	
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
@@ -127,7 +129,7 @@ public class TaigaStructures
         	{
         		for (int j=1; j<=6; j++)
             	{
-        			this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, i, 0, j, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, i, 0, j, structureBB);
         			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
         			// Set grass path after fill so that the area is level
@@ -149,18 +151,18 @@ public class TaigaStructures
         		{10, 3}, 
         	})
         	{
-        		this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, offset_xy[0], 0, offset_xy[1], structureBB);
+        		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, offset_xy[0], 0, offset_xy[1], structureBB);
         	}
         	
         	// Nodules at the end
         	for (int i=4; i<=6; i++) {for (int j=0; j<=0; j++) {
-        			this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, i, 0, j, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, i, 0, j, structureBB);
         			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), this.getYWithOffset(0), this.getZWithOffset(i, j));
             }}
         	for (int i=11; i<=11; i++) {for (int j=2; j<=4; j++) {
-        			this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, i, 0, j, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, i, 0, j, structureBB);
         			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), this.getYWithOffset(0), this.getZWithOffset(i, j));
@@ -183,9 +185,8 @@ public class TaigaStructures
         	// Wood trapdoor hatching
         	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, 1, 1, 3, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, 3, 1, 3, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode==0 ? 4 : this.coordBaseMode==1 ? 7 : this.coordBaseMode==2 ? 5 : 6, 2, 1, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode==0 ? 5 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 4 : 7, 2, 1, 4, structureBB);
-        	
+        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], 2, 1, 2, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], 2, 1, 4, structureBB);
         	
         	// Signs
             int signXBB = 2;
@@ -204,31 +205,13 @@ public class TaigaStructures
 
     		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==4 ? 2 : 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -241,7 +224,9 @@ public class TaigaStructures
                     int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -261,7 +246,6 @@ public class TaigaStructures
             		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
     			}
     		}
-    		
     		
     		
     		// Villagers
@@ -335,6 +319,324 @@ public class TaigaStructures
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode>=2 ? 5 : 4), 3, this.getComponentType());
 		}
+    	
+		/*
+		 * Construct the structure
+		 */
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+        {
+        	Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.mossy_cobblestone, 0, this); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_slab, 3, this); Block biomeCobblestoneSlabBlock = (Block)blockObject[0]; int biomeCobblestoneSlabMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHoriz2Block = (Block)blockObject[0]; int biomeLogHoriz2Meta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+        	
+        	if (this.field_143015_k < 0)
+            {
+        		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
+        				new StructureBoundingBox(
+        						this.boundingBox.minX+1, this.boundingBox.minZ+1,
+        						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				true);
+        		
+                if (this.field_143015_k < 0) {return true;} // Do not construct in a void
 
+                this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1 -1, 0);
+            }
+            
+        	// Generate or otherwise obtain village name and banner and colors
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        			this.getXWithOffset(8, 1),
+        			this.getYWithOffset(1),
+        			this.getZWithOffset(8, 1));
+        	int townColor = villageNBTtag.getInteger("townColor");
+        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	
+        	
+        	// Create well
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 2, 6, 2, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+        	// Bottom is dirt with inset mossy cobblestone blocks
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 0, 2, 6, 0, 6, Blocks.dirt, 0, Blocks.dirt, 0, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 0, 3, 5, 0, 5, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, false);
+        	
+        	// Clear above and set foundation
+        	for (int u=2; u<=5; u++) {for (int w=2; w<=6; w++) {
+        			this.func_151554_b(world, Blocks.dirt, 0, u, -2, w, structureBB); // Foundation
+        			this.clearCurrentPositionBlocksUpwards(world, u, 3, w, structureBB);
+            }}
+        	
+        	// Fill basin with water
+        	this.fillWithBlocks(world, structureBB, 3, 1, 3, 5, 2, 5, Blocks.flowing_water, Blocks.flowing_water, false);
+        	
+        	// Place a couple specific stone/cobblestone blocks in the well
+        	this.placeBlockAtCurrentPosition(world, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, 3, 2, 2, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, 2, 2, 4, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 3, 0, 3, structureBB);
+        	
+        	// Add fence posts
+        	this.fillWithBlocks(world, structureBB, 2, 3, 2, 6, 5, 6, biomeFenceBlock, biomeFenceBlock, false);
+        	this.fillWithAir(world, structureBB, 2, 3, 3, 6, 4, 5);
+        	this.fillWithAir(world, structureBB, 3, 3, 2, 5, 4, 6);
+        	this.fillWithAir(world, structureBB, 3, 5, 3, 5, 5, 5);
+        	// Add log roof
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 6, 2, 5, 6, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 5, 2, 2, 5, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	this.fillWithMetadataBlocks(world, structureBB, 6, 5, 2, 6, 5, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	// Add torches
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 7, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 5, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 5, 7, structureBB);
+        	
+        	
+            // Encircle the well with path
+            Block pathBlock = ModObjects.chooseModPathBlock();
+        	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece"});
+        	for (int i = 1; i <= 7; ++i)
+            {
+                for (int j = 1; j <= 7; ++j)
+                {
+                    if (j == 1 || j == 7 || i == 1 || i == 7)
+                    {
+                    	// Gets ground level, so long as it's not leaves or other foliage
+                        int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                        if (k > -1)
+                        {
+                            StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
+                       	}
+                    }
+                }
+            }
+            // Add path nodules at the end
+            for (int i : new int[]{3,4,5})
+            {
+            	for (int j : new int[]{0,8})
+            	{
+            		int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
+                    if (k > -1)
+                    {
+                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
+                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
+                   	}
+                    
+                    k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
+                    if (k > -1)
+                    {
+                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(j, i), k, this.getZWithOffset(j, i));
+                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1-this.boundingBox.minY, i, structureBB);
+                   	}
+            	}
+            }
+        	
+            // Add odds and ends into the ground
+            for (int[] uw : new int[][]{
+            	{0, -1, 5},
+            	{6, -1, 1},
+            	{7, -1, 1},
+            	{7, -1, 6},
+            	{6, -1, 7},
+            	{6, 0, 0},
+            	{8, 0, 6},
+            	{3, -1, 1},
+            	{7, -1, 5},
+            })
+            {
+            	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uw[0], uw[2]), this.getZWithOffset(uw[0], uw[2])) + uw[1] - 1;
+            	if (k > -1)
+                {
+                	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uw[0], k - this.boundingBox.minY, uw[2], structureBB);
+               	}
+            }
+            // One block of water
+            /*
+            int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(4, 7), this.getZWithOffset(4, 7)) - 2;
+            if (k > -1)
+            {
+            	this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, k - this.boundingBox.minY, 7, structureBB);
+            }
+            */
+                        
+            // Decor
+            for (int[] uvw : new int[][]{
+            	{0, 2, 7},
+            	{8, 2, 0},
+            })
+            {
+            	Random randomDecor = new Random();
+            	randomDecor.setSeed(
+        					world.getSeed() +
+        					this.coordBaseMode +
+        					this.getXWithOffset(uvw[0], uvw[2]) +
+        					this.getYWithOffset(uvw[1]) +
+        					this.getXWithOffset(uvw[0], uvw[2])
+            			);
+            	
+	            switch (randomDecor.nextInt(1))
+	            {
+            	case 0: // Wood trough
+            		boolean shift=randomDecor.nextBoolean();
+            		switch (randomDecor.nextInt(2))
+            		{
+            		case 0:
+            			// Base
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, uvw[1]-1, uvw[2]-2+(shift?1:0), uvw[0]+0, uvw[1]-1, uvw[2]+1+(shift?1:0), biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
+            			// Left
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-1, uvw[1]+0, uvw[2]-2+(shift?1:0), uvw[0]-1, uvw[1]+0, uvw[2]+1+(shift?1:0), biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, false);
+            			// Right
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+1, uvw[1]+0, uvw[2]-2+(shift?1:0), uvw[0]+1, uvw[1]+0, uvw[2]+1+(shift?1:0), biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, false);
+            			// Front
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, uvw[1]+0, uvw[2]-3+(shift?1:0), uvw[0]+0, uvw[1]+0, uvw[2]-3+(shift?1:0), biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], false);
+            			// Back
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, uvw[1]+0, uvw[2]+2+(shift?1:0), uvw[0]+0, uvw[1]+0, uvw[2]+2+(shift?1:0), biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], false);
+            			break;
+            			
+            		case 1:
+            			// Base
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), uvw[1]-1, uvw[2]+0, uvw[0]+1+(shift?1:0), uvw[1]-1, uvw[2]+0, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
+            			// Left
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-3+(shift?1:0), uvw[1]+0, uvw[2]+0, uvw[0]-3+(shift?1:0), uvw[1]+0, uvw[2]+0, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, false);
+            			// Right
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+2+(shift?1:0), uvw[1]+0, uvw[2]+0, uvw[0]+2+(shift?1:0), uvw[1]+0, uvw[2]+0, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, false);
+            			// Front
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), uvw[1]+0, uvw[2]-1, uvw[0]+1+(shift?1:0), uvw[1]+0, uvw[2]-1, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], false);
+            			// Back
+            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), uvw[1]+0, uvw[2]+1, uvw[0]+1+(shift?1:0), uvw[1]+0, uvw[2]+1, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], false);
+            			break;
+            			
+            		}
+	            }
+            }
+            
+            // Colored block where bell used to be
+            if (GeneralConfig.decorateVillageCenter)
+            {
+            	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
+            	
+            	BlockPos uvw = new BlockPos(4, 5, 4); // Starting position of the block cluster. Use lowest X, Z.
+            	int metaCycle = (metaBase+Math.abs(this.getXWithOffset(uvw.getX(), uvw.getZ())%2 - (this.getZWithOffset(uvw.getX(), uvw.getZ())%2)*3) + uvw.getY())%4; // Procedural based on block X, Y, Z 
+            	Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColor, metaCycle);
+            	
+            	if (tryGlazedTerracotta != null)
+            	{
+            		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvw.getX(), uvw.getY(), uvw.getZ(), structureBB);
+            	}
+            	else
+            	{
+            		this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor, 4, 5, 4, structureBB);
+            	}
+            }
+            else
+            {
+            	this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, 4, 5, 4, structureBB);
+            }
+            
+        	// Signs
+            int signXBB = 4;
+			int signYBB = 5;
+			int signZBB = 5;
+			int signZBB2 = 3;
+            int signX = this.getXWithOffset(signXBB, signZBB);
+            int signX2 = this.getXWithOffset(signXBB, signZBB2);
+            int signY = this.getYWithOffset(signYBB);
+            int signZ = this.getZWithOffset(signXBB, signZBB);
+            int signZ2 = this.getZWithOffset(signXBB, signZBB2);
+    		
+    		String namePrefix = villageNBTtag.getString("namePrefix");
+    		String nameRoot = villageNBTtag.getString("nameRoot");
+    		String nameSuffix = villageNBTtag.getString("nameSuffix");
+    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+    		TileEntitySign signContents2 = new TileEntitySign();
+    		for (int i=0; i<4; i++) {signContents2.signText[i] = signContents.signText[i];}
+    		
+    		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
+    		int signFacing2 = 0;
+    		
+			world.setBlock(signX, signY, signZ, biomeSignBlock, new int[]{3,4,2,5}[this.coordBaseMode], 2); // Facing away from you
+			world.setBlock(signX2, signY, signZ2, biomeSignBlock, new int[]{2,5,3,4}[this.coordBaseMode], 2); // Facing toward you
+			world.setTileEntity(signX, signY, signZ, signContents);
+    		world.setTileEntity(signX2, signY, signZ2, signContents2);
+            
+    		
+			// Banner
+    		if (GeneralConfig.decorateVillageCenter)
+    		{
+        		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+        		if (testForBanner!=null)
+    			{
+        			int bannerXBB = 7;
+        			int bannerYBB = 2;
+        			int bannerZBB = 8;
+        			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
+        			int bannerY = this.getYWithOffset(bannerYBB);
+                    int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
+                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
+                    
+                    // Place a foundation
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
+                    
+                	// Set the banner and its orientation
+    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				
+    				// Set the tile entity
+    				TileEntity tilebanner = new TileEntityBanner();
+    				NBTTagCompound modifystanding = new NBTTagCompound();
+    				tilebanner.writeToNBT(modifystanding);
+    				modifystanding.setBoolean("IsStanding", true);
+    				tilebanner.readFromNBT(modifystanding);
+    				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+    				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+    				
+        			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+            		
+            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+    			}
+    		}
+    		else
+    		{
+				int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(7, 8), this.getZWithOffset(7, 8)) - 1;
+				if (k > -1)
+				{
+					this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, 7, k-1-this.boundingBox.minY, 8, structureBB);
+				    this.clearCurrentPositionBlocksUpwards(world, 7, k-this.boundingBox.minY, 8, structureBB);
+				}
+    		}
+    		
+    		// Villagers
+            if (!this.villagersGenerated)
+            {
+            	this.villagersGenerated=true;
+            	
+        		for (int[] ia : new int[][]{
+        			{7, 2, 1, -1, 0},
+        			{8, 2, 3, -1, 0},
+        			{0, 2, 5, -1, 0},
+        			})
+        		{
+        			EntityVillager entityvillager = new EntityVillager(world);
+        			
+        			// Nitwits more often than not
+        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			
+        			int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+        			
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)k + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+                    		random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityvillager);
+        		}
+            }
+            
+            return true;
+        }
     }
 }

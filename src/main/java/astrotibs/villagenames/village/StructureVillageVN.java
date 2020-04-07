@@ -344,6 +344,7 @@ public class StructureVillageVN
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
+        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};} // Jungle planks
         	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(3), 0};} // Jungle fence
         	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};} // Jungle fence gate
@@ -351,6 +352,7 @@ public class StructureVillageVN
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
+        	if (block == Blocks.grass)                         {return new Object[]{Blocks.sand, 0};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};} // Jungle slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};} // Jungle double slab
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};} // Jungle door
@@ -364,9 +366,11 @@ public class StructureVillageVN
         {
         	//if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.hardened_clay, 0};} // No log change
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with biome
+        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.hardened_clay, 0};}
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.brick_stairs, meta};}
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.hardened_clay, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.clay, 0};}
+        	if (block == Blocks.grass)                         {return new Object[]{Blocks.clay, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 4: meta==11? 12 : meta};} // Brick slab
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 1};} // Sandstone double slab
         }
@@ -374,12 +378,14 @@ public class StructureVillageVN
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.packed_ice, 0};}
+        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.snow, 0};}
         	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(1), 0};} // Spruce fence
         	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(1), 0};} // Spruce fence
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.snow, 0};}
+        	if (block == Blocks.grass)                         {return new Object[]{Blocks.snow, 0};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};} // Spruce slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};} // Spruce double slab
         	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};} // Spruce door
@@ -391,6 +397,7 @@ public class StructureVillageVN
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Cap on all six sides
+        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.brown_mushroom_block, 15};} // Cap on all six sides
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
         }
         
@@ -839,49 +846,49 @@ public class StructureVillageVN
 			if (GeneralConfig.spawnModdedVillagers)
 			{
 				VillagerRegistry.applyRandomTrade(entityvillager, random);
-				
-				// Equally weight career subdivisions
-				if (entityvillager.getProfession()>=0 && entityvillager.getProfession()<=4 && GeneralConfig.villagerCareers)
-				{
-					ExtendedVillager ieep = ExtendedVillager.get(entityvillager);
-					
-					switch(random.nextInt(GeneralConfig.modernVillagerTrades ? 13 : 12))
-					{
-						default:
-						case 0: // Farmer | Farmer
-							profession = 0; career = 1; break;
-						case 1: // Farmer | Fisherman
-							profession = 0; career = 2; break;
-						case 2: // Farmer | Shepherd
-							profession = 0; career = 3; break;
-						case 3: // Farmer | Fletcher
-							profession = 0; career = 4; break;
-						case 4: // Librarian | Librarian
-							profession = 1; career = 1; break;
-						case 5: // Librarian | Cartographer
-							profession = 1; career = 2; break;
-						case 6: // Priest | Cleric
-							profession = 2; career = 1; break;
-						case 7: // Blacksmith | Armorer
-							profession = 3; career = 1; break;
-						case 8: // Blacksmith | Weaponsmith
-							profession = 3; career = 2; break;
-						case 9: // Blacksmith | Toolsmith
-							profession = 3; career = 3; break;
-						case 10: // Butcher | Butcher
-							profession = 4; career = 1; break;
-						case 11: // Butcher | Leatherworker
-							profession = 4; career = 2; break;
-						case 12: // Blacksmith | Mason
-							profession = 3; career = 4; break;
-					}
-					entityvillager.setProfession(profession);
-					ieep.setCareer(career);
-				}
 			}
 			else
 			{
 				entityvillager.setProfession(GeneralConfig.enableNitwit ? random.nextInt(6) : random.nextInt(5));
+			}
+			
+			// Equally weight career subdivisions
+			if (entityvillager.getProfession()>=0 && entityvillager.getProfession()<=4 && GeneralConfig.villagerCareers)
+			{
+				ExtendedVillager ieep = ExtendedVillager.get(entityvillager);
+				
+				switch(random.nextInt(GeneralConfig.modernVillagerTrades ? 13 : 12))
+				{
+					default:
+					case 0: // Farmer | Farmer
+						profession = 0; career = 1; break;
+					case 1: // Farmer | Fisherman
+						profession = 0; career = 2; break;
+					case 2: // Farmer | Shepherd
+						profession = 0; career = 3; break;
+					case 3: // Farmer | Fletcher
+						profession = 0; career = 4; break;
+					case 4: // Librarian | Librarian
+						profession = 1; career = 1; break;
+					case 5: // Librarian | Cartographer
+						profession = 1; career = 2; break;
+					case 6: // Priest | Cleric
+						profession = 2; career = 1; break;
+					case 7: // Blacksmith | Armorer
+						profession = 3; career = 1; break;
+					case 8: // Blacksmith | Weaponsmith
+						profession = 3; career = 2; break;
+					case 9: // Blacksmith | Toolsmith
+						profession = 3; career = 3; break;
+					case 10: // Butcher | Butcher
+						profession = 4; career = 1; break;
+					case 11: // Butcher | Leatherworker
+						profession = 4; career = 2; break;
+					case 12: // Blacksmith | Mason
+						profession = 3; career = 4; break;
+				}
+				entityvillager.setProfession(profession);
+				ieep.setCareer(career);
 			}
 		}
 		else

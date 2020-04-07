@@ -200,31 +200,13 @@ public class DesertStructures
     		
     		int signFacing = 3; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode%2)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode%2)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -237,7 +219,9 @@ public class DesertStructures
                     int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -484,31 +468,13 @@ public class DesertStructures
     		
     		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==4 ? 2 : 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -521,7 +487,9 @@ public class DesertStructures
                     int bannerFacing = 3; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
@@ -857,30 +825,13 @@ public class DesertStructures
     		
     		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-    		if (biomeSignBlock.getUnlocalizedName().toLowerCase().contains("ganyssurface"))
-    		{
-    			// Set the sign and its orientation
-				world.setBlock(signX, signY, signZ, biomeSignBlock);
-				world.setBlockMetadataWithNotify(signX, signY, signZ, ((signFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
-				
-				// Set the tile entity
-				TileEntity tileModSign = new TileEntityWoodSign();
-				NBTTagCompound modifystanding = new NBTTagCompound();
-				tileModSign.writeToNBT(modifystanding);
-				modifystanding.setBoolean("IsStanding", true);
-				tileModSign.readFromNBT(modifystanding);
-				
-        		world.setTileEntity(signX, signY, signZ, tileModSign);
-    		}
-    		else
-    		{
-    			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-    		}
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+    		world.setTileEntity(signX, signY, signZ, signContents);
+    		
         	
+			// Banner
     		if (GeneralConfig.decorateVillageCenter)
     		{
-    			// Banner
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
@@ -893,7 +844,9 @@ public class DesertStructures
                     int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-3, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    // Clear space upward
+                    this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
