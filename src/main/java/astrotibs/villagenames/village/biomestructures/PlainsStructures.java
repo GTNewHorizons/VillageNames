@@ -262,8 +262,15 @@ public class PlainsStructures
         		if (testForBanner!=null)
     			{
         			int bannerXBB = 8;
-        			int bannerYBB = 1;
         			int bannerZBB = 6;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -602,8 +609,15 @@ public class PlainsStructures
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 8;
-        			int bannerYBB = 11;
         			int bannerZBB = 6;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -724,6 +738,7 @@ public class PlainsStructures
         {
         	Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 0, this); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
@@ -752,8 +767,6 @@ public class PlainsStructures
         	int townColor = villageNBTtag.getInteger("townColor");
         	int townColor2 = villageNBTtag.getInteger("townColor2");
         	
-        	// TODO - replace most Blocks.dirt with biomeDirt
-        	
         	// Top layer is grass
         	this.fillWithMetadataBlocks(world, structureBB, 0, 0, 0, 7, 0, 14, biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
         	// Clear above
@@ -761,7 +774,7 @@ public class PlainsStructures
         	{
         		for (int j=0; j<=14; j++)
             	{
-        			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
@@ -790,7 +803,7 @@ public class PlainsStructures
         	
         	// Stalls
         	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 1, 7, 1, 1, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-        	this.fillWithBlocks(world, structureBB, 4, 0, 1, 7, 0, 1, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 0, 1, 7, 0, 1, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	this.fillWithBlocks(world, structureBB, 4, 1, 0, 4, 3, 0, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 4, 1, 2, 4, 3, 2, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeFenceBlock, biomeFenceBlock, false);
@@ -804,7 +817,7 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 1, structureBB);
         	
         	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 5, 2, 1, 8, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-        	this.fillWithBlocks(world, structureBB, 2, 0, 5, 2, 0, 8, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 0, 5, 2, 0, 8, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	this.fillWithBlocks(world, structureBB, 1, 1, 5, 1, 3, 5, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 1, 1, 8, 1, 3, 8, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 3, 1, 8, 3, 3, 8, biomeFenceBlock, biomeFenceBlock, false);
@@ -818,7 +831,7 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 8, structureBB);
         	
         	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 13, 7, 1, 13, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-        	this.fillWithBlocks(world, structureBB, 4, 0, 13, 7, 0, 13, Blocks.dirt, Blocks.dirt, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 0, 13, 7, 0, 13, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	this.fillWithBlocks(world, structureBB, 4, 1, 12, 4, 3, 12, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 4, 1, 14, 4, 3, 14, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeFenceBlock, biomeFenceBlock, false);
@@ -848,7 +861,7 @@ public class PlainsStructures
     		int signFacing = 1; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
     		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, signXBB, signYBB-1, signZBB, structureBB);
-    		this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, signXBB, signYBB-2, signZBB, structureBB);
+    		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, signXBB, signYBB-2, signZBB, structureBB);
         	
 			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
@@ -861,8 +874,15 @@ public class PlainsStructures
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 6;
-        			int bannerYBB = 1;
         			int bannerZBB = 4;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -975,6 +995,7 @@ public class PlainsStructures
         	Object[] blockObject;	
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, this); Block biomeStoneStairsBlock = (Block)blockObject[0];
@@ -1010,7 +1031,7 @@ public class PlainsStructures
         	{
         		for (int j=0; j<=10; j++)
             	{
-        			this.func_151554_b(world, Blocks.dirt, 0, i, -1, j, structureBB); // Foundation
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, -1, j, structureBB); // Foundation
         			this.clearCurrentPositionBlocksUpwards(world, i, 1, j, structureBB);
             	}
         	}
@@ -1069,6 +1090,7 @@ public class PlainsStructures
         	
         	
         	// Tree
+        	this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 5, 0, 5, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), 4, 1, 4, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), 5, 1, 4, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), 6, 1, 4, structureBB);
@@ -1161,8 +1183,15 @@ public class PlainsStructures
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 7;
-        			int bannerYBB = 1;
         			int bannerZBB = 8;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);

@@ -301,6 +301,12 @@ public class StructureVillageVN
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 3};}
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};} // Regular sandstone
+        	if (block == Blocks.stone_stairs)                  {
+													        		block = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsUTD);
+													        		if (block==null) {block = Blocks.stone_stairs;}
+													        		return new Object[]{block, meta};
+        													   } // Mossy cobblestone stairs
+        	if (block == Blocks.cobblestone_wall)              {return new Object[]{block, 1};} // Mossy cobblestone wall
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};}
         	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(3), 0};}
         	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};}
@@ -350,6 +356,11 @@ public class StructureVillageVN
         	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(3), 0};} // Jungle fence gate
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
+        	if (block == Blocks.cobblestone_wall)              {
+													        		block = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
+													        		if (block==null) {block = Blocks.sandstone;}
+													        		return new Object[]{block, 0};
+															   } // Sandstone wall
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
         	if (block == Blocks.grass)                         {return new Object[]{Blocks.sand, 0};}
@@ -373,6 +384,11 @@ public class StructureVillageVN
         	if (block == Blocks.grass)                         {return new Object[]{Blocks.clay, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 4: meta==11? 12 : meta};} // Brick slab
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 1};} // Sandstone double slab
+        	if (block == Blocks.cobblestone_wall)              {
+													        		block = Block.getBlockFromName(ModObjects.brickWallUTD);
+													        		if (block==null) {block = Blocks.brick_block;}
+													        		return new Object[]{block, 0};
+															   } // Brick wall
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.SNOW)
         {
@@ -923,6 +939,8 @@ public class StructureVillageVN
     	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
     	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
     	public boolean villagersGenerated = false;
+    	public int bannerY = -1;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
     	
         public StartVN() {}
 

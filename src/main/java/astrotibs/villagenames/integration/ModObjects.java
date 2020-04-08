@@ -159,8 +159,14 @@ public class ModObjects {
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
 	
-	// Sandstone Wall
+	// Mossy Cobblestone Stairs
+	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
+	
+	// Walls
 	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
+	public static final String brickWallUTD = "uptodate:wall_bricks";
+	public static final String stonebrickWallUTD = "uptodate:wall_stone_bricks";
+	public static final String mossystonebrickWallUTD = "uptodate:wall_mossy_stone_bricks";
 	
 	// Wooden Sign // TODO - Remove in 1.8
 	public static final String signSpruceGS = "ganyssurface:sign1";
@@ -823,6 +829,7 @@ public class ModObjects {
 		}
 		return Blocks.gravel;
 	}
+	
 	
 	// Sign
 	/*

@@ -211,8 +211,15 @@ public class DesertStructures
         		if (testForBanner!=null)
     			{
         			int bannerXBB = 7;
-        			int bannerYBB = 1;
         			int bannerZBB = 1;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -479,8 +486,15 @@ public class DesertStructures
         		if (testForBanner!=null)
     			{
         			int bannerXBB = 10;
-        			int bannerYBB = 1;
         			int bannerZBB = 10;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -836,8 +850,15 @@ public class DesertStructures
         		if (testForBanner!=null)
     			{
         			int bannerXBB = 10;
-        			int bannerYBB = 1;
         			int bannerZBB = 11;
+        			int bannerYBB = -1;
+        			if (this.bannerY==-1)
+        			{
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				bannerYBB = this.bannerY;
+        			}
+        			else {bannerYBB = this.bannerY;}
+        			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
