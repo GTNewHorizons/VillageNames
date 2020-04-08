@@ -42,6 +42,7 @@ import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -199,6 +200,7 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(DesertStructures.DesertMeetingPoint3.class, "VNDeMP3"); // Desert Market
 	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint1.class, "VNTaMP1"); // Grass patch with two structures
 	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint2.class, "VNTaMP2"); // Taiga Well
+	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint1.class, "VNSaMP1"); // Savanna Market
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

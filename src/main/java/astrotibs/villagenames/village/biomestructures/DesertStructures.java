@@ -232,7 +232,7 @@ public class DesertStructures
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -475,7 +475,7 @@ public class DesertStructures
     		
     		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -507,7 +507,7 @@ public class DesertStructures
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -839,7 +839,7 @@ public class DesertStructures
     		
     		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
         	
@@ -871,7 +871,7 @@ public class DesertStructures
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();

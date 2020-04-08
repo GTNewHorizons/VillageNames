@@ -9,6 +9,7 @@ import java.util.Random;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -166,6 +167,7 @@ public class MapGenVillageVN extends MapGenVillage
             StructureVillageVN.StartVN start = null;
             
             // Select a starter at random
+            
             StructureVillageVN.StartVN[] plainsStarters = new StructureVillageVN.StartVN[]
             {
         		new PlainsStructures.PlainsFountain01(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Fountain
@@ -174,7 +176,6 @@ public class MapGenVillageVN extends MapGenVillage
         		new PlainsStructures.PlainsMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Tree
             };
             
-            // Select a starter at random
             StructureVillageVN.StartVN[] desertStarters = new StructureVillageVN.StartVN[]
             {
             	new DesertStructures.DesertMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Fountain with structure
@@ -182,14 +183,18 @@ public class MapGenVillageVN extends MapGenVillage
             	new DesertStructures.DesertMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Desert market
             };
             
-            // Select a starter at random
             StructureVillageVN.StartVN[] taigaStarters = new StructureVillageVN.StartVN[]
             {
-            	//new TaigaStructures.TaigaMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Simple grass plot with two houses
+            	new TaigaStructures.TaigaMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Simple grass plot with two houses
             	new TaigaStructures.TaigaMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Taiga Well
             };
             
-            start = taigaStarters[random.nextInt(taigaStarters.length)];
+            StructureVillageVN.StartVN[] savannaStarters = new StructureVillageVN.StartVN[]
+            {
+            	new SavannaStructures.SavannaMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Simple grass plot with two houses
+            };
+            
+            start = savannaStarters[random.nextInt(savannaStarters.length)];
             
             
             // Add well to the component list

@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
@@ -59,7 +60,7 @@ public class TaigaStructures
 
             //StructureVillageVN.establishBiomeBlocks(this, posX, posZ);
     	}
-
+    	
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
@@ -189,7 +190,7 @@ public class TaigaStructures
         	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], 2, 1, 2, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], 2, 1, 4, structureBB);
         	
-        	// Signs
+        	// Sign
             int signXBB = 2;
 			int signYBB = 2;
 			int signZBB = 3;
@@ -206,7 +207,7 @@ public class TaigaStructures
 
     		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode)*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -238,7 +239,7 @@ public class TaigaStructures
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -317,7 +318,7 @@ public class TaigaStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Southward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
@@ -342,7 +343,7 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, this); Block biomeStoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone_wall, 0, this); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHoriz2Block = (Block)blockObject[0]; int biomeLogHoriz2Meta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
@@ -770,8 +771,8 @@ public class TaigaStructures
     		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		int signFacing2 = 0;
     		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, new int[]{3,4,2,5}[this.coordBaseMode], 2); // Facing away from you
-			world.setBlock(signX2, signY, signZ2, biomeSignBlock, new int[]{2,5,3,4}[this.coordBaseMode], 2); // Facing toward you
+			world.setBlock(signX, signY, signZ, biomeWallSignBlock, new int[]{3,4,2,5}[this.coordBaseMode], 2); // Facing away from you
+			world.setBlock(signX2, signY, signZ2, biomeWallSignBlock, new int[]{2,5,3,4}[this.coordBaseMode], 2); // Facing toward you
 			world.setTileEntity(signX, signY, signZ, signContents);
     		world.setTileEntity(signX2, signY, signZ2, signContents2);
             
@@ -804,7 +805,7 @@ public class TaigaStructures
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode==0 || this.coordBaseMode==1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -857,5 +858,6 @@ public class TaigaStructures
             
             return true;
         }
+        
     }
 }
