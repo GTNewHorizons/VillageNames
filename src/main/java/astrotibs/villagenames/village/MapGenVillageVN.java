@@ -200,7 +200,8 @@ public class MapGenVillageVN extends MapGenVillage
             
             StructureVillageVN.StartVN[] snowyStarters = new StructureVillageVN.StartVN[]
             {
-            		new SnowyStructures.SnowyMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
+            		//new SnowyStructures.SnowyMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
+            		new SnowyStructures.SnowyMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
             };
             
             start = snowyStarters[random.nextInt(snowyStarters.length)];
