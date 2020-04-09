@@ -340,7 +340,7 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone_wall, 0, this); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
@@ -712,9 +712,9 @@ public class TaigaStructures
         	this.fillWithAir(world, structureBB, 3, 3, 2, 5, 4, 6);
         	this.fillWithAir(world, structureBB, 3, 5, 3, 5, 5, 5);
         	// Add log roof
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 6, 2, 5, 6, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
-        	this.fillWithMetadataBlocks(world, structureBB, 2, 5, 2, 2, 5, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
-        	this.fillWithMetadataBlocks(world, structureBB, 6, 5, 2, 6, 5, 6, biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHoriz1Block, biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 6, 2, 5, 6, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 5, 2, 2, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), false);
+        	this.fillWithMetadataBlocks(world, structureBB, 6, 5, 2, 6, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), false);
         	// Add torches
         	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 1, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 7, structureBB);

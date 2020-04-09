@@ -43,6 +43,7 @@ import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -204,6 +205,7 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint2.class, "VNSaMP2"); // Savanna Fountain
 	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint3.class, "VNSaMP3"); // Savanna double well
 	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint4.class, "VNSaMP4"); // Savanna single well
+	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint1.class, "VNSnMP1"); // Snowy Ice Spire
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );

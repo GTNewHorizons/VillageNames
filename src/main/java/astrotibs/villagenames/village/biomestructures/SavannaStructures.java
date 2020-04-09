@@ -665,23 +665,23 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 0, this); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1]; // Toward you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHoriz2Block = (Block)blockObject[0]; int biomeLogHoriz2Meta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	
         	// For bark specifically
-        	Block biomeBarkOrLogHoriz1Block = null; int biomeBarkOrLogHoriz1Meta = 0;
-        	Block biomeBarkOrLogHoriz2Block = null; int biomeBarkOrLogHoriz2Meta = 0;
+        	Block biomeBarkOrLogHorAlongBlock = null; int biomeBarkOrLogHorAlongMeta = 0;
+        	Block biomeBarkOrLogHorAcrossBlock = null; int biomeBarkOrLogHorAcrossMeta = 0;
         	
         	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
         	if (tryBark == null)
         	{
-        		biomeBarkOrLogHoriz1Block = biomeLogHoriz1Block; biomeBarkOrLogHoriz1Meta = biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0);
-        		biomeBarkOrLogHoriz2Block = biomeLogHoriz2Block; biomeBarkOrLogHoriz2Meta = biomeLogHoriz2Meta - (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAcrossBlock = biomeLogHorAcrossBlock; biomeBarkOrLogHorAcrossMeta = biomeLogHorAcrossMeta - (this.coordBaseMode%2==0 ? 4 : 0);
         	}
         	else
         	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHoriz1Block = (Block)blockObject[0]; biomeBarkOrLogHoriz1Meta = (Integer)blockObject[1];
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHoriz2Block = (Block)blockObject[0]; biomeBarkOrLogHoriz2Meta = (Integer)blockObject[1];
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAcrossBlock = (Block)blockObject[0]; biomeBarkOrLogHorAcrossMeta = (Integer)blockObject[1];
         	}
         	
         	
@@ -765,18 +765,18 @@ public class SavannaStructures
         	this.fillWithMetadataBlocks(world, structureBB, 3, 0, 6, 5, 0, 8, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	
         	// Basins
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 3, 1, 4, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 5, 1, 2, 5, 1, 4, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz2Block, biomeBarkOrLogHoriz2Meta, 4, 1, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz2Block, biomeBarkOrLogHoriz2Meta, 4, 1, 4, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, 4, 0, 3, structureBB);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 3, 1, 4, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 1, 2, 5, 1, 4, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAcrossBlock, biomeBarkOrLogHorAcrossMeta, 4, 1, 2, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAcrossBlock, biomeBarkOrLogHorAcrossMeta, 4, 1, 4, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, 4, 0, 3, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 1, 3, structureBB);
         	
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 6, 3, 1, 8, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 5, 1, 6, 5, 1, 8, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz2Block, biomeBarkOrLogHoriz2Meta, 4, 1, 6, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz2Block, biomeBarkOrLogHoriz2Meta, 4, 1, 8, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHoriz2Block, biomeBarkOrLogHoriz2Meta, 4, 0, 7, structureBB);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 6, 3, 1, 8, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 1, 6, 5, 1, 8, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAcrossBlock, biomeBarkOrLogHorAcrossMeta, 4, 1, 6, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAcrossBlock, biomeBarkOrLogHorAcrossMeta, 4, 1, 8, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeBarkOrLogHorAcrossBlock, biomeBarkOrLogHorAcrossMeta, 4, 0, 7, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 1, 7, structureBB);
         	
         	// Torches on the corners
@@ -925,7 +925,7 @@ public class SavannaStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -948,22 +948,22 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, this); Block biomeWoodenStairsBlock = (Block)blockObject[0];
         	
         	// For bark specifically
-        	Block biomeBarkOrLogHoriz1Block = null; int biomeBarkOrLogHoriz1Meta = 0;
-        	Block biomeBarkOrLogHoriz2Block = null; int biomeBarkOrLogHoriz2Meta = 0;
+        	Block biomeBarkOrLogHorAlongBlock = null; int biomeBarkOrLogHorAlongMeta = 0;
+        	Block biomeBarkOrLogHorAcrossBlock = null; int biomeBarkOrLogHorAcrossMeta = 0;
         	
         	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
         	if (tryBark == null)
         	{
-        		biomeBarkOrLogHoriz1Block = biomeLogHoriz1Block; biomeBarkOrLogHoriz1Meta = biomeLogHoriz1Meta + (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0);
         	}
         	else
         	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHoriz1Block = (Block)blockObject[0]; biomeBarkOrLogHoriz1Meta = (Integer)blockObject[1];
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHoriz2Block = (Block)blockObject[0]; biomeBarkOrLogHoriz2Meta = (Integer)blockObject[1];
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAcrossBlock = (Block)blockObject[0]; biomeBarkOrLogHorAcrossMeta = (Integer)blockObject[1];
         	}
         	
         	
@@ -1035,10 +1035,10 @@ public class SavannaStructures
         	this.fillWithMetadataBlocks(world, structureBB, 2, 0, 3, 5, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	
         	// Basins
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 3, 6, 1, 5, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 4, 0, 3, 4, 0, 5, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 0, 4, 5, 0, 4, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, biomeBarkOrLogHoriz1Block, biomeBarkOrLogHoriz1Meta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 1, 2, 5, 1, 6, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 3, 6, 1, 5, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 4, 0, 3, 4, 0, 5, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
+        	this.fillWithMetadataBlocks(world, structureBB, 3, 0, 4, 5, 0, 4, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, biomeBarkOrLogHorAlongBlock, biomeBarkOrLogHorAlongMeta, false);
         	this.fillWithBlocks(world, structureBB, 4, 1, 3, 4, 1, 5, Blocks.flowing_water, Blocks.flowing_water, false);
         	this.fillWithBlocks(world, structureBB, 3, 1, 4, 5, 1, 4, Blocks.flowing_water, Blocks.flowing_water, false);
         	

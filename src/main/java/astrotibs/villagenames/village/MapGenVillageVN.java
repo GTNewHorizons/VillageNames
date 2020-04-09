@@ -10,6 +10,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -197,7 +198,12 @@ public class MapGenVillageVN extends MapGenVillage
 	            	new SavannaStructures.SavannaMeetingPoint4(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Savanna single well
             };
             
-            start = savannaStarters[random.nextInt(savannaStarters.length)];
+            StructureVillageVN.StartVN[] snowyStarters = new StructureVillageVN.StartVN[]
+            {
+            		new SnowyStructures.SnowyMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
+            };
+            
+            start = snowyStarters[random.nextInt(snowyStarters.length)];
             
             
             // Add well to the component list
