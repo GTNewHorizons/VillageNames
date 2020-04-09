@@ -95,6 +95,7 @@ public class GeneralConfig {
 	public static String[] modFenceGate;
 	public static String[] modDoor;
 	public static String[] modWoodenTrapdoor;
+	public static String[] modStrippedLog;
 	
     public static boolean villagerSkinTones;
     public static float villagerSkinToneVarianceAnnealing;
@@ -596,6 +597,7 @@ public class GeneralConfig {
 	    
 	    modDoor = config.getStringList("Mod Priority: Door", "Mod Integration", new String[]{
 	    		"uptodate",
+	    		"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Doors for village generation. The version highest on the list and registered in your game will be used."
@@ -606,6 +608,13 @@ public class GeneralConfig {
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"etfuturum",
+ 				},
+ 				"Priority order for referencing Stripped Logs for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{

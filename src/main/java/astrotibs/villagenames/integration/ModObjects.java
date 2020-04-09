@@ -97,6 +97,11 @@ public class ModObjects {
 	public static final String doorJungleGS = "ganyssurface:doorJungle";
 	public static final String doorAcaciaGS = "ganyssurface:doorAcacia";
 	public static final String doorDarkOakGS = "ganyssurface:doorDark_oak";
+	public static final String doorSpruceEF = "etfuturum:door_spruce";
+	public static final String doorBirchEF = "etfuturum:door_birch";
+	public static final String doorJungleEF = "etfuturum:door_jungle";
+	public static final String doorAcaciaEF = "etfuturum:door_acacia";
+	public static final String doorDarkOakEF = "etfuturum:door_dark_oak";
 	public static final String doorSpruceUTD = "uptodate:door_spruce";
 	public static final String doorBirchUTD = "uptodate:door_birch";
 	public static final String doorJungleUTD = "uptodate:door_jungle";
@@ -237,6 +242,17 @@ public class ModObjects {
 	public static final String rabbitCookedEF = "etfuturum:rabbit_cooked";
 	public static final String rabbitStewEF = "etfuturum:rabbit_stew";
 	
+	// Stripped log
+	public static final String strippedLog1EF = "etfuturum:log_stripped";
+	public static final String strippedLog2EF = "etfuturum:log2_stripped";
+	public static final String strippedLogOakUTD = "uptodate:stripped_log_oak";
+	public static final String strippedLogSpruceUTD = "uptodate:stripped_log_spruce";
+	public static final String strippedLogBirchUTD = "uptodate:stripped_log_birch";
+	public static final String strippedLogJungleUTD = "uptodate:stripped_log_jungle";
+	public static final String strippedLogAcaciaUTD = "uptodate:stripped_log_acacia";
+	public static final String strippedLogDarkOakUTD = "uptodate:stripped_log_dark_oak";
+	// stripped wood for UTD is just log with meta value of 12
+	
 	// Suspicious Stew
 	public static final String suspiciousStewUTD = "uptodate:suspicious_stew";
 
@@ -318,6 +334,18 @@ public class ModObjects {
 					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleUTD); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaUTD); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakEF); break;
 				}
 				if (modblock != null) {return modblock;}
 			}
@@ -854,6 +882,52 @@ public class ModObjects {
 		return standing? Blocks.standing_sign : Blocks.wall_sign;
 	}
 	*/
+	
+	// Stripped log
+	/**
+	 * Materials are: 0=oak, 1=spruce, 2=birch, 3=jungle, 4=acacia, 5=darkoak
+	 * Orientations are: 0=vertical, 1=east-west, 2=north-south
+	 */
+	public static Object[] chooseModStrippedLog(int materialMeta, int orientation)
+	{
+		String[] modprioritylist = GeneralConfig.modStrippedLog;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+				case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
+				case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, orientation*4};}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				int addMeta=0;
+				
+				switch (materialMeta)
+				{
+				case 0: modblock = Block.getBlockFromName(ModObjects.strippedLog1EF); addMeta=0; break;
+				case 1: modblock = Block.getBlockFromName(ModObjects.strippedLog1EF); addMeta=1; break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.strippedLog1EF); addMeta=2; break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.strippedLog1EF); addMeta=3; break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.strippedLog2EF); addMeta=0; break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLog2EF); addMeta=1; break;
+				}
+				if (modblock != null) {return new Object[]{modblock, orientation*4+addMeta};}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return null;
+	}
 	
 	// Trap door
 	public static Block chooseModWoodenTrapdoor(int materialMeta)
