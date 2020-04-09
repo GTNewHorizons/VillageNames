@@ -60,15 +60,15 @@ public class SnowyStructures
 		 */
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (0), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (0), 1, this.getComponentType());
+			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (0), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (new int[]{8,1,2,4})[this.coordBaseMode], this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (0), 3, this.getComponentType());
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (new int[]{4,8,1,2})[this.coordBaseMode], 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (new int[]{2,1,8,4})[this.coordBaseMode], this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (new int[]{4,2,1,8})[this.coordBaseMode], 1, this.getComponentType());
 		}
 		
 		/*
@@ -84,6 +84,8 @@ public class SnowyStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getLanternBlock(); Block biomeLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
         	
         	// For stripped wood specifically
         	Block biomeStrippedWoodOrLogOrLogVerticBlock = null; int biomeStrippedWoodOrLogOrLogVerticMeta = 0;
@@ -98,8 +100,8 @@ public class SnowyStructures
         		// Set the blocks as stripped logs and the metas as 12
         		biomeStrippedWoodOrLogOrLogVerticBlock = biomeStrippedWoodOrLogOrLogHorAlongBlock = biomeStrippedWoodOrLogOrLogHorAcrossBlock = (Block)blockObject[0];
         		biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
-        		biomeStrippedWoodOrLogOrLogHorAlongMeta = biomeStrippedWoodOrLogOrLogVerticMeta + 8 + (this.coordBaseMode%2==0 ? 4 : 0);
-        		biomeStrippedWoodOrLogOrLogHorAcrossMeta = biomeStrippedWoodOrLogOrLogVerticMeta + 4 - (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeStrippedWoodOrLogOrLogHorAlongMeta = biomeStrippedWoodOrLogOrLogVerticMeta;
+        		biomeStrippedWoodOrLogOrLogHorAcrossMeta = biomeStrippedWoodOrLogOrLogVerticMeta;
         	}
         	else
         	{
@@ -152,7 +154,7 @@ public class SnowyStructures
         	// Top layer is grass path
         	for (int u=0; u<=11; u++) {for (int w=0; w<=7; w++) {
         		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
-        		// TODO - change StructureVillageVN.setPathSpecificBlock for all starters that NEED to be at that ground level
+        		
         		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
         		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above
         	}}
@@ -188,6 +190,7 @@ public class SnowyStructures
         	this.fillWithBlocks(world, structureBB, 6, 1, 3, 7, 2, 4, Blocks.packed_ice, Blocks.packed_ice, false);
         	this.fillWithBlocks(world, structureBB, 6, 3, 4, 6, 7, 4, Blocks.packed_ice, Blocks.packed_ice, false);
         	this.fillWithBlocks(world, structureBB, 7, 3, 3, 7, 5, 3, Blocks.packed_ice, Blocks.packed_ice, false);
+        	
         	
         	// Place the sign base. Concrete if requested/allowed, ice otherwise
         	if (GeneralConfig.decorateVillageCenter)
@@ -236,9 +239,9 @@ public class SnowyStructures
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
                     
-                    // Place a cobblestone foundation
-                    this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-                    this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
+                    // Place a grass foundation
+                    this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, bannerXBB, bannerYBB-1, bannerZBB, structureBB);
+                    this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, bannerXBB, bannerYBB-2, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
@@ -262,6 +265,81 @@ public class SnowyStructures
     		}
     		
     		
+            // Decor
+            int[][] decorUVW = new int[][]{
+            	{1, 1, 1},
+            	{9, 1, 7},
+            };  
+            
+            for (int j=0; j<decorUVW.length; j++)
+            {
+            	// Get coordinates
+            	int[] uvw = decorUVW[j];
+            	
+            	// Set random seed
+            	Random randomDecor = new Random();
+            	randomDecor.setSeed(
+        					world.getSeed() +
+        					this.coordBaseMode +
+        					this.getXWithOffset(uvw[0], uvw[2]) +
+        					this.getYWithOffset(uvw[1]) +
+        					this.getXWithOffset(uvw[0], uvw[2])
+            			);
+            	
+            	int decorHeightY = uvw[1];
+            	
+            	// Get ground level
+            	if (this.decorHeightY.size()<(j+1))
+            	{
+            		// There are fewer stored ground levels than this decor number, so this is being generated for the first time.
+            		// Add new ground level
+            		//decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
+            		this.decorHeightY.add(decorHeightY);
+            	}
+            	else
+            	{
+            		// There is already (presumably) a value for this ground level, so this decor is being multiply generated.
+            		// Retrieve ground level
+            		decorHeightY = this.decorHeightY.get(j);
+            	}
+            	
+            	int decorType = randomDecor.nextInt(3);
+            	int decorOrientation = randomDecor.nextInt(4);
+            	
+            	boolean genericBoolean=false;
+            	
+            	int lanternX; int lanternY; int lanternZ;
+            	
+            	// Make lantern base
+            	switch (decorType)
+            	{
+            	case 2: // Lateral lanterns
+            		lanternX =  decorOrientation==3 ? -1 : decorOrientation==1 ? 1 : 0;
+            		lanternZ =  decorOrientation==0 ? -1 : decorOrientation==2 ? 1 : 0;
+            		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		lanternX =  decorOrientation==3 ? 1 : decorOrientation==1 ? -1 : 0;
+            		lanternZ =  decorOrientation==0 ? 1 : decorOrientation==2 ? -1 : 0;
+            		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            	case 1: // Second lantern opposite
+            		lanternX =  decorOrientation==0 ? -1 : decorOrientation==2 ? 1 : 0;
+            		lanternZ =  decorOrientation==3 ? -1 : decorOrientation==1 ? 1 : 0;
+            		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            	case 0: // Single lantern
+            		lanternX =  decorOrientation==0 ? 1 : decorOrientation==2 ? -1 : 0;
+            		lanternZ =  decorOrientation==3 ? 1 : decorOrientation==1 ? -1 : 0;
+            		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		// Base post
+            		this.fillWithBlocks(world, structureBB, uvw[0]+0, decorHeightY+0, uvw[2]+0, uvw[0]+0, decorHeightY+3, uvw[2]+0, biomeFenceBlock, biomeFenceBlock, false);
+            	}
+            }
+        	
+        	
+    		
+    		
     		// Villagers
             if (!this.villagersGenerated)
             {
@@ -279,10 +357,9 @@ public class SnowyStructures
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
         			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
         			
-        			// TODO - fix villager heights
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}

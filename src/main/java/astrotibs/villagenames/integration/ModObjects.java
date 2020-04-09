@@ -167,6 +167,10 @@ public class ModObjects {
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
 	
+	// Lanterns / Lamps
+	public static final String davyLampEM = "enviromine:davy_lamp";
+	
+	
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
 	

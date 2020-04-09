@@ -483,9 +483,9 @@ public class StructureVillageVN
     
     public static int seaLevel = 63; //TODO - actually call sea level in later versions
 	
-    
     /**
-     * Used to determine what path block to place into the world
+     * Sets the path-specific block into the world
+     * The block will get set at the ground height or posY, whichever is higher.
      * Returns the height at which the block was placed
      */
     public static int setPathSpecificBlock(World world, StructureVillageVN.StartVN startPiece, int meta, int posX, int posY, int posZ)
@@ -495,37 +495,61 @@ public class StructureVillageVN
     	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece);
     	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece);
     	
-    	if (posY < seaLevel) {posY = seaLevel-1;}
+    	// Top block level
+    	int surfaceY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1;
     	
-    	while (posY >= seaLevel-1)
+    	// Raise Y to be at least below sea level
+    	if (surfaceY < seaLevel) {surfaceY = seaLevel-1;}
+    	
+    	while (surfaceY >= seaLevel-1)
     	{
-    		Block surfaceBlock = world.getBlock(posX, posY, posZ);
+    		Block surfaceBlock = world.getBlock(posX, surfaceY, posZ);
     		
     		// Replace grass with grass path
-    		if (surfaceBlock instanceof BlockGrass && world.isAirBlock(posX, posY+1, posZ))
+    		if (surfaceBlock instanceof BlockGrass && world.isAirBlock(posX, Math.max(surfaceY, posY)+1, posZ))
     		{
-    			world.setBlock(posX, posY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
-    			return posY;
-    		}
-
-    		// Replace sand or standstone or lava with cobblestone
-    		if (surfaceBlock instanceof BlockSand || surfaceBlock instanceof BlockSandStone || surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava)
-    		{
-    			world.setBlock(posX, posY, posZ, (Block)gravel[0], (Integer)gravel[1], 2);
-    			world.setBlock(posX, posY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
-    			return posY;
+    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
+    			return Math.max(surfaceY, posY);
     		}
     		
-    		// Replace liquid with planks.
+    		// Replace sand with gravel supported by cobblestone
+    		if (surfaceBlock instanceof BlockSand)
+    		{
+    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)gravel[0], (Integer)gravel[1], 2);
+    			world.setBlock(posX, Math.max(surfaceY, posY)-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return Math.max(surfaceY, posY);
+    		}
+    		
+    		// Replace lava with two-layer cobblestone
+    		if (surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava)
+    		{
+    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			world.setBlock(posX, Math.max(surfaceY, posY)-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return Math.max(surfaceY, posY);
+    		}
+    		
+    		// Replace other liquid with planks
     		if (surfaceBlock.getMaterial().isLiquid())
     		{
-    			world.setBlock(posX, posY, posZ, (Block)planks[0], (Integer)planks[1], 2);
-    			return posY;
+    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)planks[0], (Integer)planks[1], 2);
+    			return Math.max(surfaceY, posY);
     		}
     		
-    		posY -=1;
+    		surfaceY -=1;
     	}
 		return -1;
+    }
+    
+    /**
+     * Returns a mod-specific lantern block, or failing that, a glowstone block
+     */
+    public static Object[] getLanternBlock()
+    {
+    	Block tryLantern = Block.getBlockFromName(ModObjects.davyLampEM);
+    	if (tryLantern!=null) {return new Object[]{tryLantern, 1};}
+    	
+    	// None are found, so return ordinary glowstone
+    	return new Object[]{Blocks.glowstone, 0};
     }
     
     /**
