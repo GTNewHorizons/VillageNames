@@ -102,7 +102,7 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	
         	if (this.field_143015_k < 0)
@@ -202,12 +202,8 @@ public class TaigaStructures
     		String nameRoot = villageNBTtag.getString("nameRoot");
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		TileEntitySign signContents2 = new TileEntitySign();
-    		for (int i=0; i<4; i++) {signContents2.signText[i] = signContents.signText[i];}
-
-    		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
     		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -230,16 +226,16 @@ public class TaigaStructures
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 1; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a cobblestone foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(4, this.coordBaseMode, false), 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -345,7 +341,6 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHoriz1Block = (Block)blockObject[0]; int biomeLogHoriz1Meta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHoriz2Block = (Block)blockObject[0]; int biomeLogHoriz2Meta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
@@ -765,16 +760,16 @@ public class TaigaStructures
     		String nameRoot = villageNBTtag.getString("nameRoot");
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+    		
+			world.setBlock(signX, signY, signZ, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, true), 2); // Facing away from you
+			world.setTileEntity(signX, signY, signZ, signContents);
+    		
+            // I need to make a duplicate TileEntity because the first one gets consumed when applied to the first sign
     		TileEntitySign signContents2 = new TileEntitySign();
     		for (int i=0; i<4; i++) {signContents2.signText[i] = signContents.signText[i];}
-    		
-    		int signFacing = 2; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
-    		int signFacing2 = 0;
-    		
-			world.setBlock(signX, signY, signZ, biomeWallSignBlock, new int[]{3,4,2,5}[this.coordBaseMode], 2); // Facing away from you
-			world.setBlock(signX2, signY, signZ2, biomeWallSignBlock, new int[]{2,5,3,4}[this.coordBaseMode], 2); // Facing toward you
-			world.setTileEntity(signX, signY, signZ, signContents);
-    		world.setTileEntity(signX2, signY, signZ2, signContents2);
+			
+			world.setBlock(signX2, signY, signZ2, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(2, this.coordBaseMode, true), 2); // Facing toward you
+			world.setTileEntity(signX2, signY, signZ2, signContents2);
             
     		
 			// Banner
@@ -796,16 +791,16 @@ public class TaigaStructures
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+                    this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();

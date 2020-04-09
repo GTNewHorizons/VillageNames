@@ -60,6 +60,9 @@ public class ModObjects {
 	public static final String bannerEF = "etfuturum:banner";
 	public static final String bannerGS = "ganyssurface:banner";
 	
+	// Bark
+	public static final String barkEF = "etfuturum:bark";
+	
 	// Bountiful rocks
 	public static final String andesiteC2 = "chisel:andesite";
 	public static final String dioriteC2 = "chisel:diorite";
@@ -248,8 +251,6 @@ public class ModObjects {
 	// --------------------------- //
 	// --- Generator Functions --- //
 	// --------------------------- //
-	
-	
 	
 	// Concrete - added in v3.1.2
 	public static Object[] chooseModConcrete(int meta)

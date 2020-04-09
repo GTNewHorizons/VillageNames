@@ -201,7 +201,9 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint1.class, "VNTaMP1"); // Grass patch with two structures
 	        MapGenStructureIO.func_143031_a(TaigaStructures.TaigaMeetingPoint2.class, "VNTaMP2"); // Taiga Well
 	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint1.class, "VNSaMP1"); // Savanna Market
-	        
+	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint2.class, "VNSaMP2"); // Savanna Fountain
+	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint3.class, "VNSaMP3"); // Savanna double well
+	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint4.class, "VNSaMP4"); // Savanna double well
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );

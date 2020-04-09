@@ -92,7 +92,7 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	
         	if (this.field_143015_k < 0)
             {
@@ -198,9 +198,7 @@ public class DesertStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-    		int signFacing = 3; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
-    		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode%2)*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(4, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -223,16 +221,16 @@ public class DesertStructures
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.func_151554_b(world, Blocks.sandstone, 0, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -327,7 +325,7 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	
         	if (this.field_143015_k < 0)
             {
@@ -473,9 +471,7 @@ public class DesertStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-    		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
-    		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -498,16 +494,16 @@ public class DesertStructures
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 3; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.func_151554_b(world, Blocks.sandstone, 0, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();
@@ -602,7 +598,7 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	Block biomeSandstoneWall = Block.getBlockFromName(ModObjects.sandstoneWallUTD); int biomeSandstoneMeta = 0;
         	if (biomeSandstoneWall==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); biomeSandstoneWall = (Block)blockObject[0]; biomeSandstoneMeta = (Integer)blockObject[1];}
         	
@@ -837,9 +833,7 @@ public class DesertStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-    		int signFacing = 0; // 0=forward-facing; 1=leftward-facing; 2=backward-facing (toward you); 3=rightward-facing,  
-    		
-			world.setBlock(signX, signY, signZ, biomeSignBlock, ((signFacing + this.coordBaseMode + (this.coordBaseMode >=2 ? 2 : 0))*4)%16, 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
         	
@@ -862,16 +856,16 @@ public class DesertStructures
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
-                    int bannerFacing = 0; // 0=backward-facing (toward you); 1=rightward-facing; 2=forward-facing; 3=leftward-facing;  
                     
                     // Place a foundation
                     this.fillWithMetadataBlocks(world, structureBB, bannerXBB, bannerYBB-2, bannerZBB, bannerXBB, bannerYBB-1, bannerZBB, Blocks.sandstone, 0, Blocks.sandstone, 0, false);
+                    this.func_151554_b(world, Blocks.sandstone, 0, bannerXBB, bannerYBB-3, bannerZBB, structureBB);
                     // Clear space upward
                     this.clearCurrentPositionBlocksUpwards(world, bannerXBB, bannerYBB, bannerZBB, structureBB);
                     
                 	// Set the banner and its orientation
     				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, ((bannerFacing + this.coordBaseMode + (this.coordBaseMode <=1 ? 2: 0))*4)%16, 2);
+    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2);
     				
     				// Set the tile entity
     				TileEntity tilebanner = new TileEntityBanner();

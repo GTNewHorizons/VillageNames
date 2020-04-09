@@ -282,6 +282,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 1};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.BIRCH)
         {
@@ -296,6 +297,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(2), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(2, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(2, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 2};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
         {
@@ -317,6 +319,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 3};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.ACACIA)
         {
@@ -331,6 +334,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 4};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
@@ -345,6 +349,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 5};}
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.SAND)
         {
@@ -372,6 +377,7 @@ public class StructureVillageVN
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 4};} // Brick double slab
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 3};} // Jungle bark
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
         {
@@ -408,6 +414,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};} // Spruce trapdoor
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 1};} // Spruce bark
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
@@ -424,22 +431,40 @@ public class StructureVillageVN
         
         return new Object[]{block, meta};
     }
-    /*
-    public static void establishBiomeBlocks(StructureVillageVN.StartVN start, int posX, int posZ)
+    
+    /**
+     * Give this method the orientation of a sign or banner and the base mode of the structure it's in,
+     * and it'll give you back the required meta value for construction.
+     * For relative orientations, use:
+     * 
+     * HANGING:
+     * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+     *   
+     * STANDING:
+     * 0=fore-facing (away from you); 4=right-facing; 8=back-facing (toward you); 12=left-facing
+     */
+    public static int getSignRotationMeta(int relativeOrientation, int coordBaseMode, boolean isHangingOnWall)
     {
-        // Set biome tags
-    	start.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(start.worldChunkMngr, posX, posZ);
-    	start.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(start.worldChunkMngr, posX, posZ);
-	    
-        // Establish generic building materials
-    	Object[] blockObject;
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, start); start.biomeCobblestoneBlock = (Block)blockObject[0]; start.biomeCobblestoneMeta = (Integer)blockObject[1];
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, start); start.biomePlankBlock = (Block)blockObject[0]; start.biomePlankMeta = (Integer)blockObject[1];
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.gravel, 0, start); start.biomeGravelBlock = (Block)blockObject[0]; start.biomeGravelMeta = (Integer)blockObject[1];
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start); start.biomeFenceBlock = (Block)blockObject[0];
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence_gate, 0, start); start.biomeFenceGateBlock = (Block)blockObject[0];
+    	if(isHangingOnWall)
+    	{
+    		switch (relativeOrientation)
+    		{
+    		case 0: // Facing away
+    			return new int[]{3,4,2,5}[coordBaseMode];
+    		case 1: // Facing right
+    			return new int[]{5,3,5,3}[coordBaseMode];
+    		case 2: // Facing you
+    			return new int[]{2,5,3,4}[coordBaseMode];
+    		case 3: // Facing left
+    			return new int[]{4,2,4,2}[coordBaseMode];
+    		}
+    	}
+    	else
+    	{
+    		return coordBaseMode <=1 ? ((coordBaseMode==1 ? 24 : 16)-(relativeOrientation+coordBaseMode*4))%16 : (relativeOrientation+coordBaseMode*4)%16;
+    	}
+    	return 0;
     }
-    */
     
     public static int seaLevel = 63; //TODO - actually call sea level in later versions
 	
