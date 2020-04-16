@@ -137,7 +137,6 @@ public class GeneralConfig {
 	
 	protected static void loadConfiguration()
 	{
-		
 		// --- New Villages --- //
 		newVillageGenerator = config.getBoolean("Activate New Village Generator", "Village Generator", true, "Use replacement village generation system. You may need to deactivate village generation from other mods. All other settings in this section require this to be true.");
 		newVillageSize = config.getInt("Village Size", "Village Generator", 1, 1, 10, "How large villages are. Vanilla is 1.");
@@ -405,8 +404,8 @@ public class GeneralConfig {
  		
  		
     	//--------------Miscellaneous-----------------//
-	    // Allow or disable in-game config menu: 1.7.10 only
-	    versionChecker = config.getBoolean("Version Checker", "miscellaneous", true, "Displays a client-side chat message if there's an update available.");
+	    
+	    versionChecker = config.getBoolean("Version Checker", "miscellaneous", false, "Displays a client-side chat message on login if there's an update available. If the URL pinged by the checker happens to be down, your game will freeze for a while on login. Turn this on at your own risk.");
 	    codexChestLoot = config.getBoolean("Codex Chest Loot", "miscellaneous", true, "The Codex can appear as rare chest loot.");
 	    allowInGameConfig = config.getBoolean("Allow in-game config access", "miscellaneous", true, "Set this to false to deacactivate the in-game config GUI, in case it conflicts with other mods.");
 	    debugMessages = config.getBoolean("Debug messages", "miscellaneous", false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");

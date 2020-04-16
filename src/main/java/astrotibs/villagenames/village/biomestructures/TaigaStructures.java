@@ -9,6 +9,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
@@ -64,6 +65,7 @@ public class TaigaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -95,6 +97,7 @@ public class TaigaStructures
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;	
@@ -119,7 +122,7 @@ public class TaigaStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(2, 3),
         			this.getYWithOffset(2),
         			this.getZWithOffset(2, 3));
@@ -314,6 +317,7 @@ public class TaigaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -330,6 +334,7 @@ public class TaigaStructures
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -361,7 +366,7 @@ public class TaigaStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(8, 1),
         			this.getYWithOffset(1),
         			this.getZWithOffset(8, 1));
@@ -382,7 +387,7 @@ public class TaigaStructures
                         int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                         if (k > -1)
                         {
-                            StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                            StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
                         	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                        	}
                     }
@@ -430,12 +435,13 @@ public class TaigaStructures
             }
             
             // One block of water - probably a mistake but whatever
+            /*
             int kw = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(4, 7), this.getZWithOffset(4, 7)) - 2;
             if (kw > -1)
             {
             	this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, kw - this.boundingBox.minY, 7, structureBB);
             }
-            
+            */
             
             
             // Decor
@@ -450,13 +456,14 @@ public class TaigaStructures
             	int[] uvw = decorUVW[j];
             	
             	// Set random seed
-            	Random randomDecor = new Random();
-            	randomDecor.setSeed(
+            	Random randomFromXYZ = new Random();
+            	randomFromXYZ.setSeed(
         					world.getSeed() +
-        					this.coordBaseMode +
-        					this.getXWithOffset(uvw[0], uvw[2]) +
-        					this.getYWithOffset(uvw[1]) +
-        					this.getXWithOffset(uvw[0], uvw[2])
+        					FunctionsVN.getUniqueLongForXYZ(
+        							this.getXWithOffset(uvw[0], uvw[2]),
+        							this.getYWithOffset(uvw[1]),
+        							this.getXWithOffset(uvw[0], uvw[2])
+        							)
             			);
             	
             	int decorHeightY;
@@ -480,11 +487,11 @@ public class TaigaStructures
             	
             	boolean genericBoolean=false;
             	
-	            switch (randomDecor.nextInt(7))
+	            switch (randomFromXYZ.nextInt(7))
 	            {
             	case 0: // Wood trough
-            		boolean shift=randomDecor.nextBoolean();
-            		switch (randomDecor.nextInt(2))
+            		boolean shift=randomFromXYZ.nextBoolean();
+            		switch (randomFromXYZ.nextInt(2))
             		{
             		case 0:
             			// Base
@@ -523,7 +530,7 @@ public class TaigaStructures
             		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
             		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
             		
-            		switch (randomDecor.nextInt(4))
+            		switch (randomFromXYZ.nextInt(4))
             		{
             		case 0: // Facing you
             			this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]+1, structureBB);

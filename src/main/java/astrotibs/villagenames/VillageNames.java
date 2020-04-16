@@ -207,9 +207,10 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SavannaStructures.SavannaMeetingPoint4.class, "VNSaMP4"); // Savanna single well
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint1.class, "VNSnMP1"); // Snowy Ice Spire
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint2.class, "VNSnMP2"); // Frozen Fountain
+	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint3.class, "VNSnMP3"); // Snowy Pavilion
 	        
 	        // Listener that interrupts old village generation with the new one
-			MinecraftForge.TERRAIN_GEN_BUS.register( new MapGenVillageVN() );
+			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
 			
 			LogHelper.info("Registered new Village generator");
 		}

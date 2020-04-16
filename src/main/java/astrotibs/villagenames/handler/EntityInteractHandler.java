@@ -1026,7 +1026,7 @@ public class EntityInteractHandler {
 			else if (!world.isRemote)
 			{
 				// Update villager trades on interaction
-				if (event.target instanceof EntityVillager) {FunctionsVN.monitorVillagerTrades((EntityVillager) event.target);}
+				if (event.target instanceof EntityVillager && GeneralConfig.modernVillagerTrades) {FunctionsVN.monitorVillagerTrades((EntityVillager) event.target);}
 				
 				// Entity is a custom clickable config entry.
 				if ( mappedNamesClickable.get("ClassPaths").contains(targetClassPath) ) {

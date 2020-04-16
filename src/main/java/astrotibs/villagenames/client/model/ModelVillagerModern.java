@@ -95,7 +95,7 @@ public class ModelVillagerModern extends ModelVillager
 				if (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) || !GeneralConfig.moddedVillagerHeadwear) {return;}
 			}
 			
-	        if (this.isChild)
+	        if (((EntityVillager) entity).isChild())
 	        {
 	        	//Re-upscale baby head lmao
 	            GL11.glPushMatrix();

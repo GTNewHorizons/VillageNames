@@ -85,8 +85,7 @@ public class VersionChecker implements Runnable {
         if (
         		event.player.worldObj.isRemote
         		&& event.phase == Phase.END // Stops doubling the checks unnecessarily -- v3.2.4
-            	&& event.player.ticksExisted<=50
-    			&& event.player.ticksExisted%10==0
+            	&& event.player.ticksExisted==30
         		)
         {
         	// V3.0.1: Used to repeat the version check

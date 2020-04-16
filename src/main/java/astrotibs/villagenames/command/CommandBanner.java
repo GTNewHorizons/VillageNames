@@ -84,10 +84,11 @@ public class CommandBanner extends CommandBase {
 			for (int i=0; i<arguments.length; i++)
 			{
 				// Player wants to create a random banner with a specific base color
-				if (arguments[i].equals("-1")) {
+				if (arguments[i].equals("-1"))
+				{
 					sender.addChatMessage( new ChatComponentText("Unknown color: -1") );
 					return;
-					} 
+				} 
 				else if (arguments[i].toLowerCase().equals("black")) {arguments[i] = "0";}
 				else if (arguments[i].toLowerCase().equals("red")) {arguments[i] = "1";}
 				else if (arguments[i].toLowerCase().equals("green")) {arguments[i] = "2";}
@@ -95,15 +96,15 @@ public class CommandBanner extends CommandBase {
 				else if (arguments[i].toLowerCase().equals("blue")) {arguments[i] = "4";}
 				else if (arguments[i].toLowerCase().equals("purple")) {arguments[i] = "5";}
 				else if (arguments[i].toLowerCase().equals("cyan")) {arguments[i] = "6";}
-				else if (arguments[i].toLowerCase().equals("light_gray")) {arguments[i] = "7";}
-				else if (arguments[i].toLowerCase().equals("lightgray")) {arguments[i] = "7";}
-				else if (arguments[i].toLowerCase().equals("silver")) {arguments[i] = "7";}
+				else if (arguments[i].toLowerCase().equals("light_gray")
+						||arguments[i].toLowerCase().equals("lightgray")
+						||arguments[i].toLowerCase().equals("silver")) {arguments[i] = "7";}
 				else if (arguments[i].toLowerCase().equals("gray")) {arguments[i] = "8";}
 				else if (arguments[i].toLowerCase().equals("pink")) {arguments[i] = "9";}
 				else if (arguments[i].toLowerCase().equals("lime")) {arguments[i] = "10";}
 				else if (arguments[i].toLowerCase().equals("yellow")) {arguments[i] = "11";}
-				else if (arguments[i].toLowerCase().equals("light_blue")) {arguments[i] = "12";}
-				else if (arguments[i].toLowerCase().equals("lightblue")) {arguments[i] = "12";}
+				else if (arguments[i].toLowerCase().equals("light_blue")
+						||arguments[i].toLowerCase().equals("lightblue")) {arguments[i] = "12";}
 				else if (arguments[i].toLowerCase().equals("magenta")) {arguments[i] = "13";}
 				else if (arguments[i].toLowerCase().equals("orange")) {arguments[i] = "14";}
 				else if (arguments[i].toLowerCase().equals("white")) {arguments[i] = "15";}

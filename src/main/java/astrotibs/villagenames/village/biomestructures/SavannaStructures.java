@@ -59,6 +59,7 @@ public class SavannaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -75,6 +76,7 @@ public class SavannaStructures
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -102,7 +104,7 @@ public class SavannaStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(6, 7),
         			this.getYWithOffset(1),
         			this.getZWithOffset(6, 7));
@@ -364,6 +366,7 @@ public class SavannaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -380,6 +383,7 @@ public class SavannaStructures
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -403,7 +407,7 @@ public class SavannaStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(9, 1),
         			this.getYWithOffset(2),
         			this.getZWithOffset(9, 1));
@@ -639,6 +643,7 @@ public class SavannaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -655,6 +660,7 @@ public class SavannaStructures
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -675,8 +681,8 @@ public class SavannaStructures
         	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
         	if (tryBark == null)
         	{
-        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0);
-        		biomeBarkOrLogHorAcrossBlock = biomeLogHorAcrossBlock; biomeBarkOrLogHorAcrossMeta = biomeLogHorAcrossMeta - (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta%4+12;// + (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAcrossBlock = biomeLogHorAcrossBlock; biomeBarkOrLogHorAcrossMeta = biomeLogHorAcrossMeta%4+12;// - (this.coordBaseMode%2==0 ? 4 : 0);
         	}
         	else
         	{
@@ -700,7 +706,7 @@ public class SavannaStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(4, 5),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 5));
@@ -709,9 +715,12 @@ public class SavannaStructures
         	
         	// Top grass path 
         	for (int u=2; u<=6; u++) {for (int w=1; w<=9; w++) {
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
-        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above
+        		if (!(u==4 && w==3) && !(u==4 && w==7)) // To prevent path overwriting the water in the wells
+        		{
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
+            		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
+            		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above	
+        		}
         	}}
         	
         	// Set grass paths
@@ -834,7 +843,7 @@ public class SavannaStructures
 
         	// Sign support
         	this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 4, 4, 3, 5, structureBB);
-        	        	
+        	
         	// Sign
             int signXBB = 3;
 			int signYBB = 3;
@@ -923,6 +932,7 @@ public class SavannaStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -939,6 +949,7 @@ public class SavannaStructures
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -953,17 +964,15 @@ public class SavannaStructures
         	
         	// For bark specifically
         	Block biomeBarkOrLogHorAlongBlock = null; int biomeBarkOrLogHorAlongMeta = 0;
-        	Block biomeBarkOrLogHorAcrossBlock = null; int biomeBarkOrLogHorAcrossMeta = 0;
         	
         	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
         	if (tryBark == null)
         	{
-        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0);
+        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta%4+12;// + (this.coordBaseMode%2==0 ? 4 : 0);
         	}
         	else
         	{
         		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this); biomeBarkOrLogHorAcrossBlock = (Block)blockObject[0]; biomeBarkOrLogHorAcrossMeta = (Integer)blockObject[1];
         	}
         	
         	
@@ -982,7 +991,7 @@ public class SavannaStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 4));
@@ -992,7 +1001,8 @@ public class SavannaStructures
         	// Set grass paths
         	for (int u=1; u<=7; u++) {for (int w=1; w<=7; w++) {
         		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
-        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
+        		if (u<3 || u>5 || w<3 || w>5) {StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w));} // Path
+        		else {this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, 0, w, structureBB);}
         		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above
         	}}
         	// Set Grass blocks

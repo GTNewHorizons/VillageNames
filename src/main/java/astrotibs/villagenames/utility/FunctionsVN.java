@@ -32,8 +32,8 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraftforge.common.BiomeDictionary;
 
 // Added in v3.1
-public class FunctionsVN {
-	
+public class FunctionsVN
+{
 	// Represents the 1.14+ village types
 	public static enum VillageType
 	{
@@ -2044,5 +2044,21 @@ public class FunctionsVN {
 			//LogHelper.info("Median chosen type E: " + array.get(array.size()/2));
 			return array.get(array.size()/2);
 		}
+	}
+	
+	/**
+	 * This method inputs three integers and returns a unique long value based on them.
+	 * The purpose of this is to be used as Random.setSeed(unique + worldseed) to ensure that
+	 * randomized values for e.g. village names are deterministic based on their coordinates
+	 * so that they can be regenerated as necessary.
+	 */
+	public static long getUniqueLongForXYZ(int x, int y, int z)
+	{
+		// Find out which of x and/or z are negative in order to discriminate "quadrant"
+		boolean xIsNegative = x<0; boolean zIsNegative = z<0;
+		// set the inputs to non-negative
+		x = Math.abs(x); y = Math.abs(y); z = Math.abs(z);
+		
+		return ((x+y+z)*(x+y+z+1)*(x+y+z+2)/6 + (y+z)*(y+z+1)/2 + y + (zIsNegative? 1:0)) * (xIsNegative? -2:2);
 	}
 }

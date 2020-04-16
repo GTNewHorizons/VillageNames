@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
@@ -123,7 +124,7 @@ public class MapGenVillageVN extends MapGenVillage
         // Return "true" if this chunk X & Z is flagged for village construction AND the biome is allowed as per the config
         if (chunkX == chunkXModulated && chunkZ == chunkZModulated)
         {
-        	BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(chunkX * 16 + 8, chunkZ * 16 + 8); // No need for bit shift here. Villages rarely spawn
+        	BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(chunkX * 16 + 8, chunkZ * 16 + 8); // No need for bit shift here. Villages rarely spawn.
         	
         	if (GeneralConfig.spawnBiomesNames != null) // Biome list is not empty
     		{
@@ -200,11 +201,35 @@ public class MapGenVillageVN extends MapGenVillage
             
             StructureVillageVN.StartVN[] snowyStarters = new StructureVillageVN.StartVN[]
             {
-            		//new SnowyStructures.SnowyMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
-            		new SnowyStructures.SnowyMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
+            		new SnowyStructures.SnowyMeetingPoint1(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Ice spire
+            		new SnowyStructures.SnowyMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Frozen Fountain
+            		new SnowyStructures.SnowyMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Snowy Pavilion
             };
             
-            start = snowyStarters[random.nextInt(snowyStarters.length)];
+            
+            // Choose starter type based on biome
+            FunctionsVN.VillageType startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(world, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+            
+            if (startVillageType==FunctionsVN.VillageType.DESERT)
+            {
+            	start = desertStarters[random.nextInt(desertStarters.length)];
+            }
+            else if (startVillageType==FunctionsVN.VillageType.TAIGA)
+            {
+            	start = taigaStarters[random.nextInt(taigaStarters.length)];
+            }
+            else if (startVillageType==FunctionsVN.VillageType.SAVANNA)
+            {
+            	start = savannaStarters[random.nextInt(savannaStarters.length)];
+            }
+            else if (startVillageType==FunctionsVN.VillageType.SNOWY)
+            {
+            	start = snowyStarters[random.nextInt(snowyStarters.length)];
+            }
+            else // Plains if nothing else mathches
+            {
+            	start = plainsStarters[random.nextInt(plainsStarters.length)];
+            }
             
             
             // Add well to the component list

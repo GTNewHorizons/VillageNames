@@ -822,7 +822,7 @@ public class WriteBookHandler {
 
     		// Added in v3.1banner
     		// Generate banner info specifically to obtain a village color
-    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1,-1);
+    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1, -1);
 			ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 			ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
     		int townColorMeta = 15-colorArray.get(0);

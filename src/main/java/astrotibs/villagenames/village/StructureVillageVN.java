@@ -96,11 +96,11 @@ public class StructureVillageVN
 					StructureVillagePieces.Start.class, List.class, Random.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE
 					);
 			
-			StructureVillagePieces.Village village = null;
+			StructureVillagePieces.Village structurecomponent = null;
 			
 			try
 			{
-				village = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);
+				structurecomponent = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);
 			}
     		catch (Exception e)
 			{
@@ -109,12 +109,12 @@ public class StructureVillageVN
 			
         	//StructureVillagePieces.Village village = StructureVillagePieces.getNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
 			
-            if (village != null)
+            if (structurecomponent != null)
             {
-                int medianX = (village.getBoundingBox().minX + village.getBoundingBox().maxX) / 2;
-                int medianZ = (village.getBoundingBox().minZ + village.getBoundingBox().maxZ) / 2;
-                int rangeX = village.getBoundingBox().maxX - village.getBoundingBox().minX;
-                int rangeZ = village.getBoundingBox().maxZ - village.getBoundingBox().minZ;
+                int medianX = (structurecomponent.getBoundingBox().minX + structurecomponent.getBoundingBox().maxX) / 2;
+                int medianZ = (structurecomponent.getBoundingBox().minZ + structurecomponent.getBoundingBox().maxZ) / 2;
+                int rangeX = structurecomponent.getBoundingBox().maxX - structurecomponent.getBoundingBox().minX;
+                int rangeZ = structurecomponent.getBoundingBox().maxZ - structurecomponent.getBoundingBox().minZ;
                 int bboxWidth = rangeX > rangeZ ? rangeX : rangeZ;
 
                 // Replaces the ordinary "areBiomesViable" method with one that uses the VN biome config list
@@ -128,9 +128,9 @@ public class StructureVillageVN
         				{
         					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
         					
-        					components.add(village);
-                            start.field_74932_i.add(village);
-                            return village;
+        					components.add(structurecomponent);
+                            start.field_74932_i.add(structurecomponent);
+                            return structurecomponent;
         				}
         			}
         		}
@@ -306,7 +306,7 @@ public class StructureVillageVN
         if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 3};}
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};} // Regular sandstone
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};}
         	if (block == Blocks.stone_stairs)                  {
 													        		block = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsUTD);
 													        		if (block==null) {block = Blocks.stone_stairs;}
@@ -396,8 +396,7 @@ public class StructureVillageVN
         }
         if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
         {
-        	//if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.hardened_clay, 0};} // No log change
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with biome
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with village colors?
         	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.hardened_clay, 0};}
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.brick_stairs, meta};}
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.hardened_clay, 0};}
@@ -434,8 +433,8 @@ public class StructureVillageVN
         if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Cap on all six sides
-        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.brown_mushroom_block, 15};} // Cap on all six sides
+        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
+        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
         }
         
@@ -587,7 +586,7 @@ public class StructureVillageVN
      * This method checks to see if VN info exists for this village (name, banner, color, etc.)
      * If that information does not exist, it instead makes it.
      */
-    public static NBTTagCompound getOrMakeVNInfo(World world, Random random, int posX, int posY, int posZ)
+    public static NBTTagCompound getOrMakeVNInfo(World world, int posX, int posY, int posZ)
     {
     	int townColorMeta; int townColorMeta2;
     	String townSignEntry;
@@ -597,6 +596,13 @@ public class StructureVillageVN
 		NBTTagCompound villagetagcompound = new NBTTagCompound();
 		
 		int villageRadiusBuffer = 16;
+		
+    	// Set random seed
+    	Random randomFromXYZ = new Random();
+    	randomFromXYZ.setSeed(
+					world.getSeed() +
+					FunctionsVN.getUniqueLongForXYZ(posX, posY, posZ)
+    			);
 		
 		// First, search through all previously generated VN villages and see if this is inside
     	// the bounding box of one of them.
@@ -673,7 +679,7 @@ public class StructureVillageVN
             		{
             			while (townColorMeta2==townColorMeta)
             			{
-            				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random);
+            				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
             			}
             		}
             		
@@ -764,7 +770,7 @@ public class StructureVillageVN
 					{
 						while (townColorMeta2==townColorMeta)
 						{
-							townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random);
+							townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
 						}
 					}
 					
@@ -806,7 +812,7 @@ public class StructureVillageVN
 		}
 		
 		
-		int topLineRand = random.nextInt(4);
+		int topLineRand = randomFromXYZ.nextInt(4);
 		
 		// Call the name generator here
 		String[] newVillageName = NameGenerator.newRandomName("Village");
@@ -816,7 +822,7 @@ public class StructureVillageVN
 		nameSuffix = newVillageName[3];
 		
 		// Generate banner info, regardless of if we make a banner.
-		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1, -1);
+		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(randomFromXYZ, -1, -1);
 		ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 		ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 		ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
@@ -1037,17 +1043,17 @@ public class StructureVillageVN
         }
         
         @Override
-        protected void func_143012_a(NBTTagCompound p_143012_1_)
+        protected void func_143012_a(NBTTagCompound tagCompound)
         {
-            super.func_143012_a(p_143012_1_);
-            p_143012_1_.setInteger("Length", this.averageGroundLevel);
+            super.func_143012_a(tagCompound);
+            tagCompound.setInteger("Length", this.averageGroundLevel);
         }
         
         @Override
-        protected void func_143011_b(NBTTagCompound p_143011_1_)
+        protected void func_143011_b(NBTTagCompound tagCompound)
         {
-            super.func_143011_b(p_143011_1_);
-            this.averageGroundLevel = p_143011_1_.getInteger("Length");
+            super.func_143011_b(tagCompound);
+            this.averageGroundLevel = tagCompound.getInteger("Length");
         }
 
         /**

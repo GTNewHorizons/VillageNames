@@ -931,7 +931,7 @@ public class NameGenerator {
 		// K
 		"rxvx",	"frxvx",
 		// Ldy zn
-		"gahp", "fgahp", "lgahp", "zvhd", "fzvhd", "lzzvhd",
+		"gahp", "fgahp", "lgahp", "zvhd", "fzvhd", "lzzvhd", "gnjg",
 		// arise donkey
 		"ffn", "frffn",
 		// /b

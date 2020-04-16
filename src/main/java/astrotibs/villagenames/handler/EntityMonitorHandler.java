@@ -205,7 +205,7 @@ public class EntityMonitorHandler
         	
         	EntityVillager villager = (EntityVillager) event.entity;
             
-            FunctionsVN.monitorVillagerTrades(villager);
+            if (GeneralConfig.modernVillagerTrades) {FunctionsVN.monitorVillagerTrades(villager);}
             
             
         	// Added in v3.1

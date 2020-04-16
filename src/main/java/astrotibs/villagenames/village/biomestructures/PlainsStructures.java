@@ -63,21 +63,24 @@ public class PlainsStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
 		}
     	
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;	
@@ -94,12 +97,12 @@ public class PlainsStructures
         				true);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
-
+                
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(2),
         			this.getZWithOffset(4, 4));
@@ -197,7 +200,7 @@ public class PlainsStructures
                     	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                         if (k > -1)
                         {
-                        	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                        	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
                         	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                        	}
                     }
@@ -353,21 +356,24 @@ public class PlainsStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 1, this.getComponentType());
+			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
         	// Northward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 3 : 4), this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
         	// Eastward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 3, this.getComponentType());
+        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 3 : 4), 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 4 : 3), this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 4 : 3), 1, this.getComponentType());
 		}
 		
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -393,7 +399,7 @@ public class PlainsStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(12),
         			this.getZWithOffset(4, 4));
@@ -515,39 +521,45 @@ public class PlainsStructures
                     if (j == 1 || j == 8 || i == 1 || i == 8)
                     {
                     	// Gets ground level, so long as it's not leaves or other foliage
-                        //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
                     	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
                         if (k > -1)
                         {
-                            StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
+                            StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
                         	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
                        	}
                     }
                 }
             }
             // Add path nodules at the end
-            for (int i : new int[]{3,4,5,6})
+            for (int i : new int[]{3,4,5})
             {
-            	for (int j : new int[]{0,9})
-            	{
-                    //int k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+i, this.getBoundingBox().minZ+j) - 1;
-            		int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, j), this.getZWithOffset(i, j)) - 1;
-                    if (k > -1)
-                    {
-                    	//StructureVillagePiecesVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+i, k, this.getBoundingBox().minZ+j);
-                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
-                    	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
-                   	}
-                    
-                    //k = world.getTopSolidOrLiquidBlock(this.getBoundingBox().minX+j, this.getBoundingBox().minZ+i) - 1;
-                    k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(j, i), this.getZWithOffset(j, i)) - 1;
-                    if (k > -1)
-                    {
-                    	//StructureVillagePiecesVN.setPathSpecificBlock(world, this, 0, this.getBoundingBox().minX+j, k, this.getBoundingBox().minZ+i);
-                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(j, i), k, this.getZWithOffset(j, i));
-                    	this.clearCurrentPositionBlocksUpwards(world, j, k+1-this.boundingBox.minY, i, structureBB);
-                   	}
-            	}
+            	int k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(0, i+1), this.getZWithOffset(0, i+1)) - 1;
+                if (k > -1)
+                {
+                	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(0, i+1), k, this.getZWithOffset(0, i+1));
+                	this.clearCurrentPositionBlocksUpwards(world, 0, k+1-this.boundingBox.minY, i+1, structureBB);
+               	}
+                
+                k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(9, i), this.getZWithOffset(9, i)) - 1;
+                if (k > -1)
+                {
+                	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(9, i), k, this.getZWithOffset(9, i));
+                	this.clearCurrentPositionBlocksUpwards(world, 9, k+1-this.boundingBox.minY, i, structureBB);
+               	}
+
+                k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, 0), this.getZWithOffset(i, 0)) - 1;
+                if (k > -1)
+                {
+                	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, 0), k, this.getZWithOffset(i, 0));
+                	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, 0, structureBB);
+               	}
+                
+                k = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i+1, 9), this.getZWithOffset(i+1, 9)) - 1;
+                if (k > -1)
+                {
+                	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i+1, 9), k, this.getZWithOffset(i+1, 9));
+                	this.clearCurrentPositionBlocksUpwards(world, i+1, k+1-this.boundingBox.minY, 9, structureBB);
+               	}
             }
             
             
@@ -675,21 +687,23 @@ public class PlainsStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 2 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 10 : 1), 1, this.getComponentType());
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 10 : this.coordBaseMode==2 ? 1 : 2), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 6 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 6 : 1), 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 2 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 10 : 1), 1, this.getComponentType());
 		}
 		
 		/*
 		 * Construct the structure
 		 */
+		@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -716,7 +730,7 @@ public class PlainsStructures
         	
         	
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(12),
         			this.getZWithOffset(4, 4));
@@ -930,22 +944,24 @@ public class PlainsStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
-			// Westward
-			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
 			// Northward
 			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
 			if (this.coordBaseMode!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());}
+			// Southward
+			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			// Westward
+			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
 		}
     	
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;	
@@ -970,7 +986,7 @@ public class PlainsStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(5, 5),
         			this.getYWithOffset(2),
         			this.getZWithOffset(5, 5));

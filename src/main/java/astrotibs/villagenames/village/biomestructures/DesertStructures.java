@@ -59,6 +59,7 @@ public class DesertStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -89,6 +90,7 @@ public class DesertStructures
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -108,7 +110,7 @@ public class DesertStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(6, 4),
         			this.getYWithOffset(2),
         			this.getZWithOffset(6, 4));
@@ -308,6 +310,7 @@ public class DesertStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -324,6 +327,7 @@ public class DesertStructures
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -343,7 +347,7 @@ public class DesertStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(8, 1),
         			this.getYWithOffset(1),
         			this.getZWithOffset(8, 1));
@@ -473,7 +477,7 @@ public class DesertStructures
     		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
     		world.setTileEntity(signX, signY, signZ, signContents);
     		
     		
@@ -583,6 +587,7 @@ public class DesertStructures
 		/*
 		 * Add the paths that lead outward from this structure
 		 */
+    	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
 			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
@@ -599,6 +604,7 @@ public class DesertStructures
 		/*
 		 * Construct the structure
 		 */
+    	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
@@ -620,7 +626,7 @@ public class DesertStructures
             }
             
         	// Generate or otherwise obtain village name and banner and colors
-        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, random,
+        	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
         			this.getXWithOffset(8, 2),
         			this.getYWithOffset(3),
         			this.getZWithOffset(8, 2));
