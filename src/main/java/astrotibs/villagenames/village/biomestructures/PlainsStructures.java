@@ -66,7 +66,7 @@ public class PlainsStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -116,11 +116,16 @@ public class PlainsStructures
             // Basin bottom
             this.fillWithMetadataBlocks(world, structureBB, 2, -1, 2, 6, 0, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             
-            // Torches at the corners
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 1, 2, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 1, 6, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 1, 2, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 1, 6, structureBB);
+            // Torches with the correct metas
+            for (int[] uvwm : new int[][]{
+            	{2, 1, 2, 0},
+            	{2, 1, 6, 0},
+            	{6, 1, 2, 0},
+            	{6, 1, 6, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
             
             if (GeneralConfig.decorateVillageCenter)
             {
@@ -307,7 +312,7 @@ public class PlainsStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -359,7 +364,7 @@ public class PlainsStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
         	// Northward
         	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 3 : 4), this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
         	// Eastward
@@ -505,10 +510,15 @@ public class PlainsStructures
             */
             
             // Over-lid torches
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 16, 3, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 16, 6, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 16, 3, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 16, 6, structureBB);
+            for (int[] uvwm : new int[][]{
+            	{3, 16, 3, 0},
+            	{3, 16, 6, 0},
+            	{6, 16, 3, 0},
+            	{6, 16, 6, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
             
             
             // Encircle the well with path
@@ -641,7 +651,7 @@ public class PlainsStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -690,6 +700,7 @@ public class PlainsStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 10 : this.coordBaseMode==2 ? 1 : 2), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -783,9 +794,16 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 0, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 1, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 1, structureBB);
-        	
+            
+        	// Torches
+            for (int[] uvwm : new int[][]{
+            	{4, 2, 1, 0},
+            	{7, 2, 1, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
+            
         	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 5, 2, 1, 8, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
         	this.fillWithMetadataBlocks(world, structureBB, 2, 0, 5, 2, 0, 8, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
         	this.fillWithBlocks(world, structureBB, 1, 1, 5, 1, 3, 5, biomeFenceBlock, biomeFenceBlock, false);
@@ -797,8 +815,15 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 1, 4, 7, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 2, 4, 6, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 3, 4, 7, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 5, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 8, structureBB);
+
+            // Torches
+            for (int[] uvwm : new int[][]{
+            	{2, 2, 5, 0},
+            	{2, 2, 8, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
         	
         	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 13, 7, 1, 13, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
         	this.fillWithMetadataBlocks(world, structureBB, 4, 0, 13, 7, 0, 13, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
@@ -811,8 +836,15 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 12, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 13, structureBB);
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 14, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 13, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 2, 13, structureBB);
+        	
+            // Torches
+            for (int[] uvwm : new int[][]{
+            	{4, 2, 13, 0},
+            	{7, 2, 13, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
         	
         	        	        	
             // Sign
@@ -897,7 +929,7 @@ public class PlainsStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -947,7 +979,7 @@ public class PlainsStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
@@ -1062,7 +1094,6 @@ public class PlainsStructures
         	
         	
         	// Tree
-        	this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 5, 0, 5, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), 4, 1, 4, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), 5, 1, 4, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), 6, 1, 4, structureBB);
@@ -1071,22 +1102,44 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), 5, 1, 6, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), 4, 1, 6, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), 4, 1, 5, structureBB);
-        	this.fillWithMetadataBlocks(world, structureBB, 3, 5, 4, 7, 6, 6, Blocks.leaves, 0, Blocks.leaves, 0, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 4, 5, 3, 6, 6, 7, Blocks.leaves, 0, Blocks.leaves, 0, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 4, 7, 4, 6, 8, 6, Blocks.leaves, 0, Blocks.leaves, 0, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 5, 1, 5, 5, 7, 5, Blocks.log, 0, Blocks.log, 0, false);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 4, 5, 3, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 4, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 6, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 5, 6, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 4, 8, 4, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 6, 8, 4, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 6, 8, 6, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 4, 8, 6, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 3, 4, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 3, 5, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 3, 6, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 3, 5, structureBB);
+        	
+        	
+        	// Dirt block
+        	world.setBlock(this.getXWithOffset(5, 5), this.getYWithOffset(0), this.getZWithOffset(5, 5), Blocks.dirt, 0, 2);
+        	
+        	// Leaves placed into world
+        	for (int u=3; u<=7; u++) {for (int v=5; v<=6; v++) {for (int w=4; w<=6; w++) {world.setBlock(this.getXWithOffset(u, w), this.getYWithOffset(v), this.getZWithOffset(u, w), Blocks.leaves, 0, 2);}}}
+        	for (int u=4; u<=6; u++) {for (int v=5; v<=6; v++) {for (int w=3; w<=7; w++) {world.setBlock(this.getXWithOffset(u, w), this.getYWithOffset(v), this.getZWithOffset(u, w), Blocks.leaves, 0, 2);}}}
+        	for (int u=4; u<=6; u++) {for (int v=7; v<=8; v++) {for (int w=4; w<=6; w++) {world.setBlock(this.getXWithOffset(u, w), this.getYWithOffset(v), this.getZWithOffset(u, w), Blocks.leaves, 0, 2);}}}
+
+        	// Logs need to be set in world so as not to be replaced with sandstone
+        	for (int v=1; v<=7; v++) {world.setBlock(this.getXWithOffset(5, 5), this.getYWithOffset(v), this.getZWithOffset(5, 5), Blocks.log, 0, 2);}
+        	
+        	// Carve out chunks of leaves using air
+            for (int[] uvw : new int[][]{
+            	{4, 5, 3},
+            	{4, 5, 7},
+            	{6, 5, 7},
+            	{5, 6, 7},
+            	{4, 8, 4},
+            	{6, 8, 4},
+            	{6, 8, 6},
+            	{4, 8, 6},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvw[0], uvw[2]), this.getYWithOffset(uvw[1]), this.getZWithOffset(uvw[0], uvw[2]), Blocks.air, 0, 2);
+            }
+            
+            // Torches
+            for (int[] uvwm : new int[][]{
+            	{5, 3, 4, StructureVillageVN.getTorchRotationMeta(2, this.coordBaseMode)},
+            	{4, 3, 5, StructureVillageVN.getTorchRotationMeta(3, this.coordBaseMode)},
+            	{5, 3, 6, StructureVillageVN.getTorchRotationMeta(0, this.coordBaseMode)},
+            	{6, 3, 5, StructureVillageVN.getTorchRotationMeta(1, this.coordBaseMode)},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
         	
                     	        	
             // Posts
@@ -1208,7 +1261,7 @@ public class PlainsStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			

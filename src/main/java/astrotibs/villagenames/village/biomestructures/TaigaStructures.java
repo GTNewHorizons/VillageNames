@@ -68,7 +68,7 @@ public class TaigaStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Southward
 			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==1 ? 2 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
 			// Westward
@@ -271,7 +271,7 @@ public class TaigaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -320,7 +320,7 @@ public class TaigaStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Southward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
@@ -657,8 +657,10 @@ public class TaigaStructures
             		
             		// Substitute with a log with a torch
             		this.placeBlockAtCurrentPosition(world, biomeLogVertBlock, biomeLogVertMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-                	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-                	
+            		
+            		// Torch
+            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
+            		
             		break;
             		
             	case 5: // Campfire over hay in bin
@@ -680,14 +682,14 @@ public class TaigaStructures
         			this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
         			
         			// This block is supposed to be campfire but ya know
-            		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-                	
+            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
+            		
             		break;
             		
             	case 6: // Torch on a cobblestone wall
             		
             		this.placeBlockAtCurrentPosition(world, biomeCobblestoneWallBlock, biomeCobblestoneWallMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
+            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
             		
             		break;
 	            }
@@ -725,10 +727,15 @@ public class TaigaStructures
         	this.fillWithMetadataBlocks(world, structureBB, 2, 5, 2, 2, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), false);
         	this.fillWithMetadataBlocks(world, structureBB, 6, 5, 2, 6, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), biomeLogHorAlongBlock, biomeLogHorAlongMeta + (this.coordBaseMode%2==0 ? 4 : 0), false);
         	// Add torches
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 5, 7, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 5, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 5, 7, structureBB);
+        	for (int[] uvwm : new int[][]{
+        		{2, 5, 1, 0},
+        		{2, 5, 7, 0},
+        		{6, 5, 1, 0},
+        		{6, 5, 7, 0},
+        	})
+        	{
+        		world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+        	}
             
             
             // Colored block where bell used to be
@@ -850,7 +857,7 @@ public class TaigaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			

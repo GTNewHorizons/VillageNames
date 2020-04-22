@@ -62,7 +62,7 @@ public class SnowyStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (new int[]{8,1,2,4})[this.coordBaseMode], this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -231,7 +231,6 @@ public class SnowyStructures
     		if (GeneralConfig.decorateVillageCenter)
     		{
     			Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-        		testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 10;
@@ -358,7 +357,7 @@ public class SnowyStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -407,7 +406,7 @@ public class SnowyStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0?4:3), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -488,7 +487,7 @@ public class SnowyStructures
         	this.fillWithBlocks(world, structureBB, 6, 1, 4, 6, 2, 4, Blocks.packed_ice, Blocks.packed_ice, false);
         	this.placeBlockAtCurrentPosition(world, Blocks.packed_ice, 0, 5, 3, 4, structureBB);
         	// Torch
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 4, 4, structureBB);
+        	world.setBlock(this.getXWithOffset(5, 4), this.getYWithOffset(4), this.getZWithOffset(5, 4), Blocks.torch, 0, 2);
         	
         	// Rim
         	this.placeBlockAtCurrentPosition(world, biomeWoodenStairsBlock, (new int[]{2,1,3,0})[this.coordBaseMode], 6, 1, 2, structureBB);
@@ -565,7 +564,6 @@ public class SnowyStructures
     		if (GeneralConfig.decorateVillageCenter)
     		{
     			Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-        		testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 8;
@@ -616,7 +614,7 @@ public class SnowyStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -664,7 +662,7 @@ public class SnowyStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 2, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -873,7 +871,6 @@ public class SnowyStructures
     		if (GeneralConfig.decorateVillageCenter)
     		{
     			Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-        		testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
     			{
                     int bannerXBB = 5;
@@ -930,7 +927,7 @@ public class SnowyStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			

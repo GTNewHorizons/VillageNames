@@ -62,15 +62,15 @@ public class SavannaStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			if (this.coordBaseMode%2!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 ? 4 : 5), 1, this.getComponentType());}
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			if (this.coordBaseMode%2!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 5 : this.coordBaseMode==2 ? 4 : 0), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			if (this.coordBaseMode%2!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 ? 4 : 5), 1, this.getComponentType());}
 		}
 		
 		/*
@@ -200,10 +200,9 @@ public class SavannaStructures
         	
         	// Fences with torches
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 2, 1, 10, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 10, structureBB);
+        	world.setBlock(this.getXWithOffset(2, 10), this.getYWithOffset(2), this.getZWithOffset(2, 10), Blocks.torch, 0, 2);
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 8, 1, 0, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 8, 2, 0, structureBB);
-        	
+        	world.setBlock(this.getXWithOffset(8, 0), this.getYWithOffset(2), this.getZWithOffset(8, 0), Blocks.torch, 0, 2);        	
         	
         	
 			// Banners on the market stalls
@@ -321,7 +320,7 @@ public class SavannaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -369,15 +368,15 @@ public class SavannaStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());
 		}
 		
 		/*
@@ -502,9 +501,8 @@ public class SavannaStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 1, 5, 4, 5, structureBB);
         	
         	// Torches
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 2, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 9, 2, 9, structureBB);
-        	
+        	world.setBlock(this.getXWithOffset(1, 1), this.getYWithOffset(2), this.getZWithOffset(1, 1), Blocks.torch, 0, 2);     
+        	world.setBlock(this.getXWithOffset(9, 9), this.getYWithOffset(2), this.getZWithOffset(9, 9), Blocks.torch, 0, 2);     
         	
         	// Banners
     		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
@@ -598,7 +596,7 @@ public class SavannaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -646,7 +644,7 @@ public class SavannaStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0 ? 3 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -789,10 +787,15 @@ public class SavannaStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 1, 7, structureBB);
         	
         	// Torches on the corners
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 2, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 2, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 3, 2, 8, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 2, 8, structureBB);
+        	for (int[] uvwm : new int[][]{
+        		{3, 2, 2, 0},
+        		{5, 2, 2, 0},
+        		{3, 2, 8, 0},
+        		{5, 2, 8, 0},
+        	})
+        	{
+        		world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+        	}
         	
         	// Pavilion
         	this.fillWithBlocks(world, structureBB, 3, 2, 4, 5, 3, 6, biomeFenceBlock, biomeFenceBlock, false);
@@ -800,7 +803,13 @@ public class SavannaStructures
         	this.fillWithAir(world, structureBB, 3, 2, 5, 5, 3, 5);
         	this.fillWithMetadataBlocks(world, structureBB, 3, 4, 4, 5, 4, 6, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
         	this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, 4, 4, 5, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 5, structureBB);
+        	// Torch
+        	for (int[] uvwm : new int[][]{
+        		{4, 5, 5, 0},
+        	})
+        	{
+        		world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+        	}
         	
 			// Banner
     		if (GeneralConfig.decorateVillageCenter)
@@ -887,7 +896,7 @@ public class SavannaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -935,7 +944,7 @@ public class SavannaStructures
 		@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
+			if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -1053,10 +1062,15 @@ public class SavannaStructures
         	this.fillWithBlocks(world, structureBB, 3, 1, 4, 5, 1, 4, Blocks.flowing_water, Blocks.flowing_water, false);
         	
         	// Torches on the corners
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 4, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 2, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 2, 6, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 6, 2, 4, structureBB);
+        	for (int[] uvwm : new int[][]{
+        		{2, 2, 4, 0},
+        		{4, 2, 2, 0},
+        		{4, 2, 6, 0},
+        		{6, 2, 4, 0},
+        	})
+        	{
+        		world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+        	}
         	
         	// Pavilion
         	// Supports
@@ -1160,7 +1174,7 @@ public class SavannaStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			

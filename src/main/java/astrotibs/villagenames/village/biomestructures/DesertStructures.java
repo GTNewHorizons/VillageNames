@@ -8,6 +8,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
+import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import net.minecraft.block.Block;
@@ -62,15 +63,15 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			if (this.coordBaseMode%2==0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
 			if (this.coordBaseMode%2!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());}
+			// Southward
+			if (this.coordBaseMode%2==0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
 			
 			// Attach a non-road structure
 			int strucX=0; int strucZ=0; int coordBaseMode=0;
@@ -181,7 +182,12 @@ public class DesertStructures
         		this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, 4, 4, 4, structureBB);
         	}
             // Just the tip
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 4, structureBB);
+            for (int[] uvwm : new int[][]{
+            	{4, 5, 4, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
             
             // Cactus
             this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 9, 5, 2, 2, structureBB); // 9 is cactus
@@ -265,7 +271,7 @@ public class DesertStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -313,15 +319,15 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode<=1 ? 5 : 4), 1, this.getComponentType());
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode>=2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode>=2 ? 5 : 4), 3, this.getComponentType());
+			// Southward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			// Westward
+			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode<=1 ? 5 : 4), 1, this.getComponentType());
 		}
     	
 		/*
@@ -423,10 +429,16 @@ public class DesertStructures
             this.fillWithMetadataBlocks(world, structureBB, 7, 1, 4, 7, 4, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
             
             // Torches
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 4, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 5, 7, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 5, 4, structureBB);
+            for (int[] uvwm : new int[][]{
+            	{4, 5, 4, 0},
+            	{4, 5, 7, 0},
+            	{7, 5, 7, 0},
+            	{7, 5, 4, 0},
+            })
+            {
+            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            }
+            
             
             // Roof of the well
             if (GeneralConfig.decorateVillageCenter)
@@ -542,7 +554,7 @@ public class DesertStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
@@ -590,15 +602,15 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-			//LogHelper.info("coordBaseMode: " + this.coordBaseMode);
-			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 1, this.getComponentType());
+    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
         	// Northward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
+    		if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + new int[]{1,5,1,7}[this.coordBaseMode], this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());}
         	// Eastward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + 4, 3, this.getComponentType());
+        	if (this.coordBaseMode!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + new int[]{6,4,6,1}[this.coordBaseMode], 3, this.getComponentType());}
+			// Southward
+        	if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + new int[]{1,6,4,6}[this.coordBaseMode], this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			// Westward
+			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + new int[]{7,1,5,4}[this.coordBaseMode], 1, this.getComponentType());}
 		}
     	
 		/*
@@ -724,24 +736,24 @@ public class DesertStructures
     		// Market stalls
     		
     		// Frames
-    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 0, 7, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 0, 10, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 2, 10, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 0, 7, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 0, 10, 3, 0, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 10, 1, 2, 10, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
     		this.fillWithMetadataBlocks(world, structureBB, 7, 4, 0, 10, 4, 2, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
     		this.fillWithAir(world, structureBB, 8, 4, 1, 9, 4, 1);
     		
-    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 5, 1, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 5, 5, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 7, 5, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 7, 1, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 5, 1, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 5, 5, 4, 5, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 7, 5, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 1, 1, 7, 1, 4, 7, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
     		this.fillWithMetadataBlocks(world, structureBB, 1, 5, 5, 5, 5, 7, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
     		this.fillWithAir(world, structureBB, 2, 5, 6, 4, 5, 6);
     		
-    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 11, 4, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 11, 7, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
-    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 14, 4, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, 0, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 11, 4, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 11, 7, 3, 11, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
+    		this.fillWithMetadataBlocks(world, structureBB, 4, 1, 14, 4, 3, 14, biomeSandstoneWall, biomeSandstoneMeta, biomeSandstoneWall, biomeSandstoneMeta, false);
     		this.fillWithMetadataBlocks(world, structureBB, 4, 4, 11, 7, 4, 14, Blocks.stone_slab, 1, Blocks.stone_slab, 1, false);
     		this.fillWithAir(world, structureBB, 5, 4, 12, 6, 4, 13);
     		
@@ -827,7 +839,7 @@ public class DesertStructures
                 if (GeneralConfig.decorateVillageCenter) {this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor, uvw[0], uvw[1]+2, uvw[2], structureBB);}
             	else {this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uvw[0], uvw[1]+2, uvw[2], structureBB);}
         		// Torch
-                this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, uvw[0], uvw[1]+3, uvw[2], structureBB);
+            	world.setBlock(this.getXWithOffset(uvw[0], uvw[2]), this.getYWithOffset(uvw[1]+3), this.getZWithOffset(uvw[0], uvw[2]), Blocks.torch, 0, 2);
         	}
         	
         	// Sign
@@ -908,7 +920,7 @@ public class DesertStructures
         			
         			// Nitwits more often than not
         			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -random.nextInt(24001));}
+        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			

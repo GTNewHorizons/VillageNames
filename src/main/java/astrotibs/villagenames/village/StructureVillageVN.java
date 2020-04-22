@@ -480,6 +480,28 @@ public class StructureVillageVN
     	return 0;
     }
     
+    /**
+     * Give this method the orientation of a hanging torch and the base mode of the structure it's in,
+     * and it'll give you back the required meta value for construction.
+     * For relative orientations, use:
+     * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+     */
+    public static int getTorchRotationMeta(int relativeOrientation, int coordBaseMode)
+    {
+		switch (relativeOrientation)
+		{
+		case 0: // Facing away
+			return new int[]{3,2,4,1}[coordBaseMode];
+		case 1: // Facing right
+			return new int[]{1,3,1,3}[coordBaseMode];
+		case 2: // Facing you
+			return new int[]{4,1,3,2}[coordBaseMode];
+		case 3: // Facing left
+			return new int[]{2,4,2,4}[coordBaseMode];
+		}
+    	return 0; // Torch will be standing upright, hopefully
+    }
+    
     public static int seaLevel = 63; //TODO - actually call sea level in later versions
 	
     /**

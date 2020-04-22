@@ -242,7 +242,7 @@ public class EntityMonitorHandler
                     ServerInfoTracker.removeCuredZombiesFromTracker(event.world, tracked.getEntityID());
 
                 }
-                
+                /*
                 // Moved inside server-side check in v3.2
         		// Try to assign a biome number if this villager has none.
                 if (
@@ -263,7 +263,7 @@ public class EntityMonitorHandler
                 {
                 	(ExtendedVillager.get(villager)).setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));
                 }
-                
+                */
             }
             
             
@@ -532,6 +532,13 @@ public class EntityMonitorHandler
         {
         	EntityVillager villager = (EntityVillager)event.entity;
         	ExtendedVillager ev = ExtendedVillager.get(villager);
+
+        	if (GeneralConfig.modernVillagerSkins)
+        	{
+            	// Initialize buying list in order to provoke the villager to choose a career
+            	villager.getRecipes(null);
+            	FunctionsVN.monitorVillagerTrades(villager);
+        	}
         	
         	int professionLevel = ev.getProfessionLevel();
     		if (professionLevel < 0) {ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));}
