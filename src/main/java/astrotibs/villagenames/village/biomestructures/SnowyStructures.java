@@ -361,7 +361,7 @@ public class SnowyStructures
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}
@@ -574,7 +574,7 @@ public class SnowyStructures
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
                     
-                    // Place a grass foundation
+                    // Place a plank foundation
                     this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, bannerXBB, bannerYBB-1, bannerZBB, structureBB);
                     this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, bannerXBB, bannerYBB-2, bannerZBB, structureBB);
                     // Clear space upward
@@ -618,7 +618,7 @@ public class SnowyStructures
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}
@@ -931,7 +931,7 @@ public class SnowyStructures
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}

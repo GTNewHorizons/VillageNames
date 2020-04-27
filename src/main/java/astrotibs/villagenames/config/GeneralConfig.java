@@ -122,8 +122,6 @@ public class GeneralConfig {
 	// Misc new village stuff
 	public static boolean spawnModdedVillagers;
 	public static boolean decorateVillageCenter;
-	// For ensuring decor is ground-level
-	public static ArrayList<Integer> decorGroundLevels = new ArrayList();
 	
 	
 	public static void init(File configFile) 

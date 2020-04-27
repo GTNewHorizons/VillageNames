@@ -2,6 +2,7 @@ package astrotibs.villagenames.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import astrotibs.villagenames.name.NameGenerator;
 import net.minecraft.command.CommandBase;
@@ -91,7 +92,7 @@ public class CommandName extends CommandBase {
 				// Add comma separation
 				if (i > 0) {outputString += ", ";}
 				
-				String[] sa = NameGenerator.newRandomName(nameType);
+				String[] sa = NameGenerator.newRandomName(nameType, new Random());
 				stringName = (sa[1] + " " + sa[2] + " " + sa[3]).trim();
 				outputString += stringName;
 			}

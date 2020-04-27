@@ -1,13 +1,11 @@
 package astrotibs.villagenames.village.biomestructures;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
-import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
 import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
@@ -275,7 +273,7 @@ public class TaigaStructures
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}
@@ -375,7 +373,6 @@ public class TaigaStructures
         	
         	
             // Encircle the well with path
-            Block pathBlock = ModObjects.chooseModPathBlock();
         	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece"});
         	for (int i = 1; i <= 7; ++i)
             {
@@ -688,7 +685,26 @@ public class TaigaStructures
             		
             	case 6: // Torch on a cobblestone wall
             		
-            		this.placeBlockAtCurrentPosition(world, biomeCobblestoneWallBlock, biomeCobblestoneWallMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
+            		Object[] blockObjectTest = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeTestBlock = (Block)blockObjectTest[0]; int biomeTestMeta = (Integer)blockObjectTest[1];
+            		
+            		boulderTopperBlock=Blocks.cobblestone_wall; boulderTopperMeta=0;
+            		if (biomeTestBlock==Blocks.mossy_cobblestone)
+            		{
+            			// Try to make mossy cobblestone wall
+            			boulderTopperMeta = 1;
+            		}
+            		else if (biomeTestBlock==Blocks.sandstone)
+            		{
+            			// Try a sandstone wall--use a slab otherwise
+            			boulderTopperBlock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
+            			if (boulderTopperBlock==null) {boulderTopperBlock = Blocks.sandstone;}
+            		}
+            		else if (biomeTestBlock!=Blocks.cobblestone)
+            		{
+            			boulderTopperBlock = biomeTestBlock;
+            		}
+            		
+            		this.placeBlockAtCurrentPosition(world, boulderTopperBlock, boulderTopperMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
             		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
             		
             		break;
@@ -729,8 +745,9 @@ public class TaigaStructures
         	// Add torches
         	for (int[] uvwm : new int[][]{
         		{2, 5, 1, 0},
-        		{2, 5, 7, 0},
         		{6, 5, 1, 0},
+        		// Banner side
+        		{2, 5, 7, 0},
         		{6, 5, 7, 0},
         	})
         	{
@@ -861,7 +878,7 @@ public class TaigaStructures
         			
         			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
         			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 0.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
                     		random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(entityvillager);
         		}

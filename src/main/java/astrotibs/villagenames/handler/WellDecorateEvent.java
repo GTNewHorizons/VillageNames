@@ -12,6 +12,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
@@ -214,11 +215,16 @@ public class WellDecorateEvent {
                                 	
                                 	// Now I need to get tricky with the sign generation.
                                 	isWellCorner ++; //1=NW, 2=SW, 3=NE, 4=SE
-                                	
+
+                            		int signX = (x+signXOffset);
+                            		int signY = y+2;
+                            		int signZ = (z+signZOffset);
+                            		
                                 	if (1-Math.abs(isWellCorner/2-1)+((isWellCorner-1)%2)*2 == signLocation) {
                                 		
                                 		// Call the name generator here
-                                		String[] newVillageName = NameGenerator.newRandomName("Village");
+                                		Random deterministic = new Random(); deterministic.setSeed(event.world.getSeed() + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
+                                		String[] newVillageName = NameGenerator.newRandomName("Village", deterministic);
                                 		String headerTags = newVillageName[0];
                                 		String namePrefix = newVillageName[1];
                                 		String nameRoot = newVillageName[2];
@@ -231,7 +237,7 @@ public class WellDecorateEvent {
                                 			
                                 			// Changed color block in v3.1banner
                                 			// Generate banner info, regardless of if we make a banner.
-                                    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(event.world.rand, -1, -1);
+                                    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(deterministic, -1, -1);
                             				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                             				ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
                             				
@@ -246,9 +252,6 @@ public class WellDecorateEvent {
                                     		// In this section, I determine how big the village in generation will be
                                     		// and use that information to inform the village sign.
                                     		
-                                    		int signX = (x+signXOffset);
-                                    		int signY = y+2;
-                                    		int signZ = (z+signZOffset);
                                     		int villageArea = -1; // If a village area value is not ascertained, this will remain as -1.
                                     		
                                     		// Try via NBT access
@@ -558,9 +561,6 @@ public class WellDecorateEvent {
                                 		}
                                 		else { //The stupid thing is generating a sign inside the well structure for some reason.
                                 			
-                                			int signX = (x+signXOffset);
-                                    		int signY = y+2;
-                                    		int signZ = (z+signZOffset);
                                     		LogHelper.error("Tried to generate a sign inside a well's post at x="+signX+" y="+signY+" z="+signZ);
                                 		}
                                 		

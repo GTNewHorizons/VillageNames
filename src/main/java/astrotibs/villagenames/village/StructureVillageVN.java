@@ -21,7 +21,6 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
@@ -699,7 +698,12 @@ public class StructureVillageVN
             		// Village does not have banner info. Make some.
             		else
             		{
-            			while (townColorMeta2==townColorMeta)
+            			while (
+            					townColorMeta2==townColorMeta // Colors are the same, requiring a new draw
+            					&& !(townColorMeta==2 && townColorMeta2==10) && !(townColorMeta==10 && townColorMeta2==2) // Lime and Green aren't in the same banner
+            					&& !(townColorMeta==5 && townColorMeta2==13) && !(townColorMeta==13 && townColorMeta2==5) // Magenta and Purple aren't in the same banner
+            					&& !(townColorMeta==6 && townColorMeta2==12) && !(townColorMeta==12 && townColorMeta2==6) // Light Blue and Cyan aren't in the same banner
+            					)
             			{
             				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
             			}
@@ -790,10 +794,15 @@ public class StructureVillageVN
 					// Village does not have banner info. Make some.
 					else
 					{
-						while (townColorMeta2==townColorMeta)
-						{
-							townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
-						}
+            			while (
+            					townColorMeta2==townColorMeta // Colors are the same, requiring a new draw
+            					&& !(townColorMeta==2 && townColorMeta2==10) && !(townColorMeta==10 && townColorMeta2==2) // Lime and Green aren't in the same banner
+            					&& !(townColorMeta==5 && townColorMeta2==13) && !(townColorMeta==13 && townColorMeta2==5) // Magenta and Purple aren't in the same banner
+            					&& !(townColorMeta==6 && townColorMeta2==12) && !(townColorMeta==12 && townColorMeta2==6) // Light Blue and Cyan aren't in the same banner
+            					)
+            			{
+            				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+            			}
 					}
 					
 					villagetagcompound.setInteger("townColor2", townColorMeta2);
@@ -837,7 +846,7 @@ public class StructureVillageVN
 		int topLineRand = randomFromXYZ.nextInt(4);
 		
 		// Call the name generator here
-		String[] newVillageName = NameGenerator.newRandomName("Village");
+		String[] newVillageName = NameGenerator.newRandomName("Village", randomFromXYZ);
 		String headerTags = newVillageName[0];
 		namePrefix = newVillageName[1];
 		nameRoot = newVillageName[2];

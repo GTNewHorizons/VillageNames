@@ -46,10 +46,8 @@ public class NameGenerator {
 	 * [2] root name -- this is the CORE NAME of interest
 	 * [3] suffix
 	 */
-	public static String[] newRandomName(String nameType)
+	public static String[] newRandomName(String nameType, Random random)
 	{
-		Random random = new Random(); // Use a new random rather than the world's random because of simultaneity issues
-		
 		// Unpack nameType into multiple possible name pools
 		
 		// Split input string by hyphen

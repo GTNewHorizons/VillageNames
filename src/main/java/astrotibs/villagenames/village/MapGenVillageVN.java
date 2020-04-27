@@ -19,7 +19,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -41,8 +40,6 @@ public class MapGenVillageVN extends MapGenVillage
 		if (event.type == EventType.VILLAGE && GeneralConfig.newVillageGenerator)
         {
 			// Do a try/catch because in case the Overworld has not yet loaded
-			WorldType worldtype;
-			
 	        try 
 	        {
 	            if (MinecraftServer.getServer().worldServerForDimension(0).getWorldInfo().getTerrainType()==null) {return;}

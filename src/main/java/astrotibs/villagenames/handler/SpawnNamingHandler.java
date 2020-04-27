@@ -2,6 +2,7 @@ package astrotibs.villagenames.handler;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.name.NameGenerator;
@@ -66,7 +67,7 @@ public class SpawnNamingHandler {
 						
 						String nameType = (String) ((mappedNamesAutomatic.get("NameTypes")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClassPath) ));
 						
-						String[] newNameA = NameGenerator.newRandomName(nameType);
+						String[] newNameA = NameGenerator.newRandomName(nameType, new Random());
 						String newName = (newNameA[1]+" "+newNameA[2]+" "+newNameA[3]).trim();
 						// Generate profession tag
 						if (

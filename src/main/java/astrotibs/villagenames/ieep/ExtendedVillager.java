@@ -3,7 +3,6 @@ package astrotibs.villagenames.ieep;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
-import astrotibs.villagenames.utility.LogHelper;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;

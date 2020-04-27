@@ -16,6 +16,7 @@ import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldData;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.structure.StructureRegistry;
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -812,7 +813,13 @@ public class WriteBookHandler {
 			//VNWorldData data=null;
 			
 			VNWorldDataStructure data = VNWorldDataStructure.forWorld(event.entity.worldObj, "villagenames3_"+nearbyStructure, "NamedStructures");
-			structureNameArray = NameGenerator.newRandomName(nearbyStructure);
+
+    		int signX = structureCoords[0];
+    		int signY = structureCoords[1];
+    		int signZ = structureCoords[2];
+    		
+			Random deterministic = new Random(); deterministic.setSeed(event.entity.worldObj.getSeed() + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
+			structureNameArray = NameGenerator.newRandomName(nearbyStructure, deterministic);
 			
 			// Gotta copy this thing to each IF condition I think
 			String headerTags = structureNameArray[0];
@@ -822,16 +829,11 @@ public class WriteBookHandler {
 
     		// Added in v3.1banner
     		// Generate banner info specifically to obtain a village color
-    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(random, -1, -1);
+    		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(deterministic, -1, -1);
 			ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 			ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
     		int townColorMeta = 15-colorArray.get(0);
     		int townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1); 
-    		
-    		int signX = structureCoords[0];
-    		int signY = structureCoords[1];
-    		int signZ = structureCoords[2];
-    		
     		
     		// Make the data bundle to save to NBT
     		NBTTagList nbttaglist = new NBTTagList();

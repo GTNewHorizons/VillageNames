@@ -1137,7 +1137,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Generated name
-							String[] locationName = NameGenerator.newRandomName("village-mineshaft-stronghold-temple-fortress-monument-endcity-mansion-alienvillage");
+							String[] locationName = NameGenerator.newRandomName("village-mineshaft-stronghold-temple-fortress-monument-endcity-mansion-alienvillage", new Random());
 							bookContents += "\n\n" + (locationName[1]+" "+locationName[2]+" "+locationName[3]).trim();
 							
 							// Put it all together
@@ -1325,7 +1325,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// --- VILLAGE -- //
-							String[] entityName = NameGenerator.newRandomName("villager-alien-angel-demon-dragon-goblin-golem");
+							String[] entityName = NameGenerator.newRandomName("villager-alien-angel-demon-dragon-goblin-golem", new Random());
 					        ItemStack tagWithName = new ItemStack(Items.name_tag, 1).setStackDisplayName( (entityName[1]+" "+entityName[2]+" "+entityName[3]).trim() );
 							tagWithName.setRepairCost(99);
 							recipeList.add( new MerchantRecipe(
