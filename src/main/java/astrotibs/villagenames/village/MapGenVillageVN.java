@@ -223,7 +223,7 @@ public class MapGenVillageVN extends MapGenVillage
             {
             	start = snowyStarters[random.nextInt(snowyStarters.length)];
             }
-            else // Plains if nothing else mathches
+            else // Plains if nothing else matches
             {
             	start = plainsStarters[random.nextInt(plainsStarters.length)];
             }
