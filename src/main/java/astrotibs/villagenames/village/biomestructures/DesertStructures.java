@@ -62,7 +62,16 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
+    		if (GeneralConfig.debugMessages)
+    		{
+    			LogHelper.info(
+    					this.materialType + " " +  this.villageType + " village generated in "
+    					+ this.worldChunkMngr.getBiomeGenAt((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2).biomeName
+    					+ " at x=" + (this.boundingBox.minX+this.boundingBox.maxX)/2 + ", z=" + (this.boundingBox.minZ+this.boundingBox.maxZ)/2
+    					+ " with town center: " + start.getClass().toString().substring(start.getClass().toString().indexOf("$")+1) + " and coordBaseMode: " + this.coordBaseMode
+    					);
+    		}
+    		
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -318,7 +327,16 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
+    		if (GeneralConfig.debugMessages)
+    		{
+    			LogHelper.info(
+    					this.materialType + " " +  this.villageType + " village generated in "
+    					+ this.worldChunkMngr.getBiomeGenAt((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2).biomeName
+    					+ " at x=" + (this.boundingBox.minX+this.boundingBox.maxX)/2 + ", z=" + (this.boundingBox.minZ+this.boundingBox.maxZ)/2
+    					+ " with town center: " + start.getClass().toString().substring(start.getClass().toString().indexOf("$")+1) + " and coordBaseMode: " + this.coordBaseMode
+    					);
+    		}
+    		
 			// Northward
 			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode>=2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
@@ -601,7 +619,16 @@ public class DesertStructures
     	@Override
 		public void buildComponent(StructureComponent start, List components, Random random)
 		{
-    		if (GeneralConfig.debugMessages) {LogHelper.info("Village coordBaseMode: " + this.coordBaseMode);}
+    		if (GeneralConfig.debugMessages)
+    		{
+    			LogHelper.info(
+    					this.materialType + " " +  this.villageType + " village generated in "
+    					+ this.worldChunkMngr.getBiomeGenAt((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2).biomeName
+    					+ " at x=" + (this.boundingBox.minX+this.boundingBox.maxX)/2 + ", z=" + (this.boundingBox.minZ+this.boundingBox.maxZ)/2
+    					+ " with town center: " + start.getClass().toString().substring(start.getClass().toString().indexOf("$")+1) + " and coordBaseMode: " + this.coordBaseMode
+    					);
+    		}
+    		
         	// Northward
     		if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + new int[]{1,5,1,7}[this.coordBaseMode], this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());}
         	// Eastward
