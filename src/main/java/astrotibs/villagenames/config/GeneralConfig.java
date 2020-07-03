@@ -85,6 +85,7 @@ public class GeneralConfig {
 	public static String[] modBeetroot;
 	public static String[] modMutton;
 	public static String[] modKelp;
+	public static String[] modLantern;
 	public static String[] modGrassPath;
 	
 	// Added in v3.2
@@ -668,6 +669,13 @@ public class GeneralConfig {
  				"Priority order for referencing Kelp for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 		
+	    modLantern = config.getStringList("Mod Priority: Lantern", "Mod Integration", new String[]{
+ 				"uptodate",
+	    		"enviromine",
+ 				},
+ 				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 		// Mapping for modded structures, and the creatures that can name them
 		modStructureNames = config.getStringList("Mod Structures", "Mod Integration", new String[]{
 				

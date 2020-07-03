@@ -477,7 +477,7 @@ public class TaigaStructures
         					FunctionsVN.getUniqueLongForXYZ(
         							this.getXWithOffset(uvw[0], uvw[2]),
         							this.getYWithOffset(uvw[1]),
-        							this.getXWithOffset(uvw[0], uvw[2])
+        							this.getZWithOffset(uvw[0], uvw[2])
         							)
             			);
             	
@@ -501,6 +501,9 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	boolean genericBoolean=false;
+            	
+            	Object[] campfireObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), this.coordBaseMode);
+        		Block campfireBlock = (Block) campfireObject[0]; int campfireMeta = (Integer) campfireObject[1];
             	
 	            switch (randomFromXYZ.nextInt(7))
 	            {
@@ -656,25 +659,7 @@ public class TaigaStructures
             		
             	case 4: // Campfire
             		
-            		/*
-            		for (int i=-1; i<=1; i++) {for (int l=-1; l<=1; l++) {
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+i, decorHeightY-2, uvw[2]+l, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, Blocks.gravel, 0, uvw[0]+i, decorHeightY-1, uvw[2]+l, structureBB); // Gravel
-            			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+i, decorHeightY+0, uvw[2]+l, structureBB); // Clear above
-            			// Add slabs around the edge
-            			if (i==0 || l==0) {this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 3, uvw[0]+i, decorHeightY+0, uvw[2]+l, structureBB);} // Cobblestone slab
-            			
-            		}}
-            		// Actually set the campfire
-            		this.placeBlockAtCurrentPosition(world, Blocks.netherrack, 0, uvw[0]+0, decorHeightY-1, uvw[2]+0, structureBB);
-            		this.placeBlockAtCurrentPosition(world, Blocks.fire, 0, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		*/
-            		
-            		// Substitute with a log with a torch
-            		this.placeBlockAtCurrentPosition(world, biomeLogVertBlock, biomeLogVertMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		
-            		// Torch
-            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
+            		this.placeBlockAtCurrentPosition(world, campfireBlock, campfireMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
             		
             		break;
             		
@@ -696,8 +681,8 @@ public class TaigaStructures
             		
         			this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
         			
-        			// This block is supposed to be campfire but ya know
-            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
+        			// Campfire
+        			world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), campfireBlock, campfireMeta, 2);
             		
             		break;
             		

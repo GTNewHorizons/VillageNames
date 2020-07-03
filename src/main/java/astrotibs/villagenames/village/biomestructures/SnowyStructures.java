@@ -97,7 +97,7 @@ public class SnowyStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getLanternBlock(); Block biomeLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
         	
         	// For stripped wood specifically
         	Block biomeStrippedWoodOrLogOrLogVerticBlock = null; int biomeStrippedWoodOrLogOrLogVerticMeta = 0;
@@ -294,7 +294,7 @@ public class SnowyStructures
     					FunctionsVN.getUniqueLongForXYZ(
     							this.getXWithOffset(uvw[0], uvw[2]),
     							this.getYWithOffset(uvw[1]),
-    							this.getXWithOffset(uvw[0], uvw[2])
+    							this.getZWithOffset(uvw[0], uvw[2])
     							)
             			);
             	
@@ -329,21 +329,21 @@ public class SnowyStructures
             		lanternX =  decorOrientation==3 ? -1 : decorOrientation==1 ? 1 : 0;
             		lanternZ =  decorOrientation==0 ? -1 : decorOrientation==2 ? 1 : 0;
             		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
             		lanternX =  decorOrientation==3 ? 1 : decorOrientation==1 ? -1 : 0;
             		lanternZ =  decorOrientation==0 ? 1 : decorOrientation==2 ? -1 : 0;
             		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
             	case 1: // Second lantern opposite
             		lanternX =  decorOrientation==0 ? -1 : decorOrientation==2 ? 1 : 0;
             		lanternZ =  decorOrientation==3 ? -1 : decorOrientation==1 ? 1 : 0;
             		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
             	case 0: // Single lantern
             		lanternX =  decorOrientation==0 ? 1 : decorOrientation==2 ? -1 : 0;
             		lanternZ =  decorOrientation==3 ? 1 : decorOrientation==1 ? -1 : 0;
             		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0]+lanternX, decorHeightY+3, uvw[2]+lanternZ, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, uvw[0]+lanternX, decorHeightY+2, uvw[2]+lanternZ, structureBB);
             		// Base post
             		this.fillWithBlocks(world, structureBB, uvw[0]+0, decorHeightY+0, uvw[2]+0, uvw[0]+0, decorHeightY+3, uvw[2]+0, biomeFenceBlock, biomeFenceBlock, false);
             	}
@@ -714,7 +714,7 @@ public class SnowyStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getLanternBlock(); Block biomeLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
         	
         	// For stripped wood specifically
         	Block biomeStrippedWoodOrLogOrLogVerticBlock = null; int biomeStrippedWoodOrLogOrLogVerticMeta = 0;
@@ -841,13 +841,13 @@ public class SnowyStructures
         	
         	// Add torches
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 1, 4, 3, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, 1, 3, 3, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, 1, 3, 3, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 5, 4, 3, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, 5, 3, 3, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, 5, 3, 3, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 3, 4, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, 3, 3, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, 3, 3, 1, structureBB);
         	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 3, 4, 5, structureBB);
-        	this.placeBlockAtCurrentPosition(world, biomeLanternBlock, biomeLanternMeta, 3, 3, 5, structureBB);
+        	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeLanternMeta, 3, 3, 5, structureBB);
         	
         	
         	// Place the sign base. Concrete if requested/allowed

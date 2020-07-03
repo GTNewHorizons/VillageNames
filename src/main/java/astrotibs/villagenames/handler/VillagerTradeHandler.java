@@ -273,7 +273,15 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 2), 1 ),
 										new ItemStack( Items.cooked_fished, 6, 1 ) ) );
+								
 								// TODO - Emerald to Campfire
+								moditemstack =  new ItemStack(Item.getItemFromBlock(Block.getBlockFromName(ModObjects.campfirebackport)));
+								if (moditemstack != null)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(2, 1, nextSlotToFill, 2) ),
+											moditemstack ) );
+								}
 							}
 							
 							// Level 3: Journeyman
@@ -833,7 +841,15 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Items.book, FunctionsVN.modernTradeCostBySlot(4, 1, nextSlotToFill, 2) ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								
-								// TODO - Emerald to Lantern
+								moditemstack = ModObjects.chooseModLanternItem();
+								if (moditemstack != null)
+								{
+									// TODO - Emerald to Lantern
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											moditemstack ) );
+								}
+								
 							}
 							
 							// Level 3: Journeyman

@@ -3,6 +3,7 @@ package astrotibs.villagenames.integration;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.village.StructureVillageVN;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -71,6 +72,9 @@ public class ModObjects {
 	public static final String stoneEF = "etfuturum:stone";
 	public static final String stoneGS = "ganyssurface:18Stones";
 	public static final String stoneUTD = "uptodate:stone";
+
+	// Campfire
+	public static final String campfirebackport = "campfirebackport:campfire";
 	
 	// Concrete
 	public static final String concreteUTD = "uptodate:concrete";
@@ -169,7 +173,7 @@ public class ModObjects {
 	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
-	
+	public static final String lanternUTD = "uptodate:lantern";
 	
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
@@ -530,6 +534,76 @@ public class ModObjects {
 		return null;
 	}
 	
+	// Campfire
+	/**
+     * Give this method the orientation of the campfire and the base mode of the structure it's in,
+     * and it'll give you back the required meta value for construction.
+     * For relative orientations, use:
+     * 
+     * HANGING:
+     * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+     *   
+     * STANDING:
+     * 0=fore-facing (away from you); 4=right-facing; 8=back-facing (toward you); 12=left-facing
+     */
+	public static Object[] chooseModCampfireBlock(int relativeOrientation, int coordBaseMode)
+	{
+		Block tryCampfire = Block.getBlockFromName(ModObjects.campfirebackport);
+		
+		if (tryCampfire!=null)
+		{
+			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, false)};
+		}
+		
+		return new Object[]{Blocks.torch, 0};
+	}
+	
+	// Lantern
+    public static Object[] chooseModLanternBlock(boolean isHanging)
+    {
+    	String[] modprioritylist = GeneralConfig.modLantern;
+    	
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				Block tryLantern = Block.getBlockFromName(ModObjects.lanternUTD);
+		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
+			}
+			if (mod.toLowerCase().equals("enviromine"))
+			{
+				Block tryLantern = Block.getBlockFromName(ModObjects.davyLampEM);
+		    	if (tryLantern!=null) {return new Object[]{tryLantern, 1};} // 1 is lit
+			}
+		}
+		
+    	// None are found, so return ordinary glowstone
+    	return new Object[]{Blocks.glowstone, 0};
+    }
+    
+	public static ItemStack chooseModLanternItem()
+	{
+		String[] modprioritylist = GeneralConfig.modLantern;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.lanternUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("enviromine"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.davyLampEM));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+		}
+		return null;
+	}
 	
 	// Banner
 	public static ItemStack chooseModBannerItem()
