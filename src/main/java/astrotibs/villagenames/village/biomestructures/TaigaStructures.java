@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
@@ -108,12 +110,12 @@ public class TaigaStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;	
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this.materialType, this.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	
         	if (this.field_143015_k < 0)
             {
@@ -354,19 +356,19 @@ public class TaigaStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.mossy_cobblestone, 0, this); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_slab, 3, this); Block biomeCobblestoneSlabBlock = (Block)blockObject[0]; int biomeCobblestoneSlabMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, this); Block biomeStoneStairsBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone_wall, 0, this); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.mossy_cobblestone, 0, this.materialType, this.biome); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_slab, 3, this.materialType, this.biome); Block biomeCobblestoneSlabBlock = (Block)blockObject[0]; int biomeCobblestoneSlabMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, this.materialType, this.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone_wall, 0, this.materialType, this.biome); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this.materialType, this.biome); Block biomeWallSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this.materialType, this.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, this.materialType, this.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
         	
         	if (this.field_143015_k < 0)
             {
@@ -500,219 +502,27 @@ public class TaigaStructures
             	
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
-            	boolean genericBoolean=false;
+            	// Generate decor
+            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(randomFromXYZ.nextInt(7), this, this.coordBaseMode, randomFromXYZ);
             	
-            	Object[] campfireObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), this.coordBaseMode);
-        		Block campfireBlock = (Block) campfireObject[0]; int campfireMeta = (Integer) campfireObject[1];
+            	for (BlueprintData b : decorBlueprint)
+            	{
+            		// Place block indicated by blueprint
+            		this.placeBlockAtCurrentPosition(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos(), uvw[2]+b.getWPos(), structureBB);
+            		
+            		// Fill below if flagged
+            		if ((b.getfillFlag()&1)!=0)
+            		{
+            			this.func_151554_b(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos()-1, uvw[2]+b.getWPos(), structureBB);
+            		}
+            		
+            		// Clear above if flagged
+            		if ((b.getfillFlag()&2)!=0)
+            		{
+            			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+b.getUPos(), decorHeightY+b.getVPos()+1, uvw[2]+b.getWPos(), structureBB);
+            		}            		
+            	}
             	
-	            switch (randomFromXYZ.nextInt(7))
-	            {
-            	case 0: // Wood trough
-            		boolean shift=randomFromXYZ.nextBoolean();
-            		switch (randomFromXYZ.nextInt(2))
-            		{
-            		case 0:
-            			// Base
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, decorHeightY-1, uvw[2]-2+(shift?1:0), uvw[0]+0, decorHeightY-1, uvw[2]+1+(shift?1:0), biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-            			// Foundation
-            			for (int i=-2 ; i<=1; i++) {this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-2, uvw[2]+i+(shift?1:0), structureBB);}
-            			// Left
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-1, decorHeightY+0, uvw[2]-2+(shift?1:0), uvw[0]-1, decorHeightY+0, uvw[2]+1+(shift?1:0), biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, false);
-            			// Right
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+1, decorHeightY+0, uvw[2]-2+(shift?1:0), uvw[0]+1, decorHeightY+0, uvw[2]+1+(shift?1:0), biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, false);
-            			// Front
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, decorHeightY+0, uvw[2]-3+(shift?1:0), uvw[0]+0, decorHeightY+0, uvw[2]-3+(shift?1:0), biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], false);
-            			// Back
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+0, decorHeightY+0, uvw[2]+2+(shift?1:0), uvw[0]+0, decorHeightY+0, uvw[2]+2+(shift?1:0), biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], false);
-            			break;
-            			
-            		case 1:
-            			// Base
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), decorHeightY-1, uvw[2]+0, uvw[0]+1+(shift?1:0), decorHeightY-1, uvw[2]+0, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-            			// Foundation
-            			for (int i=-2 ; i<=1; i++) {this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+i+(shift?1:0), decorHeightY-2, uvw[2]+0, structureBB);}
-            			// Left
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-3+(shift?1:0), decorHeightY+0, uvw[2]+0, uvw[0]-3+(shift?1:0), decorHeightY+0, uvw[2]+0, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, false);
-            			// Right
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]+2+(shift?1:0), decorHeightY+0, uvw[2]+0, uvw[0]+2+(shift?1:0), decorHeightY+0, uvw[2]+0, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, false);
-            			// Front
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), decorHeightY+0, uvw[2]-1, uvw[0]+1+(shift?1:0), decorHeightY+0, uvw[2]-1, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], false);
-            			// Back
-            			this.fillWithMetadataBlocks(world, structureBB, uvw[0]-2+(shift?1:0), decorHeightY+0, uvw[2]+1, uvw[0]+1+(shift?1:0), decorHeightY+0, uvw[2]+1, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], false);
-            			break;
-            		}
-            		break;
-            		
-            	case 1: // Large boulder
-            		// Central boulder is in the same place
-            		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            		
-            		switch (randomFromXYZ.nextInt(4))
-            		{
-            		case 0: // Facing you
-            			this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]+1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), uvw[0]+0, decorHeightY+0, uvw[2]-1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]-1, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), uvw[0]+0, decorHeightY+1, uvw[2]+1, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), uvw[0]+1, decorHeightY+0, uvw[2]+1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+1, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			break;
-            		case 1: // Facing left
-            			this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), uvw[0]-1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]-1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), uvw[0]+1, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), uvw[0]+1, decorHeightY+0, uvw[2]-1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+1, decorHeightY-1, uvw[2]-1, structureBB); // Foundation
-            			break;
-            		case 2: // Facing away
-            			this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]-1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]-1, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), uvw[0]+0, decorHeightY+0, uvw[2]+1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), uvw[0]+0, decorHeightY+1, uvw[2]-1, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), uvw[0]-1, decorHeightY+0, uvw[2]-1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]-1, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			break;
-            		case 3: // Facing right
-            			this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]-1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]-1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), uvw[0]+1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), uvw[0]-1, decorHeightY+1, uvw[2]+0, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), uvw[0]-1, decorHeightY+0, uvw[2]+1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]-1, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			break;
-            		}
-            		break;
-            	
-            	case 2: // Small boulder with spike
-            		genericBoolean=true;
-            	case 3: // Small boulder without spike
-            		// Central boulder is in the same place
-            		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            		
-            		Block boulderTopperBlock; int boulderTopperMeta;
-            		int boulderOrientation = random.nextInt(4);
-            		
-            		if (genericBoolean)
-            		{
-            			// Put a spike on top of the boulder
-            			
-            			boulderTopperBlock = Blocks.cobblestone_wall; boulderTopperMeta = 0;
-                		
-                		// Test the spike here by seeing if cobblestone remains as cobblestone.
-                		Object[] blockObjectTest = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeTestBlock = (Block)blockObjectTest[0]; int biomeTestMeta = (Integer)blockObjectTest[1];
-                		if (biomeTestBlock==Blocks.mossy_cobblestone)
-                		{
-                			// Try to make mossy cobblestone wall
-                			boulderTopperMeta = 1;
-                		}
-                		else if (biomeTestBlock==Blocks.sandstone)
-                		{
-                			// Try a sandstone wall--use a slab otherwise
-                			boulderTopperBlock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
-                			if (boulderTopperBlock==null) {boulderTopperBlock = Blocks.sandstone;}
-                		}
-                		else if (biomeTestBlock!=Blocks.cobblestone)
-                		{
-                			boulderTopperBlock = biomeTestBlock;
-                		}
-            		}
-            		else
-            		{
-            			// Put stairs on top of the boulder
-            			boulderTopperBlock = biomeStoneStairsBlock;
-            			boulderTopperMeta = this.getMetadataWithOffset(boulderTopperBlock, (new int[]{3,0,2,1})[boulderOrientation]);
-            		}
-            		
-            		this.placeBlockAtCurrentPosition(world, boulderTopperBlock, boulderTopperMeta, uvw[0]+0, decorHeightY+1, uvw[2]+0, structureBB);
-            		
-            		switch(boulderOrientation)
-            		{
-            		case 0:
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 2), uvw[0]+0, decorHeightY+0, uvw[2]+1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]+1, structureBB); // Foundation
-            			break;
-            		case 1:
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 1), uvw[0]+1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			break;
-            		case 2:
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 3), uvw[0]+0, decorHeightY+0, uvw[2]-1, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+0, decorHeightY-1, uvw[2]-1, structureBB); // Foundation
-            			break;
-            		case 3:
-            			this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(biomeStoneStairsBlock, 0), uvw[0]-1, decorHeightY+0, uvw[2]+0, structureBB);
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]-1, decorHeightY-1, uvw[2]+0, structureBB); // Foundation
-            			break;
-            		}
-            		break;
-            		
-            	case 4: // Campfire
-            		
-            		this.placeBlockAtCurrentPosition(world, campfireBlock, campfireMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		
-            		break;
-            		
-            	case 5: // Campfire over hay in bin
-            		
-            		// Foundation
-            		for (int i=-1 ; i<=1; i++) {for (int l=-1 ; l<=1; l++) {if (i==0 || j==0) {
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0]+i, decorHeightY-1, uvw[2]+j, structureBB);
-            			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+i, decorHeightY+0, uvw[2]+j, structureBB); // Clear above
-            		}}}
-        			// Left
-        			this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, uvw[0]-1, decorHeightY+0, uvw[2]+0, structureBB);
-        			// Right
-        			this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 7 : 5, uvw[0]+1, decorHeightY+0, uvw[2]+0, structureBB);
-        			// Front
-        			this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], uvw[0]+0, decorHeightY+0, uvw[2]-1, structureBB);
-        			// Back
-        			this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[this.coordBaseMode], uvw[0]+0, decorHeightY+0, uvw[2]+1, structureBB);
-            		
-        			this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-        			
-        			// Campfire
-        			world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), campfireBlock, campfireMeta, 2);
-            		
-            		break;
-            		
-            	case 6: // Torch on a cobblestone wall
-            		
-            		Object[] blockObjectTest = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeTestBlock = (Block)blockObjectTest[0]; int biomeTestMeta = (Integer)blockObjectTest[1];
-            		
-            		boulderTopperBlock=Blocks.cobblestone_wall; boulderTopperMeta=0;
-            		if (biomeTestBlock==Blocks.mossy_cobblestone)
-            		{
-            			// Try to make mossy cobblestone wall
-            			boulderTopperMeta = 1;
-            		}
-            		else if (biomeTestBlock==Blocks.sandstone)
-            		{
-            			// Try a sandstone wall--use a slab otherwise
-            			boulderTopperBlock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
-            			if (boulderTopperBlock==null) {boulderTopperBlock = Blocks.sandstone;}
-            		}
-            		else if (biomeTestBlock!=Blocks.cobblestone)
-            		{
-            			boulderTopperBlock = biomeTestBlock;
-            		}
-            		
-            		this.placeBlockAtCurrentPosition(world, boulderTopperBlock, boulderTopperMeta, uvw[0]+0, decorHeightY+0, uvw[2]+0, structureBB);
-            		world.setBlock(this.getXWithOffset(uvw[0]+0, uvw[2]+0), this.getYWithOffset(decorHeightY+1), this.getZWithOffset(uvw[0]+0, uvw[2]+0), Blocks.torch, 0, 2);
-            		
-            		break;
-	            }
-	            
             }
             
         	
@@ -891,4 +701,243 @@ public class TaigaStructures
         }
         
     }
+	
+	/**
+	 * Returns a list of blocks and coordinates used to construct a decor piece
+	 */
+	protected static ArrayList<BlueprintData> getTaigaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+	{
+		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
+		
+		
+		// Generate per-material blocks
+		
+		Object[] blockObject;
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, startVN.materialType, startVN.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, startVN.materialType, startVN.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, startVN.materialType, startVN.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, startVN.materialType, startVN.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, startVN.materialType, startVN.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+		
+    	
+		boolean genericBoolean=false;
+    	
+    	Object[] campfireObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), coordBaseMode);
+		Block campfireBlock = (Block) campfireObject[0]; int campfireMeta = (Integer) campfireObject[1];
+    	
+        switch (random.nextInt(7))
+        {
+    	case 0: // Wood trough
+    		boolean shift=random.nextBoolean();
+    		switch (random.nextInt(2))
+    		{
+    		case 0:
+    			
+    			// Base and foundation
+    			for (int i=-2 ; i<=1; i++)
+    			{
+    				BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, -1, i+(shift?1:0), biomePlankBlock, biomePlankMeta);
+    				BlueprintData.addFillBelowTo(blueprint, 0, -2, i+(shift?1:0), biomeDirtBlock, biomeDirtMeta);
+    			}
+    			
+    			// Left
+    			BlueprintData.addFillWithBlocks(blueprint, -1, 0, -2+(shift?1:0), -1, 0, 1+(shift?1:0), biomeTrapdoorBlock, coordBaseMode%2==0 ? 6 : 4);
+    			// Right
+    			BlueprintData.addFillWithBlocks(blueprint, 1, 0, -2+(shift?1:0), 1, 0, 1+(shift?1:0), biomeTrapdoorBlock, coordBaseMode%2==0 ? 7 : 5);
+    			// Front
+    			BlueprintData.addFillWithBlocks(blueprint, 0, 0, -3+(shift?1:0), 0, 0, -3+(shift?1:0), biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[coordBaseMode]);
+    			// Back
+    			BlueprintData.addFillWithBlocks(blueprint, 0, 0, 2+(shift?1:0), 0, 0, 2+(shift?1:0), biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[coordBaseMode]);
+    			
+    			break;
+    			
+    		case 1:
+    			// Base
+    			BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), -1, 0, 1+(shift?1:0), -1, 0, biomePlankBlock, biomePlankMeta);
+    			// Foundation
+    			for (int i=-2 ; i<=1; i++) {BlueprintData.addPlaceBlock(blueprint, i+(shift?1:0), -2, 0, biomeDirtBlock, biomeDirtMeta);}
+    			
+    			// Left
+    			BlueprintData.addFillWithBlocks(blueprint, -3+(shift?1:0), 0, 0, -3+(shift?1:0), 0, 0, biomeTrapdoorBlock, coordBaseMode%2==0 ? 6 : 4);
+    			// Right
+    			BlueprintData.addFillWithBlocks(blueprint, 2+(shift?1:0), 0, 0, 2+(shift?1:0), 0, 0, biomeTrapdoorBlock, coordBaseMode%2==0 ? 7 : 5);
+    			// Front
+    			BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), 0, -1, 1+(shift?1:0), 0, -1, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[coordBaseMode]);
+    			// Back
+    			BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), 0, 1, 1+(shift?1:0), 0, 1, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[coordBaseMode]);
+    			break;
+    		}
+    		break;
+    		
+    	case 1: // Large boulder
+    		// Central boulder is in the same place
+    		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		
+    		switch (random.nextInt(4))
+    		{
+    		case 0: // Facing you
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 3, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 3, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, 1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 2, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 1, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			break;
+    		case 1: // Facing left
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 0, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 0, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, 1, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 1, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 3, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			break;
+    		case 2: // Facing away
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 2, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 2, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, -1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 3, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, -1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 0, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			break;
+    		case 3: // Facing right
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 1, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 1, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, -1, 1, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 0, coordBaseMode));
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 2, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			break;
+    		}
+    		break;
+    	
+    	case 2: // Small boulder with spike
+    		genericBoolean=true;
+    	case 3: // Small boulder without spike
+    		// Central boulder is in the same place
+    		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		
+    		Block boulderTopperBlock; int boulderTopperMeta;
+    		int boulderOrientation = random.nextInt(4);
+    		
+    		if (genericBoolean)
+    		{
+    			// Put a spike on top of the boulder
+    			
+    			boulderTopperBlock = Blocks.cobblestone_wall; boulderTopperMeta = 0;
+        		
+        		// Test the spike here by seeing if cobblestone remains as cobblestone.
+        		if (biomeCobblestoneBlock==Blocks.mossy_cobblestone)
+        		{
+        			// Try to make mossy cobblestone wall
+        			boulderTopperMeta = 1;
+        		}
+        		else if (biomeCobblestoneBlock==Blocks.sandstone)
+        		{
+        			// Try a sandstone wall--use a slab otherwise
+        			boulderTopperBlock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
+        			if (boulderTopperBlock==null) {boulderTopperBlock = Blocks.sandstone;}
+        		}
+        		else if (biomeCobblestoneBlock!=Blocks.cobblestone)
+        		{
+        			boulderTopperBlock = biomeCobblestoneBlock;
+        		}
+    		}
+    		else
+    		{
+    			// Put stairs on top of the boulder
+    			boulderTopperBlock = biomeStoneStairsBlock;
+    			boulderTopperMeta = StructureVillageVN.getMetadataWithOffset(boulderTopperBlock, (new int[]{3,0,2,1})[boulderOrientation], coordBaseMode);
+    		}
+    		
+    		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, boulderTopperBlock, boulderTopperMeta);
+    		
+    		switch(boulderOrientation)
+    		{
+    		case 0:
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 2, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta);
+    			break;
+    		case 1:
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 1, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeDirtBlock, biomeDirtMeta);
+    			break;
+    		case 2:
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 3, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeDirtBlock, biomeDirtMeta);
+    			break;
+    		case 3:
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, biomeStoneStairsBlock, StructureVillageVN.getMetadataWithOffset(biomeStoneStairsBlock, 0, coordBaseMode));
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta);
+    			break;
+    		}
+    		break;
+    		
+    	case 4: // Campfire
+    		
+    		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 0, 0, campfireBlock, campfireMeta);
+    		
+    		break;
+    		
+    	case 5: // Campfire over hay in bin
+    		
+    		// Foundation
+    		//for (int i=-1 ; i<=1; i++) {for (int l=-1 ; l<=1; l++) {if (i==0 || l==0) {
+    		//	BlueprintData.addPlaceBlock(blueprint, i, -1, l, biomeGrassBlock, biomeGrassMeta);
+    		//	BlueprintData.addFillBelowTo(blueprint, i, -2, l, biomeDirtBlock, biomeDirtMeta);
+    		//}}}
+    		
+			// Left
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, -1, 0, 0, biomeTrapdoorBlock, coordBaseMode%2==0 ? 6 : 4);
+			// Right
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, 1, 0, 0, biomeTrapdoorBlock, coordBaseMode%2==0 ? 7 : 5);
+			// Front
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 0, -1, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[coordBaseMode]);
+			// Back
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 0, 1, biomeTrapdoorBlock, (new int[]{5, 6, 4, 7})[coordBaseMode]);
+    		
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 0, 0, Blocks.hay_block, 0);
+			
+			// Campfire
+			BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 1, 0, campfireBlock, campfireMeta);
+			
+    		break;
+    		
+    	case 6: // Torch on a cobblestone wall
+    		
+    		boulderTopperBlock=Blocks.cobblestone_wall; boulderTopperMeta=0;
+    		if (biomeCobblestoneBlock==Blocks.mossy_cobblestone)
+    		{
+    			// Try to make mossy cobblestone wall
+    			boulderTopperMeta = 1;
+    		}
+    		else if (biomeCobblestoneBlock==Blocks.sandstone)
+    		{
+    			// Try a sandstone wall--use a slab otherwise
+    			boulderTopperBlock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
+    			if (boulderTopperBlock==null) {boulderTopperBlock = Blocks.sandstone;}
+    		}
+    		else if (biomeCobblestoneBlock!=Blocks.cobblestone)
+    		{
+    			boulderTopperBlock = biomeCobblestoneBlock;
+    		}
+    		
+    		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, boulderTopperBlock, boulderTopperMeta);
+    		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 1, 0, Blocks.torch, 0);
+    		
+    		break;
+        }
+        
+        // Return the decor blueprint
+        return blueprint;
+	}
 }

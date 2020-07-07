@@ -565,8 +565,6 @@ public class ModObjects {
     	
 		for (String mod : modprioritylist)
 		{
-			Item moditem=null;
-			
 			if (mod.toLowerCase().equals("uptodate"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternUTD);

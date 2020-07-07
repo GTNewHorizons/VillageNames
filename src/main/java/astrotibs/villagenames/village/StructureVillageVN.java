@@ -14,11 +14,13 @@ import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -28,6 +30,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
@@ -263,12 +267,13 @@ public class StructureVillageVN
     /**
      * Biome-specific block replacement
      */
-    public static Object[] getBiomeSpecificBlock(Block block, int meta, StructureVillageVN.StartVN startPiece)
+    //public static Object[] getBiomeSpecificBlock(Block block, int meta, StructureVillageVN.StartVN startPiece)
+    public static Object[] getBiomeSpecificBlock(Block block, int meta, MaterialType materialType, BiomeGenBase biome)
     {
-    	if (startPiece==null) {return new Object[]{block, meta};}
+    	if (materialType==null || biome==null) {return new Object[]{block, meta};}
     	
     	// TODO - use vanilla fences and gates in 1.8
-    	if (startPiece.materialType == FunctionsVN.MaterialType.SPRUCE)
+    	if (materialType == FunctionsVN.MaterialType.SPRUCE)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 1};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 1};}
@@ -285,7 +290,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 1};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.BIRCH)
+        if (materialType == FunctionsVN.MaterialType.BIRCH)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 2};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 2};}
@@ -302,7 +307,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogBirchUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 2};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.JUNGLE)
+        if (materialType == FunctionsVN.MaterialType.JUNGLE)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 3};}
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};}
@@ -326,7 +331,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogJungleUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 3};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.ACACIA)
+        if (materialType == FunctionsVN.MaterialType.ACACIA)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + 0};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 4};}
@@ -343,7 +348,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 0};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.DARK_OAK)
+        if (materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + 1};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 5};}
@@ -360,7 +365,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 1};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.SAND)
+        if (materialType == FunctionsVN.MaterialType.SAND)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
@@ -393,7 +398,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.MESA)
+        if (materialType == FunctionsVN.MaterialType.MESA)
         {
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with village colors?
         	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.hardened_clay, 0};}
@@ -409,7 +414,7 @@ public class StructureVillageVN
 													        		return new Object[]{block, 0};
 															   } // Brick wall
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.SNOW)
+        if (materialType == FunctionsVN.MaterialType.SNOW)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + 1};}
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 1};}
@@ -429,7 +434,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 1};}
         }
-        if (startPiece.materialType == FunctionsVN.MaterialType.MUSHROOM)
+        if (materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
@@ -438,7 +443,7 @@ public class StructureVillageVN
         }
         
         // Post Forge event
-        BiomeEvent.GetVillageBlockID event = new BiomeEvent.GetVillageBlockID(startPiece == null ? null : startPiece.biome, block, meta);
+        BiomeEvent.GetVillageBlockID event = new BiomeEvent.GetVillageBlockID(biome == null ? null : biome, block, meta);
         MinecraftForge.TERRAIN_GEN_BUS.post(event);
         if (event.getResult() == Result.DENY) return new Object[]{event.replacement, meta};
         
@@ -510,10 +515,10 @@ public class StructureVillageVN
      */
     public static int setPathSpecificBlock(World world, StructureVillageVN.StartVN startPiece, int meta, int posX, int posY, int posZ)
     {
-    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, startPiece);
-    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, startPiece);
-    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece);
-    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece);
+    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, startPiece.materialType, startPiece.biome);
+    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, startPiece.materialType, startPiece.biome);
+    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece.materialType, startPiece.biome);
+    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece.materialType, startPiece.biome);
     	
     	// Top block level
     	int surfaceY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1;
@@ -1172,4 +1177,209 @@ public class StructureVillageVN
     }
     
     
+    
+    /**
+     * Returns the direction-shifted metadata for blocks that require orientation, e.g. doors, stairs, ladders.
+     */
+    public static int getMetadataWithOffset(Block blockIn, int metaIn, int coordBaseMode)
+    {
+    	// Rotate rails
+        if (blockIn == Blocks.rail)
+        {
+            if (coordBaseMode == 1 || coordBaseMode == 3)
+            {
+                if (metaIn == 1) {return 0;}
+                return 1;
+            }
+        }
+        else if (blockIn != Blocks.wooden_door && blockIn != Blocks.iron_door)
+        {
+            if (blockIn != Blocks.stone_stairs && blockIn != Blocks.oak_stairs && blockIn != Blocks.nether_brick_stairs && blockIn != Blocks.stone_brick_stairs && blockIn != Blocks.sandstone_stairs)
+            {
+                if (blockIn == Blocks.ladder)
+                {
+                    if (coordBaseMode == 0)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 2: return 3;
+                    	case 3: return 2;
+                    	default:
+                    	}
+                    }
+                    else if (coordBaseMode == 1)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 2: return 4;
+                    	case 3: return 5;
+                    	case 4: return 2;
+                    	case 5: return 3;
+                    	default:
+                    	}
+                    }
+                    else if (coordBaseMode == 3)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 2: return 5;
+                    	case 3: return 4;
+                    	case 4: return 2;
+                    	case 5: return 3;
+                    	default:
+                    	}
+                    }
+                }
+                else if (blockIn == Blocks.stone_button)
+                {
+                    if (coordBaseMode == 0)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 3: return 4;
+                    	case 4: return 3;
+                    	default:
+                    	}
+                    }
+                    else if (coordBaseMode == 1)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 1: return 4;
+                    	case 2: return 3;
+                    	case 3: return 1;
+                    	case 4: return 2;
+                    	default:
+                    	}
+                    }
+                    else if (coordBaseMode == 3)
+                    {
+                    	switch (metaIn)
+                    	{
+                    	case 1: return 4;
+                    	case 2: return 3;
+                    	case 3: return 2;
+                    	case 4: return 1;
+                    	default:
+                    	}
+                    }
+                }
+                else if (blockIn != Blocks.tripwire_hook && !(blockIn instanceof BlockDirectional))
+                {
+                    if (blockIn == Blocks.piston || blockIn == Blocks.sticky_piston || blockIn == Blocks.lever || blockIn == Blocks.dispenser)
+                    {
+                        if (coordBaseMode == 0)
+                        {
+                            if (metaIn == 2 || metaIn == 3)
+                            {
+                                return Facing.oppositeSide[metaIn];
+                            }
+                        }
+                        else if (coordBaseMode == 1)
+                        {
+                        	switch (metaIn)
+                        	{
+                        	case 2: return 4;
+                        	case 3: return 5;
+                        	case 4: return 2;
+                        	case 5: return 3;
+                        	default:
+                        	}
+                        }
+                        else if (coordBaseMode == 3)
+                        {
+                        	switch (metaIn)
+                        	{
+                        	case 2: return 5;
+                        	case 3: return 4;
+                        	case 4: return 2;
+                        	case 5: return 3;
+                        	default:
+                        	}
+                        }
+                    }
+                }
+                else if (coordBaseMode == 0)
+                {
+                    if (metaIn == 0 || metaIn == 2)
+                    {
+                        return Direction.rotateOpposite[metaIn];
+                    }
+                }
+                else if (coordBaseMode == 1)
+                {
+                	switch (metaIn)
+                	{
+                	case 0: return 3;
+                	case 1: return 2;
+                	case 2: return 1;
+                	case 3: return 0;
+                	default:
+                	}
+                }
+                else if (coordBaseMode == 3)
+                {
+                	switch (metaIn)
+                	{
+                	case 0: return 1;
+                	case 1: return 2;
+                	case 2: return 3;
+                	case 3: return 0;
+                	default:
+                	}
+                }
+            }
+            else if (coordBaseMode == 0)
+            {
+            	switch (metaIn)
+            	{
+            	case 2: return 3;
+            	case 3: return 2;
+            	default:
+            	}
+            }
+            else if (coordBaseMode == 1)
+            {
+            	switch (metaIn)
+            	{
+            	case 0: return 2;
+            	case 1: return 3;
+            	case 2: return 0;
+            	case 3: return 1;
+            	default:
+            	}
+            }
+            else if (coordBaseMode == 3)
+            {
+            	switch (metaIn)
+            	{
+            	case 0: return 2;
+            	case 1: return 3;
+            	case 2: return 1;
+            	case 3: return 0;
+            	default:
+            	}
+            }
+        }
+        else if (coordBaseMode == 0)
+        {
+        	switch (metaIn)
+        	{
+        	case 0: return 2;
+        	case 2: return 0;
+        	default:
+        	}
+        }
+        else
+        {
+        	switch (metaIn)
+        	{
+        	case 1: return metaIn + 1 & 3;
+        	case 3: return metaIn + 3 & 3;
+        	default:
+        	}
+        }
+
+        return metaIn;
+    }
 }

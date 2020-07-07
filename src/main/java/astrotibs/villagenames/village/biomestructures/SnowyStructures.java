@@ -89,14 +89,14 @@ public class SnowyStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this.materialType, this.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this.materialType, this.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
         	
         	// For stripped wood specifically
@@ -108,7 +108,7 @@ public class SnowyStructures
         	Block tryStrippedWood = Block.getBlockFromName(ModObjects.strippedLogOakUTD);
         	if (tryStrippedWood != null)
         	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedWood, 12, this);
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedWood, 12, this.materialType, this.biome);
         		// Set the blocks as stripped logs and the metas as 12
         		biomeStrippedWoodOrLogOrLogVerticBlock = biomeStrippedWoodOrLogOrLogHorAlongBlock = biomeStrippedWoodOrLogOrLogHorAcrossBlock = (Block)blockObject[0];
         		biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
@@ -122,7 +122,7 @@ public class SnowyStructures
         		
         		if (tryStrippedLogs != null)
             	{
-        			blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedLogs, 0, this);
+        			blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedLogs, 0, this.materialType, this.biome);
         			biomeStrippedWoodOrLogOrLogVerticBlock = biomeStrippedWoodOrLogOrLogHorAlongBlock = biomeStrippedWoodOrLogOrLogHorAcrossBlock = (Block)blockObject[0];
         			biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
         			biomeStrippedWoodOrLogOrLogHorAlongMeta = biomeStrippedWoodOrLogOrLogVerticMeta + 8 + (this.coordBaseMode%2==0 ? 4 : 0);
@@ -442,11 +442,11 @@ public class SnowyStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, this); Block biomeWoodenStairsBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, this.materialType, this.biome); Block biomeWoodenStairsBlock = (Block)blockObject[0];
         	
         	if (this.field_143015_k < 0)
             {
@@ -707,13 +707,13 @@ public class SnowyStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this); Block biomeWallSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, this.materialType, this.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this.materialType, this.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wall_sign, 0, this.materialType, this.biome); Block biomeWallSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeLanternMeta = (Integer)blockObject[1];
         	
         	// For stripped wood specifically
@@ -725,7 +725,7 @@ public class SnowyStructures
         	Block tryStrippedWood = Block.getBlockFromName(ModObjects.strippedLogOakUTD);
         	if (tryStrippedWood != null)
         	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedWood, 12, this);
+        		blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedWood, 12, this.materialType, this.biome);
         		// Set the blocks as stripped logs and the metas as 12
         		biomeStrippedWoodOrLogOrLogVerticBlock = biomeStrippedWoodOrLogOrLogHorAlongBlock = biomeStrippedWoodOrLogOrLogHorAcrossBlock = (Block)blockObject[0];
         		biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
@@ -739,7 +739,7 @@ public class SnowyStructures
         		
         		if (tryStrippedLogs != null)
             	{
-        			blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedLogs, 0, this);
+        			blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedLogs, 0, this.materialType, this.biome);
         			biomeStrippedWoodOrLogOrLogVerticBlock = biomeStrippedWoodOrLogOrLogHorAlongBlock = biomeStrippedWoodOrLogOrLogHorAcrossBlock = (Block)blockObject[0];
         			biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
         			biomeStrippedWoodOrLogOrLogHorAlongMeta = biomeStrippedWoodOrLogOrLogVerticMeta + 8 + (this.coordBaseMode%2==0 ? 4 : 0);

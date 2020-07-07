@@ -103,7 +103,7 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	
         	if (this.field_143015_k < 0)
             {
@@ -354,7 +354,7 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	
         	if (this.field_143015_k < 0)
             {
@@ -646,9 +646,9 @@ public class DesertStructures
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
         	Object[] blockObject;
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this); Block biomeStandingSignBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	Block biomeSandstoneWall = Block.getBlockFromName(ModObjects.sandstoneWallUTD); int biomeSandstoneMeta = 0;
-        	if (biomeSandstoneWall==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this); biomeSandstoneWall = (Block)blockObject[0]; biomeSandstoneMeta = (Integer)blockObject[1];}
+        	if (biomeSandstoneWall==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); biomeSandstoneWall = (Block)blockObject[0]; biomeSandstoneMeta = (Integer)blockObject[1];}
         	
         	if (this.field_143015_k < 0)
             {
