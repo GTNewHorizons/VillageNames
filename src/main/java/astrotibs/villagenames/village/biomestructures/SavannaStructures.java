@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -1222,4 +1223,37 @@ public class SavannaStructures
             return true;
         }
     }
+    
+    
+	/**
+	 * Returns a list of blocks and coordinates used to construct a decor piece
+	 */
+	protected static ArrayList<BlueprintData> getRandomSavannaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+	{
+		int decorCount = 1;
+		return getSavannaDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
+	}
+	protected static ArrayList<BlueprintData> getSavannaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+	{
+		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
+		
+		
+		// Generate per-material blocks
+		
+		Object[] blockObject;
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, startVN.materialType, startVN.biome); Block biomeFenceBlock = (Block)blockObject[0];
+    	
+        switch (decorType)
+        {
+    	case 0: // Torch on fence
+    		
+    		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeFenceBlock);
+    		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, Blocks.torch, 0);
+    		
+    		break;
+        }
+        
+        // Return the decor blueprint
+        return blueprint;
+	}
 }

@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -1312,4 +1313,78 @@ public class PlainsStructures
             return true;
         }
     }
+    
+    
+    
+	/**
+	 * Returns a list of blocks and coordinates used to construct a decor piece
+	 */
+	protected static ArrayList<BlueprintData> getRandomPlainsDecorBlueprint(StartVN startVN, int coordBaseMode, Random random, int townColor)
+	{
+		int decorCount = 1;
+		return getPlainsDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random, townColor);
+	}
+	protected static ArrayList<BlueprintData> getPlainsDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random, int townColor)
+	{
+		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
+		
+		
+		// Generate per-material blocks
+		
+		Object[] blockObject;
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, startVN.materialType, startVN.biome); Block biomeFenceBlock = (Block)blockObject[0];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, startVN.materialType, startVN.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+    	
+    	// For stripped wood specifically
+    	Block biomeStrippedWoodOrLogOrLogVerticBlock = null; int biomeStrippedWoodOrLogOrLogVerticMeta = 0;
+    	
+    	// First, try to get UTD's Stripped Log. If it exists, we can use meta 12 to turn it into Stripped Wood.
+    	Block tryStrippedWood = Block.getBlockFromName(ModObjects.strippedLogOakUTD);
+    	if (tryStrippedWood != null)
+    	{
+    		blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedWood, 12, startVN.materialType, startVN.biome);
+    		// Set the blocks as stripped logs and the metas as 12
+    		biomeStrippedWoodOrLogOrLogVerticBlock = (Block)blockObject[0];
+    		biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
+    	}
+    	else
+    	{
+    		// Next, try to see if you can use a mod that has just stripped logs, but not stripped wood (EF)
+    		Block tryStrippedLogs = Block.getBlockFromName(ModObjects.strippedLog1EF);
+    		
+    		if (tryStrippedLogs != null)
+        	{
+    			blockObject = StructureVillageVN.getBiomeSpecificBlock(tryStrippedLogs, 0, startVN.materialType, startVN.biome);
+    			biomeStrippedWoodOrLogOrLogVerticBlock = (Block)blockObject[0];
+    			biomeStrippedWoodOrLogOrLogVerticMeta = (Integer)blockObject[1];
+        	}
+    		else
+    		{
+    			// If those two fail, return the vanilla logs
+        		biomeStrippedWoodOrLogOrLogVerticBlock = biomeLogVertBlock;
+        		biomeStrippedWoodOrLogOrLogVerticMeta = biomeLogVertMeta;
+    		}
+    	}
+    	
+        switch (decorType)
+        {
+    	case 0: // Plains Lamp 1
+    		
+    		BlueprintData.addFillWithBlocks(blueprint, 0, 0, 0, 0, 2, 0, biomeFenceBlock);
+    		BlueprintData.addPlaceBlock(blueprint, 0, 3, 0, biomeStrippedWoodOrLogOrLogVerticBlock, biomeStrippedWoodOrLogOrLogVerticMeta);
+    		for (int[] lamp_uw : new int[][]{
+    			{-1,0},
+    			{1,0},
+    			{0,-1},
+    			{0,1}
+    			}) {
+    			BlueprintData.addPlaceBlock(blueprint, lamp_uw[0], 3, lamp_uw[1], Blocks.torch, 0);
+    		}
+    		
+    		break;
+        }
+        
+        // Return the decor blueprint
+        return blueprint;
+	}
 }

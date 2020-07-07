@@ -503,7 +503,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(randomFromXYZ.nextInt(7), this, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = getRandomTaigaDecorBlueprint(this, this.coordBaseMode, randomFromXYZ);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -705,6 +705,11 @@ public class TaigaStructures
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
+	protected static ArrayList<BlueprintData> getRandomTaigaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+	{
+		int decorCount = 7;
+		return getTaigaDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
+	}
 	protected static ArrayList<BlueprintData> getTaigaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
 	{
 		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
@@ -718,14 +723,11 @@ public class TaigaStructures
     	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, startVN.materialType, startVN.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
     	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, startVN.materialType, startVN.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, startVN.materialType, startVN.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
-		
-    	
+    	blockObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), coordBaseMode); Block campfireBlock = (Block) blockObject[0]; int campfireMeta = (Integer) blockObject[1];
+    	    	
 		boolean genericBoolean=false;
     	
-    	Object[] campfireObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), coordBaseMode);
-		Block campfireBlock = (Block) campfireObject[0]; int campfireMeta = (Integer) campfireObject[1];
-    	
-        switch (random.nextInt(7))
+        switch (decorType)
         {
     	case 0: // Wood trough
     		boolean shift=random.nextBoolean();

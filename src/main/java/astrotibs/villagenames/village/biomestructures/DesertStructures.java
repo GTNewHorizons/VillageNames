@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village.biomestructures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.BlockPos;
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
@@ -851,22 +853,70 @@ public class DesertStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 3, 2, 6, structureBB); // dead bush
         	this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 10, 4, 1, 5, structureBB); // dead bush
         	
-        	// Lantern decor
-        	for (int[] uvw : new int[][]{
+        	
+            // Lantern Decor
+            int[][] decorUVW = new int[][]{
     			{1, 1, 11},
     			{12, 1, 12},
     			{13, 1, 0},
     			{14, 1, 3},
-        	})
-        	{
-        		// Base
-        		this.fillWithMetadataBlocks(world, structureBB, uvw[0], uvw[1], uvw[2], uvw[0], uvw[1]+1, uvw[2], Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-        		// Tip
-                if (GeneralConfig.decorateVillageCenter) {this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, townColor, uvw[0], uvw[1]+2, uvw[2], structureBB);}
-            	else {this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uvw[0], uvw[1]+2, uvw[2], structureBB);}
-        		// Torch
-            	world.setBlock(this.getXWithOffset(uvw[0], uvw[2]), this.getYWithOffset(uvw[1]+3), this.getZWithOffset(uvw[0], uvw[2]), Blocks.torch, 0, 2);
-        	}
+            };  
+            
+            for (int j=0; j<decorUVW.length; j++)
+            {
+            	// Get coordinates
+            	int[] uvw = decorUVW[j];
+            	
+            	// Set random seed
+            	Random randomFromXYZ = new Random();
+            	randomFromXYZ.setSeed(
+        					world.getSeed() +
+        					FunctionsVN.getUniqueLongForXYZ(
+        							this.getXWithOffset(uvw[0], uvw[2]),
+        							this.getYWithOffset(uvw[1]),
+        							this.getZWithOffset(uvw[0], uvw[2])
+        							)
+            			);
+            	
+            	int decorHeightY;
+            	
+            	// Get ground level
+            	if (this.decorHeightY.size()<(j+1))
+            	{
+            		// There are fewer stored ground levels than this decor number, so this is being generated for the first time.
+            		// Add new ground level
+            		decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
+            		this.decorHeightY.add(decorHeightY);
+            	}
+            	else
+            	{
+            		// There is already (presumably) a value for this ground level, so this decor is being multiply generated.
+            		// Retrieve ground level
+            		decorHeightY = this.decorHeightY.get(j);
+            	}
+            	
+        		// Generate decor
+            	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this, this.coordBaseMode, randomFromXYZ, townColor);
+            	
+            	for (BlueprintData b : decorBlueprint)
+            	{
+            		// Place block indicated by blueprint
+            		this.placeBlockAtCurrentPosition(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos(), uvw[2]+b.getWPos(), structureBB);
+            		
+            		// Fill below if flagged
+            		if ((b.getfillFlag()&1)!=0)
+            		{
+            			this.func_151554_b(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos()-1, uvw[2]+b.getWPos(), structureBB);
+            		}
+            		
+            		// Clear above if flagged
+            		if ((b.getfillFlag()&2)!=0)
+            		{
+            			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+b.getUPos(), decorHeightY+b.getVPos()+1, uvw[2]+b.getWPos(), structureBB);
+            		}            		
+            	}
+            }
+        	
         	
         	// Sign
             int signXBB = 8;
@@ -959,4 +1009,32 @@ public class DesertStructures
             return true;
         }
     }
+    
+    
+	/**
+	 * Returns a list of blocks and coordinates used to construct a decor piece
+	 */
+	protected static ArrayList<BlueprintData> getRandomDesertDecorBlueprint(StartVN startVN, int coordBaseMode, Random random, int townColor)
+	{
+		int decorCount = 1;
+		return getDesertDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random, townColor);
+	}
+	protected static ArrayList<BlueprintData> getDesertDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random, int townColor)
+	{
+		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
+		
+        switch (decorType)
+        {
+    	case 0: // Torch on stained terracotta and cut sandstone
+    		
+    		BlueprintData.addFillWithBlocks(blueprint, 0, 0, 0, 0, 1, 0, Blocks.sandstone, 2);
+    		BlueprintData.addPlaceBlock(blueprint, 0, 2, 0, GeneralConfig.decorateVillageCenter ? Blocks.stained_hardened_clay : Blocks.hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 0);
+    		BlueprintData.addPlaceBlock(blueprint, 0, 3, 0, Blocks.torch, 0);
+    		
+    		break;
+        }
+        
+        // Return the decor blueprint
+        return blueprint;
+	}
 }
