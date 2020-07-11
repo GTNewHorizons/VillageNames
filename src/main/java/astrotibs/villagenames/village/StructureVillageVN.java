@@ -24,6 +24,12 @@ import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -42,6 +48,7 @@ import net.minecraft.world.gen.structure.MapGenStructureData;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -52,10 +59,82 @@ import net.minecraftforge.event.terraingen.BiomeEvent;
  */
 public class StructureVillageVN
 {
+	// Array of meta values for furnaces indexed by [furnaceOrientation][horizIndex]
+	public static final int[][] FURNACE_META_ARRAY = new int[][]{
+		{3,4,2,5},
+		{5,3,5,3},
+		{2,5,3,4},
+		{4,2,4,2},
+	};
+	
+	// Array of meta values for door indexed by [isLower][isRightHanded][isShut][furnaceOrientation][horizIndex]
+	public static final int[][][][][] DOOR_META_ARRAY = new int[][][][][]
+	{
+		// --- UPPER HALF --- //
+		// Left-hand
+		{{{ // Open
+		{8,8,9,9},
+		{8,8,9,9},
+		{8,8,9,9},
+		{8,8,9,9}
+		},
+		{ // Shut
+		{8,8,9,9},
+		{8,8,9,9},
+		{8,8,9,9},
+		{8,8,9,9}
+		}},
+		
+		// Right-hand
+		{{ // Open
+		{9,9,8,8},
+		{9,9,8,8},
+		{9,9,8,8},
+		{9,9,8,8}
+		},
+		{ // Shut
+		{9,9,8,8},
+		{9,9,8,8},
+		{9,9,8,8},
+		{9,9,8,8}
+		}}},
+		
+		// --- LOWER HALF --- //
+		// Left-hand
+		{{{ // Open
+		{7,4,5,6},
+		{6,7,6,7},
+		{5,6,7,4},
+		{4,5,4,5}
+		},
+		{ // Shut
+		{3,0,1,2},
+		{2,3,2,3},
+		{1,2,3,0},
+		{0,1,0,1}
+		}},
+		
+		// Right-hand
+		{{ // Open
+		{7,4,5,6},
+		{6,7,6,7},
+		{5,6,7,4},
+		{4,5,4,5}
+		},
+		{ // Shut
+		{3,0,1,2},
+		{2,3,2,3},
+		{1,2,3,0},
+		{0,1,0,1}
+		}}}
+	};
+	
+	
     public static List getStructureVillageWeightedPieceList(Random random, int villageSize)
     {
-        ArrayList arraylist = new ArrayList();
+    	ArrayList arraylist = new ArrayList();
         
+    	// Legacy structures
         if (GeneralConfig.structureLegacySmallHouse) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House4Garden.class, 4, MathHelper.getRandomIntegerInRange(random, 2 + villageSize, 4 + villageSize * 2)));}
         if (GeneralConfig.structureLegacyChurch) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Church.class, 20, MathHelper.getRandomIntegerInRange(random, 0 + villageSize, 1 + villageSize)));}
         if (GeneralConfig.structureLegacyLibrary) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House1.class, 20, MathHelper.getRandomIntegerInRange(random, 0 + villageSize, 2 + villageSize)));}
@@ -67,17 +146,16 @@ public class StructureVillageVN
         if (GeneralConfig.structureLegacyLargeHouse) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House3.class, 8, MathHelper.getRandomIntegerInRange(random, 0 + villageSize, 3 + villageSize * 2)));}
         
         VillagerRegistry.addExtraVillageComponents(arraylist, random, villageSize);
-
+        
         Iterator iterator = arraylist.iterator();
 
         while (iterator.hasNext())
         {
-            if (((StructureVillagePieces.PieceWeight)iterator.next()).villagePiecesLimit == 0)
-            {
-                iterator.remove();
-            }
+        	// Remove all buildings that rolled 0 for number or which have a weight of 0
+        	PieceWeight pw = (StructureVillagePieces.PieceWeight)iterator.next();
+            if (pw.villagePiecesLimit == 0 || pw.villagePieceWeight <=0) {iterator.remove();}
         }
-
+        
         return arraylist;
     }
     
@@ -217,17 +295,25 @@ public class StructureVillageVN
         int k = chunk.getTopFilledSegment() + 15;
         posX &= 15;
         
+        // Search downward unti you hit the first block that meets the "solid/liquid" requirement
         for (posZ &= 15; k > 0; --k)
         {
             Block block = chunk.getBlock(posX, k, posZ);
-
-            if (block.getMaterial().blocksMovement() && block.getMaterial() != Material.leaves && !block.isFoliage(world, x, k, z))
+            
+            if (
+            		// If it's a solid, full block that isn't one of these particular types
+            		(block.getMaterial().blocksMovement()
+            		&& block.getMaterial() != Material.leaves
+    				&& block.getMaterial() != Material.plants
+					&& block.getMaterial() != Material.vine
+					&& block.getMaterial() != Material.air
+            		&& !block.isFoliage(world, x, k, z)
+            		&& block.isOpaqueCube())
+            		// If the block is liquid, return the value above it
+            		|| block.getMaterial().isLiquid()
+            		)
             {
                 return k + 1;
-            }
-            else if (block.getMaterial().isLiquid())
-            {
-            	return k + 1;
             }
         }
         
@@ -238,9 +324,18 @@ public class StructureVillageVN
     /**
      * Discover the y coordinate that will serve as the ground level of the supplied BoundingBox.
      * (An ACTUAL median of all the levels in the BB's horizontal rectangle).
+     * 
      * Use outlineOnly if you'd like to tally only the boundary values.
+     * 
+     * If outlineOnly is true, use sideFlag to specify which boundaries:
+     * +1: front
+     * +2: left (wrt coordbase 0 or 1)
+     * +4: back
+     * +8: right (wrt coordbase 0 or 1)
+     * 
+     * horizIndex is the integer that represents the orientation of the structure.
      */
-    public static int getMedianGroundLevel(World world, StructureBoundingBox boundingBox, boolean outlineOnly)
+    public static int getMedianGroundLevel(World world, StructureBoundingBox boundingBox, boolean outlineOnly, byte sideFlag, int horizIndex)
     {
     	ArrayList<Integer> i = new ArrayList<Integer>();
     	
@@ -250,19 +345,27 @@ public class StructureVillageVN
             {
                 if (boundingBox.isVecInside(l, 64, k))
                 {
-                	if (!outlineOnly || (outlineOnly && (k==boundingBox.minZ || k==boundingBox.maxZ || l==boundingBox.minX || l==boundingBox.maxX)))
+                	if (!outlineOnly || (outlineOnly &&
+                			(
+                					(k==boundingBox.minZ && (sideFlag&(new int[]{1,2,4,2}[horizIndex]))>0) ||
+                					(k==boundingBox.maxZ && (sideFlag&(new int[]{4,8,1,8}[horizIndex]))>0) ||
+                					(l==boundingBox.minX && (sideFlag&(new int[]{2,4,2,1}[horizIndex]))>0) ||
+                					(l==boundingBox.maxX && (sideFlag&(new int[]{8,1,8,4}[horizIndex]))>0) ||
+                					false
+                					)
+                			))
                 	{
-                		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel())); // getAverageGroundLevel returns 64
-                		//LogHelper.info("height " + world.getTopSolidOrLiquidBlock(l, k) + " at " + l + " " + k);
-                		i.add(getAboveTopmostSolidOrLiquidBlockVN(world, l, k));
-                		//i.add(Math.max(world.getTopSolidOrLiquidBlock(l, k), world.provider.getAverageGroundLevel()));
+                		int aboveTopLevel = getAboveTopmostSolidOrLiquidBlockVN(world, l, k);
+                		if (aboveTopLevel != -1) {i.add(aboveTopLevel);}
+                		//if (GeneralConfig.debugMessages) {LogHelper.info("Position [" + l + ", " + k + "] sideFlag: " + sideFlag + ", horizIndex: " + horizIndex);}
                 	}
                 }
             }
         }
-        
+        //if (GeneralConfig.debugMessages) {LogHelper.info("Ground height array for [" + boundingBox.minX + ", " + boundingBox.minZ + "] to [" + boundingBox.maxX + ", " + boundingBox.maxZ + "]: " + i);}
         return FunctionsVN.medianIntArray(i, true);
     }
+    
     
     /**
      * Biome-specific block replacement
@@ -344,7 +447,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 4};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 0};}
         }
@@ -361,7 +464,7 @@ public class StructureVillageVN
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 5};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, 1};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 1};}
         }
@@ -1382,4 +1485,48 @@ public class StructureVillageVN
 
         return metaIn;
     }
+    
+    /**
+	 * furnaceOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int chooseFurnaceMeta(int furnaceOrientation, int horizIndex)
+	{
+		return FURNACE_META_ARRAY[furnaceOrientation][horizIndex];
+	}
+	
+    /**
+     * Returns meta values for lower and upper halves of a door
+     * 
+	 * orientation - Direction the outside of the door faces when closed:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 * 
+	 * isShut - doors are "shut" by default when placed by a player
+	 * rightHandRule - whether the door opens counterclockwise when viewed from above. This is default state when placed by a player
+	 */
+	public static int[] getDoorMetas(int orientation, int horizIndex, boolean isShut, boolean isRightHanded)
+	{
+		return new int[] {
+				DOOR_META_ARRAY[1][isRightHanded?1:0][isShut?1:0][orientation][horizIndex],
+				DOOR_META_ARRAY[0][isRightHanded?1:0][isShut?1:0][orientation][horizIndex]
+						};
+	}
+
+	/**
+	 * Returns a random animal from the /structures/village/common/animals folder, not including cats
+	 */
+	public static EntityLiving getVillageCommonAnimal(World world, Random random, boolean includeHorses)
+	{
+		EntityLiving animal;
+		int animalIndex = random.nextInt(4 + (includeHorses ? 5 : 0));
+		
+		if (animalIndex==0)      {animal = new EntityCow(world);}
+		else if (animalIndex==1) {animal = new EntityPig(world);}
+		else if (animalIndex<=3) {animal = new EntitySheep(world);}
+		else                     {animal = new EntityHorse(world);}
+		
+		IEntityLivingData ientitylivingdata = animal.onSpawnWithEgg(null); // To give the animal random spawning properties (horse pattern, sheep color, etc)
+		
+		return animal;
+	}
 }

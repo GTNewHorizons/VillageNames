@@ -63,6 +63,7 @@ public class ModObjects {
 	
 	// Bark
 	public static final String barkEF = "etfuturum:bark";
+	public static final String bark2EF = "etfuturum:bark2";
 	
 	// Bountiful rocks
 	public static final String andesiteC2 = "chisel:andesite";
@@ -178,6 +179,9 @@ public class ModObjects {
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
 	
+	// Smooth Stone
+	public static final String smoothStoneUTD = "uptodate:smooth_stone";
+	
 	// Walls
 	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
 	public static final String brickWallUTD = "uptodate:wall_bricks";
@@ -208,6 +212,11 @@ public class ModObjects {
 	
 	// --- Items --- //
 	
+	
+	// Beetroot
+	public static final String beetrootEF = "etfuturum:beetroot";
+	public static final String beetrootGS = "ganyssurface:beetroot";
+
 	// Boats
 	public static final String boatBirchUTD = "uptodate:item_boat_birch";
 	public static final String boatSpruceUTD = "uptodate:item_boat_spruce";
@@ -219,14 +228,13 @@ public class ModObjects {
 	public static final String coloredBedBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
 	
-	// Beetroot
-	public static final String beetrootEF = "etfuturum:beetroot";
-	public static final String beetrootGS = "ganyssurface:beetroot";
-	
 	// Dyes
 	public static final String miscBOP = "BiomesOPlenty:misc"; // Usually used for dyes
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
 	public static final String dyeUTD = "uptodate:dye";
+	
+	// Flowers
+	public static final String flowerUTD = "uptodate:flower";
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
@@ -275,6 +283,45 @@ public class ModObjects {
 	// --------------------------- //
 	// --- Generator Functions --- //
 	// --------------------------- //
+	
+	// Bark block
+	public static Object[] chooseModBarkBlock(Block block, int meta)
+	{
+		if (block==Blocks.log)
+		{
+			Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
+			
+			if (tryBark != null) // EF bark exists
+			{
+				return new Object[]{tryBark, meta%4};
+			}
+		}
+		else if (block==Blocks.log2)
+		{
+			Block tryBark = Block.getBlockFromName(ModObjects.bark2EF);
+			
+			if (tryBark != null) // EF bark exists
+			{
+				return new Object[]{tryBark, meta%4};
+			}
+		}
+		
+		return new Object[]{block, meta};
+	}
+	
+	
+	// Blast Furnace
+	/**
+	 * furnaceOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static Object[] chooseModBlastFurnaceBlock(int furnaceOrientation, int horizIndex)
+	{
+		Block modblock = Blocks.furnace;
+		int meta = StructureVillageVN.chooseFurnaceMeta(furnaceOrientation, horizIndex);
+		
+		return new Object[]{modblock, meta};
+	}
 	
 	// Concrete - added in v3.1.2
 	public static Object[] chooseModConcrete(int meta)
@@ -935,6 +982,15 @@ public class ModObjects {
 		return Blocks.gravel;
 	}
 	
+	// Smooth Stone
+	public static Object[] chooseModSmoothStoneBlock()
+	{
+		Block modblock=null; int meta = 0;
+		modblock = Block.getBlockFromName(ModObjects.smoothStoneUTD);
+		if (modblock == null) {modblock = Blocks.double_stone_slab; meta=8;}
+		
+		return new Object[]{modblock, meta};
+	}
 	
 	// Sign
 	/*
@@ -1002,7 +1058,24 @@ public class ModObjects {
 			}
 		}
 		// If all else fails, grab the vanilla version
-		return null;
+		return new Object[]{materialMeta <4 ? Blocks.log : Blocks.log2, orientation*4+materialMeta%4};
+	}
+	
+	public static Object[] chooseModStrippedWood(int materialMeta)
+	{
+		Block modblock=null;
+		
+		switch (materialMeta)
+		{
+		case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
+		case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
+		case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
+		case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
+		case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
+		case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
+		}
+		if (modblock != null) {return new Object[]{modblock, 12};}
+		else {return new Object[]{materialMeta<4 ? Blocks.log : Blocks.log2, 12+materialMeta%4};}
 	}
 	
 	// Trap door

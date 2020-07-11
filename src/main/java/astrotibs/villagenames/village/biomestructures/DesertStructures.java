@@ -113,7 +113,7 @@ public class DesertStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX+1, this.boundingBox.minZ+1,
         						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
 
@@ -364,7 +364,7 @@ public class DesertStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX+1, this.boundingBox.minZ+1,
         						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
 
@@ -658,7 +658,7 @@ public class DesertStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX+2, this.boundingBox.minZ+2,
         						this.boundingBox.maxX-2, this.boundingBox.maxZ-2), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct in a void
 

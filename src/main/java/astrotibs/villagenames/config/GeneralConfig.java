@@ -2,9 +2,11 @@ package astrotibs.villagenames.config;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import net.minecraftforge.common.config.Configuration;
 
@@ -119,6 +121,12 @@ public class GeneralConfig {
 	public static boolean structureLegacyLargeFarm;
 	public static boolean structureLegacySmithy;
 	public static boolean structureLegacyChurch;
+	// Modern Village buildings
+	public static String structureModernPlainsAccessory1_string; public static ArrayList<Integer> structureModernPlainsAccessory1_vals;
+	public static String structureModernPlainsAnimalPen1_string; public static ArrayList<Integer> structureModernPlainsAnimalPen1_vals;
+	public static String structureModernPlainsAnimalPen2_string; public static ArrayList<Integer> structureModernPlainsAnimalPen2_vals;
+	public static String structureModernPlainsAnimalPen3_string; public static ArrayList<Integer> structureModernPlainsAnimalPen3_vals;
+	public static String structureModernPlainsArmorerHouse1_string; public static ArrayList<Integer> structureModernPlainsArmorerHouse1_vals;
 	
 	// Misc new village stuff
 	public static boolean spawnModdedVillagers;
@@ -152,6 +160,35 @@ public class GeneralConfig {
 		structureLegacyLargeFarm = config.getBoolean("Structure: Legacy Large Farm", "Village Generator", false, "Whether this structure can generate in villages.");
 		structureLegacySmithy = config.getBoolean("Structure: Legacy Smithy", "Village Generator", false, "Whether this structure can generate in villages.");
 		structureLegacyChurch = config.getBoolean("Structure: Legacy Church", "Village Generator", false, "Whether this structure can generate in villages.");
+		
+		// Modern Village buildings
+		ArrayList<Integer> ali; // For setting default values as integer lists
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsAccessory1_string = config.getString("Structure: Modern Plains Flower Planter", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsAccessory1_vals = parseIntegerArray(structureModernPlainsAccessory1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsAnimalPen1_string = config.getString("Structure: Modern Plains Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsAnimalPen1_vals = parseIntegerArray(structureModernPlainsAnimalPen1_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsAnimalPen2_string = config.getString("Structure: Modern Plains Large Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsAnimalPen2_vals = parseIntegerArray(structureModernPlainsAnimalPen2_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsAnimalPen3_string = config.getString("Structure: Modern Plains Decorated Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsAnimalPen3_vals = parseIntegerArray(structureModernPlainsAnimalPen3_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsArmorerHouse1_string = config.getString("Structure: Modern Plains Armorer House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsArmorerHouse1_vals = parseIntegerArray(structureModernPlainsArmorerHouse1_string, ali);
+		
 		
 		// Misc
 		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Village Generator", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
@@ -1061,4 +1098,80 @@ public class GeneralConfig {
 		return map;
 	}
 	
+	/**
+	 * Used to convert the comma-separated-integer string in the config value into an array of integers
+	 * Returns the given default array if the user screws up.
+	 */
+	public static ArrayList<Integer> parseIntegerArray(String configvalue, ArrayList<Integer> defaultValues)
+	{
+		try
+		{
+			String[] sMPA1_stringarray = configvalue.split(",");
+			ArrayList<Integer> integerArrayListToReturn = new ArrayList<Integer>();
+			
+			for (int i=0; i<sMPA1_stringarray.length; i++)
+			{
+				integerArrayListToReturn.add(Integer.parseInt(sMPA1_stringarray[i].trim()));
+			}
+
+			// HALL OF SHAME
+			
+			// User entered wrong number of parameters
+			if (sMPA1_stringarray.length!=5)
+			{
+				LogHelper.error("Config entry " + configvalue + " requires five values, not " + sMPA1_stringarray.length + ". Using default values " + convertIntegerArrayToString(defaultValues) + " until this is fixed.");
+				return defaultValues;
+			}
+			
+			// User entered a negative component weight
+			if (integerArrayListToReturn.get(0) < 0)
+			{
+				integerArrayListToReturn.set(0, 0);
+				LogHelper.error("The first value of config entry " + configvalue + " is a weight and must not be less than zero. It will be set to 0 until this is fixed.");
+			}
+			
+			// User's lower bound for number of structures is negative
+			if ((integerArrayListToReturn.get(1) * GeneralConfig.newVillageSize + integerArrayListToReturn.get(2)) < 0)
+			{
+				LogHelper.error("Values two and three of config entry " + configvalue + " can result in fewer than zero of this structure component. Using default values " + convertIntegerArrayToString(defaultValues) + " until this is fixed.");
+				return defaultValues;
+			}
+			
+			// User's upper bound for number of structures is negative
+			if ((integerArrayListToReturn.get(3) * GeneralConfig.newVillageSize + integerArrayListToReturn.get(4)) < 0)
+			{
+				LogHelper.error("Values four and five of config entry " + configvalue + " will result in fewer than zero of this structure component. Using default values " + convertIntegerArrayToString(defaultValues) + " until this is fixed.");
+				return defaultValues;
+			}
+			
+			// User's lower bound for number of structures is greater than their upper bound
+			if ((integerArrayListToReturn.get(1) * GeneralConfig.newVillageSize + integerArrayListToReturn.get(2)) > (integerArrayListToReturn.get(3) * GeneralConfig.newVillageSize + integerArrayListToReturn.get(4)))
+			{
+				LogHelper.error("Values two through five of config entry " + configvalue + " result in a higher upper bound than a lower bound for this structure component. Using default values " + convertIntegerArrayToString(defaultValues) + " until this is fixed.");
+				return defaultValues;
+			}
+			
+			// This only happens if the user didn't cock up royally
+			return integerArrayListToReturn;
+		}
+		catch (Exception e) // Config entry was malformed
+		{
+			LogHelper.error("Config entry " + configvalue + " was malformed. Check that it is five comma-separated integers. Using default values " + convertIntegerArrayToString(defaultValues) + " until this is fixed.");
+			return defaultValues;
+		}
+	}
+	
+	/**
+	 * Converts an integer arraylist back into a comma-separated string
+	 */
+	public static String convertIntegerArrayToString(ArrayList<Integer> arraylist)
+	{
+		String s=arraylist.get(0).toString();
+		
+		for (int i=1; i<arraylist.size(); i++) 
+		{
+			s+=","+arraylist.get(i).toString();
+		}
+		return s;
+	}
 }

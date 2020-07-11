@@ -104,7 +104,7 @@ public class SavannaStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX, this.boundingBox.minZ,
         						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
@@ -415,7 +415,7 @@ public class SavannaStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX, this.boundingBox.minZ,
         						this.boundingBox.maxX, this.boundingBox.maxZ), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
@@ -696,24 +696,10 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 0, this.materialType, this.biome); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 8, this.materialType, this.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
-        	
-        	// For bark specifically
-        	Block biomeBarkOrLogHorAlongBlock = null; int biomeBarkOrLogHorAlongMeta = 0;
-        	Block biomeBarkOrLogHorAcrossBlock = null; int biomeBarkOrLogHorAcrossMeta = 0;
-        	
-        	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
-        	if (tryBark == null)
-        	{
-        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta%4+12;// + (this.coordBaseMode%2==0 ? 4 : 0);
-        		biomeBarkOrLogHorAcrossBlock = biomeLogHorAcrossBlock; biomeBarkOrLogHorAcrossMeta = biomeLogHorAcrossMeta%4+12;// - (this.coordBaseMode%2==0 ? 4 : 0);
-        	}
-        	else
-        	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this.materialType, this.biome); biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this.materialType, this.biome); biomeBarkOrLogHorAcrossBlock = (Block)blockObject[0]; biomeBarkOrLogHorAcrossMeta = (Integer)blockObject[1];
-        	}
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = ModObjects.chooseModBarkBlock(biomeLogHorAlongBlock, biomeLogHorAlongMeta); Block biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; int biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModBarkBlock(biomeLogHorAcrossBlock, biomeLogHorAcrossMeta); Block biomeBarkOrLogHorAcrossBlock = (Block)blockObject[0]; int biomeBarkOrLogHorAcrossMeta = (Integer)blockObject[1];
         	
         	
         	if (this.field_143015_k < 0)
@@ -722,7 +708,7 @@ public class SavannaStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX+1, this.boundingBox.minZ+1,
         						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
@@ -785,8 +771,8 @@ public class SavannaStructures
             		
                     if (k > -1)
                     {
+                    	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+2-this.boundingBox.minY, uw[1], structureBB);
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
-                    	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+1-this.boundingBox.minY, uw[1], structureBB);
                    	}
         		}
             }
@@ -1004,21 +990,9 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4, this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), this.materialType, this.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, this.materialType, this.biome); Block biomeWoodenStairsBlock = (Block)blockObject[0];
-        	
-        	// For bark specifically
-        	Block biomeBarkOrLogHorAlongBlock = null; int biomeBarkOrLogHorAlongMeta = 0;
-        	
-        	Block tryBark = Block.getBlockFromName(ModObjects.barkEF);
-        	if (tryBark == null)
-        	{
-        		biomeBarkOrLogHorAlongBlock = biomeLogHorAlongBlock; biomeBarkOrLogHorAlongMeta = biomeLogHorAlongMeta%4+12;// + (this.coordBaseMode%2==0 ? 4 : 0);
-        	}
-        	else
-        	{
-        		blockObject = StructureVillageVN.getBiomeSpecificBlock(Block.getBlockFromName(ModObjects.barkEF), 0, this.materialType, this.biome); biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
-        	}
+        	blockObject = ModObjects.chooseModBarkBlock(biomeLogHorAlongBlock, biomeLogHorAlongMeta); Block biomeBarkOrLogHorAlongBlock = (Block)blockObject[0]; int biomeBarkOrLogHorAlongMeta = (Integer)blockObject[1];
         	
         	
         	if (this.field_143015_k < 0)
@@ -1027,7 +1001,7 @@ public class SavannaStructures
         				new StructureBoundingBox(
         						this.boundingBox.minX+1, this.boundingBox.minZ+1,
         						this.boundingBox.maxX-1, this.boundingBox.maxZ-1), // Set the bounding box version as this bounding box but with Y going from 0 to 512
-        				true);
+        				true, (byte)15, this.coordBaseMode);
         		
                 if (this.field_143015_k < 0) {return true;} // Do not construct a well in a void
 
@@ -1076,8 +1050,8 @@ public class SavannaStructures
             		
                     if (k > -1)
                     {
+                    	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+2-this.boundingBox.minY, uw[1], structureBB);
                     	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
-                    	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+1-this.boundingBox.minY, uw[1], structureBB);
                    	}
         		}
             }

@@ -77,6 +77,8 @@ public class EntityInteractHandler {
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "Unlocalized name: " + targetBlockUnlocName ));
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "Meta value: " + targetBlockMeta ));
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "" ));
+			
+			//LogHelper.info("ArrayList<Integer> " + GeneralConfig.structureModernPlainsAccessory1_vals);
 		}
 		
 	}

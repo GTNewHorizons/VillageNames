@@ -39,6 +39,7 @@ import astrotibs.villagenames.proxy.CommonProxy;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.MapGenVillageVN;
+import astrotibs.villagenames.village.StructureCreationHandlers;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
@@ -190,7 +191,7 @@ public final class VillageNames
 			// New village generator
 			MapGenStructureIO.registerStructure(MapGenVillageVN.Start.class, "MapGenVillageVN");
 			
-			// Structure components
+			// Village Centers
 	        MapGenStructureIO.func_143031_a(StructureVillageVN.PathVN.class, "VNPath"); // Path
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFountain01.class, "VNPlF01"); // Fountain
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Plains Well
@@ -208,6 +209,18 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint1.class, "VNSnMP1"); // Snowy Ice Spire
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint2.class, "VNSnMP2"); // Frozen Fountain
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint3.class, "VNSnMP3"); // Snowy Pavilion
+	        
+	        // Village Structures
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAccessory1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAccessory1.class, "VNPlAc1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen1.class, "VNPlAP1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen2_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen2.class, "VNPlAP2");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen3_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen3.class, "VNPlAP3");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsArmorerHouse1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsArmorerHouse1.class, "VNPlAr1");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
