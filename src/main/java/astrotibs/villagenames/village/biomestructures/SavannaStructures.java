@@ -117,8 +117,8 @@ public class SavannaStructures
         			this.getXWithOffset(6, 7),
         			this.getYWithOffset(1),
         			this.getZWithOffset(6, 7));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	// Top layer is grass
         	this.fillWithMetadataBlocks(world, structureBB, 0, 0, 0, 13, 0, 11, biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
@@ -278,9 +278,9 @@ public class SavannaStructures
                     int bannerXBB = 11;
         			int bannerZBB = 6;
         			int bannerYBB = -1;
-        			if (this.bannerY==-1)
+        			if (this.bannerY==0)
         			{
-        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
@@ -428,8 +428,8 @@ public class SavannaStructures
         			this.getXWithOffset(9, 1),
         			this.getYWithOffset(2),
         			this.getZWithOffset(9, 1));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
 
         	// Top layer 
@@ -721,8 +721,8 @@ public class SavannaStructures
         			this.getXWithOffset(4, 5),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 5));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	// Top grass path 
         	for (int u=2; u<=6; u++) {for (int w=1; w<=9; w++) {
@@ -1014,8 +1014,8 @@ public class SavannaStructures
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 4));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	// Set grass paths
         	for (int u=1; u<=7; u++) {for (int w=1; w<=7; w++) {

@@ -385,7 +385,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(1), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(1), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
@@ -402,7 +403,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.birch_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +2: meta==8? 8 +2 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 2};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(2), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(2), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(2), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(2), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(2, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(2, false), meta};}
@@ -426,7 +428,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(3), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(3), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
@@ -443,7 +446,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.acacia_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +4: meta==8? 8 +4 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 4};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(4), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(4), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(4), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
@@ -460,7 +464,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.dark_oak_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +5: meta==8? 8 +5 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 5};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(5), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(5), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(5), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
         	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta/4};}
         	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
@@ -488,7 +493,8 @@ public class StructureVillageVN
         	if (block == Blocks.grass)                         {return new Object[]{Blocks.sand, 0};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};} // Jungle slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};} // Jungle double slab
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(3), meta};} // Jungle door
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(3), meta};} // Jungle door
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(3), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};} // Jungle trapdoor
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 1: meta==11? 9 : meta};} // Sandstone slab
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 4};} // Brick double slab
@@ -526,7 +532,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{ModObjects.chooseModDoor(1), meta};}
+        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(1), meta};}
+        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(1), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.packed_ice, 0};}
@@ -1132,8 +1139,10 @@ public class StructureVillageVN
     	// Set them to defaults here
     	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
     	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
+    	public int townColor = 14; // Red
+    	public int townColor2 = 0; // White
     	public boolean villagersGenerated = false;
-    	public int bannerY = -1;
+    	public int bannerY = 0;
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	
         public StartVN() {}
@@ -1515,7 +1524,7 @@ public class StructureVillageVN
 	/**
 	 * Returns a random animal from the /structures/village/common/animals folder, not including cats
 	 */
-	public static EntityLiving getVillageCommonAnimal(World world, Random random, boolean includeHorses)
+	public static EntityLiving getVillageAnimal(World world, Random random, boolean includeHorses)
 	{
 		EntityLiving animal;
 		int animalIndex = random.nextInt(4 + (includeHorses ? 5 : 0));
@@ -1529,4 +1538,86 @@ public class StructureVillageVN
 		
 		return animal;
 	}
+	
+	
+	
+	/**
+	 * relativeOrientation
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int getBedOrientationMeta(int relativeOrientation, int coordBaseMode, boolean isHead)
+	{
+		switch (relativeOrientation)
+		{
+		case 0: // Facing away
+			return new int[]{2,3,0,1}[coordBaseMode] + (isHead ? 8:0);
+		case 1: // Facing right
+			return new int[]{1,2,1,2}[coordBaseMode] + (isHead ? 8:0);
+		case 2: // Facing you
+			return new int[]{0,1,2,3}[coordBaseMode] + (isHead ? 8:0);
+		case 3: // Facing left
+			return new int[]{3,0,3,0}[coordBaseMode] + (isHead ? 8:0);
+		}
+		return 0 + (isHead ? 8:0);
+	}
+	
+
+	/*
+	 * Used to select wooden door types.
+	 */
+	public static Block chooseWoodenDoor(int materialMeta)
+	{
+		if (!GeneralConfig.useModdedWoodenDoors) {return Blocks.wooden_door;} // Returns the default oak door always
+		
+		if (materialMeta==0) {return Blocks.wooden_door;}
+		
+		String[] modprioritylist = GeneralConfig.modDoor;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakEF); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.wooden_door;
+	}
+	
+	
+	
 }

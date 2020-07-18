@@ -6,8 +6,12 @@ import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.village.StructureVillageVN;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * A holder for string names for various mod items/blocks/etc for easy access
@@ -65,6 +69,9 @@ public class ModObjects {
 	public static final String barkEF = "etfuturum:bark";
 	public static final String bark2EF = "etfuturum:bark2";
 	
+	// Barrel
+	public static final String barrelUTD = "uptodate:barrel";
+	
 	// Bountiful rocks
 	public static final String andesiteC2 = "chisel:andesite";
 	public static final String dioriteC2 = "chisel:diorite";
@@ -76,6 +83,8 @@ public class ModObjects {
 
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
+	// Colored Bed
+	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
 	
 	// Concrete
 	public static final String concreteUTD = "uptodate:concrete";
@@ -96,12 +105,12 @@ public class ModObjects {
 	public static final String concreteRedEF = "etfuturum:concrete_red";
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
 	
-	// Door // TODO - Remove in 1.8
+	// Door
 	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
 	public static final String doorBirchGS = "ganyssurface:doorBirch";
 	public static final String doorJungleGS = "ganyssurface:doorJungle";
 	public static final String doorAcaciaGS = "ganyssurface:doorAcacia";
-	public static final String doorDarkOakGS = "ganyssurface:doorDark_oak";
+	public static final String doorDarkOakGS = "ganyssurface:doorDark_oak"; // lol wtf Ganymedes
 	public static final String doorSpruceEF = "etfuturum:door_spruce";
 	public static final String doorBirchEF = "etfuturum:door_birch";
 	public static final String doorJungleEF = "etfuturum:door_jungle";
@@ -113,7 +122,7 @@ public class ModObjects {
 	public static final String doorAcaciaUTD = "uptodate:door_acacia";
 	public static final String doorDarkOakUTD = "uptodate:door_dark_oak";
 	
-	// Fence // TODO - Remove in 1.8
+	// Fence
 	public static final String fenceOakGS = "ganyssurface:fence_0";
 	public static final String fenceSpruceGS = "ganyssurface:fence_1";
 	public static final String fenceBirchGS = "ganyssurface:fence_2";
@@ -132,7 +141,7 @@ public class ModObjects {
 	public static final String fenceAcaciaUTD = "uptodate:fence_acacia";
 	public static final String fenceDarkOakUTD = "uptodate:fence_dark_oak";
 	
-	// Fence Gate // TODO - Remove in 1.8
+	// Fence Gate
 	public static final String fenceGateOakGS = "ganyssurface:fence_gate_0";
 	public static final String fenceGateSpruceGS = "ganyssurface:fence_gate_1";
 	public static final String fenceGateBirchGS = "ganyssurface:fence_gate_2";
@@ -168,9 +177,16 @@ public class ModObjects {
 	public static final String glazedTerracottaRedUTD = "uptodate:glazed_terracotta_red";
 	public static final String glazedTerracottaBlackUTD = "uptodate:glazed_terracotta_black";
 	
-	// Grass Path // TODO - Remove in 1.9?
+	// Grass Path
 	public static final String grassPathUTD = "uptodate:grass_path";
 	public static final String grassPathEF = "etfuturum:grass_path";
+	
+	// Iron Nuggets
+	// Mariculture nugget is Mariculture:materials:33
+	public static final String nuggetRC = "Railcraft:nugget"; // Iron Nugget is 0
+	public static final String materialsTC = "TConstruct:materials"; // Iron Nugget is 19 
+	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
+	public static final String ironNuggetUTD = "uptodate:iron_nugget";
 	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
@@ -187,15 +203,34 @@ public class ModObjects {
 	public static final String brickWallUTD = "uptodate:wall_bricks";
 	public static final String stonebrickWallUTD = "uptodate:wall_stone_bricks";
 	public static final String mossystonebrickWallUTD = "uptodate:wall_mossy_stone_bricks";
+
+	// Wooden Pressure Plate
+	public static final String pressurePlateSpruceGS = "ganyssurface:pressure_plate_spruce";
+	public static final String pressurePlateBirchGS = "ganyssurface:pressure_plate_birch";
+	public static final String pressurePlateJungleGS = "ganyssurface:pressure_plate_jungle";
+	public static final String pressurePlateAcaciaGS = "ganyssurface:pressure_plate_acacia";
+	public static final String pressurePlateDarkOakGS = "ganyssurface:pressure_plate_dark_oak";
 	
-	// Wooden Sign // TODO - Remove in 1.8
+	public static final String pressurePlateSpruceEF = "etfuturum:pressure_plate_spruce";
+	public static final String pressurePlateBirchEF = "etfuturum:pressure_plate_birch";
+	public static final String pressurePlateJungleEF = "etfuturum:pressure_plate_jungle";
+	public static final String pressurePlateAcaciaEF = "etfuturum:pressure_plate_acacia";
+	public static final String pressurePlateDarkOakEF = "etfuturum:pressure_plate_dark_oak";
+	
+	public static final String pressurePlateSpruceUTD = "uptodate:pressurePlate1";
+	public static final String pressurePlateBirchUTD = "uptodate:pressurePlate2";
+	public static final String pressurePlateJungleUTD = "uptodate:pressurePlate3";
+	public static final String pressurePlateAcaciaUTD = "uptodate:pressurePlate4";
+	public static final String pressurePlateDarkOakUTD = "uptodate:pressurePlate5";
+	
+	// Wooden Sign
 	public static final String signSpruceGS = "ganyssurface:sign1";
 	public static final String signBirchGS = "ganyssurface:sign2";
 	public static final String signJungleGS = "ganyssurface:sign3";
 	public static final String signAcaciaGS = "ganyssurface:sign4";
 	public static final String signDarkOakGS = "ganyssurface:sign5";
 	
-	// Wooden Trapdoor // TODO - Remove in 1.8
+	// Wooden Trapdoor
 	public static final String trapdoorSpruceGS = "ganyssurface:trapdoor1";
 	public static final String trapdoorBirchGS = "ganyssurface:trapdoor2";
 	public static final String trapdoorJungleGS = "ganyssurface:trapdoor3";
@@ -216,7 +251,15 @@ public class ModObjects {
 	// Beetroot
 	public static final String beetrootEF = "etfuturum:beetroot";
 	public static final String beetrootGS = "ganyssurface:beetroot";
+	
+	// Beetroot Seeds
+	public static final String beetrootSeedsEF = "etfuturum:beetroot_seeds";
+	public static final String beetrootSeedsGS = "ganyssurface:beetrootSeeds";
 
+	// Beetroot Soup
+	public static final String beetrootSoupEF = "etfuturum:beetroot_soup";
+	public static final String beetrootSoupGS = "ganyssurface:beetrootSoup";
+	
 	// Boats
 	public static final String boatBirchUTD = "uptodate:item_boat_birch";
 	public static final String boatSpruceUTD = "uptodate:item_boat_spruce";
@@ -225,7 +268,7 @@ public class ModObjects {
 	public static final String boatAcaciaUTD = "uptodate:item_boat_acacia";
 	
 	// Colored beds
-	public static final String coloredBedBV = "bettervanilla:bettervanilla_colored_bed";
+	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
 	
 	// Dyes
@@ -284,6 +327,28 @@ public class ModObjects {
 	// --- Generator Functions --- //
 	// --------------------------- //
 	
+	// Barrel
+	public static ItemStack chooseModSweetBerriesItem()
+	{
+		Item moditem=null;
+		
+		moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
+		if (moditem != null) {return new ItemStack(moditem, 1);}
+		
+		return null;
+	}
+	
+	// Barrel
+	public static ItemStack chooseModBarrelItem()
+	{
+		Block moditem=null;
+		
+		moditem = Block.getBlockFromName(ModObjects.barrelUTD);
+		if (moditem != null) {return new ItemStack(moditem);}
+		
+		return null;
+	}
+	
 	// Bark block
 	public static Object[] chooseModBarkBlock(Block block, int meta)
 	{
@@ -309,6 +374,118 @@ public class ModObjects {
 		return new Object[]{block, meta};
 	}
 	
+	// Bed
+	public static void setModBedBlock(World world, int x, int y, int z, int orientationMeta, int colorMeta)
+	{
+		Block modblock=null;
+		boolean setTE = false; // Flagged as true if you need to set a tile entity
+		
+		modblock = Block.getBlockFromName(ModObjects.coloredBedBlockBV);
+		if (modblock != null)
+		{
+			setTE = true;
+		}
+		else
+		{
+			// Vanilla bed only; no nbt value necessary
+			modblock = Blocks.bed;
+		}
+		
+		// Set the bed block and metadata here
+		world.setBlock(x, y, z, modblock);
+		world.setBlockMetadataWithNotify(x, y, z, orientationMeta, 2);
+
+		if (setTE)
+		{
+			// Set the tile entity so that you can assign the color via NBT 
+			NBTTagCompound bedNBT = new NBTTagCompound();
+        	TileEntity tileentity = world.getTileEntity(x, y, z);
+        	tileentity.writeToNBT(bedNBT);
+        	bedNBT.setInteger("_color", colorMeta);
+        	tileentity.readFromNBT(bedNBT);
+        	world.setTileEntity(x, y, z, tileentity);
+		}
+	}
+	
+	
+	
+	// Beetroot
+	public static ItemStack chooseModBeetroot()
+	{
+		String[] modprioritylist = GeneralConfig.modBeetroot;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootEF);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootGS);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+
+		}
+		return null;
+	}
+	
+	
+	
+	// Beetroot Seeds
+	public static ItemStack chooseModBeetrootSeeds()
+	{
+		String[] modprioritylist = GeneralConfig.modBeetroot;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSeedsEF);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSeedsGS);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+
+		}
+		return null;
+	}
+	
+	
+	
+	// Beetroot Soup
+	public static ItemStack chooseModBeetrootSoup()
+	{
+		String[] modprioritylist = GeneralConfig.modBeetroot;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSoupEF);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSoupGS);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+
+		}
+		return null;
+	}
+	
+	
 	
 	// Blast Furnace
 	/**
@@ -321,6 +498,30 @@ public class ModObjects {
 		int meta = StructureVillageVN.chooseFurnaceMeta(furnaceOrientation, horizIndex);
 		
 		return new Object[]{modblock, meta};
+	}
+
+	// Campfire
+	/**
+     * Give this method the orientation of the campfire and the base mode of the structure it's in,
+     * and it'll give you back the required meta value for construction.
+     * For relative orientations, use:
+     * 
+     * HANGING:
+     * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+     *   
+     * STANDING:
+     * 0=fore-facing (away from you); 4=right-facing; 8=back-facing (toward you); 12=left-facing
+     */
+	public static Object[] chooseModCampfireBlock(int relativeOrientation, int coordBaseMode)
+	{
+		Block tryCampfire = Block.getBlockFromName(ModObjects.campfirebackport);
+		
+		if (tryCampfire!=null)
+		{
+			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, false)};
+		}
+		
+		return new Object[]{Blocks.torch, 0};
 	}
 	
 	// Concrete - added in v3.1.2
@@ -369,57 +570,109 @@ public class ModObjects {
 		return null;
 	}
 	
-	// Door
-	public static Block chooseModDoor(int materialMeta)
+	
+	
+	// Dye
+	public static ItemStack chooseModBlueDye()
 	{
-		if (materialMeta==0) {return Blocks.wooden_door;}
-		
-		String[] modprioritylist = GeneralConfig.modDoor;
+		String[] modprioritylist = GeneralConfig.modDye;
 		
 		for (String mod : modprioritylist)
 		{
-			Block modblock=null;
+			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().equals("biomesoplenty"))
 			{
-				switch (materialMeta)
-				{
-					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceUTD); break;
-					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchUTD); break;
-					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleUTD); break;
-					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaUTD); break;
-					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakUTD); break;
-				}
-				if (modblock != null) {return modblock;}
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("mariculture"))
 			{
-				switch (materialMeta)
-				{
-					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceEF); break;
-					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchEF); break;
-					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleEF); break;
-					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaEF); break;
-					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakEF); break;
-				}
-				if (modblock != null) {return modblock;}
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 28);}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("uptodate"))
 			{
-				switch (materialMeta)
-				{
-					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceGS); break;
-					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchGS); break;
-					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleGS); break;
-					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaGS); break;
-					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakGS); break;
-				}
-				if (modblock != null) {return modblock;}
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
 		}
-		// If all else fails, grab the vanilla version
-		return Blocks.wooden_door;
+		return null;
 	}
+	public static ItemStack chooseModBlackDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 9);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModBrownDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 32);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModWhiteDye()
+	{
+		String[] modprioritylist = GeneralConfig.modDye;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
+				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 27);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+		}
+		return null;
+	}
+	
 	
 	// Fence
 	public static Block chooseModFence(int materialMeta)
@@ -581,28 +834,43 @@ public class ModObjects {
 		return null;
 	}
 	
-	// Campfire
-	/**
-     * Give this method the orientation of the campfire and the base mode of the structure it's in,
-     * and it'll give you back the required meta value for construction.
-     * For relative orientations, use:
-     * 
-     * HANGING:
-     * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-     *   
-     * STANDING:
-     * 0=fore-facing (away from you); 4=right-facing; 8=back-facing (toward you); 12=left-facing
-     */
-	public static Object[] chooseModCampfireBlock(int relativeOrientation, int coordBaseMode)
+	// Iron Nugget
+	public static ItemStack chooseModIronNugget()
 	{
-		Block tryCampfire = Block.getBlockFromName(ModObjects.campfirebackport);
+		String[] modprioritylist = GeneralConfig.modIronNugget;
 		
-		if (tryCampfire!=null)
+		for (String mod : modprioritylist)
 		{
-			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, false)};
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("tinkersconstruct"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsTC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 19);}
+			}
+			else if (mod.toLowerCase().equals("thermalfoundation"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsTF);
+				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
+			}
+			else if (mod.toLowerCase().equals("railcraft"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetRC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().equals("mariculture"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
+				if (moditem != null) {return new ItemStack(moditem, 1, 33);}
+			}
+
 		}
-		
-		return new Object[]{Blocks.torch, 0};
+		return null;
 	}
 	
 	// Lantern
@@ -694,6 +962,7 @@ public class ModObjects {
 		}
 		return null;
 	}
+	
 	
 	
 	// Andesite
@@ -959,6 +1228,61 @@ public class ModObjects {
 	}
 	
 	
+	// Sign
+	public static ItemStack chooseModWoodenSignItem(int materialMeta)
+	{
+		Item moditem=null;
+
+		switch (materialMeta)
+		{
+			case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceGS)); break;
+			case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchGS)); break;
+			case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleGS)); break;
+			case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaGS)); break;
+			case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakGS)); break;
+		}
+		if (moditem != null) {return new ItemStack(moditem, 1);}
+		
+		// If all else fails, grab the vanilla version
+		return new ItemStack(Items.sign, 1);
+	}
+	/*
+	public static Block chooseModWoodenSign(int materialMeta, boolean standing)
+	{
+		if (materialMeta==0) {return standing? Blocks.standing_sign : Blocks.wall_sign;}
+		
+		Block modblock=null;
+		
+		switch (materialMeta)
+		{
+			case 1: modblock = Block.getBlockFromName(ModObjects.signSpruceGS); break;
+			case 2: modblock = Block.getBlockFromName(ModObjects.signBirchGS); break;
+			case 3: modblock = Block.getBlockFromName(ModObjects.signJungleGS); break;
+			case 4: modblock = Block.getBlockFromName(ModObjects.signAcaciaGS); break;
+			case 5: modblock = Block.getBlockFromName(ModObjects.signDarkOakGS); break;
+		}
+		if (modblock != null) {return modblock;}
+		
+		// If all else fails, grab the vanilla version
+		return standing? Blocks.standing_sign : Blocks.wall_sign;
+	}
+	*/
+	
+	
+	// Smoker
+	/**
+	 * furnaceOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static Object[] chooseModSmokerBlock(int furnaceOrientation, int horizIndex)
+	{
+		Block modblock = Blocks.furnace;
+		int meta = StructureVillageVN.chooseFurnaceMeta(furnaceOrientation, horizIndex);
+		
+		return new Object[]{modblock, meta};
+	}
+	
+	
 	// Selects a modded Grass Path block if able; returns Gravel otherwise.
 	public static Block chooseModPathBlock()
 	{
@@ -982,6 +1306,7 @@ public class ModObjects {
 		return Blocks.gravel;
 	}
 	
+	
 	// Smooth Stone
 	public static Object[] chooseModSmoothStoneBlock()
 	{
@@ -992,28 +1317,6 @@ public class ModObjects {
 		return new Object[]{modblock, meta};
 	}
 	
-	// Sign
-	/*
-	public static Block chooseModWoodenSign(int materialMeta, boolean standing)
-	{
-		if (materialMeta==0) {return standing? Blocks.standing_sign : Blocks.wall_sign;}
-		
-		Block modblock=null;
-		
-		switch (materialMeta)
-		{
-			case 1: modblock = Block.getBlockFromName(ModObjects.signSpruceGS); break;
-			case 2: modblock = Block.getBlockFromName(ModObjects.signBirchGS); break;
-			case 3: modblock = Block.getBlockFromName(ModObjects.signJungleGS); break;
-			case 4: modblock = Block.getBlockFromName(ModObjects.signAcaciaGS); break;
-			case 5: modblock = Block.getBlockFromName(ModObjects.signDarkOakGS); break;
-		}
-		if (modblock != null) {return modblock;}
-		
-		// If all else fails, grab the vanilla version
-		return standing? Blocks.standing_sign : Blocks.wall_sign;
-	}
-	*/
 	
 	// Stripped log
 	/**
@@ -1118,136 +1421,6 @@ public class ModObjects {
 		return Blocks.trapdoor;
 	}
 	
-	
-	
-	
-	// Beetroot
-	public static ItemStack chooseModBeetroot()
-	{
-		String[] modprioritylist = GeneralConfig.modBeetroot;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootEF);
-				if (moditem != null) {return new ItemStack(moditem, 1);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootGS);
-				if (moditem != null) {return new ItemStack(moditem, 1);}
-			}
-
-		}
-		return null;
-	}
-	
-	
-	
-	// Dye
-	public static ItemStack chooseModBlueDye()
-	{
-		String[] modprioritylist = GeneralConfig.modDye;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("biomesoplenty"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
-			}
-			else if (mod.toLowerCase().equals("mariculture"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-				if (moditem != null) {return new ItemStack(moditem, 1, 28);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
-				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
-			}
-		}
-		return null;
-	}
-	public static ItemStack chooseModBlackDye()
-	{
-		String[] modprioritylist = GeneralConfig.modDye;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("biomesoplenty"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-				if (moditem != null) {return new ItemStack(moditem, 1, 9);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
-				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
-			}
-		}
-		return null;
-	}
-	public static ItemStack chooseModBrownDye()
-	{
-		String[] modprioritylist = GeneralConfig.modDye;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("biomesoplenty"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
-			}
-			else if (mod.toLowerCase().equals("mariculture"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-				if (moditem != null) {return new ItemStack(moditem, 1, 32);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
-				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
-			}
-		}
-		return null;
-	}
-	public static ItemStack chooseModWhiteDye()
-	{
-		String[] modprioritylist = GeneralConfig.modDye;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("biomesoplenty"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
-			}
-			else if (mod.toLowerCase().equals("mariculture"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-				if (moditem != null) {return new ItemStack(moditem, 1, 27);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-		}
-		return null;
-	}
-	
 	// Kelp
 	public static ItemStack chooseModKelpBlock()
 	{
@@ -1348,8 +1521,58 @@ public class ModObjects {
 	// Rabbit Foot
 	
 	// Suspicious Stew
-	 
 	
+	
+	// Wooden Pressure Plate
+	// Fence
+	public static Block chooseModPressurePlate(int materialMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modFence;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.pressurePlateSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.pressurePlateBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.pressurePlateJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.pressurePlateAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.pressurePlateDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.pressurePlateSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.pressurePlateBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.pressurePlateJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.pressurePlateAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.pressurePlateDarkOakEF); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.pressurePlateSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.pressurePlateBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.pressurePlateJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.pressurePlateAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.pressurePlateDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.fence;
+	}
 	
 	/**
 	 * These functions check the priority order provided by the config file, and return a block or object if one exists.

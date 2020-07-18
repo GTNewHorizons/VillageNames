@@ -514,7 +514,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								// Emerald to Bed
 								while (true)
 								{
-									moditem = FunctionsVN.getItemFromName(ModObjects.coloredBedBV);
+									moditem = FunctionsVN.getItemFromName(ModObjects.coloredBedItemBV);
 									if (moditem != null) {
 										color1 = random.nextInt(16);
 										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(

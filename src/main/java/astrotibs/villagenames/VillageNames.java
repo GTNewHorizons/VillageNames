@@ -221,9 +221,18 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen3.class, "VNPlAP3");
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsArmorerHouse1_Handler());
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsArmorerHouse1.class, "VNPlAr1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsBigHouse1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsBigHouse1.class, "VNPlBH1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsButcherShop1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop1.class, "VNPlBS1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsButcherShop2_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop2.class, "VNPlBS2");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
+			
+			// Chest hooks
+			ChestLootHandler.modernVillageChests();
 			
 			LogHelper.info("Registered new Village generator");
 		}

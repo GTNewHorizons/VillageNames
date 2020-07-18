@@ -11,6 +11,9 @@ import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAni
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen2;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen3;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsArmorerHouse1;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsBigHouse1;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsButcherShop1;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsButcherShop2;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
@@ -120,6 +123,69 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	    {
 	    	if (startPiece instanceof StartVN) {return PlainsArmorerHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Plains big house
+	public static class PlainsBigHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernPlainsBigHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(PlainsBigHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return PlainsBigHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return PlainsBigHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+
+	// Plains Butcher 1
+	public static class PlainsButcherShop1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernPlainsButcherShop1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(PlainsButcherShop1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return PlainsButcherShop1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return PlainsButcherShop1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Plains Butcher 2
+	public static class PlainsButcherShop2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernPlainsButcherShop2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(PlainsButcherShop2.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return PlainsButcherShop2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return PlainsButcherShop2.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
 	    }
 	}
 }

@@ -134,8 +134,8 @@ public class TaigaStructures
         			this.getXWithOffset(2, 3),
         			this.getYWithOffset(2),
         			this.getZWithOffset(2, 3));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	// Top layer is grass path
         	for (int i=0; i<=10; i++)
@@ -227,9 +227,9 @@ public class TaigaStructures
                     int bannerXBB = 5;
         			int bannerZBB = 4;
         			int bannerYBB = -1;
-        			if (this.bannerY==-1)
+        			if (this.bannerY==0)
         			{
-        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
@@ -387,8 +387,8 @@ public class TaigaStructures
         			this.getXWithOffset(8, 1),
         			this.getYWithOffset(1),
         			this.getZWithOffset(8, 1));
-        	int townColor = villageNBTtag.getInteger("townColor");
-        	int townColor2 = villageNBTtag.getInteger("townColor2");
+        	this.townColor = villageNBTtag.getInteger("townColor");
+        	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
         	
             // Encircle the well with path
@@ -404,7 +404,7 @@ public class TaigaStructures
                         if (k > -1)
                         {
                             StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
-                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+2-this.boundingBox.minY, j, structureBB);
                        	}
                     }
                 }
@@ -626,9 +626,9 @@ public class TaigaStructures
         			int bannerXBB = 7;
         			int bannerZBB = 8;
         			int bannerYBB = -1;
-        			if (this.bannerY==-1)
+        			if (this.bannerY==0)
         			{
-        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY;
+        				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}

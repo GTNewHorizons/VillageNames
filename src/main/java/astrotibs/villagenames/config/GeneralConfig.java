@@ -85,6 +85,7 @@ public class GeneralConfig {
 	public static String[] modBountifulStone;
 	public static String[] modBanner;
 	public static String[] modBeetroot;
+	public static String[] modIronNugget;
 	public static String[] modMutton;
 	public static String[] modKelp;
 	public static String[] modLantern;
@@ -127,8 +128,12 @@ public class GeneralConfig {
 	public static String structureModernPlainsAnimalPen2_string; public static ArrayList<Integer> structureModernPlainsAnimalPen2_vals;
 	public static String structureModernPlainsAnimalPen3_string; public static ArrayList<Integer> structureModernPlainsAnimalPen3_vals;
 	public static String structureModernPlainsArmorerHouse1_string; public static ArrayList<Integer> structureModernPlainsArmorerHouse1_vals;
+	public static String structureModernPlainsBigHouse1_string; public static ArrayList<Integer> structureModernPlainsBigHouse1_vals;
+	public static String structureModernPlainsButcherShop1_string; public static ArrayList<Integer> structureModernPlainsButcherShop1_vals;
+	public static String structureModernPlainsButcherShop2_string; public static ArrayList<Integer> structureModernPlainsButcherShop2_vals;
 	
 	// Misc new village stuff
+	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
 	public static boolean decorateVillageCenter;
 	
@@ -189,8 +194,24 @@ public class GeneralConfig {
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsArmorerHouse1_vals = parseIntegerArray(structureModernPlainsArmorerHouse1_string, ali);
 		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsBigHouse1_string = config.getString("Structure: Modern Plains Big House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsBigHouse1_vals = parseIntegerArray(structureModernPlainsBigHouse1_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsButcherShop1_string = config.getString("Structure: Modern Plains Small Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsButcherShop1_vals = parseIntegerArray(structureModernPlainsButcherShop1_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsButcherShop2_string = config.getString("Structure: Modern Plains Large Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsButcherShop2_vals = parseIntegerArray(structureModernPlainsButcherShop2_string, ali);
+		
 		
 		// Misc
+		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", "Village Generator", true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
 		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Village Generator", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
 		decorateVillageCenter = config.getBoolean("Decorate village center", "Village Generator", true, "Whether to decorate the town center with concrete, terracotta, banners, etc. based on the village's colors");
 		
@@ -690,6 +711,16 @@ public class GeneralConfig {
  				"Priority order for referencing Beetroot for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 		
+	    modIronNugget = config.getStringList("Mod Priority: Iron Nugget", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"tinkersconstruct",
+ 				"thermalfoundation",
+ 				"railcraft",
+ 				"mariculture",
+ 				},
+ 				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modMutton = config.getStringList("Mod Priority: Mutton", "Mod Integration", new String[]{
 	    		"uptodate",
  				"etfuturum",

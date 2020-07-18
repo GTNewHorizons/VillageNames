@@ -219,6 +219,8 @@ public class VNComponentIglooPieces
                 	this.placeBlockAtCurrentPosition(worldIn, Blocks.crafting_table, 0, (this.coordBaseMode<2?2:6)+xOffset, 1, 5, structureBoundingBoxIn);
                 	this.placeBlockAtCurrentPosition(worldIn, Blocks.redstone_torch, 5, (this.coordBaseMode<2?2:6)+xOffset, 1, 4, structureBoundingBoxIn);
                 	this.placeBlockAtCurrentPosition(worldIn, Blocks.furnace, (new int[]{5,3,4,2})[this.coordBaseMode], (this.coordBaseMode<2?2:6)+xOffset, 1, 3, structureBoundingBoxIn);
+                	// Have to manually set metadata to get it to stick
+                    worldIn.setBlockMetadataWithNotify(this.getXWithOffset((this.coordBaseMode<2?2:6)+xOffset, 3), this.getYWithOffset(1), this.getZWithOffset((this.coordBaseMode<2?2:6)+xOffset, 3), (new int[]{5,3,4,2})[this.coordBaseMode], 2);
                 	
                 	// Blank out the space next to the furnace to ensure it will face the right direction
                 	//this.placeBlockAtCurrentPosition(worldIn, Blocks.furnace, 0, (this.coordBaseMode<2?2:6)+xOffset, 1, 3, structureBoundingBoxIn);
@@ -426,7 +428,7 @@ public class VNComponentIglooPieces
                     	// The nine chiseled stone bricks in the floor
                     	for (int chiseledX: new int[]{2,4,6}) {
                     		for (int chiseledZ: new int[]{5, 3, 1}) {
-                    			this.placeBlockAtCurrentPosition(worldIn, Blocks.stonebrick, 3, chiseledX+xOffset,basementCeilingY-4,chiseledZ, structureBoundingBoxIn); // 9 is "cactus"
+                    			this.placeBlockAtCurrentPosition(worldIn, Blocks.stonebrick, 3, chiseledX+xOffset,basementCeilingY-4,chiseledZ, structureBoundingBoxIn);
                     		}
                     	}
                     	
