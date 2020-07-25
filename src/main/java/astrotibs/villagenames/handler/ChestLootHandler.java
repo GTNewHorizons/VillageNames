@@ -311,7 +311,7 @@ public class ChestLootHandler {
 		
 		
 		
-		// --- Fisher Hut --- //
+		// --- Fisher Cottage --- //
 		
 		chestGenHooks = ChestGenHooks.getInfo("vn_fisher");
 		

@@ -131,12 +131,18 @@ public class GeneralConfig {
 	public static String structureModernPlainsBigHouse1_string; public static ArrayList<Integer> structureModernPlainsBigHouse1_vals;
 	public static String structureModernPlainsButcherShop1_string; public static ArrayList<Integer> structureModernPlainsButcherShop1_vals;
 	public static String structureModernPlainsButcherShop2_string; public static ArrayList<Integer> structureModernPlainsButcherShop2_vals;
+	public static String structureModernPlainsCartographer1_string; public static ArrayList<Integer> structureModernPlainsCartographer1_vals;
+	public static String structureModernPlainsFisherCottage1_string; public static ArrayList<Integer> structureModernPlainsFisherCottage1_vals;
+	public static String structureModernPlainsFletcherHouse1_string; public static ArrayList<Integer> structureModernPlainsFletcherHouse1_vals;
+	public static String structureModernPlainsLargeFarm1_string; public static ArrayList<Integer> structureModernPlainsLargeFarm1_vals;
+	public static String structureModernPlainsLibrary1_string; public static ArrayList<Integer> structureModernPlainsLibrary1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
 	public static boolean decorateVillageCenter;
-	
+	public static float harvestcraftCropFarmRate;
+	//public static boolean farmPumpkins;
 	
 	public static void init(File configFile) 
 	{
@@ -154,6 +160,7 @@ public class GeneralConfig {
 		newVillageSize = config.getInt("Village Size", "Village Generator", 1, 1, 10, "How large villages are. Vanilla is 1.");
 		newVillageSpacingMedian = config.getInt("Village Spacing: Median", "Village Generator", 20, 1, 100, "Median distance between villages. Vanilla is 20.");
 		newVillageSpacingSpread = config.getInt("Village Spacing: Range", "Village Generator", 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12.");
+		//farmPumpkins  = config.getBoolean("Pumpkin and Melon Crops", "Village Generator", true, "Farms can have pumpkins and melons generate in them");
 		
 		// Old Village buildings
 		structureLegacyHut = config.getBoolean("Structure: Legacy Hut", "Village Generator", false, "Whether this structure can generate in villages.");
@@ -203,11 +210,36 @@ public class GeneralConfig {
 		structureModernPlainsButcherShop1_string = config.getString("Structure: Modern Plains Small Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsButcherShop1_vals = parseIntegerArray(structureModernPlainsButcherShop1_string, ali);
-
+		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
 		structureModernPlainsButcherShop2_string = config.getString("Structure: Modern Plains Large Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsButcherShop2_vals = parseIntegerArray(structureModernPlainsButcherShop2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsCartographer1_string = config.getString("Structure: Modern Plains Cartographer Hut", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsCartographer1_vals = parseIntegerArray(structureModernPlainsCartographer1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsFisherCottage1_string = config.getString("Structure: Modern Plains Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsFisherCottage1_vals = parseIntegerArray(structureModernPlainsFisherCottage1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsFletcherHouse1_string = config.getString("Structure: Modern Plains Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsFletcherHouse1_vals = parseIntegerArray(structureModernPlainsFletcherHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsLargeFarm1_string = config.getString("Structure: Modern Plains Large Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsLargeFarm1_vals = parseIntegerArray(structureModernPlainsLargeFarm1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsLibrary1_string = config.getString("Structure: Modern Plains Library", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsLibrary1_vals = parseIntegerArray(structureModernPlainsLibrary1_string, ali);
 		
 		
 		// Misc
@@ -323,7 +355,7 @@ public class GeneralConfig {
 	    wellSlabs = config.getBoolean("Well slabs", Configuration.CATEGORY_GENERAL, true, "Replace the cobblestone rims of wells with stone slabs, making it easier for players and villagers to escape if they fall in.");
 	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "Villages display a custom banner near the well. You must be using Et Futurum or Gany's Surface with banners enabled.");
 	    signYaw = config.getInt("Sign Yaw", Configuration.CATEGORY_GENERAL, 3, 0, 4, "If Village Banner is enabled: Degree to which well signs and banners should face inward. At 0 they face directly outward away from the well; at 4 they face each other.");
-
+	    
 		
 		recordStructureCoords = config.getBoolean("Record Structure Coords", Configuration.CATEGORY_GENERAL, true, "Books generated by villagers or the Codex record the structure's coordinates.");
 	    villagerDropBook = config.getBoolean("Villager drops book", Configuration.CATEGORY_GENERAL, false, "Village books are dropped by the villager rather than going directly into your inventory.");
@@ -617,6 +649,8 @@ public class GeneralConfig {
 		
 		
 		//--------------Mod Integration-----------------//
+		
+		harvestcraftCropFarmRate = config.getFloat("HarvestCraft crop chance", "Mod Integration", 0.25F, 0F, 1F, "Generate HarvestCraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
 		
 		// Added in v3.2
 	    modConcrete = config.getStringList("Mod Priority: Concrete", "Mod Integration", new String[]{

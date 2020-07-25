@@ -136,7 +136,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Items.emerald, 1 ) ) );
 								
 								// Beetroot to Emerald
-								moditemstack = ModObjects.chooseModBeetroot();
+								moditemstack = ModObjects.chooseModBeetrootItem();
 								if (moditemstack!=null)
 								{
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(

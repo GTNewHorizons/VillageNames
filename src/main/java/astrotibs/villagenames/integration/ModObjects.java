@@ -83,8 +83,12 @@ public class ModObjects {
 
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
+	
 	// Colored Bed
 	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
+	
+	// Compost Bin
+	public static final String compostBinGC = "GardenCore:compost_bin";
 	
 	// Concrete
 	public static final String concreteUTD = "uptodate:concrete";
@@ -104,6 +108,69 @@ public class ModObjects {
 	public static final String concreteGreenEF = "etfuturum:concrete_green";
 	public static final String concreteRedEF = "etfuturum:concrete_red";
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
+	
+	// Crops
+	public static final String cropArtichokeHC = "harvestcraft:pamartichokeCrop";
+	public static final String cropAsparagusHC = "harvestcraft:pamasparagusCrop";
+	public static final String cropBambooHC = "harvestcraft:pambambooshootCrop";
+	public static final String cropBarleyHC = "harvestcraft:pambarleyCrop";
+	public static final String cropBeanHC = "harvestcraft:pambeanCrop";
+	public static final String cropBeetHC = "harvestcraft:pambeetCrop";
+	public static final String cropBellpepperHC = "harvestcraft:pambellpepperCrop";
+	public static final String cropBlackberryHC = "harvestcraft:pamblackberryCrop";
+	public static final String cropBlueberryHC = "harvestcraft:pamblueberryCrop";
+	public static final String cropBroccoliHC = "harvestcraft:pambroccoliCrop";
+	public static final String cropBrusselsproutHC = "harvestcraft:pambrusselsproutCrop";
+	public static final String cropCabbageHC = "harvestcraft:pamcabbageCrop";
+	public static final String cropCactusfruitHC = "harvestcraft:pamcactusfruitCrop"; // Planted on sand
+	public static final String cropCandleberryHC = "harvestcraft:pamcandleberryCrop";
+	public static final String cropCantaloupeHC = "harvestcraft:pamcantaloupeCrop";
+	public static final String cropCauliflowerHC = "harvestcraft:pamcauliflowerCrop";
+	public static final String cropCeleryHC = "harvestcraft:pamceleryCrop";
+	public static final String cropChilipepperHC = "harvestcraft:pamchilipepperCrop";
+	public static final String cropCoffeebeanHC = "harvestcraft:pamcoffeebeanCrop";
+	public static final String cropCornHC = "harvestcraft:pamcornCrop";
+	public static final String cropCottonHC = "harvestcraft:pamcottonCrop";
+	public static final String cropCranberryHC = "harvestcraft:pamcranberryCrop"; // Planted on water
+	public static final String cropCucumberHC = "harvestcraft:pamcucumberCrop";
+	public static final String cropCurryleafHC = "harvestcraft:pamcurryleafCrop";
+	public static final String cropEggplantHC = "harvestcraft:pameggplantCrop";
+	public static final String cropGarlicHC = "harvestcraft:pamgarlicCrop";
+	public static final String cropGingerHC = "harvestcraft:pamgingerCrop";
+	public static final String cropGrapeHC = "harvestcraft:pamgrapeCrop";
+	public static final String cropKiwiHC = "harvestcraft:pamkiwiCrop";
+	public static final String cropLeekHC = "harvestcraft:pamleekCrop";
+	public static final String cropLettuceHC = "harvestcraft:pamlettuceCrop";
+	public static final String cropMustardseedHC = "harvestcraft:pammustardseedsCrop";
+	public static final String cropOatsHC = "harvestcraft:pamoatsCrop";
+	public static final String cropOkraHC = "harvestcraft:pamokraCrop";
+	public static final String cropOnionHC = "harvestcraft:pamonionCrop";
+	public static final String cropParsnipHC = "harvestcraft:pamparsnipCrop";
+	public static final String cropPeanutHC = "harvestcraft:pampeanutCrop";
+	public static final String cropPeasHC = "harvestcraft:pampeasCrop";
+	public static final String cropPineappleHC = "harvestcraft:pampineappleCrop";
+	public static final String cropRadishHC = "harvestcraft:pamradishCrop";
+	public static final String cropRaspberryHC = "harvestcraft:pamraspberryCrop";
+	public static final String cropRhubarbHC = "harvestcraft:pamrhubarbCrop";
+	public static final String cropRiceHC = "harvestcraft:pamriceCrop"; // Planted on water
+	public static final String cropRutabegaHC = "harvestcraft:pamrutabagaCrop";
+	public static final String cropRyeHC = "harvestcraft:pamryeCrop";
+	public static final String cropScallionHC = "harvestcraft:pamscallionCrop";
+	public static final String cropSeaweedHC = "harvestcraft:pamseaweedCrop"; // Planted on water
+	public static final String cropSesameseedHC = "harvestcraft:pamsesameseedsCrop";
+	public static final String cropSoybeanHC = "harvestcraft:pamsoybeanCrop";
+	public static final String cropSpiceleafHC = "harvestcraft:pamspiceleafCrop";
+	public static final String cropSpinachHC = "harvestcraft:pamspinachCrop";
+	public static final String cropStrawberryHC = "harvestcraft:pamstrawberryCrop";
+	public static final String cropSweetpotatoHC = "harvestcraft:pamsweetpotatoCrop";
+	public static final String cropTealeafHC = "harvestcraft:pamtealeafCrop";
+	public static final String cropTomatoHC = "harvestcraft:pamtomatoCrop";
+	public static final String cropTurnipHC = "harvestcraft:pamturnipCrop";
+	public static final String cropWaterchestnutHC = "harvestcraft:pamwaterchestnutCrop"; // Planted on water
+	public static final String cropWhitemushroomHC = "harvestcraft:pamwhitemushroomCrop"; // Planted on log
+	public static final String cropWintersquashHC = "harvestcraft:pamwintersquashCrop";
+	public static final String cropZucchiniHC = "harvestcraft:pamzucchiniCrop";
+	public static final String cropKaleJAFFA = "jaffa:kaleCrop";
 	
 	// Door
 	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
@@ -328,23 +395,22 @@ public class ModObjects {
 	// --------------------------- //
 	
 	// Barrel
-	public static ItemStack chooseModSweetBerriesItem()
-	{
-		Item moditem=null;
-		
-		moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
-		if (moditem != null) {return new ItemStack(moditem, 1);}
-		
-		return null;
-	}
-	
-	// Barrel
 	public static ItemStack chooseModBarrelItem()
 	{
 		Block moditem=null;
 		
 		moditem = Block.getBlockFromName(ModObjects.barrelUTD);
 		if (moditem != null) {return new ItemStack(moditem);}
+		
+		return null;
+	}
+	// Uses furnace metas. 1 is vertical, and horizontal are 2, 3, 4, 5. 0 is inverted
+	public static Block chooseModBarrelBlock()
+	{
+		Block moditem=null;
+		
+		moditem = Block.getBlockFromName(ModObjects.barrelUTD);
+		if (moditem != null) {return moditem;}
 		
 		return null;
 	}
@@ -410,7 +476,7 @@ public class ModObjects {
 	
 	
 	// Beetroot
-	public static ItemStack chooseModBeetroot()
+	public static ItemStack chooseModBeetrootItem()
 	{
 		String[] modprioritylist = GeneralConfig.modBeetroot;
 		
@@ -427,6 +493,32 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+
+		}
+		return null;
+	}
+	
+	
+	
+	// Beetroot
+	public static Block chooseModBeetrootBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBeetroot;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock = null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.beetrootEF); 
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.beetrootGS);
+				if (modblock != null) {return modblock;}
 			}
 
 		}
@@ -523,6 +615,21 @@ public class ModObjects {
 		
 		return new Object[]{Blocks.torch, 0};
 	}
+	
+	
+	// Cartography Table
+	/**
+	 * furnaceOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static Object[] chooseModCartographyTable()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
+	}
+	
 	
 	// Concrete - added in v3.1.2
 	public static Object[] chooseModConcrete(int meta)
@@ -777,6 +884,15 @@ public class ModObjects {
 		return Blocks.fence_gate;
 	}
 	
+	// Fletching Table
+	public static Object[] chooseModFletchingTable()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
+	}
+	
 	// Glazed Terracotta - added in v3.1.2
 	public static Object[] chooseModGlazedTerracotta(int colorMeta, int orientationMeta)
 	{
@@ -895,7 +1011,6 @@ public class ModObjects {
     	// None are found, so return ordinary glowstone
     	return new Object[]{Blocks.glowstone, 0};
     }
-    
 	public static ItemStack chooseModLanternItem()
 	{
 		String[] modprioritylist = GeneralConfig.modLantern;
@@ -916,6 +1031,19 @@ public class ModObjects {
 			}
 		}
 		return null;
+	}
+	
+	// Lectern
+	/**
+	 * furnaceOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static Object[] chooseModLectern()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
 	}
 	
 	// Banner
@@ -1507,6 +1635,17 @@ public class ModObjects {
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
 		}
+		return null;
+	}
+
+	// Sweet Berries
+	public static ItemStack chooseModSweetBerriesItem()
+	{
+		Item moditem=null;
+		
+		moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
+		if (moditem != null) {return new ItemStack(moditem, 1);}
+		
 		return null;
 	}
 	

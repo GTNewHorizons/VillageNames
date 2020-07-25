@@ -227,6 +227,16 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop1.class, "VNPlBS1");
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsButcherShop2_Handler());
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop2.class, "VNPlBS2");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsCartographer1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsCartographer1.class, "VNPlCa1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsFisherCottage1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFisherCottage1.class, "VNPlFC1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsFletcherHouse1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFletcherHouse1.class, "VNPlFH1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLargeFarm1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLargeFarm1.class, "VNPlLF1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLibrary1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLibrary1.class, "VNPlLi1");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

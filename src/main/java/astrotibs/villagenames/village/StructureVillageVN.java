@@ -1619,5 +1619,99 @@ public class StructureVillageVN
 	}
 	
 	
-	
+	/**
+	 * Used to select crops. Returns a two-element array that are either two different harvestcraft/JAFFA crops, or the same vanilla/beetroot crop twice.
+	 */
+	public static Block[] chooseCropPair(Random random)
+	{
+		Block[] cropblocks = new Block[]{Blocks.wheat, Blocks.wheat}; // What ultimately to return
+		ArrayList<Block> cropArray = new ArrayList(); // The array from which to choose crops
+		
+		// TODO - Substitute with other mod versions
+		
+		if (random.nextDouble() < GeneralConfig.harvestcraftCropFarmRate)
+		{
+			Block tryHarvestcraft;
+			
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBambooHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropSesameseedHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBlackberryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropOnionHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropTealeafHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCucumberHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropScallionHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCornHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropRhubarbHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropTomatoHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCottonHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropPeanutHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropSweetpotatoHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBeetHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropPineappleHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropStrawberryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropArtichokeHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropOkraHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropRutabegaHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropParsnipHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCandleberryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCantaloupeHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropWintersquashHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropRaspberryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCoffeebeanHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropSoybeanHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropSpiceleafHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCeleryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBellpepperHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBeanHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCabbageHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropZucchiniHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropLeekHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropLettuceHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBrusselsproutHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCauliflowerHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropPeasHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropKiwiHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropRyeHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropChilipepperHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropRadishHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropCurryleafHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropGrapeHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropMustardseedHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropEggplantHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropGarlicHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBarleyHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBroccoliHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropSpinachHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropAsparagusHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropGingerHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropOatsHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropBlueberryHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropTurnipHC); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			tryHarvestcraft = Block.getBlockFromName(ModObjects.cropKaleJAFFA); if (tryHarvestcraft != null) {cropArray.add(tryHarvestcraft);}
+			
+			if (cropArray.size()>0)
+			{
+				for (int i=0; i<2; i++) {cropblocks[i] = cropArray.get(random.nextInt(cropArray.size()));}
+			}
+			
+			return cropblocks;
+		}
+		
+		// If you've reached this stage, you will be returning vanilla crops
+		cropArray.add(Blocks.wheat); cropArray.add(Blocks.wheat); cropArray.add(Blocks.wheat); cropArray.add(Blocks.wheat); cropArray.add(Blocks.wheat);
+		cropArray.add(Blocks.carrots); cropArray.add(Blocks.carrots);
+		cropArray.add(Blocks.potatoes); cropArray.add(Blocks.potatoes);
+		
+		// Add backported blocks
+		Block tryBeetroot = ModObjects.chooseModBeetrootBlock();
+		if (tryBeetroot != null) {cropArray.add(tryBeetroot);}
+		
+		
+		// If the array is empty, either because harvestcraft crops were not used or were not selected, then choose a vanilla crop
+		Block cropblock = cropArray.get(random.nextInt(cropArray.size()));
+		cropblocks[0] = cropblock;
+		cropblocks[1] = cropblock;
+		
+		return cropblocks;
+	}
 }
