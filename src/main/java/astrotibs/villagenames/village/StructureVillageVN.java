@@ -612,8 +612,9 @@ public class StructureVillageVN
 			return new int[]{4,1,3,2}[coordBaseMode];
 		case 3: // Facing left
 			return new int[]{2,4,2,4}[coordBaseMode];
+		default: // Torch will be standing upright, hopefully
+			return 0;
 		}
-    	return 0; // Torch will be standing upright, hopefully
     }
     
     public static int seaLevel = 63; //TODO - actually call sea level in later versions

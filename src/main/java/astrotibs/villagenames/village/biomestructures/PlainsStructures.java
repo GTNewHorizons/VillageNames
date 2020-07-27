@@ -104,6 +104,7 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	
         	if (this.field_143015_k < 0)
             {
@@ -126,9 +127,6 @@ public class PlainsStructures
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	
-        	
-        	// Clear out area
-        	this.fillWithAir(world, structureBB, 2, 1, 2, 6, 4, 6);
         	
             // Basin bottom
             this.fillWithMetadataBlocks(world, structureBB, 2, -1, 2, 6, 0, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
@@ -209,6 +207,8 @@ public class PlainsStructures
             }
             this.placeBlockAtCurrentPosition(world, Blocks.flowing_water, 0, 4, 3, 4, structureBB);
             
+            
+            
             // Encircle the fountain with path
         	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece"});
         	for (int i = 1; i <= 7; ++i)
@@ -222,7 +222,7 @@ public class PlainsStructures
                         if (k > -1)
                         {
                         	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(i, j), k, this.getZWithOffset(i, j));
-                        	this.clearCurrentPositionBlocksUpwards(world, i, k+1-this.boundingBox.minY, j, structureBB);
+                        	this.clearCurrentPositionBlocksUpwards(world, i, k+2-this.boundingBox.minY, j, structureBB);
                        	}
                     }
                 }
@@ -1340,6 +1340,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 5;
     	private static final int STRUCTURE_HEIGHT = 2;
     	private static final int STRUCTURE_DEPTH = 3;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -1360,11 +1361,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsAccessory1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -1379,7 +1377,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;	
@@ -1389,9 +1387,9 @@ public class PlainsStructures
             
         	// make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
-                    this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
         	
             // Sod filling
@@ -1440,6 +1438,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 6;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 5;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -1460,11 +1459,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsAnimalPen1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -1479,7 +1475,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;	
@@ -1490,9 +1486,9 @@ public class PlainsStructures
         	
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
-                    this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
                     
                     // Add a fence
                     if (u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)
@@ -1547,7 +1543,7 @@ public class PlainsStructures
                 world.spawnEntityInWorld(animal);
                 
                 // Dirt block underneath
-                this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 1, 0, 2, structureBB);
+                //this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 1, 0, 2, structureBB);
             }
             
             return true;
@@ -1576,6 +1572,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -1596,11 +1593,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsAnimalPen2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -1616,7 +1610,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;	
@@ -1627,9 +1621,9 @@ public class PlainsStructures
         	
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
-                    this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
                     
                     // Add a fence
                     if (u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)
@@ -1695,7 +1689,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             }
             
@@ -1726,6 +1720,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 8;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -1746,11 +1741,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsAnimalPen3(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -1765,7 +1757,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;	
@@ -1776,9 +1768,9 @@ public class PlainsStructures
         	
         	// Make foundation and clear space above
             for (int w = 0; w < STRUCTURE_DEPTH; ++w) {for (int u = new int[]{2,2,0,0,0,0,0,3}[w]; u <= new int[]{8,8,8,10,10,10,10,10}[w]; ++u) {
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
-                    this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
                     
                     // Add a fence
                     if (u==new int[]{2,2,0,0,0,0,0,3}[w] || u==new int[]{8,8,8,10,10,10,10,10}[w] || w==0 || w==STRUCTURE_DEPTH-1)
@@ -1806,7 +1798,7 @@ public class PlainsStructures
             	})
             {
             	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uw[0], 0, uw[1], structureBB);
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], -1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], GROUND_LEVEL-2, uw[1], structureBB);
             }
             
             // Fence gate
@@ -1840,7 +1832,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             }
             
@@ -1935,6 +1927,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 8;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 9;
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -1955,11 +1948,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsArmorerHouse1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -1974,7 +1964,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY + 0, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -1997,17 +1987,17 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-            		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
             		
             		// Only add foundation to interior
             		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, -1, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL-1, w, structureBB);
+                		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
             		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
             		}
             		
             }}
@@ -2084,7 +2074,7 @@ public class PlainsStructures
             }
             for (int i=3; i<=5; i++) {
             	this.fillWithMetadataBlocks(world, structureBB, 7, 0, i, 7, 1, i, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            	this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 7, -1, i, structureBB);
+            	this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 7, GROUND_LEVEL-1, i, structureBB);
             }
             
             this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 5, 3, 4, structureBB);
@@ -2121,14 +2111,14 @@ public class PlainsStructures
             // Clear path for easier entry
             for (int i : new int[]{3, 4})
             {
-            	this.clearCurrentPositionBlocksUpwards(world, i, 0, -1, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, -2, -1, structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, i, GROUND_LEVEL, -1, structureBB);
+            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, GROUND_LEVEL-2, -1, structureBB);
             	// Place dirt if the block to be set as path is empty
-            	if (world.isAirBlock(this.getXWithOffset(i, -1), this.getYWithOffset(-1), this.getZWithOffset(i, -1)))
+            	if (world.isAirBlock(this.getXWithOffset(i, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(i, -1)))
             	{
-                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, i, -1, -1, structureBB);
+                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, i, GROUND_LEVEL-1, -1, structureBB);
             	}
-            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(i, -1), this.getYWithOffset(-1), this.getZWithOffset(i, -1));
+            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(i, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(i, -1));
             }
             
             // Doors
@@ -2181,6 +2171,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 11;
     	private static final int STRUCTURE_DEPTH = 7;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -2201,11 +2192,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsBigHouse1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -2220,7 +2208,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -2238,17 +2226,17 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-            		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             		
             		// Only add foundation to interior
             		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+                		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
             		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		
             }}
@@ -2312,15 +2300,15 @@ public class PlainsStructures
             this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 5, 0, 1, structureBB);
             
             // Clear path for easier entry
-        	this.clearCurrentPositionBlocksUpwards(world, 5, 1, 0, structureBB);
-        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 5, -1, 0, structureBB);
-        	this.placeBlockAtCurrentPosition(world, grassPathBlock, grassPathMeta, 5, 0, 0, structureBB);
+        	this.clearCurrentPositionBlocksUpwards(world, 5, GROUND_LEVEL, 0, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 5, GROUND_LEVEL-2, 0, structureBB);
+        	this.placeBlockAtCurrentPosition(world, grassPathBlock, grassPathMeta, 5, GROUND_LEVEL-1, 0, structureBB);
         	// Place dirt if the block to be set as path is empty
-        	if (world.isAirBlock(this.getXWithOffset(5, 0), this.getYWithOffset(0), this.getZWithOffset(5, 0)))
+        	if (world.isAirBlock(this.getXWithOffset(5, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(5, 0)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 5, 0, 0, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 5, GROUND_LEVEL-1, 0, structureBB);
         	}
-        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(5, 0), this.getYWithOffset(0), this.getZWithOffset(5, 0));
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(5, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(5, 0));
         	
         	
             // --- Interior --- //
@@ -2437,6 +2425,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 12;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 11;
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -2457,11 +2446,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsButcherShop1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -2476,7 +2462,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY + 0, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             
@@ -2499,24 +2485,24 @@ public class PlainsStructures
         	// House proper
             for (int u = 0; u < STRUCTURE_WIDTH-4; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-            		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
             		
             		// Only add foundation to interior
             		if (u>=1 && u<=6 && w>=1 && w<=9) {
-            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, -1, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL-1, w, structureBB);
+                		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, u, GROUND_LEVEL, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
             		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
             		}
             }}
             // Outside field
             for (int u = 7; u <= 11; ++u) {for (int w = 3; w <= 9; ++w) {
-    			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-        		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+    			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
+        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
             }}
             
             // Log frame
@@ -2670,14 +2656,14 @@ public class PlainsStructures
             // Clear path for easier entry
             for (int i : new int[]{3, 4})
             {
-            	this.clearCurrentPositionBlocksUpwards(world, i, 0, -1, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, -2, -1, structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, i, GROUND_LEVEL, -1, structureBB);
+            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, i, GROUND_LEVEL-2, -1, structureBB);
             	// Place dirt if the block to be set as path is empty
-            	if (world.isAirBlock(this.getXWithOffset(i, -1), this.getYWithOffset(-1), this.getZWithOffset(i, -1)))
+            	if (world.isAirBlock(this.getXWithOffset(i, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(i, -1)))
             	{
-                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, i, -1, -1, structureBB);
+                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, i, GROUND_LEVEL-1, -1, structureBB);
             	}
-            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(i, -1), this.getYWithOffset(-1), this.getZWithOffset(i, -1));
+            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(i, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(i, -1));
             }
             
             //LogHelper.info("butcher spawned at " + this.getXWithOffset(4, 0) + " " + this.getYWithOffset(1) + " " + this.getZWithOffset(4, 0) + " with horizIndex " + this.coordBaseMode);
@@ -2737,6 +2723,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 12;
     	private static final int STRUCTURE_DEPTH = 15;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -2757,11 +2744,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsButcherShop2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -2776,7 +2760,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -2796,17 +2780,17 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
         		
         		// Only add foundation to interior
         		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH)) {
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, w<=8?biomeDirtBlock:biomeGrassBlock, w<=8?biomeDirtMeta:biomeGrassMeta, u, 0, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, w<=8?biomeDirtBlock:biomeGrassBlock, w<=8?biomeDirtMeta:biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
-        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
+        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
         		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -3038,13 +3022,13 @@ public class PlainsStructures
             
             // Clear path for easier entry
             this.clearCurrentPositionBlocksUpwards(world, 3, 1, 0, structureBB);
-        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 3, -1, 0, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-2, 0, structureBB);
         	// Place dirt if the block to be set as path is empty
-        	if (world.isAirBlock(this.getXWithOffset(3, 0), this.getYWithOffset(0), this.getZWithOffset(3, 0)))
+        	if (world.isAirBlock(this.getXWithOffset(3, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, 0)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 3, 0, 0, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-1, 0, structureBB);
         	}
-        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(3, 0), this.getYWithOffset(0), this.getZWithOffset(3, 0));
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(3, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, 0));
             
 			//LogHelper.info("butcher 2 spawned at " + this.getXWithOffset(4, 0) + " " + this.getYWithOffset(1) + " " + this.getZWithOffset(4, 0) + " with horizIndex " + this.coordBaseMode);
             
@@ -3104,6 +3088,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 10;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -3124,11 +3109,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsCartographer1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -3143,7 +3125,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -3164,17 +3146,17 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
         		
         		// Only add foundation to interior
         		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, 0, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
-        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
+        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
         		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -3325,14 +3307,14 @@ public class PlainsStructures
         	
             
             // Clear path for easier entry
-            this.clearCurrentPositionBlocksUpwards(world, 3, 1, 0, structureBB);
-        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 3, -1, 0, structureBB);
+            this.clearCurrentPositionBlocksUpwards(world, 3, GROUND_LEVEL, 0, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-2, 0, structureBB);
         	// Place dirt if the block to be set as path is empty
-        	if (world.isAirBlock(this.getXWithOffset(3, 0), this.getYWithOffset(0), this.getZWithOffset(3, 0)))
+        	if (world.isAirBlock(this.getXWithOffset(3, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, 0)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 3, 0, 0, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-1, 0, structureBB);
         	}
-        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(3, 0), this.getYWithOffset(0), this.getZWithOffset(3, 0));
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(3, 0), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, 0));
             
 			//LogHelper.info("Cartographer house spawned at " + this.getXWithOffset(4, 0) + " " + this.getYWithOffset(1) + " " + this.getZWithOffset(4, 0) + " with horizIndex " + this.coordBaseMode);
             
@@ -3378,6 +3360,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 10;
     	private static final int STRUCTURE_HEIGHT = 9;
     	private static final int STRUCTURE_DEPTH = 11;
+    	private static final int GROUND_LEVEL = 2; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -3398,11 +3381,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsFisherCottage1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -3418,7 +3398,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 2, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -3459,8 +3439,8 @@ public class PlainsStructures
             {
         		for (int u=grassWidths[w][0]; u<=grassWidths[w][1]; u++)
         		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, 0, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 1, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }
             
@@ -3627,13 +3607,13 @@ public class PlainsStructures
         	for (int u=4; u<=6; u++)
         	{
         		this.clearCurrentPositionBlocksUpwards(world, u, 2, -1, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, 0, -1, structureBB);
+            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, -1, structureBB);
             	// Place dirt if the block to be set as path is empty
-            	if (world.isAirBlock(this.getXWithOffset(u, -1), this.getYWithOffset(1), this.getZWithOffset(u, -1)))
+            	if (world.isAirBlock(this.getXWithOffset(u, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, -1)))
             	{
-                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, 1, -1, structureBB);
+                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, -1, structureBB);
             	}
-            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(u, -1), this.getYWithOffset(1), this.getZWithOffset(u, -1));
+            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(u, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, -1));
         	}
         	
 			//LogHelper.info("Fisher Cottage spawned at " + this.getXWithOffset(0, 0) + " " + this.getYWithOffset(0) + " " + this.getZWithOffset(0, 0) + " with horizIndex " + this.coordBaseMode);
@@ -3680,6 +3660,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 9;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -3700,11 +3681,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsFletcherHouse1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -3719,7 +3697,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 1, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -3740,12 +3718,12 @@ public class PlainsStructures
         	// Clear above and make foundation
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB);
+        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
         		
-        		if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
+        		if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
         		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, 0, w, structureBB);
+        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             // Set foundation where the house specifically is
@@ -3763,7 +3741,7 @@ public class PlainsStructures
             {
             	for (int u=rowstrips[i][0]; u<=rowstrips[i][1]; u++)
             	{
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, 0, i, structureBB);
+            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, i, structureBB);
             	}
             }
             // The grass patch in front
@@ -3775,16 +3753,16 @@ public class PlainsStructures
             	{10,1,0},
             })
             {
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uwg[0], -1, uwg[1], structureBB);
-    			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uwg[0], 0, uwg[1], structureBB);
+            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uwg[0], GROUND_LEVEL-2, uwg[1], structureBB);
+    			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uwg[0], GROUND_LEVEL-1, uwg[1], structureBB);
     			if (uwg[2]==0) // Short grass
     			{
-    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 1, uwg[0], 1, uwg[1], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 1, uwg[0], GROUND_LEVEL, uwg[1], structureBB);
     			}
     			else // Tall grass
     			{
-    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 2, uwg[0], 1, uwg[1], structureBB);
-    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uwg[0], 2, uwg[1], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 2, uwg[0], GROUND_LEVEL, uwg[1], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uwg[0], GROUND_LEVEL+1, uwg[1], structureBB);
     			}
             }
             
@@ -3942,14 +3920,14 @@ public class PlainsStructures
             this.fillWithMetadataBlocks(world, structureBB, 5, 0, 0, 5, 0, 1, grassPathBlock, grassPathMeta, grassPathBlock, grassPathMeta, false);
             
             // Clear path for easier entry
-            this.clearCurrentPositionBlocksUpwards(world, 5, 1, -1, structureBB);
-        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 5, -1, -1, structureBB);
+            this.clearCurrentPositionBlocksUpwards(world, 5, GROUND_LEVEL, -1, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 5, GROUND_LEVEL-2, -1, structureBB);
         	// Place dirt if the block to be set as path is empty
-        	if (world.isAirBlock(this.getXWithOffset(5, -1), this.getYWithOffset(0), this.getZWithOffset(5, -1)))
+        	if (world.isAirBlock(this.getXWithOffset(5, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(5, -1)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 5, 0, -1, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 5, GROUND_LEVEL-1, -1, structureBB);
         	}
-        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(5, -1), this.getYWithOffset(0), this.getZWithOffset(5, -1));
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(5, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(5, -1));
             
             // Decor
             for (int decorUVW[] : new int[][]{
@@ -4059,6 +4037,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 13;
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -4079,11 +4058,8 @@ public class PlainsStructures
             
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsLargeFarm1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -4098,7 +4074,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 0, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -4109,16 +4085,16 @@ public class PlainsStructures
         	// Clear above and make foundation
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		
-        		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above
-    			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
+        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB); // Clear above
+    			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB); // Foundation
     			// Ground-level blocks
     			if(u==0 || u==(STRUCTURE_WIDTH-1) || w==0 || w==(STRUCTURE_DEPTH-1) )
     			{
-    				this.placeBlockAtCurrentPosition(world, biomeLogVertBlock, biomeLogVertMeta, u, 0, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeLogVertBlock, biomeLogVertMeta, u, GROUND_LEVEL, w, structureBB);
     			}
     			else
     			{
-    				this.placeBlockAtCurrentPosition(world, Blocks.farmland, 7, u, 0, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.farmland, 7, u, GROUND_LEVEL, w, structureBB);
     			}
             }}
             
@@ -4185,7 +4161,7 @@ public class PlainsStructures
     
     
     
-    // --- Big House --- //
+    // --- Plains Large Library --- //
     
     public static class PlainsLibrary1 extends StructureVillagePieces.Village
     {
@@ -4198,6 +4174,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 17;
     	private static final int STRUCTURE_HEIGHT = 9;
     	private static final int STRUCTURE_DEPTH = 10;
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
     	
@@ -4219,10 +4196,7 @@ public class PlainsStructures
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsLibrary1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs,
-         * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
+        
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
@@ -4237,7 +4211,7 @@ public class PlainsStructures
         		
                 if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - 0, 0);
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
             Object[] blockObject;
@@ -4245,9 +4219,7 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, start.materialType, start.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, start.materialType, start.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, start.materialType, start.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.brick_block, 0, start.materialType, start.biome); Block biomeBrickBlock = (Block)blockObject[0]; int biomeBrickMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, start.materialType, start.biome); Block biomeWoodStairsBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_slab, 8, start.materialType, start.biome); Block biomeWoodSlabTopBlock = (Block)blockObject[0]; int biomeWoodSlabTopMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, start.materialType, start.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), start.materialType, start.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), start.materialType, start.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
@@ -4259,7 +4231,7 @@ public class PlainsStructures
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            	this.clearCurrentPositionBlocksUpwards(world, u, 2, w, structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+2, w, structureBB);
             }}
             
             // Make foundation
@@ -4277,12 +4249,12 @@ public class PlainsStructures
             		if (u>=grassWidths[w][0] && u<=grassWidths[w][1])
             		{
             			// Grass foundation
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
-            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(-1), this.getZWithOffset(u, w))==Blocks.dirt)
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
             		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -2, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, -1, w, structureBB);
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
                 }
             }
@@ -4463,14 +4435,14 @@ public class PlainsStructures
             
             
             // Clear path for easier entry
-        	this.clearCurrentPositionBlocksUpwards(world, 8, 0, -1, structureBB);
-        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 8, -2, -1, structureBB);
+        	this.clearCurrentPositionBlocksUpwards(world, 8, GROUND_LEVEL, -1, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 8, GROUND_LEVEL-2, -1, structureBB);
         	// Place dirt if the block to be set as path is empty
-        	if (world.isAirBlock(this.getXWithOffset(8, -1), this.getYWithOffset(-1), this.getZWithOffset(8, -1)))
+        	if (world.isAirBlock(this.getXWithOffset(8, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(8, -1)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 8, -1, -1, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 8, GROUND_LEVEL-1, -1, structureBB);
         	}
-        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(8, -1), this.getYWithOffset(-1), this.getZWithOffset(8, -1));
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(8, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(8, -1));
         	
             
     		// Villagers
@@ -4487,15 +4459,15 @@ public class PlainsStructures
             	{
             		// Upstairs
                 	u=6+random.nextInt(5);
-                	w=4;
-                	v=5;
+                	v=4;
+                	w=5;
             	}
             	else
             	{
             		// Downstairs
                 	u=3+random.nextInt(11);
-                	w=1;
-                	v=6+random.nextInt(2);
+                	v=1;
+                	w=6+random.nextInt(2);
             	}
             	
             	EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 1, 1, 0);
@@ -4513,6 +4485,654 @@ public class PlainsStructures
          */
         @Override
         protected int getVillagerType (int number) {return 1;}
+    }
+    
+    
+    
+    // --- Plains Small Library --- //
+    
+    public static class PlainsLibrary2 extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public StartVN start;
+    	
+    	// Here are values to assign to the bounding box
+    	private static final int STRUCTURE_WIDTH = 9;
+    	private static final int STRUCTURE_HEIGHT = 10;
+    	private static final int STRUCTURE_DEPTH = 8;
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	
+    	private int averageGroundLevel = -1;
+    	
+        public PlainsLibrary2() {}
+        
+        public PlainsLibrary2(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        {
+            super();
+            this.coordBaseMode = coordBaseMode;
+            this.boundingBox = boundingBox;
+            // Additional stuff to be used in the construction
+            this.start = start;
+        }
+        
+        public static PlainsLibrary2 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+            
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsLibrary2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+        }
+        
+        
+        @Override
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+        {
+        	if (this.averageGroundLevel < 0)
+            {
+        		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+        				// Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				new StructureBoundingBox(
+        						this.boundingBox.minX, this.boundingBox.minZ,
+        						this.boundingBox.maxX, this.boundingBox.maxZ),
+        				true, (byte)1, this.coordBaseMode);
+        		
+                if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+            }
+        	
+            Object[] blockObject;
+            blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, start.materialType, start.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, start.materialType, start.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, start.materialType, start.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, start.materialType, start.biome); Block biomeWoodStairsBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, start.materialType, start.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), start.materialType, start.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), start.materialType, start.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, start.materialType, start.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, start.materialType, start.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, start.materialType, start.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
+        	
+        	// Clear space above
+            for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+            }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+            	"         ",
+            	" FFFFFFF ",
+            	" FFFFFFF ",
+            	" FFFFFFF ",
+            	" FFFFFFF ",
+            	" FFFFFFF ",
+            	"   F F   ",
+            	"  FFFFF  ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+            
+            
+            // Stone
+            for(int[] uuvvww : new int[][]{
+            	// Floor
+            	{2,0,3, 6,0,4},
+            	// Front
+            	{2,1,2, 6,3,2},
+            	// Back
+            	{2,1,6, 6,3,6},
+            	// Left
+            	{1,1,3, 1,3,5},
+            	// Right
+            	{7,1,3, 7,3,5},
+            	// Under bookshelves
+            	{2,0,5, 3,0,5},
+            	// Foot of stairs
+            	{6,0,5, 6,0,5},
+            	// Under doors
+            	{3,0,2, 3,0,2},
+            	{5,0,2, 5,0,2},
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
+            }
+            
+            // Planks
+            for(int[] uuvvww : new int[][]{
+            	// Second floor
+            	
+            	// Floor
+            	{2,4,3, 6,4,4},
+            	// Front
+            	{2,5,2, 6,7,2},
+            	// Back
+            	{2,5,6, 6,7,6},
+            	// Left
+            	{1,5,3, 1,7,5},
+            	// Right
+            	{7,5,3, 7,7,5},
+            	// Balcony
+            	{2,4,1, 6,4,1},
+            	// Corner of second floor
+            	{6,4,5, 6,4,5},
+            	// Stairs
+            	{4,1,5, 4,1,5},
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+            
+            // Logs
+            // Vertical beams
+            for(int[] uuvvww : new int[][]{
+            	{1,1,2, 1,3,2}, {1,5,2, 1,6,2}, 
+            	{1,1,6, 1,3,6}, {1,5,6, 1,6,6},
+            	{7,1,2, 7,3,2}, {7,5,2, 7,6,2}, 
+            	{7,1,6, 7,3,6}, {7,5,6, 7,6,6}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeLogVertBlock, biomeLogVertMeta, biomeLogVertBlock, biomeLogVertMeta, false);
+            }
+            // Across beams
+            for(int[] uuvvww : new int[][]{
+            	{2,4,0, 6,4,0},
+            	{1,4,2, 7,4,2},
+            	{3,8,2, 5,8,2},
+            	{1,4,6, 7,4,6},
+            	{3,8,6, 5,8,6},
+            })
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeLogHorAcrossBlock, biomeLogHorAcrossMeta, biomeLogHorAcrossBlock, biomeLogHorAcrossMeta, false);
+            }
+            
+            // Along beams
+            for(int[] uuvvww : new int[][]{
+            	{1,4,3, 1,4,5},
+            	{7,4,3, 7,4,5},
+            	{4,9,1, 4,9,7},
+            })
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeLogHorAlongBlock, biomeLogHorAlongMeta, biomeLogHorAlongBlock, biomeLogHorAlongMeta, false);
+            }
+            for (int u : new int[]{1,7}) {
+            	this.placeBlockAtCurrentPosition(world, biomeLogHorAlongBlock, biomeLogHorAlongMeta, u, 4, 1, structureBB);
+            }
+            
+            // Windows
+        	for (int[] uvw : new int[][]{
+        			{1,2,4}, {1,6,4},
+        			{7,2,4}, {7,6,4},
+        			{3,2,6}, {5,2,6}, {3,6,6}, {5,6	,6},
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.glass_pane, 0, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+            
+        	// Various wooden stairs
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward; +4:inverted
+        		
+        		// Roof
+        		{0,6,1, 0,6,2, 0}, {8,6,1, 8,6,2, 1},
+        		{0,6,6, 0,6,7, 0}, {8,6,6, 8,6,7, 1}, 
+        		{1,7,1, 1,7,2, 0}, {7,7,1, 7,7,2, 1}, 
+        		{1,7,6, 1,7,7, 0}, {7,7,6, 7,7,7, 1}, 
+        		{2,8,1, 2,8,7, 0}, {6,8,1, 6,8,7, 1}, 
+        		{3,9,1, 3,9,7, 0}, {5,9,1, 5,9,7, 1}, 
+        		// Side awning
+        		{0,7,3, 0,7,5, 0}, {8,7,3, 8,7,5, 1}, 
+        		// Roof trim
+        		{1,6,1, 1,6,1, 5}, {7,6,1, 7,6,1, 4}, 
+        		{2,7,1, 2,7,1, 5}, {6,7,1, 6,7,1, 4}, 
+        		{3,8,1, 3,8,1, 5}, {5,8,1, 5,8,1, 4}, 
+        		{1,6,7, 1,6,7, 5}, {7,6,7, 7,6,7, 4}, 
+        		{2,7,7, 2,7,7, 5}, {6,7,7, 6,7,7, 4}, 
+        		{3,8,7, 3,8,7, 5}, {5,8,7, 5,8,7, 4}, 
+        		// Roof awning trims
+        		{0,6,3, 0,6,3, 6}, {0,6,5, 0,6,5, 7},
+        		{8,6,3, 8,6,3, 6}, {8,6,5, 8,6,5, 7}, 
+        		// Inside stairs
+        		{5,1,5, 5,1,5, 1}, 
+        		{4,2,5, 4,2,5, 1},
+        		{3,3,5, 3,3,5, 1},
+        		{2,4,5, 2,4,5, 1}, 
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, false);
+            }
+        	
+        	// Torches
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright; 
+            	// Front
+            	{3,3,1,2}, {5,3,1,2}, {3,7,1,2}, {5,7,1,2},
+            	// Back
+            	{4,2,7,0}, {4,6,7,0}, 
+            	// Left
+            	{0,4,4,3}, 
+            	// Right
+            	{8,4,4,1},
+            	
+            	// Interior
+            	{4,2,3,0}, {4,4,5,2}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
+            }
+        	
+        	// Interior
+        	
+            // Bookshelves
+            for(int[] uuvvww : new int[][]{
+            	{3,1,5, 3,1,5}, 
+            	{2,1,5, 2,3,5}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.bookshelf, 0, Blocks.bookshelf, 0, false);	
+            }
+        	
+            // Lectern
+            this.placeBlockAtCurrentPosition(world, lecternBlock, lecternMeta, 2, 1, 3, structureBB);
+            
+            // Doors
+            for (int[] uvwoor : new int[][]{ // u, v, w, orientation, isShut (1/0 for true/false), isRightHanded (1/0 for true/false)
+            	{3, 1, 2, 2, 1, 1},
+            	{5, 1, 2, 2, 1, 0},
+            	{3, 5, 2, 2, 1, 1},
+            	{5, 5, 2, 2, 1, 0},
+            })
+            {
+            	for (int height=0; height<=1; height++)
+            	{
+            		this.placeBlockAtCurrentPosition(world, biomeWoodDoorBlock, StructureVillageVN.getDoorMetas(uvwoor[3], this.coordBaseMode, uvwoor[4]==1, uvwoor[5]==1)[height],
+            				uvwoor[0], uvwoor[1]+height, uvwoor[2], structureBB);
+            	}
+            }
+        	
+            // Fences
+            for(int[] uuvvww : new int[][]{
+            	{2,1,0, 2,2,0}, {4,1,0, 4,2,0}, {6,1,0, 6,2,0}, 
+            	{2,3,0, 6,3,0}, {2,5,0, 6,5,0},
+            	{1,5,1, 1,5,1}, {7,5,1, 7,5,1}, 
+            })
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+            }
+            
+            // Front path
+            for (int u : new int[]{2,4,6})
+            {
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, 0, structureBB);
+            }
+            for (int u : new int[]{3,5}) {for (int w=0; w<2; w++) {
+            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w));
+            }}
+            
+            
+            // Clear path for easier entry
+            for (int u=3; u<=5; u++)
+            {
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, -1, structureBB);
+            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, -1, structureBB);
+            	// Place dirt if the block to be set as path is empty
+            	if (world.isAirBlock(this.getXWithOffset(u, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, -1)))
+            	{
+                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, -1, structureBB);
+            	}
+            	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(u, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, -1));
+            }
+        	
+            
+    		// Villagers
+            if (!this.entitiesGenerated)
+            {
+            	this.entitiesGenerated=true;
+            	
+            	// Villager
+            	int u = 3+random.nextInt(4);
+            	int v = random.nextBoolean() ? 5 : 1;
+            	int w = 3+random.nextInt(2);
+            	            	
+            	EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 1, 1, 0);
+    			
+    			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
+                world.spawnEntityInWorld(entityvillager);
+            }
+            
+            return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 1;}
+    }
+    
+    
+    
+    // --- Plains Mason's House --- //
+    
+    public static class PlainsMasonsHouse1 extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public StartVN start;
+    	
+    	// Here are values to assign to the bounding box
+    	private static final int STRUCTURE_WIDTH = 9;
+    	private static final int STRUCTURE_HEIGHT = 7;
+    	private static final int STRUCTURE_DEPTH = 8;
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	
+    	private int averageGroundLevel = -1;
+    	
+        public PlainsMasonsHouse1() {}
+        
+        public PlainsMasonsHouse1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        {
+            super();
+            this.coordBaseMode = coordBaseMode;
+            this.boundingBox = boundingBox;
+            // Additional stuff to be used in the construction
+            this.start = start;
+        }
+        
+        public static PlainsMasonsHouse1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+            
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new PlainsMasonsHouse1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+        }
+        
+        
+        @Override
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+        {
+        	if (this.averageGroundLevel < 0)
+            {
+        		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+        				// Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				new StructureBoundingBox(
+        						this.boundingBox.minX, this.boundingBox.minZ,
+        						this.boundingBox.maxX, this.boundingBox.maxZ),
+        				true, (byte)1, this.coordBaseMode);
+        		
+                if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+            }
+        	
+            Object[] blockObject;
+            blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, start.materialType, start.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, start.materialType, start.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, start.materialType, start.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, start.materialType, start.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.oak_stairs, 0, start.materialType, start.biome); Block biomeWoodStairsBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 0, start.materialType, start.biome); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), start.materialType, start.biome); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), start.materialType, start.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, start.materialType, start.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, start.materialType, start.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, start.materialType, start.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, start.materialType, start.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModStonecutter(); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+        	
+        	// Clear space above
+            for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+            }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+	            	"         ",
+	            	" FFFFFFF ",
+	            	" FFFFFFF ",
+	            	" FFFFFFF ",
+	            	" FFFFFFF ",
+	            	" FFFFFFF ",
+	            	"  FFFFFF ",
+	            	"   FFFFF ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+            
+            
+            // Stone
+            for(int[] uuvvww : new int[][]{
+            	// Floor
+            	{1,0,2, 7,0,6},
+            	{3,0,1, 7,0,1},
+            	{4,0,0, 7,0,0},
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
+            }
+            
+            // Planks
+            for(int[] uuvvww : new int[][]{
+            	// Embedded into the floor
+            	{3,0,4, 5,0,4},
+            	// Roof
+            	{4,6,1, 4,6,7},
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+
+            
+            // Stained terracotta
+            for(int[] uuvvww : new int[][]{
+            	// Front
+            	{2,1,2, 6,3,2}, {3,5,2, 5,5,2},
+            	// Back
+            	{2,1,6, 6,3,6}, {3,5,6, 5,5,6},
+            	// Left
+            	{1,1,3, 1,3,5},
+            	// Right
+            	{7,1,3, 7,3,5},
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, false);	
+            }
+            
+            
+            // Logs
+            // Vertical beams
+            for(int[] uuvvww : new int[][]{
+            	{1,1,2, 1,3,2}, 
+            	{1,1,6, 1,3,6}, 
+            	{7,1,2, 7,3,2}, 
+            	{7,1,6, 7,3,6}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeLogVertBlock, biomeLogVertMeta, biomeLogVertBlock, biomeLogVertMeta, false);
+            }
+            // Across beams
+            for(int[] uuvvww : new int[][]{
+            	{2,4,2, 6,4,2},
+            	{2,4,6, 6,4,6},
+            })
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeLogHorAcrossBlock, biomeLogHorAcrossMeta, biomeLogHorAcrossBlock, biomeLogHorAcrossMeta, false);
+            }
+            
+            // Windows
+        	for (int[] uvw : new int[][]{
+        			{5,2,2},
+        			{5,2,6},
+        			{3,2,6},
+        			{1,2,4},
+        			{7,2,4},
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.glass_pane, 0, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+            
+        	// Various wooden stairs
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0:leftward, 1:rightward, 3:backward, 2:forward; +4:inverted
+        		
+        		// Roof
+        		{0,3,1, 0,3,7, 0}, {8,3,1, 8,3,7, 1},
+        		{1,4,1, 1,4,7, 0}, {7,4,1, 7,4,7, 1}, 
+        		{2,5,1, 2,5,7, 0}, {6,5,1, 6,5,7, 1}, 
+        		{3,6,1, 3,6,7, 0}, {5,6,1, 5,6,7, 1},
+        		// Trim
+        		{1,3,1, 1,3,1, 5}, {7,3,1, 7,3,1, 4},
+        		{2,4,1, 2,4,1, 5}, {6,4,1, 6,4,1, 4},
+        		{3,5,1, 3,5,1, 5}, {5,5,1, 5,5,1, 4},
+        		{1,3,7, 1,3,7, 5}, {7,3,7, 7,3,7, 4},
+        		{2,4,7, 2,4,7, 5}, {6,4,7, 6,4,7, 4},
+        		{3,5,7, 3,5,7, 5}, {5,5,7, 5,5,7, 4},
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, false);
+            }
+
+            // Fences
+            for(int[] uuvvww : new int[][]{
+            	{4,1,0, 7,1,0}, {7,1,1, 7,1,1}, 
+            })
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+            }
+            
+        	// Torches
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright; 
+            	// Porch
+            	{4,2,0,-1}, {7,2,0,-1},
+            	{4,4,3,0}, {4,4,5,2}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
+            }
+        	
+        	// Interior
+        	
+            // Clay
+            for(int[] uvw : new int[][]{
+            	{2,1,5}, 
+            	{3,1,5}, 
+            	{2,2,5}, 
+            	{2,1,4}, 
+            	})
+            {
+            	this.placeBlockAtCurrentPosition(world, Blocks.clay, 0, uvw[0], uvw[1], uvw[2], structureBB);	
+            }
+            // Terracotta
+            for(int[] uvw : new int[][]{
+            	{4,1,5}, 
+            	{2,3,5}, 
+            	})
+            {
+            	this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uvw[0], uvw[1], uvw[2], structureBB);	
+            }
+        	
+            // Stone Cutter
+            this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 6, 1, 4, structureBB);
+            
+            // Doors
+            for (int[] uvwoor : new int[][]{ // u, v, w, orientation, isShut (1/0 for true/false), isRightHanded (1/0 for true/false)
+            	{3, 1, 2, 2, 1, 1},
+            })
+            {
+            	for (int height=0; height<=1; height++)
+            	{
+            		this.placeBlockAtCurrentPosition(world, biomeWoodDoorBlock, StructureVillageVN.getDoorMetas(uvwoor[3], this.coordBaseMode, uvwoor[4]==1, uvwoor[5]==1)[height],
+            				uvwoor[0], uvwoor[1]+height, uvwoor[2], structureBB);
+            	}
+            }
+        	
+            // Front stairs
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward; +4:inverted
+        		{3,0,0, 3}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, biomeStoneStairsBlock, this.getMetadataWithOffset(Blocks.stone_stairs, uuvvwwo[3]%4)+(uuvvwwo[3]/4)*4, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], structureBB);
+            }
+            
+            
+        	// Flower planter out front
+        	this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, 2, 0, 1, structureBB); // Sod
+        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0 ? 6 : 4, 1, 0, 1, structureBB); // Left
+        	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, (new int[]{4, 7, 5, 6})[this.coordBaseMode], 2, 0, 0, structureBB); // Front
+        	
+        	// Flowers on top
+    		int flowerindex = random.nextInt(10 + (Block.getBlockFromName(ModObjects.flowerUTD)==null ? 0 : 2));
+    		// 0-8 is "red" flower
+    		// 9 is a basic yellow flower
+    		// 10-11 are the flowers from UpToDateMod
+    		Block flowerblock = flowerindex == 9 ? Blocks.yellow_flower : flowerindex > 9 ? Block.getBlockFromName(ModObjects.flowerUTD) : Blocks.red_flower;
+    		int flowermeta = new int[]{0,1,2,3,4,5,6,7,8,0,0,1}[flowerindex];
+    		
+    		this.placeBlockAtCurrentPosition(world, flowerblock, flowermeta, 2, 1, 1, structureBB);
+        	
+    		
+        	
+            // Clear path for easier entry
+        	this.clearCurrentPositionBlocksUpwards(world, 3, GROUND_LEVEL, -1, structureBB);
+        	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-2, -1, structureBB);
+        	// Place dirt if the block to be set as path is empty
+        	if (world.isAirBlock(this.getXWithOffset(3, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, -1)))
+        	{
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 3, GROUND_LEVEL-1, -1, structureBB);
+        	}
+        	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(3, -1), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(3, -1));
+        	
+            
+    		// Villagers
+            if (!this.entitiesGenerated)
+            {
+            	this.entitiesGenerated=true;
+            	
+            	// Villager
+            	int u = 3+random.nextInt(3);
+            	int v = 1;
+            	int w = 3+random.nextInt(2);
+            	            	
+            	EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 3, 4, 0);
+    			
+    			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
+                world.spawnEntityInWorld(entityvillager);
+            }
+            
+            return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 3;}
     }
     
     

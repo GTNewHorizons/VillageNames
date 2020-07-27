@@ -237,6 +237,10 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLargeFarm1.class, "VNPlLF1");
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLibrary1_Handler());
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLibrary1.class, "VNPlLi1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLibrary2_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLibrary2.class, "VNPlLi2");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMasonsHouse1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMasonsHouse1.class, "VNPlMH1");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

@@ -1508,6 +1508,19 @@ public class ModObjects {
 		if (modblock != null) {return new Object[]{modblock, 12};}
 		else {return new Object[]{materialMeta<4 ? Blocks.log : Blocks.log2, 12+materialMeta%4};}
 	}
+
+	// Stonecutter
+	/**
+	 * Orientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static Object[] chooseModStonecutter()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
+	}
 	
 	// Trap door
 	public static Block chooseModWoodenTrapdoor(int materialMeta)
