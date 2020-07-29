@@ -136,6 +136,9 @@ public class TaigaStructures
         			this.getZWithOffset(2, 3));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+    		this.namePrefix = villageNBTtag.getString("namePrefix");
+    		this.nameRoot = villageNBTtag.getString("nameRoot");
+    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
         	
         	// Top layer is grass path
         	for (int i=0; i<=10; i++)
@@ -389,6 +392,9 @@ public class TaigaStructures
         			this.getZWithOffset(8, 1));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+    		this.namePrefix = villageNBTtag.getString("namePrefix");
+    		this.nameRoot = villageNBTtag.getString("nameRoot");
+    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
         	
         	
             // Encircle the well with path

@@ -1142,6 +1142,9 @@ public class StructureVillageVN
     	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
     	public int townColor = 14; // Red
     	public int townColor2 = 0; // White
+    	public String namePrefix = "";
+    	public String nameRoot = "";
+    	public String nameSuffix = "";
     	public boolean villagersGenerated = false;
     	public int bannerY = 0;
     	public ArrayList<Integer> decorHeightY = new ArrayList();
