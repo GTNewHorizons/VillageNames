@@ -1092,6 +1092,15 @@ public class ModObjects {
 	}
 	
 	
+	// Loom
+	public static Object[] chooseModLoom()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
+	}
+	
 	
 	// Andesite
 	public static ItemStack chooseModAndesite()
