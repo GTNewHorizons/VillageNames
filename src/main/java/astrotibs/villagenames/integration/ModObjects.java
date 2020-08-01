@@ -255,6 +255,13 @@ public class ModObjects {
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
 	public static final String ironNuggetUTD = "uptodate:iron_nugget";
 	
+	// Ladders
+	public static final String ladderSpruceGS = "ganyssurface:ladder1";
+	public static final String ladderBirchGS = "ganyssurface:ladder2";
+	public static final String ladderJungleGS = "ganyssurface:ladder3";
+	public static final String ladderAcaciaGS = "ganyssurface:ladder4";
+	public static final String ladderDarkOakGS = "ganyssurface:ladder5";
+	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
 	public static final String lanternUTD = "uptodate:lantern";
@@ -1364,6 +1371,23 @@ public class ModObjects {
 		return null;
 	}
 	
+	// Ladder
+	public static Block chooseModLadderBlock(int materialMeta)
+	{
+		Block modblock=null;
+		
+		switch (materialMeta)
+		{
+		case 0: modblock = Blocks.ladder; break;
+		case 1: modblock = Block.getBlockFromName(ModObjects.ladderSpruceGS); break;
+		case 2: modblock = Block.getBlockFromName(ModObjects.ladderBirchGS); break;
+		case 3: modblock = Block.getBlockFromName(ModObjects.ladderJungleGS); break;
+		case 4: modblock = Block.getBlockFromName(ModObjects.ladderAcaciaGS); break;
+		case 5: modblock = Block.getBlockFromName(ModObjects.ladderDarkOakGS); break;
+		}
+		if (modblock != null) {return modblock;}
+		else {return null;}
+	}
 	
 	// Sign
 	public static ItemStack chooseModWoodenSignItem(int materialMeta)

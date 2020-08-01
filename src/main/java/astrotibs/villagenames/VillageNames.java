@@ -250,7 +250,21 @@ public final class VillageNames
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMeetingPoint5_Handler());
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint5.class, "VNPlMP5");
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsShepherdsHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsShepherdsHouse1.class, "VNPlSH1");
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsShepherdsHouse1.class, "VNPlSh1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallFarm1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallFarm1.class, "VNPlSF1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse1.class, "VNPlSH1");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse2_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse2.class, "VNPlSH2");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse3_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse3.class, "VNPlSH3");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse4_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse4.class, "VNPlSH4");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse5_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse5.class, "VNPlSH5");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse6_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse6.class, "VNPlSH6");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
