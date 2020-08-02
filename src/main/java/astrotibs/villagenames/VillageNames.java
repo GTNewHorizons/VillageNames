@@ -265,6 +265,12 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse5.class, "VNPlSH5");
 	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse6_Handler());
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse6.class, "VNPlSH6");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse7_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse7.class, "VNPlSH7");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse8_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse8.class, "VNPlSH8");
+	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsStable1_Handler());
+	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsStable1.class, "VNPlSt1");
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

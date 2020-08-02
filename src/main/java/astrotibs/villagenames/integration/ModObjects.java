@@ -110,6 +110,12 @@ public class ModObjects {
 	public static final String concreteBlackEF = "etfuturum:concrete_black";
 	
 	// Crops
+	public static final String cropHerbDRQ = "DQMIIINext:blockYakusouSeed1";
+	public static final String cropAntidoteHerbDRQ = "DQMIIINext:blockDokukesisouSeed1";
+	public static final String cropStrengthSeedDRQ = "DQMIIINext:blockTikaraSeed1";
+	public static final String cropDefenceSeedDRQ = "DQMIIINext:blockMamoriSeed1";
+	public static final String cropAgilitySeedDRQ = "DQMIIINext:blockSubayasaSeed1";
+	
 	public static final String cropArtichokeHC = "harvestcraft:pamartichokeCrop";
 	public static final String cropAsparagusHC = "harvestcraft:pamasparagusCrop";
 	public static final String cropBambooHC = "harvestcraft:pambambooshootCrop";

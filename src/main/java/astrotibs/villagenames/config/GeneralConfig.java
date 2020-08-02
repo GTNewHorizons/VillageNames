@@ -150,12 +150,16 @@ public class GeneralConfig {
 	public static String structureModernPlainsSmallHouse4_string; public static ArrayList<Integer> structureModernPlainsSmallHouse4_vals;
 	public static String structureModernPlainsSmallHouse5_string; public static ArrayList<Integer> structureModernPlainsSmallHouse5_vals;
 	public static String structureModernPlainsSmallHouse6_string; public static ArrayList<Integer> structureModernPlainsSmallHouse6_vals;
+	public static String structureModernPlainsSmallHouse7_string; public static ArrayList<Integer> structureModernPlainsSmallHouse7_vals;
+	public static String structureModernPlainsSmallHouse8_string; public static ArrayList<Integer> structureModernPlainsSmallHouse8_vals;
+	public static String structureModernPlainsStable1_string; public static ArrayList<Integer> structureModernPlainsStable1_vals;
 
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
 	public static boolean decorateVillageCenter;
 	public static float harvestcraftCropFarmRate;
+	public static float dragonQuestCropFarmRate;
 	//public static boolean farmPumpkins;
 	
 	public static void init(File configFile) 
@@ -324,6 +328,21 @@ public class GeneralConfig {
 		structureModernPlainsSmallHouse6_string = config.getString("Structure: Modern Plains Small House 6", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsSmallHouse6_vals = parseIntegerArray(structureModernPlainsSmallHouse6_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsSmallHouse7_string = config.getString("Structure: Modern Plains Small House 7", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsSmallHouse7_vals = parseIntegerArray(structureModernPlainsSmallHouse7_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsSmallHouse8_string = config.getString("Structure: Modern Plains Small House 8", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsSmallHouse8_vals = parseIntegerArray(structureModernPlainsSmallHouse8_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsStable1_string = config.getString("Structure: Modern Plains Cobblestone Stable", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsStable1_vals = parseIntegerArray(structureModernPlainsStable1_string, ali);
 		
 		
 		// Misc
@@ -734,7 +753,8 @@ public class GeneralConfig {
 		
 		//--------------Mod Integration-----------------//
 		
-		harvestcraftCropFarmRate = config.getFloat("HarvestCraft crop chance", "Mod Integration", 0.25F, 0F, 1F, "Generate HarvestCraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
+		harvestcraftCropFarmRate = config.getFloat("Crop rate: Harvestcraft", "Mod Integration", 0.25F, 0F, 1F, "Generate Harvestcraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
+		dragonQuestCropFarmRate = config.getFloat("Crop rate: DQ Respect", "Mod Integration", 0.25F, 0F, 1F, "Generate Dragon Quest Respect crops in farms. Only used with Village Generator. Set to 0 for no DQR crops.");
 		
 		// Added in v3.2
 	    modConcrete = config.getStringList("Mod Priority: Concrete", "Mod Integration", new String[]{
