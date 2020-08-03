@@ -60,6 +60,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumChatFormatting;
@@ -211,66 +212,41 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint3.class, "VNSnMP3"); // Snowy Pavilion
 	        
 	        // Village Structures
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAccessory1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAccessory1.class, "VNPlAc1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen1.class, "VNPlAP1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen2_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen2.class, "VNPlAP2");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsAnimalPen3_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsAnimalPen3.class, "VNPlAP3");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsArmorerHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsArmorerHouse1.class, "VNPlAr1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsBigHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsBigHouse1.class, "VNPlBH1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsButcherShop1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop1.class, "VNPlBS1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsButcherShop2_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsButcherShop2.class, "VNPlBS2");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsCartographer1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsCartographer1.class, "VNPlCa1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsFisherCottage1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFisherCottage1.class, "VNPlFC1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsFletcherHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFletcherHouse1.class, "VNPlFH1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLargeFarm1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLargeFarm1.class, "VNPlLF1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLibrary1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLibrary1.class, "VNPlLi1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsLibrary2_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsLibrary2.class, "VNPlLi2");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMasonsHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMasonsHouse1.class, "VNPlMa1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMediumHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMediumHouse1.class, "VNPlMH1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMediumHouse2_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMediumHouse2.class, "VNPlMH2");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMeetingPoint4_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint4.class, "VNPlMP4");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsMeetingPoint5_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint5.class, "VNPlMP5");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsShepherdsHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsShepherdsHouse1.class, "VNPlSh1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallFarm1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallFarm1.class, "VNPlSF1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse1.class, "VNPlSH1");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse2_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse2.class, "VNPlSH2");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse3_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse3.class, "VNPlSH3");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse4_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse4.class, "VNPlSH4");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse5_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse5.class, "VNPlSH5");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse6_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse6.class, "VNPlSH6");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse7_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse7.class, "VNPlSH7");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsSmallHouse8_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsSmallHouse8.class, "VNPlSH8");
-	        VillagerRegistry.instance().registerVillageCreationHandler(new StructureCreationHandlers.PlainsStable1_Handler());
-	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsStable1.class, "VNPlSt1");
+	        registerVillageComponentBuilding(PlainsStructures.PlainsAccessory1.class, "VNPlAcc1", new StructureCreationHandlers.PlainsAccessory1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsAnimalPen1.class, "VNPlAnP1", new StructureCreationHandlers.PlainsAnimalPen1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsAnimalPen2.class, "VNPlAnP2", new StructureCreationHandlers.PlainsAnimalPen2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsAnimalPen3.class, "VNPlAnP3", new StructureCreationHandlers.PlainsAnimalPen3_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsArmorerHouse1.class, "VNPlArm1", new StructureCreationHandlers.PlainsArmorerHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsBigHouse1.class, "VNPlBiH1", new StructureCreationHandlers.PlainsBigHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsButcherShop1.class, "VNPlBut1", new StructureCreationHandlers.PlainsButcherShop1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsButcherShop2.class, "VNPlBut2", new StructureCreationHandlers.PlainsButcherShop2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsCartographer1.class, "VNPlCar1", new StructureCreationHandlers.PlainsCartographer1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsFisherCottage1.class, "VNPlFis1", new StructureCreationHandlers.PlainsFisherCottage1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsFletcherHouse1.class, "VNPlFle1", new StructureCreationHandlers.PlainsFletcherHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsLargeFarm1.class, "VNPlLFa1", new StructureCreationHandlers.PlainsLargeFarm1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsLibrary1.class, "VNPlLib1", new StructureCreationHandlers.PlainsLibrary1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsLibrary2.class, "VNPlLib2", new StructureCreationHandlers.PlainsLibrary2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsMasonsHouse1.class, "VNPlMas1", new StructureCreationHandlers.PlainsMasonsHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsMediumHouse1.class, "VNPlMeH1", new StructureCreationHandlers.PlainsMediumHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsMediumHouse2.class, "VNPlMeH2", new StructureCreationHandlers.PlainsMediumHouse2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsMeetingPoint4.class, "VNPlMeP4", new StructureCreationHandlers.PlainsMeetingPoint4_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsMeetingPoint5.class, "VNPlMeP5", new StructureCreationHandlers.PlainsMeetingPoint5_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsShepherdsHouse1.class, "VNPlShe1", new StructureCreationHandlers.PlainsShepherdsHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallFarm1.class, "VNPlSFa1", new StructureCreationHandlers.PlainsSmallFarm1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse1.class, "VNPlSmH1", new StructureCreationHandlers.PlainsSmallHouse1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse2.class, "VNPlSmH2", new StructureCreationHandlers.PlainsSmallHouse2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse3.class, "VNPlSmH3", new StructureCreationHandlers.PlainsSmallHouse3_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse4.class, "VNPlSmH4", new StructureCreationHandlers.PlainsSmallHouse4_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse5.class, "VNPlSmH5", new StructureCreationHandlers.PlainsSmallHouse5_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse6.class, "VNPlSmH6", new StructureCreationHandlers.PlainsSmallHouse6_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse7.class, "VNPlSmH7", new StructureCreationHandlers.PlainsSmallHouse7_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsSmallHouse8.class, "VNPlSmH8", new StructureCreationHandlers.PlainsSmallHouse8_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsStable1.class, "VNPlSta1", new StructureCreationHandlers.PlainsStable1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsStable2.class, "VNPlSta2", new StructureCreationHandlers.PlainsStable2_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsTannery1.class, "VNPlTan2", new StructureCreationHandlers.PlainsTannery1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple3.class, "VNPlTem3", new StructureCreationHandlers.PlainsTemple3_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple4.class, "VNPlTem4", new StructureCreationHandlers.PlainsTemple4_Handler());
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
@@ -438,4 +414,16 @@ public final class VillageNames
 		return signColorToFormat.get(colorMeta);
 	}
 	*/
+	
+	/**
+	 * For streamlining structure registry of component buildings (not village centers)
+	 * @param structureClass - The class of the building
+	 * @param structureShorthand - Abbreviated name for the structure, loaded into nbt structure files
+	 * @param handlerClass - The creation handler class in StructureCreationHandlers
+	 */
+	public static void registerVillageComponentBuilding(Class structureClass, String structureShorthand, IVillageCreationHandler handlerClass)
+	{
+        VillagerRegistry.instance().registerVillageCreationHandler(handlerClass);
+        MapGenStructureIO.func_143031_a(structureClass, structureShorthand);
+	}
 }

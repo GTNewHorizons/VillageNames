@@ -153,7 +153,11 @@ public class GeneralConfig {
 	public static String structureModernPlainsSmallHouse7_string; public static ArrayList<Integer> structureModernPlainsSmallHouse7_vals;
 	public static String structureModernPlainsSmallHouse8_string; public static ArrayList<Integer> structureModernPlainsSmallHouse8_vals;
 	public static String structureModernPlainsStable1_string; public static ArrayList<Integer> structureModernPlainsStable1_vals;
-
+	public static String structureModernPlainsStable2_string; public static ArrayList<Integer> structureModernPlainsStable2_vals;
+	public static String structureModernPlainsTannery1_string; public static ArrayList<Integer> structureModernPlainsTannery1_vals;
+	public static String structureModernPlainsTemple3_string; public static ArrayList<Integer> structureModernPlainsTemple3_vals;
+	public static String structureModernPlainsTemple4_string; public static ArrayList<Integer> structureModernPlainsTemple4_vals;
+	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
@@ -343,6 +347,26 @@ public class GeneralConfig {
 		structureModernPlainsStable1_string = config.getString("Structure: Modern Plains Cobblestone Stable", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsStable1_vals = parseIntegerArray(structureModernPlainsStable1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsStable2_string = config.getString("Structure: Modern Plains Terracotta Stable", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsStable2_vals = parseIntegerArray(structureModernPlainsStable2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsTannery1_string = config.getString("Structure: Modern Plains Tannery", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsTannery1_vals = parseIntegerArray(structureModernPlainsTannery1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsTemple3_string = config.getString("Structure: Modern Plains Terracotta Temple", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsTemple3_vals = parseIntegerArray(structureModernPlainsTemple3_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsTemple4_string = config.getString("Structure: Modern Plains Cobblestone Temple", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsTemple4_vals = parseIntegerArray(structureModernPlainsTemple4_string, ali);
 		
 		
 		// Misc
