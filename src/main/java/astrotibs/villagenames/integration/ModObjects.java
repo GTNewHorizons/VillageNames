@@ -275,11 +275,42 @@ public class ModObjects {
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
 	
+	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
+	public static final String redSandstoneEF = "etfuturum:red_sandstone";
+	public static final String redSandstoneGS = "ganyssurface:red_sandstone";
+	public static final String redSandstoneUTD = "uptodate:red_sandstone";
+	
+	// Red Sandstone slab
+	public static final String redSandstoneSlabEF = "etfuturum:red_sandstone_slab";
+	public static final String redSandstoneSlabGS = "ganyssurface:red_sandstone_slab";
+	public static final String redSandstoneSlabUTD = "uptodate:slab_red_sandstone";
+	public static final String cutRedSandstoneSlabUTD = "uptodate:slab_cut_red_sandstone";
+	
+	// Cut Sandstone Slab
+	public static final String cutSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
+	
+	// Red Sandstone Stairs
+	public static final String redSandstoneStairsEF = "etfuturum:red_sandstone_stairs";
+	public static final String redSandstoneStairsGS = "ganyssurface:red_sandstone_stairs";
+	public static final String redSandstoneStairsUTD = "uptodate:stairs_red_sandstone";
+	
 	// Smooth Stone
 	public static final String smoothStoneUTD = "uptodate:smooth_stone";
 	
+	// Smooth Sandstone
+	public static final String smoothSandstoneUTD = "uptodate:smooth_sandstone";
+	
+	// Smooth Sandstone Stairs
+	public static final String smoothSandstoneStairsUTD = "uptodate:slab_smooth_sandstone";
+	public static final String smoothRedSandstoneStairsUTD = "uptodate:slab_smooth_red_sandstone";
+	
+	// Smooth Sandstone Slab
+	public static final String smoothSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
+	public static final String smoothRedSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
+	
 	// Walls
 	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
+	public static final String redSandstoneWallUTD = "uptodate:wall_red_sandstone";
 	public static final String brickWallUTD = "uptodate:wall_bricks";
 	public static final String stonebrickWallUTD = "uptodate:wall_stone_bricks";
 	public static final String mossystonebrickWallUTD = "uptodate:wall_mossy_stone_bricks";
@@ -485,7 +516,6 @@ public class ModObjects {
         	world.setTileEntity(x, y, z, tileentity);
 		}
 	}
-	
 	
 	
 	// Beetroot
@@ -963,6 +993,17 @@ public class ModObjects {
 		return null;
 	}
 	
+	
+	// Grindstone
+	public static Object[] chooseModGrindstone(int orientation, int horizIndex)
+	{
+		Block modblock = Blocks.anvil;
+		int meta = StructureVillageVN.chooseAnvilMeta(orientation, horizIndex);
+		
+		return new Object[]{modblock, meta};
+	}
+	
+	
 	// Iron Nugget
 	public static ItemStack chooseModIronNugget()
 	{
@@ -1377,6 +1418,31 @@ public class ModObjects {
 		return null;
 	}
 	
+	
+	// Selects a modded Grass Path block if able; returns Gravel otherwise.
+	public static Block chooseModPathBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modGrassPath;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return Blocks.gravel;
+	}
+	
+	
 	// Ladder
 	public static Block chooseModLadderBlock(int materialMeta)
 	{
@@ -1394,6 +1460,7 @@ public class ModObjects {
 		if (modblock != null) {return modblock;}
 		else {return null;}
 	}
+	
 	
 	// Sign
 	public static ItemStack chooseModWoodenSignItem(int materialMeta)
@@ -1436,6 +1503,16 @@ public class ModObjects {
 	*/
 	
 	
+	// SmithingTable
+	public static Object[] chooseModSmithingTable()
+	{
+		Block modblock = Blocks.crafting_table;
+		int meta = 0;
+		
+		return new Object[]{modblock, meta};
+	}
+	
+	
 	// Smoker
 	/**
 	 * furnaceOrientation:
@@ -1450,10 +1527,10 @@ public class ModObjects {
 	}
 	
 	
-	// Selects a modded Grass Path block if able; returns Gravel otherwise.
-	public static Block chooseModPathBlock()
+	// Red Sandstone
+	public static Block chooseModRedSandstone()
 	{
-		String[] modprioritylist = GeneralConfig.modGrassPath;
+		String[] modprioritylist = GeneralConfig.modRedSandstone;
 		
 		for (String mod : modprioritylist)
 		{
@@ -1461,16 +1538,221 @@ public class ModObjects {
 			
 			if (mod.toLowerCase().equals("uptodate"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().equals("etfuturum"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneEF);
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneGS);
 				if (modblock != null) {return modblock;}
 			}
 		}
-		return Blocks.gravel;
+		
+		return null;
+	}
+	
+	
+	// Red Sandstone Slab
+	public static Object[] chooseModRedSandstoneSlab(boolean upper)
+	{
+		String[] modprioritylist = GeneralConfig.modRedSandstone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabUTD);
+				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabEF);
+				if (modblock != null) {return new Object[]{modblock, upper?1:0};}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabGS);
+				if (modblock != null) {return new Object[]{modblock, upper?1:0};}
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	// Red Sandstone Double Slab
+	public static Object[] chooseModRedSandstoneDoubleSlab()
+	{
+		String[] modprioritylist = GeneralConfig.modRedSandstone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabEF);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabGS);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	// Cut Red Sandstone Slab
+	public static Object[] chooseModCutRedSandstoneSlab(boolean upper)
+	{
+		Block modblock = Block.getBlockFromName(ModObjects.cutRedSandstoneSlabUTD);
+		if (modblock != null) {return new Object[]{modblock, upper?8:0};}
+		
+		return null;
+	}
+	
+	
+	// Red Sandstone Stairs
+	public static Block chooseModRedSandstoneStairs()
+	{
+		String[] modprioritylist = GeneralConfig.modRedSandstone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsUTD);
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsEF);
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsGS);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	/**
+	 * Returns non-smooth stair versions on failure; white sandstone stairs if red does not exist
+	 */
+	public static Block chooseModSmoothSandstoneStairs(boolean isRed)
+	{
+		Block modblock;
+		
+		if (isRed)
+		{
+			modblock = Block.getBlockFromName(ModObjects.smoothRedSandstoneStairsUTD);
+			if (modblock != null) {return modblock;}
+			else
+			{
+				modblock = chooseModRedSandstoneStairs();
+				if (modblock != null) {return modblock;}
+				else {return Blocks.sandstone_stairs;}
+			}
+		}
+		else
+		{
+			modblock = Block.getBlockFromName(ModObjects.smoothRedSandstoneStairsUTD);
+			if (modblock != null) {return modblock;}
+			else {return Blocks.sandstone_stairs;}
+		}
+	}
+	
+	
+	// Sandstone Wall
+	public static Block chooseModSandstoneWall(boolean isRed)
+	{
+		Block modblock = Block.getBlockFromName(isRed ? ModObjects.redSandstoneWallUTD : ModObjects.sandstoneWallUTD);
+		if (modblock != null) {return modblock;}
+		
+		return null;
+	}
+	
+	
+	// Cut Sandstone Slab
+	public static Object[] chooseModCutSandstoneSlab(boolean upper)
+	{
+		Block modblock = Block.getBlockFromName(ModObjects.cutSandstoneSlabUTD);
+		if (modblock != null) {return new Object[]{modblock, upper?8:0};}
+		
+		return null;
+	}
+	
+	
+	// Smooth Sandstone
+	public static Object[] chooseModSmoothSandstoneBlock(boolean isRed)
+	{
+		Block modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
+		
+		return new Object[]{modblock, isRed?3:0};
+	}
+	
+	
+	// Smooth Sandstone Slab
+	/**
+	 * Returns regular sandstone slab on a failure
+	 */
+	public static Object[] chooseModSmoothSandstoneSlab(boolean upper, boolean isRed)
+	{
+		Block modblock;
+		
+		if (isRed)
+		{
+			modblock = Block.getBlockFromName(ModObjects.smoothRedSandstoneSlabUTD);
+			if (modblock != null)
+			{
+				return new Object[]{modblock, upper?8:0};
+			}
+			else
+			{
+				Object[] modobject = chooseModRedSandstoneSlab(upper);
+				if (modobject != null)
+				{
+					return modobject;
+				}
+				else
+				{
+					return new Object[]{Blocks.stone_slab, upper?9:1};
+				}
+			}
+		}
+		else
+		{
+			modblock = Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD);
+			if (modblock != null)
+			{
+				return new Object[]{modblock, upper?8:0};
+			}
+			else
+			{
+				return new Object[]{Blocks.stone_slab, upper?9:1};
+			}
+		}
 	}
 	
 	

@@ -246,6 +246,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTannery1.class, "VNPlTan2", new StructureCreationHandlers.PlainsTannery1_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple3.class, "VNPlTem3", new StructureCreationHandlers.PlainsTemple3_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple4.class, "VNPlTem4", new StructureCreationHandlers.PlainsTemple4_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsToolSmith1.class, "VNPlTSm1", new StructureCreationHandlers.PlainsToolSmith1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsWeaponsmith1.class, "VNPlWSm1", new StructureCreationHandlers.PlainsWeaponsmith1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

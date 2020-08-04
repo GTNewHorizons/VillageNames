@@ -446,7 +446,7 @@ public class ChestLootHandler {
 		
 		// --- Temple --- //
 		
-		chestGenHooks = ChestGenHooks.getInfo("vn_tannery");
+		chestGenHooks = ChestGenHooks.getInfo("vn_temple");
 		
 		// Number of stacks in a chest
 		stacks_min=3;
@@ -496,7 +496,7 @@ public class ChestLootHandler {
 		
 		
 		
-		// --- Toolsmith --- //
+		// --- Weaponsmith --- //
 		
 		chestGenHooks = ChestGenHooks.getInfo("vn_weaponsmith");
 		

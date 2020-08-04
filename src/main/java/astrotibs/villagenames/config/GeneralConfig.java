@@ -99,6 +99,7 @@ public class GeneralConfig {
 	public static String[] modFenceGate;
 	public static String[] modDoor;
 	public static String[] modWoodenTrapdoor;
+	public static String[] modRedSandstone;
 	public static String[] modStrippedLog;
 	
     public static boolean villagerSkinTones;
@@ -157,6 +158,8 @@ public class GeneralConfig {
 	public static String structureModernPlainsTannery1_string; public static ArrayList<Integer> structureModernPlainsTannery1_vals;
 	public static String structureModernPlainsTemple3_string; public static ArrayList<Integer> structureModernPlainsTemple3_vals;
 	public static String structureModernPlainsTemple4_string; public static ArrayList<Integer> structureModernPlainsTemple4_vals;
+	public static String structureModernPlainsToolSmith1_string; public static ArrayList<Integer> structureModernPlainsToolSmith1_vals;
+	public static String structureModernPlainsWeaponsmith1_string; public static ArrayList<Integer> structureModernPlainsWeaponsmith1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -367,6 +370,16 @@ public class GeneralConfig {
 		structureModernPlainsTemple4_string = config.getString("Structure: Modern Plains Cobblestone Temple", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsTemple4_vals = parseIntegerArray(structureModernPlainsTemple4_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsToolSmith1_string = config.getString("Structure: Modern Plains Tool Smithy", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsToolSmith1_vals = parseIntegerArray(structureModernPlainsToolSmith1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernPlainsWeaponsmith1_string = config.getString("Structure: Modern Plains Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernPlainsWeaponsmith1_vals = parseIntegerArray(structureModernPlainsWeaponsmith1_string, ali);
 		
 		
 		// Misc
@@ -826,6 +839,14 @@ public class GeneralConfig {
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modRedSandstone = config.getStringList("Mod Priority: Red Sandstone", "Mod Integration", new String[]{
+	    		"uptodate",
+	    		"etfuturum",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Red Sandstone and its variants for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", "Mod Integration", new String[]{

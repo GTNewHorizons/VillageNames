@@ -104,14 +104,16 @@ public class FunctionsVN
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MESA) {return MESA;}}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.MUSHROOM) {return MUSHROOM;}}
 			
-			// Special handler for snowy:
+			// Snow is only returned if there are no trees and it's a wasteland:
 			boolean isSnowy = false;
+			boolean isWasteland = false;
 			for (BiomeDictionary.Type type : typeTags)
 			{
 				if (type==BiomeDictionary.Type.SNOWY) {isSnowy=true;}
-				if (type==BiomeDictionary.Type.DENSE || type==BiomeDictionary.Type.FOREST || type==BiomeDictionary.Type.LUSH || type==BiomeDictionary.Type.SPARSE) {isSnowy=false; break;}
+				if (type==BiomeDictionary.Type.WASTELAND) {isWasteland=true;}
+				if (type==BiomeDictionary.Type.DENSE || type==BiomeDictionary.Type.FOREST || type==BiomeDictionary.Type.LUSH || type==BiomeDictionary.Type.SPARSE) {isSnowy=false; isWasteland=false; break;}
 			}
-			if (isSnowy) {return SNOW;}
+			if (isSnowy && isWasteland) {return SNOW;}
 			
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SANDY) {return SAND;}}
 			
