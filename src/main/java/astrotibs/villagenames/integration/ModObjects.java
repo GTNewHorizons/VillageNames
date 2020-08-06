@@ -80,7 +80,19 @@ public class ModObjects {
 	public static final String stoneEF = "etfuturum:stone";
 	public static final String stoneGS = "ganyssurface:18Stones";
 	public static final String stoneUTD = "uptodate:stone";
-
+	public static final String andesiteSlabUTD = "uptodate:slab_andesite";
+	public static final String andesiteStairsUTD = "uptodate:stairs_andesite";
+	public static final String dioriteSlabUTD = "uptodate:slab_diorite";
+	public static final String dioriteStairsUTD = "uptodate:stairs_diorite";
+	public static final String graniteSlabUTD = "uptodate:slab_granite";
+	public static final String graniteStairsUTD = "uptodate:stairs_granite";
+	public static final String andesiteSlabBo = "Botania:stone0Slab";
+	public static final String andesiteStairsBo = "Botania:stone0Stairs";
+	public static final String dioriteSlabBo = "Botania:stone2Slab";
+	public static final String dioriteStairsBo = "Botania:stone2Stairs";
+	public static final String graniteSlabBo = "Botania:stone3Slab";
+	public static final String graniteStairsBo = "Botania:stone3Stairs";
+	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
 	
@@ -301,8 +313,8 @@ public class ModObjects {
 	public static final String smoothSandstoneUTD = "uptodate:smooth_sandstone";
 	
 	// Smooth Sandstone Stairs
-	public static final String smoothSandstoneStairsUTD = "uptodate:slab_smooth_sandstone";
-	public static final String smoothRedSandstoneStairsUTD = "uptodate:slab_smooth_red_sandstone";
+	public static final String smoothSandstoneStairsUTD = "uptodate:stairs_smooth_sandstone";
+	public static final String smoothRedSandstoneStairsUTD = "uptodate:stairs_smooth_red_sandstone";
 	
 	// Smooth Sandstone Slab
 	public static final String smoothSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
@@ -314,7 +326,12 @@ public class ModObjects {
 	public static final String brickWallUTD = "uptodate:wall_bricks";
 	public static final String stonebrickWallUTD = "uptodate:wall_stone_bricks";
 	public static final String mossystonebrickWallUTD = "uptodate:wall_mossy_stone_bricks";
-
+	public static final String andesiteWallUTD = "uptodate:wall_andesite";
+	public static final String dioriteWallUTD = "uptodate:wall_diorite";
+	public static final String graniteWallUTD = "uptodate:wall_granite";
+	public static final String bountifulWallBo = "Botania:stone0Wall"; // Meta 0:Andesite, 2:Diorite, 3:Granite
+	public static final String wallRC = "Railcraft:wall.alpha"; // Meta 10:Brick, 11:Sandstone
+	
 	// Wooden Pressure Plate
 	public static final String pressurePlateSpruceGS = "ganyssurface:pressure_plate_spruce";
 	public static final String pressurePlateBirchGS = "ganyssurface:pressure_plate_birch";
@@ -360,8 +377,10 @@ public class ModObjects {
 	
 	
 	// Beetroot
-	public static final String beetrootEF = "etfuturum:beetroot";
-	public static final String beetrootGS = "ganyssurface:beetroot";
+	public static final String beetrootItemEF = "etfuturum:beetroot";
+	public static final String beetrootItemGS = "ganyssurface:beetroot";
+	public static final String beetrootCropEF = "etfuturum:beetroots";
+	public static final String beetrootCropGS = "ganyssurface:beetrootBlock";
 	
 	// Beetroot Seeds
 	public static final String beetrootSeedsEF = "etfuturum:beetroot_seeds";
@@ -437,6 +456,271 @@ public class ModObjects {
 	// --------------------------- //
 	// --- Generator Functions --- //
 	// --------------------------- //
+	
+	
+	// Andesite
+	public static Object[] chooseModAndesiteBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteC2);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 5};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				if (modblock != null) {return new Object[]{modblock, 5};}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneGS);
+				if (modblock != null) {return new Object[]{modblock, 5};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneBo);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModAndesiteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModPolishedAndesiteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
+			}
+		}
+		return null;
+	}
+	public static Object[] chooseModPolishedAndesiteBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteC2);
+				if (modblock != null) {return new Object[]{modblock, new Integer(1)};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
+				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneGS);
+				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneBo);
+				if (modblock != null) {return new Object[]{modblock, new Integer(4)};}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select an andesite slab block from a mod; returns null otherwise
+	 */
+	public static Block chooseModAndesiteSlabBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteSlabUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteSlabBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select an andesite stairs block from a mod; returns null otherwise
+	 */
+	public static Block chooseModAndesiteStairsBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteStairsUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteStairsBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select an andesite wall from a mod; returns null otherwise
+	 */
+	public static Object[] chooseModAndesiteWallBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.andesiteWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	
+	// Banner
+	public static ItemStack chooseModBannerItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBanner;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerEF));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerGS));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+		}
+		return null;
+	}
+	
+	public static Block chooseModBannerBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBanner;
+		
+		for (String mod : modprioritylist)
+		{
+			Block moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Block.getBlockFromName(ModObjects.bannerEF);
+				if (moditem != null) {return moditem;}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Block.getBlockFromName(ModObjects.bannerGS);
+				if (moditem != null) {return moditem;}
+			}
+		}
+		return null;
+	}
+	
 	
 	// Barrel
 	public static ItemStack chooseModBarrelItem()
@@ -529,23 +813,19 @@ public class ModObjects {
 			
 			if (mod.toLowerCase().equals("etfuturum"))
 			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootEF);
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootItemEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
 			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
-				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootGS);
+				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootItemGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
 
 		}
 		return null;
 	}
-	
-	
-	
-	// Beetroot
-	public static Block chooseModBeetrootBlock()
+	public static Block chooseModBeetrootCrop()
 	{
 		String[] modprioritylist = GeneralConfig.modBeetroot;
 		
@@ -555,12 +835,12 @@ public class ModObjects {
 			
 			if (mod.toLowerCase().equals("etfuturum"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.beetrootEF); 
+				modblock = Block.getBlockFromName(ModObjects.beetrootCropEF); 
 				if (modblock != null) {return modblock;}
 			}
 			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.beetrootGS);
+				modblock = Block.getBlockFromName(ModObjects.beetrootCropGS);
 				if (modblock != null) {return modblock;}
 			}
 
@@ -634,7 +914,33 @@ public class ModObjects {
 		
 		return new Object[]{modblock, meta};
 	}
-
+	
+	
+	// Brick Wall
+	public static Object[] chooseModBrickWall()
+	{
+		String[] modprioritylist = GeneralConfig.modWall;
+		
+		Block modblock=null;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.brickWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			if (mod.toLowerCase().equals("railcraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.wallRC);
+				if (modblock != null) {return new Object[]{modblock, 10};}
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	// Campfire
 	/**
      * Give this method the orientation of the campfire and the base mode of the structure it's in,
@@ -720,6 +1026,190 @@ public class ModObjects {
 		return null;
 	}
 	
+	
+	// Diorite
+	public static Object[] chooseModDioriteBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteC2);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneGS);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneBo);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+		}
+		return null;
+	}
+	
+	public static ItemStack chooseModDioriteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+		}
+		return null;
+	}
+	
+	public static ItemStack chooseModPolishedDioriteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a diorite slab block from a mod; returns null otherwise
+	 */
+	public static Block chooseModDioriteSlabBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteSlabUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteSlabBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a diorite stairs block from a mod; returns null otherwise
+	 */
+	public static Block chooseModDioriteStairsBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteStairsUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteStairsBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a diorite wall from a mod; returns null otherwise
+	 */
+	public static Object[] chooseModDioriteWallBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.dioriteWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+		}
+		return null;
+	}
 	
 	
 	// Dye
@@ -876,6 +1366,7 @@ public class ModObjects {
 		return Blocks.fence;
 	}
 	
+	
 	// Fence Gate
 	public static Block chooseModFenceGate(int materialMeta)
 	{
@@ -936,6 +1427,7 @@ public class ModObjects {
 		return new Object[]{modblock, meta};
 	}
 	
+	
 	// Glazed Terracotta - added in v3.1.2
 	public static Object[] chooseModGlazedTerracotta(int colorMeta, int orientationMeta)
 	{
@@ -994,6 +1486,215 @@ public class ModObjects {
 	}
 	
 	
+	// Granite
+	public static Object[] chooseModGraniteBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteC2);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneGS);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneBo);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+		}
+		return null;
+	}
+	public static ItemStack chooseModGraniteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
+			}
+		}
+		return null;
+	}
+	
+	public static ItemStack chooseModPolishedGraniteItem()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 7);}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a granite slab block from a mod; returns null otherwise
+	 */
+	public static Block chooseModGraniteSlabBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteSlabUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteSlabBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a granite stairs block from a mod; returns null otherwise
+	 */
+	public static Block chooseModGraniteStairsBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteStairsUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteStairsBo);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	/**
+	 * Select a granite wall from a mod; returns null otherwise
+	 */
+	public static Object[] chooseModGraniteWallBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	// Selects a modded Grass Path block if able; returns Gravel otherwise.
+	public static Block chooseModPathBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modGrassPath;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return Blocks.gravel;
+	}
+	
+	
 	// Grindstone
 	public static Object[] chooseModGrindstone(int orientation, int horizIndex)
 	{
@@ -1043,6 +1744,7 @@ public class ModObjects {
 		return null;
 	}
 	
+	
 	// Lantern
     public static Object[] chooseModLanternBlock(boolean isHanging)
     {
@@ -1087,6 +1789,7 @@ public class ModObjects {
 		return null;
 	}
 	
+	
 	// Lectern
 	/**
 	 * furnaceOrientation:
@@ -1094,55 +1797,10 @@ public class ModObjects {
 	 */
 	public static Object[] chooseModLectern()
 	{
-		Block modblock = Blocks.crafting_table;
+		Block modblock = Blocks.bookshelf;//Blocks.crafting_table;
 		int meta = 0;
 		
 		return new Object[]{modblock, meta};
-	}
-	
-	// Banner
-	public static ItemStack chooseModBannerItem()
-	{
-		String[] modprioritylist = GeneralConfig.modBanner;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerEF));
-				if (moditem != null) {return new ItemStack(moditem, 1);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerGS));
-				if (moditem != null) {return new ItemStack(moditem, 1);}
-			}
-		}
-		return null;
-	}
-	
-	public static Block chooseModBannerBlock()
-	{
-		String[] modprioritylist = GeneralConfig.modBanner;
-		
-		for (String mod : modprioritylist)
-		{
-			Block moditem=null;
-			
-			if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Block.getBlockFromName(ModObjects.bannerEF);
-				if (moditem != null) {return moditem;}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Block.getBlockFromName(ModObjects.bannerGS);
-				if (moditem != null) {return moditem;}
-			}
-		}
-		return null;
 	}
 	
 	
@@ -1156,294 +1814,11 @@ public class ModObjects {
 	}
 	
 	
-	// Andesite
-	public static ItemStack chooseModAndesite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
-			}
-		}
-		return null;
-	}
-	
-	public static ItemStack chooseModPolishedAndesite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
-			}
-		}
-		return null;
-	}
-	
-	public static Object[] chooseModPolishedAndesiteBlock()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Block modblock=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.andesiteC2);
-				if (modblock != null) {return new Object[]{modblock, new Integer(1)};}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
-				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.stoneEF);
-				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.stoneGS);
-				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.stoneBo);
-				if (modblock != null) {return new Object[]{modblock, new Integer(4)};}
-			}
-		}
-		return null;
-	}
-	
-	// Diorite
-	public static ItemStack chooseModDiorite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
-			}
-		}
-		return null;
-	}
-	
-	public static ItemStack chooseModPolishedDiorite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
-			}
-		}
-		return null;
-	}
-	
-	// Granite
-	public static ItemStack chooseModGranite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
-			}
-		}
-		return null;
-	}
-	
-	public static ItemStack chooseModPolishedGranite()
-	{
-		String[] modprioritylist = GeneralConfig.modBountifulStone;
-		
-		for (String mod : modprioritylist)
-		{
-			Item moditem=null;
-			
-			if (mod.toLowerCase().equals("chisel"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
-				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
-			}
-			else if (mod.toLowerCase().equals("uptodate"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
-				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
-				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
-			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
-				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
-			}
-			else if (mod.toLowerCase().equals("botania"))
-			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
-				if (moditem != null) {return new ItemStack(moditem, 1, 7);}
-			}
-		}
-		return null;
-	}
-	
-	
-	// Selects a modded Grass Path block if able; returns Gravel otherwise.
-	public static Block chooseModPathBlock()
-	{
-		String[] modprioritylist = GeneralConfig.modGrassPath;
-		
-		for (String mod : modprioritylist)
-		{
-			Block modblock=null;
-			
-			if (mod.toLowerCase().equals("uptodate"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
-				if (modblock != null) {return modblock;}
-			}
-			else if (mod.toLowerCase().equals("etfuturum"))
-			{
-				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
-				if (modblock != null) {return modblock;}
-			}
-		}
-		return Blocks.gravel;
-	}
-	
-	
 	// Ladder
+	/**
+	 * Tries to convert to different wood ladder types.
+	 * On a failure, return default vanilla ladder.
+	 */
 	public static Block chooseModLadderBlock(int materialMeta)
 	{
 		Block modblock=null;
@@ -1458,7 +1833,7 @@ public class ModObjects {
 		case 5: modblock = Block.getBlockFromName(ModObjects.ladderDarkOakGS); break;
 		}
 		if (modblock != null) {return modblock;}
-		else {return null;}
+		else {return Blocks.ladder;}
 	}
 	
 	
@@ -1677,7 +2052,7 @@ public class ModObjects {
 		}
 		else
 		{
-			modblock = Block.getBlockFromName(ModObjects.smoothRedSandstoneStairsUTD);
+			modblock = Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD);
 			if (modblock != null) {return modblock;}
 			else {return Blocks.sandstone_stairs;}
 		}
@@ -1685,10 +2060,39 @@ public class ModObjects {
 	
 	
 	// Sandstone Wall
-	public static Block chooseModSandstoneWall(boolean isRed)
+	public static Object[] chooseModSandstoneWall(boolean isRed)
 	{
-		Block modblock = Block.getBlockFromName(isRed ? ModObjects.redSandstoneWallUTD : ModObjects.sandstoneWallUTD);
-		if (modblock != null) {return modblock;}
+		String[] modprioritylist = GeneralConfig.modWall;
+		
+		Block modblock=null;
+		
+		if (isRed)
+		{
+			for (String mod : modprioritylist)
+			{
+				if (mod.toLowerCase().equals("uptodate"))
+				{
+					modblock = Block.getBlockFromName(ModObjects.redSandstoneWallUTD);
+					if (modblock != null) {return new Object[]{modblock, 0};}
+				}
+			}
+		}
+		else
+		{
+			for (String mod : modprioritylist)
+			{
+				if (mod.toLowerCase().equals("uptodate"))
+				{
+					modblock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
+					if (modblock != null) {return new Object[]{modblock, 0};}
+				}
+				if (mod.toLowerCase().equals("railcraft"))
+				{
+					modblock = Block.getBlockFromName(ModObjects.wallRC);
+					if (modblock != null) {return new Object[]{modblock, 11};}
+				}
+			}
+		}
 		
 		return null;
 	}
@@ -1708,8 +2112,9 @@ public class ModObjects {
 	public static Object[] chooseModSmoothSandstoneBlock(boolean isRed)
 	{
 		Block modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
+		if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
 		
-		return new Object[]{modblock, isRed?3:0};
+		return null;
 	}
 	
 	
@@ -1717,11 +2122,11 @@ public class ModObjects {
 	/**
 	 * Returns regular sandstone slab on a failure
 	 */
-	public static Object[] chooseModSmoothSandstoneSlab(boolean upper, boolean isRed)
+	public static Object[] chooseModSmoothSandstoneSlab(boolean upper, boolean isred)
 	{
 		Block modblock;
 		
-		if (isRed)
+		if (isred)
 		{
 			modblock = Block.getBlockFromName(ModObjects.smoothRedSandstoneSlabUTD);
 			if (modblock != null)

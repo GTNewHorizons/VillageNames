@@ -6,6 +6,17 @@ import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertAnimalPen1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertAnimalPen2;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertArmorer1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertButcherShop1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertCartographerHouse1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertFarm1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertFarm2;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertFisher1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertFletcherHouse1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertLargeFarm1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertLibrary1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAccessory1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen2;
@@ -802,6 +813,237 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	    {
 	    	if (startPiece instanceof StartVN) {return PlainsWeaponsmith1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Small Animal Pen
+	public static class DesertAnimalPen1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertAnimalPen1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertAnimalPen1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertAnimalPen1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertAnimalPen1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Covered Animal Pen
+	public static class DesertAnimalPen2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertAnimalPen2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertAnimalPen2.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertAnimalPen2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertAnimalPen2.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Armorer House
+	public static class DesertArmorer1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertArmorer1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertArmorer1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertArmorer1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertArmorer1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Butcher Shop
+	public static class DesertButcherShop1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertButcherShop1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertButcherShop1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertButcherShop1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertButcherShop1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Cartographer House
+	public static class DesertCartographerHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertCartographerHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertCartographerHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertCartographerHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertCartographerHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Small Farm
+	public static class DesertFarm1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertFarm1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertFarm1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertFarm1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertFarm1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Large Farm
+	public static class DesertFarm2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertFarm2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertFarm2.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertFarm2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertFarm2.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Fisher Cottage
+	public static class DesertFisher1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertFisher1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertFisher1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertFisher1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertFisher1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Fletcher House
+	public static class DesertFletcherHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertFletcherHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertFletcherHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertFletcherHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertFletcherHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Large Farm
+	public static class DesertLargeFarm1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertLargeFarm1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertLargeFarm1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertLargeFarm1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertLargeFarm1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Library
+	public static class DesertLibrary1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertLibrary1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertLibrary1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertLibrary1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertLibrary1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
 	    }
 	}
 }

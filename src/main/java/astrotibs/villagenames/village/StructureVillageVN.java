@@ -67,6 +67,14 @@ public class StructureVillageVN
 		{4,2,4,2},
 	};
 	
+	// Array of meta values for buyttons indexed by [furnaceOrientation][horizIndex]
+	public static final int[][] BUTTON_META_ARRAY = new int[][]{
+		{3,2,4,1},
+		{1,3,1,3},
+		{4,1,3,2},
+		{2,4,2,4},
+	};
+	
 	// Array of meta values for furnaces indexed by [furnaceOrientation][horizIndex]
 	public static final int[][] ANVIL_META_ARRAY = new int[][]{
 		{1,2,3,0},
@@ -392,6 +400,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
     	if (materialType == FunctionsVN.MaterialType.SPRUCE)
         {
@@ -417,6 +428,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.BIRCH)
         {
@@ -442,6 +456,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.JUNGLE)
         {
@@ -474,6 +491,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.mossy_cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 1};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.ACACIA)
         {
@@ -499,6 +519,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
@@ -524,6 +547,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.SAND)
         {
@@ -536,9 +562,8 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
         	if (block == Blocks.cobblestone_wall)              {
-													        		block = ModObjects.chooseModSandstoneWall(false);
-													        		if (block==null) {block = Blocks.sandstone;}
-													        		return new Object[]{block, 0};
+													        		if (ModObjects.chooseModSandstoneWall(false)==null) {block = Blocks.sandstone;}
+													        		return ModObjects.chooseModSandstoneWall(false);
 															   } // Sandstone wall
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
@@ -571,13 +596,14 @@ public class StructureVillageVN
         	//if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 4: meta==11? 12 : meta};} // Brick slab
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 1};} // Sandstone double slab
         	if (block == Blocks.cobblestone_wall)              {
-													        		block = ModObjects.chooseModSandstoneWall(true);
-													        		if (block==null)
+        															Object[] modobject = ModObjects.chooseModSandstoneWall(true);
+													        		if (modobject==null)
 													        		{
 													        			block = ModObjects.chooseModRedSandstone();
-													        			if (block==null) {block = Blocks.cobblestone_wall;} // Just return what you put in
+													        			if (block==null) {block = Blocks.cobblestone_wall; meta=0;} // Just return what you put in
+													        			return new Object[]{block, meta};
 													        		}
-													        		return new Object[]{block, 0};
+													        		else {return modobject;}
 															   } // Brick wall
         	if (block == Blocks.sandstone)                     {
         															block = ModObjects.chooseModRedSandstone();
@@ -606,6 +632,7 @@ public class StructureVillageVN
 																	if (modobject == null) {return new Object[]{Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD), meta};}
 																	else {return modobject;}
 													    	   }
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return ModObjects.chooseModSmoothSandstoneBlock(true);}
         }
         if (materialType == FunctionsVN.MaterialType.SNOW)
         {
@@ -633,8 +660,12 @@ public class StructureVillageVN
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}        }
-        if (materialType == FunctionsVN.MaterialType.MUSHROOM)
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.packed_ice, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        }
+    	if (materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
@@ -646,6 +677,9 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.brown_mushroom_block, 14};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
         }
         
         // Post Forge event
@@ -1598,10 +1632,20 @@ public class StructureVillageVN
     /**
 	 * furnaceOrientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 * -X: returns the value X - used for things like upright barrels
 	 */
 	public static int chooseFurnaceMeta(int orientation, int horizIndex)
 	{
+		if (orientation<0) {return -orientation;}
 		return FURNACE_META_ARRAY[orientation][horizIndex];
+	}
+    /**
+	 * buttonOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int chooseButtonMeta(int orientation, int horizIndex)
+	{
+		return BUTTON_META_ARRAY[orientation][horizIndex];
 	}
     /**
 	 * anvilOrientation:
@@ -1822,9 +1866,8 @@ public class StructureVillageVN
 		cropArray.add(Blocks.potatoes); cropArray.add(Blocks.potatoes);
 		
 		// Add backported blocks
-		Block tryBeetroot = ModObjects.chooseModBeetrootBlock();
+		Block tryBeetroot = ModObjects.chooseModBeetrootCrop();
 		if (tryBeetroot != null) {cropArray.add(tryBeetroot);}
-		
 		
 		// If the array is empty, either because harvestcraft crops were not used or were not selected, then choose a vanilla crop
 		Block cropblock = cropArray.get(random.nextInt(cropArray.size()));

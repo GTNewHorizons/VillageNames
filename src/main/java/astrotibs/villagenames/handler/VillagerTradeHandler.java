@@ -1811,7 +1811,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							int modrocks = 0; // Use this to count how many modded rocks available. If none, use a different trade.
 							
 							// Granite to Emerald
-							moditemstack = ModObjects.chooseModGranite();
+							moditemstack = ModObjects.chooseModGraniteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -1821,7 +1821,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Andesite to Emerald
-							moditemstack = ModObjects.chooseModAndesite();
+							moditemstack = ModObjects.chooseModAndesiteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -1831,7 +1831,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Diorite to Emerald
-							moditemstack = ModObjects.chooseModDiorite();
+							moditemstack = ModObjects.chooseModDioriteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -1841,7 +1841,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Emerald to Polished Andesite
-							moditemstack = ModObjects.chooseModPolishedAndesite();
+							moditemstack = ModObjects.chooseModPolishedAndesiteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -1851,7 +1851,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Emerald to Polished Granite
-							moditemstack = ModObjects.chooseModPolishedGranite();
+							moditemstack = ModObjects.chooseModPolishedGraniteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -1861,7 +1861,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							}
 							
 							// Emerald to Polished Diorite
-							moditemstack = ModObjects.chooseModPolishedDiorite();
+							moditemstack = ModObjects.chooseModPolishedDioriteItem();
 							if (moditemstack!=null)
 							{
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(

@@ -1351,6 +1351,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 5;
     	private static final int STRUCTURE_HEIGHT = 2;
     	private static final int STRUCTURE_DEPTH = 3;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -1449,6 +1450,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 6;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 5;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -1498,7 +1500,7 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, u, GROUND_LEVEL-1, w, structureBB);
                     this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
                     
                     // Add a fence
@@ -1583,6 +1585,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -1633,7 +1636,7 @@ public class PlainsStructures
         	// Make foundation and clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		this.placeBlockAtCurrentPosition(world, Blocks.grass, 0, u, GROUND_LEVEL-1, w, structureBB);
                     this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
                     
                     // Add a fence
@@ -1731,6 +1734,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 8;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -1777,12 +1781,42 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence_gate, 0, start.materialType, start.biome); Block biomeFenceGateBlock = (Block)blockObject[0]; int biomeFenceGateMeta = (Integer)blockObject[1];
         	
-        	// Make foundation and clear space above
+        	
+        	// Clear space above
+            for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+            }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"   FFFFFFFF",
+                	"FFFFFFFFFFF",
+                	"FFFFFFFFFFF",
+                	"FFFFFFFFFFF",
+                	"FFFFFFFFFFF",
+                	"FFFFFFFFF  ",
+                	"  FFFFFFF F",
+                	"F FFFFFFF  ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+        	
+        	
+        	// Add fences
             for (int w = 0; w < STRUCTURE_DEPTH; ++w) {for (int u = new int[]{2,2,0,0,0,0,0,3}[w]; u <= new int[]{8,8,8,10,10,10,10,10}[w]; ++u) {
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-                    this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
-                    
                     // Add a fence
                     if (u==new int[]{2,2,0,0,0,0,0,3}[w] || u==new int[]{8,8,8,10,10,10,10,10}[w] || w==0 || w==STRUCTURE_DEPTH-1)
                     {
@@ -1938,6 +1972,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 8;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -1995,23 +2030,40 @@ public class PlainsStructures
         	blockObject = ModObjects.chooseModBlastFurnaceBlock(3, this.coordBaseMode); Block blastFurnaceBlock = (Block) blockObject[0]; int blastFurnaceMeta = (Integer) blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, start.materialType, start.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
         	
-        	// Make foundation and clear space above
+        	
+        	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
-            		
-            		// Only add foundation to interior
-            		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL-1, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL, w, structureBB);
-            		}
-            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
-            		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
-            		}
-            		
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"        ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	" FFFFFF ",
+                	"   FF   ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+        	
             
             // Log corners
             for(int[] uw : new int[][]{{1,1},{1,7},{6,1},{6,7}})
@@ -2182,6 +2234,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 11;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -2234,23 +2287,38 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, start.materialType, start.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, start.materialType, start.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
         	
-        	// Make foundation and clear space above
+        	
+        	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
-            		
-            		// Only add foundation to interior
-            		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-            		}
-            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+            }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"           ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	"     F     ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
             			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
-            		
-            }}
+                }
+            }
+        	
             
             // Log frame
             for(int[] uw : new int[][]{{1,1},{1,5},{9,1},{9,5}})
@@ -2438,7 +2506,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 12;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 11;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 4;
     	
     	private int averageGroundLevel = -1;
     	
@@ -2466,18 +2537,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 4;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -2502,30 +2569,42 @@ public class PlainsStructures
         	blockObject = ModObjects.chooseModSmokerBlock(3, this.coordBaseMode); Block smokerBlock = (Block) blockObject[0];
         	
         	
-        	// Make foundation and clear space above
-        	// House proper
-            for (int u = 0; u < STRUCTURE_WIDTH-4; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-            		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
-            		
-            		// Only add foundation to interior
-            		if (u>=1 && u<=6 && w>=1 && w<=9) {
-            			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, u, GROUND_LEVEL-1, w, structureBB);
-                		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, u, GROUND_LEVEL, w, structureBB);
-            		}
-            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w))==Blocks.dirt)
-            		{
-            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
-            		}
-            }}
-            // Outside field
-            for (int u = 7; u <= 11; ++u) {for (int w = 3; w <= 9; ++w) {
-    			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL, w, structureBB);
-        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+1, w, structureBB);
+        	// Clear space above
+            for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
             
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"            ",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFFFFFFF",
+                	" FFFFFF     ",
+                	" FFFFFF     ",
+                	"   FF       ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+        	
+        	
             // Log frame
             for (int u : new int[]{1,6}) {for (int w : new int[]{1,9}) {
             	this.fillWithMetadataBlocks(world, structureBB, u, 0, w, u, 3, w, biomeLogVertBlock, biomeLogVertMeta, biomeLogVertBlock, biomeLogVertMeta, false);
@@ -2704,7 +2783,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             	
             	// Villager
@@ -2744,6 +2823,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 12;
     	private static final int STRUCTURE_DEPTH = 15;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -2798,23 +2878,45 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSmokerBlock(3, this.coordBaseMode); Block smokerBlock = (Block) blockObject[0];
         	
-        	// Make foundation and clear space above
+        	
+        	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
-        		
-        		// Only add foundation to interior
-        		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH)) {
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, w<=8?biomeDirtBlock:biomeGrassBlock, w<=8?biomeDirtMeta:biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
-        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
-        		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
-            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"FFFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFFF",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	"   F   ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+        	
             
             // Decor
             for (int decorUVW[] : new int[][]{
@@ -3068,7 +3170,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             	
             	// Villager
@@ -3109,6 +3211,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 10;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -3164,22 +3267,41 @@ public class PlainsStructures
         	blockObject = ModObjects.chooseModCartographyTable(); Block cartographyTableBlock = (Block) blockObject[0]; int cartographyTableMeta = (Integer) blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.trapdoor, 0, start.materialType, start.biome); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
         	
-        	// Make foundation and clear space above
+        	
+        	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
-        		
-        		// Only add foundation to interior
-        		if (!(u==0 || u==STRUCTURE_WIDTH-1 || w==0 || w==STRUCTURE_DEPTH-1)) {
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
-        		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
-        		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"       ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	" FFFFF ",
+                	"   F   ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
+            }
+        	
             
             // Log Frame
             // Corners
@@ -3377,7 +3499,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 10;
     	private static final int STRUCTURE_HEIGHT = 9;
     	private static final int STRUCTURE_DEPTH = 11;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 2; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 2;
+    	private static final int DECREASE_MAX_U = 1;
     	
     	private int averageGroundLevel = -1;
     	
@@ -3405,18 +3530,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 2;
-            	int shrinkMaxU = 1;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -3440,33 +3561,41 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.stone_stairs, 0, start.materialType, start.biome); Block biomeStoneStairsBlock = (Block)blockObject[0];
         	
+        	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            	this.clearCurrentPositionBlocksUpwards(world, u, 2, w, structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
             
-            // Make foundation
-        	int[][] grassWidths = new int[][]{
-    			{4,7},
-    			{3,7},
-    			{2,7},
-    			{1,8},
-    			{0,9},
-    			{0,9},
-    			{0,9},
-    			{1,9},
-    			{2,9},
-    			{4,7},
-    			{4,7},
-        	};
-        	for (int w=0; w < STRUCTURE_DEPTH; w++)
-            {
-        		for (int u=grassWidths[w][0]; u<=grassWidths[w][1]; u++)
-        		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"    FFFF  ",
+                	"  FFFFFFFF",
+                	" FFFFFFFFF",
+                	"FFFFFFFFFF",
+                	"FFFFFFFFFF",
+                	"FFFFFFFFFF",
+                	" FFFFFFFF ",
+                	"  FFFFFF  ",
+                	"   FFFFF  ",
+                	"    FFFF  ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
             }
+        	
             
             // Log Frame
             // Corners
@@ -3602,15 +3731,17 @@ public class PlainsStructures
     		Block barrelBlock = ModObjects.chooseModBarrelBlock();
     		for (int[] uvwoo : new int[][]{
     			// u, v, w, orientationIfChest, orientationIfUTDBarrel
+    			// orientationIfChest:  0=foreward (away from you),  1=rightward,  2=backward (toward you),  3=leftward
+    			// orientationIfUTDBarrel:  1=vertical,  0=forward,  1=rightward,  2=backward (toward you),  3=leftward
     			// TODO - use different barrel meta for different mods
-            	{2, 2, 2, 3, 1},
-            	{7, 2, 9, 1, 1},
+            	{2,2,2, 3,-1},
+            	{7,2,9, 1,-1},
             })
             {
     			// Set the barrel, or a chest if it's not supported
     			if (barrelBlock==null) {barrelBlock = Blocks.chest;}
     			this.placeBlockAtCurrentPosition(world, barrelBlock, 0, uvwoo[0], uvwoo[1], uvwoo[2], structureBB);
-                world.setBlockMetadataWithNotify(this.getXWithOffset(uvwoo[0], uvwoo[2]), this.getYWithOffset(uvwoo[1]), this.getZWithOffset(uvwoo[0], uvwoo[2]), barrelBlock==Blocks.chest?StructureVillageVN.chooseFurnaceMeta(uvwoo[3], this.coordBaseMode):uvwoo[4], 2);
+                world.setBlockMetadataWithNotify(this.getXWithOffset(uvwoo[0], uvwoo[2]), this.getYWithOffset(uvwoo[1]), this.getZWithOffset(uvwoo[0], uvwoo[2]), barrelBlock==Blocks.chest?StructureVillageVN.chooseFurnaceMeta(uvwoo[3], this.coordBaseMode):StructureVillageVN.chooseFurnaceMeta(uvwoo[4], this.coordBaseMode), 2);
                 // Dirt beneath
                 this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvwoo[0], uvwoo[1]-1, uvwoo[2], structureBB);
             }
@@ -3684,6 +3815,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -3739,35 +3871,40 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModFletchingTable(); Block fletchingTableBlock = (Block) blockObject[0]; int fletchingTableMeta = (Integer) blockObject[1];
         	
-        	// Clear above and make foundation
+        	
+        	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            		
-        		this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
-        		
-        		if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
-        		{
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
-        		}
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
-            // Set foundation where the house specifically is
-            int[][] rowstrips = new int[][]{
-            	{4,6},
-            	{5,5},
-            	{4,6},
-            	{3,7},
-            	{1,9},
-            	{1,9},
-            	{1,9},
-            	{1,9},
+            
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"           ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	" FFFFFFFFF ",
+                	"   FFFFF   ",
+                	"    FFF    ",
+                	" F   F  F F",
+                	"    FFF FFF",
             };
-            for (int i=0; i<=7; i++)
-            {
-            	for (int u=rowstrips[i][0]; u<=rowstrips[i][1]; u++)
-            	{
-            		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, i, structureBB);
-            	}
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		{
+            			// If marked with F: fill with dirt foundation
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
+            		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
+            			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
+            			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+            		}
+                }
             }
+        	
             // The grass patch in front
             for (int[] uwg : new int[][]{ // g is grass type
             	{8,0,0},
@@ -3777,8 +3914,6 @@ public class PlainsStructures
             	{10,1,0},
             })
             {
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uwg[0], GROUND_LEVEL-2, uwg[1], structureBB);
-    			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uwg[0], GROUND_LEVEL-1, uwg[1], structureBB);
     			if (uwg[2]==0) // Short grass
     			{
     				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 1, uwg[0], GROUND_LEVEL, uwg[1], structureBB);
@@ -4061,6 +4196,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 13;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -4121,6 +4257,9 @@ public class PlainsStructures
     				this.placeBlockAtCurrentPosition(world, Blocks.farmland, 7, u, GROUND_LEVEL, w, structureBB);
     			}
             }}
+            // Place one non-moistened tilled block
+            this.placeBlockAtCurrentPosition(world, Blocks.farmland, 0, 7, GROUND_LEVEL, 2, structureBB);
+            
             
             // Log Frame interior
             this.fillWithMetadataBlocks(world, structureBB, 1, 0, 6, STRUCTURE_WIDTH-2, 0, 6, biomeLogVertBlock, biomeLogVertMeta, biomeLogVertBlock, biomeLogVertMeta, false);
@@ -4129,6 +4268,84 @@ public class PlainsStructures
             	this.fillWithMetadataBlocks(world, structureBB, 1, 0, w, STRUCTURE_WIDTH-2, 0, w, Blocks.flowing_water, 0, Blocks.flowing_water, 0, false);
             }
             
+            
+        	// Pairs of crops are generated together. These are pairs of ages arrays.
+        	int[][][] uPairArray = {
+    			{{1,2,3,4,5,6,7},
+    			 {1,2,3,4,5,6,7}},
+    			
+    			{{1,2,3,4,5,6,7},
+        		 {1,2,3,4,5,6,7}},
+    			
+    			{{1,2,3,4,5,6,7},
+            	 {1,2,3,4,5,6,7}},
+    			
+    			{{1,2,3,4,5,6,7},
+                 {1,2,3,4,5,6,7}},
+        	};
+        	int[][][] vPairArray = {
+    			{{1,1,1,1,1,1,1},
+       			 {1,1,1,1,1,1,1}},
+       			
+       			{{1,1,1,1,1,1,1},
+           		 {1,1,1,1,1,1,1}},
+       			
+       			{{1,1,1,1,1,1,1},
+               	 {1,1,1,1,1,1,1}},
+       			
+       			{{1,1,1,1,1,1,1},
+                 {1,1,1,1,1,1,1}},
+           	};
+        	int[][][] wPairArray = {
+    			{{11,11,11,11,11,11,11},
+       			 {10,10,10,10,10,10,10}},
+       			
+       			{{8,8,8,8,8,8,8},
+           		 {7,7,7,7,7,7,7}},
+       			
+       			{{5,5,5,5,5,5,5},
+               	 {4,4,4,4,4,4,4}},
+       			
+       			{{2,2,2,2,2,2,2},
+                 {1,1,1,1,1,1,1}},
+           	};
+        	int[][][] cropPairAgeArray = {
+    			{{0,7,7,7,7,7,0},
+       			 {7,7,3,1,7,1,0}},
+       			
+       			{{1,6,2,0,0,7,7},
+           		 {0,0,1,0,0,0,0}},
+       			
+       			{{0,0,1,1,0,1,0},
+               	 {0,1,0,0,1,0,0}},
+       			
+       			{{0,0,0,0,1,0,0},
+                 {0,0,0,0,0,0,0}},
+           	};
+        	// Iterate through the pairs of crops
+            for (int crop_pair=0; crop_pair<cropPairAgeArray.length; crop_pair++)
+            {
+            	Block[] cropBlocks = StructureVillageVN.chooseCropPair(random);
+            	
+            	// Iterate through the members of a crop pair
+            	for (int crop_member=0; crop_member<2; crop_member++)
+            	{
+            		// Iterate through u positions
+            		for (int i=0; i<cropPairAgeArray[crop_pair][crop_member].length; i++)
+                	{
+            			this.placeBlockAtCurrentPosition(world, cropBlocks[crop_member],
+            					cropPairAgeArray[crop_pair][crop_member][i], 
+            					uPairArray[crop_pair][crop_member][i],
+            					vPairArray[crop_pair][crop_member][i],
+            					wPairArray[crop_pair][crop_member][i],
+            					structureBB);
+                	}
+            	}
+            }
+            
+            
+            
+            /*
             // Crops here
             Block[] cropBlocks;
             
@@ -4149,7 +4366,7 @@ public class PlainsStructures
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 1, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 11, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
             }
-            		
+            */	
             
     		// Entities
             if (!this.entitiesGenerated)
@@ -4198,6 +4415,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 17;
     	private static final int STRUCTURE_HEIGHT = 9;
     	private static final int STRUCTURE_DEPTH = 10;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -4253,36 +4471,42 @@ public class PlainsStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, start.materialType, start.biome); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
         	
+        	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
-            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL+2, w, structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             }}
             
-            // Make foundation
-        	int[][] grassWidths = new int[][]{
-    			{-1,-1}, // Force this row to be grass-style
-    			{7,9},
-    			{6,10},
-    			{1,15}, {1,15}, {1,15}, {1,15}, {1,15}, {1,15}, {1,15},
-    			{-1,-1}, // Force this row to be grass-style
-        	};
-        	for (int w=0; w < STRUCTURE_DEPTH; w++)
-            {
-            	for (int u=0; u < STRUCTURE_WIDTH; u++)
-                {
-            		if (u>=grassWidths[w][0] && u<=grassWidths[w][1])
+            // Make foundation with blanks as empty air and F as foundation spaces
+            String[] foundationPattern = new String[]{
+                	"                 ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	" FFFFFFFFFFFFFFF ",
+                	"      FFFFF      ",
+                	"       FFF       ",
+                	"        F        ",
+            };
+        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+        		
+            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
-            			// Grass foundation
+            			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
-            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==Blocks.dirt)
+            		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
+            			// Otherwise, if dirt, add dirt foundation and then cap with grass:
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
             			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
                 }
             }
-            
+        	
             
             // Stone
             for(int[] uuvvww : new int[][]{
@@ -4526,6 +4750,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 10;
     	private static final int STRUCTURE_DEPTH = 8;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -4862,7 +5087,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 8;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 2;
     	
     	private int averageGroundLevel = -1;
     	
@@ -4890,18 +5118,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 2;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -5180,7 +5404,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 13;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 4;
     	
     	private int averageGroundLevel = -1;
     	
@@ -5208,18 +5435,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 4;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -5661,7 +5884,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 13;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -5689,18 +5915,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -5964,7 +6186,7 @@ public class PlainsStructures
         	// Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	
@@ -6016,7 +6238,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 16;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 10;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -6044,18 +6269,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -6364,7 +6585,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 10;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -6392,18 +6616,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -6672,6 +6892,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 13;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -6942,7 +7163,7 @@ public class PlainsStructures
         	// Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -7071,6 +7292,7 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	
     	private int averageGroundLevel = -1;
@@ -7135,6 +7357,69 @@ public class PlainsStructures
             // Water
             this.fillWithMetadataBlocks(world, structureBB, 1, 0, 3, STRUCTURE_WIDTH-2, 0, 3, Blocks.flowing_water, 0, Blocks.flowing_water, 0, false);
             
+            
+            
+            
+            
+
+            
+            
+        	// Pairs of crops are generated together. These are pairs of ages arrays.
+        	int[][][] uPairArray = {
+    			{{1,2,3,4,5,6,7},
+            	 {1,2,3,4,5,6,7}},
+    			
+    			{{1,2,3,4,5,6,7},
+                 {1,2,3,4,5,6,7}},
+        	};
+        	int[][][] vPairArray = {
+       			{{1,1,1,1,1,1,1},
+               	 {1,1,1,1,1,1,1}},
+       			
+       			{{1,1,1,1,1,1,1},
+                 {1,1,1,1,1,1,1}},
+           	};
+        	int[][][] wPairArray = {
+       			{{5,5,5,5,5,5,5},
+               	 {4,4,4,4,4,4,4}},
+       			
+       			{{2,2,2,2,2,2,2},
+                 {1,1,1,1,1,1,1}},
+           	};
+        	int[][][] cropPairAgeArray = {
+       			{{0,1,0,0,0,2,0},
+               	 {1,0,1,0,0,1,1}},
+       			
+       			{{1,0,0,0,1,0,0},
+                 {0,0,0,0,0,0,0}},
+           	};
+        	// Iterate through the pairs of crops
+            for (int crop_pair=0; crop_pair<cropPairAgeArray.length; crop_pair++)
+            {
+            	Block[] cropBlocks = StructureVillageVN.chooseCropPair(random);
+            	
+            	// Iterate through the members of a crop pair
+            	for (int crop_member=0; crop_member<2; crop_member++)
+            	{
+            		// Iterate through u positions
+            		for (int i=0; i<cropPairAgeArray[crop_pair][crop_member].length; i++)
+                	{
+            			this.placeBlockAtCurrentPosition(world, cropBlocks[crop_member],
+            					cropPairAgeArray[crop_pair][crop_member][i], 
+            					uPairArray[crop_pair][crop_member][i],
+            					vPairArray[crop_pair][crop_member][i],
+            					wPairArray[crop_pair][crop_member][i],
+            					structureBB);
+                	}
+            	}
+            }
+            
+            
+            
+            
+            
+            
+            /*
             // Crops here
             Block[] cropBlocks;
             
@@ -7155,7 +7440,7 @@ public class PlainsStructures
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, STRUCTURE_WIDTH-2, 1, STRUCTURE_DEPTH-2, structureBB);
             	this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, STRUCTURE_WIDTH-2, 0, STRUCTURE_DEPTH-2, structureBB);
             }
-            		
+            */	
             
     		// Entities
             if (!this.entitiesGenerated)
@@ -7205,7 +7490,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -7233,18 +7521,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -7459,7 +7743,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -7507,7 +7791,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -7535,18 +7822,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -7755,7 +8038,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -7803,7 +8086,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -7831,18 +8117,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -8059,7 +8341,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -8107,7 +8389,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -8135,18 +8420,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -8359,7 +8640,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -8407,7 +8688,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 11;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -8435,18 +8719,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -8756,7 +9036,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -8804,7 +9084,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -8832,18 +9115,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -9080,7 +9359,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -9128,7 +9407,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 8;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -9156,18 +9438,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -9399,7 +9677,7 @@ public class PlainsStructures
                 // Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
-                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+                	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
             	}
             	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             }
@@ -9448,7 +9726,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 9;
     	private static final int STRUCTURE_HEIGHT = 9;
     	private static final int STRUCTURE_DEPTH = 8;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 2; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 1;
+    	private static final int DECREASE_MAX_U = 1;
     	
     	private int averageGroundLevel = -1;
     	
@@ -9476,18 +9757,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 1;
-            	int shrinkMaxU = 1;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -9721,7 +9998,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -9769,7 +10046,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 16;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 4;
+    	private static final int DECREASE_MAX_U = 4;
     	
     	private int averageGroundLevel = -1;
     	
@@ -9797,18 +10077,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 4;
-            	int shrinkMaxU = 4;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -10103,7 +10379,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -10124,7 +10400,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             }
             
@@ -10154,7 +10430,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 17;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 7;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 4;
+    	private static final int DECREASE_MAX_U = 2;
     	
     	private int averageGroundLevel = -1;
     	
@@ -10182,18 +10461,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 4;
-            	int shrinkMaxU = 2;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -10395,7 +10670,7 @@ public class PlainsStructures
             {
         		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
-        	// Hay bales, along Along
+        	// Hay bales, along
         	for (int[] uvw : new int[][]{
         		{9,1,4}, 
         		})
@@ -10438,7 +10713,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             
@@ -10459,7 +10734,7 @@ public class PlainsStructures
                     world.spawnEntityInWorld(animal);
                     
                     // Dirt block underneath
-                    this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
         		}
             }
             
@@ -10489,7 +10764,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 10;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 8;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 4;
+    	private static final int DECREASE_MAX_U = 2;
     	
     	private int averageGroundLevel = -1;
     	
@@ -10517,18 +10795,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 4;
-            	int shrinkMaxU = 2;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -10777,7 +11051,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	
@@ -10824,7 +11098,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 7;
     	private static final int STRUCTURE_DEPTH = 11;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -10852,18 +11129,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -11089,7 +11362,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	
@@ -11142,7 +11415,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 7;
     	private static final int STRUCTURE_HEIGHT = 12;
     	private static final int STRUCTURE_DEPTH = 10;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -11170,18 +11446,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -11258,7 +11530,7 @@ public class PlainsStructures
             	{2,5,1, 4,5,8}, 
             	// Upper ceiling
             	{2,9,2, 4,9,4}, 
-            	// Garrison
+            	// parapet
             	{1,9,1, 1,9,1}, {5,9,1, 5,9,1},
             	{1,9,5, 1,9,5}, {5,9,5, 5,9,5},
             	{3,11,5, 3,11,5}, {1,11,3, 1,11,3}, {5,11,3, 5,11,3}, 
@@ -11395,7 +11667,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	
@@ -11465,7 +11737,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 12;
     	private static final int STRUCTURE_HEIGHT = 6;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 6;
+    	private static final int DECREASE_MAX_U = 0;
     	
     	private int averageGroundLevel = -1;
     	
@@ -11493,18 +11768,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 6;
-            	int shrinkMaxU = 0;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -11703,7 +11974,7 @@ public class PlainsStructures
             // Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
-            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
         	}
         	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	
@@ -11756,7 +12027,10 @@ public class PlainsStructures
     	private static final int STRUCTURE_WIDTH = 11;
     	private static final int STRUCTURE_HEIGHT = 8;
     	private static final int STRUCTURE_DEPTH = 9;
+    	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 6;
     	
     	private int averageGroundLevel = -1;
     	
@@ -11784,18 +12058,14 @@ public class PlainsStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-        		// Use these to re-center the side when determining ground level
-            	int expandMinU = 0;
-            	int shrinkMaxU = 6;
-            	
             	if (this.averageGroundLevel < 0)
                 {
             		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
             				// Set the bounding box version as this bounding box but with Y going from 0 to 512
             				new StructureBoundingBox(
             						// Modified to center onto front of house
-            						this.boundingBox.minX+(this.coordBaseMode%2==0?expandMinU:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:expandMinU),
-            						this.boundingBox.maxX-(this.coordBaseMode%2==0?shrinkMaxU:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:shrinkMaxU)),
+            						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
+            						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
             				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
@@ -12086,7 +12356,7 @@ public class PlainsStructures
                 // Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
-                	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
+                	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
             	}
             	StructureVillageVN.setPathSpecificBlock(world, this.start, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             }

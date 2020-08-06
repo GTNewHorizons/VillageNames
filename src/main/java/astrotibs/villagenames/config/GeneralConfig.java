@@ -101,6 +101,7 @@ public class GeneralConfig {
 	public static String[] modWoodenTrapdoor;
 	public static String[] modRedSandstone;
 	public static String[] modStrippedLog;
+	public static String[] modWall;
 	
     public static boolean villagerSkinTones;
     public static float villagerSkinToneVarianceAnnealing;
@@ -160,6 +161,17 @@ public class GeneralConfig {
 	public static String structureModernPlainsTemple4_string; public static ArrayList<Integer> structureModernPlainsTemple4_vals;
 	public static String structureModernPlainsToolSmith1_string; public static ArrayList<Integer> structureModernPlainsToolSmith1_vals;
 	public static String structureModernPlainsWeaponsmith1_string; public static ArrayList<Integer> structureModernPlainsWeaponsmith1_vals;
+	public static String structureModernDesertAnimalPen1_string; public static ArrayList<Integer> structureModernDesertAnimalPen1_vals;
+	public static String structureModernDesertAnimalPen2_string; public static ArrayList<Integer> structureModernDesertAnimalPen2_vals;
+	public static String structureModernDesertArmorer1_string; public static ArrayList<Integer> structureModernDesertArmorer1_vals;
+	public static String structureModernDesertButcherShop1_string; public static ArrayList<Integer> structureModernDesertButcherShop1_vals;
+	public static String structureModernDesertCartographerHouse1_string; public static ArrayList<Integer> structureModernDesertCartographerHouse1_vals;
+	public static String structureModernDesertFarm1_string; public static ArrayList<Integer> structureModernDesertFarm1_vals;
+	public static String structureModernDesertFarm2_string; public static ArrayList<Integer> structureModernDesertFarm2_vals;
+	public static String structureModernDesertFisher1_string; public static ArrayList<Integer> structureModernDesertFisher1_vals;
+	public static String structureModernDesertFletcherHouse1_string; public static ArrayList<Integer> structureModernDesertFletcherHouse1_vals;
+	public static String structureModernDesertLargeFarm1_string; public static ArrayList<Integer> structureModernDesertLargeFarm1_vals;
+	public static String structureModernDesertLibrary1_string; public static ArrayList<Integer> structureModernDesertLibrary1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -242,7 +254,7 @@ public class GeneralConfig {
 		structureModernPlainsButcherShop2_vals = parseIntegerArray(structureModernPlainsButcherShop2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsCartographer1_string = config.getString("Structure: Modern Plains Cartographer Hut", "Village Generator", convertIntegerArrayToString(ali),
+		structureModernPlainsCartographer1_string = config.getString("Structure: Modern Plains Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsCartographer1_vals = parseIntegerArray(structureModernPlainsCartographer1_string, ali);
 		
@@ -380,6 +392,61 @@ public class GeneralConfig {
 		structureModernPlainsWeaponsmith1_string = config.getString("Structure: Modern Plains Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernPlainsWeaponsmith1_vals = parseIntegerArray(structureModernPlainsWeaponsmith1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertAnimalPen1_string = config.getString("Structure: Modern Desert Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertAnimalPen1_vals = parseIntegerArray(structureModernDesertAnimalPen1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertAnimalPen2_string = config.getString("Structure: Modern Desert Covered Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertAnimalPen2_vals = parseIntegerArray(structureModernDesertAnimalPen2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertArmorer1_string = config.getString("Structure: Modern Desert Armorer House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertArmorer1_vals = parseIntegerArray(structureModernDesertArmorer1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertButcherShop1_string = config.getString("Structure: Modern Desert Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertButcherShop1_vals = parseIntegerArray(structureModernDesertButcherShop1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertCartographerHouse1_string = config.getString("Structure: Modern Desert Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertCartographerHouse1_vals = parseIntegerArray(structureModernDesertCartographerHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertFarm1_string = config.getString("Structure: Modern Desert Small Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertFarm1_vals = parseIntegerArray(structureModernDesertFarm1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertFarm2_string = config.getString("Structure: Modern Desert Medium Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertFarm2_vals = parseIntegerArray(structureModernDesertFarm2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertFisher1_string = config.getString("Structure: Modern Desert Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertFisher1_vals = parseIntegerArray(structureModernDesertFisher1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertFletcherHouse1_string = config.getString("Structure: Modern Desert Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertFletcherHouse1_vals = parseIntegerArray(structureModernDesertFletcherHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertLargeFarm1_string = config.getString("Structure: Modern Desert Large Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertLargeFarm1_vals = parseIntegerArray(structureModernDesertLargeFarm1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertLibrary1_string = config.getString("Structure: Modern Desert Library", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertLibrary1_vals = parseIntegerArray(structureModernDesertLibrary1_string, ali);
 		
 		
 		// Misc
@@ -925,6 +992,13 @@ public class GeneralConfig {
 	    		"enviromine",
  				},
  				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modWall = config.getStringList("Mod Priority: Wall", "Mod Integration", new String[]{
+	    		"uptodate",
+ 				"railcraft",
+ 				},
+ 				"Priority order for referencing Wall for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 		// Mapping for modded structures, and the creatures that can name them
