@@ -259,6 +259,22 @@ public final class VillageNames
 	        registerVillageComponentBuilding(DesertStructures.DesertFletcherHouse1.class, "VNDeFle1", new StructureCreationHandlers.DesertFletcherHouse1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertLargeFarm1.class, "VNDeLFa1", new StructureCreationHandlers.DesertLargeFarm1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertLibrary1.class, "VNDeLib1", new StructureCreationHandlers.DesertLibrary1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertMason1.class, "VNDeMas1", new StructureCreationHandlers.DesertMason1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertMediumHouse1.class, "VNDeMeH1", new StructureCreationHandlers.DesertMediumHouse1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertMediumHouse2.class, "VNDeMeH2", new StructureCreationHandlers.DesertMediumHouse2_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertShepherdHouse1.class, "VNDeShe1", new StructureCreationHandlers.DesertShepherdHouse1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse1.class, "VNDeSmH1", new StructureCreationHandlers.DesertSmallHouse1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse2.class, "VNDeSmH2", new StructureCreationHandlers.DesertSmallHouse2_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse3.class, "VNDeSmH3", new StructureCreationHandlers.DesertSmallHouse3_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse4.class, "VNDeSmH4", new StructureCreationHandlers.DesertSmallHouse4_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse5.class, "VNDeSmH5", new StructureCreationHandlers.DesertSmallHouse5_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse6.class, "VNDeSmH6", new StructureCreationHandlers.DesertSmallHouse6_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse7.class, "VNDeSmH7", new StructureCreationHandlers.DesertSmallHouse7_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertSmallHouse8.class, "VNDeSmH8", new StructureCreationHandlers.DesertSmallHouse8_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertTannery1.class, "VNDeTan1", new StructureCreationHandlers.DesertTannery1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertTemple1.class, "VNDeTem1", new StructureCreationHandlers.DesertTemple1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertTemple2.class, "VNDeTem2", new StructureCreationHandlers.DesertTemple2_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertToolSmith1.class, "VNDeTSm1", new StructureCreationHandlers.DesertToolSmith1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

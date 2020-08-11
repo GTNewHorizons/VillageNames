@@ -100,7 +100,7 @@ public class PlainsStructures
     	@Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
-        	Object[] blockObject;	
+        	Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone, 0, this.materialType, this.biome); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
@@ -2463,14 +2463,15 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int countdownToAdult = 1+random.nextInt(4); // One of the villagers here is an adult
+            	int[][] villagerPositions = new int[][]{
+        			{3,1,3, -1, 0},
+        			{8,1,3, -1, 0},
+        			{2,5,3, -1, 0},
+        			{8,5,3, -1, 0},
+        			};
+        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
             	
-        		for (int[] ia : new int[][]{
-        			{3, 1, 3, -1, 0},
-        			{8, 1, 3, -1, 0},
-        			{2, 5, 3, -1, 0},
-        			{8, 5, 3, -1, 0},
-        			})
+        		for (int[] ia :villagerPositions)
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
         			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
@@ -5842,12 +5843,13 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int countdownToAdult = 1+random.nextInt(2); // One of the villagers here is an adult
+            	int[][] villagerPositions = new int[][]{
+        			{7,2,4, -1, 0},
+        			{6,2,6, -1, 0},
+        			};
+        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
             	
-        		for (int[] ia : new int[][]{
-        			{7, 2, 4, -1, 0},
-        			{6, 2, 6, -1, 0},
-        			})
+        		for (int[] ia :villagerPositions)
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
         			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
@@ -6196,12 +6198,13 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int countdownToAdult = 1+random.nextInt(2); // One of the villagers here is an adult
+            	int[][] villagerPositions = new int[][]{
+        			{4,1,3, -1, 0},
+        			{8,1,3, -1, 0},
+        			};
+        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
             	
-        		for (int[] ia : new int[][]{
-        			{4, 1, 3, -1, 0},
-        			{8, 1, 3, -1, 0},
-        			})
+        		for (int[] ia :villagerPositions)
         		{
         			EntityVillager entityvillager = new EntityVillager(world);
         			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));

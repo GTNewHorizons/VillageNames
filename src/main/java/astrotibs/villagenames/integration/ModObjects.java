@@ -92,6 +92,23 @@ public class ModObjects {
 	public static final String dioriteStairsBo = "Botania:stone2Stairs";
 	public static final String graniteSlabBo = "Botania:stone3Slab";
 	public static final String graniteStairsBo = "Botania:stone3Stairs";
+
+	// Buttons
+	public static final String buttonSpruceEF = "etfuturum:button_spruce";
+	public static final String buttonBirchEF = "etfuturum:button_birch";
+	public static final String buttonJungleEF = "etfuturum:button_jungle";
+	public static final String buttonAcaciaEF = "etfuturum:button_acacia";
+	public static final String buttonDarkOakEF = "etfuturum:button_dark_oak";
+	public static final String buttonSpruceGS = "ganyssurface:button1";
+	public static final String buttonBirchGS = "ganyssurface:button2";
+	public static final String buttonJungleGS = "ganyssurface:button3";
+	public static final String buttonAcaciaGS = "ganyssurface:button4";
+	public static final String buttonDarkOakGS = "ganyssurface:button5";
+	public static final String buttonSpruceUTD = "uptodate:button_spruce";
+	public static final String buttonBirchUTD = "uptodate:button_birch";
+	public static final String buttonJungleUTD = "uptodate:button_jungle";
+	public static final String buttonAcaciaUTD = "uptodate:button_acacia";
+	public static final String buttonDarkOakUTD = "uptodate:button_dark_oak";
 	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
@@ -317,8 +334,8 @@ public class ModObjects {
 	public static final String smoothRedSandstoneStairsUTD = "uptodate:stairs_smooth_red_sandstone";
 	
 	// Smooth Sandstone Slab
-	public static final String smoothSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
-	public static final String smoothRedSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
+	public static final String smoothSandstoneSlabUTD = "uptodate:slab_smooth_sandstone";
+	public static final String smoothRedSandstoneSlabUTD = "uptodate:slab_smooth_red_sandstone";
 	
 	// Walls
 	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
@@ -1024,6 +1041,15 @@ public class ModObjects {
 			}
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * Returns a potted cactus
+	 */
+	public static Object[] chooseGreenCoralOrPottedCactus()
+	{
+		return new Object[]{Blocks.flower_pot, 9};
 	}
 	
 	

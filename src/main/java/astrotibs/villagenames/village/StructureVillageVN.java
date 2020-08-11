@@ -59,7 +59,7 @@ import net.minecraftforge.event.terraingen.BiomeEvent;
  */
 public class StructureVillageVN
 {
-	// Array of meta values for furnaces indexed by [furnaceOrientation][horizIndex]
+	// Array of meta values for furnaces indexed by [orientation][horizIndex]
 	public static final int[][] FURNACE_META_ARRAY = new int[][]{
 		{3,4,2,5},
 		{5,3,5,3},
@@ -67,7 +67,7 @@ public class StructureVillageVN
 		{4,2,4,2},
 	};
 	
-	// Array of meta values for buyttons indexed by [furnaceOrientation][horizIndex]
+	// Array of meta values for buyttons indexed by [orientation][horizIndex]
 	public static final int[][] BUTTON_META_ARRAY = new int[][]{
 		{3,2,4,1},
 		{1,3,1,3},
@@ -75,7 +75,7 @@ public class StructureVillageVN
 		{2,4,2,4},
 	};
 	
-	// Array of meta values for furnaces indexed by [furnaceOrientation][horizIndex]
+	// Array of meta values for furnaces indexed by [orientation][horizIndex]
 	public static final int[][] ANVIL_META_ARRAY = new int[][]{
 		{1,2,3,0},
 		{0,1,0,1},
@@ -83,7 +83,15 @@ public class StructureVillageVN
 		{2,3,2,3},
 	};
 	
-	// Array of meta values for door indexed by [isLower][isRightHanded][isShut][furnaceOrientation][horizIndex]
+	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	public static final int[][] GLAZED_TERRACOTTA_META_ARRAY = new int[][]{
+		{1,2,2,3},
+		{0,1,3,0},
+		{3,0,0,1},
+		{2,3,1,2},
+	};
+	
+	// Array of meta values for door indexed by [isLower][isRightHanded][isShut][orientation][horizIndex]
 	public static final int[][][][][] DOOR_META_ARRAY = new int[][][][][]
 	{
 		// --- UPPER HALF --- //
@@ -394,6 +402,8 @@ public class StructureVillageVN
     	// TODO - use vanilla fences and gates in 1.8
     	if (materialType == FunctionsVN.MaterialType.OAK)
         {
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -414,6 +424,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(1), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(1), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(1), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(1), meta};}
@@ -422,6 +433,8 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 1};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 1};}
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -442,6 +455,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +2: meta==8? 8 +2 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 2};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(2), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(2), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(2), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(2), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(2), meta};}
@@ -450,6 +464,8 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 2};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogBirchUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 2};}
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -477,6 +493,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(3), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(3), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(3), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(3), meta};}
@@ -485,6 +502,8 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 3};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogJungleUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 3};}
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -505,6 +524,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +4: meta==8? 8 +4 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 4};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(4), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(4), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(4), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(4), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(4), meta};}
@@ -513,6 +533,8 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 0};}
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -533,6 +555,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +5: meta==8? 8 +5 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 5};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(5), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(5), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(5), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(5), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(5), meta};}
@@ -541,6 +564,8 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, 1};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + 1};}
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -554,6 +579,8 @@ public class StructureVillageVN
         if (materialType == FunctionsVN.MaterialType.SAND)
         {
         	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
+        	if (block == Blocks.stonebrick && meta==0)         {return new Object[]{Blocks.sandstone, 2};} // Stone brick into cut sandstone
+        	if (block == Blocks.cobblestone && meta==3)        {return new Object[]{Blocks.sandstone, 1};} // Chiseled sandstone
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
         	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, 3};} // Jungle planks
@@ -563,7 +590,7 @@ public class StructureVillageVN
         	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
         	if (block == Blocks.cobblestone_wall)              {
 													        		if (ModObjects.chooseModSandstoneWall(false)==null) {block = Blocks.sandstone;}
-													        		return ModObjects.chooseModSandstoneWall(false);
+													        		else {return ModObjects.chooseModSandstoneWall(false);}
 															   } // Sandstone wall
         	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
         	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
@@ -571,6 +598,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +3: meta==8? 8 +3 : meta};} // Jungle slab
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 3};} // Jungle double slab
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(3), meta};} // Jungle door
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(3), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(3), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(3), meta};} // Jungle trapdoor
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(3), meta};}
@@ -644,6 +672,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +1: meta==8? 8 +1 : meta};}
         	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, 1};}
         	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(1), meta};}
+        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(1), meta};}
         	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(1), 0};}
         	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(1), meta};}
         	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(1), meta};}
@@ -655,6 +684,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 1};} // Spruce bark
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 1};}
+        	if (block == Blocks.stonebrick)                    {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.packed_ice, 0};}
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -671,6 +701,10 @@ public class StructureVillageVN
         	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
         	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
         	if (block == Blocks.planks)                        {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
+        	if (block == Blocks.cobblestone && meta==3)        {return new Object[]{Blocks.brown_mushroom_block, 14};} // Chiseled stone brick into cap on all sides
+        	if (block == Blocks.stonebrick)                    {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
+        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
+        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.brown_mushroom_block, 14};} // Chiseled sandstone into cap on all sides
         	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
         	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
         	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
@@ -1655,6 +1689,14 @@ public class StructureVillageVN
 	{
 		return ANVIL_META_ARRAY[orientation][horizIndex];
 	}
+    /**
+	 * anvilOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int chooseGlazedTerracottaMeta(int orientation, int horizIndex)
+	{
+		return GLAZED_TERRACOTTA_META_ARRAY[orientation][horizIndex];
+	}
 	
     /**
      * Returns meta values for lower and upper halves of a door
@@ -1768,6 +1810,63 @@ public class StructureVillageVN
 		}
 		// If all else fails, grab the vanilla version
 		return Blocks.wooden_door;
+	}
+	
+
+	/*
+	 * Used to select wooden door types.
+	 */
+	public static Block chooseWoodenButton(int materialMeta)
+	{
+		if (!GeneralConfig.useModdedWoodenDoors) {return Blocks.wooden_button;} // Returns the default oak door always
+		
+		if (materialMeta==0) {return Blocks.wooden_button;}
+		
+		String[] modprioritylist = GeneralConfig.modButton;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.buttonSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.buttonBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.buttonAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.buttonDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.buttonSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.buttonBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.buttonAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.buttonDarkOakEF); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.buttonSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.buttonBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.buttonAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.buttonDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return Blocks.wooden_button;
 	}
 	
 	
