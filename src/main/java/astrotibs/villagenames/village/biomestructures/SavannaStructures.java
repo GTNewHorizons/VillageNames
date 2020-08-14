@@ -73,13 +73,13 @@ public class SavannaStructures
     		}
     		
 			// Northward
-			if (this.coordBaseMode%2!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 5 : this.coordBaseMode==2 ? 4 : 0), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
+			if (this.coordBaseMode%2!=1) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 5 : this.coordBaseMode==2 ? 4 : 0), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==1 || this.coordBaseMode==2 ? 5 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			if (this.coordBaseMode%2!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 ? 4 : 5), 1, this.getComponentType());}
+			if (this.coordBaseMode%2!=0) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==1 ? 4 : 5), 1, this.getComponentType());}
 		}
 		
 		/*
@@ -119,6 +119,11 @@ public class SavannaStructures
         			this.getZWithOffset(6, 7));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -391,13 +396,13 @@ public class SavannaStructures
     		}
     		
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());
 		}
 		
 		/*
@@ -433,6 +438,11 @@ public class SavannaStructures
         			this.getZWithOffset(9, 1));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -679,13 +689,13 @@ public class SavannaStructures
     		}
     		
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0 ? 3 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0 ? 3 : 4), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 4 : 3), 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 4 : 3), 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0 ? 3 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==0 ? 3 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 4 : 3), 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 4 : 3), 1, this.getComponentType());
 		}
 		
 		/*
@@ -729,6 +739,11 @@ public class SavannaStructures
         			this.getZWithOffset(4, 5));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -977,13 +992,13 @@ public class SavannaStructures
     		}
     		
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
 		}
 		
 		/*
@@ -1025,6 +1040,11 @@ public class SavannaStructures
         			this.getZWithOffset(4, 4));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -1214,12 +1234,12 @@ public class SavannaStructures
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
-	protected static ArrayList<BlueprintData> getRandomSavannaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+    public static ArrayList<BlueprintData> getRandomSavannaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
 	{
 		int decorCount = 1;
 		return getSavannaDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
 	}
-	protected static ArrayList<BlueprintData> getSavannaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+    public static ArrayList<BlueprintData> getSavannaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
 	{
 		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
 		

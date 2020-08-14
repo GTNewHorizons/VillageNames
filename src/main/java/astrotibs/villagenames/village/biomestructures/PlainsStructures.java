@@ -85,13 +85,13 @@ public class PlainsStructures
     		}
     		
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
 		}
     	
 		/*
@@ -126,6 +126,11 @@ public class PlainsStructures
         			this.getZWithOffset(4, 4));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -393,13 +398,13 @@ public class PlainsStructures
     		}
     		
         	// Northward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 3 : 4), this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
+        	StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 3 : 4), this.boundingBox.maxY - 5, this.boundingBox.minZ - 1, 2, this.getComponentType());
         	// Eastward
-        	StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 3 : 4), 3, this.getComponentType());
+        	StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 3 : 4), 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 4 : 3), this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode<=1? 4 : 3), this.boundingBox.maxY - 5, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 4 : 3), 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.maxY - 5, this.boundingBox.minZ + (this.coordBaseMode<=1? 4 : 3), 1, this.getComponentType());
 		}
 		
 		/*
@@ -437,6 +442,11 @@ public class PlainsStructures
         			this.getZWithOffset(4, 4));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -740,13 +750,13 @@ public class PlainsStructures
     		}
     		
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 10 : this.coordBaseMode==2 ? 1 : 2), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 10 : this.coordBaseMode==2 ? 1 : 2), this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 6 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 6 : 1), 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 6 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 6 : 1), 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode==0 ? 1 : this.coordBaseMode==1 ? 6 : this.coordBaseMode==2 ? 1 : 6), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 2 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 10 : 1), 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode==0 ? 2 : this.coordBaseMode==1 ? 1 : this.coordBaseMode==2 ? 10 : 1), 1, this.getComponentType());
 		}
 		
 		/*
@@ -785,6 +795,11 @@ public class PlainsStructures
         			this.getZWithOffset(4, 4));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -1031,13 +1046,13 @@ public class PlainsStructures
     		}
     		
 			// Northward
-			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
+			if (this.coordBaseMode!=0) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
-			if (this.coordBaseMode!=1) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());}
+			if (this.coordBaseMode!=1) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 3, this.getComponentType());}
 			// Southward
-			if (this.coordBaseMode!=2) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			if (this.coordBaseMode!=2) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
 			// Westward
-			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
+			if (this.coordBaseMode!=3) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
 		}
     	
 		/*
@@ -1074,6 +1089,11 @@ public class PlainsStructures
         			this.getZWithOffset(5, 5));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -1854,6 +1874,16 @@ public class PlainsStructures
             {
             	this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4+i, 2, 0, structureBB);
             }
+        	
+
+        	// Grass
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 2:forward, 3:backward
+        		// Front accent
+        		{2,0,0, 8,0,1}, {0,0,2, 8,0,2}, {0,0,3, 10,0,6}, {3,0,7, 10,0,7}, 
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
+            }
             
             // Cross-shaped watering hole
             for (int u=0; u<3; u++) {for (int w=0; w<3; w++) {
@@ -2064,26 +2094,24 @@ public class PlainsStructures
                 }
             }
         	
+        	// Cobblestone
+        	for(int[] uuvvww : new int[][]{
+        		// Floor
+        		{1,0,1, 6,0,7}, 
+        		// Walls
+        		{2,0,1, 2,4,1}, {5,0,1, 5,4,1}, {3,3,1, 4,5,1}, 
+        		{2,1,7, 5,4,7}, {3,5,7, 4,5,7}, 
+        		{1,1,2, 1,3,6}, {6,1,2, 6,3,6}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
+            }
             
             // Log corners
             for(int[] uw : new int[][]{{1,1},{1,7},{6,1},{6,7}})
             {
             	this.fillWithMetadataBlocks(world, structureBB, uw[0], 0, uw[1], uw[0], 3, uw[1], biomeLogVertBlock, biomeLogVertMeta, biomeLogVertBlock, biomeLogVertMeta, false);
             }            
-            
-            // Stone front wall
-            this.fillWithMetadataBlocks(world, structureBB, 2, 0, 1, 2, 4, 1, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            this.fillWithMetadataBlocks(world, structureBB, 5, 0, 1, 5, 4, 1, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            this.fillWithMetadataBlocks(world, structureBB, 3, 3, 1, 4, 5, 1, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            
-            // Stone back wall
-            this.fillWithMetadataBlocks(world, structureBB, 2, 1, 7, 5, 4, 7, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            this.fillWithMetadataBlocks(world, structureBB, 3, 5, 7, 4, 5, 7, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            
-            // Stone left and right walls
-            for (int i : new int[]{1,6}) {
-            	this.fillWithMetadataBlocks(world, structureBB, i, 1, 2, i, 3, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
-            }
             
             // Left windows
             this.fillWithMetadataBlocks(world, structureBB, 1, 2, 2, 1, 2, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta, biomeLogHorAlongBlock, biomeLogHorAlongMeta, false);
@@ -2668,7 +2696,16 @@ public class PlainsStructures
             
             
             // Yard sard
-            
+        	
+        	// Grass
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 2:forward, 3:backward
+        		// Front accent
+        		{7,0,4, 10,0,6}, {8,0,7, 10,0,7}, {7,0,8, 10,0,8}, 
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
+            }
+        	
             // Pen rim is vertical logs with fences above
             Block[] penrimBlock = new Block[]{biomeLogVertBlock, biomeFenceBlock};
             int[] penrimMeta = new int[]{biomeLogVertMeta, 0};
@@ -3073,6 +3110,16 @@ public class PlainsStructures
         		})
             {
         		this.placeBlockAtCurrentPosition(world, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uvwo[3]%4)+(uvwo[3]/4)*4, uvwo[0], uvwo[1], uvwo[2], structureBB);	
+            }
+        	
+
+        	// Grass
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 2:forward, 3:backward
+        		// Front accent
+        		{1,0,9, 5,0,14}, 
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
             }
         	
         	
@@ -3571,6 +3618,7 @@ public class PlainsStructures
             // Make foundation with blanks as empty air and F as foundation spaces
             String[] foundationPattern = new String[]{
                 	"    FFFF  ",
+                	"    FFFF  ",
                 	"  FFFFFFFF",
                 	" FFFFFFFFF",
                 	"FFFFFFFFFF",
@@ -3707,6 +3755,24 @@ public class PlainsStructures
             
         	
         	// --- Backyard --- //
+            
+        	
+            // Grass rim
+        	for (int[] uvwm : new int[][]{
+        		{1,3}, 
+        		{0,4}, {0,5}, {0,6}, 
+        		{1,7}, 
+        		{2,8}, {3,8}, 
+        		{4,9}, {4,10}, {5,10}, {6,10}, {7,10}, 
+        		{8,8}, 
+        		{9,8}, {9,7}, {9,6}, {9,5}, {9,4}, 
+        		{8,3}, 
+        		{7,0}, 
+           		})
+        	{
+            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvwm[0], 1, uvwm[1], structureBB);
+            }
+        	
         	
         	// Pond
         	int[][] waterDepths = new int[][]{
@@ -5243,11 +5309,11 @@ public class PlainsStructures
             
             // Windows
         	for (int[] uvw : new int[][]{
-        			{5,2,2},
-        			{5,2,6},
-        			{3,2,6},
-        			{1,2,4},
-        			{7,2,4},
+    			{5,2,2},
+    			{5,2,6},
+    			{3,2,6},
+    			{1,2,4},
+    			{7,2,4},
         		})
             {
         		this.placeBlockAtCurrentPosition(world, Blocks.glass_pane, 0, uvw[0], uvw[1], uvw[2], structureBB);
@@ -9000,7 +9066,7 @@ public class PlainsStructures
             
             
             // Carpet
-            this.fillWithMetadataBlocks(world, structureBB, 4, 2, 4, 5, 2, 4, Blocks.carpet, 13, Blocks.carpet, 13, false); // 13 is green
+            this.fillWithMetadataBlocks(world, structureBB, 4, 2, 4, 5, 2, 4, Blocks.carpet, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13, Blocks.carpet, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13, false); // 13 is green
             
             // Ladder
             this.fillWithMetadataBlocks(world, structureBB, 2, 2, 4, 2, 4, 4, biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(1, this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(1, this.coordBaseMode), false);
@@ -12297,15 +12363,15 @@ public class PlainsStructures
             }
             
             
-            // Anvil
-        	for (int[] uvw : new int[][]{
-        		{1,1,2, 3}, 
+            // Grindstone
+        	for (int[] uvwo : new int[][]{
+        		{1,1,2, 3}, // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
         		})
             {
         		// Generate the blockObject here so that we have the correct meta on hand
-        		blockObject = ModObjects.chooseModGrindstone(uvw[3], this.coordBaseMode); Block biomeGrindstoneBlock = (Block)blockObject[0]; int biomeGrindstoneMeta = (Integer)blockObject[1];
+        		blockObject = ModObjects.chooseModGrindstone(uvwo[3], this.coordBaseMode); Block biomeGrindstoneBlock = (Block)blockObject[0]; int biomeGrindstoneMeta = (Integer)blockObject[1];
             	
-        		this.placeBlockAtCurrentPosition(world, biomeGrindstoneBlock, biomeGrindstoneMeta, uvw[0], uvw[1], uvw[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, biomeGrindstoneBlock, biomeGrindstoneMeta, uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
         	
         	
@@ -12414,12 +12480,12 @@ public class PlainsStructures
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
-	protected static ArrayList<BlueprintData> getRandomPlainsDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+	public static ArrayList<BlueprintData> getRandomPlainsDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
 	{
 		int decorCount = 1;
 		return getPlainsDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
 	}
-	protected static ArrayList<BlueprintData> getPlainsDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+	public static ArrayList<BlueprintData> getPlainsDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
 	{
 		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
 		

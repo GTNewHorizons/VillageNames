@@ -8,6 +8,7 @@ import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
@@ -159,8 +160,11 @@ public class MapGenVillageVN extends MapGenVillage
         {
             super(chunkX, chunkZ);
             
+            // Choose starter type based on biome
+            FunctionsVN.VillageType startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(world, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+            
             // My modified version, which allows the user to disable each building
-            List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize);
+            List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize, startVillageType);
             
             // Generate the "start" component and add it to the list
             StructureVillageVN.StartVN start = null;
@@ -203,10 +207,6 @@ public class MapGenVillageVN extends MapGenVillage
             		new SnowyStructures.SnowyMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Snowy Pavilion
             };
             
-            
-            // Choose starter type based on biome
-            FunctionsVN.VillageType startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(world, (chunkX << 4) + 2, (chunkZ << 4) + 2);
-            
             if (startVillageType==FunctionsVN.VillageType.DESERT)
             {
             	start = desertStarters[random.nextInt(desertStarters.length)];
@@ -241,7 +241,7 @@ public class MapGenVillageVN extends MapGenVillage
             List paths =      start.field_74930_j; // Paths
             List components = start.field_74932_i; // Village Components
             int counter; // Used a couple times
-
+            
             while (!paths.isEmpty() || !components.isEmpty())
             {
                 StructureComponent structurecomponent;

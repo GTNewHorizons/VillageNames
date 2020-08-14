@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,6 +17,12 @@ import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.village.biomestructures.BlueprintData;
+import astrotibs.villagenames.village.biomestructures.DesertStructures;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -45,6 +52,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.structure.MapGenStructureData;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
@@ -154,7 +162,7 @@ public class StructureVillageVN
 	};
 	
 	
-    public static List getStructureVillageWeightedPieceList(Random random, int villageSize)
+    public static List getStructureVillageWeightedPieceList(Random random, int villageSize, FunctionsVN.VillageType villageType)
     {
     	ArrayList arraylist = new ArrayList();
         
@@ -175,9 +183,44 @@ public class StructureVillageVN
 
         while (iterator.hasNext())
         {
-        	// Remove all buildings that rolled 0 for number or which have a weight of 0
         	PieceWeight pw = (StructureVillagePieces.PieceWeight)iterator.next();
-            if (pw.villagePiecesLimit == 0 || pw.villagePieceWeight <=0) {iterator.remove();}
+        	
+        	// Remove all buildings that rolled 0 for number or which have a weight of 0
+            if (pw.villagePiecesLimit == 0 || pw.villagePieceWeight <=0) {iterator.remove(); continue;}
+            /*
+            // Remove buildings that aren't appropriate for the current biome
+            if (villageType!=FunctionsVN.VillageType.PLAINS)
+            {
+            	if (
+            			   pw.villagePieceClass==PlainsStructures.PlainsAccessory1.class
+               			|| pw.villagePieceClass==PlainsStructures.PlainsArmorerHouse1.class
+            			)
+            	{
+            		iterator.remove(); continue;
+            	}
+            }
+            if (villageType!=FunctionsVN.VillageType.DESERT)
+            {
+            	if (
+         			   pw.villagePieceClass==DesertStructures.DesertWeaponsmith1.class
+         			)
+	         	{
+	         		iterator.remove(); continue;
+	         	}
+            }
+            if (villageType!=FunctionsVN.VillageType.TAIGA)
+            {
+            	
+            }
+            if (villageType!=FunctionsVN.VillageType.SAVANNA)
+            {
+            	
+            }
+            if (villageType!=FunctionsVN.VillageType.SNOWY)
+            {
+            	
+            }
+            */
         }
         
         return arraylist;
@@ -186,7 +229,7 @@ public class StructureVillageVN
     
     // Pasted in from StructureVillagePieces so that I can access it, particularly to expand the allowed village biomes
     // This prepares a new path component to build upon
-    public static StructureComponent getNextVillageStructureComponent(StructureVillagePieces.Start start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    public static StructureComponent getNextVillageStructureComponent(StartVN start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
     {
         if (componentType > 50)
         {
@@ -194,34 +237,33 @@ public class StructureVillageVN
         }
         else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112)
         {
-        	
 			// Attach another structure
 			Method getNextVillageComponent_reflected = ReflectionHelper.findMethod(
 					StructureVillagePieces.class, null, new String[]{"getNextVillageComponent", "func_75081_c"},
 					StructureVillagePieces.Start.class, List.class, Random.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE
 					);
 			
+			//StructureVillagePieces.Village structurecomponent = StructureVillagePieces.getNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
 			StructureVillagePieces.Village structurecomponent = null;
-			
-			try
-			{
-				structurecomponent = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);
-			}
-    		catch (Exception e)
-			{
-    			if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke StructureVillagePieces.getNextVillageComponent method");
-    		}
-			
-        	//StructureVillagePieces.Village village = StructureVillagePieces.getNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
+			try {structurecomponent = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);}
+    		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke StructureVillagePieces.getNextVillageComponent method");}
 			
             if (structurecomponent != null)
             {
+            	// Substitute old torch with the new one
+            	if (structurecomponent instanceof StructureVillagePieces.Torch)
+            	{
+            		StructureBoundingBox decorTorchBB = StructureVillageVN.DecorTorch.findPieceBox(start, components, random, x, y, z, coordBaseMode);
+            		if (decorTorchBB==null) {return null;}
+            		structurecomponent = new StructureVillageVN.DecorTorch(start, componentType, random, decorTorchBB, coordBaseMode);
+            	}
+            	
                 int medianX = (structurecomponent.getBoundingBox().minX + structurecomponent.getBoundingBox().maxX) / 2;
                 int medianZ = (structurecomponent.getBoundingBox().minZ + structurecomponent.getBoundingBox().maxZ) / 2;
                 int rangeX = structurecomponent.getBoundingBox().maxX - structurecomponent.getBoundingBox().minX;
                 int rangeZ = structurecomponent.getBoundingBox().maxZ - structurecomponent.getBoundingBox().minZ;
                 int bboxWidth = rangeX > rangeZ ? rangeX : rangeZ;
-
+                
                 // Replaces the ordinary "areBiomesViable" method with one that uses the VN biome config list
                 BiomeGenBase biome = start.getWorldChunkManager().getBiomeGenAt(medianX, medianZ);
             	
@@ -258,21 +300,43 @@ public class StructureVillageVN
     }
     
     
+    /**
+     * Pasted in from StructureVillagePieces.Path findPieceBox so that I can access it
+     */
+    public static StructureBoundingBox findPieceBox(StructureVillagePieces.Start start, List<StructureComponent> components, Random random, int x, int y, int z, int horizIndex)
+    {
+    	// Select a length for the road. Start with a random length of 21, 28, or 35,
+    	// and then decrement 7 blocks at a time until the road doesn't intersect with any generated components
+        for (int i = 7 * MathHelper.getRandomIntegerInRange(random, 3, 5); i >= 7; i -= 7)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(
+            		x, y, z, // Structure coordinates
+            		0, 0, 0, // u, v, w offset. The u and w offsets are positive for horizIndex <=1 and negative for horizIndex >=2
+            		3, 3, i, // width, height, depth
+            		horizIndex);
+            
+            if (StructureComponent.findIntersecting(components, structureboundingbox) == null)
+            {
+                return structureboundingbox;
+            }
+        }
+        
+        return null;
+    }
+    
+    
     // Pasted in from StructureVillagePieces so that I can access it
     // This prepares a new path component to build upon
-    public static StructureComponent getNextComponentVillagePath(StructureVillagePieces.Start start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    public static StructureComponent generateAndAddRoadPiece(StructureVillagePieces.Start start, List components, Random random, int x, int y, int z, int horizIndex, int componentType)
     {
-        if (componentType > 3 + start.terrainType)
+        if (componentType > 3 + start.terrainType) {return null;} // Idk what this is
+        else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112) // Village bb can't be larger than 112x112
         {
-            return null;
-        }
-        else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112)
-        {
-            StructureBoundingBox structureboundingbox = StructureVillagePieces.Path.func_74933_a(start, components, random, x, y, z, coordBaseMode);
-
+        	StructureBoundingBox structureboundingbox = findPieceBox(start, components, random, x, y, z, horizIndex);
+        	
             if (structureboundingbox != null && structureboundingbox.minY > 10)
             {
-                StructureVillageVN.PathVN path = new StructureVillageVN.PathVN(start, componentType, random, structureboundingbox, coordBaseMode);
+                StructureVillageVN.PathVN path = new StructureVillageVN.PathVN(start, componentType, random, structureboundingbox, horizIndex);
                 int medianX = (path.getBoundingBox().minX + path.getBoundingBox().maxX) / 2;
                 int medianZ = (path.getBoundingBox().minZ + path.getBoundingBox().maxZ) / 2;
                 int rangeX = path.getBoundingBox().maxX - path.getBoundingBox().minX;
@@ -1304,8 +1368,13 @@ public class StructureVillageVN
     	// Set them to defaults here
     	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
     	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
-    	public int townColor = 14; // Red
-    	public int townColor2 = 0; // White
+    	public int townColor = 11; // Blue
+    	public int townColor2 = 14; // Red
+    	// These colors are used in case more are needed
+    	public int townColorA = 0; // White
+    	public int townColorB = 13; // Green
+    	public int townColorC = 4; // Yellow
+    	
     	public String namePrefix = "";
     	public String nameRoot = "";
     	public String nameSuffix = "";
@@ -1329,11 +1398,220 @@ public class StructureVillageVN
     }
     
     
+    /**
+     * Gets the next village component, with the bounding box shifted -1 in the X and Z direction.
+     */
+    protected static StructureComponent getNextComponentNN(StartVN start, List components, Random random, int yOffset, int lateralOffset, int horizIndex, int componentType, StructureBoundingBox boundingBox)
+    {
+        switch (horizIndex)
+        {
+            case 0: // South
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX - 1, boundingBox.minY + yOffset, boundingBox.minZ + lateralOffset, 1, componentType);
+            case 1: // West
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX + lateralOffset, boundingBox.minY + yOffset, boundingBox.minZ - 1, 2, componentType);
+            case 2: // North
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX - 1, boundingBox.minY + yOffset, boundingBox.minZ + lateralOffset, 1, componentType);
+            case 3: // East
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX + lateralOffset, boundingBox.minY + yOffset, boundingBox.minZ - 1, 2, componentType);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Gets the next village component, with the bounding box shifted +1 in the X and Z direction.
+     */
+    protected static StructureComponent getNextComponentPP(StartVN start, List components, Random random, int yOffset, int lateralOffset, int horizIndex, int componentType, StructureBoundingBox boundingBox)
+    {
+        switch (horizIndex)
+        {
+            case 0: // South
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.maxX + 1, boundingBox.minY + yOffset, boundingBox.minZ + lateralOffset, 3, componentType);
+            case 1: // West
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX + lateralOffset, boundingBox.minY + yOffset, boundingBox.maxZ + 1, 0, componentType);
+            case 2: // North
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.maxX + 1, boundingBox.minY + yOffset, boundingBox.minZ + lateralOffset, 3, componentType);
+            case 3: // East
+                return StructureVillageVN.getNextVillageStructureComponent(start, components, random, boundingBox.minX + lateralOffset, boundingBox.minY + yOffset, boundingBox.maxZ + 1, 0, componentType);
+            default:
+                return null;
+        }
+    }
+    
+    
+    public static class DecorTorch extends StructureVillagePieces.Village
+    {
+    	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
+    	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public StartVN start;
+    	
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	private int averageGroundLevel = -1;
+    	
+        public DecorTorch() {}
+        
+        public DecorTorch(StartVN start, int componentType, Random random, StructureBoundingBox structureBB, int horizIndex)
+        {
+            super(start, componentType);
+            this.coordBaseMode = horizIndex;
+            this.boundingBox = structureBB;
+            
+            this.start = start;
+            // Set biome and material type, to be used during construction
+            int averageX = (structureBB.minX+structureBB.maxX)/2;
+            int averageZ = (structureBB.minZ+structureBB.maxZ)/2;
+            this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(start.getWorldChunkManager(), averageX, averageZ);
+            this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(start.getWorldChunkManager(), averageX, averageZ);
+        }
+        
+        public static StructureBoundingBox findPieceBox(StartVN start, List components, Random random, int x, int y, int z, int horizIndex)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(
+            		x, y, z, // Structure coordinates
+            		0, 0, 0, // u, v, w offset. The u and w offsets are positive for horizIndex <=1 and negative for horizIndex >=2
+            		3, 4, 3, // width, height, depth
+            		horizIndex);
+            
+            return StructureComponent.findIntersecting(components, structureboundingbox) != null ? null : structureboundingbox;
+        }
+        
+        /**
+         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * Mineshafts at the end, it adds Fences...
+         */
+        @Override
+        public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+        {
+        	if (this.averageGroundLevel < 0)
+            {
+        		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+        				// Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				new StructureBoundingBox(
+        						this.boundingBox.minX, this.boundingBox.minZ,
+        						this.boundingBox.maxX, this.boundingBox.maxZ),
+        				true, (byte)1, this.coordBaseMode);
+        		
+                if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+            }
+        	/*
+            if (this.field_143015_k < 0)
+            {
+                this.field_143015_k = this.getAverageGroundLevel(world, structureBB);
+                
+                if (this.field_143015_k < 0)
+                {
+                    return true;
+                }
+                
+                this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4 - 1, 0);
+            }
+            
+            this.fillWithBlocks(world, structureBB, 0, 0, 0, 2, 3, 1, Blocks.air, Blocks.air, false);
+            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 0, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 1, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 2, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.log,   0, 1, 3, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 0, 3, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 1, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 3, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, -1, structureBB);
+            */
+        	// Decor
+            int[][] decorUVW = new int[][]{
+            	{1, 0, 1},
+            };  
+            
+            for (int j=0; j<decorUVW.length; j++)
+            {
+            	// Get coordinates
+            	int[] uvw = decorUVW[j];
+            	
+            	LogHelper.info("Decor generated at " + this.getXWithOffset(uvw[0], uvw[2]) + " " + this.getYWithOffset(uvw[1]) +  " " + this.getZWithOffset(uvw[0], uvw[2]));
+            	
+            	// Set random seed
+            	Random randomFromXYZ = new Random();
+            	randomFromXYZ.setSeed(
+    					world.getSeed() +
+    					FunctionsVN.getUniqueLongForXYZ(
+    							this.getXWithOffset(uvw[0], uvw[2]),
+    							this.getYWithOffset(uvw[1]),
+    							this.getZWithOffset(uvw[0], uvw[2])
+    							)
+            			);
+            	
+            	int decorHeightY = uvw[1];
+            	
+            	// Get ground level
+            	if (this.decorHeightY.size()<(j+1))
+            	{
+            		// There are fewer stored ground levels than this decor number, so this is being generated for the first time.
+            		// Add new ground level
+            		//decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
+            		this.decorHeightY.add(decorHeightY);
+            	}
+            	else
+            	{
+            		// There is already (presumably) a value for this ground level, so this decor is being multiply generated.
+            		// Retrieve ground level
+            		decorHeightY = this.decorHeightY.get(j);
+            	}
+            	
+            	// Generate lantern-like decor
+            	ArrayList<BlueprintData> decorBlueprint = null;
+            	
+            	if (this.villageType==FunctionsVN.VillageType.DESERT)
+            	{
+            		decorBlueprint = DesertStructures.getDesertDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);//, 5); // Use lime
+            	}
+            	else if (this.villageType==FunctionsVN.VillageType.TAIGA)
+            	{
+            		decorBlueprint = TaigaStructures.getTaigaDecorBlueprint(6, this.start, this.coordBaseMode, randomFromXYZ);
+            	}
+            	else if (this.villageType==FunctionsVN.VillageType.SAVANNA)
+            	{
+            		decorBlueprint = SavannaStructures.getSavannaDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);
+            	}
+            	else if (this.villageType==FunctionsVN.VillageType.SNOWY)
+            	{
+            		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.start, this.coordBaseMode, randomFromXYZ);
+            	}
+            	else // Plains
+            	{
+            		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);
+            	}
+            	
+            	for (BlueprintData b : decorBlueprint)
+            	{
+            		// Place block indicated by blueprint
+            		this.placeBlockAtCurrentPosition(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos(), uvw[2]+b.getWPos(), structureBB);
+            		
+            		// Fill below if flagged
+            		if ((b.getfillFlag()&1)!=0)
+            		{
+            			this.func_151554_b(world, b.getBlock(), b.getMeta(), uvw[0]+b.getUPos(), decorHeightY+b.getVPos()-1, uvw[2]+b.getWPos(), structureBB);
+            		}
+            		
+            		// Clear above if flagged
+            		if ((b.getfillFlag()&2)!=0)
+            		{
+            			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+b.getUPos(), decorHeightY+b.getVPos()+1, uvw[2]+b.getWPos(), structureBB);
+            		}            		
+            	}
+            }
+        	
+            return true;
+        }
+    }
+    
+    
     // --- Path --- //
     
     public static class PathVN extends StructureVillagePieces.Road
     {
-        private int averageGroundLevel;
+        private int length;
         
         public PathVN() {}
 
@@ -1342,21 +1620,21 @@ public class StructureVillageVN
             super(start, componentType);
             this.coordBaseMode = coordBaseMode;
             this.boundingBox = boundingBox;
-            this.averageGroundLevel = Math.max(boundingBox.getXSize(), boundingBox.getZSize());
+            this.length = Math.max(boundingBox.getXSize(), boundingBox.getZSize());
         }
         
         @Override
         protected void func_143012_a(NBTTagCompound tagCompound)
         {
             super.func_143012_a(tagCompound);
-            tagCompound.setInteger("Length", this.averageGroundLevel);
+            tagCompound.setInteger("Length", this.length);
         }
         
         @Override
         protected void func_143011_b(NBTTagCompound tagCompound)
         {
             super.func_143011_b(tagCompound);
-            this.averageGroundLevel = tagCompound.getInteger("Length");
+            this.length = tagCompound.getInteger("Length");
         }
 
         /**
@@ -1365,69 +1643,75 @@ public class StructureVillageVN
         @Override
         public void buildComponent(StructureComponent start, List components, Random random)
         {
-            boolean flag = false;
+            boolean structureWasGenerated = false;
             int i;
             StructureComponent structurecomponent1;
-
-            for (i = random.nextInt(5); i < this.averageGroundLevel - 8; i += 2 + random.nextInt(5))
+            
+            // Construct buildings on the -x/-z sides of roads
+            for (i = random.nextInt(5); i < this.length - 8; i += 2 + random.nextInt(5))
             {
-                structurecomponent1 = this.getNextComponentNN((StructureVillagePieces.Start)start, components, random, 0, i);
-
+                structurecomponent1 = StructureVillageVN.getNextComponentNN((StartVN)start, components, random, 0, i, this.coordBaseMode, this.getComponentType(), this.getBoundingBox());
+                
+                if (structurecomponent1 != null)
+                {
+                	i += Math.max(structurecomponent1.getBoundingBox().getXSize(), structurecomponent1.getBoundingBox().getZSize());
+                    structureWasGenerated = true;
+                }
+            }
+            
+            // Construct buildings on the +x/+z sides of roads
+            for (i = random.nextInt(5); i < this.length - 8; i += 2 + random.nextInt(5))
+            {
+                structurecomponent1 = StructureVillageVN.getNextComponentPP((StartVN)start, components, random, 0, i, this.coordBaseMode, this.getComponentType(), this.getBoundingBox());
+                
                 if (structurecomponent1 != null)
                 {
                     i += Math.max(structurecomponent1.getBoundingBox().getXSize(), structurecomponent1.getBoundingBox().getZSize());
-                    flag = true;
+                    structureWasGenerated = true;
                 }
             }
-
-            for (i = random.nextInt(5); i < this.averageGroundLevel - 8; i += 2 + random.nextInt(5))
+            
+            // If a building was generated, add a left-hand-turn street (for horizIndex>=2)
+            if (structureWasGenerated && random.nextInt(3) > 0)
             {
-                structurecomponent1 = this.getNextComponentPP((StructureVillagePieces.Start)start, components, random, 0, i);
-
-                if (structurecomponent1 != null)
+            	switch (this.coordBaseMode)
                 {
-                    i += Math.max(structurecomponent1.getBoundingBox().getXSize(), structurecomponent1.getBoundingBox().getZSize());
-                    flag = true;
+                    case 0: // South
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 1, this.getComponentType());
+                        break;
+                    case 1: // West
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+                        break;
+                    case 2: // North
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ, 1, this.getComponentType());
+                        break;
+                    case 3: // East
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+                        break;
                 }
             }
-
-            if (flag && random.nextInt(3) > 0)
+            
+            // If a building was generated, add a right-hand-turn street (for horizIndex>=2)
+            if (structureWasGenerated && random.nextInt(3) > 0)
             {
-                switch (this.coordBaseMode)
+            	switch (this.coordBaseMode)
                 {
-                    case 0:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 1, this.getComponentType());
+                    case 0: // South
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 3, this.getComponentType());
                         break;
-                    case 1:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+                    case 1: // West
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
                         break;
-                    case 2:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ, 1, this.getComponentType());
+                    case 2: // North
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ, 3, this.getComponentType());
                         break;
-                    case 3:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
-                }
-            }
-
-            if (flag && random.nextInt(3) > 0)
-            {
-                switch (this.coordBaseMode)
-                {
-                    case 0:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 3, this.getComponentType());
+                    case 3: // East
+                        generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
                         break;
-                    case 1:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-                        break;
-                    case 2:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ, 3, this.getComponentType());
-                        break;
-                    case 3:
-                        getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
                 }
             }
         }
-
+        
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
@@ -1438,24 +1722,85 @@ public class StructureVillageVN
         	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece", "startPiece"});
         	
         	// Scans X, Z inside bounding box and finds the ground layer
-            for (int i = this.boundingBox.minX; i <= this.boundingBox.maxX; ++i)
+        	for (int u = 0; u <= (this.boundingBox.maxX-this.boundingBox.minX); ++u)
             {
-                for (int j = this.boundingBox.minZ; j <= this.boundingBox.maxZ; ++j)
+        		for (int w = 0; w <= (this.boundingBox.maxZ-this.boundingBox.minZ); ++w)
                 {
-                    if (structureBB.isVecInside(i, 64, j))
+        			int x = this.boundingBox.minX + u;
+        			int z = this.boundingBox.minZ + w;
+        			
+                    if (structureBB.isVecInside(x, 64, z))
                     {
                     	// Gets ground level, so long as it's not leaves or other foliage
-                        int k = world.getTopSolidOrLiquidBlock(i, j) - 1;
+                        int y = getAboveTopmostSolidOrLiquidBlockVN(world, x, z) - 1;
                         
-                        setPathSpecificBlock(world, (StartVN)startPiece_reflected, 0, i, k, j);
+                        setPathSpecificBlock(world, (StartVN)startPiece_reflected, 0, x, y, z);
                     }
                 }
             }
-
+        	
+        	
+            /*
+            // If there was no left or right path added, put a cap at the end 
+            int STRUCTURE_WIDTH = 5;
+        	int STRUCTURE_HEIGHT = 5;
+        	int STRUCTURE_DEPTH = 2;
+        	// Values for lining things up
+        	int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+        	int HORIZ_OFFSET = -2; // How far to the "left" to shift the attached structure
+        	
+        	// Make a new boundingbox for the extension
+        	StructureBoundingBox roadExtensionBoundingBox = new StructureBoundingBox();
+        	switch (this.coordBaseMode)
+            {
+                case 0: // South
+                	roadExtensionBoundingBox = new StructureBoundingBox(
+                			this.boundingBox.minX+HORIZ_OFFSET, 				this.boundingBox.maxZ+1,
+                			this.boundingBox.minX+HORIZ_OFFSET+STRUCTURE_WIDTH,	this.boundingBox.maxZ+STRUCTURE_DEPTH);
+                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 3, this.getComponentType());
+                    break;
+                case 1: // West
+                	roadExtensionBoundingBox = new StructureBoundingBox(
+                			this.boundingBox.minX-STRUCTURE_DEPTH,	this.boundingBox.minZ+HORIZ_OFFSET,
+                			this.boundingBox.minX-1,				this.boundingBox.minZ+HORIZ_OFFSET+STRUCTURE_WIDTH);
+                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+                    break;
+                case 2: // North
+                	roadExtensionBoundingBox = new StructureBoundingBox(
+                			this.boundingBox.minX+HORIZ_OFFSET, 				this.boundingBox.minZ-STRUCTURE_DEPTH,
+                			this.boundingBox.minX+HORIZ_OFFSET+STRUCTURE_WIDTH,	this.boundingBox.minZ-1);
+                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ, 3, this.getComponentType());
+                    break;
+                case 3: // East
+                	roadExtensionBoundingBox = new StructureBoundingBox(
+                			this.boundingBox.maxX+1, 					this.boundingBox.minZ+HORIZ_OFFSET,
+                			this.boundingBox.maxX+STRUCTURE_DEPTH,		this.boundingBox.minZ+HORIZ_OFFSET+STRUCTURE_WIDTH);
+                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+                    break;
+            }
+            
+        	if (StructureComponent.findIntersecting(components, roadExtensionBoundingBox) == null)
+            {
+        		// This cap intersects with no previously-generated structures
+        		for (int u = 0; u <= (roadExtensionBoundingBox.maxX-roadExtensionBoundingBox.minX); ++u)
+                {
+        			for (int w = 0; w <= (roadExtensionBoundingBox.maxZ-roadExtensionBoundingBox.minZ); ++w)
+                    {
+            			int x = roadExtensionBoundingBox.minX + u;
+            			int z = roadExtensionBoundingBox.minZ + w;
+            			
+            			if (roadExtensionBoundingBox.isVecInside(x, 64, z))
+                        {
+            				int y = getAboveTopmostSolidOrLiquidBlockVN(world, x, z) - 1;
+                        }
+                    }
+                }
+            }
+            */
+        	
             return true;
         }
     }
-    
     
     
     /**
@@ -1974,5 +2319,29 @@ public class StructureVillageVN
 		cropblocks[1] = cropblock;
 		
 		return cropblocks;
+	}
+	
+	/**
+	 * Inputs an int array of colors being used in a village, and returns one that is not in use
+	 * useWeighted uses the banner color weighting. Set to false for uniform. 
+	 */
+	public static int generateUnusedColor(int[] colorArray, Random random, boolean useWeighted)
+	{
+		int candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random) : random.nextInt(16));
+		if (colorArray.length>=16) {return candidateColor;} // If it's not possible to return a unique color (pigeonhole principle), just return a random one
+		boolean matchFound=false;
+		
+		// Then check the color against the provided array
+		while (true)
+		{
+			candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random) : random.nextInt(16));
+			
+			for (int color : colorArray)
+			{
+				if (color==candidateColor) {matchFound=true;}
+			}
+			if (matchFound) {matchFound=false; continue;}
+			else {return candidateColor;}
+		}
 	}
 }

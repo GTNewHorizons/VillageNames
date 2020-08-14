@@ -33,6 +33,7 @@ import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTan
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTemple1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTemple2;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertToolSmith1;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertWeaponsmith1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAccessory1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen2;
@@ -1396,6 +1397,27 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	    {
 	    	if (startPiece instanceof StartVN) {return DesertToolSmith1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Desert Weapon Smithy
+	public static class DesertWeaponsmith1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernDesertWeaponsmith1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(DesertWeaponsmith1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertWeaponsmith1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertWeaponsmith1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
 	    }
 	}
 }

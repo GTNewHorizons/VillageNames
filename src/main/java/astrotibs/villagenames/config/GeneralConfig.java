@@ -189,6 +189,7 @@ public class GeneralConfig {
 	public static String structureModernDesertTemple1_string; public static ArrayList<Integer> structureModernDesertTemple1_vals;
 	public static String structureModernDesertTemple2_string; public static ArrayList<Integer> structureModernDesertTemple2_vals;
 	public static String structureModernDesertToolSmith1_string; public static ArrayList<Integer> structureModernDesertToolSmith1_vals;
+	public static String structureModernDesertWeaponsmith1_string; public static ArrayList<Integer> structureModernDesertWeaponsmith1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -544,6 +545,11 @@ public class GeneralConfig {
 		structureModernDesertToolSmith1_string = config.getString("Structure: Modern Desert Tool Smithy", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernDesertToolSmith1_vals = parseIntegerArray(structureModernDesertToolSmith1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernDesertWeaponsmith1_string = config.getString("Structure: Modern Desert Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernDesertWeaponsmith1_vals = parseIntegerArray(structureModernDesertWeaponsmith1_string, ali);
 		
 		
 		// Misc

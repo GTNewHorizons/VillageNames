@@ -192,8 +192,11 @@ public final class VillageNames
 			// New village generator
 			MapGenStructureIO.registerStructure(MapGenVillageVN.Start.class, "MapGenVillageVN");
 			
-			// Village Centers
+			// Village Misc
 	        MapGenStructureIO.func_143031_a(StructureVillageVN.PathVN.class, "VNPath"); // Path
+	        MapGenStructureIO.func_143031_a(StructureVillageVN.DecorTorch.class, "VNDecTor"); // Decor Torch
+	        
+			// Village Centers
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsFountain01.class, "VNPlF01"); // Fountain
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint1.class, "VNPlMP1"); // Plains Well
 	        MapGenStructureIO.func_143031_a(PlainsStructures.PlainsMeetingPoint2.class, "VNPlMP2"); // Plains Market
@@ -275,6 +278,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(DesertStructures.DesertTemple1.class, "VNDeTem1", new StructureCreationHandlers.DesertTemple1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertTemple2.class, "VNDeTem2", new StructureCreationHandlers.DesertTemple2_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertToolSmith1.class, "VNDeTSm1", new StructureCreationHandlers.DesertToolSmith1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertWeaponsmith1.class, "VNDeWSm1", new StructureCreationHandlers.DesertWeaponsmith1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

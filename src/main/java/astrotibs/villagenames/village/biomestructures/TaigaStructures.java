@@ -78,28 +78,28 @@ public class TaigaStructures
     		}
     		
 			// Southward
-			if (this.coordBaseMode!=0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==1 ? 2 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
+			if (this.coordBaseMode!=0) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + (this.coordBaseMode%2==1 ? 2 : 4), this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());}
 			// Westward
-			if (this.coordBaseMode==3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
+			if (this.coordBaseMode==3) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 4, 1, this.getComponentType());}
 			// Northward
-			if (this.coordBaseMode==0) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
+			if (this.coordBaseMode==0) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 4, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());}
 			// Eastward
-			if (this.coordBaseMode!=3) {StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 2 : 4), 3, this.getComponentType());}
+			if (this.coordBaseMode!=3) {StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + (this.coordBaseMode%2==0 ? 2 : 4), 3, this.getComponentType());}
 			
 			
 			// Attach non-road structures
 			
 			// Structure 1, left-hand side, near the bell
-			if (this.coordBaseMode==0) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(4)-1), 1, this.getComponentType());}
-			if (this.coordBaseMode==1) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(random.nextInt(4)+1), this.boundingBox.minY, this.boundingBox.minZ+(-1), 2, this.getComponentType());}
-			if (this.coordBaseMode==2) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(4)-1), 1, this.getComponentType());}
-			if (this.coordBaseMode==3) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(random.nextInt(4)), this.boundingBox.minY, this.boundingBox.minZ+(-1), 2, this.getComponentType());}
+			if (this.coordBaseMode==0) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(4)-1), 1, this.getComponentType());}
+			if (this.coordBaseMode==1) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(random.nextInt(4)+1), this.boundingBox.minY, this.boundingBox.minZ+(-1), 2, this.getComponentType());}
+			if (this.coordBaseMode==2) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(4)-1), 1, this.getComponentType());}
+			if (this.coordBaseMode==3) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(random.nextInt(4)), this.boundingBox.minY, this.boundingBox.minZ+(-1), 2, this.getComponentType());}
 			
 			// Structure 2, back side, along the longer side
-			if (this.coordBaseMode==0) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(random.nextInt(6)+3), this.boundingBox.minY, this.boundingBox.maxZ+(1), 0, this.getComponentType());}
-			if (this.coordBaseMode==1) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 1, this.getComponentType());}
-			if (this.coordBaseMode==2) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 2, this.getComponentType());}
-			if (this.coordBaseMode==3) {StructureVillageVN.getNextVillageStructureComponent((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX+(1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 3, this.getComponentType());}
+			if (this.coordBaseMode==0) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(random.nextInt(6)+3), this.boundingBox.minY, this.boundingBox.maxZ+(1), 0, this.getComponentType());}
+			if (this.coordBaseMode==1) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 1, this.getComponentType());}
+			if (this.coordBaseMode==2) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 2, this.getComponentType());}
+			if (this.coordBaseMode==3) {StructureVillageVN.getNextVillageStructureComponent((StartVN)start, components, random, this.boundingBox.maxX+(1), this.boundingBox.minY, this.boundingBox.minZ+(random.nextInt(6)+3), 3, this.getComponentType());}
 		}
     	
 		/*
@@ -136,6 +136,11 @@ public class TaigaStructures
         			this.getZWithOffset(2, 3));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -342,13 +347,13 @@ public class TaigaStructures
     		}
     		
 			// Southward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 1, this.getComponentType());
 			// Northward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + 3, this.boundingBox.minY, this.boundingBox.minZ - 1, 2, this.getComponentType());
 			// Eastward
-			StructureVillageVN.getNextComponentVillagePath((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + 3, 3, this.getComponentType());
 		}
     	
 		/*
@@ -392,6 +397,11 @@ public class TaigaStructures
         			this.getZWithOffset(8, 1));
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
+        	// Generate additional colors to be used in the town
+        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
+        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
+        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
     		this.nameSuffix = villageNBTtag.getString("nameSuffix");
@@ -710,12 +720,12 @@ public class TaigaStructures
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
-	protected static ArrayList<BlueprintData> getRandomTaigaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+	public static ArrayList<BlueprintData> getRandomTaigaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
 	{
 		int decorCount = 7;
 		return getTaigaDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
 	}
-	protected static ArrayList<BlueprintData> getTaigaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+	public static ArrayList<BlueprintData> getTaigaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
 	{
 		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
 		
