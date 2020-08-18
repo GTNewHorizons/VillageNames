@@ -137,9 +137,9 @@ public class DesertStructures
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	// Generate additional colors to be used in the town
-        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
-        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
-        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
+        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
+        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
@@ -228,9 +228,6 @@ public class DesertStructures
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
     		
-    		String namePrefix = villageNBTtag.getString("namePrefix");
-    		String nameRoot = villageNBTtag.getString("nameRoot");
-    		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
 			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(4, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
@@ -396,9 +393,9 @@ public class DesertStructures
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	// Generate additional colors to be used in the town
-        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
-        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
-        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
+        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
+        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
@@ -528,9 +525,6 @@ public class DesertStructures
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
     		
-    		String namePrefix = villageNBTtag.getString("namePrefix");
-    		String nameRoot = villageNBTtag.getString("nameRoot");
-    		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
 			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
@@ -698,9 +692,9 @@ public class DesertStructures
         	this.townColor = villageNBTtag.getInteger("townColor");
         	this.townColor2 = villageNBTtag.getInteger("townColor2");
         	// Generate additional colors to be used in the town
-        	this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);
-        	this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);
-        	this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);
+        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
+        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
+        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
     		this.namePrefix = villageNBTtag.getString("namePrefix");
     		this.nameRoot = villageNBTtag.getString("nameRoot");
@@ -959,9 +953,6 @@ public class DesertStructures
             int signY = this.getYWithOffset(signYBB);
             int signZ = this.getZWithOffset(signXBB, signZBB);
     		
-    		String namePrefix = villageNBTtag.getString("namePrefix");
-    		String nameRoot = villageNBTtag.getString("nameRoot");
-    		String nameSuffix = villageNBTtag.getString("nameSuffix");
     		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
     		
 			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
@@ -1054,10 +1045,21 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"    FF    ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 10;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 8;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -1133,19 +1135,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"    FF    ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -1296,10 +1289,22 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"    FF    ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 10;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 9;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -1373,20 +1378,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"    FF    ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -1537,10 +1532,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		" FFFFF ",
+        		" FFFFF ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -1610,18 +1615,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		" FFFFF ",
-            		" FFFFF ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -1672,7 +1669,7 @@ public class DesertStructures
             }
         	
         	
-            // Furnace - this is a TileEntity and needs to have its meta assigned manually
+            // Blast Furnace - this is a TileEntity and needs to have its meta assigned manually
         	blockObject = ModObjects.chooseModBlastFurnaceBlock(2, this.coordBaseMode); Block blastFurnaceBlock = (Block) blockObject[0]; int blastFurnaceMeta = (Integer) blockObject[1];
         	for (int[] uvw : new int[][]{{3,1,5}})
             {
@@ -1840,10 +1837,21 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"  F     ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 8;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 8;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -1918,19 +1926,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"  F     ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -2160,10 +2159,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFF  ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -2231,18 +2240,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFF  ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -2453,10 +2454,18 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 5;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -2520,16 +2529,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -2689,10 +2692,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF   ",
+        		"FFFFFFF   ",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFF   ",
+        		"FFFFFFF   ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 10;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -2757,18 +2770,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF   ",
-            		"FFFFFFF   ",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFF   ",
-            		"FFFFFFF   ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -2965,10 +2970,21 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFF ",
+        		"FFFFFFFFFF ",
+        		"FFFFFFFFFF ",
+        		"FFFFFFFFFF ",
+        		"FFFFFFFFFF ",
+        		"FFFFFFFFFF ",
+        		"FFFFFF  F  ",
+        		"FFFFFFFF FF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 11;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 8;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 3; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -3036,19 +3052,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFF ",
-            		"FFFFFFFFFF ",
-            		"FFFFFFFFFF ",
-            		"FFFFFFFFFF ",
-            		"FFFFFFFFFF ",
-            		"FFFFFFFFFF ",
-            		"FFFFFF  F  ",
-            		"FFFFFFFF FF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -3279,10 +3286,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFF   ",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFF   ",
+        		"   F        ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 12;
-    	private static final int STRUCTURE_HEIGHT = 12;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 12;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -3353,17 +3369,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFF   ",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFF   ",
-            		"   F        ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -3584,10 +3593,24 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        		"FFFFFFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 13;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 11;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -3651,22 +3674,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            		"FFFFFFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -3887,10 +3898,18 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 9;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 5;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -3962,16 +3981,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -4174,10 +4187,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"   FF   ",
+        		"  FFFF  ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 8;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -4246,18 +4269,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"   FF   ",
-            		"  FFFF  ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -4459,10 +4474,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        		"FFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -4531,17 +4555,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            		"FFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -4784,10 +4801,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 11;
-    	private static final int STRUCTURE_HEIGHT = 9;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 9;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 1; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -4855,18 +4882,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -5126,10 +5145,18 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        		"FFFFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 11;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 5;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 2; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -5199,16 +5226,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            		"FFFFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -5464,10 +5485,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"  F  ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -5535,17 +5565,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"  F  ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -5743,10 +5766,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		" FF  ",
+        		"F FFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -5818,18 +5851,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		" FF  ",
-            		"F FFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -6082,10 +6107,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -6155,17 +6189,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -6390,10 +6417,18 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 5;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -6460,16 +6495,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -6674,10 +6703,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -6744,17 +6782,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -6963,10 +6994,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 18;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 18;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -7034,17 +7074,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -7391,10 +7424,21 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFF   F",
+        		"FFF F F",
+        		"FFF   F",
+        		"FFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 8;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 1; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -7462,19 +7506,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFF   F",
-            		"FFF F F",
-            		"FFF   F",
-            		"FFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -7696,10 +7731,18 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        		"FFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 5;
-    	private static final int STRUCTURE_HEIGHT = 5;
-    	private static final int STRUCTURE_DEPTH = 5;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 5;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -7767,16 +7810,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            		"FFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -7980,10 +8017,19 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        		"FFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 7;
-    	private static final int STRUCTURE_HEIGHT = 10;
-    	private static final int STRUCTURE_DEPTH = 6;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 10;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 2; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -8052,17 +8098,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            		"FFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -8307,10 +8346,24 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFF    FFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		" FFFFFFFF ",
+        		" FFFFFFFF ",
+        		" FFFFFFFF ",
+        		" FFFFFFFF ",
+        		" FFFFFFFF ",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 10;
-    	private static final int STRUCTURE_HEIGHT = 7;
-    	private static final int STRUCTURE_DEPTH = 11;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -8378,22 +8431,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFF    FFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		" FFFFFFFF ",
-            		" FFFFFFFF ",
-            		" FFFFFFFF ",
-            		" FFFFFFFF ",
-            		" FFFFFFFF ",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -8656,10 +8697,23 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        		"FFFFFFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 12;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 10;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -8727,21 +8781,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            		"FFFFFFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -8981,10 +9024,22 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFF    ",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFFFFFF",
+        		"FFFFF F F",
+        		"FFFFF FF ",
+        		"FFFFFFF  ",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 9;
-    	private static final int STRUCTURE_HEIGHT = 9;
-    	private static final int STRUCTURE_DEPTH = 9;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 9;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 3; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 4; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -9053,20 +9108,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFF    ",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFFFFFF",
-            		"FFFFF F F",
-            		"FFFFF FF ",
-            		"FFFFFFF  ",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
@@ -9363,10 +9408,20 @@ public class DesertStructures
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public StartVN start;
     	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+        		"FFFFFF    ",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"FFFFFFFFFF",
+        		"  FFFFFFFF",
+        };
     	// Here are values to assign to the bounding box
-    	private static final int STRUCTURE_WIDTH = 10;
-    	private static final int STRUCTURE_HEIGHT = 6;
-    	private static final int STRUCTURE_DEPTH = 7;
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0; // How far "rightward" to start scanning the structure's front edge to determine the median ground level
@@ -9438,18 +9493,10 @@ public class DesertStructures
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
-            String[] foundationPattern = new String[]{
-            		"FFFFFF    ",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"FFFFFFFFFF",
-            		"  FFFFFFFF",
-            };
-        	for (int w=0; w < STRUCTURE_DEPTH; w++) {for (int u=0; u < STRUCTURE_WIDTH; u++) {
+            
+        	for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
         		
-            		if (foundationPattern[STRUCTURE_DEPTH-1-w].substring(u, u+1).toUpperCase().equals("F"))
+            		if (foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase().equals("F"))
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);

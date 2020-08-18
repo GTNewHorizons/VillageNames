@@ -70,6 +70,17 @@ import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsTem
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsTemple4;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsToolSmith1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsWeaponsmith1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaAnimalPen1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorer2;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorerHouse1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaButcherShop1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaCartographerHouse1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaFisherCottage1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaFletcherHouse1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaLargeFarm1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaLibrary1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMasonsHouse1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMediumFarm1;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
@@ -1418,6 +1429,237 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	    {
 	    	if (startPiece instanceof StartVN) {return DesertWeaponsmith1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Animal Pen
+	public static class TaigaAnimalPen1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaAnimalPen1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaAnimalPen1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaAnimalPen1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaAnimalPen1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Armorer Hut
+	public static class TaigaArmorer2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaArmorer2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaArmorer2.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaArmorer2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaArmorer2.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Armorer House
+	public static class TaigaArmorerHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaArmorerHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaArmorerHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaArmorerHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaArmorerHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Butcher Shop
+	public static class TaigaButcherShop1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaButcherShop1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaButcherShop1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaButcherShop1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaButcherShop1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Cartographer House
+	public static class TaigaCartographerHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaCartographerHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaCartographerHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaCartographerHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaCartographerHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Fisher Cottage
+	public static class TaigaFisherCottage1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaFisherCottage1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaFisherCottage1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaFisherCottage1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaFisherCottage1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Fletcher House
+	public static class TaigaFletcherHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaFletcherHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaFletcherHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaFletcherHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaFletcherHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Large Farm
+	public static class TaigaLargeFarm1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaLargeFarm1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaLargeFarm1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaLargeFarm1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaLargeFarm1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Medium Farm
+	public static class TaigaMediumFarm1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaMediumFarm1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaMediumFarm1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaMediumFarm1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaMediumFarm1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Library
+	public static class TaigaLibrary1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaLibrary1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaLibrary1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaLibrary1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaLibrary1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
+	    }
+	}
+	
+	// Taiga Mason's House
+	public static class TaigaMasonsHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Integer> ali = GeneralConfig.structureModernTaigaMasonsHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	return new PieceWeight(TaigaMasonsHouse1.class, ali.get(0), MathHelper.getRandomIntegerInRange(random, ali.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * ali.get(1) + ali.get(2), villageSize * ali.get(3) + ali.get(4))));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return TaigaMasonsHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	    {
+	    	if (startPiece instanceof StartVN) {return TaigaMasonsHouse1.buildComponent((StartVN)startPiece, pieces, random, p1, p2, p3, p4, p5);} return null;
 	    }
 	}
 }

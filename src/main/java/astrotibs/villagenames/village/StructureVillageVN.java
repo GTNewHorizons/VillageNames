@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -52,7 +51,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.structure.MapGenStructureData;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
@@ -289,6 +287,60 @@ public class StructureVillageVN
                     return village;
                 }
                 */
+            }
+
+            return null;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    
+    // Pasted in from StructureVillagePieces so that I can access it, particularly to expand the allowed village biomes
+    // This prepares a new path component to build upon
+    public static StructureComponent getRandomVillageRoadComponent(StartVN start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    {
+        if (componentType > 50)
+        {
+            return null;
+        }
+        else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112)
+        {
+        	// Initialize some variables
+        	StructureBoundingBox structureboundingbox;
+        	StructureVillagePieces.Village structurecomponent;
+        	
+        	// Attach a Church to the end
+        	structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 5, 12, 9, coordBaseMode);
+			structurecomponent = (structureboundingbox != null && structureboundingbox.minY > 10 && StructureComponent.findIntersecting(components, structureboundingbox) == null) ? new StructureVillagePieces.Church(start, componentType, random, structureboundingbox, coordBaseMode) : null;
+            
+            if (structurecomponent != null)
+            {
+            	int medianX = (structurecomponent.getBoundingBox().minX + structurecomponent.getBoundingBox().maxX) / 2;
+                int medianZ = (structurecomponent.getBoundingBox().minZ + structurecomponent.getBoundingBox().maxZ) / 2;
+                int rangeX = structurecomponent.getBoundingBox().maxX - structurecomponent.getBoundingBox().minX;
+                int rangeZ = structurecomponent.getBoundingBox().maxZ - structurecomponent.getBoundingBox().minZ;
+                int bboxWidth = rangeX > rangeZ ? rangeX : rangeZ;
+                
+                // Replaces the ordinary "areBiomesViable" method with one that uses the VN biome config list
+                BiomeGenBase biome = start.getWorldChunkManager().getBiomeGenAt(medianX, medianZ);
+            	
+            	if (GeneralConfig.spawnBiomesNames != null) // Biome list is not empty
+        		{
+        			for (int i = 0; i < GeneralConfig.spawnBiomesNames.length; i++)
+        			{
+        				if (GeneralConfig.spawnBiomesNames[i].equals(biome.biomeName))
+        				{
+        					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
+        					
+        					components.add(structurecomponent);
+                            start.field_74932_i.add(structurecomponent);
+                            return structurecomponent;
+        				}
+        			}
+        		}
             }
 
             return null;
@@ -1371,9 +1423,9 @@ public class StructureVillageVN
     	public int townColor = 11; // Blue
     	public int townColor2 = 14; // Red
     	// These colors are used in case more are needed
-    	public int townColorA = 0; // White
-    	public int townColorB = 13; // Green
-    	public int townColorC = 4; // Yellow
+    	public int townColorA = -1; // 0: White
+    	public int townColorB = -1; // 13: Green
+    	public int townColorC = -1; // 4: Yellow
     	
     	public String namePrefix = "";
     	public String nameRoot = "";
@@ -1528,8 +1580,6 @@ public class StructureVillageVN
             {
             	// Get coordinates
             	int[] uvw = decorUVW[j];
-            	
-            	LogHelper.info("Decor generated at " + this.getXWithOffset(uvw[0], uvw[2]) + " " + this.getYWithOffset(uvw[1]) +  " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Set random seed
             	Random randomFromXYZ = new Random();
@@ -1710,6 +1760,29 @@ public class StructureVillageVN
                         break;
                 }
             }
+            
+            //LogHelper.info("Spawning " + ((StartVN)start).villageType + " church at " + this.boundingBox.minX + " " + this.boundingBox.minZ);
+            
+            // If I wanted to place something on a road, I could do that here:
+			// Place a church along the end
+            /*
+            switch (this.coordBaseMode)
+            {
+	            case 0: // South
+	            	StructureVillageVN.getRandomVillageRoadComponent((StartVN)start, components, random, this.boundingBox.minX+(0), this.boundingBox.minY, this.boundingBox.maxZ+(1), 0, this.getComponentType());
+	                break;
+	            case 1: // West
+	            	StructureVillageVN.getRandomVillageRoadComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(0), 1, this.getComponentType());
+	                break;
+	            case 2: // North
+	            	StructureVillageVN.getRandomVillageRoadComponent((StartVN)start, components, random, this.boundingBox.minX+(-1), this.boundingBox.minY, this.boundingBox.minZ+(0), 2, this.getComponentType());
+	                break;
+	            case 3: // East
+	            	StructureVillageVN.getRandomVillageRoadComponent((StartVN)start, components, random, this.boundingBox.maxX+(1), this.boundingBox.minY, this.boundingBox.minZ+(0), 3, this.getComponentType());
+	                break;
+            }
+			*/
+		
         }
         
         /**
@@ -1738,65 +1811,6 @@ public class StructureVillageVN
                     }
                 }
             }
-        	
-        	
-            /*
-            // If there was no left or right path added, put a cap at the end 
-            int STRUCTURE_WIDTH = 5;
-        	int STRUCTURE_HEIGHT = 5;
-        	int STRUCTURE_DEPTH = 2;
-        	// Values for lining things up
-        	int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
-        	int HORIZ_OFFSET = -2; // How far to the "left" to shift the attached structure
-        	
-        	// Make a new boundingbox for the extension
-        	StructureBoundingBox roadExtensionBoundingBox = new StructureBoundingBox();
-        	switch (this.coordBaseMode)
-            {
-                case 0: // South
-                	roadExtensionBoundingBox = new StructureBoundingBox(
-                			this.boundingBox.minX+HORIZ_OFFSET, 				this.boundingBox.maxZ+1,
-                			this.boundingBox.minX+HORIZ_OFFSET+STRUCTURE_WIDTH,	this.boundingBox.maxZ+STRUCTURE_DEPTH);
-                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, 3, this.getComponentType());
-                    break;
-                case 1: // West
-                	roadExtensionBoundingBox = new StructureBoundingBox(
-                			this.boundingBox.minX-STRUCTURE_DEPTH,	this.boundingBox.minZ+HORIZ_OFFSET,
-                			this.boundingBox.minX-1,				this.boundingBox.minZ+HORIZ_OFFSET+STRUCTURE_WIDTH);
-                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-                    break;
-                case 2: // North
-                	roadExtensionBoundingBox = new StructureBoundingBox(
-                			this.boundingBox.minX+HORIZ_OFFSET, 				this.boundingBox.minZ-STRUCTURE_DEPTH,
-                			this.boundingBox.minX+HORIZ_OFFSET+STRUCTURE_WIDTH,	this.boundingBox.minZ-1);
-                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ, 3, this.getComponentType());
-                    break;
-                case 3: // East
-                	roadExtensionBoundingBox = new StructureBoundingBox(
-                			this.boundingBox.maxX+1, 					this.boundingBox.minZ+HORIZ_OFFSET,
-                			this.boundingBox.maxX+STRUCTURE_DEPTH,		this.boundingBox.minZ+HORIZ_OFFSET+STRUCTURE_WIDTH);
-                    //generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
-                    break;
-            }
-            
-        	if (StructureComponent.findIntersecting(components, roadExtensionBoundingBox) == null)
-            {
-        		// This cap intersects with no previously-generated structures
-        		for (int u = 0; u <= (roadExtensionBoundingBox.maxX-roadExtensionBoundingBox.minX); ++u)
-                {
-        			for (int w = 0; w <= (roadExtensionBoundingBox.maxZ-roadExtensionBoundingBox.minZ); ++w)
-                    {
-            			int x = roadExtensionBoundingBox.minX + u;
-            			int z = roadExtensionBoundingBox.minZ + w;
-            			
-            			if (roadExtensionBoundingBox.isVecInside(x, 64, z))
-                        {
-            				int y = getAboveTopmostSolidOrLiquidBlockVN(world, x, z) - 1;
-                        }
-                    }
-                }
-            }
-            */
         	
             return true;
         }
@@ -2100,6 +2114,35 @@ public class StructureVillageVN
 		return 0 + (isHead ? 8:0);
 	}
 	
+	
+	
+	/**
+	 * relativeOrientation
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int getTrapdoorMeta(int relativeOrientation, int coordBaseMode, boolean isTop, boolean isVertical)
+	{
+		int meta = 0;
+		
+		switch (relativeOrientation)
+		{
+		case 0: // Facing away
+			meta = (new int[]{1, 2, 0, 3})[coordBaseMode]; break;
+		case 1: // Facing right
+			meta = coordBaseMode%2==0 ? 3 : 1; break;
+		default:
+		case 2: // Facing you
+			meta = (new int[]{0, 3, 1, 2})[coordBaseMode]; break;
+		case 3: // Facing left
+			meta = coordBaseMode%2==0 ? 2 : 0; break;
+		}
+		
+		meta += (isVertical?4:0);
+		meta += (isTop?8:0);
+		
+		return meta;
+	}
+	
 
 	/*
 	 * Used to select wooden door types.
@@ -2340,6 +2383,7 @@ public class StructureVillageVN
 			{
 				if (color==candidateColor) {matchFound=true;}
 			}
+			
 			if (matchFound) {matchFound=false; continue;}
 			else {return candidateColor;}
 		}

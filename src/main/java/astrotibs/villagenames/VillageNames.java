@@ -251,6 +251,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple4.class, "VNPlTem4", new StructureCreationHandlers.PlainsTemple4_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsToolSmith1.class, "VNPlTSm1", new StructureCreationHandlers.PlainsToolSmith1_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsWeaponsmith1.class, "VNPlWSm1", new StructureCreationHandlers.PlainsWeaponsmith1_Handler());
+	        
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen1.class, "VNDeAnP1", new StructureCreationHandlers.DesertAnimalPen1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen2.class, "VNDeAnP2", new StructureCreationHandlers.DesertAnimalPen2_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertArmorer1.class, "VNDeArm1", new StructureCreationHandlers.DesertArmorer1_Handler());
@@ -279,6 +280,18 @@ public final class VillageNames
 	        registerVillageComponentBuilding(DesertStructures.DesertTemple2.class, "VNDeTem2", new StructureCreationHandlers.DesertTemple2_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertToolSmith1.class, "VNDeTSm1", new StructureCreationHandlers.DesertToolSmith1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertWeaponsmith1.class, "VNDeWSm1", new StructureCreationHandlers.DesertWeaponsmith1_Handler());
+	        
+	        registerVillageComponentBuilding(TaigaStructures.TaigaAnimalPen1.class, "VNTaAnP1", new StructureCreationHandlers.TaigaAnimalPen1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaArmorer2.class, "VNTaArm2", new StructureCreationHandlers.TaigaArmorer2_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaArmorerHouse1.class, "VNTaArm1", new StructureCreationHandlers.TaigaArmorerHouse1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaButcherShop1.class, "VNTaBut1", new StructureCreationHandlers.TaigaButcherShop1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaCartographerHouse1.class, "VNTaCar1", new StructureCreationHandlers.TaigaCartographerHouse1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaFisherCottage1.class, "VNTaFis1", new StructureCreationHandlers.TaigaFisherCottage1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaFletcherHouse1.class, "VNTaFle1", new StructureCreationHandlers.TaigaFletcherHouse1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaLargeFarm1.class, "VNTaLFa1", new StructureCreationHandlers.TaigaLargeFarm1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaMediumFarm1.class, "VNTaLFa2", new StructureCreationHandlers.TaigaMediumFarm1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaLibrary1.class, "VNTaLib1", new StructureCreationHandlers.TaigaLibrary1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaMasonsHouse1.class, "VNTaMas1", new StructureCreationHandlers.TaigaMasonsHouse1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

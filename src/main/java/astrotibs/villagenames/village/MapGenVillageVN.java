@@ -8,7 +8,6 @@ import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
-import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;

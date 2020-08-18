@@ -190,6 +190,17 @@ public class GeneralConfig {
 	public static String structureModernDesertTemple2_string; public static ArrayList<Integer> structureModernDesertTemple2_vals;
 	public static String structureModernDesertToolSmith1_string; public static ArrayList<Integer> structureModernDesertToolSmith1_vals;
 	public static String structureModernDesertWeaponsmith1_string; public static ArrayList<Integer> structureModernDesertWeaponsmith1_vals;
+	public static String structureModernTaigaAnimalPen1_string; public static ArrayList<Integer> structureModernTaigaAnimalPen1_vals;
+	public static String structureModernTaigaArmorer2_string; public static ArrayList<Integer> structureModernTaigaArmorer2_vals;
+	public static String structureModernTaigaArmorerHouse1_string; public static ArrayList<Integer> structureModernTaigaArmorerHouse1_vals;
+	public static String structureModernTaigaButcherShop1_string; public static ArrayList<Integer> structureModernTaigaButcherShop1_vals;
+	public static String structureModernTaigaCartographerHouse1_string; public static ArrayList<Integer> structureModernTaigaCartographerHouse1_vals;
+	public static String structureModernTaigaFisherCottage1_string; public static ArrayList<Integer> structureModernTaigaFisherCottage1_vals;
+	public static String structureModernTaigaFletcherHouse1_string; public static ArrayList<Integer> structureModernTaigaFletcherHouse1_vals;
+	public static String structureModernTaigaLargeFarm1_string; public static ArrayList<Integer> structureModernTaigaLargeFarm1_vals;
+	public static String structureModernTaigaMediumFarm1_string; public static ArrayList<Integer> structureModernTaigaMediumFarm1_vals;
+	public static String structureModernTaigaLibrary1_string; public static ArrayList<Integer> structureModernTaigaLibrary1_vals;
+	public static String structureModernTaigaMasonsHouse1_string; public static ArrayList<Integer> structureModernTaigaMasonsHouse1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -550,6 +561,61 @@ public class GeneralConfig {
 		structureModernDesertWeaponsmith1_string = config.getString("Structure: Modern Desert Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
 				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
 		structureModernDesertWeaponsmith1_vals = parseIntegerArray(structureModernDesertWeaponsmith1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaAnimalPen1_string = config.getString("Structure: Modern Taiga Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaAnimalPen1_vals = parseIntegerArray(structureModernTaigaAnimalPen1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaArmorer2_string = config.getString("Structure: Modern Taiga Armorer Station", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaArmorer2_vals = parseIntegerArray(structureModernTaigaArmorer2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaArmorerHouse1_string = config.getString("Structure: Modern Taiga Armorer House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaArmorerHouse1_vals = parseIntegerArray(structureModernTaigaArmorerHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaButcherShop1_string = config.getString("Structure: Modern Taiga Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaButcherShop1_vals = parseIntegerArray(structureModernTaigaButcherShop1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaCartographerHouse1_string = config.getString("Structure: Modern Taiga Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaCartographerHouse1_vals = parseIntegerArray(structureModernTaigaCartographerHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaFisherCottage1_string = config.getString("Structure: Modern Taiga Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaFisherCottage1_vals = parseIntegerArray(structureModernTaigaFisherCottage1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaFletcherHouse1_string = config.getString("Structure: Modern Taiga Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaFletcherHouse1_vals = parseIntegerArray(structureModernTaigaFletcherHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaLargeFarm1_string = config.getString("Structure: Modern Taiga Large Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaLargeFarm1_vals = parseIntegerArray(structureModernTaigaLargeFarm1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaMediumFarm1_string = config.getString("Structure: Modern Taiga Medium Farm", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaMediumFarm1_vals = parseIntegerArray(structureModernTaigaMediumFarm1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaLibrary1_string = config.getString("Structure: Modern Taiga Library", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaLibrary1_vals = parseIntegerArray(structureModernTaigaLibrary1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		structureModernTaigaMasonsHouse1_string = config.getString("Structure: Modern Taiga Mason's House", "Village Generator", convertIntegerArrayToString(ali),
+				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
+		structureModernTaigaMasonsHouse1_vals = parseIntegerArray(structureModernTaigaMasonsHouse1_string, ali);
 		
 		
 		// Misc
