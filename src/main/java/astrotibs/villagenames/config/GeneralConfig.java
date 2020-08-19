@@ -97,6 +97,7 @@ public class GeneralConfig {
 	public static String[] modGlazedTerracotta;
 	public static String[] modDye;
 	public static String[] modFence;
+	public static String[] modPressurePlate;
 	public static String[] modFenceGate;
 	public static String[] modDoor;
 	public static String[] modWoodenTrapdoor;
@@ -115,97 +116,98 @@ public class GeneralConfig {
 	public static int newVillageSpacingMedian;
 	public static int newVillageSpacingSpread;
 	public static String[] spawnBiomesNames;
-	// Old Village buildings
-	public static boolean structureLegacyHut;
-	public static boolean structureLegacySmallHouse;
-	public static boolean structureLegacyLargeHouse;
-	public static boolean structureLegacyButcherShop;
-	public static boolean structureLegacyLibrary;
-	public static boolean structureLegacySmallFarm;
-	public static boolean structureLegacyLargeFarm;
-	public static boolean structureLegacySmithy;
-	public static boolean structureLegacyChurch;
+	// Legacy Village buildings
+	public static String componentLegacyHouse4Garden_string; public static ArrayList<Integer> componentLegacyHouse4Garden_vals;
+	public static String componentLegacyChurch_string; public static ArrayList<Integer> componentLegacyChurch_vals;
+	public static String componentLegacyHouse1_string; public static ArrayList<Integer> componentLegacyHouse1_vals;
+	public static String componentLegacyWoodHut_string; public static ArrayList<Integer> componentLegacyWoodHut_vals;
+	public static String componentLegacyHall_string; public static ArrayList<Integer> componentLegacyHall_vals;
+	public static String componentLegacyField1_string; public static ArrayList<Integer> componentLegacyField1_vals;
+	public static String componentLegacyField2_string; public static ArrayList<Integer> componentLegacyField2_vals;
+	public static String componentLegacyHouse2_string; public static ArrayList<Integer> componentLegacyHouse2_vals;
+	public static String componentLegacyHouse3_string; public static ArrayList<Integer> componentLegacyHouse3_vals;
 	// Modern Village buildings
-	public static String structureModernPlainsAccessory1_string; public static ArrayList<Integer> structureModernPlainsAccessory1_vals;
-	public static String structureModernPlainsAnimalPen1_string; public static ArrayList<Integer> structureModernPlainsAnimalPen1_vals;
-	public static String structureModernPlainsAnimalPen2_string; public static ArrayList<Integer> structureModernPlainsAnimalPen2_vals;
-	public static String structureModernPlainsAnimalPen3_string; public static ArrayList<Integer> structureModernPlainsAnimalPen3_vals;
-	public static String structureModernPlainsArmorerHouse1_string; public static ArrayList<Integer> structureModernPlainsArmorerHouse1_vals;
-	public static String structureModernPlainsBigHouse1_string; public static ArrayList<Integer> structureModernPlainsBigHouse1_vals;
-	public static String structureModernPlainsButcherShop1_string; public static ArrayList<Integer> structureModernPlainsButcherShop1_vals;
-	public static String structureModernPlainsButcherShop2_string; public static ArrayList<Integer> structureModernPlainsButcherShop2_vals;
-	public static String structureModernPlainsCartographer1_string; public static ArrayList<Integer> structureModernPlainsCartographer1_vals;
-	public static String structureModernPlainsFisherCottage1_string; public static ArrayList<Integer> structureModernPlainsFisherCottage1_vals;
-	public static String structureModernPlainsFletcherHouse1_string; public static ArrayList<Integer> structureModernPlainsFletcherHouse1_vals;
-	public static String structureModernPlainsLargeFarm1_string; public static ArrayList<Integer> structureModernPlainsLargeFarm1_vals;
-	public static String structureModernPlainsLibrary1_string; public static ArrayList<Integer> structureModernPlainsLibrary1_vals;
-	public static String structureModernPlainsLibrary2_string; public static ArrayList<Integer> structureModernPlainsLibrary2_vals;
-	public static String structureModernPlainsMasonsHouse1_string; public static ArrayList<Integer> structureModernPlainsMasonsHouse1_vals;
-	public static String structureModernPlainsMediumHouse1_string; public static ArrayList<Integer> structureModernPlainsMediumHouse1_vals;
-	public static String structureModernPlainsMediumHouse2_string; public static ArrayList<Integer> structureModernPlainsMediumHouse2_vals;
-	public static String structureModernPlainsMeetingPoint4_string; public static ArrayList<Integer> structureModernPlainsMeetingPoint4_vals;
-	public static String structureModernPlainsMeetingPoint5_string; public static ArrayList<Integer> structureModernPlainsMeetingPoint5_vals;
-	public static String structureModernPlainsShepherdsHouse1_string; public static ArrayList<Integer> structureModernPlainsShepherdsHouse1_vals;
-	public static String structureModernPlainsSmallFarm1_string; public static ArrayList<Integer> structureModernPlainsSmallFarm1_vals;
-	public static String structureModernPlainsSmallHouse1_string; public static ArrayList<Integer> structureModernPlainsSmallHouse1_vals;
-	public static String structureModernPlainsSmallHouse2_string; public static ArrayList<Integer> structureModernPlainsSmallHouse2_vals;
-	public static String structureModernPlainsSmallHouse3_string; public static ArrayList<Integer> structureModernPlainsSmallHouse3_vals;
-	public static String structureModernPlainsSmallHouse4_string; public static ArrayList<Integer> structureModernPlainsSmallHouse4_vals;
-	public static String structureModernPlainsSmallHouse5_string; public static ArrayList<Integer> structureModernPlainsSmallHouse5_vals;
-	public static String structureModernPlainsSmallHouse6_string; public static ArrayList<Integer> structureModernPlainsSmallHouse6_vals;
-	public static String structureModernPlainsSmallHouse7_string; public static ArrayList<Integer> structureModernPlainsSmallHouse7_vals;
-	public static String structureModernPlainsSmallHouse8_string; public static ArrayList<Integer> structureModernPlainsSmallHouse8_vals;
-	public static String structureModernPlainsStable1_string; public static ArrayList<Integer> structureModernPlainsStable1_vals;
-	public static String structureModernPlainsStable2_string; public static ArrayList<Integer> structureModernPlainsStable2_vals;
-	public static String structureModernPlainsTannery1_string; public static ArrayList<Integer> structureModernPlainsTannery1_vals;
-	public static String structureModernPlainsTemple3_string; public static ArrayList<Integer> structureModernPlainsTemple3_vals;
-	public static String structureModernPlainsTemple4_string; public static ArrayList<Integer> structureModernPlainsTemple4_vals;
-	public static String structureModernPlainsToolSmith1_string; public static ArrayList<Integer> structureModernPlainsToolSmith1_vals;
-	public static String structureModernPlainsWeaponsmith1_string; public static ArrayList<Integer> structureModernPlainsWeaponsmith1_vals;
-	public static String structureModernDesertAnimalPen1_string; public static ArrayList<Integer> structureModernDesertAnimalPen1_vals;
-	public static String structureModernDesertAnimalPen2_string; public static ArrayList<Integer> structureModernDesertAnimalPen2_vals;
-	public static String structureModernDesertArmorer1_string; public static ArrayList<Integer> structureModernDesertArmorer1_vals;
-	public static String structureModernDesertButcherShop1_string; public static ArrayList<Integer> structureModernDesertButcherShop1_vals;
-	public static String structureModernDesertCartographerHouse1_string; public static ArrayList<Integer> structureModernDesertCartographerHouse1_vals;
-	public static String structureModernDesertFarm1_string; public static ArrayList<Integer> structureModernDesertFarm1_vals;
-	public static String structureModernDesertFarm2_string; public static ArrayList<Integer> structureModernDesertFarm2_vals;
-	public static String structureModernDesertFisher1_string; public static ArrayList<Integer> structureModernDesertFisher1_vals;
-	public static String structureModernDesertFletcherHouse1_string; public static ArrayList<Integer> structureModernDesertFletcherHouse1_vals;
-	public static String structureModernDesertLargeFarm1_string; public static ArrayList<Integer> structureModernDesertLargeFarm1_vals;
-	public static String structureModernDesertLibrary1_string; public static ArrayList<Integer> structureModernDesertLibrary1_vals;
-	public static String structureModernDesertMason1_string; public static ArrayList<Integer> structureModernDesertMason1_vals;
-	public static String structureModernDesertMediumHouse1_string; public static ArrayList<Integer> structureModernDesertMediumHouse1_vals;
-	public static String structureModernDesertMediumHouse2_string; public static ArrayList<Integer> structureModernDesertMediumHouse2_vals;
-	public static String structureModernDesertShepherdHouse1_string; public static ArrayList<Integer> structureModernDesertShepherdHouse1_vals;
-	public static String structureModernDesertSmallHouse1_string; public static ArrayList<Integer> structureModernDesertSmallHouse1_vals;
-	public static String structureModernDesertSmallHouse2_string; public static ArrayList<Integer> structureModernDesertSmallHouse2_vals;
-	public static String structureModernDesertSmallHouse3_string; public static ArrayList<Integer> structureModernDesertSmallHouse3_vals;
-	public static String structureModernDesertSmallHouse4_string; public static ArrayList<Integer> structureModernDesertSmallHouse4_vals;
-	public static String structureModernDesertSmallHouse5_string; public static ArrayList<Integer> structureModernDesertSmallHouse5_vals;
-	public static String structureModernDesertSmallHouse6_string; public static ArrayList<Integer> structureModernDesertSmallHouse6_vals;
-	public static String structureModernDesertSmallHouse7_string; public static ArrayList<Integer> structureModernDesertSmallHouse7_vals;
-	public static String structureModernDesertSmallHouse8_string; public static ArrayList<Integer> structureModernDesertSmallHouse8_vals;
-	public static String structureModernDesertTannery1_string; public static ArrayList<Integer> structureModernDesertTannery1_vals;
-	public static String structureModernDesertTemple1_string; public static ArrayList<Integer> structureModernDesertTemple1_vals;
-	public static String structureModernDesertTemple2_string; public static ArrayList<Integer> structureModernDesertTemple2_vals;
-	public static String structureModernDesertToolSmith1_string; public static ArrayList<Integer> structureModernDesertToolSmith1_vals;
-	public static String structureModernDesertWeaponsmith1_string; public static ArrayList<Integer> structureModernDesertWeaponsmith1_vals;
-	public static String structureModernTaigaAnimalPen1_string; public static ArrayList<Integer> structureModernTaigaAnimalPen1_vals;
-	public static String structureModernTaigaArmorer2_string; public static ArrayList<Integer> structureModernTaigaArmorer2_vals;
-	public static String structureModernTaigaArmorerHouse1_string; public static ArrayList<Integer> structureModernTaigaArmorerHouse1_vals;
-	public static String structureModernTaigaButcherShop1_string; public static ArrayList<Integer> structureModernTaigaButcherShop1_vals;
-	public static String structureModernTaigaCartographerHouse1_string; public static ArrayList<Integer> structureModernTaigaCartographerHouse1_vals;
-	public static String structureModernTaigaFisherCottage1_string; public static ArrayList<Integer> structureModernTaigaFisherCottage1_vals;
-	public static String structureModernTaigaFletcherHouse1_string; public static ArrayList<Integer> structureModernTaigaFletcherHouse1_vals;
-	public static String structureModernTaigaLargeFarm1_string; public static ArrayList<Integer> structureModernTaigaLargeFarm1_vals;
-	public static String structureModernTaigaMediumFarm1_string; public static ArrayList<Integer> structureModernTaigaMediumFarm1_vals;
-	public static String structureModernTaigaLibrary1_string; public static ArrayList<Integer> structureModernTaigaLibrary1_vals;
-	public static String structureModernTaigaMasonsHouse1_string; public static ArrayList<Integer> structureModernTaigaMasonsHouse1_vals;
+	public static String componentModernPlainsAccessory1_string; public static ArrayList<Integer> componentModernPlainsAccessory1_vals;
+	public static String componentModernPlainsAnimalPen1_string; public static ArrayList<Integer> componentModernPlainsAnimalPen1_vals;
+	public static String componentModernPlainsAnimalPen2_string; public static ArrayList<Integer> componentModernPlainsAnimalPen2_vals;
+	public static String componentModernPlainsAnimalPen3_string; public static ArrayList<Integer> componentModernPlainsAnimalPen3_vals;
+	public static String componentModernPlainsArmorerHouse1_string; public static ArrayList<Integer> componentModernPlainsArmorerHouse1_vals;
+	public static String componentModernPlainsBigHouse1_string; public static ArrayList<Integer> componentModernPlainsBigHouse1_vals;
+	public static String componentModernPlainsButcherShop1_string; public static ArrayList<Integer> componentModernPlainsButcherShop1_vals;
+	public static String componentModernPlainsButcherShop2_string; public static ArrayList<Integer> componentModernPlainsButcherShop2_vals;
+	public static String componentModernPlainsCartographer1_string; public static ArrayList<Integer> componentModernPlainsCartographer1_vals;
+	public static String componentModernPlainsFisherCottage1_string; public static ArrayList<Integer> componentModernPlainsFisherCottage1_vals;
+	public static String componentModernPlainsFletcherHouse1_string; public static ArrayList<Integer> componentModernPlainsFletcherHouse1_vals;
+	public static String componentModernPlainsLargeFarm1_string; public static ArrayList<Integer> componentModernPlainsLargeFarm1_vals;
+	public static String componentModernPlainsLibrary1_string; public static ArrayList<Integer> componentModernPlainsLibrary1_vals;
+	public static String componentModernPlainsLibrary2_string; public static ArrayList<Integer> componentModernPlainsLibrary2_vals;
+	public static String componentModernPlainsMasonsHouse1_string; public static ArrayList<Integer> componentModernPlainsMasonsHouse1_vals;
+	public static String componentModernPlainsMediumHouse1_string; public static ArrayList<Integer> componentModernPlainsMediumHouse1_vals;
+	public static String componentModernPlainsMediumHouse2_string; public static ArrayList<Integer> componentModernPlainsMediumHouse2_vals;
+	public static String componentModernPlainsMeetingPoint4_string; public static ArrayList<Integer> componentModernPlainsMeetingPoint4_vals;
+	public static String componentModernPlainsMeetingPoint5_string; public static ArrayList<Integer> componentModernPlainsMeetingPoint5_vals;
+	public static String componentModernPlainsShepherdsHouse1_string; public static ArrayList<Integer> componentModernPlainsShepherdsHouse1_vals;
+	public static String componentModernPlainsSmallFarm1_string; public static ArrayList<Integer> componentModernPlainsSmallFarm1_vals;
+	public static String componentModernPlainsSmallHouse1_string; public static ArrayList<Integer> componentModernPlainsSmallHouse1_vals;
+	public static String componentModernPlainsSmallHouse2_string; public static ArrayList<Integer> componentModernPlainsSmallHouse2_vals;
+	public static String componentModernPlainsSmallHouse3_string; public static ArrayList<Integer> componentModernPlainsSmallHouse3_vals;
+	public static String componentModernPlainsSmallHouse4_string; public static ArrayList<Integer> componentModernPlainsSmallHouse4_vals;
+	public static String componentModernPlainsSmallHouse5_string; public static ArrayList<Integer> componentModernPlainsSmallHouse5_vals;
+	public static String componentModernPlainsSmallHouse6_string; public static ArrayList<Integer> componentModernPlainsSmallHouse6_vals;
+	public static String componentModernPlainsSmallHouse7_string; public static ArrayList<Integer> componentModernPlainsSmallHouse7_vals;
+	public static String componentModernPlainsSmallHouse8_string; public static ArrayList<Integer> componentModernPlainsSmallHouse8_vals;
+	public static String componentModernPlainsStable1_string; public static ArrayList<Integer> componentModernPlainsStable1_vals;
+	public static String componentModernPlainsStable2_string; public static ArrayList<Integer> componentModernPlainsStable2_vals;
+	public static String componentModernPlainsTannery1_string; public static ArrayList<Integer> componentModernPlainsTannery1_vals;
+	public static String componentModernPlainsTemple3_string; public static ArrayList<Integer> componentModernPlainsTemple3_vals;
+	public static String componentModernPlainsTemple4_string; public static ArrayList<Integer> componentModernPlainsTemple4_vals;
+	public static String componentModernPlainsToolSmith1_string; public static ArrayList<Integer> componentModernPlainsToolSmith1_vals;
+	public static String componentModernPlainsWeaponsmith1_string; public static ArrayList<Integer> componentModernPlainsWeaponsmith1_vals;
+	public static String componentModernDesertAnimalPen1_string; public static ArrayList<Integer> componentModernDesertAnimalPen1_vals;
+	public static String componentModernDesertAnimalPen2_string; public static ArrayList<Integer> componentModernDesertAnimalPen2_vals;
+	public static String componentModernDesertArmorer1_string; public static ArrayList<Integer> componentModernDesertArmorer1_vals;
+	public static String componentModernDesertButcherShop1_string; public static ArrayList<Integer> componentModernDesertButcherShop1_vals;
+	public static String componentModernDesertCartographerHouse1_string; public static ArrayList<Integer> componentModernDesertCartographerHouse1_vals;
+	public static String componentModernDesertFarm1_string; public static ArrayList<Integer> componentModernDesertFarm1_vals;
+	public static String componentModernDesertFarm2_string; public static ArrayList<Integer> componentModernDesertFarm2_vals;
+	public static String componentModernDesertFisher1_string; public static ArrayList<Integer> componentModernDesertFisher1_vals;
+	public static String componentModernDesertFletcherHouse1_string; public static ArrayList<Integer> componentModernDesertFletcherHouse1_vals;
+	public static String componentModernDesertLargeFarm1_string; public static ArrayList<Integer> componentModernDesertLargeFarm1_vals;
+	public static String componentModernDesertLibrary1_string; public static ArrayList<Integer> componentModernDesertLibrary1_vals;
+	public static String componentModernDesertMason1_string; public static ArrayList<Integer> componentModernDesertMason1_vals;
+	public static String componentModernDesertMediumHouse1_string; public static ArrayList<Integer> componentModernDesertMediumHouse1_vals;
+	public static String componentModernDesertMediumHouse2_string; public static ArrayList<Integer> componentModernDesertMediumHouse2_vals;
+	public static String componentModernDesertShepherdHouse1_string; public static ArrayList<Integer> componentModernDesertShepherdHouse1_vals;
+	public static String componentModernDesertSmallHouse1_string; public static ArrayList<Integer> componentModernDesertSmallHouse1_vals;
+	public static String componentModernDesertSmallHouse2_string; public static ArrayList<Integer> componentModernDesertSmallHouse2_vals;
+	public static String componentModernDesertSmallHouse3_string; public static ArrayList<Integer> componentModernDesertSmallHouse3_vals;
+	public static String componentModernDesertSmallHouse4_string; public static ArrayList<Integer> componentModernDesertSmallHouse4_vals;
+	public static String componentModernDesertSmallHouse5_string; public static ArrayList<Integer> componentModernDesertSmallHouse5_vals;
+	public static String componentModernDesertSmallHouse6_string; public static ArrayList<Integer> componentModernDesertSmallHouse6_vals;
+	public static String componentModernDesertSmallHouse7_string; public static ArrayList<Integer> componentModernDesertSmallHouse7_vals;
+	public static String componentModernDesertSmallHouse8_string; public static ArrayList<Integer> componentModernDesertSmallHouse8_vals;
+	public static String componentModernDesertTannery1_string; public static ArrayList<Integer> componentModernDesertTannery1_vals;
+	public static String componentModernDesertTemple1_string; public static ArrayList<Integer> componentModernDesertTemple1_vals;
+	public static String componentModernDesertTemple2_string; public static ArrayList<Integer> componentModernDesertTemple2_vals;
+	public static String componentModernDesertToolSmith1_string; public static ArrayList<Integer> componentModernDesertToolSmith1_vals;
+	public static String componentModernDesertWeaponsmith1_string; public static ArrayList<Integer> componentModernDesertWeaponsmith1_vals;
+	public static String componentModernTaigaAnimalPen1_string; public static ArrayList<Integer> componentModernTaigaAnimalPen1_vals;
+	public static String componentModernTaigaArmorer2_string; public static ArrayList<Integer> componentModernTaigaArmorer2_vals;
+	public static String componentModernTaigaArmorerHouse1_string; public static ArrayList<Integer> componentModernTaigaArmorerHouse1_vals;
+	public static String componentModernTaigaButcherShop1_string; public static ArrayList<Integer> componentModernTaigaButcherShop1_vals;
+	public static String componentModernTaigaCartographerHouse1_string; public static ArrayList<Integer> componentModernTaigaCartographerHouse1_vals;
+	public static String componentModernTaigaFisherCottage1_string; public static ArrayList<Integer> componentModernTaigaFisherCottage1_vals;
+	public static String componentModernTaigaFletcherHouse1_string; public static ArrayList<Integer> componentModernTaigaFletcherHouse1_vals;
+	public static String componentModernTaigaLargeFarm1_string; public static ArrayList<Integer> componentModernTaigaLargeFarm1_vals;
+	public static String componentModernTaigaMediumFarm1_string; public static ArrayList<Integer> componentModernTaigaMediumFarm1_vals;
+	public static String componentModernTaigaLibrary1_string; public static ArrayList<Integer> componentModernTaigaLibrary1_vals;
+	public static String componentModernTaigaMasonsHouse1_string; public static ArrayList<Integer> componentModernTaigaMasonsHouse1_vals;
+	public static String componentModernTaigaMediumHouse1_string; public static ArrayList<Integer> componentModernTaigaMediumHouse1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
-	public static boolean decorateVillageCenter;
+	public static boolean useVillageColors;
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
 	//public static boolean farmPumpkins;
@@ -228,400 +230,359 @@ public class GeneralConfig {
 		newVillageSpacingSpread = config.getInt("Village Spacing: Range", "Village Generator", 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12.");
 		//farmPumpkins  = config.getBoolean("Pumpkin and Melon Crops", "Village Generator", true, "Farms can have pumpkins and melons generate in them");
 		
-		// Old Village buildings
-		structureLegacyHut = config.getBoolean("Structure: Legacy Hut", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacySmallHouse = config.getBoolean("Structure: Legacy Small House", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacyLargeHouse = config.getBoolean("Structure: Legacy Large House", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacyButcherShop = config.getBoolean("Structure: Legacy Butcher's Shop", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacyLibrary = config.getBoolean("Structure: Legacy Library", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacySmallFarm = config.getBoolean("Structure: Legacy Small Farm", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacyLargeFarm = config.getBoolean("Structure: Legacy Large Farm", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacySmithy = config.getBoolean("Structure: Legacy Smithy", "Village Generator", false, "Whether this structure can generate in villages.");
-		structureLegacyChurch = config.getBoolean("Structure: Legacy Church", "Village Generator", false, "Whether this structure can generate in villages.");
 		
-		// Modern Village buildings
 		ArrayList<Integer> ali; // For setting default values as integer lists
 		
+		// Legacy Village components
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 2, 4));
+		componentLegacyHouse4Garden_string = config.getString("Component: Legacy Small House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 4");
+		componentLegacyHouse4Garden_vals = parseIntegerArray(componentLegacyHouse4Garden_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 1));
+		componentLegacyChurch_string = config.getString("Component: Legacy Church", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 20");
+		componentLegacyChurch_vals = parseIntegerArray(componentLegacyChurch_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 2));
+		componentLegacyHouse1_string = config.getString("Component: Legacy Library", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 20");
+		componentLegacyHouse1_vals = parseIntegerArray(componentLegacyHouse1_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 5));
+		componentLegacyWoodHut_string = config.getString("Component: Legacy Hut", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3");
+		componentLegacyWoodHut_vals = parseIntegerArray(componentLegacyWoodHut_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 2));
+		componentLegacyHall_string = config.getString("Component: Legacy Butcher Shop", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 15");
+		componentLegacyHall_vals = parseIntegerArray(componentLegacyHall_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 1, 1, 4));
+		componentLegacyField1_string = config.getString("Component: Legacy Large Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3");
+		componentLegacyField1_vals = parseIntegerArray(componentLegacyField1_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 2, 4));
+		componentLegacyField2_string = config.getString("Component: Legacy Small Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3");
+		componentLegacyField2_vals = parseIntegerArray(componentLegacyField2_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 1, 1));
+		componentLegacyHouse2_string = config.getString("Component: Legacy Smithy", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 15");
+		componentLegacyHouse2_vals = parseIntegerArray(componentLegacyHouse2_string, ali);
+
+		ali = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 2, 3));
+		componentLegacyHouse3_string = config.getString("Component: Legacy Large House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 8");
+		componentLegacyHouse3_vals = parseIntegerArray(componentLegacyHouse3_string, ali);
+		
+		// Modern Village components
+		// Plains components
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsAccessory1_string = config.getString("Structure: Modern Plains Flower Planter", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsAccessory1_vals = parseIntegerArray(structureModernPlainsAccessory1_string, ali);
+		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsAccessory1_vals = parseIntegerArray(componentModernPlainsAccessory1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsAnimalPen1_string = config.getString("Structure: Modern Plains Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsAnimalPen1_vals = parseIntegerArray(structureModernPlainsAnimalPen1_string, ali);
+		componentModernPlainsAnimalPen1_string = config.getString("Component: Modern Plains Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen1_vals = parseIntegerArray(componentModernPlainsAnimalPen1_string, ali);
 
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsAnimalPen2_string = config.getString("Structure: Modern Plains Large Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsAnimalPen2_vals = parseIntegerArray(structureModernPlainsAnimalPen2_string, ali);
+		componentModernPlainsAnimalPen2_string = config.getString("Component: Modern Plains Large Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen2_vals = parseIntegerArray(componentModernPlainsAnimalPen2_string, ali);
 
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsAnimalPen3_string = config.getString("Structure: Modern Plains Decorated Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsAnimalPen3_vals = parseIntegerArray(structureModernPlainsAnimalPen3_string, ali);
+		componentModernPlainsAnimalPen3_string = config.getString("Component: Modern Plains Decorated Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen3_vals = parseIntegerArray(componentModernPlainsAnimalPen3_string, ali);
 
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsArmorerHouse1_string = config.getString("Structure: Modern Plains Armorer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsArmorerHouse1_vals = parseIntegerArray(structureModernPlainsArmorerHouse1_string, ali);
+		componentModernPlainsArmorerHouse1_string = config.getString("Component: Modern Plains Armorer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsArmorerHouse1_vals = parseIntegerArray(componentModernPlainsArmorerHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsBigHouse1_string = config.getString("Structure: Modern Plains Big House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsBigHouse1_vals = parseIntegerArray(structureModernPlainsBigHouse1_string, ali);
+		componentModernPlainsBigHouse1_string = config.getString("Component: Modern Plains Large House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsBigHouse1_vals = parseIntegerArray(componentModernPlainsBigHouse1_string, ali);
 
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsButcherShop1_string = config.getString("Structure: Modern Plains Small Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsButcherShop1_vals = parseIntegerArray(structureModernPlainsButcherShop1_string, ali);
+		componentModernPlainsButcherShop1_string = config.getString("Component: Modern Plains Small Butcher Shop", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsButcherShop1_vals = parseIntegerArray(componentModernPlainsButcherShop1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsButcherShop2_string = config.getString("Structure: Modern Plains Large Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsButcherShop2_vals = parseIntegerArray(structureModernPlainsButcherShop2_string, ali);
+		componentModernPlainsButcherShop2_string = config.getString("Component: Modern Plains Large Butcher Shop", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsButcherShop2_vals = parseIntegerArray(componentModernPlainsButcherShop2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsCartographer1_string = config.getString("Structure: Modern Plains Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsCartographer1_vals = parseIntegerArray(structureModernPlainsCartographer1_string, ali);
+		componentModernPlainsCartographer1_string = config.getString("Component: Modern Plains Cartographer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsCartographer1_vals = parseIntegerArray(componentModernPlainsCartographer1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsFisherCottage1_string = config.getString("Structure: Modern Plains Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsFisherCottage1_vals = parseIntegerArray(structureModernPlainsFisherCottage1_string, ali);
+		componentModernPlainsFisherCottage1_string = config.getString("Component: Modern Plains Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsFisherCottage1_vals = parseIntegerArray(componentModernPlainsFisherCottage1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsFletcherHouse1_string = config.getString("Structure: Modern Plains Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsFletcherHouse1_vals = parseIntegerArray(structureModernPlainsFletcherHouse1_string, ali);
+		componentModernPlainsFletcherHouse1_string = config.getString("Component: Modern Plains Fletcher House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsFletcherHouse1_vals = parseIntegerArray(componentModernPlainsFletcherHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsLargeFarm1_string = config.getString("Structure: Modern Plains Large Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsLargeFarm1_vals = parseIntegerArray(structureModernPlainsLargeFarm1_string, ali);
+		componentModernPlainsLargeFarm1_string = config.getString("Component: Modern Plains Large Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsLargeFarm1_vals = parseIntegerArray(componentModernPlainsLargeFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsLibrary1_string = config.getString("Structure: Modern Plains Large Library", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsLibrary1_vals = parseIntegerArray(structureModernPlainsLibrary1_string, ali);
+		componentModernPlainsLibrary1_string = config.getString("Component: Modern Plains Large Library", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsLibrary1_vals = parseIntegerArray(componentModernPlainsLibrary1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsLibrary2_string = config.getString("Structure: Modern Plains Small Library", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsLibrary2_vals = parseIntegerArray(structureModernPlainsLibrary2_string, ali);
+		componentModernPlainsLibrary2_string = config.getString("Component: Modern Plains Small Library", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsLibrary2_vals = parseIntegerArray(componentModernPlainsLibrary2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsMasonsHouse1_string = config.getString("Structure: Modern Plains Mason's House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsMasonsHouse1_vals = parseIntegerArray(structureModernPlainsMasonsHouse1_string, ali);
+		componentModernPlainsMasonsHouse1_string = config.getString("Component: Modern Plains Mason House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsMasonsHouse1_vals = parseIntegerArray(componentModernPlainsMasonsHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsMediumHouse1_string = config.getString("Structure: Modern Plains Medium House 1", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsMediumHouse1_vals = parseIntegerArray(structureModernPlainsMediumHouse1_string, ali);
+		componentModernPlainsMediumHouse1_string = config.getString("Component: Modern Plains Medium House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsMediumHouse1_vals = parseIntegerArray(componentModernPlainsMediumHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsMediumHouse2_string = config.getString("Structure: Modern Plains Medium House 2", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsMediumHouse2_vals = parseIntegerArray(structureModernPlainsMediumHouse2_string, ali);
+		componentModernPlainsMediumHouse2_string = config.getString("Component: Modern Plains Medium House 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsMediumHouse2_vals = parseIntegerArray(componentModernPlainsMediumHouse2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsMeetingPoint4_string = config.getString("Structure: Modern Plains Market", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsMeetingPoint4_vals = parseIntegerArray(structureModernPlainsMeetingPoint4_string, ali);
+		componentModernPlainsMeetingPoint4_string = config.getString("Component: Modern Plains Market", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsMeetingPoint4_vals = parseIntegerArray(componentModernPlainsMeetingPoint4_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsMeetingPoint5_string = config.getString("Structure: Modern Plains Small Market", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsMeetingPoint5_vals = parseIntegerArray(structureModernPlainsMeetingPoint5_string, ali);
+		componentModernPlainsMeetingPoint5_string = config.getString("Component: Modern Plains Small Market", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsMeetingPoint5_vals = parseIntegerArray(componentModernPlainsMeetingPoint5_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsShepherdsHouse1_string = config.getString("Structure: Modern Plains Shepherd's House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsShepherdsHouse1_vals = parseIntegerArray(structureModernPlainsShepherdsHouse1_string, ali);
+		componentModernPlainsShepherdsHouse1_string = config.getString("Component: Modern Plains Shepherd House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsShepherdsHouse1_vals = parseIntegerArray(componentModernPlainsShepherdsHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallFarm1_string = config.getString("Structure: Modern Plains Small Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallFarm1_vals = parseIntegerArray(structureModernPlainsSmallFarm1_string, ali);
+		componentModernPlainsSmallFarm1_string = config.getString("Component: Modern Plains Small Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallFarm1_vals = parseIntegerArray(componentModernPlainsSmallFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse1_string = config.getString("Structure: Modern Plains Small House 1", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse1_vals = parseIntegerArray(structureModernPlainsSmallHouse1_string, ali);
+		componentModernPlainsSmallHouse1_string = config.getString("Component: Modern Plains Small House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse1_vals = parseIntegerArray(componentModernPlainsSmallHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse2_string = config.getString("Structure: Modern Plains Small House 2", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse2_vals = parseIntegerArray(structureModernPlainsSmallHouse2_string, ali);
+		componentModernPlainsSmallHouse2_string = config.getString("Component: Modern Plains Small House 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse2_vals = parseIntegerArray(componentModernPlainsSmallHouse2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse3_string = config.getString("Structure: Modern Plains Small House 3", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse3_vals = parseIntegerArray(structureModernPlainsSmallHouse3_string, ali);
+		componentModernPlainsSmallHouse3_string = config.getString("Component: Modern Plains Small House 3", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse3_vals = parseIntegerArray(componentModernPlainsSmallHouse3_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse4_string = config.getString("Structure: Modern Plains Small House 4", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse4_vals = parseIntegerArray(structureModernPlainsSmallHouse4_string, ali);
+		componentModernPlainsSmallHouse4_string = config.getString("Component: Modern Plains Small House 4", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse4_vals = parseIntegerArray(componentModernPlainsSmallHouse4_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse5_string = config.getString("Structure: Modern Plains Small House 5", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse5_vals = parseIntegerArray(structureModernPlainsSmallHouse5_string, ali);
+		componentModernPlainsSmallHouse5_string = config.getString("Component: Modern Plains Small House 5", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse5_vals = parseIntegerArray(componentModernPlainsSmallHouse5_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse6_string = config.getString("Structure: Modern Plains Small House 6", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse6_vals = parseIntegerArray(structureModernPlainsSmallHouse6_string, ali);
+		componentModernPlainsSmallHouse6_string = config.getString("Component: Modern Plains Small House 6", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse6_vals = parseIntegerArray(componentModernPlainsSmallHouse6_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse7_string = config.getString("Structure: Modern Plains Small House 7", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse7_vals = parseIntegerArray(structureModernPlainsSmallHouse7_string, ali);
+		componentModernPlainsSmallHouse7_string = config.getString("Component: Modern Plains Small House 7", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse7_vals = parseIntegerArray(componentModernPlainsSmallHouse7_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsSmallHouse8_string = config.getString("Structure: Modern Plains Small House 8", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsSmallHouse8_vals = parseIntegerArray(structureModernPlainsSmallHouse8_string, ali);
+		componentModernPlainsSmallHouse8_string = config.getString("Component: Modern Plains Small House 8", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse8_vals = parseIntegerArray(componentModernPlainsSmallHouse8_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsStable1_string = config.getString("Structure: Modern Plains Cobblestone Stable", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsStable1_vals = parseIntegerArray(structureModernPlainsStable1_string, ali);
+		componentModernPlainsStable1_string = config.getString("Component: Modern Plains Cobblestone Stable", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsStable1_vals = parseIntegerArray(componentModernPlainsStable1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsStable2_string = config.getString("Structure: Modern Plains Terracotta Stable", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsStable2_vals = parseIntegerArray(structureModernPlainsStable2_string, ali);
+		componentModernPlainsStable2_string = config.getString("Component: Modern Plains Terracotta Stable", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsStable2_vals = parseIntegerArray(componentModernPlainsStable2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsTannery1_string = config.getString("Structure: Modern Plains Tannery", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsTannery1_vals = parseIntegerArray(structureModernPlainsTannery1_string, ali);
+		componentModernPlainsTannery1_string = config.getString("Component: Modern Plains Tannery", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsTannery1_vals = parseIntegerArray(componentModernPlainsTannery1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsTemple3_string = config.getString("Structure: Modern Plains Terracotta Temple", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsTemple3_vals = parseIntegerArray(structureModernPlainsTemple3_string, ali);
+		componentModernPlainsTemple3_string = config.getString("Component: Modern Plains Terracotta Temple", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsTemple3_vals = parseIntegerArray(componentModernPlainsTemple3_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsTemple4_string = config.getString("Structure: Modern Plains Cobblestone Temple", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsTemple4_vals = parseIntegerArray(structureModernPlainsTemple4_string, ali);
+		componentModernPlainsTemple4_string = config.getString("Component: Modern Plains Cobblestone Temple", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsTemple4_vals = parseIntegerArray(componentModernPlainsTemple4_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsToolSmith1_string = config.getString("Structure: Modern Plains Tool Smithy", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsToolSmith1_vals = parseIntegerArray(structureModernPlainsToolSmith1_string, ali);
+		componentModernPlainsToolSmith1_string = config.getString("Component: Modern Plains Tool Smithy", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsToolSmith1_vals = parseIntegerArray(componentModernPlainsToolSmith1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernPlainsWeaponsmith1_string = config.getString("Structure: Modern Plains Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in plains villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernPlainsWeaponsmith1_vals = parseIntegerArray(structureModernPlainsWeaponsmith1_string, ali);
+		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in plains villages");
+		componentModernPlainsWeaponsmith1_vals = parseIntegerArray(componentModernPlainsWeaponsmith1_string, ali);
 		
+		// Desert components
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertAnimalPen1_string = config.getString("Structure: Modern Desert Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertAnimalPen1_vals = parseIntegerArray(structureModernDesertAnimalPen1_string, ali);
+		componentModernDesertAnimalPen1_string = config.getString("Component: Modern Desert Small Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertAnimalPen1_vals = parseIntegerArray(componentModernDesertAnimalPen1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertAnimalPen2_string = config.getString("Structure: Modern Desert Covered Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertAnimalPen2_vals = parseIntegerArray(structureModernDesertAnimalPen2_string, ali);
+		componentModernDesertAnimalPen2_string = config.getString("Component: Modern Desert Covered Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertAnimalPen2_vals = parseIntegerArray(componentModernDesertAnimalPen2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertArmorer1_string = config.getString("Structure: Modern Desert Armorer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertArmorer1_vals = parseIntegerArray(structureModernDesertArmorer1_string, ali);
+		componentModernDesertArmorer1_string = config.getString("Component: Modern Desert Armorer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertArmorer1_vals = parseIntegerArray(componentModernDesertArmorer1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertButcherShop1_string = config.getString("Structure: Modern Desert Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertButcherShop1_vals = parseIntegerArray(structureModernDesertButcherShop1_string, ali);
+		componentModernDesertButcherShop1_string = config.getString("Component: Modern Desert Butcher Shop", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertButcherShop1_vals = parseIntegerArray(componentModernDesertButcherShop1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertCartographerHouse1_string = config.getString("Structure: Modern Desert Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertCartographerHouse1_vals = parseIntegerArray(structureModernDesertCartographerHouse1_string, ali);
+		componentModernDesertCartographerHouse1_string = config.getString("Component: Modern Desert Cartographer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertCartographerHouse1_vals = parseIntegerArray(componentModernDesertCartographerHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertFarm1_string = config.getString("Structure: Modern Desert Small Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertFarm1_vals = parseIntegerArray(structureModernDesertFarm1_string, ali);
+		componentModernDesertFarm1_string = config.getString("Component: Modern Desert Small Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertFarm1_vals = parseIntegerArray(componentModernDesertFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertFarm2_string = config.getString("Structure: Modern Desert Medium Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertFarm2_vals = parseIntegerArray(structureModernDesertFarm2_string, ali);
+		componentModernDesertFarm2_string = config.getString("Component: Modern Desert Medium Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertFarm2_vals = parseIntegerArray(componentModernDesertFarm2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertFisher1_string = config.getString("Structure: Modern Desert Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertFisher1_vals = parseIntegerArray(structureModernDesertFisher1_string, ali);
+		componentModernDesertFisher1_string = config.getString("Component: Modern Desert Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertFisher1_vals = parseIntegerArray(componentModernDesertFisher1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertFletcherHouse1_string = config.getString("Structure: Modern Desert Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertFletcherHouse1_vals = parseIntegerArray(structureModernDesertFletcherHouse1_string, ali);
+		componentModernDesertFletcherHouse1_string = config.getString("Component: Modern Desert Fletcher House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertFletcherHouse1_vals = parseIntegerArray(componentModernDesertFletcherHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertLargeFarm1_string = config.getString("Structure: Modern Desert Large Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertLargeFarm1_vals = parseIntegerArray(structureModernDesertLargeFarm1_string, ali);
+		componentModernDesertLargeFarm1_string = config.getString("Component: Modern Desert Large Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertLargeFarm1_vals = parseIntegerArray(componentModernDesertLargeFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertLibrary1_string = config.getString("Structure: Modern Desert Library", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertLibrary1_vals = parseIntegerArray(structureModernDesertLibrary1_string, ali);
+		componentModernDesertLibrary1_string = config.getString("Component: Modern Desert Library", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertLibrary1_vals = parseIntegerArray(componentModernDesertLibrary1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertMason1_string = config.getString("Structure: Modern Desert Mason's House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertMason1_vals = parseIntegerArray(structureModernDesertMason1_string, ali);
+		componentModernDesertMason1_string = config.getString("Component: Modern Desert Mason House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertMason1_vals = parseIntegerArray(componentModernDesertMason1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertMediumHouse1_string = config.getString("Structure: Modern Desert Medium House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertMediumHouse1_vals = parseIntegerArray(structureModernDesertMediumHouse1_string, ali);
+		componentModernDesertMediumHouse1_string = config.getString("Component: Modern Desert Medium House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertMediumHouse1_vals = parseIntegerArray(componentModernDesertMediumHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertMediumHouse2_string = config.getString("Structure: Modern Desert Big House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertMediumHouse2_vals = parseIntegerArray(structureModernDesertMediumHouse2_string, ali);
+		componentModernDesertMediumHouse2_string = config.getString("Component: Modern Desert Large House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertMediumHouse2_vals = parseIntegerArray(componentModernDesertMediumHouse2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertShepherdHouse1_string = config.getString("Structure: Modern Desert Shepherd's House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertShepherdHouse1_vals = parseIntegerArray(structureModernDesertShepherdHouse1_string, ali);
+		componentModernDesertShepherdHouse1_string = config.getString("Component: Modern Desert Shepherd House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertShepherdHouse1_vals = parseIntegerArray(componentModernDesertShepherdHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse1_string = config.getString("Structure: Modern Desert Small House 1", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse1_vals = parseIntegerArray(structureModernDesertSmallHouse1_string, ali);
+		componentModernDesertSmallHouse1_string = config.getString("Component: Modern Desert Small House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse1_vals = parseIntegerArray(componentModernDesertSmallHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse2_string = config.getString("Structure: Modern Desert Small House 2", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse2_vals = parseIntegerArray(structureModernDesertSmallHouse2_string, ali);
+		componentModernDesertSmallHouse2_string = config.getString("Component: Modern Desert Small House 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse2_vals = parseIntegerArray(componentModernDesertSmallHouse2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse3_string = config.getString("Structure: Modern Desert Small House 3", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse3_vals = parseIntegerArray(structureModernDesertSmallHouse3_string, ali);
+		componentModernDesertSmallHouse3_string = config.getString("Component: Modern Desert Small House 3", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse3_vals = parseIntegerArray(componentModernDesertSmallHouse3_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse4_string = config.getString("Structure: Modern Desert Small House 4", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse4_vals = parseIntegerArray(structureModernDesertSmallHouse4_string, ali);
+		componentModernDesertSmallHouse4_string = config.getString("Component: Modern Desert Small House 4", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse4_vals = parseIntegerArray(componentModernDesertSmallHouse4_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse5_string = config.getString("Structure: Modern Desert Small House 5", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse5_vals = parseIntegerArray(structureModernDesertSmallHouse5_string, ali);
+		componentModernDesertSmallHouse5_string = config.getString("Component: Modern Desert Small House 5", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse5_vals = parseIntegerArray(componentModernDesertSmallHouse5_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse6_string = config.getString("Structure: Modern Desert Small House 6", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse6_vals = parseIntegerArray(structureModernDesertSmallHouse6_string, ali);
+		componentModernDesertSmallHouse6_string = config.getString("Component: Modern Desert Small House 6", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse6_vals = parseIntegerArray(componentModernDesertSmallHouse6_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse7_string = config.getString("Structure: Modern Desert Small House 7", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse7_vals = parseIntegerArray(structureModernDesertSmallHouse7_string, ali);
+		componentModernDesertSmallHouse7_string = config.getString("Component: Modern Desert Small House 7", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse7_vals = parseIntegerArray(componentModernDesertSmallHouse7_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertSmallHouse8_string = config.getString("Structure: Modern Desert Small House 8", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertSmallHouse8_vals = parseIntegerArray(structureModernDesertSmallHouse8_string, ali);
+		componentModernDesertSmallHouse8_string = config.getString("Component: Modern Desert Small House 8", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse8_vals = parseIntegerArray(componentModernDesertSmallHouse8_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertTannery1_string = config.getString("Structure: Modern Desert Tannery 1", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertTannery1_vals = parseIntegerArray(structureModernDesertTannery1_string, ali);
+		componentModernDesertTannery1_string = config.getString("Component: Modern Desert Tannery", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertTannery1_vals = parseIntegerArray(componentModernDesertTannery1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertTemple1_string = config.getString("Structure: Modern Desert Temple 1", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertTemple1_vals = parseIntegerArray(structureModernDesertTemple1_string, ali);
+		componentModernDesertTemple1_string = config.getString("Component: Modern Desert Temple 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertTemple1_vals = parseIntegerArray(componentModernDesertTemple1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertTemple2_string = config.getString("Structure: Modern Desert Temple 2", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertTemple2_vals = parseIntegerArray(structureModernDesertTemple2_string, ali);
+		componentModernDesertTemple2_string = config.getString("Component: Modern Desert Temple 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertTemple2_vals = parseIntegerArray(componentModernDesertTemple2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertToolSmith1_string = config.getString("Structure: Modern Desert Tool Smithy", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertToolSmith1_vals = parseIntegerArray(structureModernDesertToolSmith1_string, ali);
+		componentModernDesertToolSmith1_string = config.getString("Component: Modern Desert Tool Smithy", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertToolSmith1_vals = parseIntegerArray(componentModernDesertToolSmith1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernDesertWeaponsmith1_string = config.getString("Structure: Modern Desert Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernDesertWeaponsmith1_vals = parseIntegerArray(structureModernDesertWeaponsmith1_string, ali);
+		componentModernDesertWeaponsmith1_string = config.getString("Component: Modern Desert Weapon Smithy", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in desert villages");
+		componentModernDesertWeaponsmith1_vals = parseIntegerArray(componentModernDesertWeaponsmith1_string, ali);
 		
+		// Taiga components
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaAnimalPen1_string = config.getString("Structure: Modern Taiga Animal Pen", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaAnimalPen1_vals = parseIntegerArray(structureModernTaigaAnimalPen1_string, ali);
+		componentModernTaigaAnimalPen1_string = config.getString("Component: Modern Taiga Animal Pen", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaAnimalPen1_vals = parseIntegerArray(componentModernTaigaAnimalPen1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaArmorer2_string = config.getString("Structure: Modern Taiga Armorer Station", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaArmorer2_vals = parseIntegerArray(structureModernTaigaArmorer2_string, ali);
+		componentModernTaigaArmorer2_string = config.getString("Component: Modern Taiga Armorer Station", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaArmorer2_vals = parseIntegerArray(componentModernTaigaArmorer2_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaArmorerHouse1_string = config.getString("Structure: Modern Taiga Armorer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaArmorerHouse1_vals = parseIntegerArray(structureModernTaigaArmorerHouse1_string, ali);
+		componentModernTaigaArmorerHouse1_string = config.getString("Component: Modern Taiga Armorer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaArmorerHouse1_vals = parseIntegerArray(componentModernTaigaArmorerHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaButcherShop1_string = config.getString("Structure: Modern Taiga Butcher Shop", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaButcherShop1_vals = parseIntegerArray(structureModernTaigaButcherShop1_string, ali);
+		componentModernTaigaButcherShop1_string = config.getString("Component: Modern Taiga Butcher Shop", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaButcherShop1_vals = parseIntegerArray(componentModernTaigaButcherShop1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaCartographerHouse1_string = config.getString("Structure: Modern Taiga Cartographer House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaCartographerHouse1_vals = parseIntegerArray(structureModernTaigaCartographerHouse1_string, ali);
+		componentModernTaigaCartographerHouse1_string = config.getString("Component: Modern Taiga Cartographer House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaCartographerHouse1_vals = parseIntegerArray(componentModernTaigaCartographerHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaFisherCottage1_string = config.getString("Structure: Modern Taiga Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaFisherCottage1_vals = parseIntegerArray(structureModernTaigaFisherCottage1_string, ali);
+		componentModernTaigaFisherCottage1_string = config.getString("Component: Modern Taiga Fisher Cottage", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaFisherCottage1_vals = parseIntegerArray(componentModernTaigaFisherCottage1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaFletcherHouse1_string = config.getString("Structure: Modern Taiga Fletcher House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaFletcherHouse1_vals = parseIntegerArray(structureModernTaigaFletcherHouse1_string, ali);
+		componentModernTaigaFletcherHouse1_string = config.getString("Component: Modern Taiga Fletcher House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaFletcherHouse1_vals = parseIntegerArray(componentModernTaigaFletcherHouse1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaLargeFarm1_string = config.getString("Structure: Modern Taiga Large Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaLargeFarm1_vals = parseIntegerArray(structureModernTaigaLargeFarm1_string, ali);
+		componentModernTaigaLargeFarm1_string = config.getString("Component: Modern Taiga Large Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaLargeFarm1_vals = parseIntegerArray(componentModernTaigaLargeFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaMediumFarm1_string = config.getString("Structure: Modern Taiga Medium Farm", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaMediumFarm1_vals = parseIntegerArray(structureModernTaigaMediumFarm1_string, ali);
+		componentModernTaigaMediumFarm1_string = config.getString("Component: Modern Taiga Medium Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumFarm1_vals = parseIntegerArray(componentModernTaigaMediumFarm1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaLibrary1_string = config.getString("Structure: Modern Taiga Library", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaLibrary1_vals = parseIntegerArray(structureModernTaigaLibrary1_string, ali);
+		componentModernTaigaLibrary1_string = config.getString("Component: Modern Taiga Library", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaLibrary1_vals = parseIntegerArray(componentModernTaigaLibrary1_string, ali);
 		
 		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
-		structureModernTaigaMasonsHouse1_string = config.getString("Structure: Modern Taiga Mason's House", "Village Generator", convertIntegerArrayToString(ali),
-				"Generation stats for this structure in desert villages. See https://gitgud.io/AstroTibs/VillageNames/-/raw/master/ModernVillageGeneration");
-		structureModernTaigaMasonsHouse1_vals = parseIntegerArray(structureModernTaigaMasonsHouse1_string, ali);
+		componentModernTaigaMasonsHouse1_string = config.getString("Component: Modern Taiga Mason House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMasonsHouse1_vals = parseIntegerArray(componentModernTaigaMasonsHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaMediumHouse1_string = config.getString("Component: Modern Taiga Medium House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse1_vals = parseIntegerArray(componentModernTaigaMediumHouse1_string, ali);
 		
 		
 		// Misc
 		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", "Village Generator", true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
 		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Village Generator", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
-		decorateVillageCenter = config.getBoolean("Decorate village center", "Village Generator", true, "Whether to decorate the town center with concrete, terracotta, banners, etc. based on the village's colors");
+		useVillageColors = config.getBoolean("Use village colors", "Village Generator", true, "Whether to apply the village's colors to concrete, terracotta, carpet, etc.");
 		
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", "Village Generator",
 				new String[] {
@@ -726,7 +687,7 @@ public class GeneralConfig {
 				"Names of biomes which can spawn villages. Only used with Village Generator, and only applies to Overworld. Note that this list is EXCLUSIVE: other mod configs won't override this. You have to paste all biome names here.");
 		
 		// --- General --- //
-		nameSign = config.getBoolean("Name Sign", Configuration.CATEGORY_GENERAL, true, "Villages display their name on a sign near the well. You can still discover the name by right-clicking a book onto a villager.");
+	    nameSign = config.getBoolean("Name Sign", Configuration.CATEGORY_GENERAL, true, "Town centers display their name on one or more signs.");
 		wellBoundary = config.getBoolean("Well boundary", Configuration.CATEGORY_GENERAL, true, "Whether to surround the well with colored blocks");
 	    wellSlabs = config.getBoolean("Well slabs", Configuration.CATEGORY_GENERAL, true, "Replace the cobblestone rims of wells with stone slabs, making it easier for players and villagers to escape if they fall in.");
 	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "Villages display a custom banner near the well. You must be using Et Futurum or Gany's Surface with banners enabled.");
@@ -1054,6 +1015,14 @@ public class GeneralConfig {
  				);
 	    
 	    modFence = config.getStringList("Mod Priority: Fence", "Mod Integration", new String[]{
+ 				"etfuturum",
+ 				"ganyssurface",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modPressurePlate = config.getStringList("Mod Priority: Pressure Plate", "Mod Integration", new String[]{
 	    		"uptodate",
  				"etfuturum",
  				"ganyssurface",
@@ -1062,9 +1031,9 @@ public class GeneralConfig {
  				);
 	    
 	    modFenceGate = config.getStringList("Mod Priority: Fence Gate", "Mod Integration", new String[]{
-	    		"uptodate",
  				"etfuturum",
  				"ganyssurface",
+	    		"uptodate",
  				},
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
  				);

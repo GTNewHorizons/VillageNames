@@ -166,7 +166,7 @@ public class DesertStructures
         	}}
         	
         	// Set well rim
-        	if (GeneralConfig.decorateVillageCenter)
+        	if (GeneralConfig.useVillageColors)
         	{
         		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
@@ -195,7 +195,7 @@ public class DesertStructures
             
             // Spout
             this.fillWithMetadataBlocks(world, structureBB, 4, 1, 4, 4, 3, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
         	{
         		/*Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
@@ -221,21 +221,25 @@ public class DesertStructures
             
             
         	// Sign
-            int signXBB = 6;
-			int signYBB = 2;
-			int signZBB = 4;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(4, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 6;
+    			int signYBB = 2;
+    			int signZBB = 4;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(4, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
     		
 			// Banner
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -444,7 +448,7 @@ public class DesertStructures
         	this.fillWithBlocks(world, structureBB, 3, 0, 3, 8, 0, 8, Blocks.sandstone, Blocks.sandstone, false);
         	
         	// Set well rim
-        	if (GeneralConfig.decorateVillageCenter)
+        	if (GeneralConfig.useVillageColors)
         	{
         		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
@@ -482,7 +486,7 @@ public class DesertStructures
             
             
             // Roof of the well
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
             {
             	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
             	
@@ -518,21 +522,25 @@ public class DesertStructures
             
             
         	// Sign
-            int signXBB = 8;
-			int signYBB = 1;
-			int signZBB = 1;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 8;
+    			int signYBB = 1;
+    			int signZBB = 1;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
     		
 			// Banner
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -747,7 +755,7 @@ public class DesertStructures
         	// Fountain
         	
         	// Rim
-        	if (GeneralConfig.decorateVillageCenter)
+        	if (GeneralConfig.useVillageColors)
         	{
         		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
@@ -815,43 +823,43 @@ public class DesertStructures
     		// Stall contents
     		
     		// Glazed terracotta
-    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
         	
         	if (tryGlazedTerracotta != null)
         	{
         		// Square under square awning
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 13, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 13, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 12, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 12, structureBB);
         		
         		// Halved square under strip awning
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 2, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 2, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 0, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? townColor2 : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 0, structureBB);
         	}
         	else
         	{
         		// Square under awning
-        		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 12, 6, 1, 13, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor : 0, false);
+        		this.fillWithMetadataBlocks(world, structureBB, 5, 1, 12, 6, 1, 13, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor : 0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor : 0, false);
         		
         		// Halved square under strip awning
-        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 0, 9, 1, 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, false);
-        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 2, 9, 1, 2, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? townColor2 : 0, false);
+        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 0, 9, 1, 0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor2 : 0, false);
+        		this.fillWithMetadataBlocks(world, structureBB, 8, 1, 2, 9, 1, 2, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor2 : 0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? townColor2 : 0, false);
         	}
     		
         	// Cut stone and stairs
@@ -945,22 +953,26 @@ public class DesertStructures
             }
         	
         	
-        	// Sign
-            int signXBB = 8;
-			int signYBB = 2;
-			int signZBB = 2;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            // Sign
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 8;
+    			int signYBB = 2;
+    			int signZBB = 2;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
         	
 			// Banner
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -4105,9 +4117,9 @@ public class DesertStructures
         	
         	// Carpet
         	for(int[] uvwm : new int[][]{
-        		{3,1,2, (GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0)},
-        		{4,1,2, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 5)},
-        		{5,1,2, (GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0)},
+        		{3,1,2, (GeneralConfig.useVillageColors ? this.start.townColor2 : 0)},
+        		{4,1,2, (GeneralConfig.useVillageColors ? this.start.townColor : 5)},
+        		{5,1,2, (GeneralConfig.useVillageColors ? this.start.townColor2 : 0)},
         		})
             {
         		this.placeBlockAtCurrentPosition(world, Blocks.carpet, uvwm[3], uvwm[0], uvwm[1], uvwm[2], structureBB); 
@@ -4384,7 +4396,7 @@ public class DesertStructures
         		{1,1,3, 1,1,4}, {1,2,3, 1,2,3}, 
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], Blocks.stained_hardened_clay, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 5), Blocks.stained_hardened_clay, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 5), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], Blocks.stained_hardened_clay, (GeneralConfig.useVillageColors ? this.start.townColor : 5), Blocks.stained_hardened_clay, (GeneralConfig.useVillageColors ? this.start.townColor : 5), false);
             }
         	
         	
@@ -4393,10 +4405,10 @@ public class DesertStructures
         		{2,1,3, 1}, 
         		})
             {
-        		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.decorateVillageCenter ? this.start.townColor2:0, StructureVillageVN.chooseGlazedTerracottaMeta(uvwo[3], this.coordBaseMode));
+        		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? this.start.townColor2:0, StructureVillageVN.chooseGlazedTerracottaMeta(uvwo[3], this.coordBaseMode));
             	
             	if (tryGlazedTerracotta != null) {this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwo[0], uvwo[1], uvwo[2], structureBB);}
-            	else {this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter ? this.start.townColor2:0, uvwo[0], uvwo[1], uvwo[2], structureBB);}
+            	else {this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors ? this.start.townColor2:0, uvwo[0], uvwo[1], uvwo[2], structureBB);}
             }
         	
             
@@ -4730,7 +4742,7 @@ public class DesertStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor : 5);
+                			GeneralConfig.useVillageColors ? this.start.townColor : 5);
             	}
             }
             
@@ -5059,8 +5071,8 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,3,3, 3, GeneralConfig.decorateVillageCenter ? this.start.townColor : 5},
-            	{8,1,3, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13},
+            	{3,3,3, 3, GeneralConfig.useVillageColors ? this.start.townColor : 5},
+            	{8,1,3, 2, GeneralConfig.useVillageColors ? this.start.townColorA : 13},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -5682,7 +5694,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,1,3, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorB : 9},
+            	{3,1,3, 2, GeneralConfig.useVillageColors ? this.start.townColorB : 9},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -6013,8 +6025,8 @@ public class DesertStructures
         	
         	// Carpet
         	for(int[] uvwm : new int[][]{
-        		{1,1,3, (GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13)},
-        		{3,1,3, (GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13)},
+        		{1,1,3, (GeneralConfig.useVillageColors ? this.start.townColorA : 13)},
+        		{3,1,3, (GeneralConfig.useVillageColors ? this.start.townColorA : 13)},
         		})
             {
         		this.placeBlockAtCurrentPosition(world, Blocks.carpet, uvwm[3], uvwm[0], uvwm[1], uvwm[2], structureBB); 
@@ -6023,7 +6035,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,1,5, 3, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13},
+            	{2,1,5, 3, GeneralConfig.useVillageColors ? this.start.townColorA : 13},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -6333,7 +6345,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,1,3, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13},
+            	{3,1,3, 2, GeneralConfig.useVillageColors ? this.start.townColorA : 13},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -6603,7 +6615,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,1,3, 1, GeneralConfig.decorateVillageCenter ? this.start.townColorB : 9},
+            	{2,1,3, 1, GeneralConfig.useVillageColors ? this.start.townColorB : 9},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -6910,7 +6922,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,1,3, 2, GeneralConfig.decorateVillageCenter ? this.start.townColor : 5},
+            	{3,1,3, 2, GeneralConfig.useVillageColors ? this.start.townColor : 5},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -7324,7 +7336,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,1,3, 3, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13},
+            	{2,1,3, 3, GeneralConfig.useVillageColors ? this.start.townColorA : 13},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -7647,7 +7659,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{4,1,6, 3, GeneralConfig.decorateVillageCenter ? this.start.townColor : 5},
+            	{4,1,6, 3, GeneralConfig.useVillageColors ? this.start.townColor : 5},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -7933,7 +7945,7 @@ public class DesertStructures
             
             // Beds
             for (int[] uvwoc : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{1,1,2, 0, GeneralConfig.decorateVillageCenter ? this.start.townColor : 5},
+            	{1,1,2, 0, GeneralConfig.useVillageColors ? this.start.townColor : 5},
             })
             {
             	for (boolean isHead : new boolean[]{false, true})
@@ -8533,7 +8545,7 @@ public class DesertStructures
         	
         	
     		// Glazed terracotta
-        	int gtColor = GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0;
+        	int gtColor = GeneralConfig.useVillageColors ? this.start.townColor2 : 0;
     		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
     		
         	if (tryGlazedTerracotta != null)
@@ -8868,7 +8880,7 @@ public class DesertStructures
         	
         	
     		// Glazed terracotta
-        	int gtColor = GeneralConfig.decorateVillageCenter ? this.start.townColor : 5;
+        	int gtColor = GeneralConfig.useVillageColors ? this.start.townColor : 5;
     		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
         	
         	if (tryGlazedTerracotta != null)
@@ -9215,18 +9227,18 @@ public class DesertStructures
         	Object[] tryGlazedTerracotta;
         	for (int[] uvwoc : new int[][]{ // u,v,w, orientation, dye color
         		// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-        		{2,0,4, 0, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{2,0,6, 0, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{1,0,4, 1, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{1,0,6, 1, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{3,0,6, 1, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{3,0,5, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{1,0,5, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{1,0,7, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{3,0,7, 2, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{3,0,4, 3, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{2,0,5, 3, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
-        		{2,0,7, 3, GeneralConfig.decorateVillageCenter ? this.start.townColorC : 3},
+        		{2,0,4, 0, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{2,0,6, 0, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{1,0,4, 1, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{1,0,6, 1, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{3,0,6, 1, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{3,0,5, 2, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{1,0,5, 2, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{1,0,7, 2, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{3,0,7, 2, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{3,0,4, 3, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{2,0,5, 3, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
+        		{2,0,7, 3, GeneralConfig.useVillageColors ? this.start.townColorC : 3},
            		})
         	{
         		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);

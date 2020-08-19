@@ -149,7 +149,7 @@ public class PlainsStructures
             	world.setBlock(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2]), Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), 2);
             }
             
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
             {
             	// Basin rim
             	Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
@@ -200,7 +200,7 @@ public class PlainsStructures
             this.fillWithAir(world, structureBB, 3, 1, 3, 5, 1, 5);
             
             // Spout
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
             {
             	Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
@@ -257,22 +257,26 @@ public class PlainsStructures
             }
             
             
-        	// Sign
-            int signXBB = 4;
-			int signYBB = 2;
-			int signZBB = 2;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            // Sign
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 4;
+    			int signYBB = 2;
+    			int signZBB = 2;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
     		
 			// Banner    		
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -455,7 +459,7 @@ public class PlainsStructures
             this.fillWithBlocks(world, structureBB, 4, 1+wellDepthDecrease, 4, 5, 12, 5, Blocks.flowing_water, Blocks.flowing_water, false); // Water
             
             // Well rim
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
             {
             	this.fillWithMetadataBlocks(world, structureBB, 4, 12, 3, 5, 12, 3, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
             	this.fillWithMetadataBlocks(world, structureBB, 4, 12, 6, 5, 12, 6, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, biomeCobblestoneSlabBlock, biomeCobblestoneSlabMeta, false);
@@ -481,7 +485,7 @@ public class PlainsStructures
             // Roof of the well
             this.fillWithMetadataBlocks(world, structureBB, 3, 15, 3, 6, 15, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             
-            if (GeneralConfig.decorateVillageCenter)
+            if (GeneralConfig.useVillageColors)
             {
             	int metaBase = ((int)world.getSeed()%4+this.coordBaseMode)%4; // Procedural based on world seed and base mode
             	
@@ -518,7 +522,7 @@ public class PlainsStructures
                 {
                     if (j == 2 || j == 7 || i == 2 || i == 7)
                     {
-                    	if (GeneralConfig.decorateVillageCenter)
+                    	if (GeneralConfig.useVillageColors)
                     	{
                     		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
                     		Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
@@ -610,21 +614,25 @@ public class PlainsStructures
             
             
             // Sign
-            int signXBB = 6;
-			int signYBB = 12;
-			int signZBB = 7;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 6;
+    			int signYBB = 12;
+    			int signZBB = 7;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
     		
 			// Banner
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -840,10 +848,10 @@ public class PlainsStructures
         	this.fillWithBlocks(world, structureBB, 7, 1, 2, 7, 3, 2, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 7, 1, 0, 7, 3, 0, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithMetadataBlocks(world, structureBB, 4, 4, 0, 7, 4, 2, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 0, 6, 4, 2, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 0, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 1, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 2, structureBB);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 0, 6, 4, 2, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 0, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 6, 4, 1, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 2, structureBB);
             
         	// Torches
             for (int[] uvwm : new int[][]{
@@ -861,10 +869,10 @@ public class PlainsStructures
         	this.fillWithBlocks(world, structureBB, 3, 1, 8, 3, 3, 8, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 3, 1, 5, 3, 3, 5, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithMetadataBlocks(world, structureBB, 1, 4, 5, 3, 4, 8, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 1, 4, 6, 3, 4, 7, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 1, 4, 7, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 2, 4, 6, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 3, 4, 7, structureBB);
+        	this.fillWithMetadataBlocks(world, structureBB, 1, 4, 6, 3, 4, 7, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 1, 4, 7, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 2, 4, 6, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 3, 4, 7, structureBB);
 
             // Torches
             for (int[] uvwm : new int[][]{
@@ -882,10 +890,10 @@ public class PlainsStructures
         	this.fillWithBlocks(world, structureBB, 7, 1, 14, 7, 3, 14, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 7, 1, 12, 7, 3, 12, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithMetadataBlocks(world, structureBB, 4, 4, 12, 7, 4, 14, biomeWoodSlabBlock, biomeWoodSlabMeta, biomeWoodSlabBlock, biomeWoodSlabMeta, false);
-        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 12, 6, 4, 14, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor : 4, false);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 12, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 6, 4, 13, structureBB);
-        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? townColor2 : 0, 5, 4, 14, structureBB);
+        	this.fillWithMetadataBlocks(world, structureBB, 5, 4, 12, 6, 4, 14, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, Blocks.wool, GeneralConfig.useVillageColors ? townColor : 4, false);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 12, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 6, 4, 13, structureBB);
+        	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 14, structureBB);
         	
             // Torches
             for (int[] uvwm : new int[][]{
@@ -898,24 +906,28 @@ public class PlainsStructures
         	
         	        	        	
             // Sign
-            int signXBB = 2;
-			int signYBB = 2;
-			int signZBB = 10;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-    		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, signXBB, signYBB-1, signZBB, structureBB);
-    		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, signXBB, signYBB-2, signZBB, structureBB);
-        	
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 2;
+    			int signYBB = 2;
+    			int signZBB = 10;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+        		this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, signXBB, signYBB-1, signZBB, structureBB);
+        		this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, signXBB, signYBB-2, signZBB, structureBB);
+            	
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(12, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
+            }
+            
     		
     		
 			// Banner
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -1214,7 +1226,7 @@ public class PlainsStructures
             // Posts
         	this.fillWithBlocks(world, structureBB, 4, 1, 1, 4, 4, 1, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 6, 1, 1, 6, 4, 1, biomeFenceBlock, biomeFenceBlock, false);
-        	if (GeneralConfig.decorateVillageCenter)
+        	if (GeneralConfig.useVillageColors)
         	{
         		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor;
@@ -1229,7 +1241,7 @@ public class PlainsStructures
         	
         	this.fillWithBlocks(world, structureBB, 4, 1, 9, 4, 4, 9, biomeFenceBlock, biomeFenceBlock, false);
         	this.fillWithBlocks(world, structureBB, 6, 1, 9, 6, 4, 9, biomeFenceBlock, biomeFenceBlock, false);
-        	if (GeneralConfig.decorateVillageCenter)
+        	if (GeneralConfig.useVillageColors)
         	{
         		Object[] tryConcrete = ModObjects.chooseModConcrete(townColor2);
             	Block concreteBlock = Blocks.stained_hardened_clay; int concreteMeta = townColor2;
@@ -1242,32 +1254,36 @@ public class PlainsStructures
         		this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 5, 4, 9, structureBB);
         	}
         	
-        	// Signs
-            int signXBB = 5;
-			int signYBB = 4;
-			int signZBB = 0;
-			int signZBB2 = 10;
-            int signX = this.getXWithOffset(signXBB, signZBB);
-            int signX2 = this.getXWithOffset(signXBB, signZBB2);
-            int signY = this.getYWithOffset(signYBB);
-            int signZ = this.getZWithOffset(signXBB, signZBB);
-            int signZ2 = this.getZWithOffset(signXBB, signZBB2);
-    		
-    		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
-    		
-			world.setBlock(signX, signY, signZ, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(2, this.coordBaseMode, true), 2); // 2 is "send change to clients without block update notification"
-			world.setTileEntity(signX, signY, signZ, signContents);
-    		
-            // I need to make a duplicate TileEntity because the first one gets consumed when applied to the first sign
-    		TileEntitySign signContents2 = new TileEntitySign();
-    		for (int i=0; i<4; i++) {signContents2.signText[i] = signContents.signText[i];}
-    		
-			world.setBlock(signX2, signY, signZ2, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, true), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX2, signY, signZ2, signContents2);
+            // Signs
+            if (GeneralConfig.nameSign)
+            {
+            	int signXBB = 5;
+    			int signYBB = 4;
+    			int signZBB = 0;
+    			int signZBB2 = 10;
+                int signX = this.getXWithOffset(signXBB, signZBB);
+                int signX2 = this.getXWithOffset(signXBB, signZBB2);
+                int signY = this.getYWithOffset(signYBB);
+                int signZ = this.getZWithOffset(signXBB, signZBB);
+                int signZ2 = this.getZWithOffset(signXBB, signZBB2);
+        		
+        		TileEntitySign signContents = StructureVillageVN.generateSignContents(namePrefix, nameRoot, nameSuffix);
+        		
+    			world.setBlock(signX, signY, signZ, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(2, this.coordBaseMode, true), 2); // 2 is "send change to clients without block update notification"
+    			world.setTileEntity(signX, signY, signZ, signContents);
+        		
+                // I need to make a duplicate TileEntity because the first one gets consumed when applied to the first sign
+        		TileEntitySign signContents2 = new TileEntitySign();
+        		for (int i=0; i<4; i++) {signContents2.signText[i] = signContents.signText[i];}
+        		
+    			world.setBlock(signX2, signY, signZ2, biomeWallSignBlock, StructureVillageVN.getSignRotationMeta(0, this.coordBaseMode, true), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX2, signY, signZ2, signContents2);
+            }
+            
 
     		
 			// Banner    		
-    		if (GeneralConfig.decorateVillageCenter)
+    		if (GeneralConfig.villageBanners)
     		{
         		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
         		if (testForBanner!=null)
@@ -2466,7 +2482,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -3450,7 +3466,7 @@ public class PlainsStructures
             for (int i=0; i<=7; i++)
             {
             	this.placeBlockAtCurrentPosition(world, Blocks.carpet, i%2==0?
-            			(GeneralConfig.decorateVillageCenter ? this.start.townColor : 4):(GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0),
+            			(GeneralConfig.useVillageColors ? this.start.townColor : 4):(GeneralConfig.useVillageColors ? this.start.townColor2 : 0),
             			carpetU[i], 1, carpetW[i], structureBB);
             }
             
@@ -4134,7 +4150,7 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, fletchingTableBlock, fletchingTableMeta, 2, 1, 6, structureBB);
             
             // Carpet
-            this.fillWithMetadataBlocks(world, structureBB, 4, 1, 5, 6, 1, 5, Blocks.carpet, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 4), Blocks.carpet, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 4), false);
+            this.fillWithMetadataBlocks(world, structureBB, 4, 1, 5, 6, 1, 5, Blocks.carpet, (GeneralConfig.useVillageColors ? this.start.townColor : 4), Blocks.carpet, (GeneralConfig.useVillageColors ? this.start.townColor : 4), false);
             
             
             // --- Front awning --- //
@@ -4147,8 +4163,8 @@ public class PlainsStructures
                 this.fillWithMetadataBlocks(world, structureBB, u, 4, 0, u, 4, 1, biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, false);
             }
             // Wool
-            this.placeBlockAtCurrentPosition(world, Blocks.wool, (GeneralConfig.decorateVillageCenter ? this.start.townColor : 4), 5, 4, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.wool, (GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0), 5, 4, 1, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.wool, (GeneralConfig.useVillageColors ? this.start.townColor : 4), 5, 4, 0, structureBB);
+            this.placeBlockAtCurrentPosition(world, Blocks.wool, (GeneralConfig.useVillageColors ? this.start.townColor2 : 0), 5, 4, 1, structureBB);
             // Grass Path
             this.fillWithMetadataBlocks(world, structureBB, 5, 0, 0, 5, 0, 1, grassPathBlock, grassPathMeta, grassPathBlock, grassPathMeta, false);
             
@@ -5288,7 +5304,7 @@ public class PlainsStructures
             	{7,1,3, 7,3,5},
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, false);	
             }
             
             
@@ -5812,7 +5828,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta	
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta	
             	}
             }
             
@@ -6214,7 +6230,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor : 4); // Goes by wool meta	
+                			GeneralConfig.useVillageColors ? this.start.townColor : 4); // Goes by wool meta	
             	}
             }
             
@@ -6590,29 +6606,33 @@ public class PlainsStructures
             
             
             // Sign
-            int signU = 6;
-			int signV = 2;
-			int signW = 7;
-            int signX = this.getXWithOffset(signU, signW);
-            int signY = this.getYWithOffset(signV);
-            int signZ = this.getZWithOffset(signU, signW);
-    		
-            TileEntitySign signContents;
-            
-            if (this.start.namePrefix.equals("") && this.start.nameRoot.equals("") && this.start.nameSuffix.equals(""))
+            if (GeneralConfig.nameSign)
             {
-            	// Something has gone wrong and we can't obtain the name. Substitute nonsense instead.
-            	signContents = new TileEntitySign();
-            	signContents.signText[1] = "Market";
-            }
-            else
-            {
-            	signContents = StructureVillageVN.generateSignContents(this.start.namePrefix, this.start.nameRoot, this.start.nameSuffix);
+            	int signU = 6;
+    			int signV = 2;
+    			int signW = 7;
+                int signX = this.getXWithOffset(signU, signW);
+                int signY = this.getYWithOffset(signV);
+                int signZ = this.getZWithOffset(signU, signW);
+        		
+                TileEntitySign signContents;
+                
+                if (this.start.namePrefix.equals("") && this.start.nameRoot.equals("") && this.start.nameSuffix.equals(""))
+                {
+                	// Something has gone wrong and we can't obtain the name. Substitute nonsense instead.
+                	signContents = new TileEntitySign();
+                	signContents.signText[1] = "Market";
+                }
+                else
+                {
+                	signContents = StructureVillageVN.generateSignContents(this.start.namePrefix, this.start.nameRoot, this.start.nameSuffix);
+                }
+                
+            	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, start.materialType, start.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
+    			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+        		world.setTileEntity(signX, signY, signZ, signContents);
             }
             
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, start.materialType, start.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
-			world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-    		world.setTileEntity(signX, signY, signZ, signContents);
             
             
         	// Torches
@@ -6633,7 +6653,7 @@ public class PlainsStructures
             	{12,4,3}, {13,4,4}, {14,4,3}, 
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
             }
             // White
             for (int[] uvw : new int[][]{
@@ -6641,7 +6661,7 @@ public class PlainsStructures
             	{12,4,4}, {13,4,3}, {14,4,4}, 
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
             }        	
             
             return true;
@@ -6893,28 +6913,32 @@ public class PlainsStructures
             
             
             // Sign
-            int signU = 5;
-			int signV = 2;
-			int signW = 7;
-            int signX = this.getXWithOffset(signU, signW);
-            int signY = this.getYWithOffset(signV);
-            int signZ = this.getZWithOffset(signU, signW);
-    		
-        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, start.materialType, start.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
-            TileEntitySign signContents;
-            if (this.start.namePrefix.equals("") && this.start.nameRoot.equals("") && this.start.nameSuffix.equals(""))
+            if (GeneralConfig.nameSign)
             {
-            	// Something has gone wrong and we can't obtain the name. Substitute nonsense instead.
-            	//signContents = new TileEntitySign();
-            	//signContents.signText[1] = "Market";
+            	int signU = 5;
+    			int signV = 2;
+    			int signW = 7;
+                int signX = this.getXWithOffset(signU, signW);
+                int signY = this.getYWithOffset(signV);
+                int signZ = this.getZWithOffset(signU, signW);
+        		
+            	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, start.materialType, start.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
+                TileEntitySign signContents;
+                if (this.start.namePrefix.equals("") && this.start.nameRoot.equals("") && this.start.nameSuffix.equals(""))
+                {
+                	// Something has gone wrong and we can't obtain the name. Substitute nonsense instead.
+                	//signContents = new TileEntitySign();
+                	//signContents.signText[1] = "Market";
+                }
+                else
+                {
+                	signContents = StructureVillageVN.generateSignContents(this.start.namePrefix, this.start.nameRoot, this.start.nameSuffix);
+                	
+                	world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
+            		world.setTileEntity(signX, signY, signZ, signContents);
+                }
             }
-            else
-            {
-            	signContents = StructureVillageVN.generateSignContents(this.start.namePrefix, this.start.nameRoot, this.start.nameSuffix);
-            	
-            	world.setBlock(signX, signY, signZ, biomeStandingSignBlock, StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false), 2); // 2 is "send change to clients without block update notification"
-        		world.setTileEntity(signX, signY, signZ, signContents);
-            }
+            
         	
 
             // Wool Awnings
@@ -6925,7 +6949,7 @@ public class PlainsStructures
             	{5,4,7},
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
             }
             // White
             for (int[] uvw : new int[][]{
@@ -6934,7 +6958,7 @@ public class PlainsStructures
             	{5,4,6}, {5,4,8},
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
             
             
@@ -7211,7 +7235,7 @@ public class PlainsStructures
             	{7,0,4}, {8,0,3}, {9,0,4}, 
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor : 4, uvw[0], uvw[1], uvw[2], structureBB);
             }
             // White
             for (int[] uvw : new int[][]{
@@ -7220,7 +7244,7 @@ public class PlainsStructures
             	{7,0,3}, {8,0,4}, {9,0,3}, 
             })
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? this.start.townColor2 : 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
             
             
@@ -7809,7 +7833,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -8037,7 +8061,7 @@ public class PlainsStructures
             	{5,1,2, 5,3,4},
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, false);	
             }
             
             
@@ -8106,7 +8130,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor : 4); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor : 4); // Goes by wool meta
             	}
             }
             
@@ -8411,7 +8435,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor : 4); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor : 4); // Goes by wool meta
             	}
             }
             
@@ -8711,7 +8735,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -9086,7 +9110,7 @@ public class PlainsStructures
             
             
             // Carpet
-            this.fillWithMetadataBlocks(world, structureBB, 4, 2, 4, 5, 2, 4, Blocks.carpet, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13, Blocks.carpet, GeneralConfig.decorateVillageCenter ? this.start.townColorA : 13, false); // 13 is green
+            this.fillWithMetadataBlocks(world, structureBB, 4, 2, 4, 5, 2, 4, Blocks.carpet, GeneralConfig.useVillageColors ? this.start.townColorA : 13, Blocks.carpet, GeneralConfig.useVillageColors ? this.start.townColorA : 13, false); // 13 is green
             
             // Ladder
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.ladder, 0, start.materialType, start.biome); Block biomeLadderBlock = (Block)blockObject[0];
@@ -9108,7 +9132,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -9410,7 +9434,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -9754,7 +9778,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor : 4); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor : 4); // Goes by wool meta
             	}
             }
             
@@ -10079,7 +10103,7 @@ public class PlainsStructures
                 			this.getYWithOffset(v),
                 			this.getZWithOffset(u, w),
                 			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			GeneralConfig.decorateVillageCenter ? this.start.townColor2 : 0); // Goes by wool meta
+                			GeneralConfig.useVillageColors ? this.start.townColor2 : 0); // Goes by wool meta
             	}
             }
             
@@ -10630,7 +10654,7 @@ public class PlainsStructures
             	{15,1,2, 15,4,4}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, false);	
             }
             
             
@@ -11302,7 +11326,7 @@ public class PlainsStructures
             	{5,1,2, 5,4,4}, {5,1,6, 5,4,8}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, Blocks.stained_hardened_clay, GeneralConfig.useVillageColors? this.start.townColor2:0, false);	
             }
         	
         	
@@ -11384,14 +11408,14 @@ public class PlainsStructures
         		{1, 2, 3}, {1, 2, 7}, {5, 2, 3}, {5, 2, 7}, {3, 2, 9}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, GeneralConfig.decorateVillageCenter? this.start.townColor:4, uvw[0], uvw[1], uvw[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, GeneralConfig.useVillageColors? this.start.townColor:4, uvw[0], uvw[1], uvw[2], structureBB);
             }
             // Secondary color
         	for (int[] uvw : new int[][]{
         		{1, 3, 3}, {1, 3, 7}, {5, 3, 3}, {5, 3, 7}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, GeneralConfig.decorateVillageCenter? this.start.townColor2:0, uvw[0], uvw[1], uvw[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, GeneralConfig.useVillageColors? this.start.townColor2:0, uvw[0], uvw[1], uvw[2], structureBB);
             }
             
         	
@@ -11704,7 +11728,7 @@ public class PlainsStructures
         		for (int i=0; i<2; i++)
         		{
         			this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane,
-        					i==0 ? (GeneralConfig.decorateVillageCenter? this.start.townColor:4) : (GeneralConfig.decorateVillageCenter? this.start.townColor2:0),
+        					i==0 ? (GeneralConfig.useVillageColors? this.start.townColor:4) : (GeneralConfig.useVillageColors? this.start.townColor2:0),
         					uvw[0], uvw[1]+i, uvw[2], structureBB);
         		}
             }

@@ -110,11 +110,12 @@ public class VNGuiConfig extends GuiConfig
 		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
 		subCats.add( new ConfigElement(cc) );
 		*/
+		/*
 		cc = GeneralConfig.config.getCategory("sounds");
 		cc.setComment("Add in sound effects backported from various Minecraft versions");
 		//cc.setRequiresMcRestart(true);
 		subCats.add( new ConfigElement(cc) );
-		
+		*/
 		cc = GeneralConfig.config.getCategory("mod integration");
 		cc.setComment("Interaction with modded structures, entities, blocks, items, etc.");
 		subCats.add( new ConfigElement(cc) );
