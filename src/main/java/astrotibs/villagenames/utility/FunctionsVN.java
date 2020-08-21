@@ -69,7 +69,15 @@ public class FunctionsVN
 			// If none apply, send back Plains
 			return PLAINS;
 		}
-		
+		public static VillageType getVillageTypeFromName(String name, VillageType defaultType)
+		{
+			if (name.toUpperCase().equals("PLAINS"))       {return PLAINS;}
+			else if (name.toUpperCase().equals("DESERT"))  {return DESERT;}
+			else if (name.toUpperCase().equals("TAIGA"))   {return TAIGA;}
+			else if (name.toUpperCase().equals("SAVANNA")) {return SAVANNA;}
+			else if (name.toUpperCase().equals("SNOWY"))   {return SNOWY;}
+			return defaultType;
+		}
 	}
 	
 	public static enum MaterialType
@@ -119,6 +127,20 @@ public class FunctionsVN
 			
 			// If none apply, send back Oak
 			return OAK;
+		}
+		public static MaterialType getMaterialTypeFromName(String name, MaterialType defaultType)
+		{
+			if (name.toUpperCase().equals("OAK"))           {return OAK;}
+			else if (name.toUpperCase().equals("SPRUCE"))   {return SPRUCE;}
+			else if (name.toUpperCase().equals("BIRCH"))    {return BIRCH;}
+			else if (name.toUpperCase().equals("JUNGLE"))   {return JUNGLE;}
+			else if (name.toUpperCase().equals("ACACIA"))   {return ACACIA;}
+			else if (name.toUpperCase().equals("DARK_OAK")) {return DARK_OAK;}
+			else if (name.toUpperCase().equals("SAND"))     {return SAND;}
+			else if (name.toUpperCase().equals("MESA"))     {return MESA;}
+			else if (name.toUpperCase().equals("SNOW"))     {return SNOW;}
+			else if (name.toUpperCase().equals("MUSHROOM")) {return MUSHROOM;}
+			return defaultType;
 		}
 	}
 	

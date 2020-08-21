@@ -904,12 +904,16 @@ public class StructureVillageVN
      * The block will get set at the ground height or posY, whichever is higher.
      * Returns the height at which the block was placed
      */
-    public static int setPathSpecificBlock(World world, StructureVillageVN.StartVN startPiece, int meta, int posX, int posY, int posZ)
+    public static int setPathSpecificBlock(World world, MaterialType materialType, BiomeGenBase biome, int meta, int posX, int posY, int posZ)
     {
-    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, startPiece.materialType, startPiece.biome);
-    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, startPiece.materialType, startPiece.biome);
-    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, startPiece.materialType, startPiece.biome);
-    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, startPiece.materialType, startPiece.biome);
+    	// Regenerate these if null
+    	if (materialType==null) {materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ);}
+    	if (biome==null) {biome = world.getBiomeGenForCoords(posX, posZ);}
+    	
+    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, materialType, biome);
+    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, materialType, biome);
+    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, materialType, biome);
+    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, materialType, biome);
     	
     	// Top block level
     	int surfaceY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1;
@@ -993,7 +997,12 @@ public class StructureVillageVN
      */
     public static NBTTagCompound getOrMakeVNInfo(World world, int posX, int posY, int posZ)
     {
-    	int townColorMeta; int townColorMeta2;
+    	int townColorMeta;
+    	int townColorMeta2;
+    	int townColorMeta3;
+    	int townColorMeta4;
+    	int townColorMeta5;
+    	
     	String townSignEntry;
     	String namePrefix; String nameRoot; String nameSuffix;
     	NBTTagCompound bannerNBT;
@@ -1055,52 +1064,59 @@ public class StructureVillageVN
 				nameRoot = villagetagcompound.getString("nameRoot");
 				nameSuffix = villagetagcompound.getString("nameSuffix");
 				
-				// Check if it has a second color
-        		townColorMeta2 = townColorMeta;
-        		// Second color is already explicitly registered
-        		if (villagetagcompound.hasKey("townColor2")) {townColorMeta2 = villagetagcompound.getInteger("townColor2");}
-        		// Try to extract second color from banner colors
-        		else
+				// Obtain the array of banner colors from the banner tag, if there is one
+				boolean updateTownNBT=false;
+				int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
+				if (villagetagcompound.hasKey("BlockEntityTag", 10))
         		{
-        			if (villagetagcompound.hasKey("BlockEntityTag", 10))
-            		{
-            			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
-            			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
-            	        {
-            				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
-            				
-            				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
-            				{
-            					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
-            					if (patterntag.hasKey("Color") && patterntag.getInteger("Color")!=townColorMeta)
-            					{
-            						townColorMeta2 = patterntag.getInteger("Color");
-            					}
-            				}
-            	        }
-            		}
-            		// Village does not have banner info. Make some.
-            		else
-            		{
-            			while (
-            					townColorMeta2==townColorMeta // Colors are the same, requiring a new draw
-            					&& !(townColorMeta==2 && townColorMeta2==10) && !(townColorMeta==10 && townColorMeta2==2) // Lime and Green aren't in the same banner
-            					&& !(townColorMeta==5 && townColorMeta2==13) && !(townColorMeta==13 && townColorMeta2==5) // Magenta and Purple aren't in the same banner
-            					&& !(townColorMeta==6 && townColorMeta2==12) && !(townColorMeta==12 && townColorMeta2==6) // Light Blue and Cyan aren't in the same banner
-            					)
-            			{
-            				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
-            			}
-            		}
-            		
-            		villagetagcompound.setInteger("townColor2", townColorMeta2);
-            		
-            		// Replace the old tag
-            		nbttaglist.func_150304_a(0, villagetagcompound);
-            		tagCompound.setTag(townSignEntry, nbttaglist);
-            		data.markDirty();
+        			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
+        			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
+        	        {
+        				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
+        				
+        				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
+        				{
+        					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
+        					if (patterntag.hasKey("Color"))
+        					{
+        						townColorArray[i+1] = patterntag.getInteger("Color");
+        					}
+        				}
+        	        }
         		}
+				// Change each entry that's -1 to a unique color
+				for (int c=1; c<(townColorArray.length); c++)
+				{
+					// The color
+	        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
+	        		else if (townColorArray[c]==-1) // must be generated
+	        		{
+	        			while(true)
+	        			{
+	        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+	        				// Compare to all previous colors to ensure it's unique
+	        				boolean isRedundant=false;
+	        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
+	        				if (!isRedundant) {break;} // Keep this color and move on to the next one
+	        			}
+	        		}
+	        		
+	        		// Now that the townColorArray is populated, assign the colors to the town
+					if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
+				}
 				
+				// Add tags for village and biome types
+				if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
+				if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
+				
+				// Replace the old tag
+				if (updateTownNBT)
+				{
+	        		nbttaglist.func_150304_a(0, villagetagcompound);
+	        		tagCompound.setTag(townSignEntry, nbttaglist);
+	        		data.markDirty();
+				}
+        		
 				// Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
 				Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, villageRadiusBuffer);
 				
@@ -1151,52 +1167,61 @@ public class StructureVillageVN
 				LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
 				LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
 				*/
-				// Check if it has a second color
-				townColorMeta2 = townColorMeta;
-				// Second color is already explicitly registered
-				if (villagetagcompound.hasKey("townColor2")) {townColorMeta2 = villagetagcompound.getInteger("townColor2");}
-				// Try to extract second color from banner colors
-				else
-				{
-					if (villagetagcompound.hasKey("BlockEntityTag", 10))
-					{
-						bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
-						if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
-						{
-							NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
-							
-							for (int i=0; i < nbttaglistPattern.tagCount(); i++)
-							{
-								NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
-								if (patterntag.hasKey("Color") && patterntag.getInteger("Color")!=townColorMeta)
-								{
-									townColorMeta2 = patterntag.getInteger("Color");
-								}
-							}
-						}
-					}
-					// Village does not have banner info. Make some.
-					else
-					{
-            			while (
-            					townColorMeta2==townColorMeta // Colors are the same, requiring a new draw
-            					&& !(townColorMeta==2 && townColorMeta2==10) && !(townColorMeta==10 && townColorMeta2==2) // Lime and Green aren't in the same banner
-            					&& !(townColorMeta==5 && townColorMeta2==13) && !(townColorMeta==13 && townColorMeta2==5) // Magenta and Purple aren't in the same banner
-            					&& !(townColorMeta==6 && townColorMeta2==12) && !(townColorMeta==12 && townColorMeta2==6) // Light Blue and Cyan aren't in the same banner
-            					)
-            			{
-            				townColorMeta2 = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
-            			}
-					}
-					
-					villagetagcompound.setInteger("townColor2", townColorMeta2);
-					
-					// Replace the old tag
-					nbttaglist.func_150304_a(0, villagetagcompound);
-					tagCompound.setTag(townSignEntry, nbttaglist);
-					data.markDirty();
-				}
 				
+
+				// Obtain the array of banner colors from the banner tag, if there is one
+				boolean updateTownNBT=false;
+				int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
+				if (villagetagcompound.hasKey("BlockEntityTag", 10))
+        		{
+        			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
+        			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
+        	        {
+        				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
+        				
+        				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
+        				{
+        					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
+        					if (patterntag.hasKey("Color"))
+        					{
+        						townColorArray[i+1] = patterntag.getInteger("Color");
+        					}
+        				}
+        	        }
+        		}
+				// Change each entry that's -1 to a unique color
+				for (int c=1; c<(townColorArray.length); c++)
+				{
+					// The color
+	        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
+	        		else if (townColorArray[c]==-1) // must be generated
+	        		{
+	        			while(true)
+	        			{
+	        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+	        				// Compare to all previous colors to ensure it's unique
+	        				boolean isRedundant=false;
+	        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
+	        				if (!isRedundant) {break;} // Keep this color and move on to the next one
+	        			}
+	        		}
+	        		
+	        		// Now that the townColorArray is populated, assign the colors to the town
+					if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
+				}
+
+				// Add tags for village and biome types
+				if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
+				if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
+				
+				// Replace the old tag
+				if (updateTownNBT)
+				{
+	        		nbttaglist.func_150304_a(0, villagetagcompound);
+	        		tagCompound.setTag(townSignEntry, nbttaglist);
+	        		data.markDirty();
+				}
+        		
 				return villagetagcompound;
 			}
 		}
@@ -1236,26 +1261,56 @@ public class StructureVillageVN
 		nameRoot = newVillageName[2];
 		nameSuffix = newVillageName[3];
 		
+        villagetagcompound.setString("namePrefix", namePrefix);
+        villagetagcompound.setString("nameRoot", nameRoot);
+        villagetagcompound.setString("nameSuffix", nameSuffix);
+        
 		// Generate banner info, regardless of if we make a banner.
 		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(randomFromXYZ, -1, -1);
 		ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
 		ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 		ItemStack villageBanner = BannerGenerator.makeBanner(patternArray, colorArray);
 		townColorMeta = 15-colorArray.get(0);
-		townColorMeta2 = colorArray.size()==1 ? townColorMeta : 15-colorArray.get(1);
-		
-		// Make the data bundle to save to NBT
-		NBTTagList nbttaglist = new NBTTagList();
-		
+
         villagetagcompound.setInteger("signX", posX);
         villagetagcompound.setInteger("signY", posY);
         villagetagcompound.setInteger("signZ", posZ);
         villagetagcompound.setInteger("townColor", townColorMeta); //In case we want to make clay, carpet, wool, glass, etc
-        villagetagcompound.setInteger("townColor2", townColorMeta2);
-        villagetagcompound.setString("namePrefix", namePrefix);
-        villagetagcompound.setString("nameRoot", nameRoot);
-        villagetagcompound.setString("nameSuffix", nameSuffix);
         
+		boolean updateTownNBT=false;
+		int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
+		for (int i=1; i<colorArray.size(); i++)
+		{
+			townColorArray[i] = 15-colorArray.get(i);
+		}
+		// Change each entry that's -1 to a unique color
+		for (int c=1; c<(townColorArray.length); c++)
+		{
+			// The color
+    		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
+    		else if (townColorArray[c]==-1) // must be generated
+    		{
+    			while(true)
+    			{
+    				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+    				// Compare to all previous colors to ensure it's unique
+    				boolean isRedundant=false;
+    				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
+    				if (!isRedundant) {break;} // Keep this color and move on to the next one
+    			}
+    		}
+    		
+    		// Now that the townColorArray is populated, assign the colors to the town
+			if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
+		}
+		
+		// Add tags for village and biome types
+		villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());
+		villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());
+		
+		// Make the data bundle to save to NBT
+		NBTTagList nbttaglist = new NBTTagList();
+		
         // Form and append banner info
         // If you don't have a mod banner, this will not be added (bc crash). It will be generated once you do.
         if (villageBanner!=null) {villagetagcompound.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
@@ -1417,19 +1472,22 @@ public class StructureVillageVN
     
     public static class StartVN extends StructureVillagePieces.Start
     {
-    	// Set them to defaults here
-    	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
-    	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
-    	public int townColor = 11; // Blue
-    	public int townColor2 = 14; // Red
-    	// These colors are used in case more are needed
-    	public int townColorA = -1; // 0: White
-    	public int townColorB = -1; // 13: Green
-    	public int townColorC = -1; // 4: Yellow
+    	// These values are shared by all components in a village.
+    	// If a world is loaded and a village has to regenerate, the start piece will be null and so these will be inaccessible.
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
     	
-    	public String namePrefix = "";
-    	public String nameRoot = "";
-    	public String nameSuffix = "";
+    	// For use with the town center only. These should not be needed on a partial world load.
     	public boolean villagersGenerated = false;
     	public int bannerY = 0;
     	public ArrayList<Integer> decorHeightY = new ArrayList();
@@ -1493,10 +1551,21 @@ public class StructureVillageVN
     
     public static class DecorTorch extends StructureVillagePieces.Village
     {
-    	public FunctionsVN.VillageType villageType = FunctionsVN.VillageType.PLAINS;
-    	public FunctionsVN.MaterialType materialType = FunctionsVN.MaterialType.OAK;
     	public ArrayList<Integer> decorHeightY = new ArrayList();
-    	public StartVN start;
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	
+    	public BiomeGenBase biome=null;
     	
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
     	private int averageGroundLevel = -1;
@@ -1508,13 +1577,23 @@ public class StructureVillageVN
             super(start, componentType);
             this.coordBaseMode = horizIndex;
             this.boundingBox = structureBB;
-            
-            this.start = start;
-            // Set biome and material type, to be used during construction
-            int averageX = (structureBB.minX+structureBB.maxX)/2;
-            int averageZ = (structureBB.minZ+structureBB.maxZ)/2;
-            this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(start.getWorldChunkManager(), averageX, averageZ);
-            this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(start.getWorldChunkManager(), averageX, averageZ);
+            // Additional stuff to be used in the construction
+            if (start!=null)
+            {
+            	this.villageType=start.villageType;
+            	this.materialType=start.materialType;
+            	this.townColor=start.townColor;
+            	this.townColor2=start.townColor2;
+            	this.townColor3=start.townColor3;
+            	this.townColor4=start.townColor4;
+            	this.townColor5=start.townColor5;
+            	this.townColor6=start.townColor6;
+            	this.townColor7=start.townColor7;
+            	this.namePrefix=start.namePrefix;
+            	this.nameRoot=start.nameRoot;
+            	this.nameSuffix=start.nameSuffix;
+            	this.biome=start.biome;
+            }
         }
         
         public static StructureBoundingBox findPieceBox(StartVN start, List components, Random random, int x, int y, int z, int horizIndex)
@@ -1548,6 +1627,44 @@ public class StructureVillageVN
 
                 this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
+        	
+        	// In the event that this village construction is resuming after being unloaded
+        	// you may need to reestablish the village name/color/type info
+            if (
+                	this.villageType==null
+                	|| this.materialType==null
+                	|| this.townColor==-1
+                	|| this.townColor2==-1
+                	|| this.townColor3==-1
+                	|| this.townColor4==-1
+                	|| this.townColor5==-1
+                	|| this.townColor6==-1
+                	|| this.townColor7==-1
+                	|| this.nameRoot.equals("")
+            		)
+            {
+            	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+            			(this.boundingBox.minX+this.boundingBox.maxX)/2,
+            			(this.boundingBox.minY+this.boundingBox.maxY)/2,
+            			(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+            	
+            	// Load the values of interest into memory
+            	this.townColor = villageNBTtag.getInteger("townColor");
+            	this.townColor2 = villageNBTtag.getInteger("townColor2");
+            	this.townColor3 = villageNBTtag.getInteger("townColor3");
+            	this.townColor4 = villageNBTtag.getInteger("townColor4");
+            	this.townColor5 = villageNBTtag.getInteger("townColor5");
+            	this.townColor6 = villageNBTtag.getInteger("townColor6");
+            	this.townColor7 = villageNBTtag.getInteger("townColor7");
+            	this.namePrefix = villageNBTtag.getString("namePrefix");
+            	this.nameRoot = villageNBTtag.getString("nameRoot");
+            	this.nameSuffix = villageNBTtag.getString("nameSuffix");
+            	this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.PLAINS);
+            	this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.OAK);
+            }
+        	// Reestablish biome if start was null or something
+            if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+        	
         	/*
             if (this.field_143015_k < 0)
             {
@@ -1614,23 +1731,23 @@ public class StructureVillageVN
             	
             	if (this.villageType==FunctionsVN.VillageType.DESERT)
             	{
-            		decorBlueprint = DesertStructures.getDesertDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);//, 5); // Use lime
+            		decorBlueprint = DesertStructures.getDesertDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);//, 5); // Use lime
             	}
             	else if (this.villageType==FunctionsVN.VillageType.TAIGA)
             	{
-            		decorBlueprint = TaigaStructures.getTaigaDecorBlueprint(6, this.start, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = TaigaStructures.getTaigaDecorBlueprint(6, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SAVANNA)
             	{
-            		decorBlueprint = SavannaStructures.getSavannaDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = SavannaStructures.getSavannaDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SNOWY)
             	{
-            		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.start, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else // Plains
             	{
-            		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.start, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	
             	for (BlueprintData b : decorBlueprint)
@@ -1807,7 +1924,14 @@ public class StructureVillageVN
                     	// Gets ground level, so long as it's not leaves or other foliage
                         int y = getAboveTopmostSolidOrLiquidBlockVN(world, x, z) - 1;
                         
-                        setPathSpecificBlock(world, (StartVN)startPiece_reflected, 0, x, y, z);
+                        if (startPiece_reflected==null)
+                        {
+                        	setPathSpecificBlock(world, FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, x, y), world.getBiomeGenForCoords(x, z), 0, x, y, z);
+                        }
+                        else
+                        {
+                        	setPathSpecificBlock(world, ((StartVN)startPiece_reflected).materialType, ((StartVN)startPiece_reflected).biome, 0, x, y, z);
+                        }
                     }
                 }
             }

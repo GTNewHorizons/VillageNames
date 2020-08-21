@@ -7,6 +7,8 @@ import java.util.Random;
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
+import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
@@ -18,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -116,16 +119,20 @@ public class SavannaStructures
         			this.getXWithOffset(6, 7),
         			this.getYWithOffset(1),
         			this.getZWithOffset(6, 7));
-        	this.townColor = villageNBTtag.getInteger("townColor");
-        	this.townColor2 = villageNBTtag.getInteger("townColor2");
-        	// Generate additional colors to be used in the town
-        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
-        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
-        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
-    		this.namePrefix = villageNBTtag.getString("namePrefix");
-    		this.nameRoot = villageNBTtag.getString("nameRoot");
-    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
+        	// Load the values of interest into memory
+        	if (this.townColor==-1) {this.townColor = villageNBTtag.getInteger("townColor");}
+        	if (this.townColor2==-1) {this.townColor2 = villageNBTtag.getInteger("townColor2");}
+        	if (this.townColor3==-1) {this.townColor3 = villageNBTtag.getInteger("townColor3");}
+        	if (this.townColor4==-1) {this.townColor4 = villageNBTtag.getInteger("townColor4");}
+        	if (this.townColor5==-1) {this.townColor5 = villageNBTtag.getInteger("townColor5");}
+        	if (this.townColor6==-1) {this.townColor6 = villageNBTtag.getInteger("townColor6");}
+        	if (this.townColor7==-1) {this.townColor7 = villageNBTtag.getInteger("townColor7");}
+        	if (this.namePrefix.equals("")) {this.namePrefix = villageNBTtag.getString("namePrefix");}
+        	if (this.nameRoot.equals("")) {this.nameRoot = villageNBTtag.getString("nameRoot");}
+        	if (this.nameSuffix.equals("")) {this.nameSuffix = villageNBTtag.getString("nameSuffix");}
+        	if (this.villageType==null) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.SAVANNA);}
+        	if (this.materialType==null) {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.ACACIA);}
         	
         	// Top layer is grass
         	this.fillWithMetadataBlocks(world, structureBB, 0, 0, 0, 13, 0, 11, biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);
@@ -153,7 +160,7 @@ public class SavannaStructures
         		{13, 0}, {13, 2}, {13, 3}, {13, 4}, {13, 5}, {13, 6}, {13, 8}, {13, 10},
         	})
         	{
-        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(grass_uw[0], grass_uw[1]), this.getYWithOffset(0), this.getZWithOffset(grass_uw[0], grass_uw[1]));
+        		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(grass_uw[0], grass_uw[1]), this.getYWithOffset(0), this.getZWithOffset(grass_uw[0], grass_uw[1]));
         	}
         	
         	// Set unkempt grass
@@ -436,18 +443,21 @@ public class SavannaStructures
         			this.getXWithOffset(9, 1),
         			this.getYWithOffset(2),
         			this.getZWithOffset(9, 1));
-        	this.townColor = villageNBTtag.getInteger("townColor");
-        	this.townColor2 = villageNBTtag.getInteger("townColor2");
-        	// Generate additional colors to be used in the town
-        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
-        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
-        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
-    		this.namePrefix = villageNBTtag.getString("namePrefix");
-    		this.nameRoot = villageNBTtag.getString("nameRoot");
-    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
+        	// Load the values of interest into memory
+        	if (this.townColor==-1) {this.townColor = villageNBTtag.getInteger("townColor");}
+        	if (this.townColor2==-1) {this.townColor2 = villageNBTtag.getInteger("townColor2");}
+        	if (this.townColor3==-1) {this.townColor3 = villageNBTtag.getInteger("townColor3");}
+        	if (this.townColor4==-1) {this.townColor4 = villageNBTtag.getInteger("townColor4");}
+        	if (this.townColor5==-1) {this.townColor5 = villageNBTtag.getInteger("townColor5");}
+        	if (this.townColor6==-1) {this.townColor6 = villageNBTtag.getInteger("townColor6");}
+        	if (this.townColor7==-1) {this.townColor7 = villageNBTtag.getInteger("townColor7");}
+        	if (this.namePrefix.equals("")) {this.namePrefix = villageNBTtag.getString("namePrefix");}
+        	if (this.nameRoot.equals("")) {this.nameRoot = villageNBTtag.getString("nameRoot");}
+        	if (this.nameSuffix.equals("")) {this.nameSuffix = villageNBTtag.getString("nameSuffix");}
+        	if (this.villageType==null) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.SAVANNA);}
+        	if (this.materialType==null) {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.ACACIA);}
         	
-
         	// Top layer 
         	
         	// Set grass paths
@@ -466,7 +476,7 @@ public class SavannaStructures
         	})
         	{
         		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, grass_uw[0], -1, grass_uw[1], structureBB); // Foundation
-        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(grass_uw[0], grass_uw[1]), this.getYWithOffset(0), this.getZWithOffset(grass_uw[0], grass_uw[1])); // Path
+        		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(grass_uw[0], grass_uw[1]), this.getYWithOffset(0), this.getZWithOffset(grass_uw[0], grass_uw[1])); // Path
         		this.clearCurrentPositionBlocksUpwards(world, grass_uw[0], 1, grass_uw[1], structureBB); // Clear above
         	}
         	// Set Grass blocks
@@ -738,23 +748,27 @@ public class SavannaStructures
         			this.getXWithOffset(4, 5),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 5));
-        	this.townColor = villageNBTtag.getInteger("townColor");
-        	this.townColor2 = villageNBTtag.getInteger("townColor2");
-        	// Generate additional colors to be used in the town
-        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
-        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
-        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
-    		this.namePrefix = villageNBTtag.getString("namePrefix");
-    		this.nameRoot = villageNBTtag.getString("nameRoot");
-    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
+        	// Load the values of interest into memory
+        	if (this.townColor==-1) {this.townColor = villageNBTtag.getInteger("townColor");}
+        	if (this.townColor2==-1) {this.townColor2 = villageNBTtag.getInteger("townColor2");}
+        	if (this.townColor3==-1) {this.townColor3 = villageNBTtag.getInteger("townColor3");}
+        	if (this.townColor4==-1) {this.townColor4 = villageNBTtag.getInteger("townColor4");}
+        	if (this.townColor5==-1) {this.townColor5 = villageNBTtag.getInteger("townColor5");}
+        	if (this.townColor6==-1) {this.townColor6 = villageNBTtag.getInteger("townColor6");}
+        	if (this.townColor7==-1) {this.townColor7 = villageNBTtag.getInteger("townColor7");}
+        	if (this.namePrefix.equals("")) {this.namePrefix = villageNBTtag.getString("namePrefix");}
+        	if (this.nameRoot.equals("")) {this.nameRoot = villageNBTtag.getString("nameRoot");}
+        	if (this.nameSuffix.equals("")) {this.nameSuffix = villageNBTtag.getString("nameSuffix");}
+        	if (this.villageType==null) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.SAVANNA);}
+        	if (this.materialType==null) {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.ACACIA);}
         	
         	// Top grass path 
         	for (int u=2; u<=6; u++) {for (int w=1; w<=9; w++) {
         		if (!(u==4 && w==3) && !(u==4 && w==7)) // To prevent path overwriting the water in the wells
         		{
         			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
-            		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
+            		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w)); // Path
             		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above	
         		}
         	}}
@@ -766,7 +780,7 @@ public class SavannaStructures
         	})
         	{
         		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], -1, uw[1], structureBB); // Foundation
-        		StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(uw[0], uw[1]), this.getYWithOffset(0), this.getZWithOffset(uw[0], uw[1])); // Path
+        		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(uw[0], uw[1]), this.getYWithOffset(0), this.getZWithOffset(uw[0], uw[1])); // Path
         		this.clearCurrentPositionBlocksUpwards(world, uw[0], 1, uw[1], structureBB); // Clear above
         	}
         	// Set Grass blocks
@@ -797,7 +811,7 @@ public class SavannaStructures
                     if (k > -1)
                     {
                     	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+2-this.boundingBox.minY, uw[1], structureBB);
-                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
+                    	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
                    	}
         		}
             }
@@ -1040,21 +1054,25 @@ public class SavannaStructures
         			this.getXWithOffset(4, 4),
         			this.getYWithOffset(3),
         			this.getZWithOffset(4, 4));
-        	this.townColor = villageNBTtag.getInteger("townColor");
-        	this.townColor2 = villageNBTtag.getInteger("townColor2");
-        	// Generate additional colors to be used in the town
-        	if (this.townColorA==-1) {this.townColorA = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2}, random, false);}
-        	if (this.townColorB==-1) {this.townColorB = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA}, random, false);}
-        	if (this.townColorC==-1) {this.townColorC = StructureVillageVN.generateUnusedColor(new int[]{this.townColor, this.townColor2, this.townColorA, this.townColorB}, random, false);}
         	
-    		this.namePrefix = villageNBTtag.getString("namePrefix");
-    		this.nameRoot = villageNBTtag.getString("nameRoot");
-    		this.nameSuffix = villageNBTtag.getString("nameSuffix");
+        	// Load the values of interest into memory
+        	if (this.townColor==-1) {this.townColor = villageNBTtag.getInteger("townColor");}
+        	if (this.townColor2==-1) {this.townColor2 = villageNBTtag.getInteger("townColor2");}
+        	if (this.townColor3==-1) {this.townColor3 = villageNBTtag.getInteger("townColor3");}
+        	if (this.townColor4==-1) {this.townColor4 = villageNBTtag.getInteger("townColor4");}
+        	if (this.townColor5==-1) {this.townColor5 = villageNBTtag.getInteger("townColor5");}
+        	if (this.townColor6==-1) {this.townColor6 = villageNBTtag.getInteger("townColor6");}
+        	if (this.townColor7==-1) {this.townColor7 = villageNBTtag.getInteger("townColor7");}
+        	if (this.namePrefix.equals("")) {this.namePrefix = villageNBTtag.getString("namePrefix");}
+        	if (this.nameRoot.equals("")) {this.nameRoot = villageNBTtag.getString("nameRoot");}
+        	if (this.nameSuffix.equals("")) {this.nameSuffix = villageNBTtag.getString("nameSuffix");}
+        	if (this.villageType==null) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.SAVANNA);}
+        	if (this.materialType==null) {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.ACACIA);}
         	
         	// Set grass paths
         	for (int u=1; u<=7; u++) {for (int w=1; w<=7; w++) {
         		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, -1, w, structureBB); // Foundation
-        		if (u<3 || u>5 || w<3 || w>5) {StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w));} // Path
+        		if (u<3 || u>5 || w<3 || w>5) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(u, w), this.getYWithOffset(0), this.getZWithOffset(u, w));} // Path
         		else {this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, u, 0, w, structureBB);}
         		this.clearCurrentPositionBlocksUpwards(world, u, 1, w, structureBB); // Clear above
         	}}
@@ -1085,7 +1103,7 @@ public class SavannaStructures
                     if (k > -1)
                     {
                     	this.clearCurrentPositionBlocksUpwards(world, uw[0], k+2-this.boundingBox.minY, uw[1], structureBB);
-                    	StructureVillageVN.setPathSpecificBlock(world, this, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
+                    	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(uw[0], uw[1]), k, this.getZWithOffset(uw[0], uw[1]));
                    	}
         		}
             }
@@ -1237,12 +1255,12 @@ public class SavannaStructures
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
-    public static ArrayList<BlueprintData> getRandomSavannaDecorBlueprint(StartVN startVN, int coordBaseMode, Random random)
+    public static ArrayList<BlueprintData> getRandomSavannaDecorBlueprint(MaterialType materialType, BiomeGenBase biome, int coordBaseMode, Random random)
 	{
 		int decorCount = 1;
-		return getSavannaDecorBlueprint(random.nextInt(decorCount), startVN, coordBaseMode, random);
+		return getSavannaDecorBlueprint(random.nextInt(decorCount), materialType, biome, coordBaseMode, random);
 	}
-    public static ArrayList<BlueprintData> getSavannaDecorBlueprint(int decorType, StartVN startVN, int coordBaseMode, Random random)
+    public static ArrayList<BlueprintData> getSavannaDecorBlueprint(int decorType, MaterialType materialType, BiomeGenBase biome, int coordBaseMode, Random random)
 	{
 		ArrayList<BlueprintData> blueprint = new ArrayList(); // The blueprint to export
 		
@@ -1250,7 +1268,7 @@ public class SavannaStructures
 		// Generate per-material blocks
 		
 		Object[] blockObject;
-    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, startVN.materialType, startVN.biome); Block biomeFenceBlock = (Block)blockObject[0];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, materialType, biome); Block biomeFenceBlock = (Block)blockObject[0];
     	
         switch (decorType)
         {

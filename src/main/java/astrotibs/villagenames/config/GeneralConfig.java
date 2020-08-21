@@ -203,6 +203,11 @@ public class GeneralConfig {
 	public static String componentModernTaigaLibrary1_string; public static ArrayList<Integer> componentModernTaigaLibrary1_vals;
 	public static String componentModernTaigaMasonsHouse1_string; public static ArrayList<Integer> componentModernTaigaMasonsHouse1_vals;
 	public static String componentModernTaigaMediumHouse1_string; public static ArrayList<Integer> componentModernTaigaMediumHouse1_vals;
+	public static String componentModernTaigaMediumHouse2_string; public static ArrayList<Integer> componentModernTaigaMediumHouse2_vals;
+	public static String componentModernTaigaMediumHouse3_string; public static ArrayList<Integer> componentModernTaigaMediumHouse3_vals;
+	public static String componentModernTaigaMediumHouse4_string; public static ArrayList<Integer> componentModernTaigaMediumHouse4_vals;
+	public static String componentModernTaigaShepherdsHouse1_string; public static ArrayList<Integer> componentModernTaigaShepherdsHouse1_vals;
+	public static String componentModernTaigaSmallFarm1_string; public static ArrayList<Integer> componentModernTaigaSmallFarm1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -578,6 +583,26 @@ public class GeneralConfig {
 		componentModernTaigaMediumHouse1_string = config.getString("Component: Modern Taiga Medium House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
 		componentModernTaigaMediumHouse1_vals = parseIntegerArray(componentModernTaigaMediumHouse1_string, ali);
 		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaMediumHouse2_string = config.getString("Component: Modern Taiga Medium House 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse2_vals = parseIntegerArray(componentModernTaigaMediumHouse2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaMediumHouse3_string = config.getString("Component: Modern Taiga Medium House 3", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse3_vals = parseIntegerArray(componentModernTaigaMediumHouse3_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaMediumHouse4_string = config.getString("Component: Modern Taiga Medium House 4", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse4_vals = parseIntegerArray(componentModernTaigaMediumHouse4_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaShepherdsHouse1_string = config.getString("Component: Modern Taiga Shepherd House", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaShepherdsHouse1_vals = parseIntegerArray(componentModernTaigaShepherdsHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallFarm1_string = config.getString("Component: Modern Taiga Small Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallFarm1_vals = parseIntegerArray(componentModernTaigaSmallFarm1_string, ali);
+		
 		
 		// Misc
 		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", "Village Generator", true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
@@ -690,7 +715,7 @@ public class GeneralConfig {
 	    nameSign = config.getBoolean("Name Sign", Configuration.CATEGORY_GENERAL, true, "Town centers display their name on one or more signs.");
 		wellBoundary = config.getBoolean("Well boundary", Configuration.CATEGORY_GENERAL, true, "Whether to surround the well with colored blocks");
 	    wellSlabs = config.getBoolean("Well slabs", Configuration.CATEGORY_GENERAL, true, "Replace the cobblestone rims of wells with stone slabs, making it easier for players and villagers to escape if they fall in.");
-	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "Villages display a custom banner near the well. You must be using Et Futurum or Gany's Surface with banners enabled.");
+	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "The town banner pattern is displayed at the town center.");
 	    signYaw = config.getInt("Sign Yaw", Configuration.CATEGORY_GENERAL, 3, 0, 4, "If Village Banner is enabled: Degree to which well signs and banners should face inward. At 0 they face directly outward away from the well; at 4 they face each other.");
 	    
 		
@@ -1015,9 +1040,9 @@ public class GeneralConfig {
  				);
 	    
 	    modFence = config.getStringList("Mod Priority: Fence", "Mod Integration", new String[]{
+	    		"uptodate",
  				"etfuturum",
  				"ganyssurface",
-	    		"uptodate",
  				},
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
  				);

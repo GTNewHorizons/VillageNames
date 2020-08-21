@@ -1254,34 +1254,37 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								// Changed in v3.1banner
 								// Instead, offer a banner with the village's pattern!
 								
-	    		    			Object[] villageBannerData = BannerGenerator.getVillageBannerData(villager);
-	    						NBTTagCompound bannerNBT = new NBTTagCompound();
-	    						String villageNameForBanner = "";
-	    						if (villageBannerData!=null) {
-	    							bannerNBT = (NBTTagCompound) villageBannerData[0];
-	    							villageNameForBanner = (String) villageBannerData[1];}
-	    						
-	    						if (!(villageNameForBanner.equals("")))
-	    						{
-	    							recipeList.add(new MerchantRecipe(
-	    									new ItemStack( Items.emerald, 2 ), (ItemStack)null, BannerGenerator.makeBanner(bannerNBT) ));
-	    						}
-	    						else // No banner was found or is available. INSTEAD, sell a new banner with a random design.
-	    						{
-	    							ItemStack trialbannerstack = ModObjects.chooseModBannerItem();
-	    							
-	    							if (trialbannerstack != null)
-	    							{
-	    								Object[] newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, -1, -1);
-		    							ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
-		    							ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
-		    							
+								ItemStack trialbannerstack = ModObjects.chooseModBannerItem();
+								
+								if (trialbannerstack != null)
+								{
+									Object[] villageBannerData = BannerGenerator.getVillageBannerData(villager);
+		    						NBTTagCompound bannerNBT = new NBTTagCompound();
+		    						String villageNameForBanner = "";
+		    						if (villageBannerData!=null) {
+		    							bannerNBT = (NBTTagCompound) villageBannerData[0];
+		    							villageNameForBanner = (String) villageBannerData[1];}
+		    						
+		    						if (!(villageNameForBanner.equals("")))
+		    						{
 		    							recipeList.add(new MerchantRecipe(
-		    									new ItemStack( Items.emerald, 3 ), (ItemStack)null, BannerGenerator.makeBanner(patternArray, colorArray) ));
-	    							}
-	    							
-	    						}
-	    						
+		    									new ItemStack( Items.emerald, 2 ), (ItemStack)null, BannerGenerator.makeBanner(bannerNBT) ));
+		    						}
+		    						else // No banner was found or is available. INSTEAD, sell a new banner with a random design.
+		    						{
+		    							
+		    							
+		    							if (trialbannerstack != null)
+		    							{
+		    								Object[] newRandomBanner = BannerGenerator.randomBannerArrays(villager.worldObj.rand, -1, -1);
+			    							ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
+			    							ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
+			    							
+			    							recipeList.add(new MerchantRecipe(
+			    									new ItemStack( Items.emerald, 3 ), (ItemStack)null, BannerGenerator.makeBanner(patternArray, colorArray) ));
+		    							}
+		    						}
+								}
 							}
 						}
 						else
