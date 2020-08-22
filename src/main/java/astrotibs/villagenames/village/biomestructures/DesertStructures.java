@@ -10233,7 +10233,7 @@ public class DesertStructures
         		{1,1,1}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 3, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
             }
         	
         	
@@ -10635,7 +10635,7 @@ public class DesertStructures
         		{1,1,4}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 3, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
             }
             
             

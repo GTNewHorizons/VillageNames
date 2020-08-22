@@ -65,6 +65,8 @@ import net.minecraftforge.event.terraingen.BiomeEvent;
  */
 public class StructureVillageVN
 {
+	public static final int VILLAGE_RADIUS_BUFFER = 112;
+	
 	// Array of meta values for furnaces indexed by [orientation][horizIndex]
 	public static final int[][] FURNACE_META_ARRAY = new int[][]{
 		{3,4,2,5},
@@ -1003,13 +1005,11 @@ public class StructureVillageVN
     	int townColorMeta4;
     	int townColorMeta5;
     	
-    	String townSignEntry;
+    	String townSignEntry="";
     	String namePrefix; String nameRoot; String nameSuffix;
     	NBTTagCompound bannerNBT;
         int townX; int townY; int townZ;
 		NBTTagCompound villagetagcompound = new NBTTagCompound();
-		
-		int villageRadiusBuffer = 16;
 		
     	// Set random seed
     	Random randomFromXYZ = new Random();
@@ -1025,7 +1025,7 @@ public class StructureVillageVN
 		// --- TRY 1: See if the village already exists in the vanilla collection object and try to match it to this village --- //
 		
 		
-		Village villageNearTarget = world.villageCollectionObj.findNearestVillage(posX, posY, posZ, villageRadiusBuffer);
+		Village villageNearTarget = world.villageCollectionObj.findNearestVillage(posX, posY, posZ, VILLAGE_RADIUS_BUFFER);
 		
 		if (villageNearTarget != null) // There is a town.
 		{
@@ -1118,7 +1118,7 @@ public class StructureVillageVN
 				}
         		
 				// Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
-				Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, villageRadiusBuffer);
+				Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, VILLAGE_RADIUS_BUFFER);
 				
 				isColony = villagetagcompound.getBoolean("isColony");
 				
@@ -1137,94 +1137,115 @@ public class StructureVillageVN
 		VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
 		NBTTagCompound tagCompound = data.getData();
 		Set tagmapKeyset = tagCompound.func_150296_c(); //Gets the town key list: "coordinates"
-		Iterator itr = tagmapKeyset.iterator();
-
-		while(itr.hasNext())
-		{
+		//Iterator itr = tagmapKeyset.iterator();
+		NBTTagList nbttaglist = null;
+		villagetagcompound = null;
+		
+        // Initialize village to be returned as null
+		NBTTagCompound villageToCompare = null;
+        // Initialize f at max value
+        float bestSquareDistance = Float.MAX_VALUE;
+        // Establish iterator
+        Iterator itr = tagmapKeyset.iterator();
+        
+        // Go through iterated values
+        while (itr.hasNext())
+        {
+        	// Obtain next village to check
 			Object element = itr.next();
 			townSignEntry = element.toString(); //Text name of village header (e.g. "Kupei, x191 y73 z187")
 			//The only index that has data is 0:
-			NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
-			villagetagcompound = nbttaglist.getCompoundTagAt(0);
-
-			townX = villagetagcompound.hasKey("signX") ? villagetagcompound.getInteger("signX") : Integer.MAX_VALUE;
-			townY = villagetagcompound.hasKey("signY") ? villagetagcompound.getInteger("signY") : Integer.MAX_VALUE;
-			townZ = villagetagcompound.hasKey("signZ") ? villagetagcompound.getInteger("signZ") : Integer.MAX_VALUE;
+			nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
+			villageToCompare = nbttaglist.getCompoundTagAt(0);
+            
+			townX = villageToCompare.hasKey("signX") ? villageToCompare.getInteger("signX") : 0;
+			townY = villageToCompare.hasKey("signY") ? villageToCompare.getInteger("signY") : 0;
+			townZ = villageToCompare.hasKey("signZ") ? villageToCompare.getInteger("signZ") : 0;
 			
-			int radiussearch = 32;
-			if (
-					villagetagcompound.hasKey("signX") && villagetagcompound.hasKey("signY") && villagetagcompound.hasKey("signZ")
-					&& (posX-townX)*(posX-townX) + (posZ-townZ)*(posZ-townZ) <= radiussearch*radiussearch
-					)
+            // Set f1 to distance squared between this position and the well sign position
+            float squareDistanceToVNVillage = ((posX-townX)*(posX-townX)) + ((posY-townY)*(posY-townY)) + ((posZ-townZ)*(posZ-townZ));
+            
+            // In this case, we're closer than the closest recorded village so far
+            if (squareDistanceToVNVillage < bestSquareDistance)
+            {
+                // And we're closer than the prescribed buffer from that village, so hold on to it
+                if (squareDistanceToVNVillage <= VILLAGE_RADIUS_BUFFER * VILLAGE_RADIUS_BUFFER)
+                {
+                	villagetagcompound = villageToCompare;
+                    bestSquareDistance = squareDistanceToVNVillage;
+                }
+            }
+        }
+        // At this point, villagetagcompound should be the best candidate of the lot.
+		if (villagetagcompound!=null)
+		{
+			// This village already has a name.
+			townColorMeta = villagetagcompound.getInteger("townColor");
+			namePrefix = villagetagcompound.getString("namePrefix");
+			nameRoot = villagetagcompound.getString("nameRoot");
+			nameSuffix = villagetagcompound.getString("nameSuffix");
+			/*
+			LogHelper.info("Village detected at " + posX + " " + posY + " " + posZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+			LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
+			LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
+			*/
+			
+			// Obtain the array of banner colors from the banner tag, if there is one
+			boolean updateTownNBT=false;
+			int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
+			if (villagetagcompound.hasKey("BlockEntityTag", 10))
+    		{
+    			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
+    			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
+    	        {
+    				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
+    				
+    				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
+    				{
+    					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
+    					if (patterntag.hasKey("Color"))
+    					{
+    						townColorArray[i+1] = patterntag.getInteger("Color");
+    					}
+    				}
+    	        }
+    		}
+			// Change each entry that's -1 to a unique color
+			for (int c=1; c<(townColorArray.length); c++)
 			{
-				// This village already has a name.
-				townColorMeta = villagetagcompound.getInteger("townColor");
-				namePrefix = villagetagcompound.getString("namePrefix");
-				nameRoot = villagetagcompound.getString("nameRoot");
-				nameSuffix = villagetagcompound.getString("nameSuffix");
-				/*
-				LogHelper.info("Village detected at " + posX + " " + posY + " " + posZ + " - it's " + nameRoot + " listed under " + townSignEntry);
-				LogHelper.info("It thinks its position is " + townX + " " + townY + " " + townZ + " - it's " + nameRoot + " listed under " + townSignEntry);
-				LogHelper.info("Distance difference is " + MathHelper.sqrt_double((posX-townX)*(posX-townX) + (posY-townY)*(posY-townY) + (posZ-townZ)*(posZ-townZ)));
-				*/
-				
-
-				// Obtain the array of banner colors from the banner tag, if there is one
-				boolean updateTownNBT=false;
-				int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
-				if (villagetagcompound.hasKey("BlockEntityTag", 10))
+				// The color
+        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
+        		else if (townColorArray[c]==-1) // must be generated
         		{
-        			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
-        			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
-        	        {
-        				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
-        				
-        				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
-        				{
-        					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
-        					if (patterntag.hasKey("Color"))
-        					{
-        						townColorArray[i+1] = patterntag.getInteger("Color");
-        					}
-        				}
-        	        }
+        			while(true)
+        			{
+        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+        				// Compare to all previous colors to ensure it's unique
+        				boolean isRedundant=false;
+        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
+        				if (!isRedundant) {break;} // Keep this color and move on to the next one
+        			}
         		}
-				// Change each entry that's -1 to a unique color
-				for (int c=1; c<(townColorArray.length); c++)
-				{
-					// The color
-	        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
-	        		else if (townColorArray[c]==-1) // must be generated
-	        		{
-	        			while(true)
-	        			{
-	        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
-	        				// Compare to all previous colors to ensure it's unique
-	        				boolean isRedundant=false;
-	        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
-	        				if (!isRedundant) {break;} // Keep this color and move on to the next one
-	        			}
-	        		}
-	        		
-	        		// Now that the townColorArray is populated, assign the colors to the town
-					if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
-				}
-
-				// Add tags for village and biome types
-				if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
-				if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
-				
-				// Replace the old tag
-				if (updateTownNBT)
-				{
-	        		nbttaglist.func_150304_a(0, villagetagcompound);
-	        		tagCompound.setTag(townSignEntry, nbttaglist);
-	        		data.markDirty();
-				}
         		
-				return villagetagcompound;
+        		// Now that the townColorArray is populated, assign the colors to the town
+				if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
 			}
+
+			// Add tags for village and biome types
+			if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
+			if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
+			
+			// Replace the old tag
+			if (updateTownNBT)
+			{
+        		nbttaglist.func_150304_a(0, villagetagcompound);
+        		tagCompound.setTag(townSignEntry, nbttaglist);
+        		data.markDirty();
+			}
+    		
+			return villagetagcompound;
 		}
+		
 		
 		
 		// --- TRY 3: just make a new VN entry --- //
@@ -1309,7 +1330,7 @@ public class StructureVillageVN
 		villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());
 		
 		// Make the data bundle to save to NBT
-		NBTTagList nbttaglist = new NBTTagList();
+		nbttaglist = new NBTTagList();
 		
         // Form and append banner info
         // If you don't have a mod banner, this will not be added (bc crash). It will be generated once you do.
@@ -1926,7 +1947,7 @@ public class StructureVillageVN
                         
                         if (startPiece_reflected==null)
                         {
-                        	setPathSpecificBlock(world, FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, x, y), world.getBiomeGenForCoords(x, z), 0, x, y, z);
+                        	setPathSpecificBlock(world, FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, x, z), world.getBiomeGenForCoords(x, z), 0, x, y, z);
                         }
                         else
                         {

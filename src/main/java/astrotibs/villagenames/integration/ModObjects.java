@@ -299,7 +299,9 @@ public class ModObjects {
 	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
+	public static final String lanternNL = "netherlicious:Lantern";
 	public static final String lanternUTD = "uptodate:lantern";
+	
 	
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
@@ -468,6 +470,8 @@ public class ModObjects {
 	// Tipped arrows
 	public static final String tippedArrowEF = "etfuturum:tipped_arrow";
 	
+	// Wood block
+	public static final String woodBlockUTD = "uptodate:wood";
 	
 	
 	// --------------------------- //
@@ -1783,6 +1787,11 @@ public class ModObjects {
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternUTD);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
 			}
+			if (mod.toLowerCase().equals("netherlicious"))
+			{
+				Block tryLantern = Block.getBlockFromName(ModObjects.lanternNL);
+		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
+			}
 			if (mod.toLowerCase().equals("enviromine"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.davyLampEM);
@@ -2478,10 +2487,24 @@ public class ModObjects {
 		return Blocks.fence;
 	}
 	
-	/**
-	 * These functions check the priority order provided by the config file, and return a block or object if one exists.
-	 */
-	
+	// Wood block (has bark on all surfaces)
+	public static Object[] chooseModWoodBlock(Block block, int meta)
+	{
+		// Pass the original block if it's not a vanilla log
+		if (block!=Blocks.log && block!=Blocks.log2) {return new Object[]{block, meta};}
+		
+		// Specifically UpToDate stuff
+		Block logBlock = Block.getBlockFromName(ModObjects.woodBlockUTD);
+		
+		if (logBlock!=null) // Use the UTD block
+		{
+			return new Object[]{logBlock, meta+(block==Blocks.log2?4:0)};
+		}
+		else // Use vanilla wood with bark on all sides
+		{
+			return new Object[]{block, meta+12};	
+		}
+	}
 	
 	
 }

@@ -208,7 +208,14 @@ public class GeneralConfig {
 	public static String componentModernTaigaMediumHouse4_string; public static ArrayList<Integer> componentModernTaigaMediumHouse4_vals;
 	public static String componentModernTaigaShepherdsHouse1_string; public static ArrayList<Integer> componentModernTaigaShepherdsHouse1_vals;
 	public static String componentModernTaigaSmallFarm1_string; public static ArrayList<Integer> componentModernTaigaSmallFarm1_vals;
-	
+	public static String componentModernTaigaSmallHouse1_string; public static ArrayList<Integer> componentModernTaigaSmallHouse1_vals;
+	public static String componentModernTaigaSmallHouse2_string; public static ArrayList<Integer> componentModernTaigaSmallHouse2_vals;
+	public static String componentModernTaigaSmallHouse3_string; public static ArrayList<Integer> componentModernTaigaSmallHouse3_vals;
+	public static String componentModernTaigaSmallHouse4_string; public static ArrayList<Integer> componentModernTaigaSmallHouse4_vals;
+	public static String componentModernTaigaSmallHouse5_string; public static ArrayList<Integer> componentModernTaigaSmallHouse5_vals;
+	public static String componentModernTaigaTannery1_string; public static ArrayList<Integer> componentModernTaigaTannery1_vals;
+	public static String componentModernTaigaTemple1_string; public static ArrayList<Integer> componentModernTaigaTemple1_vals;
+
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
@@ -603,6 +610,34 @@ public class GeneralConfig {
 		componentModernTaigaSmallFarm1_string = config.getString("Component: Modern Taiga Small Farm", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
 		componentModernTaigaSmallFarm1_vals = parseIntegerArray(componentModernTaigaSmallFarm1_string, ali);
 		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallHouse1_string = config.getString("Component: Modern Taiga Small House 1", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse1_vals = parseIntegerArray(componentModernTaigaSmallHouse1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallHouse2_string = config.getString("Component: Modern Taiga Small House 2", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse2_vals = parseIntegerArray(componentModernTaigaSmallHouse2_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallHouse3_string = config.getString("Component: Modern Taiga Small House 3", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse3_vals = parseIntegerArray(componentModernTaigaSmallHouse3_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallHouse4_string = config.getString("Component: Modern Taiga Small House 4", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse4_vals = parseIntegerArray(componentModernTaigaSmallHouse4_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaSmallHouse5_string = config.getString("Component: Modern Taiga Small House 5", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse5_vals = parseIntegerArray(componentModernTaigaSmallHouse5_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaTannery1_string = config.getString("Component: Modern Taiga Tannery", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaTannery1_vals = parseIntegerArray(componentModernTaigaTannery1_string, ali);
+		
+		ali = new ArrayList<Integer>(Arrays.asList(3,1,1,2,4));
+		componentModernTaigaTemple1_string = config.getString("Component: Modern Taiga Temple", "Village Generator", convertIntegerArrayToString(ali), "Generation stats for this component in taiga villages");
+		componentModernTaigaTemple1_vals = parseIntegerArray(componentModernTaigaTemple1_string, ali);
+		
 		
 		// Misc
 		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", "Village Generator", true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
@@ -715,7 +750,7 @@ public class GeneralConfig {
 	    nameSign = config.getBoolean("Name Sign", Configuration.CATEGORY_GENERAL, true, "Town centers display their name on one or more signs.");
 		wellBoundary = config.getBoolean("Well boundary", Configuration.CATEGORY_GENERAL, true, "Whether to surround the well with colored blocks");
 	    wellSlabs = config.getBoolean("Well slabs", Configuration.CATEGORY_GENERAL, true, "Replace the cobblestone rims of wells with stone slabs, making it easier for players and villagers to escape if they fall in.");
-	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "The town banner pattern is displayed at the town center.");
+	    villageBanners = config.getBoolean("Village Banner", Configuration.CATEGORY_GENERAL, true, "The town banner pattern is displayed at the town center. You must be using Et Futurum or Gany's Surface with banners enabled.");
 	    signYaw = config.getInt("Sign Yaw", Configuration.CATEGORY_GENERAL, 3, 0, 4, "If Village Banner is enabled: Degree to which well signs and banners should face inward. At 0 they face directly outward away from the well; at 4 they face each other.");
 	    
 		
@@ -1159,6 +1194,7 @@ public class GeneralConfig {
 		
 	    modLantern = config.getStringList("Mod Priority: Lantern", "Mod Integration", new String[]{
  				"uptodate",
+ 				"netherlicious",
 	    		"enviromine",
  				},
  				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
