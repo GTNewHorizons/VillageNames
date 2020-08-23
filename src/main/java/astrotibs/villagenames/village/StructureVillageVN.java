@@ -165,17 +165,80 @@ public class StructureVillageVN
     public static List getStructureVillageWeightedPieceList(Random random, int villageSize, FunctionsVN.VillageType villageType)
     {
     	ArrayList arraylist = new ArrayList();
-        
+    	
     	// Legacy structures
-        if (GeneralConfig.componentLegacyHouse4Garden_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House4Garden.class, GeneralConfig.componentLegacyHouse4Garden_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyHouse4Garden_vals.get(1) + GeneralConfig.componentLegacyHouse4Garden_vals.get(2), villageSize * GeneralConfig.componentLegacyHouse4Garden_vals.get(3) + GeneralConfig.componentLegacyHouse4Garden_vals.get(4))));}
-        if (GeneralConfig.componentLegacyChurch_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Church.class, GeneralConfig.componentLegacyChurch_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyChurch_vals.get(1) + GeneralConfig.componentLegacyChurch_vals.get(2), villageSize * GeneralConfig.componentLegacyChurch_vals.get(3) + GeneralConfig.componentLegacyChurch_vals.get(4))));}
-        if (GeneralConfig.componentLegacyHouse1_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House1.class, GeneralConfig.componentLegacyHouse1_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyHouse1_vals.get(1) + GeneralConfig.componentLegacyHouse1_vals.get(2), villageSize * GeneralConfig.componentLegacyHouse1_vals.get(3) + GeneralConfig.componentLegacyHouse1_vals.get(4))));}
-        if (GeneralConfig.componentLegacyWoodHut_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.WoodHut.class, GeneralConfig.componentLegacyWoodHut_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyWoodHut_vals.get(1) + GeneralConfig.componentLegacyWoodHut_vals.get(2), villageSize * GeneralConfig.componentLegacyWoodHut_vals.get(3) + GeneralConfig.componentLegacyWoodHut_vals.get(4))));}
-        if (GeneralConfig.componentLegacyHall_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Hall.class, GeneralConfig.componentLegacyHall_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyHall_vals.get(1) + GeneralConfig.componentLegacyHall_vals.get(2), villageSize * GeneralConfig.componentLegacyHall_vals.get(3) + GeneralConfig.componentLegacyHall_vals.get(4))));}
-        if (GeneralConfig.componentLegacyField1_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Field1.class, GeneralConfig.componentLegacyField1_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyField1_vals.get(1) + GeneralConfig.componentLegacyField1_vals.get(2), villageSize * GeneralConfig.componentLegacyField1_vals.get(3) + GeneralConfig.componentLegacyField1_vals.get(4))));}
-        if (GeneralConfig.componentLegacyField2_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Field2.class, GeneralConfig.componentLegacyField2_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyField1_vals.get(1) + GeneralConfig.componentLegacyField1_vals.get(2), villageSize * GeneralConfig.componentLegacyField1_vals.get(3) + GeneralConfig.componentLegacyField1_vals.get(4))));}
-        if (GeneralConfig.componentLegacyHouse2_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House2.class, GeneralConfig.componentLegacyHouse2_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyHouse2_vals.get(1) + GeneralConfig.componentLegacyHouse2_vals.get(2), villageSize * GeneralConfig.componentLegacyHouse2_vals.get(3) + GeneralConfig.componentLegacyHouse2_vals.get(4))));}
-        if (GeneralConfig.componentLegacyHouse3_vals.get(0)>0) {arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House3.class, GeneralConfig.componentLegacyHouse3_vals.get(0), MathHelper.getRandomIntegerInRange(random, villageSize * GeneralConfig.componentLegacyHouse3_vals.get(1) + GeneralConfig.componentLegacyHouse3_vals.get(2), villageSize * GeneralConfig.componentLegacyHouse3_vals.get(3) + GeneralConfig.componentLegacyHouse3_vals.get(4))));}
+        if (GeneralConfig.componentLegacyHouse4Garden_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyHouse4Garden_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House4Garden.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyChurch_vals.get(0)>0)
+        {
+    		ArrayList<Double> ali = GeneralConfig.componentLegacyChurch_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Church.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyHouse1_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyHouse1_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyWoodHut_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyWoodHut_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.WoodHut.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyHall_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyHall_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Hall.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyField1_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyField1_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Field1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyField2_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyField2_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.Field2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyHouse2_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyHouse2_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
+        if (GeneralConfig.componentLegacyHouse3_vals.get(0)>0)
+        {
+        	ArrayList<Double> ali = GeneralConfig.componentLegacyHouse3_vals;
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	arraylist.add(new StructureVillagePieces.PieceWeight(StructureVillagePieces.House3.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic)));
+        }
         
         VillagerRegistry.addExtraVillageComponents(arraylist, random, villageSize);
         
