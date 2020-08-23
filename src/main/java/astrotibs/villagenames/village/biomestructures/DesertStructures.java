@@ -10703,7 +10703,7 @@ public class DesertStructures
     
     
     
-    // --- Tool Smithy 1 --- //
+    // --- Tool Smithy --- //
     
     public static class DesertToolSmith1 extends StructureVillagePieces.Village
     {
@@ -10846,7 +10846,6 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlock((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlock((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.sandstone_stairs, 0, this.materialType, this.biome);} else {blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
-        	blockObject = ModObjects.chooseModSmithingTable(); Block smithingTableBlock = (Block) blockObject[0]; int smithingTableMeta = (Integer) blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_button, 0, this.materialType, this.biome); Block biomeWoodButtonBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, this.materialType, this.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	
@@ -11043,6 +11042,7 @@ public class DesertStructures
             
             
             // Smithing table
+        	blockObject = ModObjects.chooseModSmithingTable(); Block smithingTableBlock = (Block) blockObject[0]; int smithingTableMeta = (Integer) blockObject[1];
         	for (int[] uvw : new int[][]{
         		{1,5,6}, 
         		})
@@ -11151,7 +11151,7 @@ public class DesertStructures
     
     
     
-    // --- Tool Smithy 1 --- //
+    // --- Weapon Smithy --- //
     
     public static class DesertWeaponsmith1 extends StructureVillagePieces.Village
     {

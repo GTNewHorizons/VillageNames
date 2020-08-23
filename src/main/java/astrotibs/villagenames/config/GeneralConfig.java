@@ -215,6 +215,9 @@ public class GeneralConfig {
 	public static String componentModernTaigaSmallHouse5_string; public static ArrayList<Double> componentModernTaigaSmallHouse5_vals;
 	public static String componentModernTaigaTannery1_string; public static ArrayList<Double> componentModernTaigaTannery1_vals;
 	public static String componentModernTaigaTemple1_string; public static ArrayList<Double> componentModernTaigaTemple1_vals;
+	public static String componentModernTaigaToolSmith1_string; public static ArrayList<Double> componentModernTaigaToolSmith1_vals;
+	public static String componentModernTaigaWeaponsmith1_string; public static ArrayList<Double> componentModernTaigaWeaponsmith1_vals;
+	public static String componentModernTaigaWeaponsmith2_string; public static ArrayList<Double> componentModernTaigaWeaponsmith2_vals;
 
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -243,400 +246,333 @@ public class GeneralConfig {
 		//farmPumpkins  = config.getBoolean("Pumpkin and Melon Crops", "Village Generator", true, "Farms can have pumpkins and melons generate in them");
 		
 		
-		ArrayList<Double> ali; // For setting default values as integer lists
+		ArrayList<Double> ald; // For setting default values as integer lists
 		
 		// Legacy Village components
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,2D,2D,4D));
-		componentLegacyHouse4Garden_string = config.getString("Component: Legacy Small House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 4.0");
-		componentLegacyHouse4Garden_vals = parseDoubleArray(componentLegacyHouse4Garden_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,2D,2D,4D));
+		componentLegacyHouse4Garden_string = config.getString("Component: Legacy Small House", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 4.0");
+		componentLegacyHouse4Garden_vals = parseDoubleArray(componentLegacyHouse4Garden_string, ald);
 		
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,1D));
-		componentLegacyChurch_string = config.getString("Component: Legacy Church", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 20.0");
-		componentLegacyChurch_vals = parseDoubleArray(componentLegacyChurch_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,1D));
+		componentLegacyChurch_string = config.getString("Component: Legacy Church", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 20.0");
+		componentLegacyChurch_vals = parseDoubleArray(componentLegacyChurch_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,2D));
-		componentLegacyHouse1_string = config.getString("Component: Legacy Library", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 20.0");
-		componentLegacyHouse1_vals = parseDoubleArray(componentLegacyHouse1_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,2D));
+		componentLegacyHouse1_string = config.getString("Component: Legacy Library", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 20.0");
+		componentLegacyHouse1_vals = parseDoubleArray(componentLegacyHouse1_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,2D,3D,5D));
-		componentLegacyWoodHut_string = config.getString("Component: Legacy Hut", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3.0");
-		componentLegacyWoodHut_vals = parseDoubleArray(componentLegacyWoodHut_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,2D,3D,5D));
+		componentLegacyWoodHut_string = config.getString("Component: Legacy Hut", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 3.0");
+		componentLegacyWoodHut_vals = parseDoubleArray(componentLegacyWoodHut_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,2D));
-		componentLegacyHall_string = config.getString("Component: Legacy Butcher Shop", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 15.0");
-		componentLegacyHall_vals = parseDoubleArray(componentLegacyHall_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,0D,1D,2D));
+		componentLegacyHall_string = config.getString("Component: Legacy Butcher Shop", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 15.0");
+		componentLegacyHall_vals = parseDoubleArray(componentLegacyHall_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,1D,1D,4D));
-		componentLegacyField1_string = config.getString("Component: Legacy Large Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3.0");
-		componentLegacyField1_vals = parseDoubleArray(componentLegacyField1_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,1D,1D,4D));
+		componentLegacyField1_string = config.getString("Component: Legacy Large Farm", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 3.0");
+		componentLegacyField1_vals = parseDoubleArray(componentLegacyField1_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,2D,2D,4D));
-		componentLegacyField2_string = config.getString("Component: Legacy Small Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 3.0");
-		componentLegacyField2_vals = parseDoubleArray(componentLegacyField2_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,2D,2D,4D));
+		componentLegacyField2_string = config.getString("Component: Legacy Small Farm", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 3.0");
+		componentLegacyField2_vals = parseDoubleArray(componentLegacyField2_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,0D,0D,1D,1D));
-		componentLegacyHouse2_string = config.getString("Component: Legacy Smithy", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 15.0");
-		componentLegacyHouse2_vals = parseDoubleArray(componentLegacyHouse2_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,0D,0D,1D,1D));
+		componentLegacyHouse2_string = config.getString("Component: Legacy Smithy", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 15.0");
+		componentLegacyHouse2_vals = parseDoubleArray(componentLegacyHouse2_string, ald);
 
-		ali = new ArrayList<Double>(Arrays.asList(0D,1D,0D,2D,3D));
-		componentLegacyHouse3_string = config.getString("Component: Legacy Large House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in all villages. Vanilla weight is 8.0");
-		componentLegacyHouse3_vals = parseDoubleArray(componentLegacyHouse3_string, ali);
+		ald = new ArrayList<Double>(Arrays.asList(0D,1D,0D,2D,3D));
+		componentLegacyHouse3_string = config.getString("Component: Legacy Large House", "Village Generator", convertDoubleArrayToString(ald), "Generation stats for this component in all villages. Vanilla weight is 8.0");
+		componentLegacyHouse3_vals = parseDoubleArray(componentLegacyHouse3_string, ald);
 		
 		// Modern Village components
+		/*
+		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
+				10.11D,  //(91D/9), = 10.11111111111111
+				0.2473D, //((76D/91) * 9D/(152D/5)) =  0.24725274725274726
+				0.0748D, //((23D/91) * 9D/(152D/5)) = 0.07482648930017351
+				0.3644D, //((112D/91) * 9D/(152D/5)) = 0.3643724696356275
+				0.5986D  //((184D/91) * 9D/(152D/5)) = 0.5986119144013881
+				)); // All modern buildings will default to these values
+				*/
+		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(10D, 1D, 1D, 2D, 3D)); // Placeholder to ensure spawn
+		
+		
 		// Plains components
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsAccessory1_vals = parseDoubleArray(componentModernPlainsAccessory1_string, ali);
+		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsAccessory1_vals = parseDoubleArray(componentModernPlainsAccessory1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsAnimalPen1_string = config.getString("Component: Modern Plains Small Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsAnimalPen1_vals = parseDoubleArray(componentModernPlainsAnimalPen1_string, ali);
+		componentModernPlainsAnimalPen1_string = config.getString("Component: Modern Plains Small Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen1_vals = parseDoubleArray(componentModernPlainsAnimalPen1_string, modernDefaults);
 
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsAnimalPen2_string = config.getString("Component: Modern Plains Large Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsAnimalPen2_vals = parseDoubleArray(componentModernPlainsAnimalPen2_string, ali);
+		componentModernPlainsAnimalPen2_string = config.getString("Component: Modern Plains Large Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen2_vals = parseDoubleArray(componentModernPlainsAnimalPen2_string, modernDefaults);
 
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsAnimalPen3_string = config.getString("Component: Modern Plains Decorated Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsAnimalPen3_vals = parseDoubleArray(componentModernPlainsAnimalPen3_string, ali);
+		componentModernPlainsAnimalPen3_string = config.getString("Component: Modern Plains Decorated Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsAnimalPen3_vals = parseDoubleArray(componentModernPlainsAnimalPen3_string, modernDefaults);
 
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsArmorerHouse1_string = config.getString("Component: Modern Plains Armorer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsArmorerHouse1_vals = parseDoubleArray(componentModernPlainsArmorerHouse1_string, ali);
+		componentModernPlainsArmorerHouse1_string = config.getString("Component: Modern Plains Armorer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsArmorerHouse1_vals = parseDoubleArray(componentModernPlainsArmorerHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsBigHouse1_string = config.getString("Component: Modern Plains Large House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsBigHouse1_vals = parseDoubleArray(componentModernPlainsBigHouse1_string, ali);
+		componentModernPlainsBigHouse1_string = config.getString("Component: Modern Plains Large House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsBigHouse1_vals = parseDoubleArray(componentModernPlainsBigHouse1_string, modernDefaults);
 
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsButcherShop1_string = config.getString("Component: Modern Plains Small Butcher Shop", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsButcherShop1_vals = parseDoubleArray(componentModernPlainsButcherShop1_string, ali);
+		componentModernPlainsButcherShop1_string = config.getString("Component: Modern Plains Small Butcher Shop", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsButcherShop1_vals = parseDoubleArray(componentModernPlainsButcherShop1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsButcherShop2_string = config.getString("Component: Modern Plains Large Butcher Shop", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsButcherShop2_vals = parseDoubleArray(componentModernPlainsButcherShop2_string, ali);
+		componentModernPlainsButcherShop2_string = config.getString("Component: Modern Plains Large Butcher Shop", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsButcherShop2_vals = parseDoubleArray(componentModernPlainsButcherShop2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsCartographer1_string = config.getString("Component: Modern Plains Cartographer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsCartographer1_vals = parseDoubleArray(componentModernPlainsCartographer1_string, ali);
+		componentModernPlainsCartographer1_string = config.getString("Component: Modern Plains Cartographer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsCartographer1_vals = parseDoubleArray(componentModernPlainsCartographer1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsFisherCottage1_string = config.getString("Component: Modern Plains Fisher Cottage", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsFisherCottage1_vals = parseDoubleArray(componentModernPlainsFisherCottage1_string, ali);
+		componentModernPlainsFisherCottage1_string = config.getString("Component: Modern Plains Fisher Cottage", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsFisherCottage1_vals = parseDoubleArray(componentModernPlainsFisherCottage1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsFletcherHouse1_string = config.getString("Component: Modern Plains Fletcher House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsFletcherHouse1_vals = parseDoubleArray(componentModernPlainsFletcherHouse1_string, ali);
+		componentModernPlainsFletcherHouse1_string = config.getString("Component: Modern Plains Fletcher House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsFletcherHouse1_vals = parseDoubleArray(componentModernPlainsFletcherHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsLargeFarm1_string = config.getString("Component: Modern Plains Large Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsLargeFarm1_vals = parseDoubleArray(componentModernPlainsLargeFarm1_string, ali);
+		componentModernPlainsLargeFarm1_string = config.getString("Component: Modern Plains Large Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsLargeFarm1_vals = parseDoubleArray(componentModernPlainsLargeFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsLibrary1_string = config.getString("Component: Modern Plains Large Library", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsLibrary1_vals = parseDoubleArray(componentModernPlainsLibrary1_string, ali);
+		componentModernPlainsLibrary1_string = config.getString("Component: Modern Plains Large Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsLibrary1_vals = parseDoubleArray(componentModernPlainsLibrary1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsLibrary2_string = config.getString("Component: Modern Plains Small Library", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsLibrary2_vals = parseDoubleArray(componentModernPlainsLibrary2_string, ali);
+		componentModernPlainsLibrary2_string = config.getString("Component: Modern Plains Small Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsLibrary2_vals = parseDoubleArray(componentModernPlainsLibrary2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsMasonsHouse1_string = config.getString("Component: Modern Plains Mason House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsMasonsHouse1_vals = parseDoubleArray(componentModernPlainsMasonsHouse1_string, ali);
+		componentModernPlainsMasonsHouse1_string = config.getString("Component: Modern Plains Mason House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsMasonsHouse1_vals = parseDoubleArray(componentModernPlainsMasonsHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsMediumHouse1_string = config.getString("Component: Modern Plains Medium House 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsMediumHouse1_vals = parseDoubleArray(componentModernPlainsMediumHouse1_string, ali);
+		componentModernPlainsMediumHouse1_string = config.getString("Component: Modern Plains Medium House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsMediumHouse1_vals = parseDoubleArray(componentModernPlainsMediumHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsMediumHouse2_string = config.getString("Component: Modern Plains Medium House 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsMediumHouse2_vals = parseDoubleArray(componentModernPlainsMediumHouse2_string, ali);
+		componentModernPlainsMediumHouse2_string = config.getString("Component: Modern Plains Medium House 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsMediumHouse2_vals = parseDoubleArray(componentModernPlainsMediumHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsMeetingPoint4_string = config.getString("Component: Modern Plains Market", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsMeetingPoint4_vals = parseDoubleArray(componentModernPlainsMeetingPoint4_string, ali);
+		componentModernPlainsMeetingPoint4_string = config.getString("Component: Modern Plains Market", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsMeetingPoint4_vals = parseDoubleArray(componentModernPlainsMeetingPoint4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsMeetingPoint5_string = config.getString("Component: Modern Plains Small Market", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsMeetingPoint5_vals = parseDoubleArray(componentModernPlainsMeetingPoint5_string, ali);
+		componentModernPlainsMeetingPoint5_string = config.getString("Component: Modern Plains Small Market", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsMeetingPoint5_vals = parseDoubleArray(componentModernPlainsMeetingPoint5_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsShepherdsHouse1_string = config.getString("Component: Modern Plains Shepherd House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsShepherdsHouse1_vals = parseDoubleArray(componentModernPlainsShepherdsHouse1_string, ali);
+		componentModernPlainsShepherdsHouse1_string = config.getString("Component: Modern Plains Shepherd House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsShepherdsHouse1_vals = parseDoubleArray(componentModernPlainsShepherdsHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallFarm1_string = config.getString("Component: Modern Plains Small Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallFarm1_vals = parseDoubleArray(componentModernPlainsSmallFarm1_string, ali);
+		componentModernPlainsSmallFarm1_string = config.getString("Component: Modern Plains Small Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallFarm1_vals = parseDoubleArray(componentModernPlainsSmallFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse1_string = config.getString("Component: Modern Plains Small House 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse1_vals = parseDoubleArray(componentModernPlainsSmallHouse1_string, ali);
+		componentModernPlainsSmallHouse1_string = config.getString("Component: Modern Plains Small House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse1_vals = parseDoubleArray(componentModernPlainsSmallHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse2_string = config.getString("Component: Modern Plains Small House 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse2_vals = parseDoubleArray(componentModernPlainsSmallHouse2_string, ali);
+		componentModernPlainsSmallHouse2_string = config.getString("Component: Modern Plains Small House 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse2_vals = parseDoubleArray(componentModernPlainsSmallHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse3_string = config.getString("Component: Modern Plains Small House 3", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse3_vals = parseDoubleArray(componentModernPlainsSmallHouse3_string, ali);
+		componentModernPlainsSmallHouse3_string = config.getString("Component: Modern Plains Small House 3", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse3_vals = parseDoubleArray(componentModernPlainsSmallHouse3_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse4_string = config.getString("Component: Modern Plains Small House 4", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse4_vals = parseDoubleArray(componentModernPlainsSmallHouse4_string, ali);
+		componentModernPlainsSmallHouse4_string = config.getString("Component: Modern Plains Small House 4", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse4_vals = parseDoubleArray(componentModernPlainsSmallHouse4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse5_string = config.getString("Component: Modern Plains Small House 5", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse5_vals = parseDoubleArray(componentModernPlainsSmallHouse5_string, ali);
+		componentModernPlainsSmallHouse5_string = config.getString("Component: Modern Plains Small House 5", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse5_vals = parseDoubleArray(componentModernPlainsSmallHouse5_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse6_string = config.getString("Component: Modern Plains Small House 6", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse6_vals = parseDoubleArray(componentModernPlainsSmallHouse6_string, ali);
+		componentModernPlainsSmallHouse6_string = config.getString("Component: Modern Plains Small House 6", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse6_vals = parseDoubleArray(componentModernPlainsSmallHouse6_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse7_string = config.getString("Component: Modern Plains Small House 7", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse7_vals = parseDoubleArray(componentModernPlainsSmallHouse7_string, ali);
+		componentModernPlainsSmallHouse7_string = config.getString("Component: Modern Plains Small House 7", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse7_vals = parseDoubleArray(componentModernPlainsSmallHouse7_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsSmallHouse8_string = config.getString("Component: Modern Plains Small House 8", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsSmallHouse8_vals = parseDoubleArray(componentModernPlainsSmallHouse8_string, ali);
+		componentModernPlainsSmallHouse8_string = config.getString("Component: Modern Plains Small House 8", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsSmallHouse8_vals = parseDoubleArray(componentModernPlainsSmallHouse8_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsStable1_string = config.getString("Component: Modern Plains Cobblestone Stable", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsStable1_vals = parseDoubleArray(componentModernPlainsStable1_string, ali);
+		componentModernPlainsStable1_string = config.getString("Component: Modern Plains Cobblestone Stable", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsStable1_vals = parseDoubleArray(componentModernPlainsStable1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsStable2_string = config.getString("Component: Modern Plains Terracotta Stable", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsStable2_vals = parseDoubleArray(componentModernPlainsStable2_string, ali);
+		componentModernPlainsStable2_string = config.getString("Component: Modern Plains Terracotta Stable", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsStable2_vals = parseDoubleArray(componentModernPlainsStable2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsTannery1_string = config.getString("Component: Modern Plains Tannery", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsTannery1_vals = parseDoubleArray(componentModernPlainsTannery1_string, ali);
+		componentModernPlainsTannery1_string = config.getString("Component: Modern Plains Tannery", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsTannery1_vals = parseDoubleArray(componentModernPlainsTannery1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsTemple3_string = config.getString("Component: Modern Plains Terracotta Temple", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsTemple3_vals = parseDoubleArray(componentModernPlainsTemple3_string, ali);
+		componentModernPlainsTemple3_string = config.getString("Component: Modern Plains Terracotta Temple", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsTemple3_vals = parseDoubleArray(componentModernPlainsTemple3_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsTemple4_string = config.getString("Component: Modern Plains Cobblestone Temple", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsTemple4_vals = parseDoubleArray(componentModernPlainsTemple4_string, ali);
+		componentModernPlainsTemple4_string = config.getString("Component: Modern Plains Cobblestone Temple", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsTemple4_vals = parseDoubleArray(componentModernPlainsTemple4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsToolSmith1_string = config.getString("Component: Modern Plains Tool Smithy", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsToolSmith1_vals = parseDoubleArray(componentModernPlainsToolSmith1_string, ali);
+		componentModernPlainsToolSmith1_string = config.getString("Component: Modern Plains Tool Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsToolSmith1_vals = parseDoubleArray(componentModernPlainsToolSmith1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in plains villages");
-		componentModernPlainsWeaponsmith1_vals = parseDoubleArray(componentModernPlainsWeaponsmith1_string, ali);
+		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsWeaponsmith1_vals = parseDoubleArray(componentModernPlainsWeaponsmith1_string, modernDefaults);
 		
 		// Desert components
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertAnimalPen1_string = config.getString("Component: Modern Desert Small Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertAnimalPen1_vals = parseDoubleArray(componentModernDesertAnimalPen1_string, ali);
+		componentModernDesertAnimalPen1_string = config.getString("Component: Modern Desert Small Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertAnimalPen1_vals = parseDoubleArray(componentModernDesertAnimalPen1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertAnimalPen2_string = config.getString("Component: Modern Desert Covered Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertAnimalPen2_vals = parseDoubleArray(componentModernDesertAnimalPen2_string, ali);
+		componentModernDesertAnimalPen2_string = config.getString("Component: Modern Desert Covered Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertAnimalPen2_vals = parseDoubleArray(componentModernDesertAnimalPen2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertArmorer1_string = config.getString("Component: Modern Desert Armorer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertArmorer1_vals = parseDoubleArray(componentModernDesertArmorer1_string, ali);
+		componentModernDesertArmorer1_string = config.getString("Component: Modern Desert Armorer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertArmorer1_vals = parseDoubleArray(componentModernDesertArmorer1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertButcherShop1_string = config.getString("Component: Modern Desert Butcher Shop", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertButcherShop1_vals = parseDoubleArray(componentModernDesertButcherShop1_string, ali);
+		componentModernDesertButcherShop1_string = config.getString("Component: Modern Desert Butcher Shop", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertButcherShop1_vals = parseDoubleArray(componentModernDesertButcherShop1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertCartographerHouse1_string = config.getString("Component: Modern Desert Cartographer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertCartographerHouse1_vals = parseDoubleArray(componentModernDesertCartographerHouse1_string, ali);
+		componentModernDesertCartographerHouse1_string = config.getString("Component: Modern Desert Cartographer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertCartographerHouse1_vals = parseDoubleArray(componentModernDesertCartographerHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertFarm1_string = config.getString("Component: Modern Desert Small Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertFarm1_vals = parseDoubleArray(componentModernDesertFarm1_string, ali);
+		componentModernDesertFarm1_string = config.getString("Component: Modern Desert Small Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertFarm1_vals = parseDoubleArray(componentModernDesertFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertFarm2_string = config.getString("Component: Modern Desert Medium Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertFarm2_vals = parseDoubleArray(componentModernDesertFarm2_string, ali);
+		componentModernDesertFarm2_string = config.getString("Component: Modern Desert Medium Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertFarm2_vals = parseDoubleArray(componentModernDesertFarm2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertFisher1_string = config.getString("Component: Modern Desert Fisher Cottage", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertFisher1_vals = parseDoubleArray(componentModernDesertFisher1_string, ali);
+		componentModernDesertFisher1_string = config.getString("Component: Modern Desert Fisher Cottage", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertFisher1_vals = parseDoubleArray(componentModernDesertFisher1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertFletcherHouse1_string = config.getString("Component: Modern Desert Fletcher House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertFletcherHouse1_vals = parseDoubleArray(componentModernDesertFletcherHouse1_string, ali);
+		componentModernDesertFletcherHouse1_string = config.getString("Component: Modern Desert Fletcher House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertFletcherHouse1_vals = parseDoubleArray(componentModernDesertFletcherHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertLargeFarm1_string = config.getString("Component: Modern Desert Large Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertLargeFarm1_vals = parseDoubleArray(componentModernDesertLargeFarm1_string, ali);
+		componentModernDesertLargeFarm1_string = config.getString("Component: Modern Desert Large Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertLargeFarm1_vals = parseDoubleArray(componentModernDesertLargeFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertLibrary1_string = config.getString("Component: Modern Desert Library", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertLibrary1_vals = parseDoubleArray(componentModernDesertLibrary1_string, ali);
+		componentModernDesertLibrary1_string = config.getString("Component: Modern Desert Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertLibrary1_vals = parseDoubleArray(componentModernDesertLibrary1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertMason1_string = config.getString("Component: Modern Desert Mason House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertMason1_vals = parseDoubleArray(componentModernDesertMason1_string, ali);
+		componentModernDesertMason1_string = config.getString("Component: Modern Desert Mason House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertMason1_vals = parseDoubleArray(componentModernDesertMason1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertMediumHouse1_string = config.getString("Component: Modern Desert Medium House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertMediumHouse1_vals = parseDoubleArray(componentModernDesertMediumHouse1_string, ali);
+		componentModernDesertMediumHouse1_string = config.getString("Component: Modern Desert Medium House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertMediumHouse1_vals = parseDoubleArray(componentModernDesertMediumHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertMediumHouse2_string = config.getString("Component: Modern Desert Large House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertMediumHouse2_vals = parseDoubleArray(componentModernDesertMediumHouse2_string, ali);
+		componentModernDesertMediumHouse2_string = config.getString("Component: Modern Desert Large House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertMediumHouse2_vals = parseDoubleArray(componentModernDesertMediumHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertShepherdHouse1_string = config.getString("Component: Modern Desert Shepherd House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertShepherdHouse1_vals = parseDoubleArray(componentModernDesertShepherdHouse1_string, ali);
+		componentModernDesertShepherdHouse1_string = config.getString("Component: Modern Desert Shepherd House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertShepherdHouse1_vals = parseDoubleArray(componentModernDesertShepherdHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse1_string = config.getString("Component: Modern Desert Small House 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse1_vals = parseDoubleArray(componentModernDesertSmallHouse1_string, ali);
+		componentModernDesertSmallHouse1_string = config.getString("Component: Modern Desert Small House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse1_vals = parseDoubleArray(componentModernDesertSmallHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse2_string = config.getString("Component: Modern Desert Small House 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse2_vals = parseDoubleArray(componentModernDesertSmallHouse2_string, ali);
+		componentModernDesertSmallHouse2_string = config.getString("Component: Modern Desert Small House 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse2_vals = parseDoubleArray(componentModernDesertSmallHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse3_string = config.getString("Component: Modern Desert Small House 3", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse3_vals = parseDoubleArray(componentModernDesertSmallHouse3_string, ali);
+		componentModernDesertSmallHouse3_string = config.getString("Component: Modern Desert Small House 3", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse3_vals = parseDoubleArray(componentModernDesertSmallHouse3_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse4_string = config.getString("Component: Modern Desert Small House 4", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse4_vals = parseDoubleArray(componentModernDesertSmallHouse4_string, ali);
+		componentModernDesertSmallHouse4_string = config.getString("Component: Modern Desert Small House 4", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse4_vals = parseDoubleArray(componentModernDesertSmallHouse4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse5_string = config.getString("Component: Modern Desert Small House 5", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse5_vals = parseDoubleArray(componentModernDesertSmallHouse5_string, ali);
+		componentModernDesertSmallHouse5_string = config.getString("Component: Modern Desert Small House 5", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse5_vals = parseDoubleArray(componentModernDesertSmallHouse5_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse6_string = config.getString("Component: Modern Desert Small House 6", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse6_vals = parseDoubleArray(componentModernDesertSmallHouse6_string, ali);
+		componentModernDesertSmallHouse6_string = config.getString("Component: Modern Desert Small House 6", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse6_vals = parseDoubleArray(componentModernDesertSmallHouse6_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse7_string = config.getString("Component: Modern Desert Small House 7", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse7_vals = parseDoubleArray(componentModernDesertSmallHouse7_string, ali);
+		componentModernDesertSmallHouse7_string = config.getString("Component: Modern Desert Small House 7", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse7_vals = parseDoubleArray(componentModernDesertSmallHouse7_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertSmallHouse8_string = config.getString("Component: Modern Desert Small House 8", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertSmallHouse8_vals = parseDoubleArray(componentModernDesertSmallHouse8_string, ali);
+		componentModernDesertSmallHouse8_string = config.getString("Component: Modern Desert Small House 8", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertSmallHouse8_vals = parseDoubleArray(componentModernDesertSmallHouse8_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertTannery1_string = config.getString("Component: Modern Desert Tannery", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertTannery1_vals = parseDoubleArray(componentModernDesertTannery1_string, ali);
+		componentModernDesertTannery1_string = config.getString("Component: Modern Desert Tannery", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertTannery1_vals = parseDoubleArray(componentModernDesertTannery1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertTemple1_string = config.getString("Component: Modern Desert Temple 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertTemple1_vals = parseDoubleArray(componentModernDesertTemple1_string, ali);
+		componentModernDesertTemple1_string = config.getString("Component: Modern Desert Temple 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertTemple1_vals = parseDoubleArray(componentModernDesertTemple1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertTemple2_string = config.getString("Component: Modern Desert Temple 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertTemple2_vals = parseDoubleArray(componentModernDesertTemple2_string, ali);
+		componentModernDesertTemple2_string = config.getString("Component: Modern Desert Temple 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertTemple2_vals = parseDoubleArray(componentModernDesertTemple2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertToolSmith1_string = config.getString("Component: Modern Desert Tool Smithy", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertToolSmith1_vals = parseDoubleArray(componentModernDesertToolSmith1_string, ali);
+		componentModernDesertToolSmith1_string = config.getString("Component: Modern Desert Tool Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertToolSmith1_vals = parseDoubleArray(componentModernDesertToolSmith1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernDesertWeaponsmith1_string = config.getString("Component: Modern Desert Weapon Smithy", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in desert villages");
-		componentModernDesertWeaponsmith1_vals = parseDoubleArray(componentModernDesertWeaponsmith1_string, ali);
+		componentModernDesertWeaponsmith1_string = config.getString("Component: Modern Desert Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertWeaponsmith1_vals = parseDoubleArray(componentModernDesertWeaponsmith1_string, modernDefaults);
 		
 		// Taiga components
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaAnimalPen1_string = config.getString("Component: Modern Taiga Animal Pen", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaAnimalPen1_vals = parseDoubleArray(componentModernTaigaAnimalPen1_string, ali);
+		componentModernTaigaAnimalPen1_string = config.getString("Component: Modern Taiga Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaAnimalPen1_vals = parseDoubleArray(componentModernTaigaAnimalPen1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaArmorer2_string = config.getString("Component: Modern Taiga Armorer Station", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaArmorer2_vals = parseDoubleArray(componentModernTaigaArmorer2_string, ali);
+		componentModernTaigaArmorer2_string = config.getString("Component: Modern Taiga Armorer Station", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaArmorer2_vals = parseDoubleArray(componentModernTaigaArmorer2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaArmorerHouse1_string = config.getString("Component: Modern Taiga Armorer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaArmorerHouse1_vals = parseDoubleArray(componentModernTaigaArmorerHouse1_string, ali);
+		componentModernTaigaArmorerHouse1_string = config.getString("Component: Modern Taiga Armorer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaArmorerHouse1_vals = parseDoubleArray(componentModernTaigaArmorerHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaButcherShop1_string = config.getString("Component: Modern Taiga Butcher Shop", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaButcherShop1_vals = parseDoubleArray(componentModernTaigaButcherShop1_string, ali);
+		componentModernTaigaButcherShop1_string = config.getString("Component: Modern Taiga Butcher Shop", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaButcherShop1_vals = parseDoubleArray(componentModernTaigaButcherShop1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaCartographerHouse1_string = config.getString("Component: Modern Taiga Cartographer House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaCartographerHouse1_vals = parseDoubleArray(componentModernTaigaCartographerHouse1_string, ali);
+		componentModernTaigaCartographerHouse1_string = config.getString("Component: Modern Taiga Cartographer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaCartographerHouse1_vals = parseDoubleArray(componentModernTaigaCartographerHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaFisherCottage1_string = config.getString("Component: Modern Taiga Fisher Cottage", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaFisherCottage1_vals = parseDoubleArray(componentModernTaigaFisherCottage1_string, ali);
+		componentModernTaigaFisherCottage1_string = config.getString("Component: Modern Taiga Fisher Cottage", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaFisherCottage1_vals = parseDoubleArray(componentModernTaigaFisherCottage1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaFletcherHouse1_string = config.getString("Component: Modern Taiga Fletcher House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaFletcherHouse1_vals = parseDoubleArray(componentModernTaigaFletcherHouse1_string, ali);
+		componentModernTaigaFletcherHouse1_string = config.getString("Component: Modern Taiga Fletcher House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaFletcherHouse1_vals = parseDoubleArray(componentModernTaigaFletcherHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaLargeFarm1_string = config.getString("Component: Modern Taiga Large Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaLargeFarm1_vals = parseDoubleArray(componentModernTaigaLargeFarm1_string, ali);
+		componentModernTaigaLargeFarm1_string = config.getString("Component: Modern Taiga Large Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaLargeFarm1_vals = parseDoubleArray(componentModernTaigaLargeFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMediumFarm1_string = config.getString("Component: Modern Taiga Medium Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMediumFarm1_vals = parseDoubleArray(componentModernTaigaMediumFarm1_string, ali);
+		componentModernTaigaMediumFarm1_string = config.getString("Component: Modern Taiga Medium Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumFarm1_vals = parseDoubleArray(componentModernTaigaMediumFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaLibrary1_string = config.getString("Component: Modern Taiga Library", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaLibrary1_vals = parseDoubleArray(componentModernTaigaLibrary1_string, ali);
+		componentModernTaigaLibrary1_string = config.getString("Component: Modern Taiga Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaLibrary1_vals = parseDoubleArray(componentModernTaigaLibrary1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMasonsHouse1_string = config.getString("Component: Modern Taiga Mason House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMasonsHouse1_vals = parseDoubleArray(componentModernTaigaMasonsHouse1_string, ali);
+		componentModernTaigaMasonsHouse1_string = config.getString("Component: Modern Taiga Mason House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMasonsHouse1_vals = parseDoubleArray(componentModernTaigaMasonsHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMediumHouse1_string = config.getString("Component: Modern Taiga Medium House 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMediumHouse1_vals = parseDoubleArray(componentModernTaigaMediumHouse1_string, ali);
+		componentModernTaigaMediumHouse1_string = config.getString("Component: Modern Taiga Medium House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse1_vals = parseDoubleArray(componentModernTaigaMediumHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMediumHouse2_string = config.getString("Component: Modern Taiga Medium House 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMediumHouse2_vals = parseDoubleArray(componentModernTaigaMediumHouse2_string, ali);
+		componentModernTaigaMediumHouse2_string = config.getString("Component: Modern Taiga Medium House 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse2_vals = parseDoubleArray(componentModernTaigaMediumHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMediumHouse3_string = config.getString("Component: Modern Taiga Medium House 3", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMediumHouse3_vals = parseDoubleArray(componentModernTaigaMediumHouse3_string, ali);
+		componentModernTaigaMediumHouse3_string = config.getString("Component: Modern Taiga Medium House 3", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse3_vals = parseDoubleArray(componentModernTaigaMediumHouse3_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaMediumHouse4_string = config.getString("Component: Modern Taiga Medium House 4", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaMediumHouse4_vals = parseDoubleArray(componentModernTaigaMediumHouse4_string, ali);
+		componentModernTaigaMediumHouse4_string = config.getString("Component: Modern Taiga Medium House 4", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaMediumHouse4_vals = parseDoubleArray(componentModernTaigaMediumHouse4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaShepherdsHouse1_string = config.getString("Component: Modern Taiga Shepherd House", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaShepherdsHouse1_vals = parseDoubleArray(componentModernTaigaShepherdsHouse1_string, ali);
+		componentModernTaigaShepherdsHouse1_string = config.getString("Component: Modern Taiga Shepherd House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaShepherdsHouse1_vals = parseDoubleArray(componentModernTaigaShepherdsHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallFarm1_string = config.getString("Component: Modern Taiga Small Farm", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallFarm1_vals = parseDoubleArray(componentModernTaigaSmallFarm1_string, ali);
+		componentModernTaigaSmallFarm1_string = config.getString("Component: Modern Taiga Small Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallFarm1_vals = parseDoubleArray(componentModernTaigaSmallFarm1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallHouse1_string = config.getString("Component: Modern Taiga Small House 1", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallHouse1_vals = parseDoubleArray(componentModernTaigaSmallHouse1_string, ali);
+		componentModernTaigaSmallHouse1_string = config.getString("Component: Modern Taiga Small House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse1_vals = parseDoubleArray(componentModernTaigaSmallHouse1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallHouse2_string = config.getString("Component: Modern Taiga Small House 2", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallHouse2_vals = parseDoubleArray(componentModernTaigaSmallHouse2_string, ali);
+		componentModernTaigaSmallHouse2_string = config.getString("Component: Modern Taiga Small House 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse2_vals = parseDoubleArray(componentModernTaigaSmallHouse2_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallHouse3_string = config.getString("Component: Modern Taiga Small House 3", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallHouse3_vals = parseDoubleArray(componentModernTaigaSmallHouse3_string, ali);
+		componentModernTaigaSmallHouse3_string = config.getString("Component: Modern Taiga Small House 3", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse3_vals = parseDoubleArray(componentModernTaigaSmallHouse3_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallHouse4_string = config.getString("Component: Modern Taiga Small House 4", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallHouse4_vals = parseDoubleArray(componentModernTaigaSmallHouse4_string, ali);
+		componentModernTaigaSmallHouse4_string = config.getString("Component: Modern Taiga Small House 4", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse4_vals = parseDoubleArray(componentModernTaigaSmallHouse4_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaSmallHouse5_string = config.getString("Component: Modern Taiga Small House 5", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaSmallHouse5_vals = parseDoubleArray(componentModernTaigaSmallHouse5_string, ali);
+		componentModernTaigaSmallHouse5_string = config.getString("Component: Modern Taiga Small House 5", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaSmallHouse5_vals = parseDoubleArray(componentModernTaigaSmallHouse5_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaTannery1_string = config.getString("Component: Modern Taiga Tannery", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaTannery1_vals = parseDoubleArray(componentModernTaigaTannery1_string, ali);
+		componentModernTaigaTannery1_string = config.getString("Component: Modern Taiga Tannery", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaTannery1_vals = parseDoubleArray(componentModernTaigaTannery1_string, modernDefaults);
 		
-		ali = new ArrayList<Double>(Arrays.asList(3D,1D,1D,2D,4D));
-		componentModernTaigaTemple1_string = config.getString("Component: Modern Taiga Temple", "Village Generator", convertDoubleArrayToString(ali), "Generation stats for this component in taiga villages");
-		componentModernTaigaTemple1_vals = parseDoubleArray(componentModernTaigaTemple1_string, ali);
+		componentModernTaigaTemple1_string = config.getString("Component: Modern Taiga Temple", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaTemple1_vals = parseDoubleArray(componentModernTaigaTemple1_string, modernDefaults);
+		
+		componentModernTaigaToolSmith1_string = config.getString("Component: Modern Taiga Tool Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaToolSmith1_vals = parseDoubleArray(componentModernTaigaToolSmith1_string, modernDefaults);
+		
+		componentModernTaigaWeaponsmith1_string = config.getString("Component: Modern Taiga Weapon Smith House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaWeaponsmith1_vals = parseDoubleArray(componentModernTaigaWeaponsmith1_string, modernDefaults);
+		
+		componentModernTaigaWeaponsmith2_string = config.getString("Component: Modern Taiga Weapon Smith Station", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaWeaponsmith2_vals = parseDoubleArray(componentModernTaigaWeaponsmith2_string, modernDefaults);
 		
 		
 		// Misc

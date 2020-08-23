@@ -305,6 +305,9 @@ public final class VillageNames
 	        registerVillageComponentBuilding(TaigaStructures.TaigaSmallHouse5.class, "VNTaSmH5", new StructureCreationHandlers.TaigaSmallHouse5_Handler());
 	        registerVillageComponentBuilding(TaigaStructures.TaigaTannery1.class, "VNTaTan1", new StructureCreationHandlers.TaigaTannery1_Handler());
 	        registerVillageComponentBuilding(TaigaStructures.TaigaTemple1.class, "VNTaTem1", new StructureCreationHandlers.TaigaTemple1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaToolSmith1.class, "VNTaTSm1", new StructureCreationHandlers.TaigaToolSmith1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaWeaponsmith1.class, "VNTaWSm1", new StructureCreationHandlers.TaigaWeaponsmith1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaWeaponsmith2.class, "VNTaWSm2", new StructureCreationHandlers.TaigaWeaponsmith2_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one
