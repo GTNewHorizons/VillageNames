@@ -218,6 +218,11 @@ public class GeneralConfig {
 	public static String componentModernTaigaToolSmith1_string; public static ArrayList<Double> componentModernTaigaToolSmith1_vals;
 	public static String componentModernTaigaWeaponsmith1_string; public static ArrayList<Double> componentModernTaigaWeaponsmith1_vals;
 	public static String componentModernTaigaWeaponsmith2_string; public static ArrayList<Double> componentModernTaigaWeaponsmith2_vals;
+	public static String componentModernSavannaAnimalPen1_string; public static ArrayList<Double> componentModernSavannaAnimalPen1_vals;
+	public static String componentModernSavannaAnimalPen2_string; public static ArrayList<Double> componentModernSavannaAnimalPen2_vals;
+	public static String componentModernSavannaAnimalPen3_string; public static ArrayList<Double> componentModernSavannaAnimalPen3_vals;
+	public static String componentModernSavannaArmorer1_string; public static ArrayList<Double> componentModernSavannaArmorer1_vals;
+	public static String componentModernSavannaButchersShop1_string; public static ArrayList<Double> componentModernSavannaButchersShop1_vals;
 
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -573,6 +578,22 @@ public class GeneralConfig {
 		
 		componentModernTaigaWeaponsmith2_string = config.getString("Component: Modern Taiga Weapon Smith Station", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
 		componentModernTaigaWeaponsmith2_vals = parseDoubleArray(componentModernTaigaWeaponsmith2_string, modernDefaults);
+		
+		// Savanna components
+		componentModernSavannaAnimalPen1_string = config.getString("Component: Modern Savanna Covered Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaAnimalPen1_vals = parseDoubleArray(componentModernSavannaAnimalPen1_string, modernDefaults);
+		
+		componentModernSavannaAnimalPen2_string = config.getString("Component: Modern Savanna Large Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaAnimalPen2_vals = parseDoubleArray(componentModernSavannaAnimalPen2_string, modernDefaults);
+		
+		componentModernSavannaAnimalPen3_string = config.getString("Component: Modern Savanna Medium Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaAnimalPen3_vals = parseDoubleArray(componentModernSavannaAnimalPen3_string, modernDefaults);
+		
+		componentModernSavannaArmorer1_string = config.getString("Component: Modern Savanna Armorer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaArmorer1_vals = parseDoubleArray(componentModernSavannaArmorer1_string, modernDefaults);
+		
+		componentModernSavannaButchersShop1_string = config.getString("Component: Modern Savanna Butcher Shop 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaButchersShop1_vals = parseDoubleArray(componentModernSavannaButchersShop1_string, modernDefaults);
 		
 		
 		// Misc

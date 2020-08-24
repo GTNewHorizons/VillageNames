@@ -3,6 +3,7 @@ package astrotibs.villagenames.handler;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.item.ModItems;
+import astrotibs.villagenames.utility.FunctionsVN;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -530,5 +531,18 @@ public class ChestLootHandler {
 			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
 		}
 		
+	}
+	
+	public static String getGenericLootForVillageType(FunctionsVN.VillageType villageType)
+	{
+		switch (villageType)
+		{
+		default:
+		case PLAINS:  return "vn_plains_house";
+		case DESERT:  return "vn_desert_house";
+		case TAIGA:   return "vn_taiga_house";
+		case SAVANNA: return "vn_savanna_house";
+		case SNOWY:   return "vn_snowy_house";
+		}
 	}
 }
