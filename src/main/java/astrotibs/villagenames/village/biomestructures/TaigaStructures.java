@@ -995,7 +995,7 @@ public class TaigaStructures
         			{8, 1, 4}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -2252,7 +2252,7 @@ public class TaigaStructures
         			{7, 2, 2},
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     

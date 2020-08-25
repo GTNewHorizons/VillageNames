@@ -1350,7 +1350,7 @@ public class DesertStructures
         			{7, 1, 3}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false); // Because horses can escape the pen
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM); // Because horses can escape the pen
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
         		}
@@ -1657,7 +1657,7 @@ public class DesertStructures
         			{3, 1, 3}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false); // Because horses can escape the pen
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM); // Because horses can escape the pen
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
         		}
@@ -2396,7 +2396,7 @@ public class DesertStructures
         			{6, 1, 6},
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     

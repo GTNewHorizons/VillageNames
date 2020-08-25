@@ -1723,7 +1723,7 @@ public class PlainsStructures
             {
             	entitiesGenerated = true;
             	
-            	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+            	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                 animal.setLocationAndAngles((double)this.getXWithOffset(1, 2) + 0.5D, (double)this.getYWithOffset(1) + 0.5D, (double)this.getZWithOffset(1, 2) + 0.5D, random.nextFloat()*360F, 0.0F);
                 world.spawnEntityInWorld(animal);
                 
@@ -1934,7 +1934,7 @@ public class PlainsStructures
         			})
         		{
 
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -2184,7 +2184,7 @@ public class PlainsStructures
         			{5, 1, 5},
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -3299,7 +3299,7 @@ public class PlainsStructures
         			{9, 1, 6},
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -3761,7 +3761,7 @@ public class PlainsStructures
         			{3, 1, 12},
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -12452,7 +12452,7 @@ public class PlainsStructures
         			{10, 1, 4}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -12852,7 +12852,7 @@ public class PlainsStructures
         			{4, 1, 3}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
