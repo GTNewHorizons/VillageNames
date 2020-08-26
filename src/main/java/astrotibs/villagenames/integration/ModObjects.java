@@ -2437,10 +2437,9 @@ public class ModObjects {
 	
 	
 	// Wooden Pressure Plate
-	// Fence
 	public static Block chooseModPressurePlate(int materialMeta)
 	{
-		String[] modprioritylist = GeneralConfig.modFence;
+		String[] modprioritylist = GeneralConfig.modPressurePlate;
 		
 		for (String mod : modprioritylist)
 		{
@@ -2484,7 +2483,7 @@ public class ModObjects {
 			}
 		}
 		// If all else fails, grab the vanilla version
-		return Blocks.fence;
+		return Blocks.wooden_pressure_plate;
 	}
 	
 	// Wood block (has bark on all surfaces)

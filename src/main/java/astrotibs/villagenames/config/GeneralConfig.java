@@ -225,7 +225,12 @@ public class GeneralConfig {
 	public static String componentModernSavannaButchersShop1_string; public static ArrayList<Double> componentModernSavannaButchersShop1_vals;
 	public static String componentModernSavannaButchersShop2_string; public static ArrayList<Double> componentModernSavannaButchersShop2_vals;
 	public static String componentModernSavannaCartographer1_string; public static ArrayList<Double> componentModernSavannaCartographer1_vals;
-
+	public static String componentModernSavannaFisherCottage1_string; public static ArrayList<Double> componentModernSavannaFisherCottage1_vals;
+	public static String componentModernSavannaFletcherHouse1_string; public static ArrayList<Double> componentModernSavannaFletcherHouse1_vals;
+	public static String componentModernSavannaLargeFarm1_string; public static ArrayList<Double> componentModernSavannaLargeFarm1_vals;
+	public static String componentModernSavannaLargeFarm2_string; public static ArrayList<Double> componentModernSavannaLargeFarm2_vals;
+	public static String componentModernSavannaLibrary1_string; public static ArrayList<Double> componentModernSavannaLibrary1_vals;
+	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
@@ -602,6 +607,21 @@ public class GeneralConfig {
 		
 		componentModernSavannaCartographer1_string = config.getString("Component: Modern Savanna Cartographer House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
 		componentModernSavannaCartographer1_vals = parseDoubleArray(componentModernSavannaCartographer1_string, modernDefaults);
+		
+		componentModernSavannaFisherCottage1_string = config.getString("Component: Modern Savanna Fisher Cottage", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaFisherCottage1_vals = parseDoubleArray(componentModernSavannaFisherCottage1_string, modernDefaults);
+		
+		componentModernSavannaFletcherHouse1_string = config.getString("Component: Modern Savanna Fletcher House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaFletcherHouse1_vals = parseDoubleArray(componentModernSavannaFletcherHouse1_string, modernDefaults);
+		
+		componentModernSavannaLargeFarm1_string = config.getString("Component: Modern Savanna Methodical Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaLargeFarm1_vals = parseDoubleArray(componentModernSavannaLargeFarm1_string, modernDefaults);
+		
+		componentModernSavannaLargeFarm2_string = config.getString("Component: Modern Savanna Haphazard Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaLargeFarm2_vals = parseDoubleArray(componentModernSavannaLargeFarm2_string, modernDefaults);
+		
+		componentModernSavannaLibrary1_string = config.getString("Component: Modern Savanna Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaLibrary1_vals = parseDoubleArray(componentModernSavannaLibrary1_string, modernDefaults);
 		
 		
 		// Misc
