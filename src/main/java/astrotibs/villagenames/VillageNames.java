@@ -251,6 +251,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple4.class, "VNPlTem4", new StructureCreationHandlers.PlainsTemple4_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsToolSmith1.class, "VNPlTSm1", new StructureCreationHandlers.PlainsToolSmith1_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsWeaponsmith1.class, "VNPlWSm1", new StructureCreationHandlers.PlainsWeaponsmith1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsStreetSubstitute1.class, "VNPlStS1", new StructureCreationHandlers.PlainsStreetSubstitute1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsStreetSubstitute2.class, "VNPlStS2", new StructureCreationHandlers.PlainsStreetSubstitute2_Handler());
 	        
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen1.class, "VNDeAnP1", new StructureCreationHandlers.DesertAnimalPen1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen2.class, "VNDeAnP2", new StructureCreationHandlers.DesertAnimalPen2_Handler());

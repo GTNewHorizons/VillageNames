@@ -163,6 +163,9 @@ public class GeneralConfig {
 	public static String componentModernPlainsTemple4_string; public static ArrayList<Double> componentModernPlainsTemple4_vals;
 	public static String componentModernPlainsToolSmith1_string; public static ArrayList<Double> componentModernPlainsToolSmith1_vals;
 	public static String componentModernPlainsWeaponsmith1_string; public static ArrayList<Double> componentModernPlainsWeaponsmith1_vals;
+	public static String componentModernPlainsStreetSubstitute1_string; public static ArrayList<Double> componentModernPlainsStreetSubstitute1_vals;
+	public static String componentModernPlainsStreetSubstitute2_string; public static ArrayList<Double> componentModernPlainsStreetSubstitute2_vals;
+	
 	public static String componentModernDesertAnimalPen1_string; public static ArrayList<Double> componentModernDesertAnimalPen1_vals;
 	public static String componentModernDesertAnimalPen2_string; public static ArrayList<Double> componentModernDesertAnimalPen2_vals;
 	public static String componentModernDesertArmorer1_string; public static ArrayList<Double> componentModernDesertArmorer1_vals;
@@ -191,6 +194,7 @@ public class GeneralConfig {
 	public static String componentModernDesertTemple2_string; public static ArrayList<Double> componentModernDesertTemple2_vals;
 	public static String componentModernDesertToolSmith1_string; public static ArrayList<Double> componentModernDesertToolSmith1_vals;
 	public static String componentModernDesertWeaponsmith1_string; public static ArrayList<Double> componentModernDesertWeaponsmith1_vals;
+	
 	public static String componentModernTaigaAnimalPen1_string; public static ArrayList<Double> componentModernTaigaAnimalPen1_vals;
 	public static String componentModernTaigaArmorer2_string; public static ArrayList<Double> componentModernTaigaArmorer2_vals;
 	public static String componentModernTaigaArmorerHouse1_string; public static ArrayList<Double> componentModernTaigaArmorerHouse1_vals;
@@ -218,6 +222,7 @@ public class GeneralConfig {
 	public static String componentModernTaigaToolSmith1_string; public static ArrayList<Double> componentModernTaigaToolSmith1_vals;
 	public static String componentModernTaigaWeaponsmith1_string; public static ArrayList<Double> componentModernTaigaWeaponsmith1_vals;
 	public static String componentModernTaigaWeaponsmith2_string; public static ArrayList<Double> componentModernTaigaWeaponsmith2_vals;
+	
 	public static String componentModernSavannaAnimalPen1_string; public static ArrayList<Double> componentModernSavannaAnimalPen1_vals;
 	public static String componentModernSavannaAnimalPen2_string; public static ArrayList<Double> componentModernSavannaAnimalPen2_vals;
 	public static String componentModernSavannaAnimalPen3_string; public static ArrayList<Double> componentModernSavannaAnimalPen3_vals;
@@ -300,15 +305,16 @@ public class GeneralConfig {
 		// Modern Village components
 		/*
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
-				10.11D,  //(91D/9), = 10.11111111111111
-				0.2473D, //((76D/91) * 9D/(152D/5)) =  0.24725274725274726
-				0.0748D, //((23D/91) * 9D/(152D/5)) = 0.07482648930017351
-				0.3644D, //((112D/91) * 9D/(152D/5)) = 0.3643724696356275
-				0.5986D  //((184D/91) * 9D/(152D/5)) = 0.5986119144013881
+				(91D/9), //= 10.11111111111111
+				((76D/91) * 9D/(152D/5)), //=  0.24725274725274726
+				((23D/91) * 9D/(152D/5)), //= 0.07482648930017351
+				((112D/91) * 9D/(152D/5)), //= 0.3643724696356275
+				((184D/91) * 9D/(152D/5)) //= 0.5986119144013881
 				)); // All modern buildings will default to these values
 				*/
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(10D, 1D, 1D, 2D, 3D)); // Placeholder to ensure spawn
-		
+		ArrayList<Double> modifiedDefaults = new ArrayList<Double>(Arrays.asList(0D, 0D, 0D, 0D, 0D));
+		int plainsHouses = 36;
 		
 		// Plains components
 		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
@@ -418,6 +424,20 @@ public class GeneralConfig {
 		
 		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
 		componentModernPlainsWeaponsmith1_vals = parseDoubleArray(componentModernPlainsWeaponsmith1_string, modernDefaults);
+		
+		double plainsDecorToHouseRatio = 18D/13D;
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * plainsDecorToHouseRatio); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*plainsHouses * plainsDecorToHouseRatio);}
+		componentModernPlainsStreetSubstitute1_string = config.getString("Component: Modern Plains Roadside Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsStreetSubstitute1_vals = parseDoubleArray(componentModernPlainsStreetSubstitute1_string, modifiedDefaults);
+		
+		//double plainsStreetDecorToHouseRatio = 1D/13D;
+		double plainsStreetToHouseRatio = 2D; // 13 house attachments and 46 street attachments across 20 streets and street endcaps = (46-20)/13 = 26/13 = 2
+		double plainsCrossroadsDecorStreetFraction = 1D/(16D + 4D); // 16 streets and 4 endcaps
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * plainsStreetToHouseRatio * plainsCrossroadsDecorStreetFraction);
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*plainsHouses * plainsStreetToHouseRatio * plainsCrossroadsDecorStreetFraction);}
+		componentModernPlainsStreetSubstitute2_string = config.getString("Component: Modern Plains Crossroads Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsStreetSubstitute2_vals = parseDoubleArray(componentModernPlainsStreetSubstitute2_string, modifiedDefaults);
 		
 		// Desert components
 		componentModernDesertAnimalPen1_string = config.getString("Component: Modern Desert Small Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
@@ -1643,14 +1663,20 @@ public class GeneralConfig {
 	/**
 	 * Converts a double arraylist back into a comma-separated string
 	 */
-	public static String convertDoubleArrayToString(ArrayList<Double> arraylist)
+	public static String convertDoubleArrayToString(ArrayList<Double> arraylist, int nDecimals)
 	{
-		String s=arraylist.get(0).toString();
+		//String s=arraylist.get(0).toString();
+		String s=String.format("%1."+nDecimals+"f", arraylist.get(0));
 		
 		for (int i=1; i<arraylist.size(); i++) 
 		{
-			s+=", "+arraylist.get(i).toString();
+			//s+=", "+arraylist.get(i).toString();
+			s+=", "+String.format("%1."+nDecimals+"f", arraylist.get(i));
 		}
 		return s;
+	}
+	public static String convertDoubleArrayToString(ArrayList<Double> arraylist)
+	{
+		return convertDoubleArrayToString(arraylist, 4);
 	}
 }

@@ -2,7 +2,6 @@ package astrotibs.villagenames.village;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -49,7 +48,6 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.Chunk;
@@ -58,7 +56,6 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
-import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -598,6 +595,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 0};}
         }
     	if (materialType == FunctionsVN.MaterialType.SPRUCE)
         {
@@ -629,6 +627,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 1};}
         }
         if (materialType == FunctionsVN.MaterialType.BIRCH)
         {
@@ -660,6 +659,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 2};}
         }
         if (materialType == FunctionsVN.MaterialType.JUNGLE)
         {
@@ -698,6 +698,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.mossy_cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 1};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 3};}
         }
         if (materialType == FunctionsVN.MaterialType.ACACIA)
         {
@@ -729,6 +730,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 4};}
         }
         if (materialType == FunctionsVN.MaterialType.DARK_OAK)
         {
@@ -760,6 +762,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.cobblestone, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 5};}
         }
         if (materialType == FunctionsVN.MaterialType.SAND)
         {
@@ -797,6 +800,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.deadbush, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.MESA)
         {
@@ -846,6 +850,7 @@ public class StructureVillageVN
 																	else {return modobject;}
 													    	   }
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return ModObjects.chooseModSmoothSandstoneBlock(true);}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 0};}
         }
         if (materialType == FunctionsVN.MaterialType.SNOW)
         {
@@ -879,6 +884,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.packed_ice, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, 1};}
         }
     	if (materialType == FunctionsVN.MaterialType.MUSHROOM)
         {
@@ -899,6 +905,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.brown_mushroom_block, 14};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
+        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.brown_mushroom, 0};}
         }
         
         // Post Forge event

@@ -1,0 +1,23 @@
+# eclipse
+bin
+.classpath
+.project
+.settings
+ 
+# forge
+MinecraftForge-Credits.txt
+MinecraftForge-License.txt
+forge-*
+CREDITS-fml.txt
+LICENSE-fml.txt
+ 
+# gradle
+.gradle
+gradle*
+ 
+# other
+eclipse
+README.txt
+ 
+# Junk added by AstroTibs
+NewZombieBiomes.png

@@ -8194,7 +8194,7 @@ public class DesertStructures
             
         	
             // Crafting Table
-        	for (int[] uvwm : new int[][]{ // 9:cactus,  10:dead bush
+        	for (int[] uvwm : new int[][]{
         		{3,1,2}, 
            		})
         	{
