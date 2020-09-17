@@ -2275,7 +2275,7 @@ public class ModObjects {
 	 * Orientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
-	public static Object[] chooseModStonecutter()
+	public static Object[] chooseModStonecutter(int orientation)
 	{
 		Block modblock = Blocks.crafting_table;
 		int meta = 0;

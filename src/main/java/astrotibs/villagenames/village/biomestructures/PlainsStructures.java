@@ -6083,7 +6083,7 @@ public class PlainsStructures
     
     
     
-    // --- Plains Mason's House --- //
+    // --- Plains Mason House --- //
     
     public static class PlainsMasonsHouse1 extends StructureVillagePieces.Village
     {
@@ -6382,7 +6382,8 @@ public class PlainsStructures
             }
         	
             // Stone Cutter
-        	blockObject = ModObjects.chooseModStonecutter(); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+            // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+        	blockObject = ModObjects.chooseModStonecutter(3); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 6, 1, 4, structureBB);
             
             // Doors

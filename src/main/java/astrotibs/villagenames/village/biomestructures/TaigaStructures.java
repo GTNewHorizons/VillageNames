@@ -3235,7 +3235,7 @@ public class TaigaStructures
             	{5,0,5, 5,0,5}, {6,0,4, 6,0,5}, {7,0,3, 7,0,3}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeSandBlock, biomeSandMeta, biomeSandBlock, biomeSandMeta, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeClayBlock, biomeClayMeta, biomeClayBlock, biomeClayMeta, false);	
             }
             
             
@@ -5221,7 +5221,7 @@ public class TaigaStructures
     }
     
     
-    // --- Mason's House --- //
+    // --- Mason House --- //
     
     public static class TaigaMasonsHouse1 extends StructureVillagePieces.Village
     {
@@ -5478,7 +5478,8 @@ public class TaigaStructures
         	
         	
             // Stone Cutter
-        	blockObject = ModObjects.chooseModStonecutter(); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+        	// 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+        	blockObject = ModObjects.chooseModStonecutter(3); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 4, 2, 4, structureBB);
         	
             

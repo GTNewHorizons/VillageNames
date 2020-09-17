@@ -239,6 +239,7 @@ public class GeneralConfig {
 	public static String componentModernSavannaLargeFarm1_string; public static ArrayList<Double> componentModernSavannaLargeFarm1_vals;
 	public static String componentModernSavannaLargeFarm2_string; public static ArrayList<Double> componentModernSavannaLargeFarm2_vals;
 	public static String componentModernSavannaLibrary1_string; public static ArrayList<Double> componentModernSavannaLibrary1_vals;
+	public static String componentModernSavannaMason1_string; public static ArrayList<Double> componentModernSavannaMason1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -669,6 +670,9 @@ public class GeneralConfig {
 		
 		componentModernSavannaLibrary1_string = config.getString("Component: Modern Savanna Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
 		componentModernSavannaLibrary1_vals = parseDoubleArray(componentModernSavannaLibrary1_string, modernDefaults);
+		
+		componentModernSavannaMason1_string = config.getString("Component: Modern Savanna Mason House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaMason1_vals = parseDoubleArray(componentModernSavannaMason1_string, modernDefaults);
 		
 		
 		// Misc
