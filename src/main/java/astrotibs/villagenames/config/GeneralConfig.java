@@ -193,6 +193,10 @@ public class GeneralConfig {
 	public static String componentModernDesertTemple2_string; public static ArrayList<Double> componentModernDesertTemple2_vals;
 	public static String componentModernDesertToolSmith1_string; public static ArrayList<Double> componentModernDesertToolSmith1_vals;
 	public static String componentModernDesertWeaponsmith1_string; public static ArrayList<Double> componentModernDesertWeaponsmith1_vals;
+	public static String componentModernDesertStreetSubstitute1_string; public static ArrayList<Double> componentModernDesertStreetSubstitute1_vals;
+	public static String componentModernDesertStreetSubstitute2_string; public static ArrayList<Double> componentModernDesertStreetSubstitute2_vals;
+	public static String componentModernDesertStreetSubstitute3_string; public static ArrayList<Double> componentModernDesertStreetSubstitute3_vals;
+	public static String componentModernDesertStreetSubstitute4_string; public static ArrayList<Double> componentModernDesertStreetSubstitute4_vals;
 	
 	public static String componentModernTaigaAnimalPen1_string; public static ArrayList<Double> componentModernTaigaAnimalPen1_vals;
 	public static String componentModernTaigaArmorer2_string; public static ArrayList<Double> componentModernTaigaArmorer2_vals;
@@ -221,7 +225,8 @@ public class GeneralConfig {
 	public static String componentModernTaigaToolSmith1_string; public static ArrayList<Double> componentModernTaigaToolSmith1_vals;
 	public static String componentModernTaigaWeaponsmith1_string; public static ArrayList<Double> componentModernTaigaWeaponsmith1_vals;
 	public static String componentModernTaigaWeaponsmith2_string; public static ArrayList<Double> componentModernTaigaWeaponsmith2_vals;
-	
+	public static String componentModernTaigaStreetSubstitute1_string; public static ArrayList<Double> componentModernTaigaStreetSubstitute1_vals;
+
 	public static String componentModernSavannaAnimalPen1_string; public static ArrayList<Double> componentModernSavannaAnimalPen1_vals;
 	public static String componentModernSavannaAnimalPen2_string; public static ArrayList<Double> componentModernSavannaAnimalPen2_vals;
 	public static String componentModernSavannaAnimalPen3_string; public static ArrayList<Double> componentModernSavannaAnimalPen3_vals;
@@ -314,6 +319,13 @@ public class GeneralConfig {
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(10D, 1D, 1D, 2D, 3D)); // Placeholder to ensure spawn
 		ArrayList<Double> modifiedDefaults = new ArrayList<Double>(Arrays.asList(0D, 0D, 0D, 0D, 0D));
 		int plainsHouses = 36;
+		int desertHouses = 28;
+		int taigaHouses = 27;
+		double plainsDecorToHouseRatio = 19D/13D;
+		double desertDecorToHouseRatio = 12D/17D;
+		double desertStreetToHouseRatio = 15D/17D; // 17 house attachments and 28 street attachments across 11 streets and 2 street endcaps = (28-(11+2))/17 = 15/17
+		double desertCrossroadsDecorStreetFraction = 1D/(13D); // 11 streets and 2 endcaps		modifiedDefaults.set(0, modernDefaults.get(0)*9D * desertDecorToHouseRatio); 
+		double taigaDecorToHouseRatio = 30D/18D;
 		
 		// Plains components
 		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
@@ -424,10 +436,9 @@ public class GeneralConfig {
 		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
 		componentModernPlainsWeaponsmith1_vals = parseDoubleArray(componentModernPlainsWeaponsmith1_string, modernDefaults);
 		
-		double plainsDecorToHouseRatio = 19D/13D;
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * plainsDecorToHouseRatio); 
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*plainsHouses * plainsDecorToHouseRatio);}
-		componentModernPlainsStreetSubstitute1_string = config.getString("Component: Modern Plains Roadside Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
+		componentModernPlainsStreetSubstitute1_string = config.getString("Component: Modern Plains Road Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
 		componentModernPlainsStreetSubstitute1_vals = parseDoubleArray(componentModernPlainsStreetSubstitute1_string, modifiedDefaults);
 		
 		// Desert components
@@ -515,6 +526,26 @@ public class GeneralConfig {
 		componentModernDesertWeaponsmith1_string = config.getString("Component: Modern Desert Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");
 		componentModernDesertWeaponsmith1_vals = parseDoubleArray(componentModernDesertWeaponsmith1_string, modernDefaults);
 		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * desertDecorToHouseRatio); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*desertHouses * desertDecorToHouseRatio);}
+		componentModernDesertStreetSubstitute1_string = config.getString("Component: Modern Desert Road Decor 1", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertStreetSubstitute1_vals = parseDoubleArray(componentModernDesertStreetSubstitute1_string, modifiedDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*desertHouses * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction);}
+		componentModernDesertStreetSubstitute2_string = config.getString("Component: Modern Desert Road Terracotta Accent 1", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertStreetSubstitute2_vals = parseDoubleArray(componentModernDesertStreetSubstitute2_string, modifiedDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*desertHouses * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction);}
+		componentModernDesertStreetSubstitute3_string = config.getString("Component: Modern Desert Road Terracotta Accent 2", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertStreetSubstitute3_vals = parseDoubleArray(componentModernDesertStreetSubstitute3_string, modifiedDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*desertHouses * desertStreetToHouseRatio * desertCrossroadsDecorStreetFraction);}
+		componentModernDesertStreetSubstitute4_string = config.getString("Component: Modern Desert Road Decor 2", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in desert villages");
+		componentModernDesertStreetSubstitute4_vals = parseDoubleArray(componentModernDesertStreetSubstitute4_string, modifiedDefaults);
+		
 		// Taiga components
 		componentModernTaigaAnimalPen1_string = config.getString("Component: Modern Taiga Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
 		componentModernTaigaAnimalPen1_vals = parseDoubleArray(componentModernTaigaAnimalPen1_string, modernDefaults);
@@ -596,6 +627,11 @@ public class GeneralConfig {
 		
 		componentModernTaigaWeaponsmith2_string = config.getString("Component: Modern Taiga Weapon Smith Station", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in taiga villages");
 		componentModernTaigaWeaponsmith2_vals = parseDoubleArray(componentModernTaigaWeaponsmith2_string, modernDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * taigaDecorToHouseRatio); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*taigaHouses * taigaDecorToHouseRatio);}
+		componentModernTaigaStreetSubstitute1_string = config.getString("Component: Modern Taiga Road Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in taiga villages");
+		componentModernTaigaStreetSubstitute1_vals = parseDoubleArray(componentModernTaigaStreetSubstitute1_string, modifiedDefaults);
 		
 		// Savanna components
 		componentModernSavannaAnimalPen1_string = config.getString("Component: Modern Savanna Covered Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");

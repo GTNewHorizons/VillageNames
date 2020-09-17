@@ -14858,7 +14858,7 @@ public class PlainsStructures
     
     
     
-    // --- Roadside Decor --- //
+    // --- Road Decor --- //
     
     public static class PlainsStreetSubstitute1 extends StructureVillagePieces.Village
     {
@@ -15086,7 +15086,7 @@ public class PlainsStructures
             			this.getYWithOffset(decorHeightY-1),
             			this.getZWithOffset(uvw[0], uvw[2])
             			).isNormalCube()
-            			|| decorDepth == -2 // If it's in the center of the road, make sure the base is grass so it doesn't become path -> dirt
+            			|| decorDepth < 0 // If it's in the center of the road, make sure the base is grass so it doesn't become path -> dirt
             			) {
             		this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	}
