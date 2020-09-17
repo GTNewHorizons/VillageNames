@@ -164,7 +164,6 @@ public class GeneralConfig {
 	public static String componentModernPlainsToolSmith1_string; public static ArrayList<Double> componentModernPlainsToolSmith1_vals;
 	public static String componentModernPlainsWeaponsmith1_string; public static ArrayList<Double> componentModernPlainsWeaponsmith1_vals;
 	public static String componentModernPlainsStreetSubstitute1_string; public static ArrayList<Double> componentModernPlainsStreetSubstitute1_vals;
-	public static String componentModernPlainsStreetSubstitute2_string; public static ArrayList<Double> componentModernPlainsStreetSubstitute2_vals;
 	
 	public static String componentModernDesertAnimalPen1_string; public static ArrayList<Double> componentModernDesertAnimalPen1_vals;
 	public static String componentModernDesertAnimalPen2_string; public static ArrayList<Double> componentModernDesertAnimalPen2_vals;
@@ -425,19 +424,11 @@ public class GeneralConfig {
 		componentModernPlainsWeaponsmith1_string = config.getString("Component: Modern Plains Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
 		componentModernPlainsWeaponsmith1_vals = parseDoubleArray(componentModernPlainsWeaponsmith1_string, modernDefaults);
 		
-		double plainsDecorToHouseRatio = 18D/13D;
+		double plainsDecorToHouseRatio = 19D/13D;
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * plainsDecorToHouseRatio); 
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*plainsHouses * plainsDecorToHouseRatio);}
 		componentModernPlainsStreetSubstitute1_string = config.getString("Component: Modern Plains Roadside Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
 		componentModernPlainsStreetSubstitute1_vals = parseDoubleArray(componentModernPlainsStreetSubstitute1_string, modifiedDefaults);
-		
-		//double plainsStreetDecorToHouseRatio = 1D/13D;
-		double plainsStreetToHouseRatio = 2D; // 13 house attachments and 46 street attachments across 20 streets and street endcaps = (46-20)/13 = 26/13 = 2
-		double plainsCrossroadsDecorStreetFraction = 1D/(16D + 4D); // 16 streets and 4 endcaps
-		modifiedDefaults.set(0, modernDefaults.get(0)*9D * plainsStreetToHouseRatio * plainsCrossroadsDecorStreetFraction);
-		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*plainsHouses * plainsStreetToHouseRatio * plainsCrossroadsDecorStreetFraction);}
-		componentModernPlainsStreetSubstitute2_string = config.getString("Component: Modern Plains Crossroads Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in plains villages");
-		componentModernPlainsStreetSubstitute2_vals = parseDoubleArray(componentModernPlainsStreetSubstitute2_string, modifiedDefaults);
 		
 		// Desert components
 		componentModernDesertAnimalPen1_string = config.getString("Component: Modern Desert Small Animal Pen", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in desert villages");

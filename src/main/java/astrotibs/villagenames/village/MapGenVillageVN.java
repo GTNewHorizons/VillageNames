@@ -229,7 +229,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // Force a specific starter for testing purposes
-            //start = new PlainsStructures.PlainsFountain01(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+            //start = new SavannaStructures.SavannaMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize); // Savanna fountain
             
             // Add well to the component list
             this.components.add(start);
