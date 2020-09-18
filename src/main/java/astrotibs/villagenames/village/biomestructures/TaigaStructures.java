@@ -8084,7 +8084,7 @@ public class TaigaStructures
             	
             	// Villager
             	int u = 3+random.nextInt(5);
-            	int v =  2;
+            	int v = 2;
             	int w = 3+random.nextInt(2);
             	
             	EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 3, 0);

@@ -16,6 +16,7 @@ import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntitySheep;
@@ -1718,6 +1719,32 @@ public class PlainsStructures
             	}
             }
             
+            
+        	// Tree
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.sapling, 0, this.materialType, this.biome); Block biomeSaplingBlock = (Block)blockObject[0]; int biomeSaplingMeta = (Integer)blockObject[1];
+        	for (int[] uvwss : new int[][]{
+        		// u,v,w, ushift,wshift: Which adjacent spaces to use if this is a Dark Oak sapling
+        		{4,1,3, -1,-1},
+        		})
+            {
+        		// Place the sapling
+        		this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2], structureBB);
+        		
+        		// Grow it into a tree
+        		if (biomeSaplingBlock instanceof BlockSapling)
+                {
+        			if (biomeSaplingMeta==5) // This is a dark oak. You need four to grow.
+        			{
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        			}
+        			
+        			((BlockSapling)biomeSaplingBlock).func_149878_d(world, this.getXWithOffset(uvwss[0], uvwss[2]), this.getYWithOffset(uvwss[1]), this.getZWithOffset(uvwss[0], uvwss[2]), world.rand);
+                }
+            }
+        	
+            
             // Animal in the pen
             if (!this.entitiesGenerated)
             {
@@ -1921,6 +1948,31 @@ public class PlainsStructures
             		// Double-tall topper
             		if (i >=11) {this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, weedpositions.get(i)%(STRUCTURE_WIDTH-2)+1, 2, weedpositions.get(i)/(STRUCTURE_WIDTH-2)+1, structureBB);}
             	}
+            }
+            
+            
+        	// Tree
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.sapling, 0, this.materialType, this.biome); Block biomeSaplingBlock = (Block)blockObject[0]; int biomeSaplingMeta = (Integer)blockObject[1];
+        	for (int[] uvwss : new int[][]{
+        		// u,v,w, ushift,wshift: Which adjacent spaces to use if this is a Dark Oak sapling
+        		{2,1,4, -1,1},
+        		})
+            {
+        		// Place the sapling
+        		this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2], structureBB);
+        		
+        		// Grow it into a tree
+        		if (biomeSaplingBlock instanceof BlockSapling)
+                {
+        			if (biomeSaplingMeta==5) // This is a dark oak. You need four to grow.
+        			{
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        			}
+        			
+        			((BlockSapling)biomeSaplingBlock).func_149878_d(world, this.getXWithOffset(uvwss[0], uvwss[2]), this.getYWithOffset(uvwss[1]), this.getZWithOffset(uvwss[0], uvwss[2]), world.rand);
+                }
             }
             
             // Animal in the pen
@@ -7465,7 +7517,7 @@ public class PlainsStructures
     
     
     
-    // --- Plains Market (building) --- //
+    // --- Plains Large Market (building) --- //
     
     public static class PlainsMeetingPoint4 extends StructureVillagePieces.Village
     {
@@ -7698,8 +7750,29 @@ public class PlainsStructures
             }
             
             
-            // Trees
-            // Nothing yet...
+        	// Tree
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.sapling, 0, this.materialType, this.biome); Block biomeSaplingBlock = (Block)blockObject[0]; int biomeSaplingMeta = (Integer)blockObject[1];
+        	for (int[] uvwss : new int[][]{
+        		// u,v,w, ushift,wshift: Which adjacent spaces to use if this is a Dark Oak sapling
+        		{9,1,7, -1,-1},
+        		})
+            {
+        		// Place the sapling
+        		this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2], structureBB);
+        		
+        		// Grow it into a tree
+        		if (biomeSaplingBlock instanceof BlockSapling)
+                {
+        			if (biomeSaplingMeta==5) // This is a dark oak. You need four to grow.
+        			{
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        				this.placeBlockAtCurrentPosition(world, biomeSaplingBlock, biomeSaplingMeta, uvwss[0]+uvwss[3], uvwss[1], uvwss[2]+uvwss[4], structureBB);
+        			}
+        			
+        			((BlockSapling)biomeSaplingBlock).func_149878_d(world, this.getXWithOffset(uvwss[0], uvwss[2]), this.getYWithOffset(uvwss[1]), this.getZWithOffset(uvwss[0], uvwss[2]), world.rand);
+                }
+            }
         	
             
             // Decor
