@@ -207,6 +207,9 @@ public class ModObjects {
 	public static final String cropZucchiniHC = "harvestcraft:pamzucchiniCrop";
 	public static final String cropKaleJAFFA = "jaffa:kaleCrop";
 	
+	// Desk
+	public static final String deskBC = "BiblioCraft:BiblioDesk";
+	
 	// Door
 	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
 	public static final String doorBirchGS = "ganyssurface:doorBirch";
@@ -478,6 +481,26 @@ public class ModObjects {
 	// --- Generator Functions --- //
 	// --------------------------- //
 	
+
+	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	// 1: north-facing
+	// 2: east-facing
+	// 3: south-facing
+	// 0: west-facing
+	public static final int[][] BIBLIOCRAFT_DESK_META_ARRAY = new int[][]{
+		{3,0,1,2}, // fore-facing (away from you)
+		{2,3,2,3}, // right-facing
+		{1,2,3,0}, // back-facing (toward you)
+		{0,1,0,1}, // left-facing
+	};
+	/**
+	 * orientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int chooseBibliocraftDeskMeta(int orientation, int horizIndex)
+	{
+		return (StructureVillageVN.ANVIL_META_ARRAY[orientation][horizIndex]+2)%4;
+	}
 	
 	// Andesite
 	public static Object[] chooseModAndesiteBlock()
@@ -1827,15 +1850,59 @@ public class ModObjects {
 	
 	// Lectern
 	/**
-	 * furnaceOrientation:
-	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 * Used in case this needs to be an item
 	 */
-	public static Object[] chooseModLectern()
+	public static Object[] chooseModLectern(int woodMeta)
 	{
-		Block modblock = Blocks.bookshelf;//Blocks.crafting_table;
-		int meta = 0;
+		Block modblock=null;
+		int modmeta=0;
 		
-		return new Object[]{modblock, meta};
+		modblock = Block.getBlockFromName(ModObjects.deskBC);
+		if (modblock != null)
+		{
+			modmeta = woodMeta;
+		}
+		else
+		{
+			// Vanilla
+			modblock = Blocks.bookshelf;
+			modmeta = 0;
+		}
+		
+		return new Object[]{modblock, modmeta};
+	}
+	
+	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta)
+	{
+		Block modblock=null;
+		boolean setTE = false; // Flagged as true if you need to set a tile entity
+		
+		modblock = Block.getBlockFromName(ModObjects.deskBC);
+		if (modblock != null)
+		{
+			setTE = true;
+		}
+		else
+		{
+			// Vanilla bed only; no nbt value necessary
+			modblock = Blocks.bookshelf;
+		}
+		
+		// Set the bed block and metadata here
+		world.setBlock(x, y, z, modblock);
+		
+		if (setTE)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, woodMeta, 2);
+			
+			// Set the tile entity so that you can assign the orientation via NBT 
+			NBTTagCompound nbtCompound = new NBTTagCompound();
+        	TileEntity tileentity = world.getTileEntity(x, y, z);
+        	tileentity.writeToNBT(nbtCompound);
+        	nbtCompound.setInteger("deskAngle", chooseBibliocraftDeskMeta(orientation, horizIndex));
+        	tileentity.readFromNBT(nbtCompound);
+        	world.setTileEntity(x, y, z, tileentity);
+		}
 	}
 	
 	

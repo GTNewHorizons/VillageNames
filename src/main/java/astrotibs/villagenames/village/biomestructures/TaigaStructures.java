@@ -4989,10 +4989,25 @@ public class TaigaStructures
             }
             
         	
-            // Lectern
+            // Lecterns
+            /*
         	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, lecternBlock, lecternMeta, 2, 1, 5, structureBB);
-        	
+        	*/
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+            for (int[] uvwo : new int[][]{ // u, v, w, orientation, color meta
+            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{2,1,5, 1},
+            })
+            {
+        		ModObjects.setModLecternBlock(world,
+            			this.getXWithOffset(uvwo[0], uvwo[2]),
+            			this.getYWithOffset(uvwo[1]),
+            			this.getZWithOffset(uvwo[0], uvwo[2]),
+            			uvwo[3],
+            			this.coordBaseMode,
+            			biomePlankMeta);
+            }
             
             // Bookshelves
             for (int[] uuvvww : new int[][]{

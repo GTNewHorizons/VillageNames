@@ -5596,11 +5596,29 @@ public class PlainsStructures
             }
         	
             // Lecterns
-        	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
+        	/*
+            blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
             for (int u : new int[]{6, 10})
             {
             	this.placeBlockAtCurrentPosition(world, lecternBlock, lecternMeta, u, 1, 5, structureBB);
             }
+            */
+            
+            for (int[] uvwo : new int[][]{ // u, v, w, orientation, color meta
+            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{6,1,5, 1},
+            	{10,1,5, 3},
+            })
+            {
+        		ModObjects.setModLecternBlock(world,
+            			this.getXWithOffset(uvwo[0], uvwo[2]),
+            			this.getYWithOffset(uvwo[1]),
+            			this.getZWithOffset(uvwo[0], uvwo[2]),
+            			uvwo[3],
+            			this.coordBaseMode,
+            			biomePlankMeta);
+            }
+            
             
             // Doors
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, this.materialType, this.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
@@ -5999,9 +6017,24 @@ public class PlainsStructures
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.bookshelf, 0, Blocks.bookshelf, 0, false);	
             }
         	
-            // Lectern
-        	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
+            // Lecterns
+        	/*
+            blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, lecternBlock, lecternMeta, 2, 1, 3, structureBB);
+            */
+            for (int[] uvwo : new int[][]{ // u, v, w, orientation, color meta
+            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{2,1,3, 1},
+            })
+            {
+        		ModObjects.setModLecternBlock(world,
+            			this.getXWithOffset(uvwo[0], uvwo[2]),
+            			this.getYWithOffset(uvwo[1]),
+            			this.getZWithOffset(uvwo[0], uvwo[2]),
+            			uvwo[3],
+            			this.coordBaseMode,
+            			biomePlankMeta);
+            }
             
             // Doors
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, this.materialType, this.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];

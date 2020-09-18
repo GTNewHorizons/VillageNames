@@ -4697,7 +4697,6 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.wooden_door, 0, this.materialType, this.biome); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.sandstone_stairs, 0, this.materialType, this.biome);} else {blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
-        	blockObject = ModObjects.chooseModLectern(); Block lecternBlock = (Block) blockObject[0]; int lecternMeta = (Integer) blockObject[1];
         	
         	
         	// Clear space above
@@ -4757,7 +4756,7 @@ public class DesertStructures
         		// Walkway
         		{4,0,0, 4,0,0}, 
         		// Floor
-        		{2,0,1, 6,0,3}, 
+        		{2,0,1, 6,0,3}, {7,0,2, 7,0,2},
         		// Front wall
         		{1,1,0, 7,4,0}, 
         		// Front wall
@@ -4814,14 +4813,21 @@ public class DesertStructures
             }
         	
         	
-        	// Lectern
-        	for(int[] uvw : new int[][]{
-        		{7,1,2}, 
-            	})
+        	// Lecterns
+        	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.planks, 0, this.materialType, this.biome); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+            for (int[] uvwo : new int[][]{ // u, v, w, orientation, color meta
+            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{7,1,2, 3},
+            })
             {
-        		this.placeBlockAtCurrentPosition(world, lecternBlock, lecternMeta, uvw[0], uvw[1], uvw[2], structureBB); 
+        		ModObjects.setModLecternBlock(world,
+            			this.getXWithOffset(uvwo[0], uvwo[2]),
+            			this.getYWithOffset(uvwo[1]),
+            			this.getZWithOffset(uvwo[0], uvwo[2]),
+            			uvwo[3],
+            			this.coordBaseMode,
+            			biomePlankMeta);
             }
-        	
         	
         	// Bookshelves
         	for(int[] uuvvww : new int[][]{
