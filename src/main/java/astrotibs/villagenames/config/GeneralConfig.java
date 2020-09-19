@@ -243,11 +243,15 @@ public class GeneralConfig {
 	public static String componentModernSavannaMediumHouse1_string; public static ArrayList<Double> componentModernSavannaMediumHouse1_vals;
 	public static String componentModernSavannaMediumHouse2_string; public static ArrayList<Double> componentModernSavannaMediumHouse2_vals;
 	public static String componentModernSavannaShepherd1_string; public static ArrayList<Double> componentModernSavannaShepherd1_vals;
+	public static String componentModernSavannaSmallFarm_string; public static ArrayList<Double> componentModernSavannaSmallFarm_vals;
+	public static String componentModernSavannaSmallHouse1_string; public static ArrayList<Double> componentModernSavannaSmallHouse1_vals;
 
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
 	public static boolean useVillageColors;
+	public static boolean spawnVillagersInResidences;
+	public static boolean spawnVillagersInTownCenters;
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
 	//public static boolean farmPumpkins;
@@ -686,11 +690,19 @@ public class GeneralConfig {
 		componentModernSavannaShepherd1_string = config.getString("Component: Modern Savanna Shepherd House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
 		componentModernSavannaShepherd1_vals = parseDoubleArray(componentModernSavannaShepherd1_string, modernDefaults);
 		
+		componentModernSavannaSmallFarm_string = config.getString("Component: Modern Savanna Small Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaSmallFarm_vals = parseDoubleArray(componentModernSavannaSmallFarm_string, modernDefaults);
+		
+		componentModernSavannaSmallHouse1_string = config.getString("Component: Modern Savanna Small House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in savanna villages");
+		componentModernSavannaSmallHouse1_vals = parseDoubleArray(componentModernSavannaSmallHouse1_string, modernDefaults);
+		
 		
 		// Misc
 		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", "Village Generator", true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
 		spawnModdedVillagers = config.getBoolean("Allow mod villagers in new structures", "Village Generator", false, "When modern structures spawn random villagers on generation, set this to true to allow non-vanilla professions.");
 		useVillageColors = config.getBoolean("Use village colors", "Village Generator", true, "Whether to apply the village's colors to concrete, terracotta, carpet, etc.");
+		spawnVillagersInResidences = config.getBoolean("Spawn Villagers in Residences", "Village Generator", false, "Spawn villagers with random professions and ages in non-job-specific residential houses.");
+		spawnVillagersInTownCenters = config.getBoolean("Spawn Villagers in Town Centers", "Village Generator", true, "Spawn villagers with random professions and ages in the town center.");
 		
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", "Village Generator",
 				new String[] {

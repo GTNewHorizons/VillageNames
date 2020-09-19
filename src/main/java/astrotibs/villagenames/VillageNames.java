@@ -331,6 +331,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SavannaStructures.SavannaMediumHouse1.class, "VNSaMeH1", new StructureCreationHandlers.SavannaMediumHouse1_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaMediumHouse2.class, "VNSaMeH2", new StructureCreationHandlers.SavannaMediumHouse2_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaShepherd1.class, "VNSaShe1", new StructureCreationHandlers.SavannaShepherd1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallFarm.class, "VNSaSmFa", new StructureCreationHandlers.SavannaSmallFarm_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse1.class, "VNSaSmH1", new StructureCreationHandlers.SavannaSmallHouse1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

@@ -336,25 +336,28 @@ public class PlainsStructures
             if (!this.villagersGenerated)
             {
             	this.villagersGenerated=true;
-            	            	
-        		for (int[] ia : new int[][]{
-        			{6, 1, 1, -1, 0},
-        			{1, 1, 2, -1, 0},
-        			{1, 1, 7, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			
-        			// Nitwits more often than not
-        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
-        			
-        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	
+            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{6, 1, 1, -1, 0},
+	        			{1, 1, 2, -1, 0},
+	        			{1, 1, 7, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			
+	        			// Nitwits more often than not
+	        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+	        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
+	        			
+	        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+	        			
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -697,23 +700,26 @@ public class PlainsStructures
             {
             	this.villagersGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{1, 11, 8, -1, 0},
-        			{8, 11, 8, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			
-        			// Nitwits more often than not
-        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
-        			
-        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{1, 11, 8, -1, 0},
+	        			{8, 11, 8, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			
+	        			// Nitwits more often than not
+	        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+	        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
+	        			
+	        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+	        			
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -996,24 +1002,27 @@ public class PlainsStructures
             {
             	this.villagersGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{6, 1, 6, -1, 0},
-        			{5, 1, 8, -1, 0},
-        			{5, 1, 10, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			
-        			// Nitwits more often than not
-        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
-        			
-        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{6, 1, 6, -1, 0},
+	        			{5, 1, 8, -1, 0},
+	        			{5, 1, 10, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			
+	        			// Nitwits more often than not
+	        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+	        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
+	        			
+	        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+	        			
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -1355,23 +1364,26 @@ public class PlainsStructures
             {
             	this.villagersGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{8, 1, 6, -1, 0},
-        			{9, 1, 2, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			
-        			// Nitwits more often than not
-        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
-        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
-        			
-        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
-        			
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{8, 1, 6, -1, 0},
+	        			{9, 1, 2, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			
+	        			// Nitwits more often than not
+	        			if (GeneralConfig.enableNitwit && random.nextInt(3)==0) {entityvillager.setProfession(5);}
+	        			else {entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], -12000-random.nextInt(12001));}
+	        			
+	        			int villagerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(ia[0], ia[2]), this.getZWithOffset(ia[0], ia[2]));
+	        			
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)villagerY + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -1381,7 +1393,7 @@ public class PlainsStructures
     
     
     // ------------------ //
-    // --- Structures --- //
+    // --- Components --- //
     // ------------------ //
     
     
@@ -2652,7 +2664,7 @@ public class PlainsStructures
     
     
     
-    // --- Big House --- //
+    // --- Large House --- //
     
     public static class PlainsBigHouse1 extends StructureVillagePieces.Village
     {
@@ -2962,22 +2974,25 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int[][] villagerPositions = new int[][]{
-        			{3,1,3, -1, 0},
-        			{8,1,3, -1, 0},
-        			{2,5,3, -1, 0},
-        			{8,5,3, -1, 0},
-        			};
-        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
-            	
-        		for (int[] ia :villagerPositions)
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	            	int[][] villagerPositions = new int[][]{
+	        			{3,1,3, -1, 0},
+	        			{8,1,3, -1, 0},
+	        			{2,5,3, -1, 0},
+	        			{8,5,3, -1, 0},
+	        			};
+	        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
+	            	
+	        		for (int[] ia :villagerPositions)
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -7068,20 +7083,23 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int[][] villagerPositions = new int[][]{
-        			{7,2,4, -1, 0},
-        			{6,2,6, -1, 0},
-        			};
-        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
-            	
-        		for (int[] ia :villagerPositions)
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	            	int[][] villagerPositions = new int[][]{
+	        			{7,2,4, -1, 0},
+	        			{6,2,6, -1, 0},
+	        			};
+	        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
+	            	
+	        		for (int[] ia :villagerPositions)
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             
@@ -7487,20 +7505,23 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-            	int[][] villagerPositions = new int[][]{
-        			{4,1,3, -1, 0},
-        			{8,1,3, -1, 0},
-        			};
-        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
-            	
-        		for (int[] ia :villagerPositions)
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	            	int[][] villagerPositions = new int[][]{
+	        			{4,1,3, -1, 0},
+	        			{8,1,3, -1, 0},
+	        			};
+	        		int countdownToAdult = 1+random.nextInt(villagerPositions.length); // One of the villagers here is an adult
+	            	
+	        		for (int[] ia :villagerPositions)
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], (--countdownToAdult)==0?0:Math.min(random.nextInt(24001)-12000,0));
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             
@@ -8467,8 +8488,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -8479,6 +8498,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -9208,8 +9229,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -9220,6 +9239,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -9390,16 +9411,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{3, 1, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{3, 1, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -9575,8 +9599,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -9587,6 +9609,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -9751,16 +9775,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{3, 1, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{3, 1, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -9920,8 +9947,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -9932,6 +9957,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -10120,16 +10147,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{3, 1, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{3, 1, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -10289,8 +10319,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -10301,6 +10329,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -10484,16 +10514,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{3, 1, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{3, 1, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -10655,8 +10688,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -10667,6 +10698,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -10946,16 +10979,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{2, 2, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{2, 2, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -11115,8 +11151,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -11127,6 +11161,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -11335,16 +11371,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{4, 1, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{4, 1, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -11504,8 +11543,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -11516,6 +11553,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -11720,16 +11759,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{4, 0, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{4, 0, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
         		}
+            	}
             }
             
             return true;
@@ -11890,8 +11932,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -11902,6 +11942,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -12106,16 +12148,19 @@ public class PlainsStructures
             {
             	this.entitiesGenerated=true;
             	
-        		for (int[] ia : new int[][]{
-        			{4, 3, 3, -1, 0},
-        			})
-        		{
-        			EntityVillager entityvillager = new EntityVillager(world);
-        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
-        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
-                    		random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityvillager);
-        		}
+            	if (GeneralConfig.spawnVillagersInResidences)
+            	{
+	        		for (int[] ia : new int[][]{
+	        			{4, 3, 3, -1, 0},
+	        			})
+	        		{
+	        			EntityVillager entityvillager = new EntityVillager(world);
+	        			entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, ia[3], ia[4], 0); // Adult
+	        			entityvillager.setLocationAndAngles((double)this.getXWithOffset(ia[0], ia[2]) + 0.5D, (double)this.getYWithOffset(ia[1]) + 1.5D, (double)this.getZWithOffset(ia[0], ia[2]) + 0.5D,
+	                    		random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityvillager);
+	        		}
+            	}
             }
             
             return true;
@@ -12277,8 +12322,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -12289,6 +12332,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -12725,8 +12770,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -12737,6 +12780,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -13125,8 +13170,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -13137,6 +13180,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -13528,8 +13573,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -13540,6 +13583,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -13910,8 +13955,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -13922,6 +13965,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -14297,8 +14342,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -14309,6 +14352,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -14653,8 +14698,6 @@ public class PlainsStructures
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-2, w, structureBB);
-            	// top with grass
-            	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
             
             // Make foundation with blanks as empty air and F as foundation spaces
@@ -14665,6 +14708,8 @@ public class PlainsStructures
             		{
             			// If marked with F: fill with dirt foundation
             			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+                    	// top with grass
+                    	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             		}
             		else if (world.getBlock(this.getXWithOffset(u, w), this.getYWithOffset(GROUND_LEVEL-1), this.getZWithOffset(u, w))==biomeDirtBlock)
             		{
@@ -14965,6 +15010,11 @@ public class PlainsStructures
     
     
     
+    // ------------------ //
+    // --- Road Decor --- //
+    // ------------------ //
+    
+    
     // --- Road Decor --- //
     
     public static class PlainsStreetSubstitute1 extends StructureVillagePieces.Village
@@ -15092,7 +15142,7 @@ public class PlainsStructures
             Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.dirt, 0, this.materialType, this.biome); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.grass, 0, this.materialType, this.biome); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
-        	
+        	/*
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
@@ -15114,7 +15164,7 @@ public class PlainsStructures
             		}
                 }
             }
-            
+            */
             
             // Decor
         			
