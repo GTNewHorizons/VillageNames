@@ -333,7 +333,14 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SavannaStructures.SavannaShepherd1.class, "VNSaShe1", new StructureCreationHandlers.SavannaShepherd1_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallFarm.class, "VNSaSmFa", new StructureCreationHandlers.SavannaSmallFarm_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse1.class, "VNSaSmH1", new StructureCreationHandlers.SavannaSmallHouse1_Handler());
-	        
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse2.class, "VNSaSmH2", new StructureCreationHandlers.SavannaSmallHouse2_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse3.class, "VNSaSmH3", new StructureCreationHandlers.SavannaSmallHouse3_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse4.class, "VNSaSmH4", new StructureCreationHandlers.SavannaSmallHouse4_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse5.class, "VNSaSmH5", new StructureCreationHandlers.SavannaSmallHouse5_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse6.class, "VNSaSmH6", new StructureCreationHandlers.SavannaSmallHouse6_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse7.class, "VNSaSmH7", new StructureCreationHandlers.SavannaSmallHouse7_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse8.class, "VNSaSmH8", new StructureCreationHandlers.SavannaSmallHouse8_Handler());
+
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

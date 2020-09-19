@@ -93,6 +93,13 @@ import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaM
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaShepherd1;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallFarm;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse1;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse2;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse3;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse4;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse5;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse6;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse7;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse8;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorer2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorerHouse1;
@@ -2885,6 +2892,174 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 2
+	public static class SavannaSmallHouse2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse2.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 3
+	public static class SavannaSmallHouse3_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse3_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse3.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse3.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 4
+	public static class SavannaSmallHouse4_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse4_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse4.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse4.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse4.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 5
+	public static class SavannaSmallHouse5_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse5_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse5.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse5.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse5.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 6
+	public static class SavannaSmallHouse6_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse6_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse6.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse6.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse6.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 7
+	public static class SavannaSmallHouse7_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse7_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse7.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse7.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse7.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Small House 8
+	public static class SavannaSmallHouse8_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse8_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaSmallHouse8.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaSmallHouse8.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaSmallHouse8.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
