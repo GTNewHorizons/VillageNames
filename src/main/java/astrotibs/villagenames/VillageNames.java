@@ -340,7 +340,12 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse6.class, "VNSaSmH6", new StructureCreationHandlers.SavannaSmallHouse6_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse7.class, "VNSaSmH7", new StructureCreationHandlers.SavannaSmallHouse7_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaSmallHouse8.class, "VNSaSmH8", new StructureCreationHandlers.SavannaSmallHouse8_Handler());
-
+	        registerVillageComponentBuilding(SavannaStructures.SavannaTannery1.class, "VNSaTsn1", new StructureCreationHandlers.SavannaTannery1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaTemple1.class, "VNSaTem1", new StructureCreationHandlers.SavannaTemple1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaTemple2.class, "VNSaTem2", new StructureCreationHandlers.SavannaTemple2_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaToolSmith1.class, "VNSaTSm1", new StructureCreationHandlers.SavannaToolSmith1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaWeaponsmith1.class, "VNSaWSm1", new StructureCreationHandlers.SavannaWeaponsmith1_Handler());
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

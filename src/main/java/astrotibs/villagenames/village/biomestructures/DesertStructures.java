@@ -1345,11 +1345,11 @@ public class DesertStructures
             {
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             }
             
@@ -1652,11 +1652,11 @@ public class DesertStructures
             {
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
             }
             
@@ -2022,11 +2022,11 @@ public class DesertStructures
             
             this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
         	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-            // Place dirt if the block to be set as path is empty
+        	/*// Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-        	}
+        	}*/
         	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));            
 
             
@@ -2392,11 +2392,11 @@ public class DesertStructures
             
             this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
         	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-            // Place dirt if the block to be set as path is empty
+        	/*// Place dirt if the block to be set as path is empty
         	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
         	{
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-        	}
+        	}*/
         	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));            
 
             
@@ -2760,11 +2760,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -3059,11 +3059,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -3403,11 +3403,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -3783,11 +3783,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -4160,11 +4160,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -4888,11 +4888,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -5242,11 +5242,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -5626,11 +5626,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));
         	}
@@ -6035,11 +6035,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -6432,11 +6432,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -6788,11 +6788,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -7196,11 +7196,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -7573,11 +7573,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -7926,11 +7926,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -8284,11 +8284,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -8781,11 +8781,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -9155,11 +9155,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -9508,11 +9508,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -9908,11 +9908,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -10282,11 +10282,11 @@ public class DesertStructures
             
         	
             // Brewing Stand
-        	for (int[] uuvvww : new int[][]{
+        	for (int[] uvw : new int[][]{
         		{1,1,1}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
         	
         	
@@ -10323,11 +10323,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -10684,11 +10684,11 @@ public class DesertStructures
             
         	
             // Brewing Stand
-        	for (int[] uuvvww : new int[][]{
+        	for (int[] uvw : new int[][]{
         		{1,1,4}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+        		this.placeBlockAtCurrentPosition(world, Blocks.brewing_stand, 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
             
             
@@ -10714,11 +10714,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -11155,11 +11155,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
@@ -11578,11 +11578,11 @@ public class DesertStructures
                 
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-1, pathW, structureBB);
-                // Place dirt if the block to be set as path is empty
+            	/*// Place dirt if the block to be set as path is empty
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
                 	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, pathU, pathV-1, pathW, structureBB);
-            	}
+            	}*/
             	
             	// Only add path blocks in the front. Otherwise add "regular" grass
             	if (pathW==-1) {StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, 0, this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW));}
