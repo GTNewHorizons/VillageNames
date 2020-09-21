@@ -251,7 +251,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(PlainsStructures.PlainsTemple4.class, "VNPlTem4", new StructureCreationHandlers.PlainsTemple4_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsToolSmith1.class, "VNPlTSm1", new StructureCreationHandlers.PlainsToolSmith1_Handler());
 	        registerVillageComponentBuilding(PlainsStructures.PlainsWeaponsmith1.class, "VNPlWSm1", new StructureCreationHandlers.PlainsWeaponsmith1_Handler());
-	        registerVillageComponentBuilding(PlainsStructures.PlainsStreetSubstitute1.class, "VNPlStS1", new StructureCreationHandlers.PlainsStreetSubstitute1_Handler());
+	        registerVillageComponentBuilding(PlainsStructures.PlainsStreetDecor1.class, "VNPlStD1", new StructureCreationHandlers.PlainsStreetDecor1_Handler());
 	        
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen1.class, "VNDeAnP1", new StructureCreationHandlers.DesertAnimalPen1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertAnimalPen2.class, "VNDeAnP2", new StructureCreationHandlers.DesertAnimalPen2_Handler());
@@ -281,10 +281,10 @@ public final class VillageNames
 	        registerVillageComponentBuilding(DesertStructures.DesertTemple2.class, "VNDeTem2", new StructureCreationHandlers.DesertTemple2_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertToolSmith1.class, "VNDeTSm1", new StructureCreationHandlers.DesertToolSmith1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertWeaponsmith1.class, "VNDeWSm1", new StructureCreationHandlers.DesertWeaponsmith1_Handler());
+	        registerVillageComponentBuilding(DesertStructures.DesertStreetDecor1.class, "VNDeStD1", new StructureCreationHandlers.SavannaStreetDecor1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertStreetSubstitute1.class, "VNDeStS1", new StructureCreationHandlers.DesertStreetSubstitute1_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertStreetSubstitute2.class, "VNDeStS2", new StructureCreationHandlers.DesertStreetSubstitute2_Handler());
 	        registerVillageComponentBuilding(DesertStructures.DesertStreetSubstitute3.class, "VNDeStS3", new StructureCreationHandlers.DesertStreetSubstitute3_Handler());
-	        registerVillageComponentBuilding(DesertStructures.DesertStreetSubstitute4.class, "VNDeStS4", new StructureCreationHandlers.DesertStreetSubstitute4_Handler());
 	        
 	        registerVillageComponentBuilding(TaigaStructures.TaigaAnimalPen1.class, "VNTaAnP1", new StructureCreationHandlers.TaigaAnimalPen1_Handler());
 	        registerVillageComponentBuilding(TaigaStructures.TaigaArmorer2.class, "VNTaArm2", new StructureCreationHandlers.TaigaArmorer2_Handler());
@@ -313,7 +313,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(TaigaStructures.TaigaToolSmith1.class, "VNTaTSm1", new StructureCreationHandlers.TaigaToolSmith1_Handler());
 	        registerVillageComponentBuilding(TaigaStructures.TaigaWeaponsmith1.class, "VNTaWSm1", new StructureCreationHandlers.TaigaWeaponsmith1_Handler());
 	        registerVillageComponentBuilding(TaigaStructures.TaigaWeaponsmith2.class, "VNTaWSm2", new StructureCreationHandlers.TaigaWeaponsmith2_Handler());
-	        registerVillageComponentBuilding(TaigaStructures.TaigaStreetSubstitute1.class, "VNTaStS1", new StructureCreationHandlers.TaigaStreetSubstitute1_Handler());
+	        registerVillageComponentBuilding(TaigaStructures.TaigaStreetDecor1.class, "VNTaStD1", new StructureCreationHandlers.TaigaStreetDecor1_Handler());
 	        
 	        registerVillageComponentBuilding(SavannaStructures.SavannaAnimalPen1.class, "VNSaAnP1", new StructureCreationHandlers.SavannaAnimalPen1_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaAnimalPen2.class, "VNSaAnP2", new StructureCreationHandlers.SavannaAnimalPen2_Handler());
@@ -345,6 +345,12 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SavannaStructures.SavannaTemple2.class, "VNSaTem2", new StructureCreationHandlers.SavannaTemple2_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaToolSmith1.class, "VNSaTSm1", new StructureCreationHandlers.SavannaToolSmith1_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaWeaponsmith1.class, "VNSaWSm1", new StructureCreationHandlers.SavannaWeaponsmith1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaWeaponsmith2.class, "VNSaWSm2", new StructureCreationHandlers.SavannaWeaponsmith2_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetDecor1.class, "VNSaStD1", new StructureCreationHandlers.SavannaStreetDecor1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute1.class, "VNSaStS1", new StructureCreationHandlers.SavannaStreetSubstitute1_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute2.class, "VNSaStS2", new StructureCreationHandlers.SavannaStreetSubstitute2_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute3.class, "VNSaStS3", new StructureCreationHandlers.SavannaStreetSubstitute3_Handler());
+	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute4.class, "VNSaStS4", new StructureCreationHandlers.SavannaStreetSubstitute4_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

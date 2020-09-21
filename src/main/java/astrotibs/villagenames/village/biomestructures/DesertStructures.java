@@ -12,6 +12,7 @@ import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import net.minecraft.block.Block;
@@ -11637,9 +11638,9 @@ public class DesertStructures
     // ------------------ //
     
     
-    // --- Road Decor 1 --- //
+    // --- Road Decor --- //
     
-    public static class DesertStreetSubstitute1 extends StructureVillagePieces.Village
+    public static class DesertStreetDecor1 extends StructureVillagePieces.Village
     {
     	// Stuff to be used in the construction
     	public boolean entitiesGenerated = false;
@@ -11659,7 +11660,7 @@ public class DesertStructures
     	public BiomeGenBase biome=null;
     	
     	// Here are values to assign to the bounding box
-    	public static final int STRUCTURE_WIDTH = 1;
+    	public static final int STRUCTURE_WIDTH = 3;
     	public static final int STRUCTURE_DEPTH = 3;
     	public static final int STRUCTURE_HEIGHT = 4;
     	// Values for lining things up
@@ -11669,9 +11670,9 @@ public class DesertStructures
     	
     	private int averageGroundLevel = -1;
     	
-        public DesertStreetSubstitute1() {}
+        public DesertStreetDecor1() {}
 
-        public DesertStreetSubstitute1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        public DesertStreetDecor1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
         {
             super();
             this.coordBaseMode = coordBaseMode;
@@ -11695,11 +11696,11 @@ public class DesertStructures
             }
         }
 
-        public static DesertStreetSubstitute1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        public static DesertStreetDecor1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             
-            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new DesertStreetSubstitute1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new DesertStreetDecor1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
         
@@ -11819,6 +11820,7 @@ public class DesertStructures
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
             	
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
@@ -11856,9 +11858,6 @@ public class DesertStructures
             		}            		
             	}
             	
-            	// Fill below with dirt regardless
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-2, uvw[2], structureBB);
-            	
             	// Grass base
             	if (!world.getBlock(
             			this.getXWithOffset(uvw[0], uvw[2]),
@@ -11885,7 +11884,7 @@ public class DesertStructures
     
     // --- Road Terracotta Accent 1 --- //
     
-    public static class DesertStreetSubstitute2 extends StructureVillagePieces.Village
+    public static class DesertStreetSubstitute1 extends StructureVillagePieces.Village
     {
     	// Stuff to be used in the construction
     	public boolean entitiesGenerated = false;
@@ -11913,13 +11912,12 @@ public class DesertStructures
     	private static final int INCREASE_MIN_U = 0;
     	private static final int DECREASE_MAX_U = 0;
     	// Values related to structures straddling streets
-        public static final int streetWidth = 3;
         
     	private int averageGroundLevel = -1;
     	
-        public DesertStreetSubstitute2() {}
+        public DesertStreetSubstitute1() {}
 
-        public DesertStreetSubstitute2(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        public DesertStreetSubstitute1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
         {
             super();
             this.coordBaseMode = coordBaseMode;
@@ -11943,16 +11941,16 @@ public class DesertStructures
             }
         }
         
-        public static DesertStreetSubstitute2 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        public static DesertStreetSubstitute1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
             		&& StructureComponent.findIntersecting(pieces, structureBBOtherSide) == null
-            		? new DesertStreetSubstitute2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+            		? new DesertStreetSubstitute1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
         
@@ -12044,8 +12042,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{0, 0}, {1, 0}, {1, 1},
         		{5, 1}, {5, 0}, {6, 0}, 
-        		{0, -(streetWidth+1)}, {1, -(streetWidth+1)}, {1, -(streetWidth+1)-1},
-        		{5, -(streetWidth+1)-1}, {5, -(streetWidth+1)}, {6, -(streetWidth+1)}, 
+        		{0, -(Reference.streetWidth+1)}, {1, -(Reference.streetWidth+1)}, {1, -(Reference.streetWidth+1)-1},
+        		{5, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)}, {6, -(Reference.streetWidth+1)}, 
         	})
         	{
         		// Determine ground level
@@ -12064,8 +12062,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{2, 0}, {3, 0}, {4, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, 
-        		{2, -(streetWidth+1)-0}, {3, -(streetWidth+1)-0}, {4, -(streetWidth+1)-0}, 
-        		{2, -(streetWidth+1)-1}, {3, -(streetWidth+1)-1}, {4, -(streetWidth+1)-1}, 
+        		{2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, 
+        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, 
         	})
         	{
         		// Determine ground level
@@ -12105,6 +12103,7 @@ public class DesertStructures
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
             	
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
@@ -12142,9 +12141,6 @@ public class DesertStructures
             		}            		
             	}
             	
-            	// Fill below with dirt regardless
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-2, uvw[2], structureBB);
-            	
             	// Grass base
             	if (!world.getBlock(
             			this.getXWithOffset(uvw[0], uvw[2]),
@@ -12171,7 +12167,7 @@ public class DesertStructures
     
     // --- Road Terracotta Accent 2 --- //
     
-    public static class DesertStreetSubstitute3 extends StructureVillagePieces.Village
+    public static class DesertStreetSubstitute2 extends StructureVillagePieces.Village
     {
     	// Stuff to be used in the construction
     	public boolean entitiesGenerated = false;
@@ -12198,14 +12194,12 @@ public class DesertStructures
     	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
     	private static final int INCREASE_MIN_U = 0;
     	private static final int DECREASE_MAX_U = 0;
-    	// Values related to structures straddling streets
-        public static final int streetWidth = 3;
-        
+    	
     	private int averageGroundLevel = -1;
     	
-        public DesertStreetSubstitute3() {}
+        public DesertStreetSubstitute2() {}
 
-        public DesertStreetSubstitute3(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        public DesertStreetSubstitute2(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
         {
             super();
             this.coordBaseMode = coordBaseMode;
@@ -12229,16 +12223,16 @@ public class DesertStructures
             }
         }
         
-        public static DesertStreetSubstitute3 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        public static DesertStreetSubstitute2 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
             		&& StructureComponent.findIntersecting(pieces, structureBBOtherSide) == null
-            		? new DesertStreetSubstitute3(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+            		? new DesertStreetSubstitute2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
         
@@ -12330,9 +12324,9 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}, {11, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {8, 1}, {9, 1}, {10, 1}, 
-        		{1, -(streetWidth+1)-0}, {2, -(streetWidth+1)-0}, {3, -(streetWidth+1)-0}, {4, -(streetWidth+1)-0}, {5, -(streetWidth+1)-0}, {6, -(streetWidth+1)-0}, 
-        		{7, -(streetWidth+1)-0}, {8, -(streetWidth+1)-0}, {9, -(streetWidth+1)-0}, {10, -(streetWidth+1)-0}, {11, -(streetWidth+1)-0}, 
-        		{2, -(streetWidth+1)-1}, {3, -(streetWidth+1)-1}, {4, -(streetWidth+1)-1}, {5, -(streetWidth+1)-1}, {6, -(streetWidth+1)-1}, {7, -(streetWidth+1)-1}, 
+        		{1, -(Reference.streetWidth+1)-0}, {2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, {5, -(Reference.streetWidth+1)-0}, {6, -(Reference.streetWidth+1)-0}, 
+        		{7, -(Reference.streetWidth+1)-0}, {8, -(Reference.streetWidth+1)-0}, {9, -(Reference.streetWidth+1)-0}, {10, -(Reference.streetWidth+1)-0}, {11, -(Reference.streetWidth+1)-0}, 
+        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)-1}, {6, -(Reference.streetWidth+1)-1}, {7, -(Reference.streetWidth+1)-1}, 
         	})
         	{
         		// Determine ground level
@@ -12390,6 +12384,7 @@ public class DesertStructures
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
             	
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
@@ -12427,9 +12422,6 @@ public class DesertStructures
             		}            		
             	}
             	
-            	// Fill below with dirt regardless
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-2, uvw[2], structureBB);
-            	
             	// Grass base
             	if (!world.getBlock(
             			this.getXWithOffset(uvw[0], uvw[2]),
@@ -12456,7 +12448,7 @@ public class DesertStructures
     
     // --- Road Decor 2 --- //
     
-    public static class DesertStreetSubstitute4 extends StructureVillagePieces.Village
+    public static class DesertStreetSubstitute3 extends StructureVillagePieces.Village
     {
     	// Stuff to be used in the construction
     	public boolean entitiesGenerated = false;
@@ -12484,13 +12476,12 @@ public class DesertStructures
     	private static final int INCREASE_MIN_U = 0;
     	private static final int DECREASE_MAX_U = 0;
     	// Values related to structures straddling streets
-        public static final int streetWidth = 3;
-        
+    	
     	private int averageGroundLevel = -1;
     	
-        public DesertStreetSubstitute4() {}
+        public DesertStreetSubstitute3() {}
 
-        public DesertStreetSubstitute4(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        public DesertStreetSubstitute3(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
         {
             super();
             this.coordBaseMode = coordBaseMode;
@@ -12514,16 +12505,16 @@ public class DesertStructures
             }
         }
         
-        public static DesertStreetSubstitute4 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        public static DesertStreetSubstitute3 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
             		&& StructureComponent.findIntersecting(pieces, structureBBOtherSide) == null
-            		? new DesertStreetSubstitute4(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+            		? new DesertStreetSubstitute3(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
         
@@ -12615,8 +12606,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, 
-        		{1, -(streetWidth+1)-0}, {2, -(streetWidth+1)-0}, {3, -(streetWidth+1)-0}, {4, -(streetWidth+1)-0}, {5, -(streetWidth+1)-0}, {6, -(streetWidth+1)-0}, {7, -(streetWidth+1)-0}, 
-        		{2, -(streetWidth+1)-1}, {3, -(streetWidth+1)-1}, {4, -(streetWidth+1)-1}, {5, -(streetWidth+1)-1}, {6, -(streetWidth+1)-1}, 
+        		{1, -(Reference.streetWidth+1)-0}, {2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, {5, -(Reference.streetWidth+1)-0}, {6, -(Reference.streetWidth+1)-0}, {7, -(Reference.streetWidth+1)-0}, 
+        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)-1}, {6, -(Reference.streetWidth+1)-1}, 
         	})
         	{
         		// Determine ground level
@@ -12644,6 +12635,7 @@ public class DesertStructures
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
             	
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
@@ -12680,9 +12672,6 @@ public class DesertStructures
             			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+b.getUPos(), decorHeightY+b.getVPos()+1, uvw[2]+b.getWPos(), structureBB);
             		}            		
             	}
-            	
-            	// Fill below with dirt regardless
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-2, uvw[2], structureBB);
             	
             	// Grass base
             	if (!world.getBlock(

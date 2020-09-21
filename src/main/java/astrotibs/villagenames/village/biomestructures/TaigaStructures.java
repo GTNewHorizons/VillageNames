@@ -12738,7 +12738,7 @@ public class TaigaStructures
     
     // --- Road Decor --- //
     
-    public static class TaigaStreetSubstitute1 extends StructureVillagePieces.Village
+    public static class TaigaStreetDecor1 extends StructureVillagePieces.Village
     {
     	// Stuff to be used in the construction
     	public boolean entitiesGenerated = false;
@@ -12768,9 +12768,9 @@ public class TaigaStructures
     	
     	private int averageGroundLevel = -1;
     	
-        public TaigaStreetSubstitute1() {}
+        public TaigaStreetDecor1() {}
 
-        public TaigaStreetSubstitute1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+        public TaigaStreetDecor1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
         {
             super();
             this.coordBaseMode = coordBaseMode;
@@ -12794,11 +12794,11 @@ public class TaigaStructures
             }
         }
 
-        public static TaigaStreetSubstitute1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+        public static TaigaStreetDecor1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             
-            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new TaigaStreetSubstitute1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new TaigaStreetDecor1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
         }
         
         
@@ -12918,6 +12918,7 @@ public class TaigaStructures
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.boundingBox.minY;
             	
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
@@ -12955,9 +12956,6 @@ public class TaigaStructures
             			this.clearCurrentPositionBlocksUpwards(world, uvw[0]+b.getUPos(), decorHeightY+b.getVPos()+1, uvw[2]+b.getWPos(), structureBB);
             		}            		
             	}
-            	
-            	// Fill below with dirt regardless
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-2, uvw[2], structureBB);
             	
             	// Grass base
             	if (!world.getBlock(

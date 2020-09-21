@@ -18,4 +18,5 @@ public class Reference
     // This helps distinguish the two via hard-coding a faux class path
     public static final String elderGuardianClass = "astrotibs.villagenames.prismarine.guardian.entity.monster.EntityElderGuardian";
     public static final String villagerClass = "net.minecraft.entity.passive.EntityVillager"; // v3.2.4
+    public static final int streetWidth = 3;
 }

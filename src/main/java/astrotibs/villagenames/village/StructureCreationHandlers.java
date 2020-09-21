@@ -29,10 +29,10 @@ import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertSma
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertSmallHouse6;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertSmallHouse7;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertSmallHouse8;
+import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertStreetDecor1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertStreetSubstitute1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertStreetSubstitute2;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertStreetSubstitute3;
-import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertStreetSubstitute4;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTannery1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTemple1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTemple2;
@@ -69,7 +69,7 @@ import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsSma
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsSmallHouse8;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsStable1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsStable2;
-import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsStreetSubstitute1;
+import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsStreetDecor1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsTannery1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsTemple3;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsTemple4;
@@ -100,11 +100,17 @@ import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaS
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse6;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse7;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaSmallHouse8;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaStreetDecor1;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaStreetSubstitute1;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaStreetSubstitute2;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaStreetSubstitute3;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaStreetSubstitute4;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaTannery1;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaTemple1;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaTemple2;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaToolSmith1;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaWeaponsmith1;
+import astrotibs.villagenames.village.biomestructures.SavannaStructures.SavannaWeaponsmith2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorer2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorerHouse1;
@@ -127,7 +133,7 @@ import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaSmall
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaSmallHouse3;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaSmallHouse4;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaSmallHouse5;
-import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaStreetSubstitute1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaStreetDecor1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaTannery1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaTemple1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaToolSmith1;
@@ -1005,9 +1011,9 @@ public class StructureCreationHandlers
 	}
 	
 	// Plains Road Decor
-	public static class PlainsStreetSubstitute1_Handler implements IVillageCreationHandler
+	public static class PlainsStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsStreetSubstitute1_vals;
+		ArrayList<Double> ali = GeneralConfig.componentModernPlainsStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1015,16 +1021,16 @@ public class StructureCreationHandlers
 	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
 	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
 	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
-	    	return new PieceWeight(PlainsStreetSubstitute1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    	return new PieceWeight(PlainsStreetDecor1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
 	    }
 	    
 	    @Override
-	    public Class<?> getComponentClass() {return PlainsStreetSubstitute1.class;}
+	    public Class<?> getComponentClass() {return PlainsStreetDecor1.class;}
 	    
 	    @Override
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
-	    	if (startPiece instanceof StartVN) {return PlainsStreetSubstitute1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    	if (startPiece instanceof StartVN) {return PlainsStreetDecor1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
@@ -1701,6 +1707,30 @@ public class StructureCreationHandlers
 	}
 	
 	// Desert Road Decor 1
+	public static class DesertStreetDecor1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetDecor1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(DesertStreetDecor1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return DesertStreetDecor1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return DesertStreetDecor1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Desert Road Terracotta Accent 1
 	public static class DesertStreetSubstitute1_Handler implements IVillageCreationHandler
 	{
 		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute1_vals;
@@ -1724,7 +1754,7 @@ public class StructureCreationHandlers
 	    }
 	}
 	
-	// Desert Road Terracotta Accent 1
+	// Desert Road Terracotta Accent 2
 	public static class DesertStreetSubstitute2_Handler implements IVillageCreationHandler
 	{
 		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute2_vals;
@@ -1748,7 +1778,7 @@ public class StructureCreationHandlers
 	    }
 	}
 	
-	// Desert Road Terracotta Accent 2
+	// Desert Road Decor 2
 	public static class DesertStreetSubstitute3_Handler implements IVillageCreationHandler
 	{
 		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute3_vals;
@@ -1769,30 +1799,6 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return DesertStreetSubstitute3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
-	    }
-	}
-	
-	// Desert Road Decor 2
-	public static class DesertStreetSubstitute4_Handler implements IVillageCreationHandler
-	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute4_vals;
-		
-	    @Override
-	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
-	    {
-	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
-	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
-	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
-	    	return new PieceWeight(DesertStreetSubstitute4.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
-	    }
-	    
-	    @Override
-	    public Class<?> getComponentClass() {return DesertStreetSubstitute4.class;}
-	    
-	    @Override
-	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
-	    {
-	    	if (startPiece instanceof StartVN) {return DesertStreetSubstitute4.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
@@ -2445,9 +2451,9 @@ public class StructureCreationHandlers
 	}
 	
 	// Taiga Road Decor
-	public static class TaigaStreetSubstitute1_Handler implements IVillageCreationHandler
+	public static class TaigaStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaStreetSubstitute1_vals;
+		ArrayList<Double> ali = GeneralConfig.componentModernTaigaStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2455,16 +2461,16 @@ public class StructureCreationHandlers
 	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
 	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
 	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
-	    	return new PieceWeight(TaigaStreetSubstitute1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    	return new PieceWeight(TaigaStreetDecor1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
 	    }
 	    
 	    @Override
-	    public Class<?> getComponentClass() {return TaigaStreetSubstitute1.class;}
+	    public Class<?> getComponentClass() {return TaigaStreetDecor1.class;}
 	    
 	    @Override
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
-	    	if (startPiece instanceof StartVN) {return TaigaStreetSubstitute1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    	if (startPiece instanceof StartVN) {return TaigaStreetDecor1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
@@ -3185,6 +3191,150 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SavannaWeaponsmith1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Weapon Smithy 2
+	public static class SavannaWeaponsmith2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaWeaponsmith2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaWeaponsmith2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaWeaponsmith2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaWeaponsmith2.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Savanna Road Decor
+	public static class SavannaStreetDecor1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetDecor1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaStreetDecor1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaStreetDecor1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaStreetDecor1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Desert Roadside Farm 1
+	public static class SavannaStreetSubstitute1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaStreetSubstitute1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaStreetSubstitute1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaStreetSubstitute1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Desert Roadside Farm 2
+	public static class SavannaStreetSubstitute2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaStreetSubstitute2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaStreetSubstitute2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaStreetSubstitute2.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Desert Roadside Farm 3
+	public static class SavannaStreetSubstitute3_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute3_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaStreetSubstitute3.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaStreetSubstitute3.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaStreetSubstitute3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Desert Roadside Farm 4
+	public static class SavannaStreetSubstitute4_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute4_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SavannaStreetSubstitute4.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SavannaStreetSubstitute4.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SavannaStreetSubstitute4.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
