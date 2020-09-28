@@ -1612,7 +1612,7 @@ public class SavannaStructures
         			{5,1,2}, 
         			})
         		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, true, this.materialType==MaterialType.MUSHROOM);
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM); // Because horses can escape the pen
                     animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
                     world.spawnEntityInWorld(animal);
                     
@@ -16145,6 +16145,10 @@ public class SavannaStructures
         protected int getVillagerType (int number) {return 0;}
     }
     
+    
+    // ------------------- //
+    // --- Biome Decor --- //
+    // ------------------- //
     
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece

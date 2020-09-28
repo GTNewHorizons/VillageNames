@@ -352,6 +352,10 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute3.class, "VNSaStS3", new StructureCreationHandlers.SavannaStreetSubstitute3_Handler());
 	        registerVillageComponentBuilding(SavannaStructures.SavannaStreetSubstitute4.class, "VNSaStS4", new StructureCreationHandlers.SavannaStreetSubstitute4_Handler());
 	        
+	        registerVillageComponentBuilding(SnowyStructures.SnowyAnimalPen1.class, "VNSnAnP1", new StructureCreationHandlers.SnowyAnimalPen1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyAnimalPen2.class, "VNSnAnP2", new StructureCreationHandlers.SnowyAnimalPen2_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyArmorerHouse1.class, "VNSnArH1", new StructureCreationHandlers.SnowyArmorerHouse1_Handler());
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

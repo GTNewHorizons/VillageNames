@@ -12697,7 +12697,11 @@ public class DesertStructures
     
     
     
-	/**
+    // ------------------- //
+    // --- Biome Decor --- //
+    // ------------------- //
+    
+    /**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
     public static ArrayList<BlueprintData> getRandomDesertDecorBlueprint(MaterialType materialType, BiomeGenBase biome, int coordBaseMode, Random random)//, int townColor)

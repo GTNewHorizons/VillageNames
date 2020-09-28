@@ -264,6 +264,10 @@ public class GeneralConfig {
 	public static String componentModernSavannaStreetSubstitute3_string; public static ArrayList<Double> componentModernSavannaStreetSubstitute3_vals;
 	public static String componentModernSavannaStreetSubstitute4_string; public static ArrayList<Double> componentModernSavannaStreetSubstitute4_vals;
 	
+	public static String componentModernSnowyAnimalPen1_string; public static ArrayList<Double> componentModernSnowyAnimalPen1_vals;
+	public static String componentModernSnowyAnimalPen2_string; public static ArrayList<Double> componentModernSnowyAnimalPen2_vals;
+	public static String componentModernSnowyArmorerHouse1_string; public static ArrayList<Double> componentModernSnowyArmorerHouse1_vals;
+	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
@@ -787,6 +791,15 @@ public class GeneralConfig {
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*savannaHouses * savannaStreetToHouseRatio/savannaStreetsAndEndcaps);}
 		componentModernSavannaStreetSubstitute4_string = config.getString("Component: Modern Savanna Roadside Farm 4", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in savanna villages");
 		componentModernSavannaStreetSubstitute4_vals = parseDoubleArray(componentModernSavannaStreetSubstitute4_string, modifiedDefaults);
+		
+		componentModernSnowyAnimalPen1_string = config.getString("Component: Modern Snowy Animal Pen 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyAnimalPen1_vals = parseDoubleArray(componentModernSnowyAnimalPen1_string, modernDefaults);
+		
+		componentModernSnowyAnimalPen2_string = config.getString("Component: Modern Snowy Animal Pen 2", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyAnimalPen2_vals = parseDoubleArray(componentModernSnowyAnimalPen2_string, modernDefaults);
+		
+		componentModernSnowyArmorerHouse1_string = config.getString("Component: Modern Snowy Armorer House 1", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyArmorerHouse1_vals = parseDoubleArray(componentModernSnowyArmorerHouse1_string, modernDefaults);
 		
 		
 		// Misc

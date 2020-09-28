@@ -15260,6 +15260,10 @@ public class PlainsStructures
     }
     
     
+    // ------------------- //
+    // --- Biome Decor --- //
+    // ------------------- //
+    
 	/**
 	 * Returns a list of blocks and coordinates used to construct a decor piece
 	 */
