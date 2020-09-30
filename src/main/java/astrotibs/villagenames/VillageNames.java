@@ -355,6 +355,12 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SnowyStructures.SnowyAnimalPen1.class, "VNSnAnP1", new StructureCreationHandlers.SnowyAnimalPen1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyAnimalPen2.class, "VNSnAnP2", new StructureCreationHandlers.SnowyAnimalPen2_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyArmorerHouse1.class, "VNSnArH1", new StructureCreationHandlers.SnowyArmorerHouse1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyArmorerHouse2.class, "VNSnArH2", new StructureCreationHandlers.SnowyArmorerHouse2_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyButchersShop1.class, "VNSnBut1", new StructureCreationHandlers.SnowyButchersShop1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyButchersShop2.class, "VNSnBut2", new StructureCreationHandlers.SnowyButchersShop2_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyCartographerHouse1.class, "VNSnCar1", new StructureCreationHandlers.SnowyCartographerHouse1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyFarm1.class, "VNSnFar1", new StructureCreationHandlers.SnowyFarm1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyFarm2.class, "VNSnFar2", new StructureCreationHandlers.SnowyFarm2_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one
