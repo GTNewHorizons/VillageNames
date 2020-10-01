@@ -361,6 +361,9 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SnowyStructures.SnowyCartographerHouse1.class, "VNSnCar1", new StructureCreationHandlers.SnowyCartographerHouse1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyFarm1.class, "VNSnFar1", new StructureCreationHandlers.SnowyFarm1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyFarm2.class, "VNSnFar2", new StructureCreationHandlers.SnowyFarm2_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyFisherCottage.class, "VNSnFisC", new StructureCreationHandlers.SnowyFisherCottage_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyFletcherHouse1.class, "VNSnFle1", new StructureCreationHandlers.SnowyFletcherHouse1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyLibrary1.class, "VNSnLib1", new StructureCreationHandlers.SnowyLibrary1_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

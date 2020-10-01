@@ -10896,7 +10896,7 @@ public class TaigaStructures
          * of villagers already spawned.
          */
         @Override
-        protected int getVillagerType (int number) {return 0;}
+        protected int getVillagerType (int number) {return 4;}
     }
     
     

@@ -273,6 +273,9 @@ public class GeneralConfig {
 	public static String componentModernSnowyCartographerHouse1_string; public static ArrayList<Double> componentModernSnowyCartographerHouse1_vals;
 	public static String componentModernSnowyFarm1_string; public static ArrayList<Double> componentModernSnowyFarm1_vals;
 	public static String componentModernSnowyFarm2_string; public static ArrayList<Double> componentModernSnowyFarm2_vals;
+	public static String componentModernSnowyFisherCottage_string; public static ArrayList<Double> componentModernSnowyFisherCottage_vals;
+	public static String componentModernSnowyFletcherHouse1_string; public static ArrayList<Double> componentModernSnowyFletcherHouse1_vals;
+	public static String componentModernSnowyLibrary1_string; public static ArrayList<Double> componentModernSnowyLibrary1_vals;
 	
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
@@ -824,6 +827,15 @@ public class GeneralConfig {
 		
 		componentModernSnowyFarm2_string = config.getString("Component: Modern Snowy Patch Farm", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
 		componentModernSnowyFarm2_vals = parseDoubleArray(componentModernSnowyFarm2_string, modernDefaults);
+		
+		componentModernSnowyFisherCottage_string = config.getString("Component: Modern Snowy Fisher Cottage", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyFisherCottage_vals = parseDoubleArray(componentModernSnowyFisherCottage_string, modernDefaults);
+		
+		componentModernSnowyFletcherHouse1_string = config.getString("Component: Modern Snowy Fletcher House", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyFletcherHouse1_vals = parseDoubleArray(componentModernSnowyFletcherHouse1_string, modernDefaults);
+		
+		componentModernSnowyLibrary1_string = config.getString("Component: Modern Snowy Library", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyLibrary1_vals = parseDoubleArray(componentModernSnowyLibrary1_string, modernDefaults);
 		
 		
 		// Misc

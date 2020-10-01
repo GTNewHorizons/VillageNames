@@ -2736,7 +2736,7 @@ public class SavannaStructures
          * of villagers already spawned.
          */
         @Override
-        protected int getVillagerType (int number) {return 0;}
+        protected int getVillagerType (int number) {return 3;}
     }
     
     
@@ -5155,7 +5155,7 @@ public class SavannaStructures
          * of villagers already spawned.
          */
         @Override
-        protected int getVillagerType (int number) {return 1;}
+        protected int getVillagerType (int number) {return 0;}
     }
     
     
