@@ -960,6 +960,14 @@ public class ModObjects {
 	}
 	
 	
+	// Blue Ice
+    public static Object[] chooseModBlueIceBlock()
+    {
+    	// None are found, so return ordinary packed ice
+    	return new Object[]{Blocks.packed_ice, 0};
+    }
+	
+	
 	// Brick Wall
 	public static Object[] chooseModBrickWall()
 	{
