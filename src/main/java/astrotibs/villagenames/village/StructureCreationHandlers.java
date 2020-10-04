@@ -128,6 +128,10 @@ import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyMason
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyMediumHouse1;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyMediumHouse2;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyMediumHouse3;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyShepherdsHouse1;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowySmallHouse1;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowySmallHouse2;
+import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowySmallHouse3;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorer2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorerHouse1;
@@ -3760,6 +3764,102 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SnowyMediumHouse3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Snowy Shepherd House
+	public static class SnowyShepherdsHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSnowyShepherdsHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SnowyShepherdsHouse1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SnowyShepherdsHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SnowyShepherdsHouse1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Snowy Small House 1
+	public static class SnowySmallHouse1_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse1_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SnowySmallHouse1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SnowySmallHouse1.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SnowySmallHouse1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Snowy Small House 2
+	public static class SnowySmallHouse2_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse2_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SnowySmallHouse2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SnowySmallHouse2.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SnowySmallHouse2.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Snowy Small House 3
+	public static class SnowySmallHouse3_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse3_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SnowySmallHouse3.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SnowySmallHouse3.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SnowySmallHouse3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	
