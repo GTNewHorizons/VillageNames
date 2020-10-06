@@ -373,7 +373,17 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse1.class, "VNSnSmH1", new StructureCreationHandlers.SnowySmallHouse1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse2.class, "VNSnSmH2", new StructureCreationHandlers.SnowySmallHouse2_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse3.class, "VNSnSmH3", new StructureCreationHandlers.SnowySmallHouse3_Handler());
-	        
+	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse4.class, "VNSnSmH4", new StructureCreationHandlers.SnowySmallHouse4_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse5.class, "VNSnSmH5", new StructureCreationHandlers.SnowySmallHouse5_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse6.class, "VNSnSmH6", new StructureCreationHandlers.SnowySmallHouse6_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse7.class, "VNSnSmH7", new StructureCreationHandlers.SnowySmallHouse7_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowySmallHouse8.class, "VNSnSmH8", new StructureCreationHandlers.SnowySmallHouse8_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyTannery1.class, "VNSnTan1", new StructureCreationHandlers.SnowyTannery1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyTemple1.class, "VNSnTem1", new StructureCreationHandlers.SnowyTemple1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyToolSmith1.class, "VNSnTSm1", new StructureCreationHandlers.SnowyToolSmith1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyWeaponSmith1.class, "VNSnWSm1", new StructureCreationHandlers.SnowyWeaponSmith1_Handler());
+	        registerVillageComponentBuilding(SnowyStructures.SnowyStreetDecor1.class, "VNSnStD1", new StructureCreationHandlers.SnowyStreetDecor1_Handler());
+
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

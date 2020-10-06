@@ -285,7 +285,17 @@ public class GeneralConfig {
 	public static String componentModernSnowySmallHouse1_string; public static ArrayList<Double> componentModernSnowySmallHouse1_vals;
 	public static String componentModernSnowySmallHouse2_string; public static ArrayList<Double> componentModernSnowySmallHouse2_vals;
 	public static String componentModernSnowySmallHouse3_string; public static ArrayList<Double> componentModernSnowySmallHouse3_vals;
-	
+	public static String componentModernSnowySmallHouse4_string; public static ArrayList<Double> componentModernSnowySmallHouse4_vals;
+	public static String componentModernSnowySmallHouse5_string; public static ArrayList<Double> componentModernSnowySmallHouse5_vals;
+	public static String componentModernSnowySmallHouse6_string; public static ArrayList<Double> componentModernSnowySmallHouse6_vals;
+	public static String componentModernSnowySmallHouse7_string; public static ArrayList<Double> componentModernSnowySmallHouse7_vals;
+	public static String componentModernSnowySmallHouse8_string; public static ArrayList<Double> componentModernSnowySmallHouse8_vals;
+	public static String componentModernSnowyTannery1_string; public static ArrayList<Double> componentModernSnowyTannery1_vals;
+	public static String componentModernSnowyTemple1_string; public static ArrayList<Double> componentModernSnowyTemple1_vals;
+	public static String componentModernSnowyToolSmith1_string; public static ArrayList<Double> componentModernSnowyToolSmith1_vals;
+	public static String componentModernSnowyWeaponSmith1_string; public static ArrayList<Double> componentModernSnowyWeaponSmith1_vals;
+	public static String componentModernSnowyStreetDecor1_string; public static ArrayList<Double> componentModernSnowyStreetDecor1_vals;
+
 	// Misc new village stuff
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
@@ -384,6 +394,8 @@ public class GeneralConfig {
 		
 		double savannaDecorToHouseRatio = 1D;
 		double savannaStreetToHouseRatio = 31D/17D; // 17 house attachments and 51 street attachments across 19 streets and 1 street endcaps = (51-(19+1))/17 = 31/17
+		
+		double snowyDecorToHouseRatio = 28D/24D; 
 		
 		// Plains components
 		componentModernPlainsAccessory1_string = config.getString("Component: Modern Plains Flower Planter", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in plains villages");
@@ -872,6 +884,38 @@ public class GeneralConfig {
 		
 		componentModernSnowySmallHouse3_string = config.getString("Component: Modern Snowy Small House 3", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
 		componentModernSnowySmallHouse3_vals = parseDoubleArray(componentModernSnowySmallHouse3_string, modernDefaults);
+		
+		componentModernSnowySmallHouse4_string = config.getString("Component: Modern Snowy Small House 4", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowySmallHouse4_vals = parseDoubleArray(componentModernSnowySmallHouse4_string, modernDefaults);
+		
+		componentModernSnowySmallHouse5_string = config.getString("Component: Modern Snowy Small House 5", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowySmallHouse5_vals = parseDoubleArray(componentModernSnowySmallHouse5_string, modernDefaults);
+		
+		componentModernSnowySmallHouse6_string = config.getString("Component: Modern Snowy Small House 6", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowySmallHouse6_vals = parseDoubleArray(componentModernSnowySmallHouse6_string, modernDefaults);
+		
+		componentModernSnowySmallHouse7_string = config.getString("Component: Modern Snowy Small House 7", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowySmallHouse7_vals = parseDoubleArray(componentModernSnowySmallHouse7_string, modernDefaults);
+		
+		componentModernSnowySmallHouse8_string = config.getString("Component: Modern Snowy Small House 8", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowySmallHouse8_vals = parseDoubleArray(componentModernSnowySmallHouse8_string, modernDefaults);
+		
+		componentModernSnowyTannery1_string = config.getString("Component: Modern Snowy Tannery", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyTannery1_vals = parseDoubleArray(componentModernSnowyTannery1_string, modernDefaults);
+		
+		componentModernSnowyTemple1_string = config.getString("Component: Modern Snowy Temple", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyTemple1_vals = parseDoubleArray(componentModernSnowyTemple1_string, modernDefaults);
+		
+		componentModernSnowyToolSmith1_string = config.getString("Component: Modern Snowy Tool Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyToolSmith1_vals = parseDoubleArray(componentModernSnowyToolSmith1_string, modernDefaults);
+		
+		componentModernSnowyWeaponSmith1_string = config.getString("Component: Modern Snowy Weapon Smithy", "Village Generator", convertDoubleArrayToString(modernDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyWeaponSmith1_vals = parseDoubleArray(componentModernSnowyWeaponSmith1_string, modernDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * snowyDecorToHouseRatio); 
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*snowyHouses * snowyDecorToHouseRatio);}
+		componentModernSnowyStreetDecor1_string = config.getString("Component: Modern Snowy Road Decor", "Village Generator", convertDoubleArrayToString(modifiedDefaults), "Generation stats for this component in snowy villages");
+		componentModernSnowyStreetDecor1_vals = parseDoubleArray(componentModernSnowyStreetDecor1_string, modifiedDefaults);
 		
 		
 		// Misc
