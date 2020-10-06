@@ -365,7 +365,7 @@ public class GeneralConfig {
 		componentLegacyHouse3_vals = parseDoubleArray(componentLegacyHouse3_string, ald);
 		
 		// Modern Village components
-		/*
+		
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
 				(91D/9), //= 10.11111111111111
 				((76D/91) * 9D/(152D/5)), //=  0.24725274725274726
@@ -373,8 +373,9 @@ public class GeneralConfig {
 				((112D/91) * 9D/(152D/5)), //= 0.3643724696356275
 				((184D/91) * 9D/(152D/5)) //= 0.5986119144013881
 				)); // All modern buildings will default to these values
-				*/
-		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(10D, 1D, 1D, 2D, 3D)); // Placeholder to ensure spawn
+		
+		//ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(10D, 1D, 1D, 2D, 3D)); // Placeholder to ensure spawn
+		
 		ArrayList<Double> modifiedDefaults = new ArrayList<Double>(Arrays.asList(0D, 0D, 0D, 0D, 0D));
 		int plainsHouses = 36;
 		int desertHouses = 28;
