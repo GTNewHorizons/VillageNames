@@ -1,5 +1,6 @@
 package astrotibs.villagenames.village;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
@@ -23,6 +25,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Road;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
@@ -165,6 +169,32 @@ public class MapGenVillageVN extends MapGenVillage
             // My modified version, which allows the user to disable each building
             List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize, startVillageType);
             
+            // Print out the list of components for player use
+            if (GeneralConfig.debugMessages)
+            {
+            	Map<String, ArrayList> mappedComponentVillageTypes = GeneralConfig.unpackComponentVillageTypes(GeneralConfig.componentVillageTypes);
+            	
+            	Iterator iterator = list.iterator();
+            	
+            	int unmappedComponent=0; // Counts how many structure components try to generate. If none, no text is printed.
+            	
+                while (iterator.hasNext())
+                {
+                	PieceWeight pw = (StructureVillagePieces.PieceWeight)iterator.next();
+                	
+                	if (!mappedComponentVillageTypes.get("ClassPaths").contains(pw.villagePieceClass.toString().substring(6)))
+                	{
+                		LogHelper.info("Weight " + pw.villagePieceWeight + ", Limit " + pw.villagePiecesLimit + ": " + pw.villagePieceClass.toString().substring(6));
+                		unmappedComponent++;
+                	}
+                }
+                
+                if (unmappedComponent>0)
+                {
+                	LogHelper.info("The above village candidate components for " + startVillageType.toString().toLowerCase() + " village at x=" + ((chunkX << 4) + 2) + ", z=" + ((chunkZ << 4) + 2) + " are not currently listed in the Component Village Types config entry.");
+                }
+            }
+            
             // Generate the "start" component and add it to the list
             StructureVillageVN.StartVN start = null;
             
@@ -229,7 +259,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // Force a specific starter for testing purposes
-            //start = new PlainsStructures.PlainsMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize); // Savanna fountain
+        	//start = new DesertStructures.DesertMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize); // Savanna market
             
             // Add well to the component list
             this.components.add(start);

@@ -139,6 +139,7 @@ public class TaigaStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
@@ -250,13 +251,15 @@ public class TaigaStructures
     			{
                     int bannerXBB = 5;
         			int bannerZBB = 4;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
+        			*/
         			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
@@ -403,6 +406,7 @@ public class TaigaStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1 -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
@@ -588,17 +592,17 @@ public class TaigaStructures
         	this.fillWithMetadataBlocks(world, structureBB, 2, 5, 2, 2, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta, biomeLogHorAlongBlock, biomeLogHorAlongMeta, false);
         	this.fillWithMetadataBlocks(world, structureBB, 6, 5, 2, 6, 5, 6, biomeLogHorAlongBlock, biomeLogHorAlongMeta, biomeLogHorAlongBlock, biomeLogHorAlongMeta, false);
         	// Add torches
-        	for (int[] uvwm : new int[][]{
-        		{2, 5, 1, 0},
-        		{6, 5, 1, 0},
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+        		{2, 5, 1, 2},
+        		{6, 5, 1, 2},
         		// Banner side
         		{2, 5, 7, 0},
         		{6, 5, 7, 0},
         	})
         	{
-        		world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
         	}
-            
+        	
             
             // Colored block where bell used to be
             if (GeneralConfig.useVillageColors)
@@ -659,13 +663,15 @@ public class TaigaStructures
     			{
         			int bannerXBB = 7;
         			int bannerZBB = 8;
-        			int bannerYBB = -1;
+        			int bannerYBB = 2;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
+        			*/
         			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);

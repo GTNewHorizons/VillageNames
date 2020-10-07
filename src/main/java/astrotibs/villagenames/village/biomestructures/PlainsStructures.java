@@ -122,6 +122,7 @@ public class PlainsStructures
                 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -149,15 +150,14 @@ public class PlainsStructures
             // Basin bottom
             this.fillWithMetadataBlocks(world, structureBB, 2, -1, 2, 6, 0, 6, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             
-            // Torches with the correct metas
-            for (int[] uvwo : new int[][]{
+            // Torches
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
             	{2, 1, 2, -1},
             	{2, 1, 6, -1},
             	{6, 1, 2, -1},
             	{6, 1, 6, -1},
-            })
-            {
-            	world.setBlock(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2]), Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), 2);
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
             
             if (GeneralConfig.useVillageColors)
@@ -294,14 +294,15 @@ public class PlainsStructures
     			{
         			int bannerXBB = 8;
         			int bannerZBB = 6;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
-        			
+        			*/
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -449,7 +450,7 @@ public class PlainsStructures
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + (5-1) - wellDepthDecrease, 0);
             }
         	
-        	
+            
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(4, 4),
@@ -558,14 +559,13 @@ public class PlainsStructures
             
             
             // Over-lid torches
-            for (int[] uvwm : new int[][]{
-            	{3, 16, 3, 0},
-            	{3, 16, 6, 0},
-            	{6, 16, 3, 0},
-            	{6, 16, 6, 0},
-            })
-            {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{3, 16, 3, -1},
+            	{3, 16, 6, -1},
+            	{6, 16, 3, -1},
+            	{6, 16, 6, -1},
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
             
             
@@ -646,14 +646,15 @@ public class PlainsStructures
     			{
                     int bannerXBB = 8;
         			int bannerZBB = 6;
-        			int bannerYBB = -1;
+        			int bannerYBB = 11;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
-        			
+        			*/
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -799,7 +800,7 @@ public class PlainsStructures
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
         	
-        	
+            
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
         			this.getXWithOffset(4, 4),
@@ -868,12 +869,11 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 2, structureBB);
             
         	// Torches
-            for (int[] uvwm : new int[][]{
-            	{4, 2, 1, 0},
-            	{7, 2, 1, 0},
-            })
-            {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{4, 2, 1, -1},
+            	{7, 2, 1, -1},
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
             
         	this.fillWithMetadataBlocks(world, structureBB, 2, 1, 5, 2, 1, 8, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
@@ -889,12 +889,12 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 3, 4, 7, structureBB);
 
             // Torches
-            for (int[] uvwm : new int[][]{
-            	{2, 2, 5, 0},
-            	{2, 2, 8, 0},
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{2, 2, 5, -1},
+            	{2, 2, 8, -1},
             })
             {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
         	
         	this.fillWithMetadataBlocks(world, structureBB, 4, 1, 13, 7, 1, 13, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
@@ -910,12 +910,12 @@ public class PlainsStructures
         	this.placeBlockAtCurrentPosition(world, Blocks.wool, GeneralConfig.useVillageColors ? townColor2 : 0, 5, 4, 14, structureBB);
         	
             // Torches
-            for (int[] uvwm : new int[][]{
-            	{4, 2, 13, 0},
-            	{7, 2, 13, 0},
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{4, 2, 13, -1},
+            	{7, 2, 13, -1},
             })
             {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
         	
         	        	        	
@@ -948,14 +948,15 @@ public class PlainsStructures
     			{
                     int bannerXBB = 6;
         			int bannerZBB = 4;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
-        			
+        			*/
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);
@@ -1101,6 +1102,7 @@ public class PlainsStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -1230,18 +1232,19 @@ public class PlainsStructures
             {
             	world.setBlock(this.getXWithOffset(uvw[0], uvw[2]), this.getYWithOffset(uvw[1]), this.getZWithOffset(uvw[0], uvw[2]), Blocks.air, 0, 2);
             }
-            
+
             // Torches
-            for (int[] uvwm : new int[][]{
-            	{5, 3, 4, StructureVillageVN.getTorchRotationMeta(2, this.coordBaseMode)},
-            	{4, 3, 5, StructureVillageVN.getTorchRotationMeta(3, this.coordBaseMode)},
-            	{5, 3, 6, StructureVillageVN.getTorchRotationMeta(0, this.coordBaseMode)},
-            	{6, 3, 5, StructureVillageVN.getTorchRotationMeta(1, this.coordBaseMode)},
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{5, 3, 4, 2},
+            	{4, 3, 5, 3},
+            	{5, 3, 6, 0},
+            	{6, 3, 5, 1},
             })
             {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
-        	
+            
+            
                     	        	
             // Posts
         	this.fillWithBlocks(world, structureBB, 4, 1, 1, 4, 4, 1, biomeFenceBlock, biomeFenceBlock, false);
@@ -1310,14 +1313,15 @@ public class PlainsStructures
     			{
                     int bannerXBB = 7;
         			int bannerZBB = 8;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
-        			
+        			*/
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
                     int bannerZ = this.getZWithOffset(bannerXBB, bannerZBB);

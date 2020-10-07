@@ -118,7 +118,7 @@ public class DesertStructures
         {
         	Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	
+
         	if (this.field_143015_k < 0)
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
@@ -131,6 +131,7 @@ public class DesertStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
@@ -216,11 +217,11 @@ public class DesertStructures
         		this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, 4, 4, 4, structureBB);
         	}
             // Just the tip
-            for (int[] uvwm : new int[][]{
-            	{4, 5, 4, 0},
+            for (int[] uvwo : new int[][]{
+            	{4, 5, 4, -1},
             })
             {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
             
             // Cactus
@@ -253,13 +254,15 @@ public class DesertStructures
     			{
         			int bannerXBB = 7;
         			int bannerZBB = 1;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
+        			*/
         			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
@@ -385,7 +388,7 @@ public class DesertStructures
         {
         	Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	
+
         	if (this.field_143015_k < 0)
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
@@ -398,6 +401,7 @@ public class DesertStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
@@ -488,16 +492,15 @@ public class DesertStructures
             this.fillWithMetadataBlocks(world, structureBB, 7, 1, 4, 7, 4, 4, Blocks.sandstone, 2, Blocks.sandstone, 2, false);
             
             // Torches
-            for (int[] uvwm : new int[][]{
-            	{4, 5, 4, 0},
-            	{4, 5, 7, 0},
-            	{7, 5, 7, 0},
-            	{7, 5, 4, 0},
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{4, 5, 4, -1},
+            	{4, 5, 7, -1},
+            	{7, 5, 7, -1},
+            	{7, 5, 4, -1},
             })
             {
-            	world.setBlock(this.getXWithOffset(uvwm[0], uvwm[2]), this.getYWithOffset(uvwm[1]), this.getZWithOffset(uvwm[0], uvwm[2]), Blocks.torch, uvwm[3], 2);
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
             }
-            
             
             // Roof of the well
             if (GeneralConfig.useVillageColors)
@@ -561,13 +564,15 @@ public class DesertStructures
     			{
         			int bannerXBB = 10;
         			int bannerZBB = 10;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
+        			*/
         			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);
@@ -695,7 +700,7 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.standing_sign, 0, this.materialType, this.biome); Block biomeStandingSignBlock = (Block)blockObject[0];
         	// Sandstone wall that defaults to fence
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.fence, 0, this.materialType, this.biome);} else {blockObject = StructureVillageVN.getBiomeSpecificBlock((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
-        	
+
         	if (this.field_143015_k < 0)
             {
         		this.field_143015_k = StructureVillageVN.getMedianGroundLevel(world,
@@ -708,6 +713,7 @@ public class DesertStructures
 
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY -1, 0);
             }
+        	
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world,
@@ -933,8 +939,8 @@ public class DesertStructures
         							)
             			);
             	
-            	int decorHeightY;
-            	
+            	int decorHeightY = uvw[1];
+            	/*
             	// Get ground level
             	if (this.decorHeightY.size()<(j+1))
             	{
@@ -949,6 +955,7 @@ public class DesertStructures
             		// Retrieve ground level
             		decorHeightY = this.decorHeightY.get(j);
             	}
+            	*/
             	
         		// Generate decor
             	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);//, townColor);
@@ -999,13 +1006,15 @@ public class DesertStructures
     			{
         			int bannerXBB = 10;
         			int bannerZBB = 11;
-        			int bannerYBB = -1;
+        			int bannerYBB = 1;
+        			/*
         			if (this.bannerY==0)
         			{
         				this.bannerY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(bannerXBB, bannerZBB), this.getZWithOffset(bannerXBB, bannerZBB))-this.boundingBox.minY +1;
         				bannerYBB = this.bannerY;
         			}
         			else {bannerYBB = this.bannerY;}
+        			*/
         			
         			int bannerX = this.getXWithOffset(bannerXBB, bannerZBB);
         			int bannerY = this.getYWithOffset(bannerYBB);

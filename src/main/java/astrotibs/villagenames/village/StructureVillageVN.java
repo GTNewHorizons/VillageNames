@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -252,210 +253,38 @@ public class StructureVillageVN
         	// Remove all buildings that rolled 0 for number or which have a weight of 0
             if (pw.villagePiecesLimit == 0 || pw.villagePieceWeight <=0) {iterator.remove(); continue;}
             
+            
             // Remove buildings that aren't appropriate for the current biome
-            if (villageType!=FunctionsVN.VillageType.PLAINS)
+            
+			ArrayList<String> classPaths = new ArrayList();
+			ArrayList<String> villageTypes = new ArrayList();
+            
+            // keys: "ClassPaths", "VillageTypes"
+			Map<String, ArrayList> mappedComponentVillageTypes = GeneralConfig.unpackComponentVillageTypes(GeneralConfig.componentVillageTypes);
+			
+			classPaths.addAll( mappedComponentVillageTypes.get("ClassPaths") );
+			villageTypes.addAll( mappedComponentVillageTypes.get("VillageTypes") );
+			
+			String villageTypeToCompare = "";
+			
+			switch (villageType)
+			{
+				default:
+				case PLAINS: villageTypeToCompare = "plains"; break;
+				case DESERT: villageTypeToCompare = "desert"; break;
+				case TAIGA: villageTypeToCompare = "taiga"; break;
+				case SAVANNA: villageTypeToCompare = "savanna"; break;
+				case SNOWY: villageTypeToCompare = "snowy"; break;
+			}
+			
+			int classPathListIndex = mappedComponentVillageTypes.get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
+			
+			if (
+					classPathListIndex!=-1 &&
+					!((String) ((mappedComponentVillageTypes.get("VillageTypes")).get(classPathListIndex))).trim().toLowerCase().contains(villageTypeToCompare)
+            		)
             {
-            	if (
-            			   pw.villagePieceClass==PlainsStructures.PlainsAccessory1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsAnimalPen1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsAnimalPen2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsAnimalPen3.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsArmorerHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsBigHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsButcherShop1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsButcherShop2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsCartographer1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsFisherCottage1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsFletcherHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsLargeFarm1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsLibrary1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsLibrary2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsMasonsHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsMediumHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsMediumHouse2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsMeetingPoint4.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsMeetingPoint5.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsShepherdsHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallFarm1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse3.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse4.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse5.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse6.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse7.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsSmallHouse8.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsStable1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsStable2.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsTannery1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsTemple3.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsTemple4.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsToolSmith1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsWeaponsmith1.class
-            			|| pw.villagePieceClass==PlainsStructures.PlainsStreetDecor1.class
-            			)
-            	{
-            		iterator.remove(); continue;
-            	}
-            }
-            if (villageType!=FunctionsVN.VillageType.DESERT)
-            {
-            	if (
-            			   pw.villagePieceClass==DesertStructures.DesertAnimalPen1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertAnimalPen2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertArmorer1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertButcherShop1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertCartographerHouse1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertFarm1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertFarm2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertFisher1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertFletcherHouse1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertLargeFarm1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertLibrary1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertMason1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertMediumHouse1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertMediumHouse2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertShepherdHouse1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse3.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse4.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse5.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse6.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse7.class
-            			|| pw.villagePieceClass==DesertStructures.DesertSmallHouse8.class
-            			|| pw.villagePieceClass==DesertStructures.DesertTannery1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertTemple1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertTemple2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertToolSmith1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertWeaponsmith1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertStreetDecor1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertStreetSubstitute1.class
-            			|| pw.villagePieceClass==DesertStructures.DesertStreetSubstitute2.class
-            			|| pw.villagePieceClass==DesertStructures.DesertStreetSubstitute3.class
-         			)
-	         	{
-	         		iterator.remove(); continue;
-	         	}
-            }
-            if (villageType!=FunctionsVN.VillageType.TAIGA)
-            {
-            	if (
-            			   pw.villagePieceClass==TaigaStructures.TaigaAnimalPen1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaArmorer2.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaArmorerHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaButcherShop1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaCartographerHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaFisherCottage1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaFletcherHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaLargeFarm1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMediumFarm1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaLibrary1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMasonsHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMediumHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMediumHouse2.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMediumHouse3.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaMediumHouse4.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaShepherdsHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallFarm1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallHouse1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallHouse2.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallHouse3.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallHouse4.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaSmallHouse5.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaTannery1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaTemple1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaToolSmith1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaWeaponsmith1.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaWeaponsmith2.class
-            			|| pw.villagePieceClass==TaigaStructures.TaigaStreetDecor1.class
-          			)
- 	         	{
- 	         		iterator.remove(); continue;
- 	         	}
-            }
-            if (villageType!=FunctionsVN.VillageType.SAVANNA)
-            {
-            	if (
-            			   pw.villagePieceClass==SavannaStructures.SavannaAnimalPen1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaAnimalPen2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaAnimalPen3.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaArmorer1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaButchersShop1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaButchersShop2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaCartographer1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaFisherCottage1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaFletcherHouse1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaLargeFarm1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaLargeFarm2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaLibrary1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaMason1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaMediumHouse1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaMediumHouse2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaShepherd1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallFarm.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse3.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse4.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse5.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse6.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse7.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaSmallHouse8.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaTannery1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaTemple1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaTemple2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaToolSmith1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaWeaponsmith1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaWeaponsmith2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaStreetDecor1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaStreetSubstitute1.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaStreetSubstitute2.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaStreetSubstitute3.class
-            			|| pw.villagePieceClass==SavannaStructures.SavannaStreetSubstitute4.class
-          			)
- 	         	{
- 	         		iterator.remove(); continue;
- 	         	}
-            }
-            if (villageType!=FunctionsVN.VillageType.SNOWY)
-            {
-            	if (
-            			   pw.villagePieceClass==SnowyStructures.SnowyAnimalPen1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyAnimalPen2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyArmorerHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyArmorerHouse2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyButchersShop1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyButchersShop2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyCartographerHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyFarm1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyFarm2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyFisherCottage.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyFletcherHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyLibrary1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyMasonsHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyMasonsHouse2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyMediumHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyMediumHouse2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyMediumHouse3.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyShepherdsHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse2.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse3.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse4.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse5.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse6.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse7.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowySmallHouse8.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyTannery1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyTemple1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyToolSmith1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyWeaponSmith1.class
-            			|| pw.villagePieceClass==SnowyStructures.SnowyStreetDecor1.class
-          			)
- 	         	{
- 	         		iterator.remove(); continue;
- 	         	}
+            	iterator.remove(); continue;
             }
             
         }
