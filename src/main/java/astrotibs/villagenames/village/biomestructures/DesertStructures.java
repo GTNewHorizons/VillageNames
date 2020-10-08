@@ -6,6 +6,7 @@ import java.util.Random;
 
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.handler.ChestLootHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.BlockPos;
@@ -299,7 +300,7 @@ public class DesertStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{1, 1, 1, -1, 0},
@@ -609,7 +610,7 @@ public class DesertStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{10, 1, 8, -1, 0},
@@ -1051,7 +1052,7 @@ public class DesertStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{6, 1, 5, -1, 0},
@@ -5612,7 +5613,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,3, -1, 0},
@@ -6020,7 +6021,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,3,2, -1, 0},
@@ -6767,7 +6768,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,3, -1, 0},
@@ -7172,7 +7173,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{1,1,1, -1, 0},
@@ -7546,7 +7547,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,4, -1, 0},
@@ -7896,7 +7897,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,2, -1, 0},
@@ -8251,7 +8252,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{1,1,3, -1, 0},
@@ -8745,7 +8746,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,2, -1, 0},
@@ -9116,7 +9117,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,5, -1, 0},
@@ -9466,7 +9467,7 @@ public class DesertStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,2, -1, 0},
@@ -11870,7 +11871,7 @@ public class DesertStructures
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -11967,8 +11968,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{0, 0}, {1, 0}, {1, 1},
         		{5, 1}, {5, 0}, {6, 0}, 
-        		{0, -(Reference.streetWidth+1)}, {1, -(Reference.streetWidth+1)}, {1, -(Reference.streetWidth+1)-1},
-        		{5, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)}, {6, -(Reference.streetWidth+1)}, 
+        		{0, -(Reference.STREET_WIDTH+1)}, {1, -(Reference.STREET_WIDTH+1)}, {1, -(Reference.STREET_WIDTH+1)-1},
+        		{5, -(Reference.STREET_WIDTH+1)-1}, {5, -(Reference.STREET_WIDTH+1)}, {6, -(Reference.STREET_WIDTH+1)}, 
         	})
         	{
         		// Determine ground level
@@ -11987,8 +11988,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{2, 0}, {3, 0}, {4, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, 
-        		{2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, 
-        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, 
+        		{2, -(Reference.STREET_WIDTH+1)-0}, {3, -(Reference.STREET_WIDTH+1)-0}, {4, -(Reference.STREET_WIDTH+1)-0}, 
+        		{2, -(Reference.STREET_WIDTH+1)-1}, {3, -(Reference.STREET_WIDTH+1)-1}, {4, -(Reference.STREET_WIDTH+1)-1}, 
         	})
         	{
         		// Determine ground level
@@ -12152,7 +12153,7 @@ public class DesertStructures
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -12249,9 +12250,9 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}, {11, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {8, 1}, {9, 1}, {10, 1}, 
-        		{1, -(Reference.streetWidth+1)-0}, {2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, {5, -(Reference.streetWidth+1)-0}, {6, -(Reference.streetWidth+1)-0}, 
-        		{7, -(Reference.streetWidth+1)-0}, {8, -(Reference.streetWidth+1)-0}, {9, -(Reference.streetWidth+1)-0}, {10, -(Reference.streetWidth+1)-0}, {11, -(Reference.streetWidth+1)-0}, 
-        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)-1}, {6, -(Reference.streetWidth+1)-1}, {7, -(Reference.streetWidth+1)-1}, 
+        		{1, -(Reference.STREET_WIDTH+1)-0}, {2, -(Reference.STREET_WIDTH+1)-0}, {3, -(Reference.STREET_WIDTH+1)-0}, {4, -(Reference.STREET_WIDTH+1)-0}, {5, -(Reference.STREET_WIDTH+1)-0}, {6, -(Reference.STREET_WIDTH+1)-0}, 
+        		{7, -(Reference.STREET_WIDTH+1)-0}, {8, -(Reference.STREET_WIDTH+1)-0}, {9, -(Reference.STREET_WIDTH+1)-0}, {10, -(Reference.STREET_WIDTH+1)-0}, {11, -(Reference.STREET_WIDTH+1)-0}, 
+        		{2, -(Reference.STREET_WIDTH+1)-1}, {3, -(Reference.STREET_WIDTH+1)-1}, {4, -(Reference.STREET_WIDTH+1)-1}, {5, -(Reference.STREET_WIDTH+1)-1}, {6, -(Reference.STREET_WIDTH+1)-1}, {7, -(Reference.STREET_WIDTH+1)-1}, 
         	})
         	{
         		// Determine ground level
@@ -12434,7 +12435,7 @@ public class DesertStructures
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -12531,8 +12532,8 @@ public class DesertStructures
         	for (int[] uw : new int[][]{
         		{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, 
         		{2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, 
-        		{1, -(Reference.streetWidth+1)-0}, {2, -(Reference.streetWidth+1)-0}, {3, -(Reference.streetWidth+1)-0}, {4, -(Reference.streetWidth+1)-0}, {5, -(Reference.streetWidth+1)-0}, {6, -(Reference.streetWidth+1)-0}, {7, -(Reference.streetWidth+1)-0}, 
-        		{2, -(Reference.streetWidth+1)-1}, {3, -(Reference.streetWidth+1)-1}, {4, -(Reference.streetWidth+1)-1}, {5, -(Reference.streetWidth+1)-1}, {6, -(Reference.streetWidth+1)-1}, 
+        		{1, -(Reference.STREET_WIDTH+1)-0}, {2, -(Reference.STREET_WIDTH+1)-0}, {3, -(Reference.STREET_WIDTH+1)-0}, {4, -(Reference.STREET_WIDTH+1)-0}, {5, -(Reference.STREET_WIDTH+1)-0}, {6, -(Reference.STREET_WIDTH+1)-0}, {7, -(Reference.STREET_WIDTH+1)-0}, 
+        		{2, -(Reference.STREET_WIDTH+1)-1}, {3, -(Reference.STREET_WIDTH+1)-1}, {4, -(Reference.STREET_WIDTH+1)-1}, {5, -(Reference.STREET_WIDTH+1)-1}, {6, -(Reference.STREET_WIDTH+1)-1}, 
         	})
         	{
         		// Determine ground level

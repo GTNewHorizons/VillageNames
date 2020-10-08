@@ -9,6 +9,7 @@ import java.util.Set;
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
@@ -51,7 +52,7 @@ public class WellDecorateEvent {
 	public void onPopulating(PopulateChunkEvent.Post event) {
 		
 		if (
-				event.hasVillageGenerated && event.world.provider.dimensionId == 0 && !GeneralConfig.newVillageGenerator
+				event.hasVillageGenerated && event.world.provider.dimensionId == 0 && !VillageGeneratorConfigHandler.newVillageGenerator
 				&& !event.world.isRemote
 				) {
 			

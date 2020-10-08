@@ -8,6 +8,7 @@ import astrotibs.villagenames.command.CommandBanner;
 import astrotibs.villagenames.command.CommandName;
 import astrotibs.villagenames.config.ConfigInit;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.handler.ChestLootHandler;
 import astrotibs.villagenames.handler.DevVersionWarning;
 import astrotibs.villagenames.handler.EntityMonitorHandler;
@@ -36,6 +37,9 @@ import astrotibs.villagenames.prismarine.monument.StructureOceanMonumentPieces;
 import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
 import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import astrotibs.villagenames.proxy.CommonProxy;
+import astrotibs.villagenames.spawnegg.DispenserBehavior;
+import astrotibs.villagenames.spawnegg.ItemSpawnEggVN;
+import astrotibs.villagenames.spawnegg.SpawnEggRegistry;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.MapGenVillageVN;
@@ -62,6 +66,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -125,6 +130,7 @@ public final class VillageNames
 	 */
 	public static int numberStructuresArchaeologist = 7;
     
+	public static ItemSpawnEggVN spawnEgg;
 	
 	// PRE-INIT
 	@EventHandler
@@ -159,7 +165,8 @@ public final class VillageNames
 		}
 		
 		if (GeneralConfig.addOceanMonuments)
-		{ // Monuments, Prismarine, Guardians, Sponges
+		{
+			// Monuments, Prismarine, Guardians, Sponges
 			// Register Prismarine stuff here
 			ModBlocksPrismarine.init();
 			ModItemsPrismarine.init();
@@ -168,10 +175,14 @@ public final class VillageNames
 			GameRegistry.registerWorldGenerator(new MonumentGeneratorIWG(), 0);
 			MapGenStructureIO.registerStructure(StructureOceanMonument.StartMonument.class, "Monument");
 			StructureOceanMonumentPieces.registerOceanMonumentPieces();
-						
-			// Register Guardian stuff here
-			EntityRegistry.registerGlobalEntityID(EntityGuardian.class, GeneralConfig.alternateGuardianNamespace ? "Guardian_VN" : "Guardian", EntityRegistry.findGlobalUniqueEntityId(), 0x5A7A6C, 0xE57E3E);
-			//RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
+			
+			// Guardian registry has been moved to init()
+			
+			// Spawn egg stuff
+			spawnEgg = new ItemSpawnEggVN();
+			GameRegistry.registerItem(spawnEgg, spawnEgg.getUnlocalizedName());
+			BlockDispenser.dispenseBehaviorRegistry.putObject(spawnEgg, new DispenserBehavior());
+			
 			MinecraftForge.EVENT_BUS.register(new SpawnEventListener());
 			LogHelper.info("Ocean Monuments, Prismarine, Guardians, and Sponges registered");
 			
@@ -187,7 +198,7 @@ public final class VillageNames
 		}
 		
 		// New village generator
-		if (GeneralConfig.newVillageGenerator)
+		if (VillageGeneratorConfigHandler.newVillageGenerator)
 		{
 			// New village generator
 			MapGenStructureIO.registerStructure(MapGenVillageVN.Start.class, "MapGenVillageVN");
@@ -485,7 +496,16 @@ public final class VillageNames
     
 	
 	@EventHandler
-	public void load(FMLInitializationEvent event) {
+	public void load(FMLInitializationEvent event)
+	{
+		if (GeneralConfig.addOceanMonuments)
+		{
+			// Register Guardian stuff here
+	    	int entityIDs = 0; // Increment this to make sure everything has its own model register
+	    	//EntityRegistry.registerGlobalEntityID(EntityGuardian.class, GeneralConfig.alternateGuardianNamespace ? "Guardian_VN" : "Guardian", EntityRegistry.findGlobalUniqueEntityId(), 0x5A7A6C, 0xE57E3E);
+	    	EntityRegistry.registerModEntity(EntityGuardian.class, Reference.MOB_GUARDIAN_VN, entityIDs++, this, 64, 3, true);
+			//RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
+		}
 		
 		// register crafting recipes
 		Recipes.init();
@@ -508,7 +528,10 @@ public final class VillageNames
 	
 	// POST-INIT
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		SpawnEggRegistry.addAllSpawnEggs();
+		
 		PROXY.postInit(event);
 		// cover your ass here
 		// e.g. get list of all blocks added into game from other mods

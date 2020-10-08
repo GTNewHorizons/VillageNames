@@ -23,6 +23,7 @@ import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
 import astrotibs.villagenames.config.pieces.TempleConfigHandler;
 import astrotibs.villagenames.config.pieces.VillageConfigHandler;
 import astrotibs.villagenames.config.pieces.VillagerConfigHandler;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import cpw.mods.fml.client.config.GuiConfig;
@@ -84,12 +85,6 @@ public class VNGuiConfig extends GuiConfig
 		cc.setComment("Change things like well decorations, name formats, and Codex/book settings");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("village generator");
-		cc.setComment("Village buildings and generation system");
-		cc.setRequiresWorldRestart(true); // This category can't be edited while a world is running
-		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
-		subCats.add( new ConfigElement(cc) );
-		
 		cc = GeneralConfig.config.getCategory("well kill switch");
 		cc.setComment("Disable well decorations outright"); 
 		subCats.add( new ConfigElement(cc) );
@@ -140,6 +135,26 @@ public class VNGuiConfig extends GuiConfig
 				"config.villagenames.global",
 				subCats
 				));
+		
+		
+		
+		// Village generator
+		subCats = new ArrayList<IConfigElement>();
+		
+		cc = VillageGeneratorConfigHandler.config.getCategory(Reference.CATEGORY_VILLAGE_GENERATOR.toLowerCase());
+		cc.setComment("Village buildings and generation system");
+		cc.setRequiresWorldRestart(true); // This category can't be edited while a world is running
+		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
+		subCats.add( new ConfigElement(cc) );
+		
+		topCats.add(new DummyCategoryElement(
+				//EnumChatFormatting.GREEN +
+				Reference.CATEGORY_VILLAGE_GENERATOR,
+				"config.villagenames.villagegenerator",
+				subCats
+				));
+		
+		
 		
 		// Syllable pools
 		subCats = new ArrayList<IConfigElement>();
@@ -235,6 +250,7 @@ public class VNGuiConfig extends GuiConfig
 				"config.villagenames.syllables",
 				subCats
 				));
+		
 		
 		return topCats;
 	}

@@ -8,7 +8,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
 import astrotibs.villagenames.prismarine.monument.StructureOceanMonument;
 import astrotibs.villagenames.utility.LogHelper;
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
@@ -38,11 +38,11 @@ public class SpawnEventListener {
 	//creatureClass, maxNumberofCreature, creatureMaterial, isPeacefulCreature, isAnimal
 	// Here I called the monster max number explicitly (70)
 	public static final EnumCreatureType waterMonster = EnumHelper.addCreatureType("waterMonster", IMob.class, EnumCreatureType.monster.getMaxNumberOfCreature(), Material.water, false, false); 
-	
+	/*
 	public SpawnEventListener() {
 		//instance = this;
 	}
-	
+	*/
 	
 	/**
 	 * This method actively cancels creature types "monster" and "waterMonster" from spawning
@@ -67,8 +67,8 @@ public class SpawnEventListener {
 				&& this.capMonsterSpawns(event.world, countMonsterType, countWaterMonsterType, true, true)
 				) 
 		{   // Cap the number of spawns per chunk for monster and waterMonster, collectively
-			event.setResult(Result.DENY);
-			event.setCanceled(true);
+			//event.setResult(Result.DENY);
+			//event.setCanceled(true);
 			//LogHelper.info("Event type " + event.type + " denied? " + (event.getResult()==Result.DENY) );
 			//LogHelper.info("Event type " + event.type + " canceled? " + (event.isCanceled()) );
 			
@@ -125,7 +125,7 @@ public class SpawnEventListener {
 							// 2: SOUTH
 							// 3: WEST
 							
-							boolean hasHadElders = nbttagcompound2.getBoolean("ElderGen");
+							boolean hasHadElders = nbttagcompound2.getBoolean(Reference.ELDER_GEN_VN4);
 							
 							if (!hasHadElders) { //This Monument was generated before the 2.1 update, so here's our chance to shove some Elders into it
 								
@@ -160,7 +160,7 @@ public class SpawnEventListener {
 										);
 								
 								// Set the tag to "true" so that we won't generate elders again
-								nbttagcompound2.setBoolean("ElderGen", true);
+								nbttagcompound2.setBoolean(Reference.ELDER_GEN_VN4, true);
 								structureData.setDirty(true);
 							}
 						}

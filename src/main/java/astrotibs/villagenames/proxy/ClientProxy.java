@@ -59,7 +59,11 @@ public class ClientProxy extends CommonProxy {
         {
         	RenderingRegistry.registerEntityRenderingHandler(EntityZombie.class, new RenderZombieVillagerModern());  // Modern modular zombie villagers
         }
-        	
+        
+        if (GeneralConfig.addOceanMonuments)
+        {
+			RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
+        }
 	}
 	
 	@Override
@@ -68,7 +72,7 @@ public class ClientProxy extends CommonProxy {
 		if (GeneralConfig.addOceanMonuments) {
 			FMLCommonHandler.instance().bus().register(RegisterRenderPrismarine.INSTANCE);
 			MinecraftForge.EVENT_BUS.register(RegisterRenderPrismarine.INSTANCE);
-			RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
+			//RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
 		}
 	}
 	

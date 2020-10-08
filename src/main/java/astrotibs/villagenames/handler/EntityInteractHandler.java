@@ -175,7 +175,7 @@ public class EntityInteractHandler {
 			// Hard-code workaround to allow reference to the Elder Guardian in the configs
 			if (target instanceof EntityGuardian) {
 				if ( ((EntityGuardian) target).isElder() ) { // Reference "Elder" guardians using the below string. Reference ordinary guardians as EntityGuardian
-					targetClassPath = Reference.elderGuardianClass;
+					targetClassPath = Reference.ELDER_GUARDIAN_CLASS;
 				}
 			}
 			

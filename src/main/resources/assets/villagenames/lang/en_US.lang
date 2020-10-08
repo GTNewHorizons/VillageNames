@@ -107,8 +107,9 @@ tile.seaLantern.name=Sea Lantern
 tile.sponge.name=Inert Sponge
 tile.sponge.dry.name=Sponge
 tile.sponge.wet.name=Wet Sponge
-entity.Guardian.name=Guardian
-entity.Guardian_VN.name=Guardian
+entity.VillageNames.Guardian.name=Guardian
+eggdisplay.VillageNames.guardian.name=Guardian
+eggdisplay.VillageNames.guardian.elder.name=Elder Guardian
 
 # Villager careers/professions
 entity.Villager.farmer=Farmer
@@ -129,7 +130,8 @@ entity.Villager.blacksmith=Blacksmith
 entity.Villager.mason=Mason
 
 # Config Menu
-config.villagenames.global.tooltip=Controls everything that's not name syllable pools
+config.villagenames.global.tooltip=Controls everything that's not name syllable pools or the village generator
+config.villagenames.villagegenerator.tooltip=Settings for the village generation system
 config.villagenames.syllables.tooltip=Collection of the pools of syllables accessible to the name generator
 
 # Achievements

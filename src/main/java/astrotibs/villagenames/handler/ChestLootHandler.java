@@ -1,6 +1,7 @@
 package astrotibs.villagenames.handler;
 
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.item.ModItems;
 import astrotibs.villagenames.utility.FunctionsVN;
@@ -39,7 +40,7 @@ public class ChestLootHandler {
 		if ( Loader.isModLoaded("Artifacts") )   ChestGenHooks.addItem("A_WIZARD_DID_IT", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 4, 20)); // Dragon Artifacts
 		
 		// Modern village buildings
-		if (GeneralConfig.newVillageGenerator)
+		if (VillageGeneratorConfigHandler.newVillageGenerator)
 		{
 			ChestGenHooks.addItem("vn_cartographer", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 2, 4));
 			ChestGenHooks.addItem("vn_mason", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 1, 1));

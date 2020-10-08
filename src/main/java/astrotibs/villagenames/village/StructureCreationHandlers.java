@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertAnimalPen2;
@@ -180,7 +180,7 @@ public class StructureCreationHandlers
 	// Plains flower planter
 	public static class PlainsAccessory1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsAccessory1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsAccessory1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -204,7 +204,7 @@ public class StructureCreationHandlers
 	// Plains small animal pen
 	public static class PlainsAnimalPen1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsAnimalPen1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsAnimalPen1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -228,7 +228,7 @@ public class StructureCreationHandlers
 	// Plains large animal pen
 	public static class PlainsAnimalPen2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsAnimalPen2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsAnimalPen2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -252,7 +252,7 @@ public class StructureCreationHandlers
 	// Plains decorated animal pen
 	public static class PlainsAnimalPen3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsAnimalPen3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsAnimalPen3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -276,7 +276,7 @@ public class StructureCreationHandlers
 	// Plains armorer
 	public static class PlainsArmorerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsArmorerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsArmorerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -300,7 +300,7 @@ public class StructureCreationHandlers
 	// Plains large house
 	public static class PlainsBigHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsBigHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsBigHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -324,7 +324,7 @@ public class StructureCreationHandlers
 	// Plains Butcher 1
 	public static class PlainsButcherShop1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsButcherShop1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsButcherShop1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -348,7 +348,7 @@ public class StructureCreationHandlers
 	// Plains Butcher 2
 	public static class PlainsButcherShop2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsButcherShop2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsButcherShop2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -372,7 +372,7 @@ public class StructureCreationHandlers
 	// Plains Cartographer 1
 	public static class PlainsCartographer1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsCartographer1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsCartographer1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -396,7 +396,7 @@ public class StructureCreationHandlers
 	// Plains Fisher Cottage 1
 	public static class PlainsFisherCottage1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsFisherCottage1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsFisherCottage1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -420,7 +420,7 @@ public class StructureCreationHandlers
 	// Plains Fletcher House 1
 	public static class PlainsFletcherHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsFletcherHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsFletcherHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -444,7 +444,7 @@ public class StructureCreationHandlers
 	// Plains Large Farm 1
 	public static class PlainsLargeFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsLargeFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsLargeFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -468,7 +468,7 @@ public class StructureCreationHandlers
 	// Plains Library 1
 	public static class PlainsLibrary1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsLibrary1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsLibrary1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -492,7 +492,7 @@ public class StructureCreationHandlers
 	// Plains Library 2
 	public static class PlainsLibrary2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsLibrary2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsLibrary2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -516,7 +516,7 @@ public class StructureCreationHandlers
 	// Plains Mason House 1
 	public static class PlainsMasonsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsMasonsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsMasonsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -540,7 +540,7 @@ public class StructureCreationHandlers
 	// Plains Medium House 1
 	public static class PlainsMediumHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsMediumHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsMediumHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -564,7 +564,7 @@ public class StructureCreationHandlers
 	// Plains Medium House 2
 	public static class PlainsMediumHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsMediumHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsMediumHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -588,7 +588,7 @@ public class StructureCreationHandlers
 	// Plains Market 1
 	public static class PlainsMeetingPoint4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsMeetingPoint4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsMeetingPoint4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -612,7 +612,7 @@ public class StructureCreationHandlers
 	// Plains Market 2
 	public static class PlainsMeetingPoint5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsMeetingPoint5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsMeetingPoint5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -636,7 +636,7 @@ public class StructureCreationHandlers
 	// Plains Shepherd House
 	public static class PlainsShepherdsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsShepherdsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsShepherdsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -660,7 +660,7 @@ public class StructureCreationHandlers
 	// Plains Small Farm
 	public static class PlainsSmallFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -684,7 +684,7 @@ public class StructureCreationHandlers
 	// Plains Small House 1
 	public static class PlainsSmallHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -708,7 +708,7 @@ public class StructureCreationHandlers
 	// Plains Small House 2
 	public static class PlainsSmallHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -732,7 +732,7 @@ public class StructureCreationHandlers
 	// Plains Small House 3
 	public static class PlainsSmallHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -756,7 +756,7 @@ public class StructureCreationHandlers
 	// Plains Small House 4
 	public static class PlainsSmallHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -780,7 +780,7 @@ public class StructureCreationHandlers
 	// Plains Small House 5
 	public static class PlainsSmallHouse5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -804,7 +804,7 @@ public class StructureCreationHandlers
 	// Plains Small House 6
 	public static class PlainsSmallHouse6_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse6_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse6_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -828,7 +828,7 @@ public class StructureCreationHandlers
 	// Plains Small House 7
 	public static class PlainsSmallHouse7_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse7_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse7_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -852,7 +852,7 @@ public class StructureCreationHandlers
 	// Plains Small House 8
 	public static class PlainsSmallHouse8_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsSmallHouse8_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsSmallHouse8_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -876,7 +876,7 @@ public class StructureCreationHandlers
 	// Plains Cobblestone Stable
 	public static class PlainsStable1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsStable1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsStable1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -900,7 +900,7 @@ public class StructureCreationHandlers
 	// Plains Terracotta Stable
 	public static class PlainsStable2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsStable2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsStable2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -924,7 +924,7 @@ public class StructureCreationHandlers
 	// Plains Tannery
 	public static class PlainsTannery1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsTannery1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsTannery1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -948,7 +948,7 @@ public class StructureCreationHandlers
 	// Plains Terracotta Temple
 	public static class PlainsTemple3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsTemple3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsTemple3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -972,7 +972,7 @@ public class StructureCreationHandlers
 	// Plains Cobblestone Temple
 	public static class PlainsTemple4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsTemple4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsTemple4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -996,7 +996,7 @@ public class StructureCreationHandlers
 	// Plains Tool Smithy
 	public static class PlainsToolSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsToolSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsToolSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1020,7 +1020,7 @@ public class StructureCreationHandlers
 	// Plains Weapon Smithy
 	public static class PlainsWeaponsmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsWeaponsmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsWeaponsmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1044,7 +1044,7 @@ public class StructureCreationHandlers
 	// Plains Road Decor
 	public static class PlainsStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernPlainsStreetDecor1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernPlainsStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1068,7 +1068,7 @@ public class StructureCreationHandlers
 	// Desert Small Animal Pen
 	public static class DesertAnimalPen1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertAnimalPen1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertAnimalPen1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1092,7 +1092,7 @@ public class StructureCreationHandlers
 	// Desert Covered Animal Pen
 	public static class DesertAnimalPen2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertAnimalPen2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertAnimalPen2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1116,7 +1116,7 @@ public class StructureCreationHandlers
 	// Desert Armorer House
 	public static class DesertArmorer1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertArmorer1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertArmorer1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1140,7 +1140,7 @@ public class StructureCreationHandlers
 	// Desert Butcher Shop
 	public static class DesertButcherShop1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertButcherShop1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertButcherShop1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1164,7 +1164,7 @@ public class StructureCreationHandlers
 	// Desert Cartographer House
 	public static class DesertCartographerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertCartographerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertCartographerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1188,7 +1188,7 @@ public class StructureCreationHandlers
 	// Desert Small Farm
 	public static class DesertFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1212,7 +1212,7 @@ public class StructureCreationHandlers
 	// Desert Large Farm
 	public static class DesertFarm2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertFarm2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertFarm2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1236,7 +1236,7 @@ public class StructureCreationHandlers
 	// Desert Fisher Cottage
 	public static class DesertFisher1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertFisher1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertFisher1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1260,7 +1260,7 @@ public class StructureCreationHandlers
 	// Desert Fletcher House
 	public static class DesertFletcherHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertFletcherHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertFletcherHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1284,7 +1284,7 @@ public class StructureCreationHandlers
 	// Desert Large Farm
 	public static class DesertLargeFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertLargeFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertLargeFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1308,7 +1308,7 @@ public class StructureCreationHandlers
 	// Desert Library
 	public static class DesertLibrary1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertLibrary1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertLibrary1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1332,7 +1332,7 @@ public class StructureCreationHandlers
 	// Desert Mason House
 	public static class DesertMason1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertMason1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertMason1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1356,7 +1356,7 @@ public class StructureCreationHandlers
 	// Desert Medium House
 	public static class DesertMediumHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertMediumHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertMediumHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1380,7 +1380,7 @@ public class StructureCreationHandlers
 	// Desert Big House
 	public static class DesertMediumHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertMediumHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertMediumHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1404,7 +1404,7 @@ public class StructureCreationHandlers
 	// Desert Shepherd House
 	public static class DesertShepherdHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertShepherdHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertShepherdHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1428,7 +1428,7 @@ public class StructureCreationHandlers
 	// Desert Small House 1
 	public static class DesertSmallHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1452,7 +1452,7 @@ public class StructureCreationHandlers
 	// Desert Small House 2
 	public static class DesertSmallHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1476,7 +1476,7 @@ public class StructureCreationHandlers
 	// Desert Small House 3
 	public static class DesertSmallHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1500,7 +1500,7 @@ public class StructureCreationHandlers
 	// Desert Small House 4
 	public static class DesertSmallHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1524,7 +1524,7 @@ public class StructureCreationHandlers
 	// Desert Small House 5
 	public static class DesertSmallHouse5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1548,7 +1548,7 @@ public class StructureCreationHandlers
 	// Desert Small House 6
 	public static class DesertSmallHouse6_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse6_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse6_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1572,7 +1572,7 @@ public class StructureCreationHandlers
 	// Desert Small House 7
 	public static class DesertSmallHouse7_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse7_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse7_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1596,7 +1596,7 @@ public class StructureCreationHandlers
 	// Desert Small House 8
 	public static class DesertSmallHouse8_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertSmallHouse8_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertSmallHouse8_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1620,7 +1620,7 @@ public class StructureCreationHandlers
 	// Desert Tannery 1
 	public static class DesertTannery1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertTannery1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertTannery1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1644,7 +1644,7 @@ public class StructureCreationHandlers
 	// Desert Temple 1
 	public static class DesertTemple1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertTemple1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertTemple1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1668,7 +1668,7 @@ public class StructureCreationHandlers
 	// Desert Temple 2
 	public static class DesertTemple2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertTemple2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertTemple2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1692,7 +1692,7 @@ public class StructureCreationHandlers
 	// Desert Tool Smithy
 	public static class DesertToolSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertToolSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertToolSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1716,7 +1716,7 @@ public class StructureCreationHandlers
 	// Desert Weapon Smithy
 	public static class DesertWeaponsmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertWeaponsmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertWeaponsmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1740,7 +1740,7 @@ public class StructureCreationHandlers
 	// Desert Road Decor 1
 	public static class DesertStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetDecor1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1764,7 +1764,7 @@ public class StructureCreationHandlers
 	// Desert Road Terracotta Accent 1
 	public static class DesertStreetSubstitute1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertStreetSubstitute1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1788,7 +1788,7 @@ public class StructureCreationHandlers
 	// Desert Road Terracotta Accent 2
 	public static class DesertStreetSubstitute2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertStreetSubstitute2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1812,7 +1812,7 @@ public class StructureCreationHandlers
 	// Desert Road Decor 2
 	public static class DesertStreetSubstitute3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernDesertStreetSubstitute3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernDesertStreetSubstitute3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1836,7 +1836,7 @@ public class StructureCreationHandlers
 	// Taiga Animal Pen
 	public static class TaigaAnimalPen1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaAnimalPen1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaAnimalPen1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1860,7 +1860,7 @@ public class StructureCreationHandlers
 	// Taiga Armorer Hut
 	public static class TaigaArmorer2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaArmorer2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaArmorer2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1884,7 +1884,7 @@ public class StructureCreationHandlers
 	// Taiga Armorer House
 	public static class TaigaArmorerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaArmorerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaArmorerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1908,7 +1908,7 @@ public class StructureCreationHandlers
 	// Taiga Butcher Shop
 	public static class TaigaButcherShop1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaButcherShop1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaButcherShop1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1932,7 +1932,7 @@ public class StructureCreationHandlers
 	// Taiga Cartographer House
 	public static class TaigaCartographerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaCartographerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaCartographerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1956,7 +1956,7 @@ public class StructureCreationHandlers
 	// Taiga Fisher Cottage
 	public static class TaigaFisherCottage1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaFisherCottage1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaFisherCottage1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -1980,7 +1980,7 @@ public class StructureCreationHandlers
 	// Taiga Fletcher House
 	public static class TaigaFletcherHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaFletcherHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaFletcherHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2004,7 +2004,7 @@ public class StructureCreationHandlers
 	// Taiga Large Farm
 	public static class TaigaLargeFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaLargeFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaLargeFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2028,7 +2028,7 @@ public class StructureCreationHandlers
 	// Taiga Medium Farm
 	public static class TaigaMediumFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMediumFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2052,7 +2052,7 @@ public class StructureCreationHandlers
 	// Taiga Library
 	public static class TaigaLibrary1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaLibrary1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaLibrary1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2076,7 +2076,7 @@ public class StructureCreationHandlers
 	// Taiga Mason House
 	public static class TaigaMasonsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMasonsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMasonsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2100,7 +2100,7 @@ public class StructureCreationHandlers
 	// Taiga Medium House 1
 	public static class TaigaMediumHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMediumHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2124,7 +2124,7 @@ public class StructureCreationHandlers
 	// Taiga Medium House 2
 	public static class TaigaMediumHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMediumHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2148,7 +2148,7 @@ public class StructureCreationHandlers
 	// Taiga Medium House 3
 	public static class TaigaMediumHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMediumHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2172,7 +2172,7 @@ public class StructureCreationHandlers
 	// Taiga Medium House 4
 	public static class TaigaMediumHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaMediumHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2196,7 +2196,7 @@ public class StructureCreationHandlers
 	// Taiga Shepherd House 1
 	public static class TaigaShepherdsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaShepherdsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaShepherdsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2220,7 +2220,7 @@ public class StructureCreationHandlers
 	// Taiga Small Farm
 	public static class TaigaSmallFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2244,7 +2244,7 @@ public class StructureCreationHandlers
 	// Taiga Small House 1
 	public static class TaigaSmallHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2268,7 +2268,7 @@ public class StructureCreationHandlers
 	// Taiga Small House 2
 	public static class TaigaSmallHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2292,7 +2292,7 @@ public class StructureCreationHandlers
 	// Taiga Small House 3
 	public static class TaigaSmallHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2316,7 +2316,7 @@ public class StructureCreationHandlers
 	// Taiga Small House 4
 	public static class TaigaSmallHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2340,7 +2340,7 @@ public class StructureCreationHandlers
 	// Taiga Small House 5
 	public static class TaigaSmallHouse5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaSmallHouse5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaSmallHouse5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2364,7 +2364,7 @@ public class StructureCreationHandlers
 	// Taiga Tannery
 	public static class TaigaTannery1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaTannery1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaTannery1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2388,7 +2388,7 @@ public class StructureCreationHandlers
 	// Taiga Temple
 	public static class TaigaTemple1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaTemple1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaTemple1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2412,7 +2412,7 @@ public class StructureCreationHandlers
 	// Taiga Tool Smith
 	public static class TaigaToolSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaToolSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaToolSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2436,7 +2436,7 @@ public class StructureCreationHandlers
 	// Taiga Weapon Smith House
 	public static class TaigaWeaponsmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaWeaponsmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaWeaponsmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2460,7 +2460,7 @@ public class StructureCreationHandlers
 	// Taiga Weapon Smith Station
 	public static class TaigaWeaponsmith2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaWeaponsmith2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaWeaponsmith2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2484,7 +2484,7 @@ public class StructureCreationHandlers
 	// Taiga Road Decor
 	public static class TaigaStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernTaigaStreetDecor1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2508,7 +2508,7 @@ public class StructureCreationHandlers
 	// Savanna Covered Animal Pen
 	public static class SavannaAnimalPen1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaAnimalPen1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaAnimalPen1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2532,7 +2532,7 @@ public class StructureCreationHandlers
 	// Savanna Large Animal Pen
 	public static class SavannaAnimalPen2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaAnimalPen2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaAnimalPen2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2556,7 +2556,7 @@ public class StructureCreationHandlers
 	// Savanna Medium Animal Pen
 	public static class SavannaAnimalPen3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaAnimalPen3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaAnimalPen3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2580,7 +2580,7 @@ public class StructureCreationHandlers
 	// Savanna Armorer House
 	public static class SavannaArmorer1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaArmorer1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaArmorer1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2604,7 +2604,7 @@ public class StructureCreationHandlers
 	// Savanna Butcher Shop 1
 	public static class SavannaButchersShop1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaButchersShop1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaButchersShop1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2628,7 +2628,7 @@ public class StructureCreationHandlers
 	// Savanna Butcher Shop 3
 	public static class SavannaButchersShop2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaButchersShop2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaButchersShop2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2652,7 +2652,7 @@ public class StructureCreationHandlers
 	// Savanna Cartographer House
 	public static class SavannaCartographer1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaCartographer1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaCartographer1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2676,7 +2676,7 @@ public class StructureCreationHandlers
 	// Savanna Fisher Cottage
 	public static class SavannaFisherCottage1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaFisherCottage1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaFisherCottage1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2700,7 +2700,7 @@ public class StructureCreationHandlers
 	// Savanna Fletcher House
 	public static class SavannaFletcherHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaFletcherHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaFletcherHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2724,7 +2724,7 @@ public class StructureCreationHandlers
 	// Savanna Methodical Farm
 	public static class SavannaLargeFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaLargeFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaLargeFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2748,7 +2748,7 @@ public class StructureCreationHandlers
 	// Savanna Haphazard Farm
 	public static class SavannaLargeFarm2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaLargeFarm2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaLargeFarm2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2772,7 +2772,7 @@ public class StructureCreationHandlers
 	// Savanna Library
 	public static class SavannaLibrary1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaLibrary1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaLibrary1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2796,7 +2796,7 @@ public class StructureCreationHandlers
 	// Savanna Mason
 	public static class SavannaMason1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaMason1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaMason1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2820,7 +2820,7 @@ public class StructureCreationHandlers
 	// Savanna Medium House 1
 	public static class SavannaMediumHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaMediumHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaMediumHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2844,7 +2844,7 @@ public class StructureCreationHandlers
 	// Savanna Medium House 2
 	public static class SavannaMediumHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaMediumHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaMediumHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2868,7 +2868,7 @@ public class StructureCreationHandlers
 	// Savanna Shepherd House
 	public static class SavannaShepherd1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaShepherd1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaShepherd1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2892,7 +2892,7 @@ public class StructureCreationHandlers
 	// Savanna Small Farm
 	public static class SavannaSmallFarm_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallFarm_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallFarm_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2916,7 +2916,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 1
 	public static class SavannaSmallHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2940,7 +2940,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 2
 	public static class SavannaSmallHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2964,7 +2964,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 3
 	public static class SavannaSmallHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -2988,7 +2988,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 4
 	public static class SavannaSmallHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3012,7 +3012,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 5
 	public static class SavannaSmallHouse5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3036,7 +3036,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 6
 	public static class SavannaSmallHouse6_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse6_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse6_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3060,7 +3060,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 7
 	public static class SavannaSmallHouse7_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse7_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse7_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3084,7 +3084,7 @@ public class StructureCreationHandlers
 	// Savanna Small House 8
 	public static class SavannaSmallHouse8_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaSmallHouse8_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaSmallHouse8_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3108,7 +3108,7 @@ public class StructureCreationHandlers
 	// Savanna Tannery 1
 	public static class SavannaTannery1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaTannery1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaTannery1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3132,7 +3132,7 @@ public class StructureCreationHandlers
 	// Savanna Temple 1
 	public static class SavannaTemple1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaTemple1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaTemple1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3156,7 +3156,7 @@ public class StructureCreationHandlers
 	// Savanna Temple 2
 	public static class SavannaTemple2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaTemple2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaTemple2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3180,7 +3180,7 @@ public class StructureCreationHandlers
 	// Savanna Tool Smithy
 	public static class SavannaToolSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaToolSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaToolSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3204,7 +3204,7 @@ public class StructureCreationHandlers
 	// Savanna Weapon Smithy 1
 	public static class SavannaWeaponsmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaWeaponsmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaWeaponsmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3228,7 +3228,7 @@ public class StructureCreationHandlers
 	// Savanna Weapon Smithy 2
 	public static class SavannaWeaponsmith2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaWeaponsmith2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaWeaponsmith2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3252,7 +3252,7 @@ public class StructureCreationHandlers
 	// Savanna Road Decor
 	public static class SavannaStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetDecor1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3276,7 +3276,7 @@ public class StructureCreationHandlers
 	// Desert Roadside Farm 1
 	public static class SavannaStreetSubstitute1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaStreetSubstitute1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3300,7 +3300,7 @@ public class StructureCreationHandlers
 	// Desert Roadside Farm 2
 	public static class SavannaStreetSubstitute2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaStreetSubstitute2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3324,7 +3324,7 @@ public class StructureCreationHandlers
 	// Desert Roadside Farm 3
 	public static class SavannaStreetSubstitute3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaStreetSubstitute3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3348,7 +3348,7 @@ public class StructureCreationHandlers
 	// Desert Roadside Farm 4
 	public static class SavannaStreetSubstitute4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSavannaStreetSubstitute4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSavannaStreetSubstitute4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3372,7 +3372,7 @@ public class StructureCreationHandlers
 	// Snowy Animal Pen 1
 	public static class SnowyAnimalPen1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyAnimalPen1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyAnimalPen1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3396,7 +3396,7 @@ public class StructureCreationHandlers
 	// Snowy Animal Pen 2
 	public static class SnowyAnimalPen2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyAnimalPen2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyAnimalPen2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3420,7 +3420,7 @@ public class StructureCreationHandlers
 	// Snowy Armorer House 1
 	public static class SnowyArmorerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyArmorerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyArmorerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3444,7 +3444,7 @@ public class StructureCreationHandlers
 	// Snowy Armorer House 2
 	public static class SnowyArmorerHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyArmorerHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyArmorerHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3468,7 +3468,7 @@ public class StructureCreationHandlers
 	// Snowy Butcher House
 	public static class SnowyButchersShop1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyButchersShop1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyButchersShop1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3492,7 +3492,7 @@ public class StructureCreationHandlers
 	// Snowy Butcher Igloo
 	public static class SnowyButchersShop2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyButchersShop2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyButchersShop2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3516,7 +3516,7 @@ public class StructureCreationHandlers
 	// Snowy Cartographer House
 	public static class SnowyCartographerHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyCartographerHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyCartographerHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3540,7 +3540,7 @@ public class StructureCreationHandlers
 	// Snowy Square Farm
 	public static class SnowyFarm1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyFarm1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3564,7 +3564,7 @@ public class StructureCreationHandlers
 	// Snowy Patch Farm
 	public static class SnowyFarm2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyFarm2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyFarm2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3588,7 +3588,7 @@ public class StructureCreationHandlers
 	// Snowy Fisher Cottage
 	public static class SnowyFisherCottage_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyFisherCottage_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyFisherCottage_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3612,7 +3612,7 @@ public class StructureCreationHandlers
 	// Snowy Fletcher House
 	public static class SnowyFletcherHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyFletcherHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyFletcherHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3636,7 +3636,7 @@ public class StructureCreationHandlers
 	// Snowy Library
 	public static class SnowyLibrary1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyLibrary1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyLibrary1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3660,7 +3660,7 @@ public class StructureCreationHandlers
 	// Snowy Mason House 1
 	public static class SnowyMasonsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyMasonsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyMasonsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3684,7 +3684,7 @@ public class StructureCreationHandlers
 	// Snowy Mason House 2
 	public static class SnowyMasonsHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyMasonsHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyMasonsHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3708,7 +3708,7 @@ public class StructureCreationHandlers
 	// Snowy Medium House 1
 	public static class SnowyMediumHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyMediumHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyMediumHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3732,7 +3732,7 @@ public class StructureCreationHandlers
 	// Snowy Medium House 2
 	public static class SnowyMediumHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyMediumHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyMediumHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3756,7 +3756,7 @@ public class StructureCreationHandlers
 	// Snowy Medium House 3
 	public static class SnowyMediumHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyMediumHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyMediumHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3780,7 +3780,7 @@ public class StructureCreationHandlers
 	// Snowy Shepherd House
 	public static class SnowyShepherdsHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyShepherdsHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyShepherdsHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3804,7 +3804,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 1
 	public static class SnowySmallHouse1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3828,7 +3828,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 2
 	public static class SnowySmallHouse2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse2_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3852,7 +3852,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 3
 	public static class SnowySmallHouse3_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse3_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse3_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3876,7 +3876,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 4
 	public static class SnowySmallHouse4_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse4_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse4_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3900,7 +3900,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 5
 	public static class SnowySmallHouse5_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse5_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse5_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3924,7 +3924,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 6
 	public static class SnowySmallHouse6_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse6_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse6_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3948,7 +3948,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 7
 	public static class SnowySmallHouse7_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse7_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse7_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3972,7 +3972,7 @@ public class StructureCreationHandlers
 	// Snowy Small House 8
 	public static class SnowySmallHouse8_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowySmallHouse8_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowySmallHouse8_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -3996,7 +3996,7 @@ public class StructureCreationHandlers
 	// Snowy Tannery
 	public static class SnowyTannery1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyTannery1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyTannery1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -4020,7 +4020,7 @@ public class StructureCreationHandlers
 	// Snowy Temple
 	public static class SnowyTemple1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyTemple1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyTemple1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -4044,7 +4044,7 @@ public class StructureCreationHandlers
 	// Tool Smith
 	public static class SnowyToolSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyToolSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyToolSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -4068,7 +4068,7 @@ public class StructureCreationHandlers
 	// Weapon Smith
 	public static class SnowyWeaponSmith1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyWeaponSmith1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyWeaponSmith1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
@@ -4092,7 +4092,7 @@ public class StructureCreationHandlers
 	// Snowy Road Decor
 	public static class SnowyStreetDecor1_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = GeneralConfig.componentModernSnowyStreetDecor1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSnowyStreetDecor1_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)

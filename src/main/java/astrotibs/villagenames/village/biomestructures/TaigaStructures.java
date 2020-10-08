@@ -6,6 +6,7 @@ import java.util.Random;
 
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.handler.ChestLootHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.BlockPos;
@@ -296,7 +297,7 @@ public class TaigaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{2, 1, 5, -1, 0},
@@ -716,7 +717,7 @@ public class TaigaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{7, 2, 1, -1, 0},
@@ -6090,7 +6091,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,6,4, -1, 0},
@@ -6516,7 +6517,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{4,1,4, -1, 0},
@@ -7061,7 +7062,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{4,1,4, -1, 0},
@@ -7507,7 +7508,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,2, -1, 0},
@@ -8808,7 +8809,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{4,2,3, -1, 0},
@@ -9207,7 +9208,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,2,3, -1, 0},
@@ -9611,7 +9612,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,3, -1, 0},
@@ -10036,7 +10037,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,4, -1, 0},
@@ -10417,7 +10418,7 @@ public class TaigaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,2,4, -1, 0},

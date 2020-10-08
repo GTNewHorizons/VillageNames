@@ -6,6 +6,7 @@ import java.util.Random;
 
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
@@ -411,7 +412,7 @@ public class SavannaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{3, 1, 2, -1, 0},
@@ -716,7 +717,7 @@ public class SavannaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{3, 1, 8, -1, 0},
@@ -1021,7 +1022,7 @@ public class SavannaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{6, 1, 5, -1, 0},
@@ -1313,7 +1314,7 @@ public class SavannaStructures
             {
             	this.villagersGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInTownCenters)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInTownCenters)
             	{
 	        		for (int[] ia : new int[][]{
 	        			{7, 1, 1, -1, 0},
@@ -7358,7 +7359,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,3, -1, 0},
@@ -7882,7 +7883,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,3, -1, 0},
@@ -9031,7 +9032,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,0, -1, 0},
@@ -9416,7 +9417,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{2,1,0, -1, 0},
@@ -9787,7 +9788,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{5,1,0, -1, 0},
@@ -10289,7 +10290,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{5,1,4, -1, 0},
@@ -10733,7 +10734,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,2, -1, 0},
@@ -11131,7 +11132,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,3, -1, 0},
@@ -11537,7 +11538,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{5,1,0, -1, 0},
@@ -11902,7 +11903,7 @@ public class SavannaStructures
             {
             	this.entitiesGenerated=true;
             	
-            	if (GeneralConfig.spawnVillagersInResidences)
+            	if (VillageGeneratorConfigHandler.spawnVillagersInResidences)
             	{
 	            	int[][] villagerPositions = new int[][]{
 	        			{3,1,3, -1, 0},
@@ -15030,7 +15031,7 @@ public class SavannaStructures
         {
         	StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -15064,7 +15065,7 @@ public class SavannaStructures
         	ArrayList<Integer> otherSideRoadHeights = new ArrayList<Integer>();
         	for (int i=OTHERSIDE_MIN_U; i<=OTHERSIDE_MAX_U; i++)
         	{
-        		int aboveTopLevel = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, -Reference.streetWidth-1), this.getZWithOffset(i, -Reference.streetWidth-1));
+        		int aboveTopLevel = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, -Reference.STREET_WIDTH-1), this.getZWithOffset(i, -Reference.STREET_WIDTH-1));
         		if (aboveTopLevel != -1) {otherSideRoadHeights.add(aboveTopLevel);}
         	}
         	if (FunctionsVN.medianIntArray(otherSideRoadHeights, true)>0) {this.otherSideOffset = FunctionsVN.medianIntArray(otherSideRoadHeights, true)-this.averageGroundLevel;}
@@ -15139,7 +15140,7 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, this.materialType, this.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
             for(int[] uvw : new int[][]{
             	{2,0,-1}, {9,0,-1},
-            	{3,this.otherSideOffset,-Reference.streetWidth-0}, 
+            	{3,this.otherSideOffset,-Reference.STREET_WIDTH-0}, 
             	})
             {
             	// Dirt foundation
@@ -15167,10 +15168,10 @@ public class SavannaStructures
             	{9,0,1, 1, 7, 0}, {9,0,2, 0, 7, 0}, 
             	{10,0,0, 0, 7, 0}, {10,0,1, 2, 7, 0}, {10,0,2, 1, 7, 0}, 
             	// Opposite side of road
-            	{1,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 0}, 
-            	{2,this.otherSideOffset,-Reference.streetWidth-1, 2, 7, 1}, {2,0,-Reference.streetWidth-2, 0, 0, 0}, 
-            	{3,this.otherSideOffset,-Reference.streetWidth-2, 0, 0, 0}, 
-            	{4,this.otherSideOffset,-Reference.streetWidth-1, 0, 0, 1}, 
+            	{1,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 0}, 
+            	{2,this.otherSideOffset,-Reference.STREET_WIDTH-1, 2, 7, 1}, {2,0,-Reference.STREET_WIDTH-2, 0, 0, 0}, 
+            	{3,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 0, 0}, 
+            	{4,this.otherSideOffset,-Reference.STREET_WIDTH-1, 0, 0, 1}, 
             	})
             {
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvwpmc[0], uvwpmc[1]-1, uvwpmc[2], structureBB);
@@ -15187,7 +15188,7 @@ public class SavannaStructures
             	{6,0,1}, 
             	{9,0,0}, 
             	// Other side of road
-            	{3,this.otherSideOffset,-Reference.streetWidth-1}, 
+            	{3,this.otherSideOffset,-Reference.STREET_WIDTH-1}, 
             	})
             {
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
@@ -15359,7 +15360,7 @@ public class SavannaStructures
         {
         	StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -15393,7 +15394,7 @@ public class SavannaStructures
         	ArrayList<Integer> otherSideRoadHeights = new ArrayList<Integer>();
         	for (int i=OTHERSIDE_MIN_U; i<=OTHERSIDE_MAX_U; i++)
         	{
-        		int aboveTopLevel = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, -Reference.streetWidth-1), this.getZWithOffset(i, -Reference.streetWidth-1));
+        		int aboveTopLevel = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(i, -Reference.STREET_WIDTH-1), this.getZWithOffset(i, -Reference.STREET_WIDTH-1));
         		if (aboveTopLevel != -1) {otherSideRoadHeights.add(aboveTopLevel);}
         	}
         	if (FunctionsVN.medianIntArray(otherSideRoadHeights, true)>0) {this.otherSideOffset = FunctionsVN.medianIntArray(otherSideRoadHeights, true)-this.averageGroundLevel;}
@@ -15478,8 +15479,8 @@ public class SavannaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, this.materialType, this.biome); Block grassPathBlock = (Block) blockObject[0]; int grassPathMeta = (Integer) blockObject[1]; 
             for(int[] uvw : new int[][]{
             	{2,0,-1}, 
-            	{6,this.otherSideOffset,-Reference.streetWidth-0}, 
-            	{9,this.otherSideOffset,-Reference.streetWidth-0}, 
+            	{6,this.otherSideOffset,-Reference.STREET_WIDTH-0}, 
+            	{9,this.otherSideOffset,-Reference.STREET_WIDTH-0}, 
             	})
             {
             	// Dirt foundation
@@ -15509,17 +15510,17 @@ public class SavannaStructures
             	{11,0,0, 0, 7, 1}, {11,0,1, 2, 7, 1}, {11,0,3, 0, 7, 0}, {11,0,4, 0, 7, 0}, 
             	{12,0,0, 1, 7, 0}, {12,0,1, 0, 7, 0}, {12,0,2, 2, 7, 0}, {12,0,3, 0, 7, 0}, 
             	// Opposite side of road
-            	{1,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 0}, 
-            	{2,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 1}, {2,this.otherSideOffset,-Reference.streetWidth-2, 0, 7, 1}, 
-            	{3,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 0}, {3,this.otherSideOffset,-Reference.streetWidth-3, 0, 7, 0}, 
-            	{4,this.otherSideOffset,-Reference.streetWidth-1, 0, 7, 0}, {4,this.otherSideOffset,-Reference.streetWidth-2, 0, 7, 0}, 
-            	{5,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 1}, {5,this.otherSideOffset,-Reference.streetWidth-2, 0, 7, 1}, {5,this.otherSideOffset,-Reference.streetWidth-3, 0, 7, 1}, 
-            	{6,this.otherSideOffset,-Reference.streetWidth-2, 0, 7, 0}, 
-            	{7,this.otherSideOffset,-Reference.streetWidth-1, 0, 7, 0}, {7,this.otherSideOffset,-Reference.streetWidth-2, 0, 7, 0}, 
-            	{8,this.otherSideOffset,-Reference.streetWidth-1, 1, 7, 0}, {8,this.otherSideOffset,-Reference.streetWidth-2, 1, 7, 0}, {8,this.otherSideOffset,-Reference.streetWidth-3, 0, 7, 0}, 
-            	{9,this.otherSideOffset,-Reference.streetWidth-2, 1, 7, 0}, 
-            	{10,this.otherSideOffset,-Reference.streetWidth-1, 0, 7, 0}, 
-            	{11,this.otherSideOffset,-Reference.streetWidth-1, 0, 7, 0}, 
+            	{1,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 0}, 
+            	{2,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 1}, {2,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 7, 1}, 
+            	{3,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 0}, {3,this.otherSideOffset,-Reference.STREET_WIDTH-3, 0, 7, 0}, 
+            	{4,this.otherSideOffset,-Reference.STREET_WIDTH-1, 0, 7, 0}, {4,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 7, 0}, 
+            	{5,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 1}, {5,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 7, 1}, {5,this.otherSideOffset,-Reference.STREET_WIDTH-3, 0, 7, 1}, 
+            	{6,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 7, 0}, 
+            	{7,this.otherSideOffset,-Reference.STREET_WIDTH-1, 0, 7, 0}, {7,this.otherSideOffset,-Reference.STREET_WIDTH-2, 0, 7, 0}, 
+            	{8,this.otherSideOffset,-Reference.STREET_WIDTH-1, 1, 7, 0}, {8,this.otherSideOffset,-Reference.STREET_WIDTH-2, 1, 7, 0}, {8,this.otherSideOffset,-Reference.STREET_WIDTH-3, 0, 7, 0}, 
+            	{9,this.otherSideOffset,-Reference.STREET_WIDTH-2, 1, 7, 0}, 
+            	{10,this.otherSideOffset,-Reference.STREET_WIDTH-1, 0, 7, 0}, 
+            	{11,this.otherSideOffset,-Reference.STREET_WIDTH-1, 0, 7, 0}, 
             	})
             {
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvwpmc[0], uvwpmc[1]-1, uvwpmc[2], structureBB);
@@ -15536,9 +15537,9 @@ public class SavannaStructures
             	{8,0,1}, 
             	{11,0,2}, 
             	// Other side of road
-            	{3,this.otherSideOffset,-Reference.streetWidth-2}, 
-            	{6,this.otherSideOffset,-Reference.streetWidth-1}, 
-            	{9,this.otherSideOffset,-Reference.streetWidth-1}, 
+            	{3,this.otherSideOffset,-Reference.STREET_WIDTH-2}, 
+            	{6,this.otherSideOffset,-Reference.STREET_WIDTH-1}, 
+            	{9,this.otherSideOffset,-Reference.STREET_WIDTH-1}, 
             	})
             {
             	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
@@ -15711,7 +15712,7 @@ public class SavannaStructures
         {
         	StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
@@ -15942,7 +15943,7 @@ public class SavannaStructures
         {
         	StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
             // Structure on the other side of the street
-            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.streetWidth-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.streetWidth-1, coordBaseMode);
+            StructureBoundingBox structureBBOtherSide = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, -Reference.STREET_WIDTH-1-STRUCTURE_DEPTH, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, -Reference.STREET_WIDTH-1, coordBaseMode);
             
             return canVillageGoDeeper(structureboundingbox)
             		&& StructureComponent.findIntersecting(pieces, structureboundingbox) == null
