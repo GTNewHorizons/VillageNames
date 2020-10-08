@@ -2085,4 +2085,33 @@ public class FunctionsVN
 		
 		return ((x+y+z)*(x+y+z+1)*(x+y+z+2)/6 + (y+z)*(y+z+1)/2 + y + (zIsNegative? 1:0)) * (xIsNegative? -2:2);
 	}
+	
+	/*
+	// Way to convert from color meta int into string formatting (for e.g. signs)
+	public static String mapColorMetaToStringFormat(int colorMeta) {
+		HashMap<Integer, String> signColorToFormat = new HashMap<Integer, String>();//new HashMap();
+		// This hashmap translates the town's name color on the sign to a color meta value.
+		// This meta should be universal through e.g. wool, clay, etc
+		signColorToFormat.put(0, "\u00a7f"); //white
+		signColorToFormat.put(1, "\u00a76"); //gold
+		signColorToFormat.put(2, "\u00a7d"); //light_purple
+		signColorToFormat.put(3, "\u00a79"); //blue
+		signColorToFormat.put(4, "\u00a7e"); //yellow
+		signColorToFormat.put(5, "\u00a7a"); //green
+		signColorToFormat.put(6, "\u00a7c"); //red
+		signColorToFormat.put(7, "\u00a78"); //dark_gray
+		signColorToFormat.put(8, "\u00a77"); //gray
+		//signColorToFormat.put(9, "\u00a7b"); //aqua
+		signColorToFormat.put(9, "\u00a73"); //dark_aqua
+		signColorToFormat.put(10, "\u00a75"); //dark_purple
+		signColorToFormat.put(11, "\u00a71"); //dark_blue
+		signColorToFormat.put(12, "\u00a70"); //black
+		signColorToFormat.put(13, "\u00a72"); //dark_green
+		signColorToFormat.put(14, "\u00a74"); //dark_red
+		signColorToFormat.put(15, "\u00a70"); //black
+		
+		// Return a "town color" string
+		return signColorToFormat.get(colorMeta);
+	}
+	*/
 }

@@ -5735,7 +5735,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -6141,7 +6141,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -6543,7 +6543,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -6889,7 +6889,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -7293,7 +7293,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -7666,7 +7666,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -8017,7 +8017,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -8372,7 +8372,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -8868,7 +8868,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -9236,7 +9236,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -9587,7 +9587,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -9982,7 +9982,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -10393,7 +10393,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -10780,7 +10780,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
@@ -11223,7 +11223,7 @@ public class DesertStructures
             						// Modified to center onto front of house
             						this.boundingBox.minX+(this.coordBaseMode%2==0?INCREASE_MIN_U:0), this.boundingBox.minZ+(this.coordBaseMode%2==0?0:INCREASE_MIN_U),
             						this.boundingBox.maxX-(this.coordBaseMode%2==0?DECREASE_MAX_U:0), this.boundingBox.maxZ-(this.coordBaseMode%2==0?0:DECREASE_MAX_U)),
-            				true, (byte)5, this.coordBaseMode);
+            				true, (byte)1, this.coordBaseMode);
             		
                     if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 

@@ -292,6 +292,7 @@ public class ModObjects {
 	public static final String materialsTC = "TConstruct:materials"; // Iron Nugget is 19 
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
 	public static final String ironNuggetUTD = "uptodate:iron_nugget";
+	public static final String nuggetNL = "netherlicious:Nugget"; // Iron Nugget is 0
 	
 	// Ladders
 	public static final String ladderSpruceGS = "ganyssurface:ladder1";
@@ -1800,7 +1801,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 33);}
 			}
-
+			else if (mod.toLowerCase().equals("netherlicious"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetNL);
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
 		}
 		return null;
 	}

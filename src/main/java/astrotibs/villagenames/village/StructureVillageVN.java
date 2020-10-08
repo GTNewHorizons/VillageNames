@@ -369,6 +369,7 @@ public class StructureVillageVN
     
     // Pasted in from StructureVillagePieces so that I can access it, particularly to expand the allowed village biomes
     // This prepares a new path component to build upon
+    /*
     public static StructureComponent getRandomVillageRoadComponent(StartVN start, List components, Random random, int x, int y, int z, int coordBaseMode, int componentType)
     {
         if (componentType > 50)
@@ -419,7 +420,7 @@ public class StructureVillageVN
             return null;
         }
     }
-    
+    */
     
     /**
      * Pasted in from StructureVillagePieces.Path findPieceBox so that I can access it
