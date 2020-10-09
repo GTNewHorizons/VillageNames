@@ -5,6 +5,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
 import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class Recipes {
+public class Recipes
+{
 	
 	static String[] oreDyeNames = new String[]{
 			"dyeWhite",
@@ -33,7 +35,8 @@ public class Recipes {
 			"dyeBlack"
 			};
 	
-	public static void init() {
+	public static void init()
+	{
 		// This is just a method inside this class that will register all the recipes.
 		
 		// Shapeless oreDict recipe
@@ -84,5 +87,7 @@ public class Recipes {
 			
 		}
 		
+		// Turn off Trapdoor stinky validation yuck
+		BlockTrapDoor.disableValidation = true;
 	}
 }

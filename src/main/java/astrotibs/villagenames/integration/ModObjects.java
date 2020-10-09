@@ -92,7 +92,10 @@ public class ModObjects {
 	public static final String dioriteStairsBo = "Botania:stone2Stairs";
 	public static final String graniteSlabBo = "Botania:stone3Slab";
 	public static final String graniteStairsBo = "Botania:stone3Stairs";
-
+	
+	// Brewing Stand
+	public static final String brewingStandEF = "etfuturum:brewing_stand";
+	
 	// Buttons
 	public static final String buttonSpruceEF = "etfuturum:button_spruce";
 	public static final String buttonBirchEF = "etfuturum:button_birch";
@@ -966,6 +969,16 @@ public class ModObjects {
     {
     	// None are found, so return ordinary packed ice
     	return new Object[]{Blocks.packed_ice, 0};
+    }
+	
+	
+	// Brewing Stand - returns 1.7 vanilla if not found
+    public static Block chooseModBrewingStandBlock()
+    {
+    	Block modblock = Block.getBlockFromName(ModObjects.brewingStandEF);
+    	if (modblock == null) {modblock = Blocks.brewing_stand;}
+    	
+    	return modblock;
     }
 	
 	

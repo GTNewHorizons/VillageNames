@@ -13,6 +13,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -403,7 +404,7 @@ public class VNComponentIglooPieces
                     	this.placeBlockAtCurrentPosition(worldIn, Blocks.wooden_slab, 9, (this.coordBaseMode<2?6:2)+xOffset,basementCeilingY-3,4, structureBoundingBoxIn);
                     	this.placeBlockAtCurrentPosition(worldIn, Blocks.spruce_stairs, (new int[]{7,4,6,5})[this.coordBaseMode], (this.coordBaseMode<2?6:2)+xOffset,basementCeilingY-3,3, structureBoundingBoxIn);
                     	// Brewing stand
-                    	this.placeBlockAtCurrentPosition(worldIn, Blocks.brewing_stand, 0, (this.coordBaseMode<2?6:2)+xOffset,basementCeilingY-2,4, structureBoundingBoxIn);
+                    	this.placeBlockAtCurrentPosition(worldIn, ModObjects.chooseModBrewingStandBlock(), 0, (this.coordBaseMode<2?6:2)+xOffset,basementCeilingY-2,4, structureBoundingBoxIn);
                     	
                     	// clay pot
                     	this.placeBlockAtCurrentPosition(worldIn, Blocks.flower_pot, 9, (this.coordBaseMode<2?6:2)+xOffset,basementCeilingY-2,5, structureBoundingBoxIn); // 9 is "cactus"
@@ -587,7 +588,7 @@ public class VNComponentIglooPieces
             	for (int y = 1; y <= worldIn.getActualHeight(); y++) {
             		for (int x = minX; x <= maxX; x++) {
                 		for (int z = minZ; z <= maxZ; z++) {
-                			if (worldIn.getBlock(x, y, z) == Blocks.brewing_stand) {
+                			if (worldIn.getBlock(x, y, z) == ModObjects.chooseModBrewingStandBlock()) {
                 				
                 				
                 				// Spawn priest
@@ -635,10 +636,16 @@ public class VNComponentIglooPieces
                                 
                             	
                             	// Set brewing stand contents
+                            	TileEntity brewingStandTileEntity = worldIn.getTileEntity(x, y, z);
+                            	if (brewingStandTileEntity instanceof ISidedInventory)
+                            	{
+                            		((ISidedInventory) brewingStandTileEntity).setInventorySlotContents(1, new ItemStack( Items.potionitem, 1, 16392));
+                            		worldIn.setTileEntity(x, y, z, brewingStandTileEntity);
+                            	}
                             	
-                            	TileEntityBrewingStand brewingStandContents = new TileEntityBrewingStand();
-                            	brewingStandContents.setInventorySlotContents(1, new ItemStack( Items.potionitem, 1, 16392));
-                            	worldIn.setTileEntity(x, y, z, brewingStandContents);
+                            	//TileEntityBrewingStand brewingStandContents = new TileEntityBrewingStand();
+                            	//brewingStandContents.setInventorySlotContents(1, new ItemStack( Items.potionitem, 1, 16392));
+                            	//worldIn.setTileEntity(x, y, z, brewingStandContents);
                             	
                             	
                             	
@@ -650,13 +657,13 @@ public class VNComponentIglooPieces
                                 		y-1,
                                 		(z + (new int[]{0, -4, 0, 4})[coordBaseMode])
                             			);
-                            	if (te instanceof IInventory) {
+                            	if (te instanceof IInventory)
+                            	{
+	                            	ChestGenHooks iglooChestGoldapple = ChestGenHooks.getInfo("iglooChestGoldapple");
+	                            	WeightedRandomChestContent.generateChestContents(randomIn, iglooChestGoldapple.getItems(randomIn), (TileEntityChest)te, iglooChestGoldapple.getCount(randomIn));
                             		
 	                            	ChestGenHooks iglooChest = ChestGenHooks.getInfo("iglooChest");
 	                            	WeightedRandomChestContent.generateChestContents(randomIn, iglooChest.getItems(randomIn), (TileEntityChest)te, iglooChest.getCount(randomIn));
-	                            	
-	                            	ChestGenHooks iglooChestGoldapple = ChestGenHooks.getInfo("iglooChestGoldapple");
-	                            	WeightedRandomChestContent.generateChestContents(randomIn, iglooChestGoldapple.getItems(randomIn), (TileEntityChest)te, iglooChestGoldapple.getCount(randomIn));
                             	}
                             	
                 				return;
