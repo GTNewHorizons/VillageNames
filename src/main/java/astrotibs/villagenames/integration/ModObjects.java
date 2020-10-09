@@ -485,26 +485,6 @@ public class ModObjects {
 	// --- Generator Functions --- //
 	// --------------------------- //
 	
-
-	// Array of meta values for furnaces indexed by [orientation][horizIndex]
-	// 1: north-facing
-	// 2: east-facing
-	// 3: south-facing
-	// 0: west-facing
-	public static final int[][] BIBLIOCRAFT_DESK_META_ARRAY = new int[][]{
-		{3,0,1,2}, // fore-facing (away from you)
-		{2,3,2,3}, // right-facing
-		{1,2,3,0}, // back-facing (toward you)
-		{0,1,0,1}, // left-facing
-	};
-	/**
-	 * orientation:
-	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-	 */
-	public static int chooseBibliocraftDeskMeta(int orientation, int horizIndex)
-	{
-		return (StructureVillageVN.ANVIL_META_ARRAY[orientation][horizIndex]+2)%4;
-	}
 	
 	// Andesite
 	public static Object[] chooseModAndesiteBlock()
@@ -836,7 +816,7 @@ public class ModObjects {
 		// Set the bed block and metadata here
 		world.setBlock(x, y, z, modblock);
 		world.setBlockMetadataWithNotify(x, y, z, orientationMeta, 2);
-
+		
 		if (setTE)
 		{
 			// Set the tile entity so that you can assign the color via NBT 
@@ -1043,6 +1023,18 @@ public class ModObjects {
 		int meta = 0;
 		
 		return new Object[]{modblock, meta};
+	}
+	
+	
+	// Compost Bin
+	public static Block chooseModCompostBinBlock()
+	{
+		Block modobject=null;
+		
+		modobject = Block.getBlockFromName(ModObjects.compostBinGC);
+		if (modobject != null) {return modobject;}
+		
+		return null;
 	}
 	
 	
@@ -1875,27 +1867,25 @@ public class ModObjects {
 	
 	
 	// Lectern
+	
+	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	// 1: north-facing
+	// 2: east-facing
+	// 3: south-facing
+	// 0: west-facing
+	public static final int[][] BIBLIOCRAFT_DESK_META_ARRAY = new int[][]{
+		{3,0,1,2}, // fore-facing (away from you)
+		{2,3,2,3}, // right-facing
+		{1,2,3,0}, // back-facing (toward you)
+		{0,1,0,1}, // left-facing
+	};
 	/**
-	 * Used in case this needs to be an item
+	 * orientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
-	public static Object[] chooseModLectern(int woodMeta)
+	public static int chooseBibliocraftDeskMeta(int orientation, int horizIndex)
 	{
-		Block modblock=null;
-		int modmeta=0;
-		
-		modblock = Block.getBlockFromName(ModObjects.deskBC);
-		if (modblock != null)
-		{
-			modmeta = woodMeta;
-		}
-		else
-		{
-			// Vanilla
-			modblock = Blocks.bookshelf;
-			modmeta = 0;
-		}
-		
-		return new Object[]{modblock, modmeta};
+		return (StructureVillageVN.ANVIL_META_ARRAY[orientation][horizIndex]+2)%4;
 	}
 	
 	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta)
@@ -1910,11 +1900,9 @@ public class ModObjects {
 		}
 		else
 		{
-			// Vanilla bed only; no nbt value necessary
 			modblock = Blocks.bookshelf;
 		}
 		
-		// Set the bed block and metadata here
 		world.setBlock(x, y, z, modblock);
 		
 		if (setTE)

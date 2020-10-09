@@ -5427,7 +5427,7 @@ public class SavannaStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             if (compostBin != null)
             {
             	for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
@@ -5793,7 +5793,7 @@ public class SavannaStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             if (compostBin != null)
             {
             	for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
@@ -8592,7 +8592,7 @@ public class SavannaStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, place a melon instead.
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             for(int[] uvw : new int[][]{
             	{1,1,5}, 
             	})

@@ -3027,7 +3027,7 @@ public class DesertStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 5, 1, 2, structureBB);
@@ -3367,7 +3367,7 @@ public class DesertStructures
         	// Bin
             
             // Attempt to add GardenCore Compost Bins. If this fails, put a hay bale down instead
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             this.placeBlockAtCurrentPosition(world, compostBin!=null?compostBin:Blocks.hay_block, 0, 8, 2, 3, structureBB);
             // Trapdoor rim
         	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, this.coordBaseMode%2==0?6:4, 7,2,3, structureBB); // Left
@@ -4515,7 +4515,7 @@ public class DesertStructures
            		})
         	{
         		// Attempt to add GardenCore Compost Bins. If this fails, put a hay bale down instead
-                Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+                Block compostBin = ModObjects.chooseModCompostBinBlock();
                 this.placeBlockAtCurrentPosition(world, compostBin!=null?compostBin:Blocks.hay_block, 0, uvw[0], uvw[1], uvw[2], structureBB);
         	}
             

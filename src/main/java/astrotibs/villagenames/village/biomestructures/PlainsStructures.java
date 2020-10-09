@@ -2592,7 +2592,7 @@ public class PlainsStructures
             }
             // Chimney
         	blockObject = StructureVillageVN.getBiomeSpecificBlock(Blocks.cobblestone_wall, 0, this.materialType, this.biome); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
-            this.fillWithMetadataBlocks(world, structureBB, 6, 3, 4, 6, 6, 4, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneWallBlock, biomeCobblestoneMeta, false);
+            this.fillWithMetadataBlocks(world, structureBB, 6, 3, 4, 6, 6, 4, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             this.placeBlockAtCurrentPosition(world, biomeCobblestoneWallBlock, biomeCobblestoneWallMeta, 6, 7, 4, structureBB);
             
             // Brick
@@ -5300,7 +5300,7 @@ public class PlainsStructures
             }
             */
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 1, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
@@ -9019,7 +9019,7 @@ public class PlainsStructures
             }
             */
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, STRUCTURE_WIDTH-2, 1, STRUCTURE_DEPTH-2, structureBB);

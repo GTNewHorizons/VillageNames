@@ -4288,7 +4288,7 @@ public class SnowyStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, add nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             for(int[] uvw : new int[][]{
             	{5,1,5}, 
             	})
@@ -4628,7 +4628,7 @@ public class SnowyStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, add nothing
-            Block compostBin = Block.getBlockFromName(ModObjects.compostBinGC);
+            Block compostBin = ModObjects.chooseModCompostBinBlock();
             for(int[] uvw : new int[][]{
             	{7,2,3}, 
             	})
