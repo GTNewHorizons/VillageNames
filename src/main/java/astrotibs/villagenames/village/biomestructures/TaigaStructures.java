@@ -1669,7 +1669,7 @@ public class TaigaStructures
             	{4,2,9, 4,2,9, 0}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), false);	
             }
             
             
@@ -2144,7 +2144,7 @@ public class TaigaStructures
             	{5,4,5, 5,4,5, 2}, {6,4,6, 6,4,6, 1}, {4,4,6, 4,4,6, 3}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), false);	
             }
             
             
@@ -2617,7 +2617,7 @@ public class TaigaStructures
             	//
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, true), false);	
             }
             
             
@@ -2627,7 +2627,7 @@ public class TaigaStructures
             	{3,3,1, 3,3,1, 2}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, true, false), false);	
             }
             
             
@@ -2637,7 +2637,7 @@ public class TaigaStructures
             	{2,5,4, 2,5,4, 1}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), false);	
             }
             
             
@@ -3154,7 +3154,7 @@ public class TaigaStructures
             	{3,3,5, 3,3,5, 1}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, false), false);	
             }
         	
             

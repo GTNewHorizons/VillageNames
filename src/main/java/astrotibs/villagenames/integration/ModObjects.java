@@ -1994,7 +1994,7 @@ public class ModObjects {
 	*/
 	
 	
-	// SmithingTable
+	// Smithing Table
 	public static Object[] chooseModSmithingTable()
 	{
 		Block modblock = Blocks.crafting_table;
@@ -2229,8 +2229,7 @@ public class ModObjects {
 	{
 		Block modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
 		if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
-		
-		return null;
+		else {return new Object[]{Blocks.double_stone_slab, 9};}
 	}
 	
 	

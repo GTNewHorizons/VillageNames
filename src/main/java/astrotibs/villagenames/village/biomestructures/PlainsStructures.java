@@ -3237,6 +3237,17 @@ public class PlainsStructures
             }}
             
             
+            // Planks
+            for(int[] uuvvww : new int[][]{
+            	// Floor
+            	{2,0,2, 5,0,5}, 
+            	{5,0,6, 5,0,8}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+            
+            
             // Yard sard
         	
         	// Grass
