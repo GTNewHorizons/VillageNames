@@ -836,170 +836,170 @@ public class VillageGeneratorConfigHandler
 		componentVillageTypes = config.getStringList("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,
 				new String[] {
 						// Village Names 1.14 buildings
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsAccessory1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsAnimalPen1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsAnimalPen2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsAnimalPen3|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsArmorerHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsBigHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsButcherShop1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsButcherShop2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsCartographer1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsFisherCottage1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsFletcherHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsLargeFarm1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsLibrary1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsLibrary2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsMasonsHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsMediumHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsMediumHouse2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsMeetingPoint4|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsMeetingPoint5|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsShepherdsHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallFarm1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse3|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse4|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse5|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse6|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse7|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsSmallHouse8|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsStable1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsStable2|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsTannery1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsTemple3|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsTemple4|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsToolSmith1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsWeaponsmith1|plains",
-						"astrotibs.villagenames.village.biomestructures.PlainsStructures$PlainsStreetDecor1|plains",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertAnimalPen1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertAnimalPen2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertArmorer1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertButcherShop1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertCartographerHouse1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertFarm1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertFarm2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertFisher1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertFletcherHouse1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertLargeFarm1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertLibrary1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertMason1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertMediumHouse1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertMediumHouse2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertShepherdHouse1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse3|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse4|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse5|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse6|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse7|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertSmallHouse8|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertTannery1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertTemple1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertTemple2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertToolSmith1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertWeaponsmith1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertStreetDecor1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertStreetSubstitute1|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertStreetSubstitute2|desert",
-						"astrotibs.villagenames.village.biomestructures.DesertStructures$DesertStreetSubstitute3|desert",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaAnimalPen1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaArmorer2|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaArmorerHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaButcherShop1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaCartographerHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaFisherCottage1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaFletcherHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaLargeFarm1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMediumFarm1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaLibrary1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMasonsHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMediumHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMediumHouse2|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMediumHouse3|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaMediumHouse4|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaShepherdsHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallFarm1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallHouse1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallHouse2|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallHouse3|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallHouse4|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaSmallHouse5|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaTannery1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaTemple1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaToolSmith1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaWeaponsmith1|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaWeaponsmith2|taiga",
-						"astrotibs.villagenames.village.biomestructures.TaigaStructures$TaigaStreetDecor1|taiga",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaAnimalPen1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaAnimalPen2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaAnimalPen3|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaArmorer1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaButchersShop1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaButchersShop2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaCartographer1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaFisherCottage1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaFletcherHouse1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaLargeFarm1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaLargeFarm2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaLibrary1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaMason1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaMediumHouse1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaMediumHouse2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaShepherd1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallFarm|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse3|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse4|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse5|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse6|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse7|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaSmallHouse8|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaTannery1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaTemple1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaTemple2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaToolSmith1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaWeaponsmith1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaWeaponsmith2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaStreetDecor1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaStreetSubstitute1|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaStreetSubstitute2|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaStreetSubstitute3|savanna",
-						"astrotibs.villagenames.village.biomestructures.SavannaStructures$SavannaStreetSubstitute4|savanna",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyAnimalPen1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyAnimalPen2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyArmorerHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyArmorerHouse2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyButchersShop1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyButchersShop2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyCartographerHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyFarm1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyFarm2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyFisherCottage|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyFletcherHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyLibrary1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyMasonsHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyMasonsHouse2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyMediumHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyMediumHouse2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyMediumHouse3|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyShepherdsHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse2|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse3|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse4|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse5|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse6|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse7|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowySmallHouse8|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyTannery1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyTemple1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyToolSmith1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyWeaponSmith1|snowy",
-						"astrotibs.villagenames.village.biomestructures.SnowyStructures$SnowyStreetDecor1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Accessory1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen3|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ArmorerHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "BigHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Cartographer1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FisherCottage1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FletcherHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "LargeFarm1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MasonsHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint4|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint5|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ShepherdsHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallFarm1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse3|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse4|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse5|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse6|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse7|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse8|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable2|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Tannery1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple3|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple4|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ToolSmith1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Weaponsmith1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "StreetDecor1|plains",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Armorer1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ButcherShop1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "CartographerHouse1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Fisher1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "FletcherHouse1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "LargeFarm1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Library1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Mason1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ShepherdHouse1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse3|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse4|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse5|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse6|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse7|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse8|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Tannery1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ToolSmith1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Weaponsmith1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetDecor1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute1|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute2|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute3|desert",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "AnimalPen1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Armorer2|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ArmorerHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ButcherShop1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "CartographerHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FisherCottage1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FletcherHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumFarm1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Library1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MasonsHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse2|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse3|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse4|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ShepherdsHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallFarm1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse2|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse3|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse4|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse5|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Tannery1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Temple1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ToolSmith1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith2|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "StreetDecor1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen3|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Armorer1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Cartographer1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FisherCottage1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FletcherHouse1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Library1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Mason1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Shepherd1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallFarm|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse3|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse4|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse5|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse6|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse7|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse8|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Tannery1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ToolSmith1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetDecor1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute1|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute2|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute3|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute4|savanna",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "CartographerHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FisherCottage|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FletcherHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Library1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse3|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ShepherdsHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse2|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse3|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse4|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse5|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse6|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse7|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse8|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Tannery1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Temple1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ToolSmith1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "WeaponSmith1|snowy",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
 						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy",
 						"growthcraft.bamboo.common.village.ComponentVillageBambooYard|plains taiga savanna snowy",
 						"growthcraft.bees.common.village.ComponentVillageApiarist|plains savanna",
@@ -1009,7 +1009,7 @@ public class VillageGeneratorConfigHandler
 						},
 				"List of village components that only appear in certain village types. Format is: classPaths|villageTypes\n"
 				+ "classPaths: The class address to the specific structure component. If debugMessages is true, every time a village generates, a list of village components not yet specified on this list will be printed to the console.\n"
-   				+ "villageTypes: list of the types this component can appear in. Multiple types can be separator with a delimiter of your choice, aside from | (pipe)"
+   				+ "villageTypes: list of the types this component can appear in. Multiple types can be separator with a delimiter of your choice, aside from | (pipe). Leave this blank, or enter something that doesn't include a village type, to prevent the component from spawning."
 				);
 		
 		
@@ -1066,7 +1066,7 @@ public class VillageGeneratorConfigHandler
 						"Garden",
 						"Grassland",
 						"Grove",
-						"Heathland",
+						"Heathland|savanna|oak",
 						"Highland",
 						"Lavender Fields",
 						"Lush Swamp",
@@ -1120,9 +1120,14 @@ public class VillageGeneratorConfigHandler
 						"Tall Pine Forest",
 						"Tropics",
 						},
-				"Names of biomes which can spawn villages. Only used with Village Generator, and only applies to Overworld. Note that this list is EXCLUSIVE: other mod configs won't override this. You have to paste all biome names here.");
-		
-		
+				"Names of biomes which can spawn villages. Only used with Village Generator, and only applies to Overworld. Note that this list is EXCLUSIVE: other mod configs won't override this. You have to paste all biome names here."
+					+ "Format is: biomeName|villageType|materialType|disallowModSub OR simply: biomeName \n"
+					+ "biomeName: the registered string name of the biome\n"
+					+ "villageType: the type of component structures. Leave this blank to automatically determine. Options: plains, desert, taiga, savanna, snowy\n"
+					+ "materialType: the building materials used to make the components. Leave this blank to automatically determine. Set as oak if you want to allow mods to override materials. Options: oak, spruce, birch, jungle, acacia, dark_oak, sand, mesa, snow, mushroom\n"
+					+ "disallowModSub: enter \"nosub\" in the last field if you want to disallow other mods from substituting blocks during village generation. Blank, or anything else, allows substitution. This only works for " + Reference.MOD_NAME + " buildings.\n"
+					+ "Printing just the biome name with no pipes is equivalent to biomeName||, which will automatically determine both villageType and materialType."
+				);
 		
 		if (config.hasChanged()) config.save();
 	}
@@ -1213,15 +1218,16 @@ public class VillageGeneratorConfigHandler
 	
 
 	/**
-	 * Loads the (classPath|villageType) string lists from general.cfg
+	 * Loads the (classPath|villageType) string lists from newvillages/village_gen.cfg
 	 * and assigns them to this instance's variables.
 	 */
-	public static Map<String, ArrayList> unpackComponentVillageTypes(String[] inputList) {
-		
+	public static Map<String, ArrayList> unpackComponentVillageTypes(String[] inputList)
+	{
 		ArrayList<String> componentClassPaths = new ArrayList<String>();
 		ArrayList<String> componentVillageTypes = new ArrayList<String>();
 		
-		for (String entry : inputList) {
+		for (String entry : inputList)
+		{
 			// Remove parentheses
 			entry.replaceAll("\\)", "");
 			entry.replaceAll("\\(", "");
@@ -1233,10 +1239,10 @@ public class VillageGeneratorConfigHandler
 			String componentVillageType="";
 			
 			// Place entries into variables
-			try {componentClassPath = splitEntry[0].trim();}       catch (Exception e) {componentClassPath="";}
-			try {componentVillageType = splitEntry[1].trim();}  catch (Exception e) {componentVillageType="FAILSAFE";}
+			try {componentClassPath = splitEntry[0].trim();}   catch (Exception e) {componentClassPath="FAILSAFE";}
+			try {componentVillageType = splitEntry[1].trim();} catch (Exception e) {componentVillageType="plains desert taiga savanna snowy";}
 			
-			if( !componentClassPath.equals("") && !componentVillageType.equals("") ) { // Something was actually assigned in the try block
+			if( !componentClassPath.equals("")) { // Something was actually assigned in the try block
 				componentClassPaths.add(componentClassPath);
 				componentVillageTypes.add(componentVillageType);
 				}
@@ -1245,6 +1251,55 @@ public class VillageGeneratorConfigHandler
 		Map<String,ArrayList> map =new HashMap();
 		map.put("ClassPaths",componentClassPaths);
 		map.put("VillageTypes",componentVillageTypes);
+		
+		return map;
+	}
+	
+
+	/**
+	 * Loads the (biomeName|villageType|materialType|modSubstitution) string lists from newvillages/village_gen.cfg
+	 * and assigns them to this instance's variables.
+	 */
+	public static Map<String, ArrayList<String>> unpackBiomes(String[] inputList)
+	{
+		ArrayList<String> biomeNames = new ArrayList<String>();
+		ArrayList<String> villageTypes = new ArrayList<String>();
+		ArrayList<String> materialTypes = new ArrayList<String>();
+		ArrayList<String> disallowModSubs = new ArrayList<String>();
+		
+		for (String entry : inputList)
+		{
+			// Remove parentheses
+			entry.replaceAll("\\)", "");
+			entry.replaceAll("\\(", "");
+			// Split by pipe
+			String[] splitEntry = entry.split("\\|");
+			
+			// Initialize temp fields
+			String biomeName="";
+			String villageType="";
+			String materialType="";
+			String disallowModSub="";
+			
+			// Place entries into variables
+			try {biomeName = splitEntry[0].trim();}      catch (Exception e) {biomeName="";}
+			try {villageType = splitEntry[1].trim();}    catch (Exception e) {villageType="";}
+			try {materialType = splitEntry[2].trim();}   catch (Exception e) {materialType="";}
+			try {disallowModSub = splitEntry[3].trim();} catch (Exception e) {disallowModSub="";}
+			
+			if( !biomeName.equals("")) { // Something was actually assigned in the try block
+				biomeNames.add(biomeName);
+				villageTypes.add(villageType);
+				materialTypes.add(materialType);
+				disallowModSubs.add(disallowModSub);
+				}
+		}
+
+		Map<String,ArrayList<String>> map =new HashMap();
+		map.put("BiomeNames",biomeNames);
+		map.put("VillageTypes",villageTypes);
+		map.put("MaterialTypes",materialTypes);
+		map.put("DisallowModSubs",disallowModSubs);
 		
 		return map;
 	}

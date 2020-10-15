@@ -17,6 +17,7 @@ import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
 import astrotibs.villagenames.config.pieces.TempleConfigHandler;
 import astrotibs.villagenames.config.pieces.VillageConfigHandler;
 import astrotibs.villagenames.config.pieces.VillagerConfigHandler;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -57,7 +58,7 @@ public class ConfigReloader {
 		
 		CustomConfigHandler.loadConfiguration();
 		
-		VillageConfigHandler.loadConfiguration();
+		VillageGeneratorConfigHandler.loadConfiguration();
 	}
 	
 }

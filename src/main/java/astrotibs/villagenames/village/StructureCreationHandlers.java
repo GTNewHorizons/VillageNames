@@ -150,9 +150,9 @@ import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaCarto
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaFisherCottage1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaFletcherHouse1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaLargeFarm1;
+import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaLargeFarm2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaLibrary1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMasonsHouse1;
-import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMediumFarm1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMediumHouse1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMediumHouse2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaMediumHouse3;
@@ -2026,7 +2026,7 @@ public class StructureCreationHandlers
 	}
 	
 	// Taiga Medium Farm
-	public static class TaigaMediumFarm1_Handler implements IVillageCreationHandler
+	public static class TaigaLargeFarm2_Handler implements IVillageCreationHandler
 	{
 		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumFarm1_vals;
 		
@@ -2036,16 +2036,16 @@ public class StructureCreationHandlers
 	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
 	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
 	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
-	    	return new PieceWeight(TaigaMediumFarm1.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    	return new PieceWeight(TaigaLargeFarm2.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
 	    }
 	    
 	    @Override
-	    public Class<?> getComponentClass() {return TaigaMediumFarm1.class;}
+	    public Class<?> getComponentClass() {return TaigaLargeFarm2.class;}
 	    
 	    @Override
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
-	    	if (startPiece instanceof StartVN) {return TaigaMediumFarm1.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    	if (startPiece instanceof StartVN) {return TaigaLargeFarm2.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	

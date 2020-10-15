@@ -100,7 +100,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.clay_ball), def_min, def_max, def_weight},
 			{new ItemStack(Items.dye, 1, 2), def_min, def_max, def_weight},
 			{new ItemStack(Blocks.cactus), 1, 4, 10},
@@ -111,7 +111,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.emerald), 1, 3, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -127,7 +127,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.gold_nugget), 1, 3, def_weight},
 			{new ItemStack(Blocks.yellow_flower), def_min, def_max, 2},
 			{new ItemStack(Blocks.red_flower), def_min, def_max, def_weight},
@@ -140,7 +140,7 @@ public class ChestLootHandler {
 			{new ItemStack(Blocks.sapling), 1, 2, 5}, // Oak sapling
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -156,7 +156,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.gold_nugget), 1, 3, def_weight},
 			{new ItemStack(Blocks.grass), def_min, def_max, 5},
 			{new ItemStack(Blocks.double_plant, 1, 2), def_min, def_max, 5}, // Tall grass
@@ -169,7 +169,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.bucket), def_min, def_max, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -185,7 +185,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			//{new ItemStack(Blocks.BLUE_ICE), def_min, def_max, def_weight}, // TODO - Blue Ice
 			{new ItemStack(Blocks.snow), def_min, def_max, 4},
 			{new ItemStack(Items.potato), 1, 7, 10},
@@ -198,7 +198,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.coal), 1, 4, 5},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -214,7 +214,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{ModObjects.chooseModIronNugget(), 1, 5, def_weight},
 			{new ItemStack(Blocks.tallgrass, 1, 2), def_min, def_max, 2}, // Fern
 			{new ItemStack(Blocks.double_plant, 1, 3), def_min, def_max, 2}, // Large Fern
@@ -229,7 +229,7 @@ public class ChestLootHandler {
 			{new ItemStack(Blocks.log, 1, 1), 1, 5, 10}, // Spruce Log
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -252,14 +252,14 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.iron_ingot), 1, 3, 2},
 			{new ItemStack(Items.bread), 1, 4, 4},
 			{new ItemStack(Items.iron_helmet), def_min, def_max, def_weight},
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -275,7 +275,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 			{new ItemStack(Items.porkchop), 1, 3, 6},
 			{new ItemStack(Items.wheat), 1, 3, 6},
@@ -284,7 +284,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.coal), 1, 3, 3},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -300,7 +300,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.map), 1, 3, 10},
 			{new ItemStack(Items.paper), 1, 5, 15},
 			{new ItemStack(Items.compass), def_min, def_max, 5},
@@ -308,7 +308,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.stick), 1, 2, 5},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -324,7 +324,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 			{new ItemStack(Items.fish), 1, 3, 2},
 			{new ItemStack(Items.fish, 1, 1), 1, 3, def_weight},
@@ -335,7 +335,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.coal), 1, 3, 2},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -351,7 +351,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 			{new ItemStack(Items.arrow), 1, 3, 2},
 			{new ItemStack(Items.feather), 1, 3, 6},
@@ -360,7 +360,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.stick), 1, 3, 6},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -376,7 +376,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.clay_ball), 1, 3, def_weight},
 			{new ItemStack(Items.flower_pot), def_min, def_max, def_weight},
 			{new ItemStack(Blocks.stone), def_min, def_max, 2},
@@ -387,7 +387,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -403,7 +403,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Blocks.wool, 1, 0), 1, 8, 6}, // White
 			{new ItemStack(Blocks.wool, 1, 15), 1, 3, 3}, // Black
 			{new ItemStack(Blocks.wool, 1, 7), 1, 3, 2}, // Gray
@@ -414,7 +414,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.wheat), 1, 6, 6},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -430,7 +430,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.leather), 1, 3, def_weight},
 			{new ItemStack(Items.leather_chestplate), def_min, def_max, 2},
 			{new ItemStack(Items.leather_boots), def_min, def_max, 2},
@@ -441,7 +441,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.emerald), 1, 4, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -457,7 +457,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.redstone), 1, 4, 2},
 			{new ItemStack(Items.bread), 1, 4, 7},
 			{new ItemStack(Items.rotten_flesh), 1, 4, 7},
@@ -466,7 +466,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.emerald), 1, 4, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -482,7 +482,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.diamond), 1, 3, def_weight},
 			{new ItemStack(Items.iron_ingot), 1, 5, 5},
 			{new ItemStack(Items.gold_ingot), 1, 3, def_weight},
@@ -493,7 +493,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.iron_shovel), def_min, def_max, 5},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 		
@@ -509,7 +509,7 @@ public class ChestLootHandler {
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
-		for (Object[] chestItem : new Object[][]{
+		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.diamond), 1, 3, 3},
 			{new ItemStack(Items.iron_ingot), 1, 5, 10},
 			{new ItemStack(Items.gold_ingot), 1, 3, 5},
@@ -529,7 +529,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.diamond_horse_armor), def_min, def_max, def_weight},
 		})
 		{
-			if (chestItem[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItem[0], (Integer)chestItem[1], (Integer)chestItem[2], (Integer)chestItem[3]));}
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
 		
 	}

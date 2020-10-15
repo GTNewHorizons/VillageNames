@@ -23,6 +23,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
@@ -130,11 +131,11 @@ public class MapGenVillageVN extends MapGenVillage
         	
         	if (VillageGeneratorConfigHandler.spawnBiomesNames != null) // Biome list is not empty
     		{
-        		//int dimension = this.worldObj.provider.dimensionId;
-    			
-    			for (int i = 0; i < VillageGeneratorConfigHandler.spawnBiomesNames.length; i++)
+        		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+        		
+    			for (int i = 0; i < mappedBiomes.get("BiomeNames").size(); i++)
     			{
-    				if (VillageGeneratorConfigHandler.spawnBiomesNames[i].equals(biome.biomeName))
+    				if (mappedBiomes.get("BiomeNames").get(i).equals(biome.biomeName))
     				{
     					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
     					
@@ -165,7 +166,22 @@ public class MapGenVillageVN extends MapGenVillage
             super(chunkX, chunkZ);
             
             // Choose starter type based on biome
-            FunctionsVN.VillageType startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(world, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+            int posX = (chunkX << 4) + 2;
+            int posZ = (chunkZ << 4) + 2;
+            WorldChunkManager chunkManager = world.getWorldChunkManager();
+            BiomeGenBase biome = chunkManager.getBiomeGenAt(posX, posZ);
+			Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+			FunctionsVN.VillageType startVillageType;
+			
+			// Attempt to swap it with the config value
+			try {
+            	String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+            	if (mappedVillageType.equals("")) {startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+            	else {startVillageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+            	}
+			catch (Exception e) {startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+			
+            
             
             // My modified version, which allows the user to disable each building
             List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize, startVillageType);

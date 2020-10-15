@@ -18,6 +18,7 @@ import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.biomestructures.BlueprintData;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
@@ -245,8 +246,19 @@ public class StructureVillageVN
         
         VillagerRegistry.addExtraVillageComponents(arraylist, random, villageSize);
         
-        Iterator iterator = arraylist.iterator();
 
+		ArrayList<String> classPaths = new ArrayList();
+		ArrayList<String> villageTypes = new ArrayList();
+        
+        // keys: "ClassPaths", "VillageTypes"
+		Map<String, ArrayList> mappedComponentVillageTypes = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
+		
+		classPaths.addAll( mappedComponentVillageTypes.get("ClassPaths") );
+		villageTypes.addAll( mappedComponentVillageTypes.get("VillageTypes") );
+		
+        
+        Iterator iterator = arraylist.iterator();
+        
         while (iterator.hasNext())
         {
         	PieceWeight pw = (StructureVillagePieces.PieceWeight)iterator.next();
@@ -254,18 +266,19 @@ public class StructureVillageVN
         	// Remove all buildings that rolled 0 for number or which have a weight of 0
             if (pw.villagePiecesLimit == 0 || pw.villagePieceWeight <=0) {iterator.remove(); continue;}
             
+            // Remove vanilla buildings re-added by other mods (?)
+            if (VillageGeneratorConfigHandler.componentLegacyHouse4Garden_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.House4Garden_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyChurch_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.Church_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyHouse1_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.House1_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyWoodHut_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.WoodHut_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyHall_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.Hall_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyField1_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.Field1_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyField2_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.Field2_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyHouse2_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.House2_CLASS)) {iterator.remove(); continue;}
+            if (VillageGeneratorConfigHandler.componentLegacyHouse3_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.House3_CLASS)) {iterator.remove(); continue;}
             
             // Remove buildings that aren't appropriate for the current biome
             
-			ArrayList<String> classPaths = new ArrayList();
-			ArrayList<String> villageTypes = new ArrayList();
-            
-            // keys: "ClassPaths", "VillageTypes"
-			Map<String, ArrayList> mappedComponentVillageTypes = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
-			
-			classPaths.addAll( mappedComponentVillageTypes.get("ClassPaths") );
-			villageTypes.addAll( mappedComponentVillageTypes.get("VillageTypes") );
-			
 			String villageTypeToCompare = "";
 			
 			switch (villageType)
@@ -336,9 +349,11 @@ public class StructureVillageVN
             	
             	if (VillageGeneratorConfigHandler.spawnBiomesNames != null) // Biome list is not empty
         		{
-        			for (int i = 0; i < VillageGeneratorConfigHandler.spawnBiomesNames.length; i++)
+            		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+            		
+        			for (int i = 0; i < mappedBiomes.get("BiomeNames").size(); i++)
         			{
-        				if (VillageGeneratorConfigHandler.spawnBiomesNames[i].equals(biome.biomeName))
+        				if (mappedBiomes.get("BiomeNames").get(i).equals(biome.biomeName))
         				{
         					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
         					
@@ -470,9 +485,11 @@ public class StructureVillageVN
             	
             	if (VillageGeneratorConfigHandler.spawnBiomesNames != null) // Biome list is not empty
         		{
-        			for (int i = 0; i < VillageGeneratorConfigHandler.spawnBiomesNames.length; i++)
+            		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+            		
+        			for (int i = 0; i < mappedBiomes.get("BiomeNames").size(); i++)
         			{
-        				if (VillageGeneratorConfigHandler.spawnBiomesNames[i].equals(biome.biomeName))
+        				if (mappedBiomes.get("BiomeNames").get(i).equals(biome.biomeName))
         				{
         					BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
         					
@@ -505,22 +522,23 @@ public class StructureVillageVN
         int k = chunk.getTopFilledSegment() + 15;
         posX &= 15;
         
-        // Search downward unti you hit the first block that meets the "solid/liquid" requirement
+        // Search downward until you hit the first block that meets the "solid/liquid" requirement
         for (posZ &= 15; k > 0; --k)
         {
             Block block = chunk.getBlock(posX, k, posZ);
+            Material material = block.getMaterial();
             
             if (
             		// If it's a solid, full block that isn't one of these particular types
-            		(block.getMaterial().blocksMovement()
-            		&& block.getMaterial() != Material.leaves
-    				&& block.getMaterial() != Material.plants
-					&& block.getMaterial() != Material.vine
-					&& block.getMaterial() != Material.air
+            		(material.blocksMovement()
+            		&& material != Material.leaves
+    				&& material != Material.plants
+					&& material != Material.vine
+					&& material != Material.air
             		&& !block.isFoliage(world, x, k, z)
             		&& block.isOpaqueCube())
             		// If the block is liquid, return the value above it
-            		|| block.getMaterial().isLiquid()
+            		|| material.isLiquid()
             		)
             {
                 return k + 1;
@@ -580,393 +598,422 @@ public class StructureVillageVN
     /**
      * Biome-specific block replacement
      */
-    //public static Object[] getBiomeSpecificBlock(Block block, int meta, StructureVillageVN.StartVN startPiece)
-    public static Object[] getBiomeSpecificBlock(Block block, int meta, MaterialType materialType, BiomeGenBase biome)
+    public static Object[] getBiomeSpecificBlockObject(Block block, int meta, MaterialType materialType, BiomeGenBase biome, boolean disallowModSubs)
     {
     	if (materialType==null || biome==null) {return new Object[]{block, meta};}
+    	int woodMeta = 0;
     	
-    	// TODO - use vanilla fences and gates in 1.8
-    	if (materialType == FunctionsVN.MaterialType.OAK)
-        {
-    		int woodMeta = 0; // Oak
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.oak_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-    	if (materialType == FunctionsVN.MaterialType.SPRUCE)
-        {
-    		int woodMeta = 1; // Spruce
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, woodMeta%4};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.spruce_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-        if (materialType == FunctionsVN.MaterialType.BIRCH)
-        {
-    		int woodMeta = 2; // Birch
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.birch_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(2, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(2, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, woodMeta%4};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogBirchUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.birch_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-        if (materialType == FunctionsVN.MaterialType.JUNGLE)
-        {
-    		int woodMeta = 3; // Jungle
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.mossy_cobblestone, 0};}
+    	switch (materialType)
+    	{
+    	default:
+    	case OAK:
+    		woodMeta = 0; // Oak
+    		
+    		if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.oak_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+    	case SPRUCE:
+    		woodMeta = 1; // Spruce
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.spruce_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.spruce_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+        case BIRCH:
+    		woodMeta = 2; // Birch
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.birch_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(2, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(2, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.birch_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+        case JUNGLE:
+    		woodMeta = 3; // Jungle
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.cobblestone)                   {block=Blocks.mossy_cobblestone; meta=0; break;}
         	if (block == Blocks.stone_stairs)                  {
 													        		block = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsUTD);
 													        		if (block==null) {block = Blocks.stone_stairs;}
-													        		return new Object[]{block, meta};
+													        		break;
         													   } // Mossy cobblestone stairs
-        	if (block == Blocks.cobblestone_wall)              {return new Object[]{block, 1};} // Mossy cobblestone wall
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, woodMeta%4};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogJungleUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.jungle_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-        if (materialType == FunctionsVN.MaterialType.ACACIA)
-        {
-    		int woodMeta = 4; // Acacia
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.acacia_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(4, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(4, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, woodMeta%4};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.acacia_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-        if (materialType == FunctionsVN.MaterialType.DARK_OAK)
-        {
-    		int woodMeta = 5; // Dark Oak
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log2, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.dark_oak_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(5, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(5, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {return new Object[]{block, woodMeta%4};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog2EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.stonebrick, 0};} // Cut sandstone into stone brick
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.stonebrick, 3};} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.dark_oak_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.cobblestone, 0};}
-        }
-        if (materialType == FunctionsVN.MaterialType.SAND)
-        {
-    		int woodMeta = 3; // Jungle
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
-        	if (block == Blocks.stonebrick && meta==0)         {return new Object[]{Blocks.sandstone, 2};} // Stone brick into cut sandstone
-        	if (block == Blocks.cobblestone && meta==3)        {return new Object[]{Blocks.sandstone, 1};} // Chiseled sandstone
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
-        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.sandstone, 0};} // Regular sandstone
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};} // Jungle planks
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};} // Jungle fence
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};} // Jungle fence gate
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.jungle_stairs, meta};}
-        	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.sandstone_stairs, meta};}
+        	if (block == Blocks.cobblestone_wall)              {meta=1; break;} // Mossy cobblestone wall
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.jungle_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(3, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.jungle_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+        case ACACIA:
+    		woodMeta = 4; // Acacia
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log2; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.acacia_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(4, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(4, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog2EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.acacia_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+        case DARK_OAK:
+    		woodMeta = 5; // Dark Oak
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log2; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.dark_oak_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(5, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(5, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog2EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.dark_oak_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	
+        	break;
+        	
+        case SAND:
+    		woodMeta = 3; // Jungle
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	if (block == Blocks.stonebrick && meta==0)         {block=Blocks.sandstone; meta=2; break;} // Stone brick into cut sandstone
+        	if (block == Blocks.cobblestone && meta==3)        {block=Blocks.sandstone; meta=1; break;} // Chiseled sandstone
+        	if (block == Blocks.cobblestone)                   {block=Blocks.sandstone; meta=0; break;} // Regular sandstone
+        	if (block == Blocks.mossy_cobblestone)             {block=Blocks.sandstone; meta=0; break;} // Regular sandstone
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;} // Jungle planks
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;} // Jungle fence
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;} // Jungle fence gate
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.jungle_stairs; break;}
+        	if (block == Blocks.stone_stairs)                  {block=Blocks.sandstone_stairs; break;}
         	if (block == Blocks.cobblestone_wall)              {
 													        		if (ModObjects.chooseModSandstoneWall(false)==null) {block = Blocks.sandstone;}
 													        		else {return ModObjects.chooseModSandstoneWall(false);}
 															   } // Sandstone wall
-        	if (block == Blocks.gravel)                        {return new Object[]{Blocks.sandstone, 0};}
-        	if (block == Blocks.dirt)                          {return new Object[]{Blocks.sand, 0};}
-        	if (block == Blocks.grass)                         {return new Object[]{Blocks.sand, 0};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};} // Jungle slab
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};} // Jungle double slab
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};} // Jungle door
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};} // Jungle trapdoor
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 1: meta==11? 9 : meta};} // Sandstone slab
-        	//if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 4};} // Brick double slab
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(3, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(3, false), meta};}
-        	//if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, 3};} // Jungle bark
-        	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogJungleUTD), meta};}
-        	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + 3};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.deadbush, 0};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.sand, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.sandstone, 0};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.sandstone, 2};} // Cut sandstone
-        }
-        if (materialType == FunctionsVN.MaterialType.MESA)
-        {
-        	int woodMeta = 0; // Oak
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.hardened_clay, 0};} // TODO - change stain color with village colors?
-        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.hardened_clay, 0};}
-        	if (block == Blocks.stone_stairs)                  {return new Object[]{Blocks.brick_stairs, meta};}
-        	if (block == Blocks.gravel)                        {return new Object[]{Blocks.hardened_clay, 0};}
-        	//if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==3? 4: meta==11? 12 : meta};} // Brick slab
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, 1};} // Sandstone double slab
-        	if (block == Blocks.sand)                          {return new Object[]{Blocks.sand, 1};} // Red Sand
+        	if (block == Blocks.gravel)                        {block=Blocks.sandstone; meta=0; break;}
+        	if (block == Blocks.dirt)                          {block=Blocks.sand; meta=0; break;}
+        	if (block == Blocks.grass)                         {block=Blocks.sand; meta=0; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;} // Jungle slab
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;} // Jungle double slab
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;} // Jungle door
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;} // Jungle trapdoor
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 1: meta==11? 9 : meta; break;} // Sandstone slab
+        	//if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=4; break;} // Brick double slab
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(3, false); break;}
+        	//if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=3; break;} // Jungle bark
+        	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;}
+        	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + 3; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	if (block == Blocks.sapling)                       {block=Blocks.deadbush; meta=0; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.sand; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.sandstone; meta=0; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	
+        	break;
+        	
+        case MESA:
+        	
+        	if (block == Blocks.cobblestone)                   {block=Blocks.hardened_clay; meta=0; break;}
+        	if (block == Blocks.mossy_cobblestone)             {block=Blocks.hardened_clay; meta=0; break;}
+        	if (block == Blocks.stone_stairs)                  {block=Blocks.brick_stairs; break;}
+        	if (block == Blocks.gravel)                        {block=Blocks.hardened_clay; meta=0; break;}
+        	//if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 4: meta==11? 12 : meta; break;} // Brick slab
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=1; break;} // Sandstone double slab
+        	if (block == Blocks.sand)                          {block=Blocks.sand; meta=1; break;} // Red Sand
         	if (block == Blocks.cobblestone_wall)              {
         															Object[] modobject = ModObjects.chooseModSandstoneWall(true);
 													        		if (modobject==null)
 													        		{
 													        			block = ModObjects.chooseModRedSandstone();
 													        			if (block==null) {block = Blocks.cobblestone_wall; meta=0;} // Just return what you put in
-													        			return new Object[]{block, meta};
+													        			break;
 													        		}
 													        		else {return modobject;}
 															   } // Brick wall
         	if (block == Blocks.sandstone)                     {
         															block = ModObjects.chooseModRedSandstone();
-        															if (block == null) {return new Object[]{Blocks.sandstone, meta};}
-        															else {return new Object[]{block, 0};}
+        															if (block == null) {block=Blocks.sandstone; break;}
+        															else {meta=0; break;}
 												        	   }
         	if (block == Blocks.stone_slab)                    {
 																	Object[] modobject = ModObjects.chooseModRedSandstoneSlab(meta>=8);
-																	if (modobject == null) {return new Object[]{Blocks.stone_slab, meta<8? 1: 9};}
+																	if (modobject == null) {block=Blocks.stone_slab; meta=meta<8? 1: 9; break;}
 											        		   }
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==0? 1 : meta};}
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==0? 1 : meta; break;}
         	if (block == Blocks.sandstone_stairs)              {
 																	block = ModObjects.chooseModRedSandstoneStairs();
-																	if (block == null) {return new Object[]{Blocks.sandstone_stairs, meta};}
-																	else {return new Object[]{block, meta};}
+																	if (block == null) {block=Blocks.sandstone_stairs; break;}
+																	else {break;}
 													    	   }
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD))
 													           {
 																	block = ModObjects.chooseModSmoothSandstoneStairs(true);
-																	if (block == null) {return new Object[]{Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD), meta};}
-																	else {return new Object[]{block, meta};}
+																	if (block == null) {block=Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD); break;}
+																	else {break;}
 													    	   }
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD))
 													           {
 																	Object[] modobject = ModObjects.chooseModSmoothSandstoneSlab(meta==8, true);
-																	if (modobject == null) {return new Object[]{Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD), meta};}
+																	if (modobject == null) {block=Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD); break;}
 																	else {return modobject;}
 													    	   }
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return ModObjects.chooseModSmoothSandstoneBlock(true);}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.tallgrass, 0};} // Shrub
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.sand, 1};} // Red Sand
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.hardened_clay, 0};}
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.hardened_clay, 0};}
+        	if (block == Blocks.sapling)                       {block=Blocks.tallgrass; meta=0; break;} // Shrub
+        	if (block == Blocks.snow)                          {block=Blocks.sand; meta=1; break;} // Red Sand
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.hardened_clay; meta=0; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.hardened_clay; meta=0; break;}
         	
+        	break;
         	
-        }
-        if (materialType == FunctionsVN.MaterialType.SNOW)
-        {
-    		int woodMeta = 1; // Spruce
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.log, (meta/4)*4 + woodMeta%4};}
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block == Blocks.fence)                         {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block == Blocks.fence_gate)                    {return new Object[]{ModObjects.chooseModFenceGate(woodMeta), 0};}
-        	if (block == Blocks.oak_stairs)                    {return new Object[]{Blocks.spruce_stairs, meta};}
-        	if (block == Blocks.wooden_slab)                   {return new Object[]{Blocks.wooden_slab, meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta};}
-        	if (block == Blocks.double_wooden_slab)            {return new Object[]{Blocks.double_wooden_slab, woodMeta};}
-        	if (block == Blocks.wooden_door)                   {return new Object[]{chooseWoodenDoor(woodMeta), meta};}
-        	if (block == Blocks.wooden_button)                 {return new Object[]{chooseWoodenButton(woodMeta), meta};}
-        	if (block == Blocks.wooden_pressure_plate)         {return new Object[]{ModObjects.chooseModPressurePlate(woodMeta), 0};}
-        	if (block == Blocks.trapdoor)                      {return new Object[]{ModObjects.chooseModWoodenTrapdoor(woodMeta), meta};}
-        	if (block == Blocks.ladder)                        {return new Object[]{ModObjects.chooseModLadderBlock(woodMeta), meta};}
-        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.cobblestone, 0};}
-        	//if (block == Blocks.standing_sign)                 {return new Object[]{ModObjects.chooseModWoodenSign(1, true), meta/4};}
-        	//if (block == Blocks.wall_sign)                     {return new Object[]{ModObjects.chooseModWoodenSign(1, false), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {return new Object[]{block, woodMeta%4};} // Spruce bark
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLogSpruceUTD), meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {return new Object[]{Block.getBlockFromName(ModObjects.strippedLog1EF), 4*meta + woodMeta%4};}
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.cobblestone, 0};}
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.planks, woodMeta};} // Smooth sandstone into planks
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.spruce_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.wooden_slab, meta+woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.planks, woodMeta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{ModObjects.chooseModFence(woodMeta), 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.sapling, woodMeta};}
-        }
-    	if (materialType == FunctionsVN.MaterialType.MUSHROOM)
-        {
-        	if (block == Blocks.log || block == Blocks.log2)   {return new Object[]{Blocks.brown_mushroom_block, 15};} // Stem on all six sides
-        	if (block == Blocks.cobblestone)                   {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        	if (block == Blocks.mossy_cobblestone)             {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        	if (block == Blocks.planks)                        {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
-        	if (block == Blocks.cobblestone && meta==3)        {return new Object[]{Blocks.brown_mushroom_block, 14};} // Chiseled stone brick into cap on all sides
-        	if (block == Blocks.stonebrick)                    {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        	if (block == Blocks.sandstone && meta==2)          {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        	if (block == Blocks.sandstone && meta==1)          {return new Object[]{Blocks.brown_mushroom_block, 14};} // Chiseled sandstone into cap on all sides
-        	if (block == Blocks.sandstone)                     {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        	if (block == Blocks.stone_slab)                    {return new Object[]{Blocks.stone_slab, meta==1? 3: meta==9? 11 : meta};}
-        	if (block == Blocks.double_stone_slab && meta==9)  {return new Object[]{Blocks.brown_mushroom_block, 0};} // Smooth sandstone into pores on all six sides
-        	if (block == Blocks.double_stone_slab)             {return new Object[]{Blocks.double_stone_slab, meta==1? 0 : meta};}
-        	if (block == Blocks.sandstone_stairs)              {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {return new Object[]{Blocks.stone_stairs, meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {return new Object[]{Blocks.stone_slab, meta==8 ? 11: meta==0? 3:meta};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return new Object[]{Blocks.brown_mushroom_block, 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {return new Object[]{Blocks.cobblestone_wall, 0};}
-        	if (block == Blocks.sapling)                       {return new Object[]{Blocks.brown_mushroom, 0};}
-        	if (block == Blocks.grass)                         {return new Object[]{Blocks.mycelium, 0};}
-        	if (block == Blocks.snow)                          {return new Object[]{Blocks.dirt, 0};}
-        	if (block == Blocks.snow_layer)                    {return new Object[]{Blocks.air, 0};}
-        	if (block == Blocks.ice)                           {return new Object[]{Blocks.brown_mushroom_block, 0};} // Pores on all six sides
-        	if (block == Blocks.packed_ice)                    {return new Object[]{Blocks.brown_mushroom_block, 14};} // Cap on all six sides
-        }
-        
-        // Post Forge event
-        BiomeEvent.GetVillageBlockID event = new BiomeEvent.GetVillageBlockID(biome == null ? null : biome, block, meta);
-        MinecraftForge.TERRAIN_GEN_BUS.post(event);
-        if (event.getResult() == Result.DENY) return new Object[]{event.replacement, meta};
-        
+        case SNOW:
+    		woodMeta = 1; // Spruce
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block == Blocks.fence)                         {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.oak_stairs)                    {block=Blocks.spruce_stairs; break;}
+        	if (block == Blocks.wooden_slab)                   {block=Blocks.wooden_slab; meta=meta==0? 0 +woodMeta: meta==8? 8 +woodMeta : meta; break;}
+        	if (block == Blocks.double_wooden_slab)            {block=Blocks.double_wooden_slab; meta=woodMeta; break;}
+        	if (block == Blocks.wooden_door)                   {block=chooseWoodenDoor(woodMeta); break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
+        	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.mossy_cobblestone)             {block=Blocks.cobblestone; meta=0; break;}
+        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
+        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;} // Spruce bark
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.spruce_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.wooden_slab; meta=meta+woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	
+        	break;
+        	
+    	case MUSHROOM:
+    		
+        	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.brown_mushroom_block; meta=15; break;} // Stem on all six sides
+        	if (block == Blocks.cobblestone)                   {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block == Blocks.mossy_cobblestone)             {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block == Blocks.planks)                        {block=Blocks.brown_mushroom_block; meta=0; break;} // Pores on all six sides
+        	if (block == Blocks.cobblestone && meta==3)        {block=Blocks.brown_mushroom_block; meta=14; break;} // Chiseled stone brick into cap on all sides
+        	if (block == Blocks.stonebrick)                    {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.brown_mushroom_block; meta=14; break;} // Chiseled sandstone into cap on all sides
+        	if (block == Blocks.sandstone)                     {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.brown_mushroom_block; meta=0; break;} // Smooth sandstone into pores on all six sides
+        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
+        	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneStairsUTD)) {block=Blocks.stone_stairs; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD)) {block=Blocks.stone_slab; meta=meta==8 ? 11: meta==0? 3:meta; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.brown_mushroom_block; meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.brown_mushroom; meta=0; break;}
+        	if (block == Blocks.grass)                         {block=Blocks.mycelium; meta=0; break;}
+        	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
+        	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
+        	if (block == Blocks.ice)                           {block=Blocks.brown_mushroom_block; meta=0; break;} // Pores on all six sides
+        	if (block == Blocks.packed_ice)                    {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	
+        	break;
+        	
+    	}
+    	
+    	// Post Forge event
+    	if (!disallowModSubs)
+    	{
+    		BiomeEvent.GetVillageBlockID villageBlockEvent = new BiomeEvent.GetVillageBlockID(biome == null ? null : biome, block, meta);
+            MinecraftForge.TERRAIN_GEN_BUS.post(villageBlockEvent);
+            BiomeEvent.GetVillageBlockMeta villageMetaEvent = new BiomeEvent.GetVillageBlockMeta(biome == null ? null : biome, block, meta);
+            MinecraftForge.TERRAIN_GEN_BUS.post(villageMetaEvent);
+            
+            if (villageBlockEvent.getResult() == Result.DENY || villageMetaEvent.getResult() == Result.DENY)
+            {
+            	return new Object[]{villageBlockEvent.replacement, villageMetaEvent.replacement};
+            }
+    	}
+    	
         return new Object[]{block, meta};
     }
     
@@ -1027,31 +1074,31 @@ public class StructureVillageVN
 		}
     }
     
-    public static int seaLevel = 63; //TODO - actually call sea level in later versions
+    public static int seaLevel = 63;
 	
     /**
      * Sets the path-specific block into the world
      * The block will get set at the ground height or posY, whichever is higher.
      * Returns the height at which the block was placed
      */
-    public static int setPathSpecificBlock(World world, MaterialType materialType, BiomeGenBase biome, int meta, int posX, int posY, int posZ)
+    public static int setPathSpecificBlock(World world, MaterialType materialType, BiomeGenBase biome, boolean disallowModSubs, int posX, int posY, int posZ, boolean searchDownward)
     {
     	// Regenerate these if null
     	if (materialType==null) {materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ);}
     	if (biome==null) {biome = world.getBiomeGenForCoords(posX, posZ);}
     	
-    	Object[] grassPath = getBiomeSpecificBlock(ModObjects.chooseModPathBlock(), 0, materialType, biome);
-    	Object[] planks = getBiomeSpecificBlock(Blocks.planks, 0, materialType, biome);
-    	Object[] gravel = getBiomeSpecificBlock(Blocks.gravel, 0, materialType, biome);
-    	Object[] cobblestone = getBiomeSpecificBlock(Blocks.cobblestone, 0, materialType, biome);
+    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
+    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);
+    	Object[] gravel = getBiomeSpecificBlockObject(Blocks.gravel, 0, materialType, biome, disallowModSubs);
+    	Object[] cobblestone = getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs);
     	
     	// Top block level
-    	int surfaceY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1;
+    	int surfaceY = searchDownward ? StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1 : posY;
     	
     	// Raise Y to be at least below sea level
     	if (surfaceY < seaLevel) {surfaceY = seaLevel-1;}
     	
-    	while (surfaceY >= seaLevel-1)
+    	do
     	{
     		Block surfaceBlock = world.getBlock(posX, surfaceY, posZ);
     		
@@ -1087,6 +1134,8 @@ public class StructureVillageVN
     		
     		surfaceY -=1;
     	}
+    	while(surfaceY >= seaLevel-1);
+    	
 		return -1;
     }
     
@@ -1148,128 +1197,132 @@ public class StructureVillageVN
 		
 		// --- TRY 1: See if the village already exists in the vanilla collection object and try to match it to this village --- //
 		
-		
-		Village villageNearTarget = world.villageCollectionObj.findNearestVillage(posX, posY, posZ, VILLAGE_RADIUS_BUFFER);
-		
-		if (villageNearTarget != null) // There is a town.
+		try
 		{
-			int villageRadius = villageNearTarget.getVillageRadius();
-			int popSize = villageNearTarget.getNumVillagers();
-			int centerX = villageNearTarget.getCenter().posX; // Village X position
-			int centerY = villageNearTarget.getCenter().posY; // Village Y position
-			int centerZ = villageNearTarget.getCenter().posZ; // Village Z position
+			Village villageNearTarget = world.villageCollectionObj.findNearestVillage(posX, posY, posZ, VILLAGE_RADIUS_BUFFER);
 			
-			// Let's see if we can find a sign near that located village center!
-			VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
-			// .getTagList() will return all the entries under the specific village name.
-			NBTTagCompound tagCompound = data.getData();
-			Set tagmapKeyset = tagCompound.func_150296_c(); // Gets the town key list: "coordinates"
-
-			Iterator itr = tagmapKeyset.iterator();
-			
-			//Placeholders for villagenames.dat tags
-			boolean signLocated = false; //Use this to record whether or not a sign was found
-			boolean isColony = false; //Use this to record whether or not the village was naturally generated
-			
-			while(itr.hasNext()) // Going through the list of VN villages
+			if (villageNearTarget != null) // There is a town.
 			{
-				Object element = itr.next();
-				townSignEntry = element.toString(); //Text name of village header (e.g. "x535y80z39")
-				//The only index that has data is 0:
-				NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
-	            villagetagcompound = nbttaglist.getCompoundTagAt(0);
+				int villageRadius = villageNearTarget.getVillageRadius();
+				int popSize = villageNearTarget.getNumVillagers();
+				int centerX = villageNearTarget.getCenter().posX; // Village X position
+				int centerY = villageNearTarget.getCenter().posY; // Village Y position
+				int centerZ = villageNearTarget.getCenter().posZ; // Village Z position
 				
-				// Retrieve the "sign" coordinates
-				townColorMeta = villagetagcompound.getInteger("townColor");
-				townX = villagetagcompound.getInteger("signX");
-				townY = villagetagcompound.getInteger("signY");
-				townZ = villagetagcompound.getInteger("signZ");
-				namePrefix = villagetagcompound.getString("namePrefix");
-				nameRoot = villagetagcompound.getString("nameRoot");
-				nameSuffix = villagetagcompound.getString("nameSuffix");
+				// Let's see if we can find a sign near that located village center!
+				VNWorldDataStructure data = VNWorldDataStructure.forWorld(world, "villagenames3_Village", "NamedStructures");
+				// .getTagList() will return all the entries under the specific village name.
+				NBTTagCompound tagCompound = data.getData();
+				Set tagmapKeyset = tagCompound.func_150296_c(); // Gets the town key list: "coordinates"
+
+				Iterator itr = tagmapKeyset.iterator();
 				
-				// Obtain the array of banner colors from the banner tag, if there is one
-				boolean updateTownNBT=false;
-				int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
-				if (villagetagcompound.hasKey("BlockEntityTag", 10))
-        		{
-        			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
-        			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
-        	        {
-        				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
-        				
-        				// The banner color array has repeat values. Create a version that does not. 
-        				ArrayList<Integer> colorSet = new ArrayList();
-        				// Add the first element straight away
-        				colorSet.add(townColorMeta);
-        				// Go through the colors in the array and add them only if they're unique
-        				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
-        				{
-        					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
-        					if (patterntag.hasKey("Color"))
-        					{
-        						int candidateColor = patterntag.getInteger("Color");
-        						
-        						boolean matchFound = false;
-            					// Go through colors already in the set and seee if this matches any of them
-            					for (int j=0; j<colorSet.size(); j++) {if (candidateColor==colorSet.get(j)) {matchFound=true; break;}}
-            					// Color is unique!
-            					if (!matchFound) {colorSet.add(candidateColor);}
-        					}
-        				}
-        				// Assign the new unique colors to the town color array 
-        				for (int i=1; i<colorSet.size(); i++)
-        				{
-        					townColorArray[i] = 15-colorSet.get(i);
-        				}
-        	        }
-        		}
-				// Change each entry that's -1 to a unique color
-				for (int c=1; c<(townColorArray.length); c++)
+				//Placeholders for villagenames.dat tags
+				boolean signLocated = false; //Use this to record whether or not a sign was found
+				boolean isColony = false; //Use this to record whether or not the village was naturally generated
+				
+				while(itr.hasNext()) // Going through the list of VN villages
 				{
-					// The color
-	        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
-	        		else if (townColorArray[c]==-1) // must be generated
-	        		{
-	        			while(true)
-	        			{
-	        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
-	        				// Compare to all previous colors to ensure it's unique
-	        				boolean isRedundant=false;
-	        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
-	        				if (!isRedundant) {break;} // Keep this color and move on to the next one
-	        			}
-	        		}
-	        		
-	        		// Now that the townColorArray is populated, assign the colors to the town
-					if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
-				}
-				
-				// Add tags for village and biome types
-				if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
-				if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
-				
-				// Replace the old tag
-				if (updateTownNBT)
-				{
-	        		nbttaglist.func_150304_a(0, villagetagcompound);
-	        		tagCompound.setTag(townSignEntry, nbttaglist);
-	        		data.markDirty();
-				}
-        		
-				// Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
-				Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, VILLAGE_RADIUS_BUFFER);
-				
-				isColony = villagetagcompound.getBoolean("isColony");
-				
-				if (villageNearSign == villageNearTarget) // There is a match between the nearest village to this villager and the nearest village to the sign
-				{
-					signLocated = true;
+					Object element = itr.next();
+					townSignEntry = element.toString(); //Text name of village header (e.g. "x535y80z39")
+					//The only index that has data is 0:
+					NBTTagList nbttaglist = tagCompound.getTagList(townSignEntry, tagCompound.getId());
+		            villagetagcompound = nbttaglist.getCompoundTagAt(0);
 					
-					return villagetagcompound;
+					// Retrieve the "sign" coordinates
+					townColorMeta = villagetagcompound.getInteger("townColor");
+					townX = villagetagcompound.getInteger("signX");
+					townY = villagetagcompound.getInteger("signY");
+					townZ = villagetagcompound.getInteger("signZ");
+					namePrefix = villagetagcompound.getString("namePrefix");
+					nameRoot = villagetagcompound.getString("nameRoot");
+					nameSuffix = villagetagcompound.getString("nameSuffix");
+					
+					// Obtain the array of banner colors from the banner tag, if there is one
+					boolean updateTownNBT=false;
+					int[] townColorArray = new int[]{townColorMeta,-1,-1,-1,-1,-1,-1};
+					if (villagetagcompound.hasKey("BlockEntityTag", 10))
+	        		{
+	        			bannerNBT = villagetagcompound.getCompoundTag("BlockEntityTag");
+	        			if (bannerNBT.hasKey("Patterns", 9)) // 9 is Tag List
+	        	        {
+	        				NBTTagList nbttaglistPattern = bannerNBT.getTagList("Patterns", 9);
+	        				
+	        				// The banner color array has repeat values. Create a version that does not. 
+	        				ArrayList<Integer> colorSet = new ArrayList();
+	        				// Add the first element straight away
+	        				colorSet.add(townColorMeta);
+	        				// Go through the colors in the array and add them only if they're unique
+	        				for (int i=0; i < nbttaglistPattern.tagCount(); i++)
+	        				{
+	        					NBTTagCompound patterntag = nbttaglistPattern.getCompoundTagAt(i);
+	        					if (patterntag.hasKey("Color"))
+	        					{
+	        						int candidateColor = patterntag.getInteger("Color");
+	        						
+	        						boolean matchFound = false;
+	            					// Go through colors already in the set and seee if this matches any of them
+	            					for (int j=0; j<colorSet.size(); j++) {if (candidateColor==colorSet.get(j)) {matchFound=true; break;}}
+	            					// Color is unique!
+	            					if (!matchFound) {colorSet.add(candidateColor);}
+	        					}
+	        				}
+	        				// Assign the new unique colors to the town color array 
+	        				for (int i=1; i<colorSet.size(); i++)
+	        				{
+	        					townColorArray[i] = 15-colorSet.get(i);
+	        				}
+	        	        }
+	        		}
+					// Change each entry that's -1 to a unique color
+					for (int c=1; c<(townColorArray.length); c++)
+					{
+						// The color
+		        		if (villagetagcompound.hasKey("townColor"+(c+1))) {townColorArray[c] = villagetagcompound.getInteger("townColor"+(c+1));} // is already registered as its own NBT flag
+		        		else if (townColorArray[c]==-1) // must be generated
+		        		{
+		        			while(true)
+		        			{
+		        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+		        				// Compare to all previous colors to ensure it's unique
+		        				boolean isRedundant=false;
+		        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
+		        				if (!isRedundant) {break;} // Keep this color and move on to the next one
+		        			}
+		        		}
+		        		
+		        		// Now that the townColorArray is populated, assign the colors to the town
+						if (!villagetagcompound.hasKey("townColor"+(c+1))) {updateTownNBT=true; villagetagcompound.setInteger("townColor"+(c+1), townColorArray[c]);}
+					}
+					
+					// Add tags for village and biome types
+					if (!villagetagcompound.hasKey("villageType")) {villagetagcompound.setString("villageType", FunctionsVN.VillageType.getVillageTypeFromBiome(world, posX, posZ).toString());}
+					if (!villagetagcompound.hasKey("materialType")) {villagetagcompound.setString("materialType", FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ).toString());}
+					
+					// Replace the old tag
+					if (updateTownNBT)
+					{
+		        		nbttaglist.func_150304_a(0, villagetagcompound);
+		        		tagCompound.setTag(townSignEntry, nbttaglist);
+		        		data.markDirty();
+					}
+	        		
+					// Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
+					Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, VILLAGE_RADIUS_BUFFER);
+					
+					isColony = villagetagcompound.getBoolean("isColony");
+					
+					if (villageNearSign == villageNearTarget) // There is a match between the nearest village to this villager and the nearest village to the sign
+					{
+						signLocated = true;
+						
+						return villagetagcompound;
+					}
 				}
 			}
 		}
+		catch (Exception e) {}
+		
 		
 		
 		// --- TRY 2: compare this sign position with stored VN sign positions and see if you're within range of one of them --- // 
@@ -1668,6 +1721,7 @@ public class StructureVillageVN
     	// If a world is loaded and a village has to regenerate, the start piece will be null and so these will be inaccessible.
     	public FunctionsVN.VillageType villageType=null;
     	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
     	public int townColor=-1;
     	public int townColor2=-1;
     	public int townColor3=-1;
@@ -1689,8 +1743,30 @@ public class StructureVillageVN
         public StartVN(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
         {
             super(chunkManager, componentType, random, posX, posZ, components, terrainType);
-            this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);
-            this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);
+            
+            BiomeGenBase biome = chunkManager.getBiomeGenAt(posX, posZ);
+			Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+            
+			try {
+            	String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+            	if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+            	else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+            	}
+			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+			
+			try {
+            	String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+            	if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);}
+            	else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+            	}
+			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);}
+			
+			try {
+            	String mappeddisallowModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+            	if (mappeddisallowModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+            	else {this.disallowModSubs = false;}
+            	}
+			catch (Exception e) {this.disallowModSubs = false;}
         }
         
         // Beth had this great idea to publicly call these protected methods lmao :'C
@@ -1746,6 +1822,7 @@ public class StructureVillageVN
     	public ArrayList<Integer> decorHeightY = new ArrayList();
     	public FunctionsVN.VillageType villageType=null;
     	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
     	public int townColor=-1;
     	public int townColor2=-1;
     	public int townColor3=-1;
@@ -1851,12 +1928,46 @@ public class StructureVillageVN
             	this.namePrefix = villageNBTtag.getString("namePrefix");
             	this.nameRoot = villageNBTtag.getString("nameRoot");
             	this.nameSuffix = villageNBTtag.getString("nameSuffix");
-            	this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(villageNBTtag.getString("villageType"), FunctionsVN.VillageType.PLAINS);
-            	this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(villageNBTtag.getString("materialType"), FunctionsVN.MaterialType.OAK);
+            	
+            	WorldChunkManager chunkManager= world.getWorldChunkManager();
+            	int posX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int posZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+                BiomeGenBase biome = chunkManager.getBiomeGenAt(posX, posZ);
+    			Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+                
+    			try {
+                	String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+                	if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+                	else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+                	}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
+    			
+    			try {
+                	String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+                	if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);}
+                	else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+                	}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, posX, posZ);}
+    			
+    			try {
+                	String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+                	if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+                	else {this.disallowModSubs = false;}
+                	}
+    			catch (Exception e) {this.disallowModSubs = false;}
+            	
             }
         	// Reestablish biome if start was null or something
             if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+            
+            Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	
+        	// Make dirt foundation
+			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, 1, -2, 1, structureBB);
+        	// Top with grass
+        	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, 1, -1, 1, structureBB);
+            
         	/*
             if (this.field_143015_k < 0)
             {
@@ -1923,23 +2034,23 @@ public class StructureVillageVN
             	
             	if (this.villageType==FunctionsVN.VillageType.DESERT)
             	{
-            		decorBlueprint = DesertStructures.getDesertDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);//, 5); // Use lime
+            		decorBlueprint = DesertStructures.getDesertDecorBlueprint(0, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);//, 5); // Use lime
             	}
             	else if (this.villageType==FunctionsVN.VillageType.TAIGA)
             	{
-            		decorBlueprint = TaigaStructures.getTaigaDecorBlueprint(6, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = TaigaStructures.getTaigaDecorBlueprint(6, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SAVANNA)
             	{
-            		decorBlueprint = SavannaStructures.getSavannaDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = SavannaStructures.getSavannaDecorBlueprint(0, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SNOWY)
             	{
-            		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else // Plains
             	{
-            		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.materialType, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	
             	for (BlueprintData b : decorBlueprint)
@@ -2118,11 +2229,11 @@ public class StructureVillageVN
                         
                         if (startPiece_reflected==null)
                         {
-                        	setPathSpecificBlock(world, FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, x, z), world.getBiomeGenForCoords(x, z), 0, x, y, z);
+                        	setPathSpecificBlock(world, FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, x, z), world.getBiomeGenForCoords(x, z), false, x, y, z, true);
                         }
                         else
                         {
-                        	setPathSpecificBlock(world, ((StartVN)startPiece_reflected).materialType, ((StartVN)startPiece_reflected).biome, 0, x, y, z);
+                        	setPathSpecificBlock(world, ((StartVN)startPiece_reflected).materialType, ((StartVN)startPiece_reflected).biome, ((StartVN)startPiece_reflected).disallowModSubs, x, y, z, true);
                         }
                     }
                 }
