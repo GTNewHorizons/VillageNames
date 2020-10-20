@@ -56,7 +56,7 @@ public class MapGenVillageVN extends MapGenVillage
         }
 	}
 	
-    private int terrainType;
+    private int terrainType;   // Actually village "size" integer
     private int field_82665_g; // Maximum distance between villages
     private int field_82666_h; // Minimum distance between villages
     
@@ -276,7 +276,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // Force a specific starter for testing purposes
-        	//start = new DesertStructures.DesertMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize); // Savanna market
+        	//start = new TaigaStructures.TaigaMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
             
             // Add well to the component list
             this.components.add(start);

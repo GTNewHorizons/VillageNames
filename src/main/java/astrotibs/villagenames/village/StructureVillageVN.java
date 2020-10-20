@@ -30,7 +30,10 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockIce;
+import net.minecraft.block.BlockPackedIce;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -536,7 +539,7 @@ public class StructureVillageVN
 					&& material != Material.vine
 					&& material != Material.air
             		&& !block.isFoliage(world, x, k, z)
-            		&& block.isOpaqueCube())
+            		&& block.isNormalCube())
             		// If the block is liquid, return the value above it
             		|| material.isLiquid()
             		)
@@ -1087,10 +1090,6 @@ public class StructureVillageVN
     	if (materialType==null) {materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(world, posX, posZ);}
     	if (biome==null) {biome = world.getBiomeGenForCoords(posX, posZ);}
     	
-    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
-    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);
-    	Object[] gravel = getBiomeSpecificBlockObject(Blocks.gravel, 0, materialType, biome, disallowModSubs);
-    	Object[] cobblestone = getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs);
     	
     	// Top block level
     	int surfaceY = searchDownward ? StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, posX, posZ)-1 : posY;
@@ -1103,33 +1102,52 @@ public class StructureVillageVN
     		Block surfaceBlock = world.getBlock(posX, surfaceY, posZ);
     		
     		// Replace grass with grass path
-    		if (surfaceBlock instanceof BlockGrass && world.isAirBlock(posX, Math.max(surfaceY, posY)+1, posZ))
+    		if ((surfaceBlock instanceof BlockGrass || surfaceBlock instanceof BlockDirt) && world.isAirBlock(posX, surfaceY+1, posZ))
     		{
-    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
-    			return Math.max(surfaceY, posY);
+    	    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
+    			world.setBlock(posX, surfaceY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
+    			return surfaceY;
     		}
     		
     		// Replace sand with gravel supported by cobblestone
     		if (surfaceBlock instanceof BlockSand)
     		{
-    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)gravel[0], (Integer)gravel[1], 2);
-    			world.setBlock(posX, Math.max(surfaceY, posY)-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
-    			return Math.max(surfaceY, posY);
+    	    	Object[] gravel = getBiomeSpecificBlockObject(Blocks.gravel, 0, materialType, biome, disallowModSubs);
+    	    	Object[] cobblestone = getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs);
+    			world.setBlock(posX, surfaceY, posZ, (Block)gravel[0], (Integer)gravel[1], 2);
+    			world.setBlock(posX, surfaceY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return surfaceY;
     		}
     		
     		// Replace lava with two-layer cobblestone
     		if (surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava)
     		{
-    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
-    			world.setBlock(posX, Math.max(surfaceY, posY)-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
-    			return Math.max(surfaceY, posY);
+    	    	Object[] cobblestone = getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs);
+    			world.setBlock(posX, surfaceY, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			world.setBlock(posX, surfaceY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			return surfaceY;
     		}
     		
-    		// Replace other liquid with planks
-    		if (surfaceBlock.getMaterial().isLiquid())
+    		// Replace other liquid or ice with planks
+    		if (surfaceBlock.getMaterial().isLiquid() 
+    				|| surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)
+    				)
     		{
-    			world.setBlock(posX, Math.max(surfaceY, posY), posZ, (Block)planks[0], (Integer)planks[1], 2);
-    			return Math.max(surfaceY, posY);
+    	    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);
+    			world.setBlock(posX, surfaceY, posZ, (Block)planks[0], (Integer)planks[1], 2);
+    			
+    			int yDownScan = surfaceY;
+    			if (MathHelper.abs_int(posX)%2==0 && MathHelper.abs_int(posZ)%2==0)
+    			{
+    		    	Object[] logVert = getBiomeSpecificBlockObject(Blocks.log, 0, materialType, biome, disallowModSubs);
+    				while(world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid() && yDownScan>0)
+    				{
+    					world.setBlock(posX, yDownScan, posZ, (Block)logVert[0], (Integer)logVert[1], 2);
+    				}
+    			}
+    			
+    			return surfaceY;
     		}
     		
     		surfaceY -=1;
@@ -1968,29 +1986,6 @@ public class StructureVillageVN
         	// Top with grass
         	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, 1, -1, 1, structureBB);
             
-        	/*
-            if (this.field_143015_k < 0)
-            {
-                this.field_143015_k = this.getAverageGroundLevel(world, structureBB);
-                
-                if (this.field_143015_k < 0)
-                {
-                    return true;
-                }
-                
-                this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4 - 1, 0);
-            }
-            
-            this.fillWithBlocks(world, structureBB, 0, 0, 0, 2, 3, 1, Blocks.air, Blocks.air, false);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 0, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 1, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 1, 2, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.log,   0, 1, 3, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 0, 3, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 1, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 3, 0, structureBB);
-            this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, -1, structureBB);
-            */
         	// Decor
             int[][] decorUVW = new int[][]{
             	{1, 0, 1},
@@ -2633,8 +2628,6 @@ public class StructureVillageVN
 	 */
 	public static Block chooseWoodenButton(int materialMeta)
 	{
-		if (!VillageGeneratorConfigHandler.useModdedWoodenDoors) {return Blocks.wooden_button;} // Returns the default oak door always
-		
 		if (materialMeta==0) {return Blocks.wooden_button;}
 		
 		String[] modprioritylist = GeneralConfig.modButton;

@@ -111,7 +111,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernTaigaFisherCottage1_string; public static ArrayList<Double> componentModernTaigaFisherCottage1_vals;
 	public static String componentModernTaigaFletcherHouse1_string; public static ArrayList<Double> componentModernTaigaFletcherHouse1_vals;
 	public static String componentModernTaigaLargeFarm1_string; public static ArrayList<Double> componentModernTaigaLargeFarm1_vals;
-	public static String componentModernTaigaMediumFarm1_string; public static ArrayList<Double> componentModernTaigaMediumFarm1_vals;
+	public static String componentModernTaigaLargeFarm2_string; public static ArrayList<Double> componentModernTaigaLargeFarm2_vals;
 	public static String componentModernTaigaLibrary1_string; public static ArrayList<Double> componentModernTaigaLibrary1_vals;
 	public static String componentModernTaigaMasonsHouse1_string; public static ArrayList<Double> componentModernTaigaMasonsHouse1_vals;
 	public static String componentModernTaigaMediumHouse1_string; public static ArrayList<Double> componentModernTaigaMediumHouse1_vals;
@@ -556,8 +556,8 @@ public class VillageGeneratorConfigHandler
 		componentModernTaigaLargeFarm1_string = config.getString(componentModern+"Taiga Large Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+taigaVillages);
 		componentModernTaigaLargeFarm1_vals = parseDoubleArray(componentModernTaigaLargeFarm1_string, modernDefaults);
 		
-		componentModernTaigaMediumFarm1_string = config.getString(componentModern+"Taiga Medium Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+taigaVillages);
-		componentModernTaigaMediumFarm1_vals = parseDoubleArray(componentModernTaigaMediumFarm1_string, modernDefaults);
+		componentModernTaigaLargeFarm2_string = config.getString(componentModern+"Taiga Medium Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+taigaVillages);
+		componentModernTaigaLargeFarm2_vals = parseDoubleArray(componentModernTaigaLargeFarm2_string, modernDefaults);
 		
 		componentModernTaigaLibrary1_string = config.getString(componentModern+"Taiga Library", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+taigaVillages);
 		componentModernTaigaLibrary1_vals = parseDoubleArray(componentModernTaigaLibrary1_string, modernDefaults);
@@ -913,7 +913,7 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FisherCottage1|taiga",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FletcherHouse1|taiga",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumFarm1|taiga",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm2|taiga",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Library1|taiga",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MasonsHouse1|taiga",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse1|taiga",
@@ -1025,28 +1025,21 @@ public class VillageGeneratorConfigHandler
 						// Vanilla
 						"Plains",
 						"Desert",
-						"Extreme Hills",
 						"Forest",
 						"Taiga",
 						"Swampland",
 						"Ice Plains",
 						"MushroomIsland",
-						"ForestHills",
-						"TaigaHills",
 						"Jungle",
-						"JungleHills",
 						"Birch Forest",
-						"Birch Forest Hills",
 						"Roofed Forest",
 						"Cold Taiga",
 						"Mega Taiga",
-						"Mega Taiga Hills",
 						"Savanna",
 						"Mesa",
 						"Sunflower Plains",
 						"Flower Forest",
 						"Mega Spruce Taiga",
-						"Mega Spruce Taiga Hill",
 						// Biomes o' Plenty
 						"Bamboo Forest",
 						"Bayou",
@@ -1099,8 +1092,6 @@ public class VillageGeneratorConfigHandler
 						"Rocky Steppe",
 						// ExtrabiomeXL
 						"Autumn Woods",
-						"Forested Hills",
-						"Green Hills",
 						"Mini Jungle",
 						"Mountain Taiga",
 						"Pine Forest",
@@ -1111,7 +1102,6 @@ public class VillageGeneratorConfigHandler
 						// Highlands
 						"Autumn Forest",
 						"Badlands",
-						"Birch Hills",
 						"Highlands",
 						"Lowlands",
 						"Outback",

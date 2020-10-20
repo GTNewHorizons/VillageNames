@@ -2028,7 +2028,7 @@ public class StructureCreationHandlers
 	// Taiga Medium Farm
 	public static class TaigaLargeFarm2_Handler implements IVillageCreationHandler
 	{
-		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaMediumFarm1_vals;
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernTaigaLargeFarm2_vals;
 		
 	    @Override
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)

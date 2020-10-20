@@ -309,9 +309,11 @@ public class ModObjects {
 	public static final String lanternNL = "netherlicious:Lantern";
 	public static final String lanternUTD = "uptodate:lantern";
 	
-	
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
+	
+	// Mud
+	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
 	
 	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
 	public static final String redSandstoneEF = "etfuturum:red_sandstone";
