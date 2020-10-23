@@ -67,6 +67,8 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.BlockTrapDoor;
+import net.minecraft.init.Blocks;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -136,7 +138,6 @@ public final class VillageNames
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		
 		configDirectory = new File(event.getModConfigurationDirectory(), currentConfigFolder);
 		ConfigInit.init(configDirectory);
 		
@@ -421,9 +422,6 @@ public final class VillageNames
         
 		PROXY.preInit(event);
 		
-		
-		// Reworked in v3.1: new network channel stuff
-		
 		// Establish the channel
         VNNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_CHANNEL);
         
@@ -510,9 +508,10 @@ public final class VillageNames
 		// register crafting recipes
 		Recipes.init();
 		
-		// package registering
-		
-		// general event handlers
+		// Turn off Trapdoor stinky validation yuck
+		BlockTrapDoor.disableValidation = true;
+		// To prevent torches from melting snow blocks
+		Blocks.snow.setTickRandomly(false);
 		
 		// Renderers
 		PROXY.init(event);
@@ -521,8 +520,6 @@ public final class VillageNames
 		// Added in v3.1banner
 		GameRegistry.registerTileEntity(TileEntityBanner.class, Reference.MOD_ID + ".banner");
 		GameRegistry.registerTileEntity(TileEntityWoodSign.class, Reference.MOD_ID + ".sign"); // VillageNames.sign // ganyssurface.wood_sign
-		// key handling
-		
 	}
 	
 	
@@ -531,10 +528,6 @@ public final class VillageNames
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		SpawnEggRegistry.addAllSpawnEggs();
-		
-		PROXY.postInit(event);
-		// cover your ass here
-		// e.g. get list of all blocks added into game from other mods
 	}
 	
 	

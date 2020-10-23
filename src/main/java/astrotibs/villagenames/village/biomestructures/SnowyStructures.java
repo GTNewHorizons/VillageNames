@@ -8,6 +8,7 @@ import java.util.Random;
 import astrotibs.villagenames.banner.TileEntityBanner;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
+import astrotibs.villagenames.handler.ChestLootHandler;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
@@ -4745,7 +4746,7 @@ public class SnowyStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, add nothing
-            Block compostBin = ModObjects.chooseModCompostBinBlock();
+            Block compostBin = ModObjects.chooseModComposterBlock();
             for(int[] uvw : new int[][]{
             	{5,1,5}, 
             	})
@@ -5124,7 +5125,7 @@ public class SnowyStructures
             
             
             // Attempt to add GardenCore Compost Bins. If this fails, add nothing
-            Block compostBin = ModObjects.chooseModCompostBinBlock();
+            Block compostBin = ModObjects.chooseModComposterBlock();
             for(int[] uvw : new int[][]{
             	{7,2,3}, 
             	})
@@ -11470,7 +11471,7 @@ public class SnowyStructures
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeBlueIceBlock, biomeBlueIceMeta, biomeBlueIceBlock, biomeBlueIceMeta, false);	
             }
             
-        	            
+        	
             // Torches
             for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
             	// Interior
@@ -11537,7 +11538,7 @@ public class SnowyStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_snowy_house");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(ChestLootHandler.getGenericLootForVillageType(this.villageType));
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
             
@@ -12027,7 +12028,7 @@ public class SnowyStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_snowy_house");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(ChestLootHandler.getGenericLootForVillageType(this.villageType));
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
             

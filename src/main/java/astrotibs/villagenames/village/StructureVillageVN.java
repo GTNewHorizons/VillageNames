@@ -74,7 +74,7 @@ public class StructureVillageVN
 {
 	public static final int VILLAGE_RADIUS_BUFFER = 112;
 	
-	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] FURNACE_META_ARRAY = new int[][]{
 		{3,4,2,5},
 		{5,3,5,3},
@@ -82,7 +82,7 @@ public class StructureVillageVN
 		{4,2,4,2},
 	};
 	
-	// Array of meta values for buyttons indexed by [orientation][horizIndex]
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] BUTTON_META_ARRAY = new int[][]{
 		{3,2,4,1},
 		{1,3,1,3},
@@ -90,7 +90,7 @@ public class StructureVillageVN
 		{2,4,2,4},
 	};
 	
-	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] ANVIL_META_ARRAY = new int[][]{
 		{1,2,3,0},
 		{0,1,0,1},
@@ -98,7 +98,7 @@ public class StructureVillageVN
 		{2,3,2,3},
 	};
 	
-	// Array of meta values for furnaces indexed by [orientation][horizIndex]
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] GLAZED_TERRACOTTA_META_ARRAY = new int[][]{
 		{1,2,2,3},
 		{0,1,3,0},
@@ -106,7 +106,7 @@ public class StructureVillageVN
 		{2,3,1,2},
 	};
 	
-	// Array of meta values for door indexed by [isLower][isRightHanded][isShut][orientation][horizIndex]
+	// Indexed by [isLower][isRightHanded][isShut][orientation][horizIndex]
 	public static final int[][][][][] DOOR_META_ARRAY = new int[][][][][]
 	{
 		// --- UPPER HALF --- //
@@ -851,8 +851,9 @@ public class StructureVillageVN
         	if (block == Blocks.oak_stairs)                    {block=Blocks.jungle_stairs; break;}
         	if (block == Blocks.stone_stairs)                  {block=Blocks.sandstone_stairs; break;}
         	if (block == Blocks.cobblestone_wall)              {
-													        		if (ModObjects.chooseModSandstoneWall(false)==null) {block = Blocks.sandstone;}
-													        		else {return ModObjects.chooseModSandstoneWall(false);}
+        															Object[] modobject = ModObjects.chooseModSandstoneWall(false);
+													        		if (modobject!=null) {block = (Block)modobject[0]; meta = (Integer)modobject[1];}
+													        		break;
 															   } // Sandstone wall
         	if (block == Blocks.gravel)                        {block=Blocks.sandstone; meta=0; break;}
         	if (block == Blocks.dirt)                          {block=Blocks.sand; meta=0; break;}
@@ -892,14 +893,9 @@ public class StructureVillageVN
         	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=1; break;} // Sandstone double slab
         	if (block == Blocks.sand)                          {block=Blocks.sand; meta=1; break;} // Red Sand
         	if (block == Blocks.cobblestone_wall)              {
-        															Object[] modobject = ModObjects.chooseModSandstoneWall(true);
-													        		if (modobject==null)
-													        		{
-													        			block = ModObjects.chooseModRedSandstone();
-													        			if (block==null) {block = Blocks.cobblestone_wall; meta=0;} // Just return what you put in
-													        			break;
-													        		}
-													        		else {return modobject;}
+																	Object[] modobject = ModObjects.chooseModSandstoneWall(true);
+													        		if (modobject!=null) {block = (Block)modobject[0]; meta = (Integer)modobject[1];}
+													        		break;
 															   } // Brick wall
         	if (block == Blocks.sandstone)                     {
         															block = ModObjects.chooseModRedSandstone();
@@ -928,7 +924,10 @@ public class StructureVillageVN
 																	if (modobject == null) {block=Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD); break;}
 																	else {return modobject;}
 													    	   }
-        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {return ModObjects.chooseModSmoothSandstoneBlock(true);}
+        	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {
+																					        		Object[] modobject=ModObjects.chooseModSmoothSandstoneBlock(true);
+																					        		block=(Block)modobject[0]; meta=(Integer)modobject[1];
+																					        		}
         	if (block == Blocks.sapling)                       {block=Blocks.tallgrass; meta=0; break;} // Shrub
         	if (block == Blocks.snow)                          {block=Blocks.sand; meta=1; break;} // Red Sand
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
@@ -1129,9 +1128,27 @@ public class StructureVillageVN
     		}
     		
     		// Replace other liquid or ice with planks
-    		if (surfaceBlock.getMaterial().isLiquid() 
-    				|| surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
+    		if (surfaceBlock.getMaterial().isLiquid() || surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
     				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softSnowMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.jungleQuicksandMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.moorMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.dryQuicksandMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidMireMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidChocolateMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingClayMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.wetPeatMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softQuicksandMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.bogMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softGravelMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mireMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingSlimeMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.slurryMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.quicksandMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.brownClayMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.denseWebbingMFQM_classPath)
+    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.tarMFQM_classPath)
     				)
     		{
     	    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);

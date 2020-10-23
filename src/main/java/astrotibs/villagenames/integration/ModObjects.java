@@ -312,9 +312,6 @@ public class ModObjects {
 	// Mossy Cobblestone Stairs
 	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
 	
-	// Mud
-	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
-	
 	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
 	public static final String redSandstoneEF = "etfuturum:red_sandstone";
 	public static final String redSandstoneGS = "ganyssurface:red_sandstone";
@@ -333,6 +330,29 @@ public class ModObjects {
 	public static final String redSandstoneStairsEF = "etfuturum:red_sandstone_stairs";
 	public static final String redSandstoneStairsGS = "ganyssurface:red_sandstone_stairs";
 	public static final String redSandstoneStairsUTD = "uptodate:stairs_red_sandstone";
+	
+	// Quicksand
+	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
+	public static final String softSnowMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftSnow";
+	public static final String jungleQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockJungleQuicksand";
+	public static final String moorMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMorass";
+	public static final String dryQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSand";
+	public static final String liquidMireMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockStableLiquidMire";
+	public static final String liquidChocolateMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockChocolate";
+	public static final String sinkingClayMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSinkingClay";
+	public static final String wetPeatMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockWetPeat";
+	public static final String mudMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMud";
+	public static final String softQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftQuicksand";
+	public static final String bogMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockBog";
+	public static final String softGravelMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftGravel";
+	public static final String mireMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMire";
+	public static final String sinkingSlimeMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSlime";
+	public static final String slurryMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSlurry";
+	public static final String quicksandMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockQuicksand";
+	public static final String brownClayMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockBrownClay";
+	public static final String denseWebbingMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockDenseWeb";
+	public static final String tarMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockTar";
+
 	
 	// Smooth Stone
 	public static final String smoothStoneUTD = "uptodate:smooth_stone";
@@ -784,6 +804,7 @@ public class ModObjects {
 			{
 				return new Object[]{tryBark, meta%4};
 			}
+			else return new Object[]{block, meta+12};
 		}
 		else if (block==Blocks.log2)
 		{
@@ -793,6 +814,7 @@ public class ModObjects {
 			{
 				return new Object[]{tryBark, meta%4};
 			}
+			else return new Object[]{block, meta+12};
 		}
 		
 		return new Object[]{block, meta};
@@ -1028,8 +1050,8 @@ public class ModObjects {
 	}
 	
 	
-	// Compost Bin
-	public static Block chooseModCompostBinBlock()
+	// Composter
+	public static Block chooseModComposterBlock()
 	{
 		Block modobject=null;
 		
@@ -2583,7 +2605,7 @@ public class ModObjects {
 		}
 		else // Use vanilla wood with bark on all sides
 		{
-			return new Object[]{block, meta+12};	
+			return chooseModBarkBlock(block, meta);
 		}
 	}
 	

@@ -5,7 +5,6 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
 import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -83,11 +82,6 @@ public class Recipes
 			// Allow vanilla sponge to be crafted into functional sponge and vice-versa
 			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(Blocks.sponge), new ItemStack(ModBlocksPrismarine.blockSpongeVN, 1, 0) ));
 			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(ModBlocksPrismarine.blockSpongeVN, 1, 0), new ItemStack(Blocks.sponge) ));
-			//
-			
 		}
-		
-		// Turn off Trapdoor stinky validation yuck
-		BlockTrapDoor.disableValidation = true;
 	}
 }

@@ -5945,7 +5945,7 @@ public class PlainsStructures
             }
             */
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = ModObjects.chooseModCompostBinBlock();
+            Block compostBin = ModObjects.chooseModComposterBlock();
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 1, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
@@ -10053,7 +10053,7 @@ public class PlainsStructures
             }
             */
             // Attempt to add GardenCore Compost Bins. If this fails, do nothing
-            Block compostBin = ModObjects.chooseModCompostBinBlock();
+            Block compostBin = ModObjects.chooseModComposterBlock();
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, STRUCTURE_WIDTH-2, 1, STRUCTURE_DEPTH-2, structureBB);
@@ -16555,7 +16555,7 @@ public class PlainsStructures
             
             // Grindstone
         	for (int[] uvwo : new int[][]{
-        		{1,1,2, 3}, // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+        		{1,1,2, 2}, // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
         		})
             {
         		// Generate the blockObject here so that we have the correct meta on hand
