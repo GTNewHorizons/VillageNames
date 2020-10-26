@@ -587,7 +587,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomTaigaDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, true);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -1445,7 +1445,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -2984,7 +2984,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -3623,7 +3623,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -4946,7 +4946,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -5513,7 +5513,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -7502,7 +7502,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -8542,7 +8542,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -10738,7 +10738,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -12111,7 +12111,7 @@ public class TaigaStructures
             
             // Wood with bark on all sides
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
-        	blockObject = ModObjects.chooseModWoodBlock(biomeLogVertBlock, biomeLogVertMeta); Block biomeWoodBlock = (Block)blockObject[0]; int biomeWoodMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModBarkBlock(biomeLogVertBlock, biomeLogVertMeta); Block biomeWoodBlock = (Block)blockObject[0]; int biomeWoodMeta = (Integer)blockObject[1];
             for (int[] uw : new int[][]{
             	// Tower roof
             	{6,11,3, 10,11,4}, 
@@ -12663,7 +12663,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -13472,7 +13472,7 @@ public class TaigaStructures
             	//LogHelper.info("Decor spawned at: " + this.getXWithOffset(uvw[0], uvw[2]) + " " + (groundLevelY+this.boundingBox.minY) + " " + this.getZWithOffset(uvw[0], uvw[2]));
             	
             	// Generate decor - no trough
-            	ArrayList<BlueprintData> decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -13893,8 +13893,7 @@ public class TaigaStructures
             	
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomTaigaDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
-            	//decorBlueprint = getTaigaDecorBlueprint(1+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, true);
             	
             	for (BlueprintData b : decorBlueprint)
             	{

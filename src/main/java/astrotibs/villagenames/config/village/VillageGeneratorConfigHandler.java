@@ -1000,9 +1000,12 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ToolSmith1|snowy",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "WeaponSmith1|snowy",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
+						
+						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna",
+						
 						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy",
 						"growthcraft.bamboo.common.village.ComponentVillageBambooYard|plains taiga savanna snowy",
-						"growthcraft.bees.common.village.ComponentVillageApiarist|plains savanna",
+						"growthcraft.bees.common.village.ComponentVillageApiarist|plains taiga savanna",
 						"growthcraft.grapes.common.village.ComponentVillageGrapeVineyard|plains taiga snowy",
 						"growthcraft.hops.common.village.ComponentVillageHopVineyard|plains taiga snowy",
 						"growthcraft.rice.common.village.ComponentVillageRiceField|plains taiga savanna snowy",

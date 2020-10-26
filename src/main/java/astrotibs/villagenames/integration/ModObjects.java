@@ -19,7 +19,17 @@ import net.minecraft.world.World;
 // Added in v3.1trades
 public class ModObjects {
 	
-    
+	// Constantly referenced domain names
+	public static final String DOM_BIOMESOPLENTY = "BiomesOPlenty";
+	public static final String DOM_BOTANIA = "Botania";
+	public static final String DOM_CHISEL = "chisel";
+	public static final String DOM_DQR3 = "DQMIIINext";
+	public static final String DOM_ETFUTURUM = "etfuturum";
+	public static final String DOM_GANYSSURFACE = "ganyssurface";
+	public static final String DOM_HARVESTCRAFT = "harvestcraft";
+	public static final String DOM_UPTODATE = "uptodate";
+	public static final String MFQM_CLASS_ROOT = "MoreFunQuicksandMod.main";
+	
     // ---------------- //
 	// --- Entities --- //
     // ---------------- //
@@ -58,60 +68,59 @@ public class ModObjects {
 	// --- Blocks and items reference for trades and generation --- //
 	// ------------------------------------------------------------ //
 	
-	
 	// --- Blocks --- //
 	
 	// Banner
-	public static final String bannerEF = "etfuturum:banner";
-	public static final String bannerGS = "ganyssurface:banner";
+	public static final String bannerEF = DOM_ETFUTURUM + ":banner";
+	public static final String bannerGS = DOM_GANYSSURFACE + ":banner";
 	
 	// Bark
-	public static final String barkEF = "etfuturum:bark";
-	public static final String bark2EF = "etfuturum:bark2";
+	public static final String barkEF = DOM_ETFUTURUM + ":bark";
+	public static final String bark2EF = DOM_ETFUTURUM + ":bark2";
 	
 	// Barrel
-	public static final String barrelUTD = "uptodate:barrel";
+	public static final String barrelUTD = DOM_UPTODATE + ":barrel";
 	
 	// Bountiful rocks
-	public static final String andesiteC2 = "chisel:andesite";
-	public static final String dioriteC2 = "chisel:diorite";
-	public static final String graniteC2 = "chisel:granite";
-	public static final String stoneBo = "Botania:stone";
-	public static final String stoneEF = "etfuturum:stone";
-	public static final String stoneGS = "ganyssurface:18Stones";
-	public static final String stoneUTD = "uptodate:stone";
-	public static final String andesiteSlabUTD = "uptodate:slab_andesite";
-	public static final String andesiteStairsUTD = "uptodate:stairs_andesite";
-	public static final String dioriteSlabUTD = "uptodate:slab_diorite";
-	public static final String dioriteStairsUTD = "uptodate:stairs_diorite";
-	public static final String graniteSlabUTD = "uptodate:slab_granite";
-	public static final String graniteStairsUTD = "uptodate:stairs_granite";
-	public static final String andesiteSlabBo = "Botania:stone0Slab";
-	public static final String andesiteStairsBo = "Botania:stone0Stairs";
-	public static final String dioriteSlabBo = "Botania:stone2Slab";
-	public static final String dioriteStairsBo = "Botania:stone2Stairs";
-	public static final String graniteSlabBo = "Botania:stone3Slab";
-	public static final String graniteStairsBo = "Botania:stone3Stairs";
+	public static final String andesiteC2 = DOM_CHISEL + ":andesite";
+	public static final String dioriteC2 = DOM_CHISEL + ":diorite";
+	public static final String graniteC2 = DOM_CHISEL + ":granite";
+	public static final String stoneBo = DOM_BOTANIA + ":stone";
+	public static final String stoneEF = DOM_ETFUTURUM + ":stone";
+	public static final String stoneGS = DOM_GANYSSURFACE + ":18Stones";
+	public static final String stoneUTD = DOM_UPTODATE + ":stone";
+	public static final String andesiteSlabUTD = DOM_UPTODATE + ":slab_andesite";
+	public static final String andesiteStairsUTD = DOM_UPTODATE + ":stairs_andesite";
+	public static final String dioriteSlabUTD = DOM_UPTODATE + ":slab_diorite";
+	public static final String dioriteStairsUTD = DOM_UPTODATE + ":stairs_diorite";
+	public static final String graniteSlabUTD = DOM_UPTODATE + ":slab_granite";
+	public static final String graniteStairsUTD = DOM_UPTODATE + ":stairs_granite";
+	public static final String andesiteSlabBo = DOM_BOTANIA + ":stone0Slab";
+	public static final String andesiteStairsBo = DOM_BOTANIA + ":stone0Stairs";
+	public static final String dioriteSlabBo = DOM_BOTANIA + ":stone2Slab";
+	public static final String dioriteStairsBo = DOM_BOTANIA + ":stone2Stairs";
+	public static final String graniteSlabBo = DOM_BOTANIA + ":stone3Slab";
+	public static final String graniteStairsBo = DOM_BOTANIA + ":stone3Stairs";
 	
 	// Brewing Stand
-	public static final String brewingStandEF = "etfuturum:brewing_stand";
+	public static final String brewingStandEF = DOM_ETFUTURUM + ":brewing_stand";
 	
 	// Buttons
-	public static final String buttonSpruceEF = "etfuturum:button_spruce";
-	public static final String buttonBirchEF = "etfuturum:button_birch";
-	public static final String buttonJungleEF = "etfuturum:button_jungle";
-	public static final String buttonAcaciaEF = "etfuturum:button_acacia";
-	public static final String buttonDarkOakEF = "etfuturum:button_dark_oak";
-	public static final String buttonSpruceGS = "ganyssurface:button1";
-	public static final String buttonBirchGS = "ganyssurface:button2";
-	public static final String buttonJungleGS = "ganyssurface:button3";
-	public static final String buttonAcaciaGS = "ganyssurface:button4";
-	public static final String buttonDarkOakGS = "ganyssurface:button5";
-	public static final String buttonSpruceUTD = "uptodate:button_spruce";
-	public static final String buttonBirchUTD = "uptodate:button_birch";
-	public static final String buttonJungleUTD = "uptodate:button_jungle";
-	public static final String buttonAcaciaUTD = "uptodate:button_acacia";
-	public static final String buttonDarkOakUTD = "uptodate:button_dark_oak";
+	public static final String buttonSpruceEF = DOM_ETFUTURUM + ":button_spruce";
+	public static final String buttonBirchEF = DOM_ETFUTURUM + ":button_birch";
+	public static final String buttonJungleEF = DOM_ETFUTURUM + ":button_jungle";
+	public static final String buttonAcaciaEF = DOM_ETFUTURUM + ":button_acacia";
+	public static final String buttonDarkOakEF = DOM_ETFUTURUM + ":button_dark_oak";
+	public static final String buttonSpruceGS = DOM_GANYSSURFACE + ":button1";
+	public static final String buttonBirchGS = DOM_GANYSSURFACE + ":button2";
+	public static final String buttonJungleGS = DOM_GANYSSURFACE + ":button3";
+	public static final String buttonAcaciaGS = DOM_GANYSSURFACE + ":button4";
+	public static final String buttonDarkOakGS = DOM_GANYSSURFACE + ":button5";
+	public static final String buttonSpruceUTD = DOM_UPTODATE + ":button_spruce";
+	public static final String buttonBirchUTD = DOM_UPTODATE + ":button_birch";
+	public static final String buttonJungleUTD = DOM_UPTODATE + ":button_jungle";
+	public static final String buttonAcaciaUTD = DOM_UPTODATE + ":button_acacia";
+	public static final String buttonDarkOakUTD = DOM_UPTODATE + ":button_dark_oak";
 	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
@@ -123,300 +132,301 @@ public class ModObjects {
 	public static final String compostBinGC = "GardenCore:compost_bin";
 	
 	// Concrete
-	public static final String concreteUTD = "uptodate:concrete";
-	public static final String concreteWhiteEF = "etfuturum:concrete_white";
-	public static final String concreteOrangeEF = "etfuturum:concrete_orange";
-	public static final String concreteMagentaEF = "etfuturum:concrete_magenta";
-	public static final String concreteLightBlueEF = "etfuturum:concrete_lightBlue";
-	public static final String concreteYellowEF = "etfuturum:concrete_yellow";
-	public static final String concreteLimeEF = "etfuturum:concrete_lime";
-	public static final String concretePinkEF = "etfuturum:concrete_pink";
-	public static final String concreteGrayEF = "etfuturum:concrete_gray";
-	public static final String concreteSilverEF = "etfuturum:concrete_silver";
-	public static final String concreteCyanEF = "etfuturum:concrete_cyan";
-	public static final String concretePurpleEF = "etfuturum:concrete_purple";
-	public static final String concreteBlueEF = "etfuturum:concrete_blue";
-	public static final String concreteBrownEF = "etfuturum:concrete_brown";
-	public static final String concreteGreenEF = "etfuturum:concrete_green";
-	public static final String concreteRedEF = "etfuturum:concrete_red";
-	public static final String concreteBlackEF = "etfuturum:concrete_black";
+	public static final String concreteUTD = DOM_UPTODATE + ":concrete";
+	public static final String concreteWhiteEF = DOM_ETFUTURUM + ":concrete_white";
+	public static final String concreteOrangeEF = DOM_ETFUTURUM + ":concrete_orange";
+	public static final String concreteMagentaEF = DOM_ETFUTURUM + ":concrete_magenta";
+	public static final String concreteLightBlueEF = DOM_ETFUTURUM + ":concrete_lightBlue";
+	public static final String concreteYellowEF = DOM_ETFUTURUM + ":concrete_yellow";
+	public static final String concreteLimeEF = DOM_ETFUTURUM + ":concrete_lime";
+	public static final String concretePinkEF = DOM_ETFUTURUM + ":concrete_pink";
+	public static final String concreteGrayEF = DOM_ETFUTURUM + ":concrete_gray";
+	public static final String concreteSilverEF = DOM_ETFUTURUM + ":concrete_silver";
+	public static final String concreteCyanEF = DOM_ETFUTURUM + ":concrete_cyan";
+	public static final String concretePurpleEF = DOM_ETFUTURUM + ":concrete_purple";
+	public static final String concreteBlueEF = DOM_ETFUTURUM + ":concrete_blue";
+	public static final String concreteBrownEF = DOM_ETFUTURUM + ":concrete_brown";
+	public static final String concreteGreenEF = DOM_ETFUTURUM + ":concrete_green";
+	public static final String concreteRedEF = DOM_ETFUTURUM + ":concrete_red";
+	public static final String concreteBlackEF = DOM_ETFUTURUM + ":concrete_black";
 	
 	// Crops
-	public static final String cropHerbDRQ = "DQMIIINext:blockYakusouSeed1";
-	public static final String cropAntidoteHerbDRQ = "DQMIIINext:blockDokukesisouSeed1";
-	public static final String cropStrengthSeedDRQ = "DQMIIINext:blockTikaraSeed1";
-	public static final String cropDefenceSeedDRQ = "DQMIIINext:blockMamoriSeed1";
-	public static final String cropAgilitySeedDRQ = "DQMIIINext:blockSubayasaSeed1";
+	public static final String cropHerbDRQ = DOM_DQR3 + ":blockYakusouSeed1";
+	public static final String cropAntidoteHerbDRQ = DOM_DQR3 + ":blockDokukesisouSeed1";
+	public static final String cropStrengthSeedDRQ = DOM_DQR3 + ":blockTikaraSeed1";
+	public static final String cropDefenceSeedDRQ = DOM_DQR3 + ":blockMamoriSeed1";
+	public static final String cropAgilitySeedDRQ = DOM_DQR3 + ":blockSubayasaSeed1";
 	
-	public static final String cropArtichokeHC = "harvestcraft:pamartichokeCrop";
-	public static final String cropAsparagusHC = "harvestcraft:pamasparagusCrop";
-	public static final String cropBambooHC = "harvestcraft:pambambooshootCrop";
-	public static final String cropBarleyHC = "harvestcraft:pambarleyCrop";
-	public static final String cropBeanHC = "harvestcraft:pambeanCrop";
-	public static final String cropBeetHC = "harvestcraft:pambeetCrop";
-	public static final String cropBellpepperHC = "harvestcraft:pambellpepperCrop";
-	public static final String cropBlackberryHC = "harvestcraft:pamblackberryCrop";
-	public static final String cropBlueberryHC = "harvestcraft:pamblueberryCrop";
-	public static final String cropBroccoliHC = "harvestcraft:pambroccoliCrop";
-	public static final String cropBrusselsproutHC = "harvestcraft:pambrusselsproutCrop";
-	public static final String cropCabbageHC = "harvestcraft:pamcabbageCrop";
-	public static final String cropCactusfruitHC = "harvestcraft:pamcactusfruitCrop"; // Planted on sand
-	public static final String cropCandleberryHC = "harvestcraft:pamcandleberryCrop";
-	public static final String cropCantaloupeHC = "harvestcraft:pamcantaloupeCrop";
-	public static final String cropCauliflowerHC = "harvestcraft:pamcauliflowerCrop";
-	public static final String cropCeleryHC = "harvestcraft:pamceleryCrop";
-	public static final String cropChilipepperHC = "harvestcraft:pamchilipepperCrop";
-	public static final String cropCoffeebeanHC = "harvestcraft:pamcoffeebeanCrop";
-	public static final String cropCornHC = "harvestcraft:pamcornCrop";
-	public static final String cropCottonHC = "harvestcraft:pamcottonCrop";
-	public static final String cropCranberryHC = "harvestcraft:pamcranberryCrop"; // Planted on water
-	public static final String cropCucumberHC = "harvestcraft:pamcucumberCrop";
-	public static final String cropCurryleafHC = "harvestcraft:pamcurryleafCrop";
-	public static final String cropEggplantHC = "harvestcraft:pameggplantCrop";
-	public static final String cropGarlicHC = "harvestcraft:pamgarlicCrop";
-	public static final String cropGingerHC = "harvestcraft:pamgingerCrop";
-	public static final String cropGrapeHC = "harvestcraft:pamgrapeCrop";
-	public static final String cropKiwiHC = "harvestcraft:pamkiwiCrop";
-	public static final String cropLeekHC = "harvestcraft:pamleekCrop";
-	public static final String cropLettuceHC = "harvestcraft:pamlettuceCrop";
-	public static final String cropMustardseedHC = "harvestcraft:pammustardseedsCrop";
-	public static final String cropOatsHC = "harvestcraft:pamoatsCrop";
-	public static final String cropOkraHC = "harvestcraft:pamokraCrop";
-	public static final String cropOnionHC = "harvestcraft:pamonionCrop";
-	public static final String cropParsnipHC = "harvestcraft:pamparsnipCrop";
-	public static final String cropPeanutHC = "harvestcraft:pampeanutCrop";
-	public static final String cropPeasHC = "harvestcraft:pampeasCrop";
-	public static final String cropPineappleHC = "harvestcraft:pampineappleCrop";
-	public static final String cropRadishHC = "harvestcraft:pamradishCrop";
-	public static final String cropRaspberryHC = "harvestcraft:pamraspberryCrop";
-	public static final String cropRhubarbHC = "harvestcraft:pamrhubarbCrop";
-	public static final String cropRiceHC = "harvestcraft:pamriceCrop"; // Planted on water
-	public static final String cropRutabegaHC = "harvestcraft:pamrutabagaCrop";
-	public static final String cropRyeHC = "harvestcraft:pamryeCrop";
-	public static final String cropScallionHC = "harvestcraft:pamscallionCrop";
-	public static final String cropSeaweedHC = "harvestcraft:pamseaweedCrop"; // Planted on water
-	public static final String cropSesameseedHC = "harvestcraft:pamsesameseedsCrop";
-	public static final String cropSoybeanHC = "harvestcraft:pamsoybeanCrop";
-	public static final String cropSpiceleafHC = "harvestcraft:pamspiceleafCrop";
-	public static final String cropSpinachHC = "harvestcraft:pamspinachCrop";
-	public static final String cropStrawberryHC = "harvestcraft:pamstrawberryCrop";
-	public static final String cropSweetpotatoHC = "harvestcraft:pamsweetpotatoCrop";
-	public static final String cropTealeafHC = "harvestcraft:pamtealeafCrop";
-	public static final String cropTomatoHC = "harvestcraft:pamtomatoCrop";
-	public static final String cropTurnipHC = "harvestcraft:pamturnipCrop";
-	public static final String cropWaterchestnutHC = "harvestcraft:pamwaterchestnutCrop"; // Planted on water
-	public static final String cropWhitemushroomHC = "harvestcraft:pamwhitemushroomCrop"; // Planted on log
-	public static final String cropWintersquashHC = "harvestcraft:pamwintersquashCrop";
-	public static final String cropZucchiniHC = "harvestcraft:pamzucchiniCrop";
+	public static final String cropArtichokeHC = DOM_HARVESTCRAFT + ":pamartichokeCrop";
+	public static final String cropAsparagusHC = DOM_HARVESTCRAFT + ":pamasparagusCrop";
+	public static final String cropBambooHC = DOM_HARVESTCRAFT + ":pambambooshootCrop";
+	public static final String cropBarleyHC = DOM_HARVESTCRAFT + ":pambarleyCrop";
+	public static final String cropBeanHC = DOM_HARVESTCRAFT + ":pambeanCrop";
+	public static final String cropBeetHC = DOM_HARVESTCRAFT + ":pambeetCrop";
+	public static final String cropBellpepperHC = DOM_HARVESTCRAFT + ":pambellpepperCrop";
+	public static final String cropBlackberryHC = DOM_HARVESTCRAFT + ":pamblackberryCrop";
+	public static final String cropBlueberryHC = DOM_HARVESTCRAFT + ":pamblueberryCrop";
+	public static final String cropBroccoliHC = DOM_HARVESTCRAFT + ":pambroccoliCrop";
+	public static final String cropBrusselsproutHC = DOM_HARVESTCRAFT + ":pambrusselsproutCrop";
+	public static final String cropCabbageHC = DOM_HARVESTCRAFT + ":pamcabbageCrop";
+	public static final String cropCactusfruitHC = DOM_HARVESTCRAFT + ":pamcactusfruitCrop"; // Planted on sand
+	public static final String cropCandleberryHC = DOM_HARVESTCRAFT + ":pamcandleberryCrop";
+	public static final String cropCantaloupeHC = DOM_HARVESTCRAFT + ":pamcantaloupeCrop";
+	public static final String cropCauliflowerHC = DOM_HARVESTCRAFT + ":pamcauliflowerCrop";
+	public static final String cropCeleryHC = DOM_HARVESTCRAFT + ":pamceleryCrop";
+	public static final String cropChilipepperHC = DOM_HARVESTCRAFT + ":pamchilipepperCrop";
+	public static final String cropCoffeebeanHC = DOM_HARVESTCRAFT + ":pamcoffeebeanCrop";
+	public static final String cropCornHC = DOM_HARVESTCRAFT + ":pamcornCrop";
+	public static final String cropCottonHC = DOM_HARVESTCRAFT + ":pamcottonCrop";
+	public static final String cropCranberryHC = DOM_HARVESTCRAFT + ":pamcranberryCrop"; // Planted on water
+	public static final String cropCucumberHC = DOM_HARVESTCRAFT + ":pamcucumberCrop";
+	public static final String cropCurryleafHC = DOM_HARVESTCRAFT + ":pamcurryleafCrop";
+	public static final String cropEggplantHC = DOM_HARVESTCRAFT + ":pameggplantCrop";
+	public static final String cropGarlicHC = DOM_HARVESTCRAFT + ":pamgarlicCrop";
+	public static final String cropGingerHC = DOM_HARVESTCRAFT + ":pamgingerCrop";
+	public static final String cropGrapeHC = DOM_HARVESTCRAFT + ":pamgrapeCrop";
+	public static final String cropKiwiHC = DOM_HARVESTCRAFT + ":pamkiwiCrop";
+	public static final String cropLeekHC = DOM_HARVESTCRAFT + ":pamleekCrop";
+	public static final String cropLettuceHC = DOM_HARVESTCRAFT + ":pamlettuceCrop";
+	public static final String cropMustardseedHC = DOM_HARVESTCRAFT + ":pammustardseedsCrop";
+	public static final String cropOatsHC = DOM_HARVESTCRAFT + ":pamoatsCrop";
+	public static final String cropOkraHC = DOM_HARVESTCRAFT + ":pamokraCrop";
+	public static final String cropOnionHC = DOM_HARVESTCRAFT + ":pamonionCrop";
+	public static final String cropParsnipHC = DOM_HARVESTCRAFT + ":pamparsnipCrop";
+	public static final String cropPeanutHC = DOM_HARVESTCRAFT + ":pampeanutCrop";
+	public static final String cropPeasHC = DOM_HARVESTCRAFT + ":pampeasCrop";
+	public static final String cropPineappleHC = DOM_HARVESTCRAFT + ":pampineappleCrop";
+	public static final String cropRadishHC = DOM_HARVESTCRAFT + ":pamradishCrop";
+	public static final String cropRaspberryHC = DOM_HARVESTCRAFT + ":pamraspberryCrop";
+	public static final String cropRhubarbHC = DOM_HARVESTCRAFT + ":pamrhubarbCrop";
+	public static final String cropRiceHC = DOM_HARVESTCRAFT + ":pamriceCrop"; // Planted on water
+	public static final String cropRutabegaHC = DOM_HARVESTCRAFT + ":pamrutabagaCrop";
+	public static final String cropRyeHC = DOM_HARVESTCRAFT + ":pamryeCrop";
+	public static final String cropScallionHC = DOM_HARVESTCRAFT + ":pamscallionCrop";
+	public static final String cropSeaweedHC = DOM_HARVESTCRAFT + ":pamseaweedCrop"; // Planted on water
+	public static final String cropSesameseedHC = DOM_HARVESTCRAFT + ":pamsesameseedsCrop";
+	public static final String cropSoybeanHC = DOM_HARVESTCRAFT + ":pamsoybeanCrop";
+	public static final String cropSpiceleafHC = DOM_HARVESTCRAFT + ":pamspiceleafCrop";
+	public static final String cropSpinachHC = DOM_HARVESTCRAFT + ":pamspinachCrop";
+	public static final String cropStrawberryHC = DOM_HARVESTCRAFT + ":pamstrawberryCrop";
+	public static final String cropSweetpotatoHC = DOM_HARVESTCRAFT + ":pamsweetpotatoCrop";
+	public static final String cropTealeafHC = DOM_HARVESTCRAFT + ":pamtealeafCrop";
+	public static final String cropTomatoHC = DOM_HARVESTCRAFT + ":pamtomatoCrop";
+	public static final String cropTurnipHC = DOM_HARVESTCRAFT + ":pamturnipCrop";
+	public static final String cropWaterchestnutHC = DOM_HARVESTCRAFT + ":pamwaterchestnutCrop"; // Planted on water
+	public static final String cropWhitemushroomHC = DOM_HARVESTCRAFT + ":pamwhitemushroomCrop"; // Planted on log
+	public static final String cropWintersquashHC = DOM_HARVESTCRAFT + ":pamwintersquashCrop";
+	public static final String cropZucchiniHC = DOM_HARVESTCRAFT + ":pamzucchiniCrop";
 	public static final String cropKaleJAFFA = "jaffa:kaleCrop";
 	
 	// Desk
 	public static final String deskBC = "BiblioCraft:BiblioDesk";
 	
 	// Door
-	public static final String doorSpruceGS = "ganyssurface:doorSpruce";
-	public static final String doorBirchGS = "ganyssurface:doorBirch";
-	public static final String doorJungleGS = "ganyssurface:doorJungle";
-	public static final String doorAcaciaGS = "ganyssurface:doorAcacia";
-	public static final String doorDarkOakGS = "ganyssurface:doorDark_oak"; // lol wtf Ganymedes
-	public static final String doorSpruceEF = "etfuturum:door_spruce";
-	public static final String doorBirchEF = "etfuturum:door_birch";
-	public static final String doorJungleEF = "etfuturum:door_jungle";
-	public static final String doorAcaciaEF = "etfuturum:door_acacia";
-	public static final String doorDarkOakEF = "etfuturum:door_dark_oak";
-	public static final String doorSpruceUTD = "uptodate:door_spruce";
-	public static final String doorBirchUTD = "uptodate:door_birch";
-	public static final String doorJungleUTD = "uptodate:door_jungle";
-	public static final String doorAcaciaUTD = "uptodate:door_acacia";
-	public static final String doorDarkOakUTD = "uptodate:door_dark_oak";
+	public static final String doorSpruceGS = DOM_GANYSSURFACE + ":doorSpruce";
+	public static final String doorBirchGS = DOM_GANYSSURFACE + ":doorBirch";
+	public static final String doorJungleGS = DOM_GANYSSURFACE + ":doorJungle";
+	public static final String doorAcaciaGS = DOM_GANYSSURFACE + ":doorAcacia";
+	public static final String doorDarkOakGS = DOM_GANYSSURFACE + ":doorDark_oak"; // lol wtf Ganymedes
+	public static final String doorSpruceEF = DOM_ETFUTURUM + ":door_spruce";
+	public static final String doorBirchEF = DOM_ETFUTURUM + ":door_birch";
+	public static final String doorJungleEF = DOM_ETFUTURUM + ":door_jungle";
+	public static final String doorAcaciaEF = DOM_ETFUTURUM + ":door_acacia";
+	public static final String doorDarkOakEF = DOM_ETFUTURUM + ":door_dark_oak";
+	public static final String doorSpruceUTD = DOM_UPTODATE + ":door_spruce";
+	public static final String doorBirchUTD = DOM_UPTODATE + ":door_birch";
+	public static final String doorJungleUTD = DOM_UPTODATE + ":door_jungle";
+	public static final String doorAcaciaUTD = DOM_UPTODATE + ":door_acacia";
+	public static final String doorDarkOakUTD = DOM_UPTODATE + ":door_dark_oak";
 	
 	// Fence
-	public static final String fenceOakGS = "ganyssurface:fence_0";
-	public static final String fenceSpruceGS = "ganyssurface:fence_1";
-	public static final String fenceBirchGS = "ganyssurface:fence_2";
-	public static final String fenceJungleGS = "ganyssurface:fence_3";
-	public static final String fenceAcaciaGS = "ganyssurface:fence_4";
-	public static final String fenceDarkOakGS = "ganyssurface:fence_5";
-	public static final String fenceOakEF = "etfuturum:fence_oak";
-	public static final String fenceSpruceEF = "etfuturum:fence_spruce";
-	public static final String fenceBirchEF = "etfuturum:fence_birch";
-	public static final String fenceJungleEF = "etfuturum:fence_jungle";
-	public static final String fenceAcaciaEF = "etfuturum:fence_acacia";
-	public static final String fenceDarkOakEF = "etfuturum:fence_dark_oak";
-	public static final String fenceSpruceUTD = "uptodate:fence_spruce";
-	public static final String fenceBirchUTD = "uptodate:fence_birch";
-	public static final String fenceJungleUTD = "uptodate:fence_jungle";
-	public static final String fenceAcaciaUTD = "uptodate:fence_acacia";
-	public static final String fenceDarkOakUTD = "uptodate:fence_dark_oak";
+	public static final String fenceOakGS = DOM_GANYSSURFACE + ":fence_0";
+	public static final String fenceSpruceGS = DOM_GANYSSURFACE + ":fence_1";
+	public static final String fenceBirchGS = DOM_GANYSSURFACE + ":fence_2";
+	public static final String fenceJungleGS = DOM_GANYSSURFACE + ":fence_3";
+	public static final String fenceAcaciaGS = DOM_GANYSSURFACE + ":fence_4";
+	public static final String fenceDarkOakGS = DOM_GANYSSURFACE + ":fence_5";
+	public static final String fenceOakEF = DOM_ETFUTURUM + ":fence_oak";
+	public static final String fenceSpruceEF = DOM_ETFUTURUM + ":fence_spruce";
+	public static final String fenceBirchEF = DOM_ETFUTURUM + ":fence_birch";
+	public static final String fenceJungleEF = DOM_ETFUTURUM + ":fence_jungle";
+	public static final String fenceAcaciaEF = DOM_ETFUTURUM + ":fence_acacia";
+	public static final String fenceDarkOakEF = DOM_ETFUTURUM + ":fence_dark_oak";
+	public static final String fenceSpruceUTD = DOM_UPTODATE + ":fence_spruce";
+	public static final String fenceBirchUTD = DOM_UPTODATE + ":fence_birch";
+	public static final String fenceJungleUTD = DOM_UPTODATE + ":fence_jungle";
+	public static final String fenceAcaciaUTD = DOM_UPTODATE + ":fence_acacia";
+	public static final String fenceDarkOakUTD = DOM_UPTODATE + ":fence_dark_oak";
 	
 	// Fence Gate
-	public static final String fenceGateOakGS = "ganyssurface:fence_gate_0";
-	public static final String fenceGateSpruceGS = "ganyssurface:fence_gate_1";
-	public static final String fenceGateBirchGS = "ganyssurface:fence_gate_2";
-	public static final String fenceGateJungleGS = "ganyssurface:fence_gate_3";
-	public static final String fenceGateAcaciaGS = "ganyssurface:fence_gate_4";
-	public static final String fenceGateDarkOakGS = "ganyssurface:fence_gate_5";
-	public static final String fenceGateSpruceEF = "etfuturum:fence_gate_spruce";
-	public static final String fenceGateBirchEF = "etfuturum:fence_gate_birch";
-	public static final String fenceGateJungleEF = "etfuturum:fence_gate_jungle";
-	public static final String fenceGateAcaciaEF = "etfuturum:fence_gate_acacia";
-	public static final String fenceGateDarkOakEF = "etfuturum:fence_gate_dark_oak";
-	public static final String fenceGateSpruceUTD = "uptodate:fence_gate_spruce";
-	public static final String fenceGateBirchUTD = "uptodate:fence_gate_birch";
-	public static final String fenceGateJungleUTD = "uptodate:fence_gate_jungle";
-	public static final String fenceGateAcaciaUTD = "uptodate:fence_gate_acacia";
-	public static final String fenceGateDarkOakUTD = "uptodate:fence_gate_dark_oak";
+	public static final String fenceGateOakGS = DOM_GANYSSURFACE + ":fence_gate_0";
+	public static final String fenceGateSpruceGS = DOM_GANYSSURFACE + ":fence_gate_1";
+	public static final String fenceGateBirchGS = DOM_GANYSSURFACE + ":fence_gate_2";
+	public static final String fenceGateJungleGS = DOM_GANYSSURFACE + ":fence_gate_3";
+	public static final String fenceGateAcaciaGS = DOM_GANYSSURFACE + ":fence_gate_4";
+	public static final String fenceGateDarkOakGS = DOM_GANYSSURFACE + ":fence_gate_5";
+	public static final String fenceGateSpruceEF = DOM_ETFUTURUM + ":fence_gate_spruce";
+	public static final String fenceGateBirchEF = DOM_ETFUTURUM + ":fence_gate_birch";
+	public static final String fenceGateJungleEF = DOM_ETFUTURUM + ":fence_gate_jungle";
+	public static final String fenceGateAcaciaEF = DOM_ETFUTURUM + ":fence_gate_acacia";
+	public static final String fenceGateDarkOakEF = DOM_ETFUTURUM + ":fence_gate_dark_oak";
+	public static final String fenceGateSpruceUTD = DOM_UPTODATE + ":fence_gate_spruce";
+	public static final String fenceGateBirchUTD = DOM_UPTODATE + ":fence_gate_birch";
+	public static final String fenceGateJungleUTD = DOM_UPTODATE + ":fence_gate_jungle";
+	public static final String fenceGateAcaciaUTD = DOM_UPTODATE + ":fence_gate_acacia";
+	public static final String fenceGateDarkOakUTD = DOM_UPTODATE + ":fence_gate_dark_oak";
 	
 	// Glazed Terracotta
-	public static final String glazedTerracottaWhiteUTD = "uptodate:glazed_terracotta_white";
-	public static final String glazedTerracottaOrangeUTD = "uptodate:glazed_terracotta_orange";
-	public static final String glazedTerracottaMagentaUTD = "uptodate:glazed_terracotta_magenta";
-	public static final String glazedTerracottaLightBlueUTD = "uptodate:glazed_terracotta_light_blue";
-	public static final String glazedTerracottaYellowUTD = "uptodate:glazed_terracotta_yellow";
-	public static final String glazedTerracottaLimeUTD = "uptodate:glazed_terracotta_lime";
-	public static final String glazedTerracottaPinkUTD = "uptodate:glazed_terracotta_pink";
-	public static final String glazedTerracottaGrayUTD = "uptodate:glazed_terracotta_gray";
-	public static final String glazedTerracottaLightGrayUTD = "uptodate:glazed_terracotta_light_gray";
-	public static final String glazedTerracottaCyanUTD = "uptodate:glazed_terracotta_cyan";
-	public static final String glazedTerracottaPurpleUTD = "uptodate:glazed_terracotta_purple";
-	public static final String glazedTerracottaBlueUTD = "uptodate:glazed_terracotta_blue";
-	public static final String glazedTerracottaBrownUTD = "uptodate:glazed_terracotta_brown";
-	public static final String glazedTerracottaGreenUTD = "uptodate:glazed_terracotta_green";
-	public static final String glazedTerracottaRedUTD = "uptodate:glazed_terracotta_red";
-	public static final String glazedTerracottaBlackUTD = "uptodate:glazed_terracotta_black";
+	public static final String glazedTerracottaWhiteUTD = DOM_UPTODATE + ":glazed_terracotta_white";
+	public static final String glazedTerracottaOrangeUTD = DOM_UPTODATE + ":glazed_terracotta_orange";
+	public static final String glazedTerracottaMagentaUTD = DOM_UPTODATE + ":glazed_terracotta_magenta";
+	public static final String glazedTerracottaLightBlueUTD = DOM_UPTODATE + ":glazed_terracotta_light_blue";
+	public static final String glazedTerracottaYellowUTD = DOM_UPTODATE + ":glazed_terracotta_yellow";
+	public static final String glazedTerracottaLimeUTD = DOM_UPTODATE + ":glazed_terracotta_lime";
+	public static final String glazedTerracottaPinkUTD = DOM_UPTODATE + ":glazed_terracotta_pink";
+	public static final String glazedTerracottaGrayUTD = DOM_UPTODATE + ":glazed_terracotta_gray";
+	public static final String glazedTerracottaLightGrayUTD = DOM_UPTODATE + ":glazed_terracotta_light_gray";
+	public static final String glazedTerracottaCyanUTD = DOM_UPTODATE + ":glazed_terracotta_cyan";
+	public static final String glazedTerracottaPurpleUTD = DOM_UPTODATE + ":glazed_terracotta_purple";
+	public static final String glazedTerracottaBlueUTD = DOM_UPTODATE + ":glazed_terracotta_blue";
+	public static final String glazedTerracottaBrownUTD = DOM_UPTODATE + ":glazed_terracotta_brown";
+	public static final String glazedTerracottaGreenUTD = DOM_UPTODATE + ":glazed_terracotta_green";
+	public static final String glazedTerracottaRedUTD = DOM_UPTODATE + ":glazed_terracotta_red";
+	public static final String glazedTerracottaBlackUTD = DOM_UPTODATE + ":glazed_terracotta_black";
 	
 	// Grass Path
-	public static final String grassPathUTD = "uptodate:grass_path";
-	public static final String grassPathEF = "etfuturum:grass_path";
+	public static final String grassPathUTD = DOM_UPTODATE + ":grass_path";
+	public static final String grassPathEF = DOM_ETFUTURUM + ":grass_path";
 	
 	// Iron Nuggets
 	// Mariculture nugget is Mariculture:materials:33
 	public static final String nuggetRC = "Railcraft:nugget"; // Iron Nugget is 0
 	public static final String materialsTC = "TConstruct:materials"; // Iron Nugget is 19 
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
-	public static final String ironNuggetUTD = "uptodate:iron_nugget";
+	public static final String ironNuggetUTD = DOM_UPTODATE + ":iron_nugget";
 	public static final String nuggetNL = "netherlicious:Nugget"; // Iron Nugget is 0
 	
 	// Ladders
-	public static final String ladderSpruceGS = "ganyssurface:ladder1";
-	public static final String ladderBirchGS = "ganyssurface:ladder2";
-	public static final String ladderJungleGS = "ganyssurface:ladder3";
-	public static final String ladderAcaciaGS = "ganyssurface:ladder4";
-	public static final String ladderDarkOakGS = "ganyssurface:ladder5";
+	public static final String ladderSpruceGS = DOM_GANYSSURFACE + ":ladder1";
+	public static final String ladderBirchGS = DOM_GANYSSURFACE + ":ladder2";
+	public static final String ladderJungleGS = DOM_GANYSSURFACE + ":ladder3";
+	public static final String ladderAcaciaGS = DOM_GANYSSURFACE + ":ladder4";
+	public static final String ladderDarkOakGS = DOM_GANYSSURFACE + ":ladder5";
 	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
 	public static final String lanternNL = "netherlicious:Lantern";
-	public static final String lanternUTD = "uptodate:lantern";
+	public static final String lanternUTD = DOM_UPTODATE + ":lantern";
 	
 	// Mossy Cobblestone Stairs
-	public static final String mossyCobblestoneStairsUTD = "uptodate:stairs_mossy_cobblestone";
+	public static final String mossyCobblestoneStairsUTD = DOM_UPTODATE + ":stairs_mossy_cobblestone";
 	
 	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
-	public static final String redSandstoneEF = "etfuturum:red_sandstone";
-	public static final String redSandstoneGS = "ganyssurface:red_sandstone";
-	public static final String redSandstoneUTD = "uptodate:red_sandstone";
+	public static final String redSandstoneEF = DOM_ETFUTURUM + ":red_sandstone";
+	public static final String redSandstoneGS = DOM_GANYSSURFACE + ":red_sandstone";
+	public static final String redSandstoneUTD = DOM_UPTODATE + ":red_sandstone";
 	
 	// Red Sandstone slab
-	public static final String redSandstoneSlabEF = "etfuturum:red_sandstone_slab";
-	public static final String redSandstoneSlabGS = "ganyssurface:red_sandstone_slab";
-	public static final String redSandstoneSlabUTD = "uptodate:slab_red_sandstone";
-	public static final String cutRedSandstoneSlabUTD = "uptodate:slab_cut_red_sandstone";
+	public static final String redSandstoneSlabEF = DOM_ETFUTURUM + ":red_sandstone_slab";
+	public static final String redSandstoneSlabGS = DOM_GANYSSURFACE + ":red_sandstone_slab";
+	public static final String redSandstoneSlabUTD = DOM_UPTODATE + ":slab_red_sandstone";
+	public static final String cutRedSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_red_sandstone";
 	
 	// Cut Sandstone Slab
-	public static final String cutSandstoneSlabUTD = "uptodate:slab_cut_sandstone";
+	public static final String cutSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_sandstone";
 	
 	// Red Sandstone Stairs
-	public static final String redSandstoneStairsEF = "etfuturum:red_sandstone_stairs";
-	public static final String redSandstoneStairsGS = "ganyssurface:red_sandstone_stairs";
-	public static final String redSandstoneStairsUTD = "uptodate:stairs_red_sandstone";
+	public static final String redSandstoneStairsEF = DOM_ETFUTURUM + ":red_sandstone_stairs";
+	public static final String redSandstoneStairsGS = DOM_GANYSSURFACE + ":red_sandstone_stairs";
+	public static final String redSandstoneStairsUTD = DOM_UPTODATE + ":stairs_red_sandstone";
 	
 	// Quicksand
 	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
-	public static final String softSnowMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftSnow";
-	public static final String jungleQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockJungleQuicksand";
-	public static final String moorMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMorass";
-	public static final String dryQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSand";
-	public static final String liquidMireMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockStableLiquidMire";
-	public static final String liquidChocolateMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockChocolate";
-	public static final String sinkingClayMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSinkingClay";
-	public static final String wetPeatMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockWetPeat";
-	public static final String mudMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMud";
-	public static final String softQuicksandMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftQuicksand";
-	public static final String bogMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockBog";
-	public static final String softGravelMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockSoftGravel";
-	public static final String mireMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockMire";
-	public static final String sinkingSlimeMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSlime";
-	public static final String slurryMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockSlurry";
-	public static final String quicksandMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockQuicksand";
-	public static final String brownClayMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockBrownClay";
-	public static final String denseWebbingMFQM_classPath = "MoreFunQuicksandMod.main.blocks.BlockDenseWeb";
-	public static final String tarMFQM_classPath = "MoreFunQuicksandMod.main.liquids.BlockTar";
+	
+	public static final String softSnowMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftSnow";
+	public static final String jungleQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockJungleQuicksand";
+	public static final String moorMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMorass";
+	public static final String dryQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSand";
+	public static final String liquidMireMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockStableLiquidMire";
+	public static final String liquidChocolateMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockChocolate";
+	public static final String sinkingClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSinkingClay";
+	public static final String wetPeatMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockWetPeat";
+	public static final String mudMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMud";
+	public static final String softQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftQuicksand";
+	public static final String bogMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockBog";
+	public static final String softGravelMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftGravel";
+	public static final String mireMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMire";
+	public static final String sinkingSlimeMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlime";
+	public static final String slurryMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlurry";
+	public static final String quicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockQuicksand";
+	public static final String brownClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockBrownClay";
+	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
+	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
 
 	
 	// Smooth Stone
-	public static final String smoothStoneUTD = "uptodate:smooth_stone";
+	public static final String smoothStoneUTD = DOM_UPTODATE + ":smooth_stone";
 	
 	// Smooth Sandstone
-	public static final String smoothSandstoneUTD = "uptodate:smooth_sandstone";
+	public static final String smoothSandstoneUTD = DOM_UPTODATE + ":smooth_sandstone";
 	
 	// Smooth Sandstone Stairs
-	public static final String smoothSandstoneStairsUTD = "uptodate:stairs_smooth_sandstone";
-	public static final String smoothRedSandstoneStairsUTD = "uptodate:stairs_smooth_red_sandstone";
+	public static final String smoothSandstoneStairsUTD = DOM_UPTODATE + ":stairs_smooth_sandstone";
+	public static final String smoothRedSandstoneStairsUTD = DOM_UPTODATE + ":stairs_smooth_red_sandstone";
 	
 	// Smooth Sandstone Slab
-	public static final String smoothSandstoneSlabUTD = "uptodate:slab_smooth_sandstone";
-	public static final String smoothRedSandstoneSlabUTD = "uptodate:slab_smooth_red_sandstone";
+	public static final String smoothSandstoneSlabUTD = DOM_UPTODATE + ":slab_smooth_sandstone";
+	public static final String smoothRedSandstoneSlabUTD = DOM_UPTODATE + ":slab_smooth_red_sandstone";
 	
 	// Walls
-	public static final String sandstoneWallUTD = "uptodate:wall_sandstone";
-	public static final String redSandstoneWallUTD = "uptodate:wall_red_sandstone";
-	public static final String brickWallUTD = "uptodate:wall_bricks";
-	public static final String stonebrickWallUTD = "uptodate:wall_stone_bricks";
-	public static final String mossystonebrickWallUTD = "uptodate:wall_mossy_stone_bricks";
-	public static final String andesiteWallUTD = "uptodate:wall_andesite";
-	public static final String dioriteWallUTD = "uptodate:wall_diorite";
-	public static final String graniteWallUTD = "uptodate:wall_granite";
-	public static final String bountifulWallBo = "Botania:stone0Wall"; // Meta 0:Andesite, 2:Diorite, 3:Granite
+	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
+	public static final String redSandstoneWallUTD = DOM_UPTODATE + ":wall_red_sandstone";
+	public static final String brickWallUTD = DOM_UPTODATE + ":wall_bricks";
+	public static final String stonebrickWallUTD = DOM_UPTODATE + ":wall_stone_bricks";
+	public static final String mossystonebrickWallUTD = DOM_UPTODATE + ":wall_mossy_stone_bricks";
+	public static final String andesiteWallUTD = DOM_UPTODATE + ":wall_andesite";
+	public static final String dioriteWallUTD = DOM_UPTODATE + ":wall_diorite";
+	public static final String graniteWallUTD = DOM_UPTODATE + ":wall_granite";
+	public static final String bountifulWallBo = DOM_BOTANIA + ":stone0Wall"; // Meta 0:Andesite, 2:Diorite, 3:Granite
 	public static final String wallRC = "Railcraft:wall.alpha"; // Meta 10:Brick, 11:Sandstone
 	
 	// Wooden Pressure Plate
-	public static final String pressurePlateSpruceGS = "ganyssurface:pressure_plate_spruce";
-	public static final String pressurePlateBirchGS = "ganyssurface:pressure_plate_birch";
-	public static final String pressurePlateJungleGS = "ganyssurface:pressure_plate_jungle";
-	public static final String pressurePlateAcaciaGS = "ganyssurface:pressure_plate_acacia";
-	public static final String pressurePlateDarkOakGS = "ganyssurface:pressure_plate_dark_oak";
+	public static final String pressurePlateSpruceGS = DOM_GANYSSURFACE + ":pressure_plate_spruce";
+	public static final String pressurePlateBirchGS = DOM_GANYSSURFACE + ":pressure_plate_birch";
+	public static final String pressurePlateJungleGS = DOM_GANYSSURFACE + ":pressure_plate_jungle";
+	public static final String pressurePlateAcaciaGS = DOM_GANYSSURFACE + ":pressure_plate_acacia";
+	public static final String pressurePlateDarkOakGS = DOM_GANYSSURFACE + ":pressure_plate_dark_oak";
 	
-	public static final String pressurePlateSpruceEF = "etfuturum:pressure_plate_spruce";
-	public static final String pressurePlateBirchEF = "etfuturum:pressure_plate_birch";
-	public static final String pressurePlateJungleEF = "etfuturum:pressure_plate_jungle";
-	public static final String pressurePlateAcaciaEF = "etfuturum:pressure_plate_acacia";
-	public static final String pressurePlateDarkOakEF = "etfuturum:pressure_plate_dark_oak";
+	public static final String pressurePlateSpruceEF = DOM_ETFUTURUM + ":pressure_plate_spruce";
+	public static final String pressurePlateBirchEF = DOM_ETFUTURUM + ":pressure_plate_birch";
+	public static final String pressurePlateJungleEF = DOM_ETFUTURUM + ":pressure_plate_jungle";
+	public static final String pressurePlateAcaciaEF = DOM_ETFUTURUM + ":pressure_plate_acacia";
+	public static final String pressurePlateDarkOakEF = DOM_ETFUTURUM + ":pressure_plate_dark_oak";
 	
-	public static final String pressurePlateSpruceUTD = "uptodate:pressurePlate1";
-	public static final String pressurePlateBirchUTD = "uptodate:pressurePlate2";
-	public static final String pressurePlateJungleUTD = "uptodate:pressurePlate3";
-	public static final String pressurePlateAcaciaUTD = "uptodate:pressurePlate4";
-	public static final String pressurePlateDarkOakUTD = "uptodate:pressurePlate5";
+	public static final String pressurePlateSpruceUTD = DOM_UPTODATE + ":pressurePlate1";
+	public static final String pressurePlateBirchUTD = DOM_UPTODATE + ":pressurePlate2";
+	public static final String pressurePlateJungleUTD = DOM_UPTODATE + ":pressurePlate3";
+	public static final String pressurePlateAcaciaUTD = DOM_UPTODATE + ":pressurePlate4";
+	public static final String pressurePlateDarkOakUTD = DOM_UPTODATE + ":pressurePlate5";
 	
 	// Wooden Sign
-	public static final String signSpruceGS = "ganyssurface:sign1";
-	public static final String signBirchGS = "ganyssurface:sign2";
-	public static final String signJungleGS = "ganyssurface:sign3";
-	public static final String signAcaciaGS = "ganyssurface:sign4";
-	public static final String signDarkOakGS = "ganyssurface:sign5";
+	public static final String signSpruceGS = DOM_GANYSSURFACE + ":sign1";
+	public static final String signBirchGS = DOM_GANYSSURFACE + ":sign2";
+	public static final String signJungleGS = DOM_GANYSSURFACE + ":sign3";
+	public static final String signAcaciaGS = DOM_GANYSSURFACE + ":sign4";
+	public static final String signDarkOakGS = DOM_GANYSSURFACE + ":sign5";
 	
 	// Wooden Trapdoor
-	public static final String trapdoorSpruceGS = "ganyssurface:trapdoor1";
-	public static final String trapdoorBirchGS = "ganyssurface:trapdoor2";
-	public static final String trapdoorJungleGS = "ganyssurface:trapdoor3";
-	public static final String trapdoorAcaciaGS = "ganyssurface:trapdoor4";
-	public static final String trapdoorDarkOakGS = "ganyssurface:trapdoor5";
-	public static final String trapdoorSpruceUTD = "uptodate:trap_door_spruce";
-	public static final String trapdoorBirchUTD = "uptodate:trap_door_birch";
-	public static final String trapdoorJungleUTD = "uptodate:trap_door_jungle";
-	public static final String trapdoorAcaciaUTD = "uptodate:trap_door_acacia";
-	public static final String trapdoorDarkOakUTD = "uptodate:trap_door_dark_oak";
+	public static final String trapdoorSpruceGS = DOM_GANYSSURFACE + ":trapdoor1";
+	public static final String trapdoorBirchGS = DOM_GANYSSURFACE + ":trapdoor2";
+	public static final String trapdoorJungleGS = DOM_GANYSSURFACE + ":trapdoor3";
+	public static final String trapdoorAcaciaGS = DOM_GANYSSURFACE + ":trapdoor4";
+	public static final String trapdoorDarkOakGS = DOM_GANYSSURFACE + ":trapdoor5";
+	public static final String trapdoorSpruceUTD = DOM_UPTODATE + ":trap_door_spruce";
+	public static final String trapdoorBirchUTD = DOM_UPTODATE + ":trap_door_birch";
+	public static final String trapdoorJungleUTD = DOM_UPTODATE + ":trap_door_jungle";
+	public static final String trapdoorAcaciaUTD = DOM_UPTODATE + ":trap_door_acacia";
+	public static final String trapdoorDarkOakUTD = DOM_UPTODATE + ":trap_door_dark_oak";
 	
 	
 	
@@ -425,82 +435,82 @@ public class ModObjects {
 	
 	
 	// Beetroot
-	public static final String beetrootItemEF = "etfuturum:beetroot";
-	public static final String beetrootItemGS = "ganyssurface:beetroot";
-	public static final String beetrootCropEF = "etfuturum:beetroots";
-	public static final String beetrootCropGS = "ganyssurface:beetrootBlock";
+	public static final String beetrootItemEF = DOM_ETFUTURUM + ":beetroot";
+	public static final String beetrootItemGS = DOM_GANYSSURFACE + ":beetroot";
+	public static final String beetrootCropEF = DOM_ETFUTURUM + ":beetroots";
+	public static final String beetrootCropGS = DOM_GANYSSURFACE + ":beetrootBlock";
 	
 	// Beetroot Seeds
-	public static final String beetrootSeedsEF = "etfuturum:beetroot_seeds";
-	public static final String beetrootSeedsGS = "ganyssurface:beetrootSeeds";
+	public static final String beetrootSeedsEF = DOM_ETFUTURUM + ":beetroot_seeds";
+	public static final String beetrootSeedsGS = DOM_GANYSSURFACE + ":beetrootSeeds";
 
 	// Beetroot Soup
-	public static final String beetrootSoupEF = "etfuturum:beetroot_soup";
-	public static final String beetrootSoupGS = "ganyssurface:beetrootSoup";
+	public static final String beetrootSoupEF = DOM_ETFUTURUM + ":beetroot_soup";
+	public static final String beetrootSoupGS = DOM_GANYSSURFACE + ":beetrootSoup";
 	
 	// Boats
-	public static final String boatBirchUTD = "uptodate:item_boat_birch";
-	public static final String boatSpruceUTD = "uptodate:item_boat_spruce";
-	public static final String boatDarkOakUTD = "uptodate:item_boat_dark_oak";
-	public static final String boatJungleUTD = "uptodate:item_boat_jungle";
-	public static final String boatAcaciaUTD = "uptodate:item_boat_acacia";
+	public static final String boatBirchUTD = DOM_UPTODATE + ":item_boat_birch";
+	public static final String boatSpruceUTD = DOM_UPTODATE + ":item_boat_spruce";
+	public static final String boatDarkOakUTD = DOM_UPTODATE + ":item_boat_dark_oak";
+	public static final String boatJungleUTD = DOM_UPTODATE + ":item_boat_jungle";
+	public static final String boatAcaciaUTD = DOM_UPTODATE + ":item_boat_acacia";
 	
 	// Colored beds
 	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
 	
 	// Dyes
-	public static final String miscBOP = "BiomesOPlenty:misc"; // Usually used for dyes
+	public static final String miscBOP = DOM_BIOMESOPLENTY + ":misc"; // Usually used for dyes
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
-	public static final String dyeUTD = "uptodate:dye";
+	public static final String dyeUTD = DOM_UPTODATE + ":dye";
 	
 	// Flowers
-	public static final String flowerUTD = "uptodate:flower";
+	public static final String flowerUTD = DOM_UPTODATE + ":flower";
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
 	public static final String kelpWrapMC = "Mariculture:food"; // Use meta 8
-	public static final String kelpDriedBOP = "BiomesOPlenty:coral1"; // Use meta 11 
+	public static final String kelpDriedBOP = DOM_BIOMESOPLENTY + ":coral1"; // Use meta 11 
 	
 	// Mutton
-	public static final String muttonRawEF = "etfuturum:mutton_raw";
-	public static final String muttonCookedEF = "etfuturum:mutton_cooked";
-	public static final String muttonRawGS = "ganyssurface:mutton_raw";
-	public static final String muttonCookedGS = "ganyssurface:mutton_cooked";
-	public static final String muttonRawHC = "harvestcraft:muttonrawItem";
-	public static final String muttonCookedHC = "harvestcraft:muttoncookedItem";
-	public static final String muttonRawUTD = "uptodate:raw_mutton";
-	public static final String muttonCookedUTD = "uptodate:cooked_mutton";
+	public static final String muttonRawEF = DOM_ETFUTURUM + ":mutton_raw";
+	public static final String muttonCookedEF = DOM_ETFUTURUM + ":mutton_cooked";
+	public static final String muttonRawGS = DOM_GANYSSURFACE + ":mutton_raw";
+	public static final String muttonCookedGS = DOM_GANYSSURFACE + ":mutton_cooked";
+	public static final String muttonRawHC = DOM_HARVESTCRAFT + ":muttonrawItem";
+	public static final String muttonCookedHC = DOM_HARVESTCRAFT + ":muttoncookedItem";
+	public static final String muttonRawUTD = DOM_UPTODATE + ":raw_mutton";
+	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
 	
 	// Rabbit
-	public static final String rabbitHideEF = "etfuturum:rabbit_hide";
-	public static final String rabbitFootEF = "etfuturum:rabbit_foot";
-	public static final String rabbitRawEF = "etfuturum:rabbit_raw";
-	public static final String rabbitCookedEF = "etfuturum:rabbit_cooked";
-	public static final String rabbitStewEF = "etfuturum:rabbit_stew";
+	public static final String rabbitHideEF = DOM_ETFUTURUM + ":rabbit_hide";
+	public static final String rabbitFootEF = DOM_ETFUTURUM + ":rabbit_foot";
+	public static final String rabbitRawEF = DOM_ETFUTURUM + ":rabbit_raw";
+	public static final String rabbitCookedEF = DOM_ETFUTURUM + ":rabbit_cooked";
+	public static final String rabbitStewEF = DOM_ETFUTURUM + ":rabbit_stew";
 	
 	// Stripped log
-	public static final String strippedLog1EF = "etfuturum:log_stripped";
-	public static final String strippedLog2EF = "etfuturum:log2_stripped";
-	public static final String strippedLogOakUTD = "uptodate:stripped_log_oak";
-	public static final String strippedLogSpruceUTD = "uptodate:stripped_log_spruce";
-	public static final String strippedLogBirchUTD = "uptodate:stripped_log_birch";
-	public static final String strippedLogJungleUTD = "uptodate:stripped_log_jungle";
-	public static final String strippedLogAcaciaUTD = "uptodate:stripped_log_acacia";
-	public static final String strippedLogDarkOakUTD = "uptodate:stripped_log_dark_oak";
+	public static final String strippedLog1EF = DOM_ETFUTURUM + ":log_stripped";
+	public static final String strippedLog2EF = DOM_ETFUTURUM + ":log2_stripped";
+	public static final String strippedLogOakUTD = DOM_UPTODATE + ":stripped_log_oak";
+	public static final String strippedLogSpruceUTD = DOM_UPTODATE + ":stripped_log_spruce";
+	public static final String strippedLogBirchUTD = DOM_UPTODATE + ":stripped_log_birch";
+	public static final String strippedLogJungleUTD = DOM_UPTODATE + ":stripped_log_jungle";
+	public static final String strippedLogAcaciaUTD = DOM_UPTODATE + ":stripped_log_acacia";
+	public static final String strippedLogDarkOakUTD = DOM_UPTODATE + ":stripped_log_dark_oak";
 	// stripped wood for UTD is just log with meta value of 12
 	
 	// Suspicious Stew
-	public static final String suspiciousStewUTD = "uptodate:suspicious_stew";
+	public static final String suspiciousStewUTD = DOM_UPTODATE + ":suspicious_stew";
 
 	// Sweet Berries
-	public static final String sweetBerriesUTD = "uptodate:sweet_berries";
+	public static final String sweetBerriesUTD = DOM_UPTODATE + ":sweet_berries";
 	
 	// Tipped arrows
-	public static final String tippedArrowEF = "etfuturum:tipped_arrow";
+	public static final String tippedArrowEF = DOM_ETFUTURUM + ":tipped_arrow";
 	
 	// Wood block
-	public static final String woodBlockUTD = "uptodate:wood";
+	public static final String woodBlockUTD = DOM_UPTODATE + ":wood";
 	
 	
 	// --------------------------- //

@@ -927,33 +927,6 @@ public class DesertStructures
 				catch (Exception e) {this.disallowModSubs = false;}
 			}
 			
-        	/*
-        	// Set ground and clear area above
-        	int fillXmin; int fillZmin; int fillXmax; int fillZmax; int clearToHeight = 5;
-        	
-        	for (Object[] o : new Object[][]{
-        		// minX, maxX, minZ, maxZ, groundY, structureHeight, surfaceBlock, surfaceMeta, subsurfaceBlock, subsurfaceMeta 
-        		{0, 0, 7, 12, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{1, 2, 4, 12, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{1, 2, 14, 14, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{0, 2, 13, 13, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{2, 2, 3, 3, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{3, 3, 14, 14, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{3, 3, 1, 13, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{3, 3, 0, 0, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{4, 4, 2, 14, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{4, 4, 0, 1, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{5, 9, 0, 14, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{10, 11, 0, 13, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{12, 12, 1, 13, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{12, 12, 0, 0, -1, 5, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{13, 13, 0, 12, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        		{14, 14, 3, 11, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta},
-        	})
-        	{
-        		this.fillWithMetadataBlocks(world, structureBB, (Integer)o[0], (Integer)o[4], (Integer)o[2], (Integer)o[1], (Integer)o[4], (Integer)o[3], (Block)o[6], (Integer)o[7], (Block)o[6], (Integer)o[7], false);
-        	}*/
-			
         	// Set sandstone in certain places
         	this.fillWithMetadataBlocks(world, structureBB, 7, 0, 0, 7, 0, 4, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, false);
         	this.fillWithMetadataBlocks(world, structureBB, 10, 0, 0, 10, 0, 3, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, biomeSmoothSandstoneBlock, biomeSmoothSandstoneMeta, false);
@@ -977,18 +950,6 @@ public class DesertStructures
             	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
             	
             	this.fillWithMetadataBlocks(world, structureBB, 9, 1, 5, 12, 1, 8, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
-            	
-            	/*
-            	tryConcrete = ModObjects.chooseModConcrete(townColor2);
-            	concreteBlock = Blocks.stained_hardened_clay; concreteMeta = townColor2;
-            	if (tryConcrete != null) {concreteBlock = (Block) tryConcrete[0]; concreteMeta = (Integer) tryConcrete[1];}
-            	
-            	this.fillWithMetadataBlocks(world, structureBB, 8, 0, 4, 8, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
-            	this.fillWithMetadataBlocks(world, structureBB, 13, 0, 4, 13, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
-            	this.fillWithMetadataBlocks(world, structureBB, 9, 0, 4, 12, 0, 4, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
-            	this.fillWithMetadataBlocks(world, structureBB, 9, 0, 9, 12, 0, 9, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
-            	*/
-            	//this.fillWithMetadataBlocks(world, structureBB, 9, 1, 7, 10, 1, 8, concreteBlock, concreteMeta, concreteBlock, concreteMeta, false);
         	}
         	else
         	{
@@ -1147,7 +1108,7 @@ public class DesertStructures
             	*/
             	
         		// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);//, townColor);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, false);//, townColor);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -13136,7 +13097,7 @@ public class DesertStructures
             	
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, true);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -13466,7 +13427,7 @@ public class DesertStructures
             	
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, true);
             	
             	for (BlueprintData b : decorBlueprint)
             	{
@@ -13794,7 +13755,7 @@ public class DesertStructures
             	
             	
             	// Generate decor
-            	ArrayList<BlueprintData> decorBlueprint = getRandomDesertDecorBlueprint(this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	ArrayList<BlueprintData> decorBlueprint = StructureVillageVN.getRandomDecorBlueprint(this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ, true);
             	
             	for (BlueprintData b : decorBlueprint)
             	{

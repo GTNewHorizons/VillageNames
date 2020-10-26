@@ -17,6 +17,7 @@ import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
+import astrotibs.villagenames.utility.FunctionsVN.VillageType;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.biomestructures.BlueprintData;
@@ -665,6 +666,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {block=ModObjects.chooseModFence(woodMeta); meta=0; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
         	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	// No snow conversion because snow is okay in spruce biomes
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
         	
@@ -890,7 +892,6 @@ public class StructureVillageVN
         	if (block == Blocks.stone_stairs)                  {block=Blocks.brick_stairs; break;}
         	if (block == Blocks.gravel)                        {block=Blocks.hardened_clay; meta=0; break;}
         	//if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 4: meta==11? 12 : meta; break;} // Brick slab
-        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=1; break;} // Sandstone double slab
         	if (block == Blocks.sand)                          {block=Blocks.sand; meta=1; break;} // Red Sand
         	if (block == Blocks.cobblestone_wall)              {
 																	Object[] modobject = ModObjects.chooseModSandstoneWall(true);
@@ -906,7 +907,6 @@ public class StructureVillageVN
 																	Object[] modobject = ModObjects.chooseModRedSandstoneSlab(meta>=8);
 																	if (modobject == null) {block=Blocks.stone_slab; meta=meta<8? 1: 9; break;}
 											        		   }
-        	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==0? 1 : meta; break;}
         	if (block == Blocks.sandstone_stairs)              {
 																	block = ModObjects.chooseModRedSandstoneStairs();
 																	if (block == null) {block=Blocks.sandstone_stairs; break;}
@@ -2823,6 +2823,30 @@ public class StructureVillageVN
 			
 			if (matchFound) {matchFound=false; continue;}
 			else {return candidateColor;}
+		}
+	}
+	
+	/**
+	 * Pick a random decor component based off of village type
+	 * The decor will be randomly selected based on the village type, except you can specify whether to allow troughs for Taiga types
+	 */
+	public static ArrayList<BlueprintData> getRandomDecorBlueprint(VillageType villageType, MaterialType materialType, boolean disallowModSubs, BiomeGenBase biome, int horizIndex, Random random, boolean allowTaigaTroughs)
+	{
+		switch (villageType)
+		{
+		default:
+		case PLAINS:
+			return PlainsStructures.getRandomPlainsDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+		case DESERT:
+			return DesertStructures.getRandomDesertDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+		case TAIGA:
+			return allowTaigaTroughs ? 
+					TaigaStructures.getRandomTaigaDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random)
+					:TaigaStructures.getTaigaDecorBlueprint(1+random.nextInt(6), materialType, disallowModSubs, biome, horizIndex, random);
+		case SAVANNA:
+			return SavannaStructures.getRandomSavannaDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+		case SNOWY:
+			return SnowyStructures.getRandomSnowyDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		}
 	}
 }
