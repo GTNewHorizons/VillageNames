@@ -1012,7 +1012,10 @@ public class StructureVillageVN
             
             if (villageBlockEvent.getResult() == Result.DENY || villageMetaEvent.getResult() == Result.DENY)
             {
-            	return new Object[]{villageBlockEvent.replacement, villageMetaEvent.replacement};
+            	// BoP likes to substitute meta BUT NOT BLOCK for some vanilla stuff. Account for a null block replacement
+                return new Object[]{
+                		villageBlockEvent.replacement==null? block : villageBlockEvent.replacement,
+                				villageMetaEvent.replacement<0? meta: villageMetaEvent.replacement};
             }
     	}
     	

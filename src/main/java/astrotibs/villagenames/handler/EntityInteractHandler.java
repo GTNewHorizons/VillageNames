@@ -30,6 +30,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -339,13 +340,21 @@ public class EntityInteractHandler {
 			{
 				// Randomly name an unnamed pet you own using a blank name tag
 				if (
-						target instanceof EntityTameable
-						&& ((EntityTameable)target).isTamed()
-						&& ((EntityTameable)target).func_152114_e(player)
+						(
+							(target instanceof EntityTameable
+							&& ((EntityTameable)target).isTamed()
+							&& ((EntityTameable)target).func_152114_e(player))
+							||
+							(target instanceof EntityHorse
+							&& ((EntityHorse)target).func_152119_ch().equals(player.getUniqueID().toString()))
+						)
+						
 						&& !target.hasCustomNameTag()
-						&& !itemstack.hasDisplayName()
+						&& (!itemstack.hasDisplayName() || (itemstack.hasDisplayName() && itemstack.getDisplayName().equals("")))
 						)
 				{
+					event.setCanceled(true);
+					
 					// Apply the name here
 					String[] petname_a = NameGenerator.newRandomName("pet", random);
 					target.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());

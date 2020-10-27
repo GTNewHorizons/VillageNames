@@ -13,6 +13,7 @@ import astrotibs.villagenames.config.pieces.GolemConfigHandler;
 import astrotibs.villagenames.config.pieces.MansionConfigHandler;
 import astrotibs.villagenames.config.pieces.MineshaftConfigHandler;
 import astrotibs.villagenames.config.pieces.MonumentConfigHandler;
+import astrotibs.villagenames.config.pieces.PetConfigHandler;
 import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
 import astrotibs.villagenames.config.pieces.TempleConfigHandler;
 import astrotibs.villagenames.config.pieces.VillageConfigHandler;
@@ -55,6 +56,8 @@ public class ConfigReloader {
 		AlienVillageConfigHandler.loadConfiguration();
 		AlienConfigHandler.loadConfiguration();
 		GoblinConfigHandler.loadConfiguration();
+		
+		PetConfigHandler.loadConfiguration();
 		
 		CustomConfigHandler.loadConfiguration();
 		

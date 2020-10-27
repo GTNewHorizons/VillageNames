@@ -19,6 +19,7 @@ import astrotibs.villagenames.config.pieces.GolemConfigHandler;
 import astrotibs.villagenames.config.pieces.MansionConfigHandler;
 import astrotibs.villagenames.config.pieces.MineshaftConfigHandler;
 import astrotibs.villagenames.config.pieces.MonumentConfigHandler;
+import astrotibs.villagenames.config.pieces.PetConfigHandler;
 import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
 import astrotibs.villagenames.config.pieces.TempleConfigHandler;
 import astrotibs.villagenames.config.pieces.VillageConfigHandler;
@@ -195,6 +196,11 @@ public class VNGuiConfig extends GuiConfig
 		// Golem
 		cc = GolemConfigHandler.config.getCategory("golem syllable pool");
 		cc.setComment("Syllables for naming golems");
+		subCats.add( new ConfigElement(cc) );
+		
+		// Pet
+		cc = PetConfigHandler.config.getCategory("pet syllable pool");
+		cc.setComment("Syllables to generate names for pets");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Dragon

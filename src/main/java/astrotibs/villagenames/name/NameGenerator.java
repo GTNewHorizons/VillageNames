@@ -21,6 +21,7 @@ import astrotibs.villagenames.config.pieces.GolemConfigHandler;
 import astrotibs.villagenames.config.pieces.MansionConfigHandler;
 import astrotibs.villagenames.config.pieces.MineshaftConfigHandler;
 import astrotibs.villagenames.config.pieces.MonumentConfigHandler;
+import astrotibs.villagenames.config.pieces.PetConfigHandler;
 import astrotibs.villagenames.config.pieces.StrongholdConfigHandler;
 import astrotibs.villagenames.config.pieces.TempleConfigHandler;
 import astrotibs.villagenames.config.pieces.VillageConfigHandler;
@@ -386,6 +387,27 @@ public class NameGenerator {
 				{pooled_length_weights.set(i, pooled_length_weights.get(i)+DragonConfigHandler.syllable_count_weighting[i]);}
 				else // Weights of this name length don't exist in the master array. Expand the array.
 				{pooled_length_weights.add(DragonConfigHandler.syllable_count_weighting[i]);}
+			}
+		}
+		if ( Arrays.asList(nameType_a).contains("pet") )
+		{
+			prefix =        ArrayUtils.addAll(prefix, PetConfigHandler.pet_prefix);
+			root_initial =  ArrayUtils.addAll(root_initial, PetConfigHandler.pet_root_initial);
+			root_sylBegin = ArrayUtils.addAll(root_sylBegin, PetConfigHandler.pet_root_syllables);
+			root_terminal = ArrayUtils.addAll(root_terminal, PetConfigHandler.pet_root_terminal);
+			suffix =        ArrayUtils.addAll(suffix, PetConfigHandler.pet_suffix);
+			
+			numnames = NamePiecesEntities.pet_root_initial_default.length();
+			prefix_chance += (PetConfigHandler.prefix_chance * numnames);
+			suffix_chance += (PetConfigHandler.suffix_chance * numnames);
+			normalization += numnames;
+			
+			for (int i=0; i<PetConfigHandler.syllable_count_weighting.length; i++)
+			{
+				if (pooled_length_weights.size() > i) // Add weights of this name length for this syllable pool to the master weight array
+				{pooled_length_weights.set(i, pooled_length_weights.get(i)+PetConfigHandler.syllable_count_weighting[i]);}
+				else // Weights of this name length don't exist in the master array. Expand the array.
+				{pooled_length_weights.add(PetConfigHandler.syllable_count_weighting[i]);}
 			}
 		}
 		if ( Arrays.asList(nameType_a).contains("custom") )
@@ -948,7 +970,8 @@ public class NameGenerator {
 		"rrc",
 		"ffvc", "lffvc", "qrffvc", "erffvc", "frffvc",
 		// any haha
-		"lan", "nunu"
+		"lan", "nunu",
+		"rynz", "rynzrs",
 	};
 	
 	/**

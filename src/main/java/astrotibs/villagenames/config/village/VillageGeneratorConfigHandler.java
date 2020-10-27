@@ -207,7 +207,7 @@ public class VillageGeneratorConfigHandler
 	public static boolean spawnModdedVillagers;
 	public static boolean spawnVillagersInResidences;
 	public static boolean spawnVillagersInTownCenters;
-	//public static boolean farmPumpkins;
+	public static boolean nameVillageHorses;
 	
 	public static void init(File configFile)
 	{
@@ -1022,6 +1022,7 @@ public class VillageGeneratorConfigHandler
 		spawnModdedVillagers = config.getBoolean("Spawn Extra Villagers with mod professions", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Villagers spawned in town centers or residential houses can have non-vanilla professions.");
 		spawnVillagersInResidences = config.getBoolean("Spawn Extra Villagers in Residences", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Spawn villagers with random professions and ages in non-job-specific residential houses.");
 		spawnVillagersInTownCenters = config.getBoolean("Spawn Extra Villagers in Town Centers", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Spawn villagers with random professions and ages in the town center.");
+		nameVillageHorses = config.getBoolean("Name Village Horses", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Domesticated horses spawn with names generated from the \"pet\" syllable pool.");
 		
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", Reference.CATEGORY_VILLAGE_GENERATOR,
 				new String[] {
