@@ -20,6 +20,7 @@ public class VillageGeneratorConfigHandler
 	public static int newVillageSpacingMedian;
 	public static int newVillageSpacingSpread;
 	public static String[] spawnBiomesNames;
+	public static int noVillagesRadius;
 	
 	// Legacy Village buildings
 	public static String componentLegacyHouse4Garden_string; public static ArrayList<Double> componentLegacyHouse4Garden_vals;
@@ -236,6 +237,7 @@ public class VillageGeneratorConfigHandler
 		newVillageSize = config.getInt("Village Size", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 1, 10, "How large villages are. Vanilla is 1.");
 		newVillageSpacingMedian = config.getInt("Village Spacing: Median", Reference.CATEGORY_VILLAGE_GENERATOR, 20, 1, 100, "Median distance between villages. Vanilla is 20.");
 		newVillageSpacingSpread = config.getInt("Village Spacing: Range", Reference.CATEGORY_VILLAGE_GENERATOR, 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12.");
+		noVillagesRadius = config.getInt("Village Spacing: Village-Free Radius", Reference.CATEGORY_VILLAGE_GENERATOR, 0, 0, 100000, "No villages will spawn less than this many chunks from world origin (0, 0).");
 		//farmPumpkins  = config.getBoolean("Pumpkin and Melon Crops", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Farms can have pumpkins and melons generate in them");
 		
 		

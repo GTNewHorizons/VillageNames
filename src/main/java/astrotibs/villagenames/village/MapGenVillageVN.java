@@ -102,6 +102,10 @@ public class MapGenVillageVN extends MapGenVillage
     @Override
     protected boolean canSpawnStructureAtCoords(int chunkXin, int chunkZin)
     {
+    	// Deny villages less than a config-specified distance away from spawn
+    	int noVillagesRadius = VillageGeneratorConfigHandler.noVillagesRadius;
+    	if ((chunkXin*chunkXin) + (chunkZin*chunkXin) < (noVillagesRadius*noVillagesRadius)) {return false;}
+    	
         int chunkX = chunkXin;
         int chunkZ = chunkZin;
         
