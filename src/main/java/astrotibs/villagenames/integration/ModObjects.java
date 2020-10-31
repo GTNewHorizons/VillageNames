@@ -417,6 +417,11 @@ public class ModObjects {
 	public static final String signDarkOakGS = DOM_GANYSSURFACE + ":sign5";
 	
 	// Wooden Trapdoor
+	public static final String trapdoorSpruceEF = DOM_ETFUTURUM + ":trapdoor_spruce";
+	public static final String trapdoorBirchEF = DOM_ETFUTURUM + ":trapdoor_birch";
+	public static final String trapdoorJungleEF = DOM_ETFUTURUM + ":trapdoor_jungle";
+	public static final String trapdoorAcaciaEF = DOM_ETFUTURUM + ":trapdoor_acacia";
+	public static final String trapdoorDarkOakEF = DOM_ETFUTURUM + ":trapdoor_dark_oak";
 	public static final String trapdoorSpruceGS = DOM_GANYSSURFACE + ":trapdoor1";
 	public static final String trapdoorBirchGS = DOM_GANYSSURFACE + ":trapdoor2";
 	public static final String trapdoorJungleGS = DOM_GANYSSURFACE + ":trapdoor3";
@@ -2417,6 +2422,18 @@ public class ModObjects {
 					case 3: modblock = Block.getBlockFromName(ModObjects.trapdoorJungleUTD); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.trapdoorAcaciaUTD); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.trapdoorDarkOakUTD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.trapdoorSpruceEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.trapdoorBirchEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.trapdoorJungleEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.trapdoorAcaciaEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.trapdoorDarkOakEF); break;
 				}
 				if (modblock != null) {return modblock;}
 			}

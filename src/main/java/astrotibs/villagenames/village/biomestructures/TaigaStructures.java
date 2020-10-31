@@ -360,6 +360,8 @@ public class TaigaStructures
             	}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
     }
@@ -777,6 +779,8 @@ public class TaigaStructures
             	}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -1088,6 +1092,8 @@ public class TaigaStructures
         		}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -1485,6 +1491,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -1886,6 +1894,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -2452,6 +2462,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -3049,6 +3061,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -3663,6 +3677,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -4134,6 +4150,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -4534,6 +4552,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -4994,6 +5014,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -5552,6 +5574,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -5971,6 +5995,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -6539,6 +6565,8 @@ public class TaigaStructures
             	}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -6995,6 +7023,8 @@ public class TaigaStructures
             	}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -7570,6 +7600,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -8046,6 +8078,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -8617,6 +8651,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -9006,6 +9042,8 @@ public class TaigaStructures
                 world.spawnEntityInWorld(entityvillager);
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -9456,6 +9494,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -9895,6 +9935,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -10339,6 +10381,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -10804,6 +10848,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -11226,6 +11272,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -11656,6 +11704,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -12242,6 +12292,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -12728,6 +12780,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -13215,6 +13269,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -13600,6 +13656,8 @@ public class TaigaStructures
             }
             
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         
@@ -13925,6 +13983,8 @@ public class TaigaStructures
             	}
             }
             
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
         

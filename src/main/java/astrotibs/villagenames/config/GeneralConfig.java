@@ -53,17 +53,15 @@ public class GeneralConfig {
 	
 	public static boolean allowInGameConfig;
 	
-	public static boolean modernVillagerSkins; // Changed in v3.1
-	public static boolean modernZombieSkins; // Added in v3.2.3
-	public static boolean moddedVillagerHeadwear; // Added in v3.1.1
-	public static boolean removeMobArmor; // v3.2.3
+	public static boolean modernVillagerSkins;
+	public static boolean modernZombieSkins;
+	public static boolean moddedVillagerHeadwear;
+	public static boolean removeMobArmor;
 	
-	// Added in v3.2
 	public static String[] moddedVillagerHeadwearGraylist;
 	public static ArrayList<Integer> moddedVillagerHeadwearWhitelist = new ArrayList<Integer>();
 	public static ArrayList<Integer> moddedVillagerHeadwearBlacklist = new ArrayList<Integer>();
 	
-	// Added in v3.2
 	public static String[] moddedVillagerModularSkins;
 	public static Map<String, ArrayList> moddedVillagerCareerSkins;
 	public static ArrayList<String> careerAsset_a;
@@ -153,20 +151,15 @@ public class GeneralConfig {
 	    		+ " This only applies if Villager Careers is true.");
 	    //villagerLegacyTrades = config.getBoolean("Villager Legacy Trades", "villager professions", true, "When using Villager Careers: some trades that were removed in 1.8 can still be unlocked.");
 	    
-	    // Changed in 3.1
 	    modernVillagerSkins = config.getBoolean("Modern Villager Profession Skins", "villager professions", true, "Use the composite 1.14 Villager skins");
-	    // Added in v3.2.3
 	    modernZombieSkins = config.getBoolean("Modern Zombie Profession Skins", "villager professions", true, "Use the composite 1.14 Zombie skins");
-	    // Added in v3.1
 	    modernVillagerTrades = config.getBoolean("Modern Villager Trades", "villager professions", true, "Use JE 1.14 / BE 1.12 trade offerings and add the Mason villager");
 	    enableNitwit = config.getBoolean("Nitwit Villager", "villager professions", true, "Enable 1.11 NitWit Villagers");
 	    
-	    // Added in v3.1.1
 	    moddedVillagerHeadwear = config.getBoolean("Modded Villager Headwear", "villager professions", false, "If modern skins are enabled: renders the headwear layer for non-vanilla villager professions, if one exists.");
 	    
 	    removeMobArmor = config.getBoolean("Remove Armor for Modern Skins", "villager professions", true, "If modern skins are enabled: automatically removes armor from villagers and zombies to avoid a rendering bug.");
 	    
-	    // Added in v3.2
 	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", "villager professions", new String[]{
 				"14", // Growthcraft Apiarist
 				"-15", // Apple & Milk & Tea's Cafe Master -- turned off because I enjoy his sexy hair v3.2.3
@@ -193,7 +186,6 @@ public class GeneralConfig {
 	    	catch (Exception e) {} // Failure to parse the string entry into an integer, so ignore it
 	    }
 	    
-	    // Added in v3.2
 	    moddedVillagerModularSkins = config.getStringList("Modded Villager Modular Skins", "villager professions", new String[]{
 				"gc_brewer||10", // Growthcraft
 				"gc_apiarist||14", // Growthcraft
@@ -486,6 +478,7 @@ public class GeneralConfig {
 	    
 	    modWoodenTrapdoor = config.getStringList("Mod Priority: Trapdoor", "Mod Integration", new String[]{
 	    		"uptodate",
+	    		"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."
@@ -604,7 +597,7 @@ public class GeneralConfig {
 				"endcity|hardcoreenderdragon_EndTower|Dungeon Tower|The End|endcity|",
 				"endcity|hardcoreenderdragon_EndIsland|Laboratory|The End|endcity|"
 				},
-				"List of mod structures that can be named with a Codex, or by right-clicking an entity in that structure (optional)."
+				"List of mod structures that can be named with a Codex, or by right-clicking an entity in that structure (optional). "
 				+ "Structures must have been generated in a manner similarly to vanilla (e.g. Galacticraft Moon Villages).\n"
 				+ "Format is: nameType|structureType|structureTitle|dimensionName|bookType|entityClassPath\n"
 				+ "nameType is your choice of name pool for the structure. Options: village, mineshaft, temple, stronghold, fortress, monument, endcity, mansion, alienvillage\n"
@@ -674,7 +667,7 @@ public class GeneralConfig {
 		
 	    //PMLostMinerProfession = config.getString("PMLostMinerProfession", "Mapping Professions", "Miner", "The career displayed for Primitive Mobs's Lost Miner. Blank this out to display no profession regardless of addJobToName.");
 	    PMLostMinerProfessionMap = config.getInt("PM Lost Miner Profession ID", "Mod Integration", 3, 0, 5,
-	    		"Which vanilla archetype the traveling merchant emulates in order to generate hint pages.\n"
+	    		"Which vanilla archetype the lost miner emulates in order to generate hint pages.\n"
 				+ "Use this reference:\n"
 				+ "-1=None\n"
 				+ "0=Farmer\n"

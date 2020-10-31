@@ -1,5 +1,7 @@
 package astrotibs.villagenames.utility;
 
+import cpw.mods.fml.common.Loader;
+
 public class Reference
 {
 	// Contains common constants for the mod
@@ -14,6 +16,9 @@ public class Reference
 	public static final String COMMON_PROXY = "astrotibs.villagenames.proxy.CommonProxy";
 	public static final String GUI_FACTORY = "astrotibs.villagenames.config.gui.VNGuiFactory";
     
+	// Mod variables
+	public static boolean isMFQMloaded = Loader.isModLoaded("MFQM");
+	
     // Elder Guardian class path: prior to 1.11, the Elder is just a normal Guardian with an "Elder" flag turned on.
     // This helps distinguish the two via hard-coding a faux class path
     public static final String ELDER_GUARDIAN_CLASS = "astrotibs.villagenames.prismarine.guardian.entity.monster.EntityElderGuardian";

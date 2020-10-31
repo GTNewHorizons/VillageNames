@@ -39,6 +39,7 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityMooshroom;
@@ -50,6 +51,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
@@ -1010,13 +1012,8 @@ public class StructureVillageVN
             BiomeEvent.GetVillageBlockMeta villageMetaEvent = new BiomeEvent.GetVillageBlockMeta(biome == null ? null : biome, block, meta);
             MinecraftForge.TERRAIN_GEN_BUS.post(villageMetaEvent);
             
-            if (villageBlockEvent.getResult() == Result.DENY || villageMetaEvent.getResult() == Result.DENY)
-            {
-            	// BoP likes to substitute meta BUT NOT BLOCK for some vanilla stuff. Account for a null block replacement
-                return new Object[]{
-                		villageBlockEvent.replacement==null? block : villageBlockEvent.replacement,
-                				villageMetaEvent.replacement<0? meta: villageMetaEvent.replacement};
-            }
+            if (villageBlockEvent.getResult() == Result.DENY && villageBlockEvent.replacement!=null) {block = villageBlockEvent.replacement;}
+            if (villageMetaEvent.getResult() == Result.DENY && villageMetaEvent.replacement>=0) {meta = villageMetaEvent.replacement;}
     	}
     	
         return new Object[]{block, meta};
@@ -1132,26 +1129,31 @@ public class StructureVillageVN
     		
     		// Replace other liquid or ice with planks
     		if (surfaceBlock.getMaterial().isLiquid() || surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softSnowMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.jungleQuicksandMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.moorMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.dryQuicksandMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidMireMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidChocolateMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingClayMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.wetPeatMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softQuicksandMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.bogMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softGravelMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mireMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingSlimeMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.slurryMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.quicksandMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.brownClayMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.denseWebbingMFQM_classPath)
-    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.tarMFQM_classPath)
+    				|| (Reference.isMFQMloaded
+    						&&
+    						(
+								surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softSnowMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.jungleQuicksandMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.moorMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.dryQuicksandMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidMireMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidChocolateMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingClayMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.wetPeatMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softQuicksandMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.bogMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softGravelMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mireMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingSlimeMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.slurryMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.quicksandMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.brownClayMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.denseWebbingMFQM_classPath)
+			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.tarMFQM_classPath)
+    								)
+    						)
     				)
     		{
     	    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);
@@ -2086,7 +2088,9 @@ public class StructureVillageVN
             		}            		
             	}
             }
-        	
+            
+            // Clean items
+            if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
             return true;
         }
     }
@@ -2851,5 +2855,33 @@ public class StructureVillageVN
 		case SNOWY:
 			return SnowyStructures.getRandomSnowyDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		}
+	}
+	
+	
+	/**
+	 * Deletes EntityItems within a given structure bounding box
+	 */
+	public static void cleanEntityItems(World world, StructureBoundingBox boundingBox)
+	{
+		// selectEntitiesWithinAABB is an AABB method
+		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(
+				// Modified to center onto front of house
+				boundingBox.minX, boundingBox.minY, boundingBox.minZ,
+				boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).expand(3, 8, 3);
+        
+        List<EntityItem> list = world.selectEntitiesWithinAABB(EntityItem.class, aabb, null);
+        
+		if (!list.isEmpty())
+        {
+			Iterator iterator = list.iterator();
+					
+			while (iterator.hasNext())
+			{
+				EntityItem entityitem = (EntityItem) iterator.next();
+				entityitem.setDead();
+			}
+			
+			if (GeneralConfig.debugMessages) {LogHelper.info("Cleaned "+list.size()+" Entity items within " + aabb.toString());}
+        }
 	}
 }
