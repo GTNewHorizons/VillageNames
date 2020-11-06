@@ -16,7 +16,12 @@ public class VillageGeneratorConfigHandler
 	
 	// --- Villages --- //
 	public static boolean newVillageGenerator;
-	public static int newVillageSize;
+	
+	public static float newVillageSizeMaximum;
+	public static float newVillageSizeMinimum;
+	public static float newVillageSizeMode;
+	public static int newVillageSizeNormalOrder;
+	
 	public static int newVillageSpacingMedian;
 	public static int newVillageSpacingSpread;
 	public static String[] spawnBiomesNames;
@@ -234,7 +239,40 @@ public class VillageGeneratorConfigHandler
 		String snowyVillages = "snowy villages";
 		
 		newVillageGenerator = config.getBoolean("Activate New Village Generator", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Use replacement village generation system. You may need to deactivate village generation from other mods. All other settings in this section require this to be true.");
-		newVillageSize = config.getInt("Village Size", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 1, 10, "How large villages are. Vanilla is 1.");
+		
+		// --- Village Size stuff --- //
+		newVillageSizeMinimum = config.getFloat("Village Size: Minimum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 10, "Lower limit for the randomly-selected size of a village. Vanilla is 1.");
+		newVillageSizeMaximum = config.getFloat("Village Size: Maximum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 10, "Upper limit for the randomly-selected size of a village. Vanilla is 1.");
+		
+		// If someone was an idiot and made Minimum greater than Maximum, fix that
+		if (newVillageSizeMinimum > newVillageSizeMaximum)
+		{
+			LogHelper.error("Minimum village size can't be higher than maximum! Swapping values.");
+			float hanoi = newVillageSizeMinimum;
+			newVillageSizeMinimum = newVillageSizeMaximum;
+			newVillageSizeMaximum = hanoi;
+		}
+		
+		newVillageSizeNormalOrder = config.getInt("Village Size: Normal Order", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 1, 10, "Village size is drawn from a convolution of this many uniform distributions."
+				+ " \nA value of 1 is uniform: all values in the range are equally likely. A value of 2 is triangular."
+				+ " \nIncreasing this more narrowly centers the distribution around the value entered for Mode.");
+		newVillageSizeMode = config.getFloat("Village Size: Mode", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 10,
+				"Peak of the distribution for the randomly-selected size of a village: the most probable village size. "
+				+ "Irrelevant for Normal Order of 1 or when Maximum and Minimum are equal. "
+				+ "Must be in the range of [Minimum, Maximum].");
+		
+		// If someone put Mode outside of the range, let them know
+		if (newVillageSizeMode < newVillageSizeMinimum)
+		{
+			LogHelper.error("Village Size: Mode can't be lower than the minimum! Setting to minimum.");
+			newVillageSizeMode = newVillageSizeMinimum;
+		}
+		else if (newVillageSizeMode > newVillageSizeMaximum)
+		{
+			LogHelper.error("Village Size: Mode can't be higher than the maximum! Setting to maximum.");
+			newVillageSizeMode = newVillageSizeMaximum;
+		}
+		
 		newVillageSpacingMedian = config.getInt("Village Spacing: Median", Reference.CATEGORY_VILLAGE_GENERATOR, 20, 1, 100, "Median distance between villages. Vanilla is 20.");
 		newVillageSpacingSpread = config.getInt("Village Spacing: Range", Reference.CATEGORY_VILLAGE_GENERATOR, 12, 1, 100, "Variation in distances between villages. Must be lower than Median value. Vanilla is 12.");
 		noVillagesRadius = config.getInt("Village Spacing: Village-Free Radius", Reference.CATEGORY_VILLAGE_GENERATOR, 0, 0, 100000, "No villages will spawn less than this many chunks from world origin (0, 0).");
@@ -1026,7 +1064,7 @@ public class VillageGeneratorConfigHandler
 		spawnVillagersInResidences = config.getBoolean("Spawn Extra Villagers in Residences", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Spawn villagers with random professions and ages in non-job-specific residential houses.");
 		spawnVillagersInTownCenters = config.getBoolean("Spawn Extra Villagers in Town Centers", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Spawn villagers with random professions and ages in the town center.");
 		nameVillageHorses = config.getBoolean("Name Village Horses", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Domesticated horses spawn with names generated from the \"pet\" syllable pool.");
-		cleanDroppedItems = config.getBoolean("Clean Dropped Items", Configuration.CATEGORY_GENERAL, true, "Deletes most blocks and items accidentally broken and dropped onto the ground by village generation, such as torches, doors, beds, and chest contents.");
+		cleanDroppedItems = config.getBoolean("Clean Dropped Items", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Deletes most blocks and items accidentally broken and dropped onto the ground by village generation, such as torches, doors, beds, and chest contents.");
 	    
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", Reference.CATEGORY_VILLAGE_GENERATOR,
 				new String[] {
@@ -1163,21 +1201,21 @@ public class VillageGeneratorConfigHandler
 			}
 			
 			// User's lower bound for number of structures is negative
-			if ((doubleArrayListToReturn.get(1) * newVillageSize + doubleArrayListToReturn.get(2)) < 0)
+			if ((doubleArrayListToReturn.get(1) * newVillageSizeMinimum + doubleArrayListToReturn.get(2)) < 0)
 			{
 				LogHelper.error("Values two and three of config entry " + configvalue + " can result in fewer than zero of this structure component. Using default values " + convertDoubleArrayToString(defaultValues) + " until this is fixed.");
 				return defaultValues;
 			}
 			
 			// User's upper bound for number of structures is negative
-			if ((doubleArrayListToReturn.get(3) * newVillageSize + doubleArrayListToReturn.get(4)) < 0)
+			if ((doubleArrayListToReturn.get(3) * newVillageSizeMinimum + doubleArrayListToReturn.get(4)) < 0)
 			{
 				LogHelper.error("Values four and five of config entry " + configvalue + " will result in fewer than zero of this structure component. Using default values " + convertDoubleArrayToString(defaultValues) + " until this is fixed.");
 				return defaultValues;
 			}
 			
 			// User's lower bound for number of structures is greater than their upper bound
-			if ((doubleArrayListToReturn.get(1) * newVillageSize + doubleArrayListToReturn.get(2)) > (doubleArrayListToReturn.get(3) * newVillageSize + doubleArrayListToReturn.get(4)))
+			if ((doubleArrayListToReturn.get(1) * (newVillageSizeMinimum+newVillageSizeMaximum)/2F + doubleArrayListToReturn.get(2)) > (doubleArrayListToReturn.get(3) * (newVillageSizeMinimum+newVillageSizeMaximum)/2F + doubleArrayListToReturn.get(4)))
 			{
 				LogHelper.error("Values two through five of config entry " + configvalue + " result in a higher upper bound than a lower bound for this structure component. Using default values " + convertDoubleArrayToString(defaultValues) + " until this is fixed.");
 				return defaultValues;

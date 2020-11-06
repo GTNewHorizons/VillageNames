@@ -70,9 +70,9 @@ public class DesertStructures
     	
     	public DesertMeetingPoint1() {}
     	
-    	public DesertMeetingPoint1(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
+    	public DesertMeetingPoint1(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, float villageSize)
     	{
-    		super(chunkManager, componentType, random, posX, posZ, components, terrainType);
+    		super(chunkManager, componentType, random, posX, posZ, components, villageSize);
     		
 		    // Establish orientation and bounding box
             this.coordBaseMode = random.nextInt(4);
@@ -153,6 +153,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneBlock(false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneBlock = (Block) blockObject[0]; int biomeSmoothSandstoneMeta = (Integer) blockObject[1]; 
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -170,19 +173,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -419,9 +422,9 @@ public class DesertStructures
     	
     	public DesertMeetingPoint2() {}
     	
-    	public DesertMeetingPoint2(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
+    	public DesertMeetingPoint2(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, float villageSize)
     	{
-    		super(chunkManager, componentType, random, posX, posZ, components, terrainType);
+    		super(chunkManager, componentType, random, posX, posZ, components, villageSize);
     		
 		    // Establish orientation and bounding box
             this.coordBaseMode = random.nextInt(4);
@@ -489,6 +492,9 @@ public class DesertStructures
         	Object[] tryObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)tryObject[0], (Integer)tryObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -506,19 +512,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -777,9 +783,9 @@ public class DesertStructures
     	
     	public DesertMeetingPoint3() {}
     	
-    	public DesertMeetingPoint3(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, int terrainType)
+    	public DesertMeetingPoint3(WorldChunkManager chunkManager, int componentType, Random random, int posX, int posZ, List components, float villageSize)
     	{
-    		super(chunkManager, componentType, random, posX, posZ, components, terrainType);
+    		super(chunkManager, componentType, random, posX, posZ, components, villageSize);
     		
 		    // Establish orientation and bounding box
             this.coordBaseMode = random.nextInt(4);
@@ -850,6 +856,9 @@ public class DesertStructures
         	// Sandstone wall that defaults to fence
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -867,19 +876,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -1422,6 +1431,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence_gate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceGateBlock = (Block)blockObject[0]; int biomeFenceGateMeta = (Integer)blockObject[1];
         	Object[] tryObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)tryObject[0], (Integer)tryObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -1439,19 +1451,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -1547,7 +1559,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -1773,6 +1785,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence_gate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceGateBlock = (Block)blockObject[0]; int biomeFenceGateMeta = (Integer)blockObject[1];
         	Object[] tryObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)tryObject[0], (Integer)tryObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -1790,19 +1805,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -1898,7 +1913,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -2118,6 +2133,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -2135,19 +2153,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -2312,7 +2330,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -2540,6 +2558,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -2557,19 +2578,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -2729,7 +2750,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -2963,6 +2984,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModCartographyTable(); Block cartographyTableBlock = (Block) blockObject[0]; int cartographyTableMeta = (Integer) blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -2980,19 +3004,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -3141,7 +3165,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -3356,6 +3380,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -3373,19 +3400,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -3477,7 +3504,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -3698,6 +3725,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSmoothSandstoneBlock(false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneBlock = (Block) blockObject[0]; int biomeSmoothSandstoneMeta = (Integer) blockObject[1]; 
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.trapdoor, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -3715,19 +3745,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -3858,7 +3888,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -4083,6 +4113,9 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -4100,19 +4133,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -4277,7 +4310,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -4503,6 +4536,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModFletchingTable(); Block fletchingTableBlock = (Block) blockObject[0]; int fletchingTableMeta = (Integer) blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.ladder, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLadderBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -4520,19 +4556,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -4693,7 +4729,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -4911,6 +4947,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneBlock(false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneBlock = (Block) blockObject[0]; int biomeSmoothSandstoneMeta = (Integer) blockObject[1]; 
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -4928,19 +4967,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -5320,7 +5359,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
-        	
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -5338,19 +5379,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -5500,7 +5541,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -5718,6 +5759,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -5735,19 +5779,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -5893,7 +5937,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -6110,6 +6154,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 1, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 9, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSandstoneSlabTopMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -6127,19 +6174,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -6316,7 +6363,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -6543,6 +6590,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_button, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodButtonBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.ladder, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLadderBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -6560,19 +6610,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -6764,7 +6814,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -6991,6 +7041,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModLoom(); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -7008,19 +7061,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -7198,7 +7251,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -7431,6 +7484,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 1, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 9, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -7448,19 +7504,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -7591,7 +7647,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -7821,6 +7877,9 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -7838,19 +7897,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -8036,7 +8095,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -8263,6 +8322,9 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_button, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodButtonBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -8280,19 +8342,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -8450,7 +8512,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -8673,6 +8735,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -8690,19 +8755,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -8840,7 +8905,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -9064,6 +9129,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone, 2, this.materialType, this.biome, this.disallowModSubs); Block biomeCutSandstoneBlock = (Block)blockObject[0]; int biomeCutSandstoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_button, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodButtonBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -9081,19 +9149,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -9235,7 +9303,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -9460,6 +9528,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -9477,19 +9548,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -9769,7 +9840,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -9996,6 +10067,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoFenceBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoFenceMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -10013,19 +10087,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -10180,7 +10254,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -10404,6 +10478,9 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseGreenCoralOrPottedCactus(); Block biomeGreenCoralOrPottedCactusBlock = (Block)blockObject[0]; int biomeGreenCoralOrPottedCactusMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -10421,19 +10498,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -10570,7 +10647,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -10796,6 +10873,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 4:0), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -10813,19 +10893,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	
@@ -11007,7 +11087,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -11230,6 +11310,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 1, this.materialType, this.biome, this.disallowModSubs); Block biomeSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -11247,19 +11330,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -11459,7 +11542,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -11681,6 +11764,9 @@ public class DesertStructures
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(false, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabBottomBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabBottomMeta = (Integer)blockObject[1];
         	blockObject = ModObjects.chooseModSmoothSandstoneSlab(true, false); blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeSmoothSandstoneSlabTopBlock = (Block)blockObject[0]; int biomeSmoothSandstoneSlabTopMeta = (Integer)blockObject[1];
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -11698,19 +11784,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -11887,7 +11973,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -12108,6 +12194,9 @@ public class DesertStructures
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_button, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodButtonBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -12125,19 +12214,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -12365,7 +12454,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -12595,6 +12684,9 @@ public class DesertStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2==0? 0:4), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
         	if (ModObjects.chooseModSmoothSandstoneStairs(false)==null) {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.sandstone_stairs, 0, this.materialType, this.biome, this.disallowModSubs);} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject(ModObjects.chooseModSmoothSandstoneStairs(false), 0, this.materialType, this.biome, this.disallowModSubs);} Block biomeSmoothSandstoneStairsBlock = (Block)blockObject[0];
         	blockObject = ModObjects.chooseModSandstoneWall(this.materialType==MaterialType.MESA); if (blockObject==null) {blockObject = new Object[]{Blocks.cobblestone_wall, 0};} else {blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);} Block biomeSandstoneWallIntoCobblestoneWallBlock = (Block)blockObject[0]; int biomeSandstoneWallIntoCobblestoneWallMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
@@ -12612,19 +12704,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             
@@ -12825,7 +12917,7 @@ public class DesertStructures
                 
                 // Clear above and set foundation below
                 this.clearCurrentPositionBlocksUpwards(world, pathU, pathV, pathW, structureBB);
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, pathU, pathV-2, pathW, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, pathU, pathV-2, pathW, structureBB);
             	// Top is grass which is converted to path
             	if (world.isAirBlock(this.getXWithOffset(pathU, pathW), this.getYWithOffset(pathV-1), this.getZWithOffset(pathU, pathW)))
             	{
@@ -13045,12 +13137,14 @@ public class DesertStructures
             Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	/*
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
             	// top with grass
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
@@ -13066,19 +13160,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             */
@@ -13140,7 +13234,7 @@ public class DesertStructures
 	            	}
             	}
             	
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
@@ -13371,12 +13465,14 @@ public class DesertStructures
             Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	/*
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
             	// top with grass
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
@@ -13392,19 +13488,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
             */
@@ -13421,7 +13517,7 @@ public class DesertStructures
         		int groundV = groundY-this.boundingBox.minY;
         		
         		// Make foundation
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], groundV-1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uw[0], groundV-1, uw[1], structureBB);
         		// Set the block
         		this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uw[0], groundV, uw[1], structureBB);
         		// Clear upwards
@@ -13441,7 +13537,7 @@ public class DesertStructures
         		int groundV = groundY-this.boundingBox.minY;
         		
         		// Make foundation
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], groundV-1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uw[0], groundV-1, uw[1], structureBB);
         		// Set the block
         		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, this.disallowModSubs, this.getXWithOffset(uw[0], uw[1]), groundY, this.getZWithOffset(uw[0], uw[1]), true);
         		// Clear upwards
@@ -13472,7 +13568,7 @@ public class DesertStructures
             	
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.getYWithOffset(0);
             	
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
@@ -13702,12 +13798,15 @@ public class DesertStructures
             Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+        	
         	/*
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
             	// top with grass
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
@@ -13723,19 +13822,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	 */
@@ -13753,7 +13852,7 @@ public class DesertStructures
         		int groundV = groundY-this.boundingBox.minY;
         		
         		// Make foundation
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], groundV-1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uw[0], groundV-1, uw[1], structureBB);
         		// Set the block
         		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, this.disallowModSubs, this.getXWithOffset(uw[0], uw[1]), groundY, this.getZWithOffset(uw[0], uw[1]), true);
         		// Clear upwards
@@ -13772,7 +13871,7 @@ public class DesertStructures
         		int groundV = groundY-this.boundingBox.minY;
         		
         		// Make foundation
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], groundV-1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uw[0], groundV-1, uw[1], structureBB);
         		// Set the block
         		this.placeBlockAtCurrentPosition(world, Blocks.hardened_clay, 0, uw[0], groundV, uw[1], structureBB);
         		// Clear upwards
@@ -13802,7 +13901,7 @@ public class DesertStructures
             	
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.getYWithOffset(0);
             	
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
@@ -14031,12 +14130,14 @@ public class DesertStructures
             Object[] blockObject;
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+        	// Establish top and filler blocks, substituting Grass and Dirt if they're null
+        	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	/*
         	// Clear space above
             for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
             	this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
             	// Make dirt foundation
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
             	// top with grass
             	this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
             }}
@@ -14052,19 +14153,19 @@ public class DesertStructures
         		if (unitLetter.equals("F"))
         		{
         			// If marked with F: fill with dirt foundation
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
         		else if (unitLetter.equals("P"))
         		{
         			// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
         			StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
         		}
-        		else if (world.getBlock(posX, posY, posZ)==biomeDirtBlock)
+        		else if (world.getBlock(posX, posY, posZ)==biomeTopBlock)
         		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, u, GROUND_LEVEL-1, w, structureBB);
-        			this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
         	*/
@@ -14081,7 +14182,7 @@ public class DesertStructures
         		int groundV = groundY-this.boundingBox.minY;
         		
         		// Make foundation
-        		this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uw[0], groundV-1, uw[1], structureBB);
+        		this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uw[0], groundV-1, uw[1], structureBB);
         		// Set the block
         		StructureVillageVN.setPathSpecificBlock(world, this.materialType, this.biome, this.disallowModSubs, this.getXWithOffset(uw[0], uw[1]), groundY, this.getZWithOffset(uw[0], uw[1]), true);
         		// Clear upwards
@@ -14100,7 +14201,7 @@ public class DesertStructures
             	
             	int decorHeightY = StructureVillageVN.getAboveTopmostSolidOrLiquidBlockVN(world, this.getXWithOffset(uvw[0], uvw[2]), this.getZWithOffset(uvw[0], uvw[2]))-this.getYWithOffset(0);
             	
-            	this.func_151554_b(world, biomeDirtBlock, biomeDirtMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level

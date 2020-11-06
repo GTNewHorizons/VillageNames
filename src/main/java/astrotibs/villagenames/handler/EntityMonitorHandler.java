@@ -275,7 +275,7 @@ public class EntityMonitorHandler
 
     @SubscribeEvent
     public void onLivingUpdateEvent(LivingUpdateEvent event) {
-
+    	
         // Check if a zombie is about to convert to villager
         if (FunctionsVN.isVanillaZombie(event.entity)) {
             final EntityZombie zombie = (EntityZombie) event.entity;
@@ -450,16 +450,18 @@ public class EntityMonitorHandler
             	if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
             	if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));} // Added in v3.2
             	
-            	// Only strip gear if modern villager skins are on - v3.2.3
-            	if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
-            	{
-            		// Strip gear
-                	zombie.setCanPickUpLoot(false);
-                    for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
-            	}
-            	
     			if ((zombie.ticksExisted + zombie.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
-    					{
+    			{
+    				// Only strip armor if modern skins are on
+    		    	if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
+    		    	{
+    		    		// Turn off gear pickup to prevent goofball rendering
+    		    		if (zombie.canPickUpLoot()) {zombie.setCanPickUpLoot(false);}
+    		    		
+    			    	// Strip armor
+    		    		for (int slot=1; slot <=4; slot++) {if (zombie.getEquipmentInSlot(slot) != null) {zombie.setCurrentItemOrArmor(slot, null);}}
+    		    	}
+    				
     				//if (ezv.getBiomeType() < 0) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
     				//(ExtendedZombieVillager.get( zombie )).setProfessionLevel(ExtendedVillager.determineProfessionLevel(zombie));
     				// Sends a ping to everyone within 80 blocks
@@ -467,7 +469,7 @@ public class EntityMonitorHandler
     				VillageNames.VNNetworkWrapper.sendToAllAround(
     						new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()), // v3.2
     						targetPoint);
-    					}
+    			}
             }
             
         }
@@ -527,7 +529,7 @@ public class EntityMonitorHandler
         
         // --- Initialize villager trades and sync skin with client --- //
         
-        else if ( event.entity.getClass().toString().substring(6).equals(Reference.VILLAGER_CLASS) // Explicit vanilla villager class - v3.2.4
+        else if ( event.entity.getClass().toString().substring(6).equals(Reference.VILLAGER_CLASS) // Explicit vanilla villager class
 				&& !event.entity.worldObj.isRemote)
         {
         	EntityVillager villager = (EntityVillager)event.entity;
@@ -548,7 +550,16 @@ public class EntityMonitorHandler
     				&& ev.getProfession() >= 0 && (ev.getProfession() <=5 || GeneralConfig.professionID_a.indexOf(ev.getProfession())>-1) // This villager ID is specified in the configs
     				)
     		{
-    			
+    			// Only strip armor if modern villager skins are on
+		    	if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor)
+		    	{
+		    		// Turn off gear pickup to prevent goofball rendering
+		    		if (villager.canPickUpLoot()) {villager.setCanPickUpLoot(false);}
+		    		
+			    	// Strip armor
+		    		for (int slot=1; slot <=4; slot++) {if (villager.getEquipmentInSlot(slot) != null) {villager.setCurrentItemOrArmor(slot, null);}}
+		    	}
+				
     			// Initialize the buying list so that the badge displays
     			MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
     			if (buyingList == null)

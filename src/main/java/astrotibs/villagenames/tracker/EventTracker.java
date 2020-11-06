@@ -244,7 +244,6 @@ public class EventTracker
         	ieep.setCareer(0);
         }
         
-        // Added in v3.1
         // BiomeType
         if (ieep.getBiomeType() <0)
         {
@@ -254,8 +253,7 @@ public class EventTracker
         {
         	ieep.setBiomeType(biomeType);
         }
-
-        // Added in v3.2
+        
         // SkinTone
         if (ieep.getSkinTone() == -99) {ieep.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
         else {ieep.setSkinTone(skinTone);}
@@ -264,14 +262,15 @@ public class EventTracker
         // ProfessionLevel
         ieep.setProfessionLevel(professionLevel);
         
-        zombie.setCanPickUpLoot(false);
         
-    	// Only strip gear if modern villager skins are on - v3.2.3
+    	// Only strip armor if modern villager skins are on
     	if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
     	{
-	    	// Strip gear
-    		zombie.setCanPickUpLoot(false); // v3.2.3
-	        for (int slot=0; slot <=4; slot++) {zombie.setCurrentItemOrArmor(slot, null);}
+    		// Turn off gear pickup to prevent goofball rendering
+    		if (zombie.canPickUpLoot()) {zombie.setCanPickUpLoot(false);}
+    		
+	    	// Strip armor
+    		for (int slot=1; slot <=4; slot++) {if (zombie.getEquipmentInSlot(slot) != null) {zombie.setCurrentItemOrArmor(slot, null);}}
     	}
     }
     
@@ -404,6 +403,17 @@ public class EventTracker
         // SkinTone
         if (ieep.getSkinTone() == -99) {ieep.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
         else {ieep.setSkinTone(skinTone);}
+        
+        
+        // Only strip armor if modern villager skins are on
+    	if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor)
+    	{
+    		// Turn off gear pickup to prevent goofball rendering
+    		if (villager.canPickUpLoot()) {villager.setCanPickUpLoot(false);}
+    		
+	    	// Strip armor
+    		for (int slot=1; slot <=4; slot++) {if (villager.getEquipmentInSlot(slot) != null) {villager.setCurrentItemOrArmor(slot, null);}}
+    	}
     }
     
 

@@ -972,6 +972,7 @@ public class NameGenerator {
 		// any haha
 		"lan", "nunu",
 		"rynz", "rynzrs",
+		"rvq",
 	};
 	
 	/**

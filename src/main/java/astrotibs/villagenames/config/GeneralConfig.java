@@ -211,6 +211,8 @@ public class GeneralConfig {
 				"tc_tinkerer||78943", // Tinkers Construct
 				"ccp_stablehand||19940402", // ChocoCraft Plus
 				"myc_archivist||1210950779", // Mystcraft
+				// Actually Additions
+				"aa_jam|aa_jam|493827",
 	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers to render in the modular skin style. Format is: careerAsset|zombieCareerAsset|professionID\n"+
 	    		"careerAsset: career skin png to be overlaid onto the villager, located in assets\\"+Reference.MOD_ID.toLowerCase()+"\\textures\\entity\\villager\\profession\n"+
@@ -464,6 +466,7 @@ public class GeneralConfig {
  				"etfuturum",
  				"ganyssurface",
 	    		"uptodate",
+	    		"malisisdoors",
  				},
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -472,6 +475,7 @@ public class GeneralConfig {
 	    		"uptodate",
 	    		"etfuturum",
  				"ganyssurface",
+ 				"malisisdoors",
  				},
  				"Priority order for referencing Doors for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -564,8 +568,8 @@ public class GeneralConfig {
  				);
 		
 	    modLantern = config.getStringList("Mod Priority: Lantern", "Mod Integration", new String[]{
- 				"uptodate",
  				"netherlicious",
+ 				"uptodate",
 	    		"enviromine",
  				},
  				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
@@ -636,6 +640,8 @@ public class GeneralConfig {
 				"Enchanter|935153|2", 
 				"Stablehand|19940402|0", // ChocoCraft Plus
 				"Archivist|1210950779|1", // Mystcraft
+				// Actually Additions
+				"Jam Guy|493827|0",
 				},
 				"List of professions for other mods' villagers. Format is: Name|ID|pageType\n"
 				+ "Name is your choice of name for the profession.\n"

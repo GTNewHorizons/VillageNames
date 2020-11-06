@@ -1183,6 +1183,8 @@ public class FunctionsVN
 	 */
 	public static void monitorVillagerTrades(EntityVillager villager)
 	{
+		if (villager.getProfession()<0 || villager.getProfession()>5) {return;} // Don't modify non-vanilla villager trades
+    	
     	ExtendedVillager ev = ExtendedVillager.get(villager);
         // Try modifying trades
 		// summon Villager ~ ~ ~ {Profession:0}

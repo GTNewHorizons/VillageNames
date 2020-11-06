@@ -27,6 +27,7 @@ public class ModObjects {
 	public static final String DOM_ETFUTURUM = "etfuturum";
 	public static final String DOM_GANYSSURFACE = "ganyssurface";
 	public static final String DOM_HARVESTCRAFT = "harvestcraft";
+	public static final String DOM_MALISISDOORS = "malisisdoors";
 	public static final String DOM_UPTODATE = "uptodate";
 	public static final String MFQM_CLASS_ROOT = "MoreFunQuicksandMod.main";
 	
@@ -233,6 +234,11 @@ public class ModObjects {
 	public static final String doorJungleEF = DOM_ETFUTURUM + ":door_jungle";
 	public static final String doorAcaciaEF = DOM_ETFUTURUM + ":door_acacia";
 	public static final String doorDarkOakEF = DOM_ETFUTURUM + ":door_dark_oak";
+	public static final String doorSpruceMD = DOM_MALISISDOORS + ":door_spruce";
+	public static final String doorBirchMD = DOM_MALISISDOORS + ":door_birch";
+	public static final String doorJungleMD = DOM_MALISISDOORS + ":door_jungle";
+	public static final String doorAcaciaMD = DOM_MALISISDOORS + ":door_acacia";
+	public static final String doorDarkOakMD = DOM_MALISISDOORS + ":door_dark_oak";
 	public static final String doorSpruceUTD = DOM_UPTODATE + ":door_spruce";
 	public static final String doorBirchUTD = DOM_UPTODATE + ":door_birch";
 	public static final String doorJungleUTD = DOM_UPTODATE + ":door_jungle";
@@ -240,18 +246,18 @@ public class ModObjects {
 	public static final String doorDarkOakUTD = DOM_UPTODATE + ":door_dark_oak";
 	
 	// Fence
-	public static final String fenceOakGS = DOM_GANYSSURFACE + ":fence_0";
-	public static final String fenceSpruceGS = DOM_GANYSSURFACE + ":fence_1";
-	public static final String fenceBirchGS = DOM_GANYSSURFACE + ":fence_2";
-	public static final String fenceJungleGS = DOM_GANYSSURFACE + ":fence_3";
-	public static final String fenceAcaciaGS = DOM_GANYSSURFACE + ":fence_4";
-	public static final String fenceDarkOakGS = DOM_GANYSSURFACE + ":fence_5";
 	public static final String fenceOakEF = DOM_ETFUTURUM + ":fence_oak";
 	public static final String fenceSpruceEF = DOM_ETFUTURUM + ":fence_spruce";
 	public static final String fenceBirchEF = DOM_ETFUTURUM + ":fence_birch";
 	public static final String fenceJungleEF = DOM_ETFUTURUM + ":fence_jungle";
 	public static final String fenceAcaciaEF = DOM_ETFUTURUM + ":fence_acacia";
 	public static final String fenceDarkOakEF = DOM_ETFUTURUM + ":fence_dark_oak";
+	public static final String fenceOakGS = DOM_GANYSSURFACE + ":fence_0";
+	public static final String fenceSpruceGS = DOM_GANYSSURFACE + ":fence_1";
+	public static final String fenceBirchGS = DOM_GANYSSURFACE + ":fence_2";
+	public static final String fenceJungleGS = DOM_GANYSSURFACE + ":fence_3";
+	public static final String fenceAcaciaGS = DOM_GANYSSURFACE + ":fence_4";
+	public static final String fenceDarkOakGS = DOM_GANYSSURFACE + ":fence_5";
 	public static final String fenceSpruceUTD = DOM_UPTODATE + ":fence_spruce";
 	public static final String fenceBirchUTD = DOM_UPTODATE + ":fence_birch";
 	public static final String fenceJungleUTD = DOM_UPTODATE + ":fence_jungle";
@@ -259,17 +265,22 @@ public class ModObjects {
 	public static final String fenceDarkOakUTD = DOM_UPTODATE + ":fence_dark_oak";
 	
 	// Fence Gate
+	public static final String fenceGateSpruceEF = DOM_ETFUTURUM + ":fence_gate_spruce";
+	public static final String fenceGateBirchEF = DOM_ETFUTURUM + ":fence_gate_birch";
+	public static final String fenceGateJungleEF = DOM_ETFUTURUM + ":fence_gate_jungle";
+	public static final String fenceGateAcaciaEF = DOM_ETFUTURUM + ":fence_gate_acacia";
+	public static final String fenceGateDarkOakEF = DOM_ETFUTURUM + ":fence_gate_dark_oak";
 	public static final String fenceGateOakGS = DOM_GANYSSURFACE + ":fence_gate_0";
 	public static final String fenceGateSpruceGS = DOM_GANYSSURFACE + ":fence_gate_1";
 	public static final String fenceGateBirchGS = DOM_GANYSSURFACE + ":fence_gate_2";
 	public static final String fenceGateJungleGS = DOM_GANYSSURFACE + ":fence_gate_3";
 	public static final String fenceGateAcaciaGS = DOM_GANYSSURFACE + ":fence_gate_4";
 	public static final String fenceGateDarkOakGS = DOM_GANYSSURFACE + ":fence_gate_5";
-	public static final String fenceGateSpruceEF = DOM_ETFUTURUM + ":fence_gate_spruce";
-	public static final String fenceGateBirchEF = DOM_ETFUTURUM + ":fence_gate_birch";
-	public static final String fenceGateJungleEF = DOM_ETFUTURUM + ":fence_gate_jungle";
-	public static final String fenceGateAcaciaEF = DOM_ETFUTURUM + ":fence_gate_acacia";
-	public static final String fenceGateDarkOakEF = DOM_ETFUTURUM + ":fence_gate_dark_oak";
+	public static final String fenceGateSpruceMD = DOM_MALISISDOORS + ":spruceFenceGate";
+	public static final String fenceGateBirchMD = DOM_MALISISDOORS + ":birchFenceGate";
+	public static final String fenceGateJungleMD = DOM_MALISISDOORS + ":jungleFenceGate";
+	public static final String fenceGateAcaciaMD = DOM_MALISISDOORS + ":acaciaFenceGate";
+	public static final String fenceGateDarkOakMD = DOM_MALISISDOORS + ":darkOakFenceGate";
 	public static final String fenceGateSpruceUTD = DOM_UPTODATE + ":fence_gate_spruce";
 	public static final String fenceGateBirchUTD = DOM_UPTODATE + ":fence_gate_birch";
 	public static final String fenceGateJungleUTD = DOM_UPTODATE + ":fence_gate_jungle";
@@ -427,6 +438,11 @@ public class ModObjects {
 	public static final String trapdoorJungleGS = DOM_GANYSSURFACE + ":trapdoor3";
 	public static final String trapdoorAcaciaGS = DOM_GANYSSURFACE + ":trapdoor4";
 	public static final String trapdoorDarkOakGS = DOM_GANYSSURFACE + ":trapdoor5";
+	//public static final String trapdoorSpruceMD = DOM_MALISISDOORS + ":trapdoor_spruce";
+	public static final String trapdoorBirchMD = DOM_MALISISDOORS + ":trapdoor_birch";
+	public static final String trapdoorJungleMD = DOM_MALISISDOORS + ":trapdoor_jungle";
+	public static final String trapdoorAcaciaMD = DOM_MALISISDOORS + ":trapdoor_acacia";
+	public static final String trapdoorDarkOakMD = DOM_MALISISDOORS + ":trapdoor_dark_oak";
 	public static final String trapdoorSpruceUTD = DOM_UPTODATE + ":trap_door_spruce";
 	public static final String trapdoorBirchUTD = DOM_UPTODATE + ":trap_door_birch";
 	public static final String trapdoorJungleUTD = DOM_UPTODATE + ":trap_door_jungle";
@@ -1421,9 +1437,11 @@ public class ModObjects {
 	
 	
 	// Fence
-	public static Block chooseModFence(int materialMeta)
+	public static Object[] chooseModFence(int materialMeta)
 	{
 		String[] modprioritylist = GeneralConfig.modFence;
+		
+		Block block = Blocks.fence; int meta = 0;
 		
 		for (String mod : modprioritylist)
 		{
@@ -1439,9 +1457,9 @@ public class ModObjects {
 					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaUTD); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakUTD); break;
 				}
-				if (modblock != null) {return modblock;}
+				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -1452,9 +1470,9 @@ public class ModObjects {
 					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaEF); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakEF); break;
 				}
-				if (modblock != null) {return modblock;}
+				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -1465,11 +1483,11 @@ public class ModObjects {
 					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaGS); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakGS); break;
 				}
-				if (modblock != null) {return modblock;}
+				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
 		}
-		// If all else fails, grab the vanilla version
-		return Blocks.fence;
+		
+		return new Object[] {block, meta};
 	}
 	
 	
@@ -1494,7 +1512,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -1506,7 +1524,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -1516,6 +1534,19 @@ public class ModObjects {
 					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleGS); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaGS); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("malisisdoors"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMD); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchMD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleMD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaMD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakMD); break;
 				}
 				if (modblock != null) {return modblock;}
 			}
@@ -2425,7 +2456,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -2437,7 +2468,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -2449,6 +2480,18 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
+			/*else if (mod.toLowerCase().equals("malisisdoors"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.trapdoorSpruceMD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.trapdoorBirchMD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.trapdoorJungleMD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.trapdoorAcaciaMD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.trapdoorDarkOakMD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}*/
 		}
 		// If all else fails, grab the vanilla version
 		return Blocks.trapdoor;
