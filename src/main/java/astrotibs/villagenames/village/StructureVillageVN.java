@@ -615,6 +615,15 @@ public class StructureVillageVN
     	case OAK:
     		woodMeta = 0; // Oak
     		
+    		// For Wood Stuff or Gany's Surface
+        	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
+        	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
+        	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
+        	// Other stuff
     		if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
         	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
@@ -2736,6 +2745,7 @@ public class StructureVillageVN
 			{
 				switch (materialMeta)
 				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.buttonOakWS); break;
 					case 1: modblock = Block.getBlockFromName(ModObjects.buttonSpruceWS); break;
 					case 2: modblock = Block.getBlockFromName(ModObjects.buttonBirchWS); break;
 					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleWS); break;
