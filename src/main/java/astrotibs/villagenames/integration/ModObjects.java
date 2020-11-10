@@ -29,6 +29,7 @@ public class ModObjects {
 	public static final String DOM_HARVESTCRAFT = "harvestcraft";
 	public static final String DOM_MALISISDOORS = "malisisdoors";
 	public static final String DOM_UPTODATE = "uptodate";
+	public static final String DOM_WOODSTUFF = "woodstuff";
 	public static final String MFQM_CLASS_ROOT = "MoreFunQuicksandMod.main";
 	
     // ---------------- //
@@ -82,6 +83,14 @@ public class ModObjects {
 	// Barrel
 	public static final String barrelUTD = DOM_UPTODATE + ":barrel";
 	
+	// Bookshelf
+	public static final String bookshelfGS = DOM_GANYSSURFACE + ":bookshelf";
+	public static final String bookshelfSpruceWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_1";
+	public static final String bookshelfBirchWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_2";
+	public static final String bookshelfJungleWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_3";
+	public static final String bookshelfAcaciaWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_4";
+	public static final String bookshelfDarkOakWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_5";
+	
 	// Bountiful rocks
 	public static final String andesiteC2 = DOM_CHISEL + ":andesite";
 	public static final String dioriteC2 = DOM_CHISEL + ":diorite";
@@ -122,9 +131,26 @@ public class ModObjects {
 	public static final String buttonJungleUTD = DOM_UPTODATE + ":button_jungle";
 	public static final String buttonAcaciaUTD = DOM_UPTODATE + ":button_acacia";
 	public static final String buttonDarkOakUTD = DOM_UPTODATE + ":button_dark_oak";
+	public static final String buttonSpruceWS = DOM_WOODSTUFF + ":button_tile.wood_1";
+	public static final String buttonBirchWS = DOM_WOODSTUFF + ":button_tile.wood_2";
+	public static final String buttonJungleWS = DOM_WOODSTUFF + ":button_tile.wood_3";
+	public static final String buttonAcaciaWS = DOM_WOODSTUFF + ":button_tile.wood_4";
+	public static final String buttonDarkOakWS = DOM_WOODSTUFF + ":button_tile.wood_5";
 	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
+
+	// Chests
+	public static final String chestSpruceGS = DOM_GANYSSURFACE + ":chest1";
+	public static final String chestBirchGS = DOM_GANYSSURFACE + ":chest2";
+	public static final String chestJungleGS = DOM_GANYSSURFACE + ":chest3";
+	public static final String chestAcaciaGS = DOM_GANYSSURFACE + ":chest4";
+	public static final String chestDarkOakGS = DOM_GANYSSURFACE + ":chest5";
+	public static final String chestSpruceWS = DOM_WOODSTUFF + ":chest_tile.wood_1";
+	public static final String chestBirchWS = DOM_WOODSTUFF + ":chest_tile.wood_2";
+	public static final String chestJungleWS = DOM_WOODSTUFF + ":chest_tile.wood_3";
+	public static final String chestAcaciaWS = DOM_WOODSTUFF + ":chest_tile.wood_4";
+	public static final String chestDarkOakWS = DOM_WOODSTUFF + ":chest_tile.wood_5";
 	
 	// Colored Bed
 	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
@@ -150,6 +176,13 @@ public class ModObjects {
 	public static final String concreteGreenEF = DOM_ETFUTURUM + ":concrete_green";
 	public static final String concreteRedEF = DOM_ETFUTURUM + ":concrete_red";
 	public static final String concreteBlackEF = DOM_ETFUTURUM + ":concrete_black";
+	
+	// Crafting Table
+	public static final String craftingTableSpruceWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_1"; 
+	public static final String craftingTableBirchWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_2"; 
+	public static final String craftingTableJungleWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_3"; 
+	public static final String craftingTableAcaciaWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_4"; 
+	public static final String craftingTableDarkOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_5"; 
 	
 	// Crops
 	public static final String cropHerbDRQ = DOM_DQR3 + ":blockYakusouSeed1";
@@ -263,6 +296,11 @@ public class ModObjects {
 	public static final String fenceJungleUTD = DOM_UPTODATE + ":fence_jungle";
 	public static final String fenceAcaciaUTD = DOM_UPTODATE + ":fence_acacia";
 	public static final String fenceDarkOakUTD = DOM_UPTODATE + ":fence_dark_oak";
+	public static final String fenceSpruceWS = DOM_WOODSTUFF + ":fence_tile.wood_1";
+	public static final String fenceBirchWS = DOM_WOODSTUFF + ":fence_tile.wood_2";
+	public static final String fenceJungleWS = DOM_WOODSTUFF + ":fence_tile.wood_3";
+	public static final String fenceAcaciaWS = DOM_WOODSTUFF + ":fence_tile.wood_4";
+	public static final String fenceDarkOakWS = DOM_WOODSTUFF + ":fence_tile.wood_5";
 	
 	// Fence Gate
 	public static final String fenceGateSpruceEF = DOM_ETFUTURUM + ":fence_gate_spruce";
@@ -286,6 +324,12 @@ public class ModObjects {
 	public static final String fenceGateJungleUTD = DOM_UPTODATE + ":fence_gate_jungle";
 	public static final String fenceGateAcaciaUTD = DOM_UPTODATE + ":fence_gate_acacia";
 	public static final String fenceGateDarkOakUTD = DOM_UPTODATE + ":fence_gate_dark_oak";
+	public static final String fenceGateSpruceWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_1";
+	public static final String fenceGateBirchWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_2";
+	public static final String fenceGateJungleWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_3";
+	public static final String fenceGateAcaciaWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_4";
+	public static final String fenceGateDarkOakWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_5";
+	
 	
 	// Glazed Terracotta
 	public static final String glazedTerracottaWhiteUTD = DOM_UPTODATE + ":glazed_terracotta_white";
@@ -419,6 +463,12 @@ public class ModObjects {
 	public static final String pressurePlateJungleUTD = DOM_UPTODATE + ":pressurePlate3";
 	public static final String pressurePlateAcaciaUTD = DOM_UPTODATE + ":pressurePlate4";
 	public static final String pressurePlateDarkOakUTD = DOM_UPTODATE + ":pressurePlate5";
+	
+	public static final String pressurePlateSpruceWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_1";
+	public static final String pressurePlateBirchWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_2";
+	public static final String pressurePlateJungleWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_3";
+	public static final String pressurePlateAcaciaWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_4";
+	public static final String pressurePlateDarkOakWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_5";
 	
 	// Wooden Sign
 	public static final String signSpruceGS = DOM_GANYSSURFACE + ":sign1";
@@ -816,10 +866,8 @@ public class ModObjects {
 	// Uses furnace metas. 1 is vertical, and horizontal are 2, 3, 4, 5. 0 is inverted
 	public static Block chooseModBarrelBlock()
 	{
-		Block moditem=null;
-		
-		moditem = Block.getBlockFromName(ModObjects.barrelUTD);
-		if (moditem != null) {return moditem;}
+		Block modblock = Block.getBlockFromName(ModObjects.barrelUTD);
+		if (modblock != null) {return modblock;}
 		
 		return null;
 	}
@@ -1007,6 +1055,41 @@ public class ModObjects {
     }
 	
 	
+	// Bookshelves
+	public static Object[] chooseModBookshelf(int materialMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modBookshelf;
+		
+		Block modblock=null; int meta=0;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.bookshelfSpruceWS); meta=0; break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.bookshelfBirchWS); meta=0; break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.bookshelfJungleWS); meta=0; break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.bookshelfAcaciaWS); meta=0; break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.bookshelfDarkOakWS); meta=0; break;
+				}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				if (materialMeta>0)
+				{
+					modblock = Block.getBlockFromName(ModObjects.bookshelfGS); meta=materialMeta-1; break;
+				}
+			}
+		}
+		
+		if (modblock==null) {modblock = Blocks.bookshelf; meta=0;}
+		
+		return new Object[]{modblock, meta};
+	}
+	
+	
 	// Brewing Stand - returns 1.7 vanilla if not found
     public static Block chooseModBrewingStandBlock()
     {
@@ -1072,12 +1155,50 @@ public class ModObjects {
 	 * furnaceOrientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
-	public static Object[] chooseModCartographyTable()
+	public static Object[] chooseModCartographyTable(int woodMeta)
 	{
-		Block modblock = Blocks.crafting_table;
-		int meta = 0;
+		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
+	}
+	
+	
+	// Chest
+	public static Block chooseModChest(int woodMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modChest;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (woodMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.chestSpruceGS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.chestBirchGS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.chestJungleGS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.chestAcaciaGS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.chestDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (woodMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.chestSpruceWS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.chestBirchWS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.chestJungleWS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.chestAcaciaWS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.chestDarkOakWS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+		}
+		
+		return Blocks.chest;
 	}
 	
 	
@@ -1137,6 +1258,25 @@ public class ModObjects {
 			}
 		}
 		return null;
+	}
+	
+	
+	// Crafting Table
+	public static Block chooseModCraftingTable(int materialMeta)
+	{
+		Block modblock=null; int meta=0;
+		
+		switch (materialMeta)
+		{
+			case 1: modblock = Block.getBlockFromName(ModObjects.craftingTableSpruceWS); break;
+			case 2: modblock = Block.getBlockFromName(ModObjects.craftingTableBirchWS); break;
+			case 3: modblock = Block.getBlockFromName(ModObjects.craftingTableJungleWS); break;
+			case 4: modblock = Block.getBlockFromName(ModObjects.craftingTableAcaciaWS); break;
+			case 5: modblock = Block.getBlockFromName(ModObjects.craftingTableDarkOakWS); break;
+		}
+		if (modblock==null) {modblock = Blocks.crafting_table;}
+		
+		return modblock;
 	}
 	
 	
@@ -1485,6 +1625,18 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			else if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceWS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchWS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleWS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaWS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakWS); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
 		}
 		
 		return new Object[] {block, meta};
@@ -1541,7 +1693,18 @@ public class ModObjects {
 			{
 				switch (materialMeta)
 				{
-					case 0: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMD); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchMD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleMD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaMD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakMD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
 					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMD); break;
 					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchMD); break;
 					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleMD); break;
@@ -1556,10 +1719,9 @@ public class ModObjects {
 	}
 	
 	// Fletching Table
-	public static Object[] chooseModFletchingTable()
+	public static Object[] chooseModFletchingTable(int woodMeta)
 	{
-		Block modblock = Blocks.crafting_table;
-		int meta = 0;
+		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
 	}
@@ -1960,20 +2122,18 @@ public class ModObjects {
 	
 	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta)
 	{
-		Block modblock=null;
+		Block modblock=null; int meta=0;
 		boolean setTE = false; // Flagged as true if you need to set a tile entity
 		
 		modblock = Block.getBlockFromName(ModObjects.deskBC);
-		if (modblock != null)
-		{
-			setTE = true;
-		}
+		
+		if (modblock != null) {setTE = true;}
 		else
 		{
-			modblock = Blocks.bookshelf;
+			Object modobject[] = ModObjects.chooseModBookshelf(woodMeta); modblock=(Block)modobject[0]; meta=(Integer)modobject[1];
 		}
 		
-		world.setBlock(x, y, z, modblock);
+		world.setBlock(x, y, z, modblock, meta, 2);
 		
 		if (setTE)
 		{
@@ -1991,10 +2151,9 @@ public class ModObjects {
 	
 	
 	// Loom
-	public static Object[] chooseModLoom()
+	public static Object[] chooseModLoom(int woodMeta)
 	{
-		Block modblock = Blocks.crafting_table;
-		int meta = 0;
+		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
 	}
@@ -2065,10 +2224,9 @@ public class ModObjects {
 	
 	
 	// Smithing Table
-	public static Object[] chooseModSmithingTable()
+	public static Object[] chooseModSmithingTable(int woodMeta)
 	{
-		Block modblock = Blocks.crafting_table;
-		int meta = 0;
+		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
 	}
@@ -2425,10 +2583,9 @@ public class ModObjects {
 	 * Orientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
-	public static Object[] chooseModStonecutter(int orientation)
+	public static Object[] chooseModStonecutter(int orientation, int woodMeta)
 	{
-		Block modblock = Blocks.crafting_table;
-		int meta = 0;
+		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
 	}
@@ -2631,7 +2788,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -2643,7 +2800,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -2652,6 +2809,18 @@ public class ModObjects {
 					case 3: modblock = Block.getBlockFromName(ModObjects.pressurePlateJungleGS); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.pressurePlateAcaciaGS); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.pressurePlateDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.pressurePlateSpruceWS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.pressurePlateBirchWS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.pressurePlateJungleWS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.pressurePlateAcaciaWS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.pressurePlateDarkOakWS); break;
 				}
 				if (modblock != null) {return modblock;}
 			}

@@ -650,6 +650,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
@@ -689,6 +692,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(2, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(2, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
@@ -736,6 +742,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(3, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
@@ -776,6 +785,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(4, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(4, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
@@ -816,6 +828,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(5, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(5, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
@@ -869,6 +884,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;} // Jungle trapdoor
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 1: meta==11? 9 : meta; break;} // Sandstone slab
         	//if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=4; break;} // Brick double slab
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
@@ -953,6 +971,9 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
+        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+        	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.cobblestone; meta=0; break;}
         	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
         	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
@@ -2687,7 +2708,7 @@ public class StructureVillageVN
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -2699,7 +2720,7 @@ public class StructureVillageVN
 				}
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -2708,6 +2729,18 @@ public class StructureVillageVN
 					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleGS); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.buttonAcaciaGS); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.buttonDarkOakGS); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.buttonSpruceWS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.buttonBirchWS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.buttonJungleWS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.buttonAcaciaWS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.buttonDarkOakWS); break;
 				}
 				if (modblock != null) {return modblock;}
 			}

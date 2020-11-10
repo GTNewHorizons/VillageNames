@@ -262,15 +262,10 @@ public class VillageGeneratorConfigHandler
 				+ "Must be in the range of [Minimum, Maximum].");
 		
 		// If someone put Mode outside of the range, let them know
-		if (newVillageSizeMode < newVillageSizeMinimum)
+		if (newVillageSizeMode < newVillageSizeMinimum || newVillageSizeMode > newVillageSizeMaximum)
 		{
-			LogHelper.error("Village Size: Mode can't be lower than the minimum! Setting to minimum.");
-			newVillageSizeMode = newVillageSizeMinimum;
-		}
-		else if (newVillageSizeMode > newVillageSizeMaximum)
-		{
-			LogHelper.error("Village Size: Mode can't be higher than the maximum! Setting to maximum.");
-			newVillageSizeMode = newVillageSizeMaximum;
+			LogHelper.error("Village Size: Mode can't be outside of the range [minimum, maximum]. Setting to the midpoint between these.");
+			newVillageSizeMode = (newVillageSizeMinimum + newVillageSizeMaximum)/2F;
 		}
 		
 		newVillageSpacingMedian = config.getInt("Village Spacing: Median", Reference.CATEGORY_VILLAGE_GENERATOR, 20, 1, 100, "Median distance between villages. Vanilla is 20.");

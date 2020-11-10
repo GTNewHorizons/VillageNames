@@ -78,7 +78,6 @@ public class GeneralConfig {
 	
 	public static boolean pyramidTerracotta;
 	
-	// Added in v3.1trades
 	public static String[] modBountifulStone;
 	public static String[] modBanner;
 	public static String[] modBeetroot;
@@ -87,8 +86,6 @@ public class GeneralConfig {
 	public static String[] modKelp;
 	public static String[] modLantern;
 	public static String[] modGrassPath;
-	
-	// Added in v3.2
 	public static String[] modButton;
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
@@ -98,9 +95,11 @@ public class GeneralConfig {
 	public static String[] modFenceGate;
 	public static String[] modDoor;
 	public static String[] modWoodenTrapdoor;
+	public static String[] modBookshelf;
 	public static String[] modRedSandstone;
 	public static String[] modStrippedLog;
 	public static String[] modWall;
+	public static String[] modChest;
 	
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
@@ -424,6 +423,7 @@ public class GeneralConfig {
 		
 		modButton = config.getStringList("Mod Priority: Button", "Mod Integration", new String[]{
 	    		"uptodate",
+	    		"woodstuff",
 	    		"etfuturum",
  				"ganyssurface",
  				},
@@ -448,6 +448,7 @@ public class GeneralConfig {
 	    
 	    modFence = config.getStringList("Mod Priority: Fence", "Mod Integration", new String[]{
 	    		"uptodate",
+	    		"woodstuff",
  				"etfuturum",
  				"ganyssurface",
  				},
@@ -456,6 +457,7 @@ public class GeneralConfig {
 	    
 	    modPressurePlate = config.getStringList("Mod Priority: Pressure Plate", "Mod Integration", new String[]{
 	    		"uptodate",
+	    		"woodstuff",
  				"etfuturum",
  				"ganyssurface",
  				},
@@ -466,6 +468,7 @@ public class GeneralConfig {
  				"etfuturum",
  				"ganyssurface",
 	    		"uptodate",
+	    		"woodstuff",
 	    		"malisisdoors",
  				},
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
@@ -486,6 +489,20 @@ public class GeneralConfig {
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modBookshelf = config.getStringList("Mod Priority: Bookshelf", "Mod Integration", new String[]{
+	    		"woodstuff",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Bookshelves for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modChest = config.getStringList("Mod Priority: Chest", "Mod Integration", new String[]{
+	    		"woodstuff",
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Wooden Chests for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modRedSandstone = config.getStringList("Mod Priority: Red Sandstone", "Mod Integration", new String[]{
