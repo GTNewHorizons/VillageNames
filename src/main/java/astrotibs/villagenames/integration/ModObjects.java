@@ -1163,7 +1163,7 @@ public class ModObjects {
 		
 		if (tryCampfire!=null)
 		{
-			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, false)};
+			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, true)};
 		}
 		
 		return new Object[]{Blocks.torch, 0};
