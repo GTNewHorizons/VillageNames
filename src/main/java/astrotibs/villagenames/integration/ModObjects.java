@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 /**
  * A holder for string names for various mod items/blocks/etc for easy access
  */
-// Added in v3.1trades
 public class ModObjects {
 	
 	// Constantly referenced domain names

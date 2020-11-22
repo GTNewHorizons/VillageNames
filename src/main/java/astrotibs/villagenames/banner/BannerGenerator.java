@@ -21,7 +21,7 @@ import net.minecraft.village.Village;
 public class BannerGenerator
 {
 	// Array of color metas and corresponding weights
-	public static int[] colorMeta = new int[]{
+	public static final int[] COLOR_METAS = new int[]{
 			0, // Black
 			1, // Red
 			2, // Green
@@ -40,7 +40,7 @@ public class BannerGenerator
 			15 // White
 			};
 	
-	public static double[] colorWeights = new double[]{
+	public static final double[] COLOR_WEIGHTS = new double[]{
 			121D/3, // Black
 			335D/2, // Red
 			81D, // Green
@@ -463,7 +463,7 @@ public class BannerGenerator
 			if (forceBannerColor>=0 && bannerColors.size()==0) {bannerColors.add(forceBannerColor);} // In case you're backporting a banner for a previously created village
 			if (forceBannerColor2>=0 && bannerColors.size()==1)  {bannerColors.add(forceBannerColor2);}
 			
-			int newpotentialcolor = (Integer) FunctionsVN.weightedRandom(colorMeta, colorWeights, random);
+			int newpotentialcolor = (Integer) FunctionsVN.weightedRandom(COLOR_METAS, COLOR_WEIGHTS, random);
 			// Search through the already-collected numbers and see if this new one is unique
 			boolean flag = true;
 			if (bannerColors.size() > 0)

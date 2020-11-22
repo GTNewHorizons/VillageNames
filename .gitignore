@@ -3,6 +3,7 @@ bin
 .classpath
 .project
 .settings
+.metadata
  
 # forge
 MinecraftForge-Credits.txt

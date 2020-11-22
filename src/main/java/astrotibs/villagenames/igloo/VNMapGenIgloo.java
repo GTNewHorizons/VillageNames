@@ -26,8 +26,7 @@ public class VNMapGenIgloo extends MapGenStructure
     private static int maxDistanceBetweenScatteredFeatures;
     /** the minimum distance between scattered features */
     private static int minDistanceBetweenScatteredFeatures;
-    private static final String __OBFID = "CL_00000471";
-
+    
     public VNMapGenIgloo()
     {
         this.scatteredFeatureSpawnList = new ArrayList();
@@ -55,6 +54,12 @@ public class VNMapGenIgloo extends MapGenStructure
     {
         return "Temple";
     }
+    
+	@Override
+	public boolean canSpawnStructureAtCoords(int chunkX, int chunkZ)
+	{
+		return canSpawnStructureAtCoords(this.worldObj, chunkX, chunkZ);
+	}
 
     protected static boolean canSpawnStructureAtCoords(World worldIn, int chunkX, int chunkZ)
     {
@@ -130,46 +135,39 @@ public class VNMapGenIgloo extends MapGenStructure
     }
 
     public static class Start extends StructureStart
+    {
+        public Start() {}
+
+        public Start(World worldIn, Random rand, int chunkX, int chunkZ)
         {
-            private static final String __OBFID = "CL_00000472";
+            super(chunkX, chunkZ);
+            BiomeGenBase biomegenbase = worldIn.getBiomeGenForCoords(chunkX * 16 + 8, chunkZ * 16 + 8);
             
-            public Start() {}
+            // Added in v3.1
+    		// Get a list of tags for this biome
+    		BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biomegenbase);
+    		
+    		boolean isSnowy = false;
+    		for (BiomeDictionary.Type type : typeTags)
+    		{
+    			if (type==BiomeDictionary.Type.SNOWY) {isSnowy = true;}
+    			// Invalid biomes
+    			if (type==BiomeDictionary.Type.HILLS) {isSnowy = false; break;}
+    			if (type==BiomeDictionary.Type.MOUNTAIN) {isSnowy = false; break;}
+    			if (type==BiomeDictionary.Type.OCEAN) {isSnowy = false; break;}
+    			if (type==BiomeDictionary.Type.RIVER) {isSnowy = false; break;}
+    		}
+    		
+			if (
+					(biomegenbase == BiomeGenBase.icePlains || biomegenbase == BiomeGenBase.coldTaiga)
+					|| (GeneralConfig.biomedictIgloos && isSnowy)
+					)
+			{
+				VNComponentIglooPieces.Igloo igloo = new VNComponentIglooPieces.Igloo(rand, chunkX * 16, chunkZ * 16);
+				this.components.add(igloo);
+			}
 
-            public Start(World worldIn, Random rand, int chunkX, int chunkZ)
-            {
-                super(chunkX, chunkZ);
-                BiomeGenBase biomegenbase = worldIn.getBiomeGenForCoords(chunkX * 16 + 8, chunkZ * 16 + 8);
-                
-                // Added in v3.1
-        		// Get a list of tags for this biome
-        		BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biomegenbase);
-        		
-        		boolean isSnowy = false;
-        		for (BiomeDictionary.Type type : typeTags)
-        		{
-        			if (type==BiomeDictionary.Type.SNOWY) {isSnowy = true;}
-        			// Invalid biomes
-        			if (type==BiomeDictionary.Type.HILLS) {isSnowy = false; break;}
-        			if (type==BiomeDictionary.Type.MOUNTAIN) {isSnowy = false; break;}
-        			if (type==BiomeDictionary.Type.OCEAN) {isSnowy = false; break;}
-        			if (type==BiomeDictionary.Type.RIVER) {isSnowy = false; break;}
-        		}
-        		
-				if (
-						(biomegenbase == BiomeGenBase.icePlains || biomegenbase == BiomeGenBase.coldTaiga)
-						|| (GeneralConfig.biomedictIgloos && isSnowy)
-						)
-				{
-					VNComponentIglooPieces.Igloo igloo = new VNComponentIglooPieces.Igloo(rand, chunkX * 16, chunkZ * 16);
-					this.components.add(igloo);
-				}
-
-                this.updateBoundingBox();
-            }
+            this.updateBoundingBox();
         }
-    
-	@Override
-	public boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) {
-		return canSpawnStructureAtCoords(this.worldObj, chunkX, chunkZ);
-	}
+    }
 }

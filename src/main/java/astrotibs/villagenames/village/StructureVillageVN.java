@@ -1353,7 +1353,7 @@ public class StructureVillageVN
 		        		{
 		        			while(true)
 		        			{
-		        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+		        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.COLOR_METAS, BannerGenerator.COLOR_WEIGHTS, randomFromXYZ);
 		        				// Compare to all previous colors to ensure it's unique
 		        				boolean isRedundant=false;
 		        				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
@@ -1498,7 +1498,7 @@ public class StructureVillageVN
         		{
         			while(true)
         			{
-        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+        				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.COLOR_METAS, BannerGenerator.COLOR_WEIGHTS, randomFromXYZ);
         				// Compare to all previous colors to ensure it's unique
         				boolean isRedundant=false;
         				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
@@ -1607,7 +1607,7 @@ public class StructureVillageVN
     		{
     			while(true)
     			{
-    				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, randomFromXYZ);
+    				townColorArray[c] = (Integer) FunctionsVN.weightedRandom(BannerGenerator.COLOR_METAS, BannerGenerator.COLOR_WEIGHTS, randomFromXYZ);
     				// Compare to all previous colors to ensure it's unique
     				boolean isRedundant=false;
     				for (int i=0; i<c; i++) {if (townColorArray[c]==townColorArray[i]) {isRedundant=true; break;}}
@@ -2693,7 +2693,7 @@ public class StructureVillageVN
 	
 
 	/*
-	 * Used to select wooden door types.
+	 * Used to select wooden button types.
 	 */
 	public static Block chooseWoodenButton(int materialMeta)
 	{
@@ -2872,14 +2872,14 @@ public class StructureVillageVN
 	 */
 	public static int generateUnusedColor(int[] colorArray, Random random, boolean useWeighted)
 	{
-		int candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random) : random.nextInt(16));
+		int candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.COLOR_METAS, BannerGenerator.COLOR_WEIGHTS, random) : random.nextInt(16));
 		if (colorArray.length>=16) {return candidateColor;} // If it's not possible to return a unique color (pigeonhole principle), just return a random one
 		boolean matchFound=false;
 		
 		// Then check the color against the provided array
 		while (true)
 		{
-			candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.colorMeta, BannerGenerator.colorWeights, random) : random.nextInt(16));
+			candidateColor = (useWeighted ? (Integer) FunctionsVN.weightedRandom(BannerGenerator.COLOR_METAS, BannerGenerator.COLOR_WEIGHTS, random) : random.nextInt(16));
 			
 			for (int color : colorArray)
 			{

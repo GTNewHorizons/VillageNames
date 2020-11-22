@@ -28,8 +28,6 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class VNComponentIglooPieces
 {
-    private static final String __OBFID = "CL_00000473";
-
     public static void registerScatteredFeaturePieces()
     {
         MapGenStructureIO.func_143031_a(VNComponentIglooPieces.Igloo.class, "Iglu");
@@ -45,7 +43,6 @@ public class VNComponentIglooPieces
             /** The size of the bounding box for this feature in the Z axis */
             protected int scatteredFeatureSizeZ;
             protected int field_74936_d = -1;
-            private static final String __OBFID = "CL_00000479";
 
             public Feature() {}
 

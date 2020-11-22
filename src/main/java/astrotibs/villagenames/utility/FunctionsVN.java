@@ -1742,11 +1742,11 @@ public class FunctionsVN
 						// This is where I'll put the "illegal trade removal" method.
 						// Right now this is a placeholder specifically to remove the paper/emerald Librarian trade
 	                    if (
-	                    		// Since we're equating careerLevel and trade list position, insert that instead of careerLevel for evaluation.
-	                    		FunctionsVN.isTradeInappropriate(merchantrecipe, profession, career, i+1)//-listSizeAdd)
-	                    		// Added in v3.1: to prevent crash-trades
+	                    		merchantrecipe==null
 	                    		|| merchantrecipe.getItemToBuy()==null || merchantrecipe.getItemToBuy().getItem()==Item.getItemFromBlock(Blocks.air)
 								|| merchantrecipe.getItemToSell()==null || merchantrecipe.getItemToSell().getItem()==Item.getItemFromBlock(Blocks.air)
+	                    		// Since we're equating careerLevel and trade list position, insert that instead of careerLevel for evaluation.
+	                    		|| FunctionsVN.isTradeInappropriate(merchantrecipe, profession, career, i+1)//-listSizeAdd)
 	                    		) {
 	                    	// summon Villager ~ ~ ~ {Profession:1}
 	        				
