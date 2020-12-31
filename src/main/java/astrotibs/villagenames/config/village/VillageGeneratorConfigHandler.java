@@ -206,7 +206,28 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSnowyToolSmith1_string; public static ArrayList<Double> componentModernSnowyToolSmith1_vals;
 	public static String componentModernSnowyWeaponSmith1_string; public static ArrayList<Double> componentModernSnowyWeaponSmith1_vals;
 	public static String componentModernSnowyStreetDecor1_string; public static ArrayList<Double> componentModernSnowyStreetDecor1_vals;
-
+	
+	// Decor
+	public static boolean allowTaigaTroughs;
+	public static boolean restrictTaigaTroughs;
+/*	public static boolean decorPlainsLamp1; // Four torches on elevated stripped wood
+	
+	public static boolean decorDesertLamp1; // Torch on terracotta atop cut sandstone column
+	
+	public static boolean decorTaigaDecoration1; // Trough
+	public static boolean decorTaigaDecoration2; // Large Boulder
+	public static boolean decorTaigaDecoration3; // Small Boulder
+	public static boolean decorTaigaDecoration4; // Medium Boulder
+	public static boolean decorTaigaDecoration5; // Campfire
+	public static boolean decorTaigaDecoration6; // Campfire over hay bin
+	public static boolean decorTaigaDecoration7; // Torch on cobblestone wall
+	
+	public static boolean decorSavannaLampPost01; // Torch on a fence
+	
+	public static boolean decorSnowyLampPost1; // Two lanterns
+	public static boolean decorSnowyLampPost02; // One lantern
+	public static boolean decorSnowyLampPost03; // Four lanterns*/	
+	
 	// Misc new village stuff
 	public static String[] componentVillageTypes;
 	public static boolean useModdedWoodenDoors;
@@ -230,6 +251,8 @@ public class VillageGeneratorConfigHandler
 		// --- New Villages --- //
 		String componentLegacy = "Component: Legacy ";
 		String componentModern = "Component: Modern ";
+/*		String decor = "Decor: ";
+		String allowForThisDecorTypeIn = "Allow this decor type in ";*/
 		String generationStatsForL = "Generation stats for this component in all villages. Vanilla weight is ";
 		String generationStatsForM = "Generation stats for this component in ";
 		String plainsVillages = "plains villages";
@@ -867,6 +890,30 @@ public class VillageGeneratorConfigHandler
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*snowyHouses * snowyDecorToHouseRatio);}
 		componentModernSnowyStreetDecor1_string = config.getString(componentModern+"Snowy Road Decor", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+snowyVillages);
 		componentModernSnowyStreetDecor1_vals = parseDoubleArray(componentModernSnowyStreetDecor1_string, modifiedDefaults);
+		
+		
+		// --- Decor --- //
+		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
+		restrictTaigaTroughs = config.getBoolean("Decor: Restrict Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Limit taiga troughs only to the well or as street decor. "
+				+ "Setting this to false allows them in any flagged taiga decor location, at the risk of them cutting into the parent structure.");
+		
+/*		decorPlainsLamp1 = config.getBoolean(decor+"Plains Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+plainsVillages);
+		
+		decorDesertLamp1 = config.getBoolean(decor+"Desert Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+desertVillages);
+		
+		decorTaigaDecoration1 = config.getBoolean(decor+"Taiga Trough", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration2 = config.getBoolean(decor+"Taiga Large Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration3 = config.getBoolean(decor+"Taiga Small Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration4 = config.getBoolean(decor+"Taiga Medium Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration5 = config.getBoolean(decor+"Taiga Campfire", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration6 = config.getBoolean(decor+"Taiga Campfire Over Hay Bin", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		decorTaigaDecoration7 = config.getBoolean(decor+"Taiga Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
+		
+		decorSavannaLampPost01 = config.getBoolean(decor+"Savanna Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+savannaVillages);
+		
+		decorSnowyLampPost1 = config.getBoolean(decor+"Snowy Lamp (Two Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
+		decorSnowyLampPost02 = config.getBoolean(decor+"Snowy Lamp (One Lantern)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
+		decorSnowyLampPost03 = config.getBoolean(decor+"Snowy Lamp (Four Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);*/
 		
 		
 		componentVillageTypes = config.getStringList("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,

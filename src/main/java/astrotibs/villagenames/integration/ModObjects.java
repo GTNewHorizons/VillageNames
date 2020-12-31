@@ -143,7 +143,7 @@ public class ModObjects {
 	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
-
+	
 	// Chests
 	public static final String chestOakGS = DOM_GANYSSURFACE + ":chest0";
 	public static final String chestSpruceGS = DOM_GANYSSURFACE + ":chest1";

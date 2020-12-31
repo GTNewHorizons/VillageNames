@@ -1,4 +1,7 @@
-# Item localizations
+# 1.7.10 version
+
+# Items
+item.villagenames:codex.name=Codex
 item.villagenames:villagebook.name=Village Book
 item.villagenames:strongholdbook.name=Stronghold Book
 item.villagenames:templebook.name=Temple Book
@@ -7,13 +10,10 @@ item.villagenames:monumentbook.name=Monument Book
 item.villagenames:mansionbook.name=Mansion Book
 item.villagenames:fortressbook.name=Fortress Book
 item.villagenames:endcitybook.name=End City Book
-item.villagenames:codex.name=Codex
-
 item.villagenames:jungletemplebook.name=Jungle Temple Book
 item.villagenames:desertpyramidbook.name=Desert Pyramid Book
 item.villagenames:swamphutbook.name=Swamp Hut Book
 item.villagenames:igloobook.name=Igloo Book
-
 item.villagenames:moonvillagebook.name=Moon Village Book
 item.villagenames:koentusvillagebook.name=Koentus Village Book
 item.villagenames:fronosvillagebook.name=Fronos Village Book
@@ -21,9 +21,10 @@ item.villagenames:nibiruvillagebook.name=Nibiru Village Book
 item.villagenames:abandonedbasebook.name=Abandoned Base Book
 
 
-# Block localizations
+# Custom Blocks
 tile.villagenames:lunarinGoldBrick.name=Lunarin Style Gold Brick
 tile.villagenames:lunarinIronBrick.name=Lunarin Style Iron Brick
+
 
 # Backported materials
 tile.glazedTerracottaWhite.name=White Glazed Terracotta
@@ -111,6 +112,7 @@ entity.VillageNames.Guardian.name=Guardian
 eggdisplay.VillageNames.guardian.name=Guardian
 eggdisplay.VillageNames.guardian.elder.name=Elder Guardian
 
+
 # Villager careers/professions
 entity.Villager.farmer=Farmer
 entity.Villager.fisherman=Fisherman
@@ -129,23 +131,21 @@ entity.Villager.cartographer=Cartographer
 entity.Villager.blacksmith=Blacksmith
 entity.Villager.mason=Mason
 
+
 # Config Menu
 config.villagenames.global.tooltip=Controls everything that's not name syllable pools or the village generator
 config.villagenames.villagegenerator.tooltip=Settings for the village generation system
 config.villagenames.syllables.tooltip=Collection of the pools of syllables accessible to the name generator
 
+
 # Achievements
 achievement.maxrep=§aEmerald Standard
 achievement.maxrep.desc=Obtain the maximum reputation in a village
-
 achievement.archaeologist=§6Archaeologist
 achievement.archaeologist.desc=Identify multiple different kinds of structures
-
 achievement.minrep=§4You're A Monster
 achievement.minrep.desc=Obtain the minimum reputation in a village
-
 achievement.ghosttown=Ghost Town
 achievement.ghosttown.desc=Create a Village Book for an empty village
-
 achievement.laputa=§cFidelity
 achievement.laputa.desc=Befriend a lonely golem

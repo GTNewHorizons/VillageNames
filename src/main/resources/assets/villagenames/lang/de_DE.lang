@@ -1,0 +1,151 @@
+# 1.7.10 version
+
+# Items
+item.villagenames:codex.name=Kodex
+item.villagenames:villagebook.name=Dorfsbuch
+item.villagenames:strongholdbook.name=Festungsbuch
+item.villagenames:templebook.name=Tempelsbuch
+item.villagenames:mineshaftbook.name=Minenbuch
+item.villagenames:monumentbook.name=Monumentsbuch
+item.villagenames:mansionbook.name=Anwesensbuch
+item.villagenames:fortressbook.name=Netherfestungsbuch
+item.villagenames:endcitybook.name=Endsiedlungsbuch
+item.villagenames:jungletemplebook.name=Dschungeltempelbuch
+item.villagenames:desertpyramidbook.name=Wüstentempelbuch
+item.villagenames:swamphutbook.name=Sumpfhüttenbuch
+item.villagenames:igloobook.name=Iglubuch
+item.villagenames:moonvillagebook.name=Monddorfsbuch
+item.villagenames:koentusvillagebook.name=Koentusdorfsbuch
+item.villagenames:fronosvillagebook.name=Fronosdorfsbuch
+item.villagenames:nibiruvillagebook.name=Nibirudorfsbuch
+item.villagenames:abandonedbasebook.name=Verlassene-Basis-Buch
+
+
+# Custom Blocks
+tile.villagenames:lunarinGoldBrick.name=Lunarin-Goldziegel
+tile.villagenames:lunarinIronBrick.name=Lunarin-Eisenziegel
+
+
+# Backported materials
+tile.glazedTerracottaWhite.name=Weiße glasierte Keramik
+tile.glazedTerracottaOrange.name=Orange glasierte Keramik
+tile.glazedTerracottaMagenta.name=Magenta glasierte Keramik
+tile.glazedTerracottaLightBlue.name=Hellblaue glasierte Keramik
+tile.glazedTerracottaYellow.name=Gelbe glasierte Keramik
+tile.glazedTerracottaLime.name=Hellgrüne glasierte Keramik
+tile.glazedTerracottaPink.name=Rosa glasierte Keramik
+tile.glazedTerracottaGray.name=Graue glasierte Keramik
+tile.glazedTerracottaSilver.name=Hellgraue glasierte Keramik
+tile.glazedTerracottaCyan.name=Türkis glasierte Keramik
+tile.glazedTerracottaPurple.name=Violette glasierte Keramik
+tile.glazedTerracottaBlue.name=Blaue glasierte Keramik
+tile.glazedTerracottaBrown.name=Braune glasierte Keramik
+tile.glazedTerracottaGreen.name=Grüne glasierte Keramik
+tile.glazedTerracottaRed.name=Rote glasierte Keramik
+tile.glazedTerracottaBlack.name=Schwarze glasierte Keramik
+
+tile.concrete.white.name=Weißer Beton
+tile.concrete.orange.name=Oranger Beton
+tile.concrete.magenta.name=Magenta Beton
+tile.concrete.light_blue.name=Hellblauer Beton
+tile.concrete.yellow.name=Gelber Beton
+tile.concrete.lime.name=Hellgrüner Beton
+tile.concrete.pink.name=Rosa Beton
+tile.concrete.gray.name=Grauer Beton
+tile.concrete.silver.name=Hellgrauer Beton
+tile.concrete.cyan.name=Türkiser Beton
+tile.concrete.purple.name=Violetter Beton
+tile.concrete.blue.name=Blauer Beton
+tile.concrete.brown.name=Brauner Beton
+tile.concrete.green.name=Grüner Beton
+tile.concrete.red.name=Roter Beton
+tile.concrete.black.name=Schwarzer Beton
+
+tile.concrete_powder.white.name=Weißer Trockenbeton
+tile.concrete_powder.orange.name=Oranger Trockenbeton
+tile.concrete_powder.magenta.name=Magenta Trockenbeton
+tile.concrete_powder.light_blue.name=Hellblauer Trockenbeton
+tile.concrete_powder.yellow.name=Gelber Trockenbeton
+tile.concrete_powder.lime.name=Hellgrüner Trockenbeton
+tile.concrete_powder.pink.name=Rosa Trockenbeton
+tile.concrete_powder.gray.name=Grauer Trockenbeton
+tile.concrete_powder.silver.name=Hellgrauer Trockenbeton
+tile.concrete_powder.cyan.name=Türkiser Trockenbeton
+tile.concrete_powder.purple.name=Violetter Trockenbeton
+tile.concrete_powder.blue.name=Blauer Trockenbeton
+tile.concrete_powder.brown.name=Brauner Trockenbeton
+tile.concrete_powder.green.name=Grüner Trockenbeton
+tile.concrete_powder.red.name=Roter Trockenbeton
+tile.concrete_powder.black.name=Schwarzer Trockenbeton
+
+# Update "stained clay" to "Terracotta" as per 1.12
+tile.clayHardenedStained.name=Gefärbte Keramik
+tile.clayHardenedStained.black.name=Schwarze Keramik
+tile.clayHardenedStained.red.name=Rote Keramik
+tile.clayHardenedStained.green.name=Grüne Keramik
+tile.clayHardenedStained.brown.name=Braune Keramik
+tile.clayHardenedStained.blue.name=Blaue Keramik
+tile.clayHardenedStained.purple.name=Violette Keramik
+tile.clayHardenedStained.cyan.name=Türkise Keramik
+tile.clayHardenedStained.silver.name=Hellgraue Keramik
+tile.clayHardenedStained.gray.name=Graue Keramik
+tile.clayHardenedStained.pink.name=Rosa Keramik
+tile.clayHardenedStained.lime.name=Hellgrüne Keramik
+tile.clayHardenedStained.yellow.name=Gelbe Keramik
+tile.clayHardenedStained.lightBlue.name=Hellblaue Keramik
+tile.clayHardenedStained.magenta.name=Magenta Keramik
+tile.clayHardenedStained.orange.name=Orange Keramik
+tile.clayHardenedStained.white.name=Weiße Keramik
+tile.clayHardened.name=Keramik
+
+# Ocean Monument stuff
+item.prismarineShard.name=Prismarinscherbe
+item.prismarineCrystals.name=Prismarinkristalle
+tile.prismarine.rough.name=Prismarin
+tile.prismarine.bricks.name=Prismarinziegel
+tile.prismarine.dark.name=Dunkler Prismarin
+tile.seaLantern.name=Seelaterne
+tile.sponge.name=Inerter Schwamm
+tile.sponge.dry.name=Schwamm
+tile.sponge.wet.name=Nasser Schwamm
+entity.VillageNames.Guardian.name=Wächter
+eggdisplay.VillageNames.guardian.name=Wächter
+eggdisplay.VillageNames.guardian.elder.name=Großer Wächter
+
+
+# Villager careers/professions
+entity.Villager.farmer=Bauer
+entity.Villager.fisherman=Fischer
+entity.Villager.shepherd=Schäfer
+entity.Villager.fletcher=Pfeilmacher
+entity.Villager.librarian=Bibliothekar
+entity.Villager.cleric=Geistlicher
+entity.Villager.armor=Panzermacher
+entity.Villager.weapon=Waffenschmied
+entity.Villager.tool=Grobschmied
+entity.Villager.butcher=Fleischer
+entity.Villager.leather=Gerber
+entity.Villager.nitwit=Nichtsnutz
+entity.Villager.cartographer=Kartograph
+# This one's custom because there was no such title in vanilla
+entity.Villager.blacksmith=Schmied
+entity.Villager.mason=Maurer
+
+
+# Config Menu
+config.villagenames.global.tooltip=Kontrolliert alles, außer den Silbenpool und die Dorfgeneration
+config.villagenames.villagegenerator.tooltip=Einstellungen für die Dorfgeneration
+config.villagenames.syllables.tooltip=Sammlungen für die Silbenpools der Namensgeneration
+
+
+# Achievements
+achievement.maxrep=§aSmaragdstandard
+achievement.maxrep.desc=Erhalte das höchste Ansehen in einem Dorf
+achievement.archaeologist=§6Archäologe
+achievement.archaeologist.desc=Identifiziere viele verschiedene Bauwerke
+achievement.minrep=§4Du bist ein Monster!
+achievement.minrep.desc=Erhalte das niedrigste Ansehen in einem Dorf
+achievement.ghosttown=Geisterstadt
+achievement.ghosttown.desc=Erschaffe ein Dorfsbuch für ein leeres Dorf
+achievement.laputa=§cTreue
+achievement.laputa.desc=Freunde dich mit einem einsamen Golem an
