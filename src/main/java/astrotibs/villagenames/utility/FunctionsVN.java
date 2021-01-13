@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;
@@ -1300,7 +1301,7 @@ public class FunctionsVN
 							// Fisherman
 							if (profession==0 && career==2)
 							{
-								if (( slot==1 ) // has cooked non-cod in slot 1 - set to cod
+								if (( slot==1 & VillageNames.canVillagerTradesDistinguishMeta ) // has cooked non-cod in slot 1 - set to cod
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.fish, 1), new ItemStack(Items.cooked_fished, 1) ))
 										&& (merchantrecipe.getItemToSell().getItemDamage() != 0)
 												)
@@ -1308,7 +1309,7 @@ public class FunctionsVN
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, slot, 1), 0 ),
 										new ItemStack( Items.cooked_fished, 6, 0 ) ));}
 								
-								else if (( slot==2 ) // has cooked non-salmon in slot 2 - set to cod
+								else if (( slot==2 & VillageNames.canVillagerTradesDistinguishMeta ) // has cooked non-salmon in slot 2 - set to cod
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.fish, 1), new ItemStack(Items.cooked_fished, 1) ))
 										&& (merchantrecipe.getItemToSell().getItemDamage() != 0)
 												)
@@ -1317,7 +1318,7 @@ public class FunctionsVN
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, slot, 2), 1 ),
 										new ItemStack( Items.cooked_fished, 6, 1 ) ));}
 								
-								else if (( slot==2 ) // has non-cod in slot 2 - set to cod
+								else if (( slot==2 & VillageNames.canVillagerTradesDistinguishMeta ) // has non-cod in slot 2 - set to cod
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.fish, 1), new ItemStack(Items.emerald, 1) ))
 										&& (merchantrecipe.getItemToBuy().getItemDamage() != 0)
 												)
@@ -1325,7 +1326,7 @@ public class FunctionsVN
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(15, 1, slot, 2), 0 ),
 										new ItemStack( Items.emerald, 1 ) ));}
 								
-								else if (( slot==3 ) // has non-salmon in slot 3 - set to salmon
+								else if (( slot==3 & VillageNames.canVillagerTradesDistinguishMeta ) // has non-salmon in slot 3 - set to salmon
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.fish, 1), new ItemStack(Items.emerald, 1) ))
 										&& (merchantrecipe.getItemToBuy().getItemDamage() != 1)
 												)
@@ -1333,7 +1334,7 @@ public class FunctionsVN
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(13, 1, slot, 3), 1 ),
 										new ItemStack( Items.emerald, 1 ) ));}
 
-								else if (( slot==4 ) // has non-clownfish in slot 4 - set to clownfish
+								else if (( slot==4 & VillageNames.canVillagerTradesDistinguishMeta ) // has non-clownfish in slot 4 - set to clownfish
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.fish, 1), new ItemStack(Items.emerald, 1) ))
 										&& (merchantrecipe.getItemToBuy().getItemDamage() != 2)
 												)
@@ -1341,7 +1342,7 @@ public class FunctionsVN
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 1, slot, 4), 2 ),
 										new ItemStack( Items.emerald, 1 ) ));}
 
-								else if (( slot==5 ) // has non-pufferfish in slot 5 - set to pufferfish
+								else if (( slot==5 & VillageNames.canVillagerTradesDistinguishMeta ) // has non-pufferfish in slot 5 - set to pufferfish
 										&& merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.fish, 1), new ItemStack(Items.emerald, 1) ))
 										&& (merchantrecipe.getItemToBuy().getItemDamage() != 3)
 												)
@@ -1350,6 +1351,7 @@ public class FunctionsVN
 										new ItemStack( Items.emerald, 1 ) ));}
 								
 								else if (// This is a differentiated pufferfish trade (Puff + emerald = emerald). Replace it with its appropriate trade.
+										VillageNames.canVillagerTradesDistinguishMeta &&
 										merchantrecipe.hasSameIDsAs(new MerchantRecipe(new ItemStack(Items.fish, 1), new ItemStack(Items.emerald, 1), new ItemStack(Items.emerald, 1) )))
 								{buyingList.set(i, new MerchantRecipe(
 										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(4, 1, slot, 5), 3 ),
@@ -1806,10 +1808,20 @@ public class FunctionsVN
 							{
 								if (nextSlotToFill==4) // Stuck at 3 trades
 								{
-									// Add the clownfish trade
-	    							buyingList.add(new MerchantRecipe(
-											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 4), 2 ),
-											new ItemStack( Items.emerald, 1 ) ));
+									if (VillageNames.canVillagerTradesDistinguishMeta)
+									{
+										// Add the clownfish trade
+		    							buyingList.add(new MerchantRecipe(
+												new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 4), 2 ),
+												new ItemStack( Items.emerald, 1 ) ));
+									}
+									else
+									{
+										// Reverse trade because vanilla 1.7 can't distinguish emeralds
+		    							buyingList.add(new MerchantRecipe(
+												new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+												new ItemStack( Items.fish, 9, 2 ) ) );
+									}
 								}
 							}
 							

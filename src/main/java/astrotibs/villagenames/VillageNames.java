@@ -51,6 +51,7 @@ import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -114,6 +115,9 @@ public final class VillageNames
 	public static boolean haveWarnedVersionOutOfDate = false;
 	public static boolean devVersionWarned = false;
 	
+	// Disallow trades that discriminate meta values sold from player unless this mod is loaded
+	public static boolean canVillagerTradesDistinguishMeta = false;
+	
 	/*
 	 * The number of structures you need to use the Codex on to trigger the achievement.
 	 * If the player does not use any mods that add valid searchable structures,
@@ -154,6 +158,7 @@ public final class VillageNames
 			}
 		}
 		
+		canVillagerTradesDistinguishMeta = Loader.isModLoaded("VillagerMetaFix");
 		
 		
 		// Moved down here to make sure config fires first!?

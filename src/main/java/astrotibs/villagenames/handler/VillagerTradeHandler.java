@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
@@ -254,10 +255,20 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Items.coal, FunctionsVN.modernTradeCostBySlot(10, 1, nextSlotToFill, 1) ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								// Emerald and raw Cod to cooked Cod
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 1) ),
-										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 1), 0 ),
-										new ItemStack( Items.cooked_fished, 6, 0 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 1) ),
+											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 1), 0 ),
+											new ItemStack( Items.cooked_fished, 6, 0 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for raw Cod
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 1) ),
+											new ItemStack( Items.fish, 5, 0 ) ) );
+								}
 								// TODO - Emerald to Bucket of Cod
 							}
 							
@@ -265,14 +276,34 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							if (nextSlotToFill == 2 || nextSlotToFill > 5)
 							{
 								// Raw Cod to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(15, 1, nextSlotToFill, 2), 0 ),
-										new ItemStack( Items.emerald, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(15, 1, nextSlotToFill, 2), 0 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for cooked Cod
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.cooked_fished, 6, 0 ) ) );
+								}
 								// Emerald and raw Salmon to cooked Salmon
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
-										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 2), 1 ),
-										new ItemStack( Items.cooked_fished, 6, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 2), 1 ),
+											new ItemStack( Items.cooked_fished, 6, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for raw Salmon
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.fish, 7, 1 ) ) );
+								}
 								
 								// TODO - Emerald to Campfire
 								moditemstack =  new ItemStack(Item.getItemFromBlock(Block.getBlockFromName(ModObjects.campfirebackport)));
@@ -299,31 +330,60 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							if (nextSlotToFill == 3 || nextSlotToFill > 5)
 							{
 								// Raw Salmon to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(13, 1, nextSlotToFill, 3), 1 ),
-										new ItemStack( Items.emerald, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(13, 1, nextSlotToFill, 3), 1 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for cooked Salmon
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.cooked_fished, 8, 1 ) ) );
+								}
 							}
 							
 							// Level 4: Expert
 							if (nextSlotToFill == 4 || nextSlotToFill > 5)
 							{
 								// Raw Tropical Fish to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 4), 2 ),
-										new ItemStack( Items.emerald, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 4), 2 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for Tropical Fish
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Items.fish, 9, 2 ) ) );
+								}
 							}
 							
 							// Level 5: Master
 							if (nextSlotToFill == 5)
 							{
 								// Raw Pufferfish to Emerald
-								for (int i=0; i<2 ; i++) {
-									recipeList.add(new MerchantRecipe(
-											new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(4, 1, nextSlotToFill, 5), 3 ),
-											new ItemStack( Items.emerald, 1 ),
-											new ItemStack( Items.emerald, 2 )) ); // Added a dud trade so that it will appear on the buying list
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									for (int i=0; i<2 ; i++) {
+										recipeList.add(new MerchantRecipe(
+												new ItemStack( Items.fish, FunctionsVN.modernTradeCostBySlot(4, 1, nextSlotToFill, 5), 3 ),
+												new ItemStack( Items.emerald, 1 ),
+												new ItemStack( Items.emerald, 2 )) ); // Added a dud trade so that it will appear on the buying list
+									}
 								}
-								
+								else
+								{
+									// SUBSTITUTE TRADE: Emerald for Pufferfish
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 5) ),
+											new ItemStack( Items.fish, 10, 3 ) ) );
+								}
 							}
 							if (nextSlotToFill >= 5)
 							{
@@ -357,22 +417,32 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							// Level 1: Novice
 							if (nextSlotToFill == 1 || nextSlotToFill > 5)
 							{
-								// White Wool to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 0 ),
-										new ItemStack( Items.emerald, 1 ) ) );
-								// Brown Wool to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 12 ),
-										new ItemStack( Items.emerald, 1 ) ) );
-								// Black Wool to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 15 ),
-										new ItemStack( Items.emerald, 1 ) ) );
-								// Gray Wool to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 7 ),
-										new ItemStack( Items.emerald, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									// White Wool to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 0 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									// Brown Wool to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 12 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									// Black Wool to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 15 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									// Gray Wool to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1), 7 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTION: Generic wool to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Item.getItemFromBlock(Blocks.wool), FunctionsVN.modernTradeCostBySlot(18, 1, nextSlotToFill, 1) ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
 								// Emerald to Shears
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 										new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(2, 1, nextSlotToFill, 1) ),
@@ -382,70 +452,90 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							// Level 2: Apprentice
 							if (nextSlotToFill == 2)
 							{
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									// Gray Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 8 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									// Lime Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 10 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+									// Light Blue Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 12 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTION: Villages SELLS dye for emeralds
+									// Emerald to Gray Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.dye, 12, 8 ) ) );
+									// Emerald to Lime Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.dye, 12, 10 ) ) );
+									// Emerald to Light Blue Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+											new ItemStack( Items.dye, 12, 12 ) ) );
+								}
 								// Black Dye to Emerald
 								while (true)
 								{
 									moditemstack = ModObjects.chooseModBlackDye();
 									if (moditemstack!=null)
 									{
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), moditemstack.getItemDamage()),
-												new ItemStack( Items.emerald, 1 ) ) );
+										if (VillageNames.canVillagerTradesDistinguishMeta)
+										{
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), moditemstack.getItemDamage()),
+													new ItemStack( Items.emerald, 1 ) ) );
+										}
+										else
+										{
+											// SUBSTITUTION: sell dye if you can't distinguish meta
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+													new ItemStack( moditemstack.getItem(), 12, moditemstack.getItemDamage() ) ) );
+										}
 										break;
 									}
 									
-									/*
-									moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 9),
-												new ItemStack( Items.emerald, 1 ) ) ); break;}
-									*/
-									
 									// Reverts to vanilla version if no modded version is found
+									if (!VillageNames.canVillagerTradesDistinguishMeta) {break;}
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 0 ),
 											new ItemStack( Items.emerald, 1 ) ) );
 									break;
 								}
-								// Gray Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 8 ),
-										new ItemStack( Items.emerald, 1 ) ) );
-								// Lime Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 10 ),
-										new ItemStack( Items.emerald, 1 ) ) );
-								// Light Blue Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 12 ),
-										new ItemStack( Items.emerald, 1 ) ) );
 								// White Dye to Emerald
 								while (true)
 								{
 									moditemstack = ModObjects.chooseModWhiteDye();
 									if (moditemstack!=null)
 									{
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), moditemstack.getItemDamage()),
-												new ItemStack( Items.emerald, 1 ) ) );
+										if (VillageNames.canVillagerTradesDistinguishMeta)
+										{
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), moditemstack.getItemDamage()),
+													new ItemStack( Items.emerald, 1 ) ) );
+										}
+										else
+										{
+											// SUBSTITUTION: sell dye if you can't distinguish meta
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 2) ),
+													new ItemStack( moditemstack.getItem(), 12, moditemstack.getItemDamage() ) ) );
+										}
 										break;
 									}
 									
-									/*
-									moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 8),
-												new ItemStack( Items.emerald, 1 ) ) ); break;}
-									moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 27),
-												new ItemStack( Items.emerald, 1 ) ) ); break;}
-									*/
-									
 									// Reverts to vanilla version if no modded version is found
+									if (!VillageNames.canVillagerTradesDistinguishMeta) {break;}
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 2), 15 ),
 											new ItemStack( Items.emerald, 1 ) ) );
@@ -483,31 +573,58 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							// Level 3: Journeyman
 							if (nextSlotToFill == 3)
 							{
-								// Red Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 1 ),
-										new ItemStack( Items.emerald, 1 ),
-										new ItemStack( Items.emerald, 2 ) ) );
-								// Light Gray Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 7 ),
-										new ItemStack( Items.emerald, 1 ),
-										new ItemStack( Items.emerald, 2 ) ) );
-								// Pink Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 9 ),
-										new ItemStack( Items.emerald, 1 ),
-										new ItemStack( Items.emerald, 2 ) ) );
-								// Yellow Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 11 ),
-										new ItemStack( Items.emerald, 1 ),
-										new ItemStack( Items.emerald, 2 ) ) );
-								// Orange Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 14 ),
-										new ItemStack( Items.emerald, 1 ),
-										new ItemStack( Items.emerald, 2 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									// Red Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 1 ),
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( Items.emerald, 2 ) ) );
+									// Light Gray Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 7 ),
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( Items.emerald, 2 ) ) );
+									// Pink Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 9 ),
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( Items.emerald, 2 ) ) );
+									// Yellow Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 11 ),
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( Items.emerald, 2 ) ) );
+									// Orange Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 3), 14 ),
+											new ItemStack( Items.emerald, 1 ),
+											new ItemStack( Items.emerald, 2 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTION: Villages SELLS dye for emeralds
+									// Emerald to Red Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 12, 1 ) ) );
+									// Emerald to Light Gray Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 12, 7 ) ) );
+									// Emerald to Pink Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 12, 9 ) ) );
+									// Emerald to Yellow Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 12, 11 ) ) );
+									// Emerald to Orange Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 12, 14 ) ) );
+								}
 							}
 							if (nextSlotToFill == 3 || nextSlotToFill > 5)
 							{
@@ -549,40 +666,74 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							// Level 4: Expert
 							if (nextSlotToFill == 4)
 							{
-								// Green Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 2 ),
-										new ItemStack( Items.diamond, 1 ),
-										new ItemStack( Items.diamond, 2 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									// Green Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 2 ),
+											new ItemStack( Items.diamond, 1 ),
+											new ItemStack( Items.diamond, 2 ) ) );
+									// Purple Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 5 ),
+											new ItemStack( Items.diamond, 1 ),
+											new ItemStack( Items.diamond, 2 ) ) );
+									// Cyan Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 6 ),
+											new ItemStack( Items.diamond, 1 ),
+											new ItemStack( Items.diamond, 2 ) ) );
+									// Magenta Dye to Emerald
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 13 ),
+											new ItemStack( Items.diamond, 1 ),
+											new ItemStack( Items.diamond, 2 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTION: Villages SELLS dye for emeralds
+									// Emerald to Green Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Items.dye, 12, 2 ) ) );
+									// Emerald to Purple Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Items.dye, 12, 5 ) ) );
+									// Emerald to Cyan Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Items.dye, 12, 6 ) ) );
+									// Emerald to Magenta Dye
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+											new ItemStack( Items.dye, 12, 13 ) ) );
+								}
 								// Brown Dye to Emerald
 								while (true)
 								{
 									moditemstack = ModObjects.chooseModBrownDye();
 									if (moditemstack!=null)
 									{
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), moditemstack.getItemDamage()),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) );
+										if (VillageNames.canVillagerTradesDistinguishMeta)
+										{
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), moditemstack.getItemDamage()),
+													new ItemStack( Items.diamond, 1 ),
+													new ItemStack( Items.diamond, 2 ) ) );
+										}
+										else
+										{
+											// SUBSTITUTION: sell dye if you can't distinguish meta
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+													new ItemStack( moditemstack.getItem(), 12, moditemstack.getItemDamage() ) ) );
+										}
 										break;
 									}
 									
-									/*
-									moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 6),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) ); break;}
-									moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 32),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) ); break;}
-									*/
-									
 									// Reverts to vanilla version if no modded version is found
+									if (!VillageNames.canVillagerTradesDistinguishMeta) {break;}
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 3 ),
 											new ItemStack( Items.diamond, 1 ),
@@ -595,50 +746,31 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 									moditemstack = ModObjects.chooseModBlueDye();
 									if (moditemstack!=null)
 									{
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), moditemstack.getItemDamage()),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) );
+										if (VillageNames.canVillagerTradesDistinguishMeta)
+										{
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( moditemstack.getItem(), FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), moditemstack.getItemDamage()),
+													new ItemStack( Items.diamond, 1 ),
+													new ItemStack( Items.diamond, 2 ) ) );
+										}
+										else
+										{
+											// SUBSTITUTION: sell dye if you can't distinguish meta
+											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4) ),
+													new ItemStack( moditemstack.getItem(), 12, moditemstack.getItemDamage() ) ) );
+										}
 										break;
 									}
 									
-									/*
-									moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 5),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) ); break;}
-									moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 28),
-												new ItemStack( Items.diamond, 1 ),
-												new ItemStack( Items.diamond, 2 ) ) ); break;}
-									*/
-									
 									// Reverts to vanilla version if no modded version is found
+									if (!VillageNames.canVillagerTradesDistinguishMeta) {break;}
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 4 ),
 											new ItemStack( Items.diamond, 1 ),
 											new ItemStack( Items.diamond, 2 ) ) );
 									break;
 								}
-								// Purple Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 5 ),
-										new ItemStack( Items.diamond, 1 ),
-										new ItemStack( Items.diamond, 2 ) ) );
-								// Cyan Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 6 ),
-										new ItemStack( Items.diamond, 1 ),
-										new ItemStack( Items.diamond, 2 ) ) );
-								// Magenta Dye to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(12, 1, nextSlotToFill, 4), 13 ),
-										new ItemStack( Items.diamond, 1 ),
-										new ItemStack( Items.diamond, 2 ) ) );
 							}
 							if (nextSlotToFill == 4 || nextSlotToFill > 5)
 							{
@@ -867,9 +999,19 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							if (nextSlotToFill == 3 || nextSlotToFill > 5)
 							{
 								// Ink Sac to Emerald
-								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-										new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(5, 1, nextSlotToFill, 3), 0 ),
-										new ItemStack( Items.emerald, 1 ) ) );
+								if (VillageNames.canVillagerTradesDistinguishMeta)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.dye, FunctionsVN.modernTradeCostBySlot(5, 1, nextSlotToFill, 3), 0 ),
+											new ItemStack( Items.emerald, 1 ) ) );
+								}
+								else
+								{
+									// SUBSTITUTION: sell ink instead
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
+											new ItemStack( Items.dye, 5, 0 ) ) );
+								}
 								
 								// Emerald to Glass
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(

@@ -1,5 +1,6 @@
 package astrotibs.villagenames.integration;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
@@ -81,6 +82,9 @@ public class ModObjects {
 	
 	// Barrel
 	public static final String barrelUTD = DOM_UPTODATE + ":barrel";
+
+	// Smoker
+	public static final String blastFurnace_EF = DOM_ETFUTURUM + ":blast_furnace";
 	
 	// Bookshelf
 	public static final String bookshelfGS = DOM_GANYSSURFACE + ":bookshelf";
@@ -434,7 +438,9 @@ public class ModObjects {
 	public static final String brownClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockBrownClay";
 	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
 	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
-
+	
+	// Smoker
+	public static final String smoker_EF = DOM_ETFUTURUM + ":smoker";
 	
 	// Smooth Stone
 	public static final String smoothStoneUTD = DOM_UPTODATE + ":smooth_stone";
@@ -657,22 +663,22 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
@@ -1058,8 +1064,10 @@ public class ModObjects {
 	 */
 	public static Object[] chooseModBlastFurnaceBlock(int furnaceOrientation, int horizIndex)
 	{
-		Block modblock = Blocks.furnace;
 		int meta = StructureVillageVN.chooseFurnaceMeta(furnaceOrientation, horizIndex);
+		
+		Block modblock = Block.getBlockFromName(blastFurnace_EF);
+		if (modblock == null) {modblock = Blocks.furnace;}
 		
 		return new Object[]{modblock, meta};
 	}
@@ -1362,22 +1370,22 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
@@ -1821,22 +1829,22 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.graniteC2);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 3};}
@@ -2261,8 +2269,10 @@ public class ModObjects {
 	 */
 	public static Object[] chooseModSmokerBlock(int furnaceOrientation, int horizIndex)
 	{
-		Block modblock = Blocks.furnace;
 		int meta = StructureVillageVN.chooseFurnaceMeta(furnaceOrientation, horizIndex);
+		
+		Block modblock = Block.getBlockFromName(smoker_EF);
+		if (modblock == null) {modblock = Blocks.furnace;}
 		
 		return new Object[]{modblock, meta};
 	}
@@ -2685,12 +2695,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("mariculture"))
+			if (mod.toLowerCase().equals("mariculture") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.kelpWrapMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
 			}
-			else if (mod.toLowerCase().equals("biomesoplenty"))
+			else if (mod.toLowerCase().equals("biomesoplenty") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.kelpDriedBOP);
 				if (moditem != null) {return new ItemStack(moditem, 9, 11);} // Use nine because BoP doesn't have a way to consolidate them
