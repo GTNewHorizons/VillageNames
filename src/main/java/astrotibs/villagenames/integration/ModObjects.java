@@ -82,9 +82,13 @@ public class ModObjects {
 	
 	// Barrel
 	public static final String barrelUTD = DOM_UPTODATE + ":barrel";
+	public static final String barrelEF = DOM_ETFUTURUM + ":barrel";
 
-	// Smoker
+	// Blast Furnace
 	public static final String blastFurnace_EF = DOM_ETFUTURUM + ":blast_furnace";
+	
+	// Blue Ice
+	public static final String blueIce_EF = DOM_ETFUTURUM + ":blue_ice";
 	
 	// Bookshelf
 	public static final String bookshelfGS = DOM_GANYSSURFACE + ":bookshelf";
@@ -391,6 +395,7 @@ public class ModObjects {
 	
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
+	public static final String lanternEF = DOM_ETFUTURUM + ":lantern";
 	public static final String lanternNL = "netherlicious:Lantern";
 	public static final String lanternUTD = DOM_UPTODATE + ":lantern";
 	
@@ -444,9 +449,12 @@ public class ModObjects {
 	
 	// Smooth Stone
 	public static final String smoothStoneUTD = DOM_UPTODATE + ":smooth_stone";
+	public static final String smoothStoneEF = DOM_ETFUTURUM + ":smooth_stone";
 	
 	// Smooth Sandstone
 	public static final String smoothSandstoneUTD = DOM_UPTODATE + ":smooth_sandstone";
+	public static final String smoothSandstoneEF = DOM_ETFUTURUM + ":smooth_sandstone";
+	public static final String smoothRedSandstoneEF = DOM_ETFUTURUM + ":smooth_red_sandstone";
 	
 	// Smooth Sandstone Stairs
 	public static final String smoothSandstoneStairsUTD = DOM_UPTODATE + ":stairs_smooth_sandstone";
@@ -500,6 +508,16 @@ public class ModObjects {
 	public static final String signJungleGS = DOM_GANYSSURFACE + ":sign3";
 	public static final String signAcaciaGS = DOM_GANYSSURFACE + ":sign4";
 	public static final String signDarkOakGS = DOM_GANYSSURFACE + ":sign5";
+	public static final String signSpruceEF = DOM_ETFUTURUM + ":sign_spruce";
+	public static final String signBirchEF = DOM_ETFUTURUM + ":sign_birch";
+	public static final String signJungleEF = DOM_ETFUTURUM + ":sign_jungle";
+	public static final String signAcaciaEF = DOM_ETFUTURUM + ":sign_acacia";
+	public static final String signDarkOakEF = DOM_ETFUTURUM + ":sign_dark_oak";
+	public static final String wallSignSpruceEF = DOM_ETFUTURUM + ":wall_sign_spruce";
+	public static final String wallSignBirchEF = DOM_ETFUTURUM + ":wall_sign_birch";
+	public static final String wallSignJungleEF = DOM_ETFUTURUM + ":wall_sign_jungle";
+	public static final String wallSignAcaciaEF = DOM_ETFUTURUM + ":wall_sign_acacia";
+	public static final String wallSignDarkOakEF = DOM_ETFUTURUM + ":wall_sign_dark_oak";
 	
 	// Wooden Trapdoor
 	public static final String trapdoorSpruceEF = DOM_ETFUTURUM + ":trapdoor_spruce";
@@ -593,6 +611,10 @@ public class ModObjects {
 	public static final String strippedLogJungleUTD = DOM_UPTODATE + ":stripped_log_jungle";
 	public static final String strippedLogAcaciaUTD = DOM_UPTODATE + ":stripped_log_acacia";
 	public static final String strippedLogDarkOakUTD = DOM_UPTODATE + ":stripped_log_dark_oak";
+	
+	// Stripped wood
+	public static final String strippedWood1EF = DOM_ETFUTURUM + ":wood_stripped";
+	public static final String strippedWood2EF = DOM_ETFUTURUM + ":wood2_stripped";
 	// stripped wood for UTD is just log with meta value of 12
 	
 	// Suspicious Stew
@@ -880,19 +902,45 @@ public class ModObjects {
 	// Barrel
 	public static ItemStack chooseModBarrelItem()
 	{
-		Block moditem=null;
+		String[] modprioritylist = GeneralConfig.modBarrel;
 		
-		moditem = Block.getBlockFromName(ModObjects.barrelUTD);
-		if (moditem != null) {return new ItemStack(moditem);}
-		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.barrelEF));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.barrelUTD));
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+		}
 		return null;
 	}
 	// Uses furnace metas. 1 is vertical, and horizontal are 2, 3, 4, 5. 0 is inverted
 	public static Block chooseModBarrelBlock()
 	{
-		Block modblock = Block.getBlockFromName(ModObjects.barrelUTD);
-		if (modblock != null) {return modblock;}
+		String[] modprioritylist = GeneralConfig.modBarrel;
 		
+		for (String mod : modprioritylist)
+		{
+			Block moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = Block.getBlockFromName(ModObjects.barrelEF);
+				if (moditem != null) {return moditem;}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = Block.getBlockFromName(ModObjects.barrelUTD);
+				if (moditem != null) {return moditem;}
+			}
+		}
 		return null;
 	}
 	
@@ -1077,7 +1125,10 @@ public class ModObjects {
     public static Object[] chooseModBlueIceBlock()
     {
     	// None are found, so return ordinary packed ice
-    	return new Object[]{Blocks.packed_ice, 0};
+    	Block modblock = Block.getBlockFromName(blueIce_EF);
+		if (modblock == null) {modblock = Blocks.packed_ice;}
+		
+    	return new Object[]{modblock, 0};
     }
 	
 	
@@ -1256,8 +1307,7 @@ public class ModObjects {
 			{
 				return new Object[]{ModBlocksVN.blockConcrete, new Integer(meta)};
 			}
-			
-			if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.concreteUTD);
 				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
@@ -2090,6 +2140,11 @@ public class ModObjects {
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternUTD);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
 			}
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				Block tryLantern = Block.getBlockFromName(ModObjects.lanternEF);
+		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
+			}
 			if (mod.toLowerCase().equals("netherlicious"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternNL);
@@ -2216,41 +2271,71 @@ public class ModObjects {
 	public static ItemStack chooseModWoodenSignItem(int materialMeta)
 	{
 		Item moditem=null;
-
-		switch (materialMeta)
+		
+		String[] modprioritylist = GeneralConfig.modSign;
+		
+		for (String mod : modprioritylist)
 		{
-			case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceGS)); break;
-			case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchGS)); break;
-			case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleGS)); break;
-			case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaGS)); break;
-			case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakGS)); break;
+			moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				switch (materialMeta)
+				{
+					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceEF)); break;
+					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchEF)); break;
+					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleEF)); break;
+					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaEF)); break;
+					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakEF)); break;
+				}
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				switch (materialMeta)
+				{
+					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceGS)); break;
+					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchGS)); break;
+					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleGS)); break;
+					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaGS)); break;
+					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakGS)); break;
+				}
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
 		}
-		if (moditem != null) {return new ItemStack(moditem, 1);}
 		
 		// If all else fails, grab the vanilla version
 		return new ItemStack(Items.sign, 1);
 	}
-	/*
-	public static Block chooseModWoodenSign(int materialMeta, boolean standing)
+	
+	public static Block chooseModWoodenSignBlock(int materialMeta, boolean standing)
 	{
-		if (materialMeta==0) {return standing? Blocks.standing_sign : Blocks.wall_sign;}
+		if (materialMeta==0) {return standing? Blocks.standing_sign : Blocks.wall_sign;} // Oak is just vanilla default
 		
 		Block modblock=null;
 		
 		switch (materialMeta)
 		{
-			case 1: modblock = Block.getBlockFromName(ModObjects.signSpruceGS); break;
+			case 1: modblock = Block.getBlockFromName(standing? ModObjects.signSpruceEF : ModObjects.wallSignSpruceEF); break;
+			case 2: modblock = Block.getBlockFromName(standing? ModObjects.signBirchEF : ModObjects.wallSignSpruceEF); break;
+			case 3: modblock = Block.getBlockFromName(standing? ModObjects.signJungleEF : ModObjects.wallSignSpruceEF); break;
+			case 4: modblock = Block.getBlockFromName(standing? ModObjects.signAcaciaEF : ModObjects.wallSignSpruceEF); break;
+			case 5: modblock = Block.getBlockFromName(standing? ModObjects.signDarkOakEF : ModObjects.wallSignSpruceEF); break;
+			
+			// Gany's Surface uniquely uses boolean tile.isStanding in its tileentity which does not have a vanilla parallel.
+			// GS standing signs won't work.
+/*			case 1: modblock = Block.getBlockFromName(ModObjects.signSpruceGS); break;
 			case 2: modblock = Block.getBlockFromName(ModObjects.signBirchGS); break;
 			case 3: modblock = Block.getBlockFromName(ModObjects.signJungleGS); break;
 			case 4: modblock = Block.getBlockFromName(ModObjects.signAcaciaGS); break;
-			case 5: modblock = Block.getBlockFromName(ModObjects.signDarkOakGS); break;
+			case 5: modblock = Block.getBlockFromName(ModObjects.signDarkOakGS); break;*/
 		}
 		if (modblock != null) {return modblock;}
 		
 		// If all else fails, grab the vanilla version
 		return standing? Blocks.standing_sign : Blocks.wall_sign;
 	}
-	*/
+	
 	
 	
 	// Smithing Table
@@ -2487,9 +2572,26 @@ public class ModObjects {
 	// Smooth Sandstone
 	public static Object[] chooseModSmoothSandstoneBlock(boolean isRed)
 	{
-		Block modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
-		if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
-		else {return new Object[]{Blocks.double_stone_slab, 9};}
+		String[] modprioritylist = GeneralConfig.modSmoothSandstone;
+		
+		Block modblock=null;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(isRed ? ModObjects.smoothRedSandstoneEF : ModObjects.smoothSandstoneEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
+				if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
+			}
+		}
+		
+		// Return vanilla white sandstone with cap on all sides
+		return new Object[]{Blocks.double_stone_slab, 9};
 	}
 	
 	
@@ -2539,11 +2641,26 @@ public class ModObjects {
 	// Smooth Stone
 	public static Object[] chooseModSmoothStoneBlock()
 	{
-		Block modblock=null; int meta = 0;
-		modblock = Block.getBlockFromName(ModObjects.smoothStoneUTD);
-		if (modblock == null) {modblock = Blocks.double_stone_slab; meta=8;}
+		String[] modprioritylist = GeneralConfig.modSmoothStone;
 		
-		return new Object[]{modblock, meta};
+		Block modblock=null;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smoothStoneEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smoothStoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		
+		// Return vanilla polished stone slab with top face on all sides
+		return new Object[]{Blocks.double_stone_slab, 8};
 	}
 	
 	
@@ -2560,19 +2677,6 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
-			{
-				switch (materialMeta)
-				{
-				case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
-				case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
-				case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
-				case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
-				case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
-				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
-				}
-				if (modblock != null) {return new Object[]{modblock, orientation*4};}
-			}
 			if (mod.toLowerCase().equals("etfuturum"))
 			{
 				int addMeta=0;
@@ -2588,6 +2692,19 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, orientation*4+addMeta};}
 			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+				case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
+				case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, orientation*4};}
+			}
 		}
 		// If all else fails, grab the vanilla version
 		return new Object[]{materialMeta <4 ? Blocks.log : Blocks.log2, orientation*4+materialMeta%4};
@@ -2595,19 +2712,44 @@ public class ModObjects {
 	
 	public static Object[] chooseModStrippedWood(int materialMeta)
 	{
-		Block modblock=null;
+		String[] modprioritylist = GeneralConfig.modStrippedLog;
 		
-		switch (materialMeta)
+		for (String mod : modprioritylist)
 		{
-		case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
-		case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
-		case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
-		case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
-		case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
-		case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				int meta=0;
+				
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.strippedWood1EF); meta=0; break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.strippedWood1EF); meta=1; break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.strippedWood1EF); meta=2; break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.strippedWood1EF); meta=3; break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.strippedWood2EF); meta=0; break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.strippedWood2EF); meta=1; break;
+				}
+				if (modblock != null) {return new Object[]{modblock, meta};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.strippedLogOakUTD); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, 12};}
+			}
 		}
-		if (modblock != null) {return new Object[]{modblock, 12};}
-		else {return new Object[]{materialMeta<4 ? Blocks.log : Blocks.log2, 12+materialMeta%4};}
+		
+		// On a failure, return vanilla log with bark on all sides
+		return new Object[]{materialMeta<4 ? Blocks.log : Blocks.log2, 12+materialMeta%4};
 	}
 
 	// Stonecutter

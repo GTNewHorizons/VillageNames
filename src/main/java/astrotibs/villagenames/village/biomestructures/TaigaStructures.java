@@ -7300,9 +7300,9 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Left wall
-            	{1,1,3, 1,3,6}, 
+            	{1,1,3, 1,3,6}, {1,4,4, 1,4,5}, 
             	// Right wall
-            	{11,1,3, 11,3,6}, 
+            	{11,1,3, 11,3,6}, {11,4,4, 11,4,5}, 
             	// Front wall
             	{5,1,3, 7,3,3}, 
             	// Back wall

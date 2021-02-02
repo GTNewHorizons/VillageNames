@@ -662,8 +662,8 @@ public class StructureVillageVN
         	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
@@ -704,8 +704,8 @@ public class StructureVillageVN
         	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(2, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(2, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogBirchUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
@@ -754,8 +754,8 @@ public class StructureVillageVN
         	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(3, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
@@ -797,8 +797,8 @@ public class StructureVillageVN
         	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(4, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(4, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogAcaciaUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog2EF); meta=4*meta + woodMeta%4; break;}
@@ -840,8 +840,8 @@ public class StructureVillageVN
         	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(5, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(5, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.bark2EF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog2EF); meta=4*meta + woodMeta%4; break;}
@@ -898,8 +898,8 @@ public class StructureVillageVN
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 1: meta==11? 9 : meta; break;} // Sandstone slab
         	//if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=4; break;} // Brick double slab
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(3, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(3, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	//if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=3; break;} // Jungle bark
         	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;}
         	//if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + 3; break;}
@@ -984,8 +984,8 @@ public class StructureVillageVN
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.cobblestone; meta=0; break;}
-        	//if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSign(1, true); meta=meta/4; break;}
-        	//if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSign(1, false); break;}
+        	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
+        	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;} // Spruce bark
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
@@ -1189,6 +1189,10 @@ public class StructureVillageVN
     	    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);
     			world.setBlock(posX, surfaceY, posZ, (Block)planks[0], (Integer)planks[1], 2);
     			
+    			// Clear space above just in case it's a lilypad
+    			world.setBlockToAir(posX, surfaceY+1, posZ);
+    			
+    			// Add log support
     			int yDownScan = surfaceY;
     			if (MathHelper.abs_int(posX)%2==0 && MathHelper.abs_int(posZ)%2==0)
     			{

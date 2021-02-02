@@ -14,7 +14,7 @@ public class TileEntityWoodSign extends TileEntitySign
 		nbt.setBoolean("IsStanding", isStanding);
 		nbt.setString("id", "ganyssurface.wood_sign");
 	}
-
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{

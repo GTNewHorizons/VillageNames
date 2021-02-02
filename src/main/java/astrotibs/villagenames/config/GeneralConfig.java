@@ -21,16 +21,16 @@ public class GeneralConfig {
     public static boolean recordStructureCoords; 
 	public static boolean addJobToName;
 	public static String nitwitProfession;
-	// Added in v3.1banner
+	
 	public static boolean villageBanners;
 	public static int signYaw;
 	
 	public static boolean addConcrete;
 	public static boolean concreteWell;
 	public static boolean addOceanMonuments;
-	//public static boolean alternateGuardianNamespace; // v3.2.3
+	//public static boolean alternateGuardianNamespace;
 	public static boolean addIgloos;
-	public static boolean biomedictIgloos; // Added in v3.1
+	public static boolean biomedictIgloos;
 	
 	public static boolean codexChestLoot;
 	public static boolean versionChecker;
@@ -80,6 +80,7 @@ public class GeneralConfig {
 	
 	public static String[] modBountifulStone;
 	public static String[] modBanner;
+	public static String[] modBarrel;
 	public static String[] modBeetroot;
 	public static String[] modIronNugget;
 	public static String[] modMutton;
@@ -100,6 +101,9 @@ public class GeneralConfig {
 	public static String[] modStrippedLog;
 	public static String[] modWall;
 	public static String[] modChest;
+	public static String[] modSign;
+	public static String[] modSmoothStone;
+	public static String[] modSmoothSandstone;
 	
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
@@ -507,17 +511,36 @@ public class GeneralConfig {
 	    
 	    modRedSandstone = config.getStringList("Mod Priority: Red Sandstone", "Mod Integration", new String[]{
 	    		"uptodate",
-	    		"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Red Sandstone and its variants for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modSign = config.getStringList("Mod Priority: Sign", "Mod Integration", new String[]{
+ 				"ganyssurface",
+ 				},
+ 				"Priority order for referencing Signs for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modSmoothStone = config.getStringList("Mod Priority: Smooth Stone", "Mod Integration", new String[]{
+ 				"etfuturum",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing Smooth Stone for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+
+	    modSmoothSandstone = config.getStringList("Mod Priority: Smooth Sandstone", "Mod Integration", new String[]{
+ 				"etfuturum",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing Smooth Sandstone for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", "Mod Integration", new String[]{
 	    		"uptodate",
  				"etfuturum",
  				},
- 				"Priority order for referencing Stripped Logs for village generation. The version highest on the list and registered in your game will be used."
+ 				"Priority order for referencing Stripped Logs/Wood for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{
@@ -532,6 +555,13 @@ public class GeneralConfig {
  				"ganyssurface",
  				},
  				"Priority order for referencing Banners for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+		
+		modBarrel = config.getStringList("Mod Priority: Barrel", "Mod Integration", new String[]{
+ 				"etfuturum",
+ 				"uptodate",
+ 				},
+ 				"Priority order for referencing Barrels for village generation. The version highest on the list and registered in your game will be used."
  				);
 		
 	    modBountifulStone = config.getStringList("Mod Priority: Bountiful Stone", "Mod Integration", new String[]{
@@ -585,6 +615,7 @@ public class GeneralConfig {
  				);
 		
 	    modLantern = config.getStringList("Mod Priority: Lantern", "Mod Integration", new String[]{
+ 				"etfuturum",
  				"netherlicious",
  				"uptodate",
 	    		"enviromine",

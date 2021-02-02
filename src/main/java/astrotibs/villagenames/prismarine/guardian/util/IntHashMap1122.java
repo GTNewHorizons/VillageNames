@@ -1,9 +1,5 @@
 package astrotibs.villagenames.prismarine.guardian.util;
 
-/*
- *  Taken from 1.12.2 
- */
-
 import javax.annotation.Nullable;
 
 public class IntHashMap1122<V>
