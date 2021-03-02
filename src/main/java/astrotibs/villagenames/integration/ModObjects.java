@@ -191,6 +191,7 @@ public class ModObjects {
 	public static final String concreteGreenEF = DOM_ETFUTURUM + ":concrete_green";
 	public static final String concreteRedEF = DOM_ETFUTURUM + ":concrete_red";
 	public static final String concreteBlackEF = DOM_ETFUTURUM + ":concrete_black";
+	public static final String concreteEF = DOM_ETFUTURUM + "etfuturum:concrete"; // EF:R
 	
 	// Crafting Table
 	public static final String craftingTableOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_0"; 
@@ -357,6 +358,24 @@ public class ModObjects {
 	
 	
 	// Glazed Terracotta
+	// Et Futurum Requiem versions:
+	public static final String glazedTerracottaWhiteEF = DOM_ETFUTURUM + ":white_glazed_terracotta";
+	public static final String glazedTerracottaOrangeEF = DOM_ETFUTURUM + ":orange_glazed_terracotta";
+	public static final String glazedTerracottaMagentaEF = DOM_ETFUTURUM + ":magenta_glazed_terracotta";
+	public static final String glazedTerracottaLightBlueEF = DOM_ETFUTURUM + ":light_blue_glazed_terracotta";
+	public static final String glazedTerracottaYellowEF = DOM_ETFUTURUM + ":yellow_glazed_terracotta";
+	public static final String glazedTerracottaLimeEF = DOM_ETFUTURUM + ":lime_glazed_terracotta";
+	public static final String glazedTerracottaPinkEF = DOM_ETFUTURUM + ":pink_glazed_terracotta";
+	public static final String glazedTerracottaGrayEF = DOM_ETFUTURUM + ":gray_glazed_terracotta";
+	public static final String glazedTerracottaLightGrayEF = DOM_ETFUTURUM + ":light_gray_glazed_terracotta";
+	public static final String glazedTerracottaCyanEF = DOM_ETFUTURUM + ":cyan_glazed_terracotta";
+	public static final String glazedTerracottaPurpleEF = DOM_ETFUTURUM + ":purple_glazed_terracotta";
+	public static final String glazedTerracottaBlueEF = DOM_ETFUTURUM + ":blueglazed_terracotta";
+	public static final String glazedTerracottaBrownEF = DOM_ETFUTURUM + ":brown_glazed_terracotta";
+	public static final String glazedTerracottaGreenEF = DOM_ETFUTURUM + ":green_glazed_terracotta";
+	public static final String glazedTerracottaRedEF = DOM_ETFUTURUM + ":red_glazed_terracotta";
+	public static final String glazedTerracottaBlackEF = DOM_ETFUTURUM + ":black_glazed_terracotta";
+	
 	public static final String glazedTerracottaWhiteUTD = DOM_UPTODATE + ":glazed_terracotta_white";
 	public static final String glazedTerracottaOrangeUTD = DOM_UPTODATE + ":glazed_terracotta_orange";
 	public static final String glazedTerracottaMagentaUTD = DOM_UPTODATE + ":glazed_terracotta_magenta";
@@ -384,6 +403,7 @@ public class ModObjects {
 	public static final String materialsTC = "TConstruct:materials"; // Iron Nugget is 19 
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
 	public static final String ironNuggetUTD = DOM_UPTODATE + ":iron_nugget";
+	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
 	public static final String nuggetNL = "netherlicious:Nugget"; // Iron Nugget is 0
 	
 	// Ladders
@@ -579,6 +599,8 @@ public class ModObjects {
 	
 	// Flowers
 	public static final String flowerUTD = DOM_UPTODATE + ":flower";
+	public static final String flowerCornflowerEF = DOM_ETFUTURUM + ":cornflower";
+	public static final String flowerLilyOfTheValleyEF = DOM_ETFUTURUM + ":lily_of_the_valley";
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
@@ -621,6 +643,7 @@ public class ModObjects {
 	public static final String suspiciousStewUTD = DOM_UPTODATE + ":suspicious_stew";
 
 	// Sweet Berries
+	public static final String sweetBerriesEF = DOM_ETFUTURUM + ":sweet_berries";
 	public static final String sweetBerriesUTD = DOM_UPTODATE + ":sweet_berries";
 	
 	// Tipped arrows
@@ -1314,6 +1337,11 @@ public class ModObjects {
 			}
 			else if (mod.toLowerCase().equals("etfuturum"))
 			{
+				// Try Et Futurum: Requiem entries
+				modblock = Block.getBlockFromName(ModObjects.concreteEF);
+				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
+				
+				// Try original Et Futurum entries
 				switch (meta)
 				{
 					case 0: modblock = Block.getBlockFromName(ModObjects.concreteWhiteEF); break;
@@ -1798,12 +1826,59 @@ public class ModObjects {
 		return Blocks.fence_gate;
 	}
 	
+	
 	// Fletching Table
 	public static Object[] chooseModFletchingTable(int woodMeta)
 	{
 		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		
 		return new Object[]{modblock, meta};
+	}
+	
+	
+	// Flowers
+	public static Object[] chooseModCornflower()
+	{
+		String[] modprioritylist = GeneralConfig.modFlower;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.flowerCornflowerEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.flowerUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	
+	public static Object[] chooseModLilyOfTheValley()
+	{
+		String[] modprioritylist = GeneralConfig.modFlower;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.flowerLilyOfTheValleyEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.flowerUTD);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+		}
+		return null;
 	}
 	
 	
@@ -1835,6 +1910,31 @@ public class ModObjects {
 				int convolvedMeta = colorMeta%4 + 4*orientationMeta;
 				
 				return new Object[]{modblock, new Integer(convolvedMeta)};
+			}
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				// Try original Et Futurum entries
+				switch (colorMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaWhiteEF); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaOrangeEF); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaMagentaEF); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLightBlueEF); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaYellowEF); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLimeEF); break;
+					case 6: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaPinkEF); break;
+					case 7: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaGrayEF); break;
+					case 8: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaLightGrayEF); break;
+					case 9: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaCyanEF); break;
+					case 10: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaPurpleEF); break;
+					case 11: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlueEF); break;
+					case 12: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBrownEF); break;
+					case 13: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaGreenEF); break;
+					case 14: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaRedEF); break;
+					case 15: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlackEF); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};} //TODO - get roadhog's namespace and orientation meta values
 			}
 			
 			if (mod.toLowerCase().equals("uptodate"))
@@ -2093,6 +2193,11 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetEF);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
 			if (mod.toLowerCase().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetUTD);
@@ -2920,11 +3025,23 @@ public class ModObjects {
 	// Sweet Berries
 	public static ItemStack chooseModSweetBerriesItem()
 	{
-		Item moditem=null;
+		String[] modprioritylist = GeneralConfig.modSweetBerries;
 		
-		moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
-		if (moditem != null) {return new ItemStack(moditem, 1);}
-		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesEF);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+		}
 		return null;
 	}
 	

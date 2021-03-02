@@ -91,6 +91,7 @@ public class GeneralConfig {
 	public static String[] modConcrete;
 	public static String[] modGlazedTerracotta;
 	public static String[] modDye;
+	public static String[] modFlower;
 	public static String[] modFence;
 	public static String[] modPressurePlate;
 	public static String[] modFenceGate;
@@ -104,6 +105,7 @@ public class GeneralConfig {
 	public static String[] modSign;
 	public static String[] modSmoothStone;
 	public static String[] modSmoothSandstone;
+	public static String[] modSweetBerries;
 	
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
@@ -459,6 +461,13 @@ public class GeneralConfig {
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
+	    modFlower = config.getStringList("Mod Priority: Flower", "Mod Integration", new String[]{
+ 				"etfuturum",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing flowers for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modPressurePlate = config.getStringList("Mod Priority: Pressure Plate", "Mod Integration", new String[]{
 	    		"uptodate",
 	    		"woodstuff",
@@ -542,9 +551,17 @@ public class GeneralConfig {
  				},
  				"Priority order for referencing Stripped Logs/Wood for village generation. The version highest on the list and registered in your game will be used."
  				);
+
+	    modSweetBerries = config.getStringList("Mod Priority: Sweet Berries", "Mod Integration", new String[]{
+ 				"etfuturum",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing sweet berries for villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
 	    
 	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", "Mod Integration", new String[]{
  				"villagenames",
+ 				"etfuturum",
 	    		"uptodate",
  				},
  				"Priority order for referencing Glazed Terracotta for villager trade offers and well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
@@ -589,11 +606,13 @@ public class GeneralConfig {
  				);
 		
 	    modIronNugget = config.getStringList("Mod Priority: Iron Nugget", "Mod Integration", new String[]{
+	    		"etfuturum",
 	    		"uptodate",
  				"tinkersconstruct",
  				"thermalfoundation",
  				"railcraft",
  				"mariculture",
+ 				"netherlicious",
  				},
  				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
  				);

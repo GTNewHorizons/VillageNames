@@ -339,31 +339,40 @@ public class EntityInteractHandler {
 					)
 			{
 				// Randomly name an unnamed pet you own using a blank name tag
-				if (
-						(
-							(target instanceof EntityTameable
-							&& ((EntityTameable)target).isTamed()
-							&& ((EntityTameable)target).func_152114_e(player))
-							||
-							(target instanceof EntityHorse
-							&& ((EntityHorse)target).func_152119_ch().equals(player.getUniqueID().toString()))
-						)
-						
-						&& !target.hasCustomNameTag()
-						&& (!itemstack.hasDisplayName() || (itemstack.hasDisplayName() && itemstack.getDisplayName().equals("")))
-						)
+				
+				/*
+				 * give AstroTibs minecraft:name_tag 64 0 {display:{Name:"Larongom"}}
+				 * summon Wolf ~ ~ ~ {Owner:"AstroTibs"}
+				 */
+				try
 				{
-					event.setCanceled(true);
-					
-					// Apply the name here
-					String[] petname_a = NameGenerator.newRandomName("pet", random);
-					target.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
-					
-					// Consume the blank name tag if relevant
-					if (!player.capabilities.isCreativeMode) {itemstack.stackSize--;}
-					
-					return;
+					if (
+							(
+								(target instanceof EntityTameable
+								&& ((EntityTameable)target).isTamed()
+								&& ((EntityTameable)target).func_152114_e(player))
+								||
+								(target instanceof EntityHorse
+								&& ((EntityHorse)target).func_152119_ch().equals(player.getUniqueID().toString()))
+							)
+							
+							&& !target.hasCustomNameTag()
+							&& (!itemstack.hasDisplayName() || (itemstack.hasDisplayName() && itemstack.getDisplayName().equals("")))
+							)
+					{
+						event.setCanceled(true);
+						
+						// Apply the name here
+						String[] petname_a = NameGenerator.newRandomName("pet", random);
+						target.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
+						
+						// Consume the blank name tag if relevant
+						if (!player.capabilities.isCreativeMode) {itemstack.stackSize--;}
+						
+						return;
+					}
 				}
+				catch (Exception e) {LogHelper.error("Caught exception when naming a pet: " + e);}
 				
 				// Cancel naming an entity that has special name registration
 				if (
