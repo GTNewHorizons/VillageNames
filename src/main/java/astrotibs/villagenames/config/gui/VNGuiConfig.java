@@ -82,39 +82,38 @@ public class VNGuiConfig extends GuiConfig
 		// General config
 		subCats = new ArrayList<IConfigElement>();
 		
-		cc = GeneralConfig.config.getCategory("general");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_GENERAL);
 		cc.setComment("Change things like well decorations, name formats, and Codex/book settings");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("well kill switch");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_WELL_KILL_SWITCH);
 		cc.setComment("Disable well decorations outright"); 
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("naming");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_NAMING);
 		cc.setComment("Name generation for vanilla and modded entities");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("world of color");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_WORLD_OF_COLOR);
 		cc.setComment("Add Concrete and Glazed Terracotta from 1.12");
 		cc.setRequiresWorldRestart(true); // This category can't be edited while a world is running
 		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("mod integration");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_MOD_INTEGRATION);
 		cc.setComment("Interaction with modded structures, entities, blocks, items, etc.");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("villager professions");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_VILLAGER_PROFESSIONS);
 		cc.setComment("Profession and career assignment");
 		subCats.add( new ConfigElement(cc) );
 		cc.setRequiresMcRestart(true); // This category needs Minecraft to be restarted to take effect
 		
-		// Added in v3.2
-		cc = GeneralConfig.config.getCategory("villager skin tones");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_VILLAGER_SKIN_TONES);
 		cc.setComment("Show biome-based skin tone variation (requires Modern Villager Profession Skins to be true)");
 		subCats.add( new ConfigElement(cc) );
 		
-		cc = GeneralConfig.config.getCategory("miscellaneous");
+		cc = GeneralConfig.config.getCategory(Reference.CATEGORY_MISCELLANEOUS);
 		cc.setComment("Activate debug messages here");
 		subCats.add( new ConfigElement(cc) );
 		
@@ -149,92 +148,92 @@ public class VNGuiConfig extends GuiConfig
 		subCats = new ArrayList<IConfigElement>();
 		
 		// Villager
-		cc = VillagerConfigHandler.config.getCategory("villager syllable pool");
+		cc = VillagerConfigHandler.config.getCategory(Reference.CATEGORY_VILLAGER_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming villagers");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Village
-		cc = VillageConfigHandler.config.getCategory("village syllable pool");
+		cc = VillageConfigHandler.config.getCategory(Reference.CATEGORY_VILLAGE_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming villages");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Temple
-		cc = TempleConfigHandler.config.getCategory("temple syllable pool");
+		cc = TempleConfigHandler.config.getCategory(Reference.CATEGORY_TEMPLE_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming temples, pyramids, swamp huts, and igloos");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Mineshaft
-		cc = MineshaftConfigHandler.config.getCategory("mineshaft syllable pool");
+		cc = MineshaftConfigHandler.config.getCategory(Reference.CATEGORY_MINESHAFT_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming mineshafts");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Fortress
-		cc = FortressConfigHandler.config.getCategory("fortress syllable pool");
+		cc = FortressConfigHandler.config.getCategory(Reference.CATEGORY_FORTRESS_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming Nether fortresses");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Stronghold
-		cc = StrongholdConfigHandler.config.getCategory("stronghold syllable pool");
+		cc = StrongholdConfigHandler.config.getCategory(Reference.CATEGORY_STRONGHOLD_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming strongholds");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Monument
-		cc = MonumentConfigHandler.config.getCategory("monument syllable pool");
+		cc = MonumentConfigHandler.config.getCategory(Reference.CATEGORY_MONUMENT_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming ocean monuments");
 		subCats.add( new ConfigElement(cc) );
 		
 		// End City
-		cc = EndCityConfigHandler.config.getCategory("end city syllable pool");
+		cc = EndCityConfigHandler.config.getCategory(Reference.CATEGORY_END_CITY_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming End cities");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Mansion
-		cc = MansionConfigHandler.config.getCategory("mansion syllable pool");
+		cc = MansionConfigHandler.config.getCategory(Reference.CATEGORY_MANSION_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming woodland mansions");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Golem
-		cc = GolemConfigHandler.config.getCategory("golem syllable pool");
+		cc = GolemConfigHandler.config.getCategory(Reference.CATEGORY_GOLEM_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming golems");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Pet
-		cc = PetConfigHandler.config.getCategory("pet syllable pool");
+		cc = PetConfigHandler.config.getCategory(Reference.CATEGORY_PET_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate names for pets");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Dragon
-		cc = DragonConfigHandler.config.getCategory("dragon syllable pool");
+		cc = DragonConfigHandler.config.getCategory(Reference.CATEGORY_DRAGON_SYLLABLE_POOL);
 		cc.setComment("Syllables for naming dragons");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Angel
-		cc = AngelConfigHandler.config.getCategory("angel syllable pool");
+		cc = AngelConfigHandler.config.getCategory(Reference.CATEGORY_ANGEL_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate angel names");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Demon
-		cc = DemonConfigHandler.config.getCategory("demon syllable pool");
+		cc = DemonConfigHandler.config.getCategory(Reference.CATEGORY_DEMON_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate demon names");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Goblin
-		cc = GoblinConfigHandler.config.getCategory("goblin syllable pool");
+		cc = GoblinConfigHandler.config.getCategory(Reference.CATEGORY_GOBLIN_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate fairy/goblin names");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Alien Villager
-		cc = AlienConfigHandler.config.getCategory("alien syllable pool");
+		cc = AlienConfigHandler.config.getCategory(Reference.CATEGORY_ALIEN_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate alien names");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Alien Village
-		cc = AlienVillageConfigHandler.config.getCategory("alien village syllable pool");
+		cc = AlienVillageConfigHandler.config.getCategory(Reference.CATEGORY_ALIEN_VILLAGE_SYLLABLE_POOL);
 		cc.setComment("Syllables to generate alien village names");
 		subCats.add( new ConfigElement(cc) );
 		
 		// Custom
-		cc = CustomConfigHandler.config.getCategory("custom syllable pool");
+		cc = CustomConfigHandler.config.getCategory(Reference.CATEGORY_CUSTOM_SYLLABLE_POOL);
 		cc.setComment("Dedicated section for players to assign names to using their own syllable pools");
 		subCats.add( new ConfigElement(cc) );
 		

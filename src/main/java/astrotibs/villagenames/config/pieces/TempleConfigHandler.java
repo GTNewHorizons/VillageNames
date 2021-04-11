@@ -3,6 +3,7 @@ package astrotibs.villagenames.config.pieces;
 import java.io.File;
 
 import astrotibs.villagenames.name.NamePieces;
+import astrotibs.villagenames.utility.Reference;
 import net.minecraftforge.common.config.Configuration;
 
 public class TempleConfigHandler
@@ -32,31 +33,31 @@ public class TempleConfigHandler
 	
 	public static void loadConfiguration()
 	{
-		temple_prefix = config.getString("Prefixes", "Temple Syllable Pool", NamePieces.temple_prefix_default,
+		temple_prefix = config.getString("Prefixes", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, NamePieces.temple_prefix_default,
 				"Prefixes that can occur before the core name.").trim().split("\\s*,\\s*");
 		
-		temple_root_initial = config.getString("Root: Initial", "Temple Syllable Pool", NamePieces.temple_root_initial_default,
+		temple_root_initial = config.getString("Root: Initial", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, NamePieces.temple_root_initial_default,
 				"Core names begin with one of these half-syllables. Use _ to represent a space.").trim().split("\\s*,\\s*");
 		
-		temple_root_syllables = config.getString("Root: Syllables", "Temple Syllable Pool", NamePieces.temple_root_sylBegin_default,
+		temple_root_syllables = config.getString("Root: Syllables", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, NamePieces.temple_root_sylBegin_default,
 				"Core names insert zero or more of these elements to build to their target lengths. Use _ to represent a space, and ^ for a blank entry.").trim().split("\\s*,\\s*");
 		
-		temple_root_terminal = config.getString("Root: Terminal", "Temple Syllable Pool", NamePieces.temple_root_terminal_default,
+		temple_root_terminal = config.getString("Root: Terminal", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, NamePieces.temple_root_terminal_default,
 				"Core names end with one of these half-syllables. Use _ to represent a space, and ^ for a blank entry.").trim().split("\\s*,\\s*");
 		
-		temple_suffix = config.getString("Suffixes", "Temple Syllable Pool", NamePieces.temple_suffix_default,
+		temple_suffix = config.getString("Suffixes", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, NamePieces.temple_suffix_default,
 				"Suffixes that can occur after the core name.").trim().split("\\s*,\\s*");
 
 		
 		
-		syllable_count_weighting = config.get("Temple Syllable Pool", "Syllable Count Weighting", NamePieces.temple_syllable_count_weights,
+		syllable_count_weighting = config.get(Reference.CATEGORY_TEMPLE_SYLLABLE_POOL, "Syllable Count Weighting", NamePieces.temple_syllable_count_weights,
 				"How often core names of various lengths are generated. The number in the Nth row is the weighting for N-syllable names.").getIntList();
 		
-		prefix_chance = config.getFloat("Prefix Chance", "Temple Syllable Pool",
+		prefix_chance = config.getFloat("Prefix Chance", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL,
 				(temple_root_initial.length-1) <= 0 ? 0 : ((float)temple_prefix.length-1)/(temple_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a prefix.");
 		
-		suffix_chance = config.getFloat("Suffix Chance", "Temple Syllable Pool",
+		suffix_chance = config.getFloat("Suffix Chance", Reference.CATEGORY_TEMPLE_SYLLABLE_POOL,
 				(temple_root_initial.length-1) <= 0 ? 0 : ((float)temple_suffix.length-1)/(temple_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a suffix.");
 		

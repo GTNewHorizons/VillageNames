@@ -130,15 +130,15 @@ public class ExtendedVillager implements IExtendedEntityProperties {
         if (properties == null) {
             hasValidData = false;
             career = -1;
-            biomeType = -1; // Added in v3.1
-            professionLevel = -1; // Added in v3.1
-            skinTone = -99; // Added in v3.2
+            biomeType = -1;
+            professionLevel = -1;
+            skinTone = -99;
         } 
         else {
             this.career = properties.getInteger(careerKey);
-            this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1; // Added in v3.1
-            this.professionLevel = properties.getInteger(professionLevelKey); // Added in v3.1
-            this.skinTone = properties.hasKey(skinToneKey) ? properties.getInteger(skinToneKey) : -99; // Added in v3.2
+            this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1;
+            this.professionLevel = properties.getInteger(professionLevelKey);
+            this.skinTone = properties.hasKey(skinToneKey) ? properties.getInteger(skinToneKey) : -99;
             this.hasValidData = properties.getBoolean(InitializedKey);
         }
 	}
@@ -197,11 +197,11 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 	{
 		// Pull out the recipe list and use its size to determine the profession level of the villager
 		MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
-		int professionLevel = (buyingList == null ? 0 : Math.max(buyingList.size(),0)); // v3.2 - ensure the PL is not below 0
+		int professionLevel = (buyingList == null ? 0 : Math.max(buyingList.size(),0)); // Ensure the PL is not below 0
 		
 		if (
 				villager.getProfession() == 0 && ExtendedVillager.get(villager).getCareer() == 3 // Is a shepherd
-				&& (professionLevel >=16 && !GeneralConfig.modernVillagerTrades) // Has unlocked the colored wool trades - v3.1: modern trades condition
+				&& (professionLevel >=16 && !GeneralConfig.modernVillagerTrades) // Has unlocked the colored wool trades - modern trades condition
 				)
 		{professionLevel -= 15;} // Do this to offset the immense additions to the shepherd
 		

@@ -3,6 +3,7 @@ package astrotibs.villagenames.config.pieces;
 import java.io.File;
 
 import astrotibs.villagenames.name.NamePieces;
+import astrotibs.villagenames.utility.Reference;
 import net.minecraftforge.common.config.Configuration;
 
 public class MansionConfigHandler
@@ -32,31 +33,31 @@ public class MansionConfigHandler
 	
 	public static void loadConfiguration()
 	{
-		mansion_prefix = config.getString("Prefixes", "Mansion Syllable Pool", NamePieces.mansion_prefix_default,
+		mansion_prefix = config.getString("Prefixes", Reference.CATEGORY_MANSION_SYLLABLE_POOL, NamePieces.mansion_prefix_default,
 				"Prefixes that can occur before the core name.").trim().split("\\s*,\\s*");
 		
-		mansion_root_initial = config.getString("Root: Initial", "Mansion Syllable Pool", NamePieces.mansion_root_initial_default,
+		mansion_root_initial = config.getString("Root: Initial", Reference.CATEGORY_MANSION_SYLLABLE_POOL, NamePieces.mansion_root_initial_default,
 				"Core names begin with one of these half-syllables. Use _ to represent a space.").trim().split("\\s*,\\s*");
 		
-		mansion_root_syllables = config.getString("Root: Syllables", "Mansion Syllable Pool", NamePieces.mansion_root_sylBegin_default,
+		mansion_root_syllables = config.getString("Root: Syllables", Reference.CATEGORY_MANSION_SYLLABLE_POOL, NamePieces.mansion_root_sylBegin_default,
 				"Core names insert zero or more of these elements to build to their target lengths. Use _ to represent a space, and ^ for a blank entry.").trim().split("\\s*,\\s*");
 		
-		mansion_root_terminal = config.getString("Root: Terminal", "Mansion Syllable Pool", NamePieces.mansion_root_terminal_default,
+		mansion_root_terminal = config.getString("Root: Terminal", Reference.CATEGORY_MANSION_SYLLABLE_POOL, NamePieces.mansion_root_terminal_default,
 				"Core names end with one of these half-syllables. Use _ to represent a space, and ^ for a blank entry.").trim().split("\\s*,\\s*");
 		
-		mansion_suffix = config.getString("Suffixes", "Mansion Syllable Pool", NamePieces.mansion_suffix_default,
+		mansion_suffix = config.getString("Suffixes", Reference.CATEGORY_MANSION_SYLLABLE_POOL, NamePieces.mansion_suffix_default,
 				"Suffixes that can occur after the core name.").trim().split("\\s*,\\s*");
 
 		
 		
-		syllable_count_weighting = config.get("Mansion Syllable Pool", "Syllable Count Weighting", NamePieces.mansion_syllable_count_weights,
+		syllable_count_weighting = config.get(Reference.CATEGORY_MANSION_SYLLABLE_POOL, "Syllable Count Weighting", NamePieces.mansion_syllable_count_weights,
 				"How often core names of various lengths are generated. The number in the Nth row is the weighting for N-syllable names.").getIntList();
 		
-		prefix_chance = config.getFloat("Prefix Chance", "Mansion Syllable Pool",
+		prefix_chance = config.getFloat("Prefix Chance", Reference.CATEGORY_MANSION_SYLLABLE_POOL,
 				(mansion_root_initial.length-1) <= 0 ? 0 : ((float)mansion_prefix.length-1)/(mansion_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a prefix.");
 		
-		suffix_chance = config.getFloat("Suffix Chance", "Mansion Syllable Pool",
+		suffix_chance = config.getFloat("Suffix Chance", Reference.CATEGORY_MANSION_SYLLABLE_POOL,
 				(mansion_root_initial.length-1) <= 0 ? 0 : ((float)mansion_suffix.length-1)/(mansion_root_initial.length-1), 0.0F, 1.0F,
 				"The fraction of names that include a suffix.");
 		

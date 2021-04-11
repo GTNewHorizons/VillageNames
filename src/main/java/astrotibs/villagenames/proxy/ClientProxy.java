@@ -5,12 +5,15 @@ import astrotibs.villagenames.block.color.RenderGlazedTerracotta;
 import astrotibs.villagenames.client.renderer.entity.RenderVillagerModern;
 import astrotibs.villagenames.client.renderer.entity.RenderZombieVillagerModern;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.integration.antiqueatlas.VillageWatcherAA;
 import astrotibs.villagenames.prismarine.guardian.audio.GuardianSound;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
 import astrotibs.villagenames.prismarine.guardian.renderer.RenderGuardian;
 import astrotibs.villagenames.prismarine.register.RegisterRenderPrismarine;
+import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -29,8 +32,14 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void init(FMLInitializationEvent e) {
+	public void init(FMLInitializationEvent e)
+	{
 		super.init(e);
+		
+		if (Loader.isModLoaded(Reference.ANTIQUE_ATLAS_MODID))
+		{ 
+			VillageWatcherAA.registerTextures();
+		}
 	}
 	
 	@Override

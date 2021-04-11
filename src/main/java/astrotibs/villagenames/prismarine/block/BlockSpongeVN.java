@@ -33,8 +33,24 @@ public class BlockSpongeVN extends BlockGeneric {
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		tryAbsorb(world, x, y, z, world.getBlockMetadata(x, y, z) == 1);
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		if (world.provider.isHellWorld) // Dries when placed in the Nether
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+			
+			world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+			
+			// Smoke particles - doesn't seem to be working
+//            for (int l = 0; l < 8; ++l)
+//            {
+//                world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + Math.random(), (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+//            }
+		}
+		else
+		{
+			tryAbsorb(world, x, y, z, world.getBlockMetadata(x, y, z) == 1);
+		}
 	}
 
 	@Override

@@ -20,7 +20,8 @@ import astrotibs.villagenames.igloo.IglooGeneratorIWG;
 import astrotibs.villagenames.igloo.VNComponentIglooPieces;
 import astrotibs.villagenames.igloo.VNMapGenIgloo;
 import astrotibs.villagenames.init.Recipes;
-import astrotibs.villagenames.integration.tools.TileEntityWoodSign;
+import astrotibs.villagenames.integration.antiqueatlas.VillageWatcherAA;
+import astrotibs.villagenames.integration.ganyssurface.TileEntityWoodSign;
 import astrotibs.villagenames.item.ModItems;
 import astrotibs.villagenames.nbt.NBTUpdater;
 import astrotibs.villagenames.network.MessageModernVillagerSkin;
@@ -525,6 +526,12 @@ public final class VillageNames
 		// Added in v3.1banner
 		GameRegistry.registerTileEntity(TileEntityBanner.class, Reference.MOD_ID + ".banner");
 		GameRegistry.registerTileEntity(TileEntityWoodSign.class, Reference.MOD_ID + ".sign"); // VillageNames.sign // ganyssurface.wood_sign
+		
+		// Other mod stuff
+        if (Loader.isModLoaded(Reference.ANTIQUE_ATLAS_MODID))
+        {
+        	MinecraftForge.EVENT_BUS.register(new VillageWatcherAA()); // Antique Atlas map listener
+        }
 	}
 	
 	

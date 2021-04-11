@@ -1,5 +1,7 @@
 package astrotibs.villagenames.integration;
 
+import java.util.Random;
+
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
@@ -11,6 +13,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -497,11 +501,11 @@ public class ModObjects {
 	public static final String wallRC = "Railcraft:wall.alpha"; // Meta 10:Brick, 11:Sandstone
 	
 	// Wooden Pressure Plate
-	public static final String pressurePlateSpruceGS = DOM_GANYSSURFACE + ":pressure_plate_spruce";
-	public static final String pressurePlateBirchGS = DOM_GANYSSURFACE + ":pressure_plate_birch";
-	public static final String pressurePlateJungleGS = DOM_GANYSSURFACE + ":pressure_plate_jungle";
-	public static final String pressurePlateAcaciaGS = DOM_GANYSSURFACE + ":pressure_plate_acacia";
-	public static final String pressurePlateDarkOakGS = DOM_GANYSSURFACE + ":pressure_plate_dark_oak";
+	public static final String pressurePlateSpruceGS = DOM_GANYSSURFACE + ":pressurePlate1";
+	public static final String pressurePlateBirchGS = DOM_GANYSSURFACE + ":pressurePlate2";
+	public static final String pressurePlateJungleGS = DOM_GANYSSURFACE + ":pressurePlate3";
+	public static final String pressurePlateAcaciaGS = DOM_GANYSSURFACE + ":pressurePlate4";
+	public static final String pressurePlateDarkOakGS = DOM_GANYSSURFACE + ":pressurePlate5";
 	
 	public static final String pressurePlateSpruceEF = DOM_ETFUTURUM + ":pressure_plate_spruce";
 	public static final String pressurePlateBirchEF = DOM_ETFUTURUM + ":pressure_plate_birch";
@@ -509,11 +513,11 @@ public class ModObjects {
 	public static final String pressurePlateAcaciaEF = DOM_ETFUTURUM + ":pressure_plate_acacia";
 	public static final String pressurePlateDarkOakEF = DOM_ETFUTURUM + ":pressure_plate_dark_oak";
 	
-	public static final String pressurePlateSpruceUTD = DOM_UPTODATE + ":pressurePlate1";
-	public static final String pressurePlateBirchUTD = DOM_UPTODATE + ":pressurePlate2";
-	public static final String pressurePlateJungleUTD = DOM_UPTODATE + ":pressurePlate3";
-	public static final String pressurePlateAcaciaUTD = DOM_UPTODATE + ":pressurePlate4";
-	public static final String pressurePlateDarkOakUTD = DOM_UPTODATE + ":pressurePlate5";
+	public static final String pressurePlateSpruceUTD = DOM_UPTODATE + ":pressure_plate_spruce";
+	public static final String pressurePlateBirchUTD = DOM_UPTODATE + ":pressure_plate_birch";
+	public static final String pressurePlateJungleUTD = DOM_UPTODATE + ":pressure_plate_jungle";
+	public static final String pressurePlateAcaciaUTD = DOM_UPTODATE + ":pressure_plate_acacia";
+	public static final String pressurePlateDarkOakUTD = DOM_UPTODATE + ":pressure_plate_dark_oak";
 	
 	public static final String pressurePlateOakWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_0";
 	public static final String pressurePlateSpruceWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_1";
@@ -640,6 +644,7 @@ public class ModObjects {
 	// stripped wood for UTD is just log with meta value of 12
 	
 	// Suspicious Stew
+	public static final String suspiciousStewEF = DOM_ETFUTURUM + ":suspicious_stew";
 	public static final String suspiciousStewUTD = DOM_UPTODATE + ":suspicious_stew";
 
 	// Sweet Berries
@@ -1181,7 +1186,7 @@ public class ModObjects {
 			{
 				if (materialMeta>0)
 				{
-					modblock = Block.getBlockFromName(ModObjects.bookshelfGS); meta=materialMeta-1; break;
+					modblock = Block.getBlockFromName(ModObjects.bookshelfGS); meta=materialMeta-1;
 				}
 				if (modblock!=null) {return new Object[]{modblock, meta};}
 			}
@@ -1934,7 +1939,7 @@ public class ModObjects {
 					case 14: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaRedEF); break;
 					case 15: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlackEF); break;
 				}
-				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};} //TODO - get roadhog's namespace and orientation meta values
+				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};}
 			}
 			
 			if (mod.toLowerCase().equals("uptodate"))
@@ -2422,10 +2427,10 @@ public class ModObjects {
 		switch (materialMeta)
 		{
 			case 1: modblock = Block.getBlockFromName(standing? ModObjects.signSpruceEF : ModObjects.wallSignSpruceEF); break;
-			case 2: modblock = Block.getBlockFromName(standing? ModObjects.signBirchEF : ModObjects.wallSignSpruceEF); break;
-			case 3: modblock = Block.getBlockFromName(standing? ModObjects.signJungleEF : ModObjects.wallSignSpruceEF); break;
-			case 4: modblock = Block.getBlockFromName(standing? ModObjects.signAcaciaEF : ModObjects.wallSignSpruceEF); break;
-			case 5: modblock = Block.getBlockFromName(standing? ModObjects.signDarkOakEF : ModObjects.wallSignSpruceEF); break;
+			case 2: modblock = Block.getBlockFromName(standing? ModObjects.signBirchEF : ModObjects.wallSignBirchEF); break;
+			case 3: modblock = Block.getBlockFromName(standing? ModObjects.signJungleEF : ModObjects.wallSignJungleEF); break;
+			case 4: modblock = Block.getBlockFromName(standing? ModObjects.signAcaciaEF : ModObjects.wallSignAcaciaEF); break;
+			case 5: modblock = Block.getBlockFromName(standing? ModObjects.signDarkOakEF : ModObjects.wallSignDarkOakEF); break;
 			
 			// Gany's Surface uniquely uses boolean tile.isStanding in its tileentity which does not have a vanilla parallel.
 			// GS standing signs won't work.
@@ -2693,6 +2698,13 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
 				if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
 			}
+		}
+		
+		// Try an ordinary red sandstone
+		if (isRed)
+		{
+			modblock = chooseModRedSandstone();
+			if (modblock != null) {return new Object[]{modblock, 0};}
 		}
 		
 		// Return vanilla white sandstone with cap on all sides
@@ -3023,7 +3035,7 @@ public class ModObjects {
 	}
 
 	// Sweet Berries
-	public static ItemStack chooseModSweetBerriesItem()
+	public static Item chooseModSweetBerriesItem()
 	{
 		String[] modprioritylist = GeneralConfig.modSweetBerries;
 		
@@ -3034,12 +3046,12 @@ public class ModObjects {
 			if (mod.toLowerCase().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesEF);
-				if (moditem != null) {return new ItemStack(moditem, 1);}
+				if (moditem != null) {return moditem;}
 			}
 			else if (mod.toLowerCase().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
-				if (moditem != null) {return new ItemStack(moditem, 1);}
+				if (moditem != null) {return moditem;}
 			}
 		}
 		return null;
@@ -3056,7 +3068,65 @@ public class ModObjects {
 	// Rabbit Foot
 	
 	// Suspicious Stew
-	
+	public static ItemStack chooseModSuspiciousStewRandom(Random random)
+	{
+		String[] modprioritylist = GeneralConfig.modSuspiciousStew;
+		
+		// Only six potion effects are allowed
+		int[][] potionEffects = new int[][]{
+			//{Potion.fireResistance.id, 80}, // Allium
+			{Potion.blindness.id, 160}, // Azure Bluet
+			//{Potion.field_76443_y.id, 7}, // Blue Orchid (Saturation)
+			{Potion.field_76443_y.id, 7}, // Dandelion (Saturation)
+			//{Potion.regeneration.id, 160}, // Oxeye Daisy
+			{Potion.nightVision.id, 100}, // Poppy
+			//{Potion.weakness.id, 180}, // Red Tulip
+			{Potion.weakness.id, 180}, // Orange Tulip
+			//{Potion.weakness.id, 180}, // White Tulip
+			//{Potion.weakness.id, 180}, // Pink Tulip
+			{Potion.jump.id, 120}, // Lily of the Valley
+			{Potion.poison.id, 240}, // Cornflower
+			//{Potion.wither.id, 160}, // Wither Rose
+		};
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewEF);
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewUTD);
+			}
+			
+			if (moditem == null) {continue;}
+						
+			// If you've reached this point, you have a viable stew item
+			
+			ItemStack moditemstack = new ItemStack(moditem, 1);
+			
+			// Taken from Et Futurum Requiem
+			// https://github.com/jss2a98aj/Et-Futurum/blob/krypt/src/main/java/ganymedes01/etfuturum/recipes/ModRecipes.java
+			moditemstack.stackTagCompound = new NBTTagCompound();
+			NBTTagList effectsList = new NBTTagList();
+			moditemstack.stackTagCompound.setTag("Effects", effectsList);
+			NBTTagCompound potionEffect = new NBTTagCompound();
+			
+			int chosenPotionEffect = random.nextInt(6);			
+			//PotionEffect effect = new PotionEffect(potionEffects[chosenPotionEffect][0], potionEffects[chosenPotionEffect][1], 0);
+			
+			potionEffect.setByte("EffectId", (byte)potionEffects[chosenPotionEffect][0]);
+			potionEffect.setInteger("EffectDuration", potionEffects[chosenPotionEffect][1]);
+			effectsList.appendTag(potionEffect);
+			
+			return moditemstack;
+		}
+    	
+    	return null;
+	}
 	
 	// Wooden Pressure Plate
 	public static Block chooseModPressurePlate(int materialMeta)

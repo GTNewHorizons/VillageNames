@@ -219,7 +219,7 @@ public class ChestLootHandler {
 			{new ItemStack(Blocks.tallgrass, 1, 2), def_min, def_max, 2}, // Fern
 			{new ItemStack(Blocks.double_plant, 1, 3), def_min, def_max, 2}, // Large Fern
 			{new ItemStack(Items.potato), 1, 7, 10},
-			{ModObjects.chooseModSweetBerriesItem(), 1, 7, 5},
+			{new ItemStack (ModObjects.chooseModSweetBerriesItem()), 1, 7, 5},
 			{new ItemStack(Items.bread), 1, 4, 10},
 			{new ItemStack(Items.pumpkin_seeds), 1, 5, 5},
 			{new ItemStack(Items.pumpkin_pie), def_min, def_max, def_weight},
@@ -326,8 +326,8 @@ public class ChestLootHandler {
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
 		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
-			{new ItemStack(Items.fish), 1, 3, 2},
-			{new ItemStack(Items.fish, 1, 1), 1, 3, def_weight},
+			{new ItemStack(Items.fish), 1, 3, 2}, // Cod
+			{new ItemStack(Items.fish, 1, 1), 1, 3, def_weight}, // Salmon
 			{new ItemStack(Items.water_bucket), 1, 3, def_weight},
 			{ModObjects.chooseModBarrelItem(), 1, 3, def_weight},
 			{new ItemStack(Items.clay_ball), def_min, def_max, def_weight},
@@ -382,7 +382,7 @@ public class ChestLootHandler {
 			{new ItemStack(Blocks.stone), def_min, def_max, 2},
 			{new ItemStack(Blocks.stonebrick), def_min, def_max, 2},
 			{new ItemStack(Items.bread), 1, 4, 4},
-			{new ItemStack(Items.dye, 1, 11), def_min, def_max, def_weight},
+			{new ItemStack(Items.dye, 1, 11), def_min, def_max, def_weight}, // Dandelion Yellow
 			{new ItemStack((Block) ModObjects.chooseModSmoothStoneBlock()[0], 1, (Integer) ModObjects.chooseModSmoothStoneBlock()[1]), def_min, def_max, def_weight},
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 		})

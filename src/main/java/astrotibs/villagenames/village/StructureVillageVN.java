@@ -26,6 +26,7 @@ import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -934,7 +935,9 @@ public class StructureVillageVN
 												        	   }
         	if (block == Blocks.stone_slab)                    {
 																	Object[] modobject = ModObjects.chooseModRedSandstoneSlab(meta>=8);
-																	if (modobject == null) {block=Blocks.stone_slab; meta=meta<8? 1: 9; break;}
+																	if (modobject == null) {block=Blocks.stone_slab; meta=meta<8? 1: 9;}
+																	else {block=(Block)modobject[0]; meta = (Integer)modobject[1];}
+																	break;
 											        		   }
         	if (block == Blocks.sandstone_stairs)              {
 																	block = ModObjects.chooseModRedSandstoneStairs();
@@ -951,7 +954,8 @@ public class StructureVillageVN
 													           {
 																	Object[] modobject = ModObjects.chooseModSmoothSandstoneSlab(meta==8, true);
 																	if (modobject == null) {block=Block.getBlockFromName(ModObjects.smoothSandstoneSlabUTD); break;}
-																	else {return modobject;}
+																	else {block=(Block)modobject[0]; meta = (Integer)modobject[1];}
+																	break;
 													    	   }
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {
 																					        		Object[] modobject=ModObjects.chooseModSmoothSandstoneBlock(true);
@@ -1159,7 +1163,7 @@ public class StructureVillageVN
     		
     		// Replace other liquid or ice with planks
     		if (surfaceBlock.getMaterial().isLiquid() || surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
-    				|| (Reference.isMFQMloaded
+    				|| (Loader.isModLoaded(Reference.MORE_FUN_QUICKSAND_MOD_MODID)
     						&&
     						(
 								surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)

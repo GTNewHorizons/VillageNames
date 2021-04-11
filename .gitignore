@@ -1,5 +1,5 @@
 # eclipse
-bin
+/bin
 .classpath
 .project
 .settings
@@ -19,6 +19,8 @@ gradle*
 # other
 eclipse
 README.txt
- 
+/api
+.gitignore
+
 # Junk added by AstroTibs
 NewZombieBiomes.png

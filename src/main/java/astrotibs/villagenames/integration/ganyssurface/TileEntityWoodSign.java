@@ -1,4 +1,4 @@
-package astrotibs.villagenames.integration.tools;
+package astrotibs.villagenames.integration.ganyssurface;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntitySign;

@@ -193,18 +193,11 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Items.egg, FunctionsVN.modernTradeCostBySlot(16, 0, nextSlotToFill, 4) ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								// This is Suspicious Stew in Java
-								while (true)
-								{
-									moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewUTD);
-									if (moditem != null) {
-										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-												new ItemStack( Items.emerald, 1 ),
-												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(1 + (random.nextBoolean()? 1 : 0), 1, nextSlotToFill, 4),
-														random.nextInt(10) // One of ten types
-														)
-												) ); break;}
-									break;
-								}
+								moditemstack = ModObjects.chooseModSuspiciousStewRandom(random); // One of six types
+								if (moditemstack != null) {
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, 1 ), moditemstack
+											));}
 							}
 							
 							// Level 5: Master
@@ -2240,7 +2233,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								// Sweet Berries to Emerald
 								while (true)
 								{
-									moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
+									moditem = ModObjects.chooseModSweetBerriesItem();
 									if (moditem != null) {
 										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 												new ItemStack( moditem, FunctionsVN.modernTradeCostBySlot(10, 1, nextSlotToFill, 5) ),
