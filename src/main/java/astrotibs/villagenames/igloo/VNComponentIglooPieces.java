@@ -444,7 +444,7 @@ public class VNComponentIglooPieces
                     	Block andesitePlaceholder = Blocks.double_stone_slab;
                     	int andesitePlaceholderMeta = 0;
                     	
-                    	Object[] tryAndesite = ModObjects.chooseModPolishedAndesiteBlock();
+                    	Object[] tryAndesite = ModObjects.chooseModPolishedAndesiteObject();
                     	
                     	if (tryAndesite != null)
                     	{

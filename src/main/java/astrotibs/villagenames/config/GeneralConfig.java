@@ -96,6 +96,7 @@ public class GeneralConfig {
 	public static String[] modIronNugget;
 	public static String[] modKelp;
 	public static String[] modLantern;
+	public static String[] modMossyStone;
 	public static String[] modMutton;
 	public static String[] modPressurePlate;
 	public static String[] modRedSandstone;
@@ -596,8 +597,8 @@ public class GeneralConfig {
 		
 	    modBountifulStone = config.getStringList("Mod Priority: Bountiful Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"chisel",
-	    		"uptodate",
  				"etfuturum",
+	    		"uptodate",
  				"ganyssurface",
  				"botania",
  				},
@@ -630,6 +631,13 @@ public class GeneralConfig {
  				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
  				);
 	    
+	    modMossyStone = config.getStringList("Mod Priority: Mossy Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
+	    		"uptodate",
+ 				},
+ 				"Priority order for referencing mossy stone blocks for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modMutton = config.getStringList("Mod Priority: Mutton", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"uptodate",
  				"etfuturum",
@@ -659,7 +667,7 @@ public class GeneralConfig {
 	    		"uptodate",
  				"railcraft",
  				},
- 				"Priority order for referencing Wall for village generation. The version highest on the list and registered in your game will be used."
+ 				"Priority order for referencing walls for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 		// Mapping for modded structures, and the creatures that can name them

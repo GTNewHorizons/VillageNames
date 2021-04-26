@@ -55,8 +55,8 @@ public class VillageWatcherAA
 	
 	public static void setCustomTileTexture(String tileName, String printedName, String aaTileFileRoot)
 	{
-		TileAPI api = AtlasAPI.getTileAPI();
-		AtlasAPI.getTileAPI().setCustomTileTexture(tileName, api.registerTextureSet(printedName, new ResourceLocation(Reference.ANTIQUE_ATLAS_MODID, "textures/gui/tiles/"+aaTileFileRoot+".png")));
+		TileAPI tileAPI = AtlasAPI.getTileAPI();
+		tileAPI.setCustomTileTexture(tileName, tileAPI.registerTextureSet(printedName, new ResourceLocation(Reference.ANTIQUE_ATLAS_MODID, "textures/gui/tiles/"+aaTileFileRoot+".png")));
 	}
 	
 	public static final String VILLAGE_MARKER = "village";
@@ -130,6 +130,8 @@ public class VillageWatcherAA
 	SNOWY_ICE_SPIRE = "VNSnMP1", // Snowy Ice Spire
 	SNOWY_FOUNTAIN = "VNSnMP2", // Snowy Fountain
 	SNOWY_PAVILION = "VNSnMP3", // Snowy Pavilion
+	
+	JUNGLE_STATUE = "VNJuSta", // Snowy Pavilion
 
 	// Village Structures
 	PLAINS_FLOWER_PLANTER = "VNPlAcc1", // Plains Flower Planter
@@ -343,6 +345,7 @@ public class VillageWatcherAA
 		builder.put(SNOWY_ICE_SPIRE, TILE_VILLAGE_WELL);
 		builder.put(SNOWY_FOUNTAIN, TILE_VILLAGE_WELL);
 		builder.put(SNOWY_PAVILION, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_STATUE, TILE_VILLAGE_WELL);
 		
 		// Plains
 		builder.put(PLAINS_FLOWER_PLANTER, TILE_VILLAGE_FARMLAND_SMALL);

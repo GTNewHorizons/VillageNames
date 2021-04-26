@@ -12,6 +12,7 @@ import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
+import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
@@ -276,6 +277,18 @@ public class MapGenVillageVN extends MapGenVillage
             		new SnowyStructures.SnowyMeetingPoint3(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Snowy Pavilion
             };
             
+            StructureVillageVN.StartVN[] jungleStarters = new StructureVillageVN.StartVN[]
+            {
+            		new JungleStructures.JungleStatue(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Statue
+            		new JungleStructures.JungleTree(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Tree
+            		new JungleStructures.JungleGarden(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Garden
+            };
+            
+            StructureVillageVN.StartVN[] swampStarters = new StructureVillageVN.StartVN[]
+            {
+            		
+            };
+            
             if (startVillageType==FunctionsVN.VillageType.DESERT)
             {
             	start = desertStarters[random.nextInt(desertStarters.length)];
@@ -292,15 +305,22 @@ public class MapGenVillageVN extends MapGenVillage
             {
             	start = snowyStarters[random.nextInt(snowyStarters.length)];
             }
+            else if (startVillageType==FunctionsVN.VillageType.JUNGLE)
+            {
+            	start = jungleStarters[random.nextInt(jungleStarters.length)];
+            }
             else // Plains if nothing else matches
             {
             	start = plainsStarters[random.nextInt(plainsStarters.length)];
             }
             
             
-            // Force a specific starter for testing purposes
-        	//start = new TaigaStructures.TaigaMeetingPoint2(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
             
+            // === FORCE A SPECIFIC STARTER FOR TESTING PURPOSES === //
+        	start = new JungleStructures.JungleGarden(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+            
+        	
+        	
             // Add well to the component list
             this.components.add(start);
             

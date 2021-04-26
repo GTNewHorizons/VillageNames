@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.item.Item;
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
@@ -22,6 +23,7 @@ import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.biomestructures.BlueprintData;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
+import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
@@ -51,6 +53,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
@@ -84,6 +87,15 @@ public class StructureVillageVN
 		{5,3,5,3},
 		{2,5,3,4},
 		{4,2,4,2},
+	};
+	
+	// Indexed by [orientation][horizIndex]
+	public static final int[][] VINE_META_ARRAY = new int[][]{
+		{4,8,1,2}, // Forward
+		{2,4,2,4}, // Right
+		{1,2,4,8}, // Back
+		{8,1,8,1}, // Left
+	   //N E S W
 	};
 	
 	// Indexed by [orientation][horizIndex]
@@ -296,6 +308,8 @@ public class StructureVillageVN
 				case TAIGA: villageTypeToCompare = "taiga"; break;
 				case SAVANNA: villageTypeToCompare = "savanna"; break;
 				case SNOWY: villageTypeToCompare = "snowy"; break;
+				case JUNGLE: villageTypeToCompare = "jungle"; break;
+				case SWAMP: villageTypeToCompare = "swamp"; break;
 			}
 			
 			int classPathListIndex = mappedComponentVillageTypes.get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
@@ -616,7 +630,8 @@ public class StructureVillageVN
     	case OAK:
     		woodMeta = 0; // Oak
     		
-    		// For Wood Stuff or Gany's Surface
+    		if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
         	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
@@ -649,6 +664,7 @@ public class StructureVillageVN
     		woodMeta = 1; // Spruce
     		
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
@@ -691,6 +707,7 @@ public class StructureVillageVN
     		woodMeta = 2; // Birch
     		
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
@@ -734,13 +751,28 @@ public class StructureVillageVN
     		woodMeta = 3; // Jungle
     		
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
-        	if (block == Blocks.cobblestone)                   {block=Blocks.mossy_cobblestone; meta=0; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
+        	
+        	if (block == Blocks.cobblestone)                   {block=Blocks.mossy_cobblestone; meta=0; break;} // Mossy cobblestone
+        	if (block == Blocks.stonebrick && meta==0)         {meta=1;} // Mossy stone brick
         	if (block == Blocks.stone_stairs)                  {
-													        		block = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsUTD);
+													        		block = ModObjects.chooseModMossyCobblestoneStairsBlock();
 													        		if (block==null) {block = Blocks.stone_stairs;}
 													        		break;
         													   } // Mossy cobblestone stairs
+        	if (block == Blocks.stone_brick_stairs)            {
+													        		block = ModObjects.chooseModMossyStoneBrickStairsBlock();
+													        		if (block==null) {block = Blocks.stone_brick_stairs;}
+													        		break;
+        													   } // Mossy stone brick stairs
         	if (block == Blocks.cobblestone_wall)              {meta=1; break;} // Mossy cobblestone wall
+        	if (block != null && block == ModObjects.chooseModStoneBrickWallBlock())
+															   {
+																	Block modblock = ModObjects.chooseModMossyStoneBrickWallBlock();
+														    		if (modblock!=null) {block=modblock; meta=0;}
+														    		break;
+														       } // Mossy stone brick wall
+        	
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
@@ -760,9 +792,9 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogJungleUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
-        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=1; break;} // Cut sandstone into mossy stone brick
         	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.sandstone)                     {block=Blocks.mossy_cobblestone; meta=0; break;}
         	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
         	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
         	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
@@ -776,7 +808,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
-        	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.packed_ice)                    {block=Blocks.mossy_cobblestone; meta=0; break;}
         	
         	break;
         	
@@ -784,6 +816,7 @@ public class StructureVillageVN
     		woodMeta = 4; // Acacia
     		
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log2; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves2; meta=12; break;}
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
@@ -815,7 +848,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
-        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.sapling)                       {LogHelper.info("Acacia sapling!");block=Blocks.sapling; meta=woodMeta; break;}
         	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
@@ -827,6 +860,7 @@ public class StructureVillageVN
     		woodMeta = 5; // Dark Oak
     		
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log2; meta=(meta/4)*4 + woodMeta%4; break;}
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves2; meta=5; break;}
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
@@ -868,7 +902,8 @@ public class StructureVillageVN
         	
         case SAND:
     		woodMeta = 3; // Jungle
-    		
+
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
         	if (block == Blocks.stonebrick && meta==0)         {block=Blocks.sandstone; meta=2; break;} // Stone brick into cut sandstone
         	if (block == Blocks.cobblestone && meta==3)        {block=Blocks.sandstone; meta=1; break;} // Chiseled sandstone
@@ -971,7 +1006,8 @@ public class StructureVillageVN
         	
         case SNOW:
     		woodMeta = 1; // Spruce
-    		
+
+        	if (block == Blocks.leaves || block == Blocks.leaves2) {block=Blocks.leaves; meta=woodMeta+4; break;}
         	if (block == Blocks.log || block == Blocks.log2)   {block=Blocks.log; meta=(meta/4)*4 + woodMeta%4; break;}
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
@@ -988,13 +1024,25 @@ public class StructureVillageVN
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.cobblestone; meta=0; break;}
+        	if (block == Blocks.stonebrick && meta==1)         {meta=0;} // Mossy stone brick to regular
+        	if (block != null && block == ModObjects.chooseModMossyCobblestoneStairsBlock()) {block = Blocks.stone_stairs; break; } // Mossy cobblestone stairs
+			if (block != null && block == ModObjects.chooseModMossyStoneBrickStairsBlock()) {block = Blocks.stone_brick_stairs; break;} // Mossy stone brick stairs
+        	if (block == Blocks.cobblestone_wall && meta==1)   {meta=0;} // Mossy cobblestone wall to regular
+        	if (block != null && block == ModObjects.chooseModMossyStoneBrickWallBlock())
+        													   {
+        															Block modblock = ModObjects.chooseModStoneBrickWallBlock();
+														    		if (modblock!=null) {block=modblock; meta=0;}
+														    		break;
+														       }
+        	if (block != null && block == ModObjects.chooseModMossyCobblestoneStairsBlock()) {block = Blocks.stone_stairs; break;} // Mossy cobblestone stairs
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
         	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.barkEF)) {meta=woodMeta%4; break;} // Spruce bark
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLogOakUTD)) {block=Block.getBlockFromName(ModObjects.strippedLogSpruceUTD); break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
-        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}
-        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
+        	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
         	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
         	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
         	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
@@ -2106,6 +2154,10 @@ public class StructureVillageVN
             	{
             		decorBlueprint = SnowyStructures.getSnowyDecorBlueprint(randomFromXYZ.nextInt(3), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
+            	else if (this.villageType==FunctionsVN.VillageType.JUNGLE)
+            	{
+            		decorBlueprint = JungleStructures.getJungleDecorBlueprint(2+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	}
             	else // Plains
             	{
             		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
@@ -2509,6 +2561,14 @@ public class StructureVillageVN
         return metaIn;
     }
     
+    /**
+	 * vineOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 */
+	public static int chooseVineMeta(int orientation, int horizIndex)
+	{
+		return VINE_META_ARRAY[orientation][horizIndex];
+	}
     /**
 	 * furnaceOrientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
@@ -2920,6 +2980,8 @@ public class StructureVillageVN
 			return SavannaStructures.getRandomSavannaDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		case SNOWY:
 			return SnowyStructures.getRandomSnowyDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+		case JUNGLE:
+			return JungleStructures.getRandomJungleDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		}
 	}
 	
@@ -2950,4 +3012,74 @@ public class StructureVillageVN
 			if (GeneralConfig.debugMessages) {LogHelper.info("Cleaned "+list.size()+" Entity items within " + aabb.toString());}
         }
 	}
+	
+	
+    /**
+     * Used to generate flower pots with contents that are tougher to access than just meta data alone
+     */
+    public static boolean generateStructureFlowerPot(World world, StructureBoundingBox box, Random random, int x, int y, int z, Block block, int meta)
+    {
+        if (box.isVecInside(x, y, z) && world.getBlock(x, y, z) != Blocks.flower_pot)
+        {
+            world.setBlock(x, y, z, Blocks.flower_pot, 0, 2);
+            
+            // This is here just in case a flower pot can't be placed at the given position
+            TileEntityFlowerPot tileentityflowerpot = (TileEntityFlowerPot)world.getTileEntity(x, y, z);
+            
+            if (tileentityflowerpot != null)
+            {
+                if (!isNotPlaceableIntoPot(block, meta))
+                {
+                    return false;
+                }
+                else
+                {
+                	// Sets the flower pot's item and meta
+                    tileentityflowerpot.func_145964_a(Item.getItemFromBlock(block), meta);
+                    
+                    tileentityflowerpot.markDirty();
+
+                    if (!world.setBlockMetadataWithNotify(x, y, z, (new ItemStack(block)).getItemDamage(), 2))
+                    {
+                    	world.markBlockForUpdate(x, y, z);
+                    }
+                    
+                    return true;
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+	
+    /**
+     * Returns "true" if the block is not something that can be placed into a flower pot.
+     */
+    private static boolean isNotPlaceableIntoPot(Block block, int meta)
+    {
+    	Block flowerModded = null;
+    	
+    	// If the block is a modded flower, return "false"
+    	for (String modFlower : new String[]{
+    			ModObjects.flowerUTD,
+    			ModObjects.flowerCornflowerEF,
+    			ModObjects.flowerLilyOfTheValleyEF,
+    	})
+    	{
+    		flowerModded = Block.getBlockFromName(modFlower);
+    		if (flowerModded!=null && block==flowerModded) {return false;}
+    	}
+    	
+        return     block != Blocks.yellow_flower
+        		&& block != Blocks.red_flower
+        		&& block != Blocks.cactus
+        		&& block != Blocks.brown_mushroom
+        		&& block != Blocks.red_mushroom
+        		&& block != Blocks.sapling
+        		&& block != Blocks.deadbush ? block == Blocks.tallgrass && meta == 2 : true;
+    }
 }

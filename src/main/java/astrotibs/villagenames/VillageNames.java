@@ -47,6 +47,7 @@ import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureCreationHandlers;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
+import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
@@ -231,6 +232,9 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint1.class, "VNSnMP1"); // Snowy Ice Spire
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint2.class, "VNSnMP2"); // Frozen Fountain
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint3.class, "VNSnMP3"); // Snowy Pavilion
+	        MapGenStructureIO.func_143031_a(JungleStructures.JungleStatue.class, "VNJuSta"); // Jungle Statue
+	        MapGenStructureIO.func_143031_a(JungleStructures.JungleTree.class, "VNJuTre"); // Jungle Tree
+	        MapGenStructureIO.func_143031_a(JungleStructures.JungleGarden.class, "VNJuGar"); // Jungle Garden
 	        
 	        // Village Structures
 	        registerVillageComponentBuilding(PlainsStructures.PlainsAccessory1.class, "VNPlAcc1", new StructureCreationHandlers.PlainsAccessory1_Handler());
