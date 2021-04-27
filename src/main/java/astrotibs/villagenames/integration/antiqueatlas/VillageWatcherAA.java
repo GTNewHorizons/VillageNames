@@ -131,8 +131,13 @@ public class VillageWatcherAA
 	SNOWY_FOUNTAIN = "VNSnMP2", // Snowy Fountain
 	SNOWY_PAVILION = "VNSnMP3", // Snowy Pavilion
 	
-	JUNGLE_STATUE = "VNJuSta", // Snowy Pavilion
-
+	JUNGLE_STATUE = "VNJuSta", // Jungle Statue
+	JUNGLE_TREE = "VNJuTre", // Jungle Tree
+	JUNGLE_GARDEN = "VNJuGar", // Jungle Garden
+	JUNGLE_VILLA = "VNJuVil", // Jungle Villa
+	
+	SWAMP_TREE = "VNSwWil", // Swamp Willow
+	
 	// Village Structures
 	PLAINS_FLOWER_PLANTER = "VNPlAcc1", // Plains Flower Planter
 	PLAINS_SMALL_ANIMAL_PEN = "VNPlAnP1", // Plains Small Animal Pen
@@ -345,7 +350,12 @@ public class VillageWatcherAA
 		builder.put(SNOWY_ICE_SPIRE, TILE_VILLAGE_WELL);
 		builder.put(SNOWY_FOUNTAIN, TILE_VILLAGE_WELL);
 		builder.put(SNOWY_PAVILION, TILE_VILLAGE_HUT);
+		
 		builder.put(JUNGLE_STATUE, TILE_VILLAGE_WELL);
+		builder.put(JUNGLE_TREE, TILE_VILLAGE_TREE);
+		builder.put(JUNGLE_GARDEN, TILE_VILLAGE_WELL);
+		builder.put(JUNGLE_VILLA, TILE_VILLAGE_L_HOUSE);
+		builder.put(SWAMP_TREE, TILE_VILLAGE_TREE);
 		
 		// Plains
 		builder.put(PLAINS_FLOWER_PLANTER, TILE_VILLAGE_FARMLAND_SMALL);

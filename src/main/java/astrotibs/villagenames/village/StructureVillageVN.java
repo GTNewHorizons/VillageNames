@@ -27,6 +27,7 @@ import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
+import astrotibs.villagenames.village.biomestructures.SwampStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -2158,6 +2159,10 @@ public class StructureVillageVN
             	{
             		decorBlueprint = JungleStructures.getJungleDecorBlueprint(2+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
+            	else if (this.villageType==FunctionsVN.VillageType.SWAMP)
+            	{
+            		decorBlueprint = SwampStructures.getSwampDecorBlueprint(randomFromXYZ.nextInt(4), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            	}
             	else // Plains
             	{
             		decorBlueprint = PlainsStructures.getPlainsDecorBlueprint(0, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
@@ -2982,6 +2987,8 @@ public class StructureVillageVN
 			return SnowyStructures.getRandomSnowyDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		case JUNGLE:
 			return JungleStructures.getRandomJungleDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+		case SWAMP:
+			return SwampStructures.getRandomSwampDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		}
 	}
 	

@@ -6,6 +6,7 @@ import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
+import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.StructureVillageVN;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -447,25 +448,15 @@ public class ModObjects {
 	public static final String mossyCobblestoneSlabUTD = DOM_UPTODATE + ":slab_mossy_cobblestone";
 	public static final String mossyStoneBrickSlabUTD = DOM_UPTODATE + ":slab_mossy_stone_bricks";
 	
-	
-	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
-	public static final String redSandstoneEF = DOM_ETFUTURUM + ":red_sandstone";
-	public static final String redSandstoneGS = DOM_GANYSSURFACE + ":red_sandstone";
-	public static final String redSandstoneUTD = DOM_UPTODATE + ":red_sandstone";
-	
-	// Red Sandstone slab
-	public static final String redSandstoneSlabEF = DOM_ETFUTURUM + ":red_sandstone_slab";
-	public static final String redSandstoneSlabGS = DOM_GANYSSURFACE + ":red_sandstone_slab";
-	public static final String redSandstoneSlabUTD = DOM_UPTODATE + ":slab_red_sandstone";
-	public static final String cutRedSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_red_sandstone";
-	
-	// Cut Sandstone Slab
-	public static final String cutSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_sandstone";
-	
-	// Red Sandstone Stairs
-	public static final String redSandstoneStairsEF = DOM_ETFUTURUM + ":red_sandstone_stairs";
-	public static final String redSandstoneStairsGS = DOM_GANYSSURFACE + ":red_sandstone_stairs";
-	public static final String redSandstoneStairsUTD = DOM_UPTODATE + ":stairs_red_sandstone";
+	// Prismarine
+	public static final String prismarine_VN = Reference.MOD_ID + ":prismarine";    // Meta - 0:regular, 1:bricks, 2:dark
+	public static final String prismarine_Bo = DOM_BOTANIA + ":prismarine";         // Meta - 0:regular, 1:bricks, 2:dark
+	public static final String prismarine_EF = DOM_ETFUTURUM + ":prismarine_block"; // Meta - 0:regular, 1:bricks, 2:dark
+	public static final String prismarine_UTD = DOM_UPTODATE + ":prismarine_block";
+	// Prismarine Bricks
+	public static final String prismarineBricks_UTD = DOM_UPTODATE + ":prismarine_brick";
+	// Dark Prismarine
+	public static final String darkPrismarine_UTD = DOM_UPTODATE + ":dark_prismarine_block";
 	
 	// Quicksand
 	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
@@ -490,6 +481,31 @@ public class ModObjects {
 	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
 	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
 	
+	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
+	public static final String redSandstoneEF = DOM_ETFUTURUM + ":red_sandstone";
+	public static final String redSandstoneGS = DOM_GANYSSURFACE + ":red_sandstone";
+	public static final String redSandstoneUTD = DOM_UPTODATE + ":red_sandstone";
+	
+	// Red Sandstone slab
+	public static final String redSandstoneSlabEF = DOM_ETFUTURUM + ":red_sandstone_slab";
+	public static final String redSandstoneSlabGS = DOM_GANYSSURFACE + ":red_sandstone_slab";
+	public static final String redSandstoneSlabUTD = DOM_UPTODATE + ":slab_red_sandstone";
+	public static final String cutRedSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_red_sandstone";
+	
+	// Cut Sandstone Slab
+	public static final String cutSandstoneSlabUTD = DOM_UPTODATE + ":slab_cut_sandstone";
+	
+	// Red Sandstone Stairs
+	public static final String redSandstoneStairsEF = DOM_ETFUTURUM + ":red_sandstone_stairs";
+	public static final String redSandstoneStairsGS = DOM_GANYSSURFACE + ":red_sandstone_stairs";
+	public static final String redSandstoneStairsUTD = DOM_UPTODATE + ":stairs_red_sandstone";
+	
+	// Sea Lantern
+	public static final String seaLantern_VN = Reference.MOD_ID + ":sea_lantern";
+	public static final String seaLantern_Bo = DOM_BOTANIA + ":seaLamp";
+	public static final String seaLantern_EF = DOM_ETFUTURUM + ":sea_lantern";
+	public static final String seaLantern_UTD = DOM_UPTODATE + ":sea_lantern";
+	
 	// Smoker
 	public static final String smoker_EF = DOM_ETFUTURUM + ":smoker";
 	
@@ -509,6 +525,11 @@ public class ModObjects {
 	// Smooth Sandstone Slab
 	public static final String smoothSandstoneSlabUTD = DOM_UPTODATE + ":slab_smooth_sandstone";
 	public static final String smoothRedSandstoneSlabUTD = DOM_UPTODATE + ":slab_smooth_red_sandstone";
+	
+	// Sponge
+	public static final String sponge_VN = Reference.MOD_ID + ":sponge";
+	public static final String sponge_EF = DOM_ETFUTURUM + ":sponge";
+	public static final String sponge_UTD = DOM_UPTODATE + ":sponge";
 	
 	// Walls
 	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
@@ -549,21 +570,21 @@ public class ModObjects {
 	public static final String pressurePlateDarkOakWS = DOM_WOODSTUFF + ":pressure_plate_tile.wood_5";
 	
 	// Wooden Sign
-	public static final String signSpruceGS = DOM_GANYSSURFACE + ":sign1";
-	public static final String signBirchGS = DOM_GANYSSURFACE + ":sign2";
-	public static final String signJungleGS = DOM_GANYSSURFACE + ":sign3";
-	public static final String signAcaciaGS = DOM_GANYSSURFACE + ":sign4";
-	public static final String signDarkOakGS = DOM_GANYSSURFACE + ":sign5";
-	public static final String signSpruceEF = DOM_ETFUTURUM + ":sign_spruce";
-	public static final String signBirchEF = DOM_ETFUTURUM + ":sign_birch";
-	public static final String signJungleEF = DOM_ETFUTURUM + ":sign_jungle";
-	public static final String signAcaciaEF = DOM_ETFUTURUM + ":sign_acacia";
-	public static final String signDarkOakEF = DOM_ETFUTURUM + ":sign_dark_oak";
-	public static final String wallSignSpruceEF = DOM_ETFUTURUM + ":wall_sign_spruce";
-	public static final String wallSignBirchEF = DOM_ETFUTURUM + ":wall_sign_birch";
-	public static final String wallSignJungleEF = DOM_ETFUTURUM + ":wall_sign_jungle";
-	public static final String wallSignAcaciaEF = DOM_ETFUTURUM + ":wall_sign_acacia";
-	public static final String wallSignDarkOakEF = DOM_ETFUTURUM + ":wall_sign_dark_oak";
+	public static final String signSpruce_GS = DOM_GANYSSURFACE + ":sign1";
+	public static final String signBirch_GS = DOM_GANYSSURFACE + ":sign2";
+	public static final String signJungle_GS = DOM_GANYSSURFACE + ":sign3";
+	public static final String signAcacia_GS = DOM_GANYSSURFACE + ":sign4";
+	public static final String signDarkOak_GS = DOM_GANYSSURFACE + ":sign5";
+	public static final String standingSignSpruceBlock_EF = DOM_ETFUTURUM + ":sign_spruce";
+	public static final String standingSignBirchBlock_EF = DOM_ETFUTURUM + ":sign_birch";
+	public static final String standingSignJungleBlock_EF = DOM_ETFUTURUM + ":sign_jungle";
+	public static final String standingSignAcaciaBlock_EF = DOM_ETFUTURUM + ":sign_acacia";
+	public static final String standingSignDarkOakBlock_EF = DOM_ETFUTURUM + ":sign_dark_oak";
+	public static final String wallSignSpruceBlock_EF = DOM_ETFUTURUM + ":wall_sign_spruce";
+	public static final String wallSignBirchBlock_EF = DOM_ETFUTURUM + ":wall_sign_birch";
+	public static final String wallSignJungleBlock_EF = DOM_ETFUTURUM + ":wall_sign_jungle";
+	public static final String wallSignAcaciaBlock_EF = DOM_ETFUTURUM + ":wall_sign_acacia";
+	public static final String wallSignDarkOakBlock_EF = DOM_ETFUTURUM + ":wall_sign_dark_oak";
 	
 	// Wooden Trapdoor
 	public static final String trapdoorSpruceEF = DOM_ETFUTURUM + ":trapdoor_spruce";
@@ -643,6 +664,16 @@ public class ModObjects {
 	public static final String muttonRawUTD = DOM_UPTODATE + ":raw_mutton";
 	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
 	
+	// Prismarine
+	public static final String prismarineShard_VN = Reference.MOD_ID + ":prismarine_shard";
+	public static final String manaResource_Bo = DOM_BOTANIA + ":manaResource"; // meta 10
+	public static final String prismarineShard_EF = DOM_ETFUTURUM + ":prismarine_shard";
+	public static final String prismarineShard_UTD = DOM_UPTODATE + ":prismarine_shard";
+	// Prismarine Crystals
+	public static final String prismarineCrystal_VN = Reference.MOD_ID + ":prismarine_crystals";
+	public static final String prismarineCrystal_EF = DOM_ETFUTURUM + ":prismarine_crystals";
+	public static final String prismarineCrystal_UTD = DOM_UPTODATE + ":prismarine_crystals";
+	
 	// Rabbit
 	public static final String rabbitHideEF = DOM_ETFUTURUM + ":rabbit_hide";
 	public static final String rabbitFootEF = DOM_ETFUTURUM + ":rabbit_foot";
@@ -678,6 +709,13 @@ public class ModObjects {
 	
 	// Wood block
 	public static final String woodBlockUTD = DOM_UPTODATE + ":wood";
+	
+	// Wooden Sign
+	public static final String signSpruceItem_EF = DOM_ETFUTURUM + ":item_sign_spruce";
+	public static final String signBirchItem_EF = DOM_ETFUTURUM + "item_sign_birch";
+	public static final String signJungleItem_EF = DOM_ETFUTURUM + ":item_sign_jungle";
+	public static final String signAcaciaItem_EF = DOM_ETFUTURUM + ":item_sign_acacia";
+	public static final String signDarkOakItem_EF = DOM_ETFUTURUM + ":item_sign_dark_oak";
 	
 	
 	// --------------------------- //
@@ -2635,6 +2673,231 @@ public class ModObjects {
 		return null;
 	}
 	
+	
+	// Prismarine
+	public static Object[] chooseModPrismarineBlockObject()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_UTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	// Prismarine Bricks
+	public static Object[] chooseModPrismarineBricksObject()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineBricks_UTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	// Dark Prismarine
+	public static Object[] chooseModDarkPrismarineObject()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.darkPrismarine_UTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	
+	
+	// Prismarine Shard
+	public static ItemStack chooseModPrismarineShardItemStack()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineShard_VN);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.manaResource_Bo);
+				if (modblock != null) {return new ItemStack(modblock, 1, 10);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineShard_EF);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineShard_UTD);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+		}
+		return null;
+	}
+	
+	
+	// Prismarine Crystals
+	public static ItemStack chooseModPrismarineCrystalsItemStack()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_VN);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_EF);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_UTD);
+				if (modblock != null) {return new ItemStack(modblock);}
+			}
+		}
+		return null;
+	}
+	
+	
+	// Sea Lantern
+	public static Block chooseModSeaLanternBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.seaLantern_VN);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.seaLantern_Bo);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.seaLantern_EF);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.seaLantern_UTD);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	
+	
+	// Sea Lantern
+	public static Object[] chooseModSpongeBlockObject(boolean isWet)
+	{
+		String[] modprioritylist = GeneralConfig.modSponge;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("villagenames"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.sponge_VN);
+				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.sponge_EF);
+				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.sponge_UTD);
+				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
+			}
+		}
+		return null;
+	}
+	
+	
 	// Sign
 	public static ItemStack chooseModWoodenSignItem(int materialMeta)
 	{
@@ -2650,11 +2913,11 @@ public class ModObjects {
 			{
 				switch (materialMeta)
 				{
-					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceEF)); break;
-					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchEF)); break;
-					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleEF)); break;
-					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaEF)); break;
-					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakEF)); break;
+					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceItem_EF)); break;
+					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchItem_EF)); break;
+					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleItem_EF)); break;
+					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaItem_EF)); break;
+					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakItem_EF)); break;
 				}
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
@@ -2662,11 +2925,11 @@ public class ModObjects {
 			{
 				switch (materialMeta)
 				{
-					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruceGS)); break;
-					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirchGS)); break;
-					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungleGS)); break;
-					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcaciaGS)); break;
-					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOakGS)); break;
+					case 1: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signSpruce_GS)); break;
+					case 2: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signBirch_GS)); break;
+					case 3: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signJungle_GS)); break;
+					case 4: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signAcacia_GS)); break;
+					case 5: moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.signDarkOak_GS)); break;
 				}
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
@@ -2684,11 +2947,11 @@ public class ModObjects {
 		
 		switch (materialMeta)
 		{
-			case 1: modblock = Block.getBlockFromName(standing? ModObjects.signSpruceEF : ModObjects.wallSignSpruceEF); break;
-			case 2: modblock = Block.getBlockFromName(standing? ModObjects.signBirchEF : ModObjects.wallSignBirchEF); break;
-			case 3: modblock = Block.getBlockFromName(standing? ModObjects.signJungleEF : ModObjects.wallSignJungleEF); break;
-			case 4: modblock = Block.getBlockFromName(standing? ModObjects.signAcaciaEF : ModObjects.wallSignAcaciaEF); break;
-			case 5: modblock = Block.getBlockFromName(standing? ModObjects.signDarkOakEF : ModObjects.wallSignDarkOakEF); break;
+			case 1: modblock = Block.getBlockFromName(standing? ModObjects.standingSignSpruceBlock_EF : ModObjects.wallSignSpruceBlock_EF); break;
+			case 2: modblock = Block.getBlockFromName(standing? ModObjects.standingSignBirchBlock_EF : ModObjects.wallSignBirchBlock_EF); break;
+			case 3: modblock = Block.getBlockFromName(standing? ModObjects.standingSignJungleBlock_EF : ModObjects.wallSignJungleBlock_EF); break;
+			case 4: modblock = Block.getBlockFromName(standing? ModObjects.standingSignAcaciaBlock_EF : ModObjects.wallSignAcaciaBlock_EF); break;
+			case 5: modblock = Block.getBlockFromName(standing? ModObjects.standingSignDarkOakBlock_EF : ModObjects.wallSignDarkOakBlock_EF); break;
 			
 			// Gany's Surface uniquely uses boolean tile.isStanding in its tileentity which does not have a vanilla parallel.
 			// GS standing signs won't work.

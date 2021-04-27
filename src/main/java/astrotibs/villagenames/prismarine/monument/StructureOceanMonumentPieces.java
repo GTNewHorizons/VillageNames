@@ -7,9 +7,9 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
 import astrotibs.villagenames.prismarine.minecraft.EnumFacing189;
-import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.IEntityLivingData;
@@ -1569,18 +1569,25 @@ public class StructureOceanMonumentPieces
 
     public abstract static class Piece extends StructureComponent
         {
-	    	
-	    	protected static final Block ROUGH_PRISMARINE = ModBlocksPrismarine.blockPrismarine; //field_175828_a in 1.8
-	        protected static final Block BRICKS_PRISMARINE = ModBlocksPrismarine.blockPrismarine; //field_175826_b in 1.8
-	        protected static final Block DARK_PRISMARINE = ModBlocksPrismarine.blockPrismarine; //field_175827_c in 1.8
+    		protected static final Object[] PRISMARINE_BLOCK_OBJECT = ModObjects.chooseModPrismarineBlockObject()!=null? ModObjects.chooseModPrismarineBlockObject() : new Object[] {Blocks.cobblestone, 0};
+    		protected static final Object[] PRISMARINE_BRICKS_OBJECT = ModObjects.chooseModPrismarineBricksObject()!=null? ModObjects.chooseModPrismarineBricksObject() : new Object[] {Blocks.stonebrick, 0};
+    		protected static final Object[] DARK_PRISMARINE_OBJECT = ModObjects.chooseModDarkPrismarineObject()!=null? ModObjects.chooseModDarkPrismarineObject() : new Object[] {Blocks.stonebrick, 3};
+    		protected static final Object[] SEA_LANTERN_BLOCK_OBJECT = ModObjects.chooseModSeaLanternBlock()!=null? new Object[]{ModObjects.chooseModSeaLanternBlock(), 0} : new Object[] {Blocks.glowstone, 0};
+    		protected static final Object[] SPONGE_BLOCK_OBJECT = ModObjects.chooseModSpongeBlockObject(true)!=null? ModObjects.chooseModSpongeBlockObject(true) : new Object[] {Blocks.sponge, 0};
+    		
+    		protected static final Block ROUGH_PRISMARINE = (Block)PRISMARINE_BLOCK_OBJECT[0]; //field_175828_a in 1.8
+	        protected static final Block BRICKS_PRISMARINE = (Block)PRISMARINE_BRICKS_OBJECT[0]; //field_175826_b in 1.8
+	        protected static final Block DARK_PRISMARINE = (Block)DARK_PRISMARINE_OBJECT[0]; //field_175827_c in 1.8
 	        protected static final Block DOT_DECO_DATA = BRICKS_PRISMARINE; //field_175824_d in 1.8
-	        protected static final Block SEA_LANTERN = ModBlocksPrismarine.blockSeaLantern; //field_175825_e in 1.8
+	        protected static final Block SEA_LANTERN = (Block)SEA_LANTERN_BLOCK_OBJECT[0]; //field_175825_e in 1.8
+	        protected static final Block SPONGE = (Block)SPONGE_BLOCK_OBJECT[0];
 	        protected static final Block WATER = Blocks.water; //field_175822_f in 1.8
-	        int ROUGH_PRISMARINE_meta=0;
-	        int BRICKS_PRISMARINE_meta=1;
-	        int DARK_PRISMARINE_meta=2;
+	        int ROUGH_PRISMARINE_meta=(Integer)PRISMARINE_BLOCK_OBJECT[1];
+	        int BRICKS_PRISMARINE_meta=(Integer)PRISMARINE_BRICKS_OBJECT[1];
+	        int DARK_PRISMARINE_meta=(Integer)DARK_PRISMARINE_OBJECT[1];
 	        int DOT_DECO_DATA_meta=BRICKS_PRISMARINE_meta;
-	        int SEA_LANTERN_meta=0;
+	        int SEA_LANTERN_meta=(Integer)SEA_LANTERN_BLOCK_OBJECT[1];
+	        int SPONGE_meta = (Integer)SPONGE_BLOCK_OBJECT[1];
 	        int WATER_meta=0;
 	        
 	        protected static final int GRIDROOM_SOURCE_INDEX = getRoomIndex(2, 0, 0); //field_175823_g in 1.8
@@ -2072,7 +2079,7 @@ public class StructureOceanMonumentPieces
                         if (randomIn.nextInt(3) != 0)
                         {
                             int k = 2 + (randomIn.nextInt(4) == 0 ? 0 : 1);
-                            this.fillWithMetadataBlocks(worldIn, structureBoundingBoxIn, i, k, j, i, 3, j, ModBlocksPrismarine.blockSpongeVN, 1, ModBlocksPrismarine.blockSpongeVN, 1, false);
+                            this.fillWithMetadataBlocks(worldIn, structureBoundingBoxIn, i, k, j, i, 3, j, SPONGE, SPONGE_meta, SPONGE, SPONGE_meta, false);
                         }
                     }
                 }

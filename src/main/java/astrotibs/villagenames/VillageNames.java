@@ -51,6 +51,7 @@ import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
+import astrotibs.villagenames.village.biomestructures.SwampStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -235,6 +236,8 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleStatue.class, "VNJuSta"); // Jungle Statue
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleTree.class, "VNJuTre"); // Jungle Tree
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleGarden.class, "VNJuGar"); // Jungle Garden
+	        MapGenStructureIO.func_143031_a(JungleStructures.JungleVilla.class, "VNJuVil"); // Jungle Villa
+	        MapGenStructureIO.func_143031_a(SwampStructures.SwampWillow.class, "VNSwWil"); // Swamp Willow
 	        
 	        // Village Structures
 	        registerVillageComponentBuilding(PlainsStructures.PlainsAccessory1.class, "VNPlAcc1", new StructureCreationHandlers.PlainsAccessory1_Handler());

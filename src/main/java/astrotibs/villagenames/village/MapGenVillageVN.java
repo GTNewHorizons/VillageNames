@@ -16,6 +16,7 @@ import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
 import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
+import astrotibs.villagenames.village.biomestructures.SwampStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -282,12 +283,14 @@ public class MapGenVillageVN extends MapGenVillage
             		new JungleStructures.JungleStatue(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Statue
             		new JungleStructures.JungleTree(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Tree
             		new JungleStructures.JungleGarden(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Garden
+            		new JungleStructures.JungleVilla(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Jungle Villa
             };
             
             StructureVillageVN.StartVN[] swampStarters = new StructureVillageVN.StartVN[]
             {
-            		
+            	new SwampStructures.SwampWillow(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Willow
             };
+            
             
             if (startVillageType==FunctionsVN.VillageType.DESERT)
             {
@@ -309,6 +312,10 @@ public class MapGenVillageVN extends MapGenVillage
             {
             	start = jungleStarters[random.nextInt(jungleStarters.length)];
             }
+            else if (startVillageType==FunctionsVN.VillageType.SWAMP)
+            {
+            	start = swampStarters[random.nextInt(swampStarters.length)];
+            }
             else // Plains if nothing else matches
             {
             	start = plainsStarters[random.nextInt(plainsStarters.length)];
@@ -317,7 +324,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // === FORCE A SPECIFIC STARTER FOR TESTING PURPOSES === //
-        	start = new JungleStructures.JungleGarden(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+        	start = new SwampStructures.SwampWillow(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
             
         	
         	
