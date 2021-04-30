@@ -238,6 +238,7 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleGarden.class, "VNJuGar"); // Jungle Garden
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleVilla.class, "VNJuVil"); // Jungle Villa
 	        MapGenStructureIO.func_143031_a(SwampStructures.SwampWillow.class, "VNSwWil"); // Swamp Willow
+	        MapGenStructureIO.func_143031_a(SwampStructures.SwampStatue.class, "VNSwSta"); // Swamp Statue
 	        
 	        // Village Structures
 	        registerVillageComponentBuilding(PlainsStructures.PlainsAccessory1.class, "VNPlAcc1", new StructureCreationHandlers.PlainsAccessory1_Handler());

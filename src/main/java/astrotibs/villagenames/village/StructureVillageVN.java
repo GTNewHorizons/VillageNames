@@ -2764,7 +2764,7 @@ public class StructureVillageVN
 		return Blocks.wooden_door;
 	}
 	
-
+	
 	/*
 	 * Used to select wooden button types.
 	 */

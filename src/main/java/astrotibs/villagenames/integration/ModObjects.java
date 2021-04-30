@@ -33,6 +33,7 @@ public class ModObjects {
 	public static final String DOM_GANYSSURFACE = "ganyssurface";
 	public static final String DOM_HARVESTCRAFT = "harvestcraft";
 	public static final String DOM_MALISISDOORS = "malisisdoors";
+	public static final String DOM_NETHERLICIOUS = "netherlicious";
 	public static final String DOM_UPTODATE = "uptodate";
 	public static final String DOM_WOODSTUFF = "woodstuff";
 	public static final String MFQM_CLASS_ROOT = "MoreFunQuicksandMod.main";
@@ -167,6 +168,8 @@ public class ModObjects {
 	public static final String buttonJungleWS = DOM_WOODSTUFF + ":button_tile.wood_3";
 	public static final String buttonAcaciaWS = DOM_WOODSTUFF + ":button_tile.wood_4";
 	public static final String buttonDarkOakWS = DOM_WOODSTUFF + ":button_tile.wood_5";
+	
+	public static final String polishedBlackstoneButton_NL = DOM_NETHERLICIOUS + ":blackstoneButton";
 	
 	// Campfire
 	public static final String campfirebackport = "campfirebackport:campfire";
@@ -423,7 +426,7 @@ public class ModObjects {
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
 	public static final String ironNuggetUTD = DOM_UPTODATE + ":iron_nugget";
 	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
-	public static final String nuggetNL = "netherlicious:Nugget"; // Iron Nugget is 0
+	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
 	
 	// Ladders
 	public static final String ladderSpruceGS = DOM_GANYSSURFACE + ":ladder1";
@@ -435,7 +438,7 @@ public class ModObjects {
 	// Lanterns / Lamps
 	public static final String davyLampEM = "enviromine:davy_lamp";
 	public static final String lanternEF = DOM_ETFUTURUM + ":lantern";
-	public static final String lanternNL = "netherlicious:Lantern";
+	public static final String lanternNL = DOM_NETHERLICIOUS + ":Lantern";
 	public static final String lanternUTD = DOM_UPTODATE + ":lantern";
 	
 	// Mossy Stone
@@ -457,6 +460,16 @@ public class ModObjects {
 	public static final String prismarineBricks_UTD = DOM_UPTODATE + ":prismarine_brick";
 	// Dark Prismarine
 	public static final String darkPrismarine_UTD = DOM_UPTODATE + ":dark_prismarine_block";
+	// Prismarine Stairs
+	public static final String prismarineStairs_Bo = DOM_BOTANIA + ":prismarine0Stairs";
+	public static final String prismarineStairs_EF = DOM_ETFUTURUM + ":prismarine_stairs";
+	public static final String prismarineStairs_UTD = DOM_UPTODATE + ":stairs_prismarine";
+	// Prismarine Slab
+	public static final String prismarineSlab_Bo = DOM_BOTANIA + ":prismarine0Slab";
+	public static final String prismarineSlab_EF = DOM_ETFUTURUM + ":prismarine_slab";
+	// Prismarine Wall
+	public static final String prismarineWall_Bo = DOM_BOTANIA + ":prismarine0Wall";
+	public static final String prismarineWall_UTD = DOM_UPTODATE + ":wall_prismarine";
 	
 	// Quicksand
 	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
@@ -2674,6 +2687,18 @@ public class ModObjects {
 	}
 	
 	
+	// Polished Blackstone Button
+	public static Block chooseModPolishedBlackstoneButton()
+	{
+		Block modblock=null;
+		
+		modblock = Block.getBlockFromName(ModObjects.polishedBlackstoneButton_NL);
+		if (modblock != null) {return modblock;}
+		
+		return null;
+	}
+	
+	
 	// Prismarine
 	public static Object[] chooseModPrismarineBlockObject()
 	{
@@ -2768,6 +2793,78 @@ public class ModObjects {
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
 		}
+		return null;
+	}
+	public static Block chooseModPrismarineStairsBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_Bo);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_EF);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_UTD);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		return null;
+	}
+	// Prismarine Slab
+	public static Object[] chooseModPrismarineSlab(boolean upper)
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineSlab_Bo);
+				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineSlab_EF);
+				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
+			}
+		}
+		
+		return null;
+	}
+	// Prismarine wall
+	public static Block chooseModPrismarineWallBlock()
+	{
+		String[] modprioritylist = GeneralConfig.modPrismarine;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineWall_Bo);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineWall_UTD);
+				if (modblock != null) {return modblock;}
+			}
+		}
+		
 		return null;
 	}
 	

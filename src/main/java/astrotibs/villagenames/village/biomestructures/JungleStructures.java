@@ -277,14 +277,81 @@ public class JungleStructures
         				false);
             }
             
-        	// Polished diorite stairs
-        	Block biomePolishedDioriteStairsBlock = ModObjects.chooseModPolishedDioriteStairsBlock(); 
-        	if (biomePolishedDioriteStairsBlock==null) // Try regular diorite stairs
+        	// Try to establish diorite blocks used for the statue. If any kind doesn't exist, use default for all.
+        	Block biomePolishedDioriteStairsBlock;
+        	Block biomePolishedDioriteBlock; int biomePolishedDioriteMeta;
+        	Block biomeDioriteStairsBlock;
+        	Block biomeDioriteBlock; int biomeDioriteMeta;
+        	Block biomeDioriteWallBlock; int biomeDioriteWallMeta;
+        	
+    		boolean useOnlyStone = false; // This flag will indicate to use stone instead of diorite, should we need to.
+        	while (true)
         	{
-        		biomePolishedDioriteStairsBlock = ModObjects.chooseModDioriteStairsBlock();
-        		if (biomePolishedDioriteStairsBlock==null) {biomePolishedDioriteStairsBlock = Blocks.stone_brick_stairs;} // Set to stone brick stairs
-        	}
-        	biomePolishedDioriteStairsBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject(biomePolishedDioriteStairsBlock, 0, this.materialType, this.biome, this.disallowModSubs)[0];
+            	// Polished diorite stairs
+            	if (useOnlyStone) {biomePolishedDioriteStairsBlock = Blocks.stone_brick_stairs;} // Set to stone brick stairs
+            	else
+            	{
+            		biomePolishedDioriteStairsBlock = ModObjects.chooseModPolishedDioriteStairsBlock(); 
+                	
+                	if (biomePolishedDioriteStairsBlock==null) // Try regular diorite stairs
+                	{
+                		biomePolishedDioriteStairsBlock = ModObjects.chooseModDioriteStairsBlock();
+                		if (biomePolishedDioriteStairsBlock==null) {useOnlyStone=true; continue;} // Trigger flag and reset
+                	}
+            	}
+            	biomePolishedDioriteStairsBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject(biomePolishedDioriteStairsBlock, 0, this.materialType, this.biome, this.disallowModSubs)[0];
+            	
+            	
+            	// Polished diorite blocks
+            	if (useOnlyStone) {blockObject = new Object[]{Blocks.stonebrick, 0};} // Set to stone brick
+            	else
+            	{
+            		blockObject = ModObjects.chooseModPolishedDioriteObject();
+                	if (blockObject==null) // Try regular diorite block
+                	{
+                		blockObject = ModObjects.chooseModDioriteObject();
+                		if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
+                	}; 
+            	}
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomePolishedDioriteBlock = (Block)blockObject[0]; biomePolishedDioriteMeta = (Integer)blockObject[1];
+            	
+                
+            	// Regular diorite stairs
+            	if (useOnlyStone) {biomeDioriteStairsBlock = Blocks.stone_stairs;} // Set to cobblestone stairs
+            	else
+            	{
+            		biomeDioriteStairsBlock = ModObjects.chooseModDioriteStairsBlock(); 
+                	if (biomeDioriteStairsBlock==null) {useOnlyStone=true; continue;} // Trigger flag and reset
+            	}
+            	biomeDioriteStairsBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject(biomeDioriteStairsBlock, 0, this.materialType, this.biome, this.disallowModSubs)[0];
+            	
+            	
+            	// Diorite blocks
+            	if (useOnlyStone) {blockObject = new Object[]{Blocks.cobblestone, 0};} // Set to cobblestone
+            	else
+            	{
+            		blockObject = ModObjects.chooseModDioriteObject();
+                	if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
+            	}
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomeDioriteBlock = (Block)blockObject[0]; biomeDioriteMeta = (Integer)blockObject[1];
+            	
+            	
+            	// Diorite wall
+            	if (useOnlyStone) {blockObject = new Object[]{Blocks.cobblestone_wall, 0};} // Set to cobblestone wall
+            	else
+            	{
+            		blockObject = ModObjects.chooseModDioriteWallObject();
+                	if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
+            	}
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomeDioriteWallBlock = (Block)blockObject[0]; biomeDioriteWallMeta = (Integer)blockObject[1];
+            	
+            	
+            	// If you make it here, all blocks are either diorite-type or stone-type.
+            	break;
+            }
+        	
+        	// Now, construct the statue with either all diorite blocks, or all stone
+        	
         	for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
         		// Base
         		{4,3,3, 3}, {5,3,3, 3}, {6,3,3, 3}, 
@@ -299,15 +366,6 @@ public class JungleStructures
             {
         		this.placeBlockAtCurrentPosition(world, biomePolishedDioriteStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uvwo[3]%4)+(uvwo[3]/4)*4, uvwo[0], uvwo[1], uvwo[2], structureBB);	
             }
-        	
-        	// Polished diorite blocks
-        	blockObject = ModObjects.chooseModPolishedDioriteObject();
-        	if (blockObject==null) // Try regular diorite block
-        	{
-        		blockObject = ModObjects.chooseModDioriteObject();
-        		if (blockObject==null) {blockObject = new Object[]{Blocks.stonebrick, 0};} // Set to stone brick
-        	}; 
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomePolishedDioriteBlock = (Block)blockObject[0]; int biomePolishedDioriteMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		// Base
         		{5,3,4, 6,3,5}, 
@@ -318,11 +376,6 @@ public class JungleStructures
         				biomePolishedDioriteBlock, biomePolishedDioriteMeta, 
         				false);	
             }
-            
-        	// Regular diorite stairs
-        	Block biomeDioriteStairsBlock = ModObjects.chooseModDioriteStairsBlock(); 
-        	if (biomeDioriteStairsBlock==null) {biomeDioriteStairsBlock = Blocks.stone_stairs;} // Set to cobblestone stairs
-        	biomeDioriteStairsBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject(biomeDioriteStairsBlock, 0, this.materialType, this.biome, this.disallowModSubs)[0];
         	for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
         		// Leg
         		{5,5,5, 2+4}, {5,5,4, 3+4}, {5,6,4, 3},
@@ -330,11 +383,6 @@ public class JungleStructures
             {
         		this.placeBlockAtCurrentPosition(world, biomeDioriteStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uvwo[3]%4)+(uvwo[3]/4)*4, uvwo[0], uvwo[1], uvwo[2], structureBB);	
             }
-        	
-        	// Diorite blocks
-        	blockObject = ModObjects.chooseModDioriteObject();
-        	if (blockObject==null) {blockObject = new Object[]{Blocks.cobblestone, 0};} // Set to stone brick
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeDioriteBlock = (Block)blockObject[0]; int biomeDioriteMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		// Torso
         		{5,6,5, 6,7,5}, 
@@ -347,11 +395,6 @@ public class JungleStructures
         				biomeDioriteBlock, biomeDioriteMeta, 
         				false);	
             }
-        	
-        	// Diorite wall
-        	blockObject = ModObjects.chooseModDioriteWallObject();
-        	if (blockObject==null) {blockObject = new Object[]{Blocks.cobblestone_wall, 0};}
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); Block biomeDioriteWallBlock = (Block)blockObject[0]; int biomeDioriteWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		// Staff arm
         		{4,6,4, 4,6,5}, {4,7,5, 4,7,5}, 
@@ -366,7 +409,8 @@ public class JungleStructures
         				biomeDioriteWallBlock, biomeDioriteWallMeta, 
         				false);	
             }
-            
+        	
+        	            
             // Fences
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
             for (int[] uuvvww : new int[][]{
@@ -2444,13 +2488,20 @@ public class JungleStructures
 		// Generate per-material blocks
 		
 		Object[] blockObject;
+		
+    	// Establish top and filler blocks, substituting Grass and Dirt if they're null
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, materialType, biome, disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, materialType, biome, disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (biome!=null && biome.topBlock!=null) {biomeTopBlock=biome.topBlock; biomeTopMeta=0;}
+    	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (biome!=null && biome.fillerBlock!=null) {biomeFillerBlock=biome.fillerBlock; biomeFillerMeta=0;}
+		
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stonebrick, 3, materialType, biome, disallowModSubs); Block biomeChiseledStoneBlock = (Block)blockObject[0]; int biomeChiseledStoneMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, materialType, biome, disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
     	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeHangingLanternMeta = (Integer)blockObject[1];
     	blockObject = ModObjects.chooseModLanternBlock(false); Block biomeSittingLanternBlock = (Block)blockObject[0]; int biomeSittingLanternMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, materialType, biome, disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
+    	
     	
 		boolean genericBoolean=false;
     	int genericInt=0;
@@ -2462,88 +2513,88 @@ public class JungleStructures
     		Block hayBlock = Blocks.hay_block; // Meta: 0 for vertical, 4 for E/W, 8 for N/S
     		
     		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, hayBlock, 0);
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		
     		switch (random.nextInt(4))
     		{
     		case 0: // Facing you
     			// Bale in center
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			// Bale in front
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, hayBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, hayBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, hayBlock, biomeFillerMeta); // Foundation
     			// Right side
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			break;
     		case 1: // Facing left
     			// Bale in center
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			// Bale in front
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, hayBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, hayBlock, biomeFillerMeta); // Foundation
     			// Right side
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, hayBlock, biomeFillerMeta); // Foundation
     			break;
     		case 2: // Facing away
     			// Bale in center
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Bale in front
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, -1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Right side
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			break;
     		case 3: // Facing right
     			// Bale in center
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			// Bale in front
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, hayBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, -1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, hayBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, hayBlock, biomeFillerMeta); // Foundation
     			// Right side
     			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, hayBlock, horizIndex%2==0?8:4);
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, hayBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, hayBlock, biomeFillerMeta); // Foundation
     			break;
     		}
     		break;
 
     	case 1: // Campfire on cobblestone by jss2a98aj
         	blockObject = ModObjects.chooseModCampfireBlock(random.nextInt(4), horizIndex); Block campfireBlock = (Block) blockObject[0]; int campfireMeta = (Integer) blockObject[1];
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
-    		BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
-    		BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 1, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlockAndClearAbove(blueprint, -1, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
@@ -2554,7 +2605,7 @@ public class JungleStructures
     		
     	case 2: // Fence post hanging lantern on stone brick foundation by jss2a98aj
     		// Central column
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeChiseledStoneBlock, biomeChiseledStoneMeta);
     		BlueprintData.addPlaceBlock(blueprint, 0, 2, 0, biomeFenceBlock);
@@ -2579,7 +2630,7 @@ public class JungleStructures
     		
     	case 3: // Lantern on stone brick post by jss2a98aj
     		// Central column
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeChiseledStoneBlock, biomeChiseledStoneMeta);
     		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 2, 0, biomeSittingLanternBlock, biomeSittingLanternMeta);
@@ -2651,7 +2702,7 @@ public class JungleStructures
     		
     	case 4: // Stone post with lanterns hanging from walls by jss2a98aj
     		// Central column
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addFillWithBlocks(blueprint, 0,0,0, 0,2,0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 3, 0, biomeChiseledStoneBlock, biomeChiseledStoneMeta);
     		
@@ -2686,7 +2737,7 @@ public class JungleStructures
     		break;
     		
     	case 5: // Lantern on a stump by jss2a98aj
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, biomeLogVertBlock, biomeLogVertMeta);
     		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeSittingLanternBlock, biomeSittingLanternMeta);
 			
@@ -2697,15 +2748,15 @@ public class JungleStructures
     		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, horizIndex%2==0?8:4, materialType, biome, disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1]; // Perpendicular to you
     		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, horizIndex%2==0?4:8, materialType, biome, disallowModSubs); Block biomeLogHorAlongBlock = (Block)blockObject[0]; int biomeLogHorAlongMeta = (Integer)blockObject[1]; // Toward you
     		
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlock(blueprint, 0, 1, 0, biomeSittingLanternBlock, biomeSittingLanternMeta);
     		
     		switch (random.nextInt(4))
     		{
     		case 0: // Facing you
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addFillWithBlocks(blueprint, 0,0,0, 1,0,0, biomeLogHorAlongBlock, biomeLogHorAlongMeta);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, biomeLogVertBlock, biomeLogVertMeta);
     			// Vines
     			if (materialType!=FunctionsVN.MaterialType.SNOW) // Orientation - 1:north, 2:east, 4:south, 8:west
@@ -2716,9 +2767,9 @@ public class JungleStructures
     			break;
     			
     		case 1: // Facing left
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addFillWithBlocks(blueprint, 0,0,-1, 0,0,0, biomeLogHorAcrossBlock, biomeLogHorAcrossMeta);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 1, biomeLogVertBlock, biomeLogVertMeta);
     			// Vines
     			if (materialType!=FunctionsVN.MaterialType.SNOW) // Orientation - 1:north, 2:east, 4:south, 8:west
@@ -2729,9 +2780,9 @@ public class JungleStructures
     			break;
     			
     		case 2: // Facing away
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addFillWithBlocks(blueprint, -1,0,0, 0,0,0, biomeLogHorAlongBlock, biomeLogHorAlongMeta);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, biomeLogVertBlock, biomeLogVertMeta);
     			// Vines
     			if (materialType!=FunctionsVN.MaterialType.SNOW) // Orientation - 1:north, 2:east, 4:south, 8:west
@@ -2742,9 +2793,9 @@ public class JungleStructures
     			break;
     			
     		case 3: // Facing right
-    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addFillWithBlocks(blueprint, 0,0,0, 0,0,1, biomeLogHorAcrossBlock, biomeLogHorAcrossMeta);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, biomeDirtBlock, biomeDirtMeta); // Foundation
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, -1, biomeLogVertBlock, biomeLogVertMeta);
     			// Vines
     			if (materialType!=FunctionsVN.MaterialType.SNOW) // Orientation - 1:north, 2:east, 4:south, 8:west
@@ -2761,14 +2812,14 @@ public class JungleStructures
     		
     		int vertOffset = -1;
     		
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1+vertOffset, 0, biomeDirtBlock, biomeDirtMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1+vertOffset, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     		BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, 0+vertOffset, 0, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		
     		genericBoolean = random.nextBoolean();
     		
     		// Foundations
-    		BlueprintData.addFillBelowTo(blueprint, genericBoolean?-1:0, -1+vertOffset, genericBoolean?0:-1, biomeDirtBlock, biomeDirtMeta);
-    		BlueprintData.addFillBelowTo(blueprint, genericBoolean?1:0, -1+vertOffset, genericBoolean?0:1, biomeDirtBlock, biomeDirtMeta);
+    		BlueprintData.addFillBelowTo(blueprint, genericBoolean?-1:0, -1+vertOffset, genericBoolean?0:-1, biomeFillerBlock, biomeFillerMeta);
+    		BlueprintData.addFillBelowTo(blueprint, genericBoolean?1:0, -1+vertOffset, genericBoolean?0:1, biomeFillerBlock, biomeFillerMeta);
     		// Cobblestone
     		BlueprintData.addPlaceBlock(blueprint, genericBoolean?-1:0, 0+vertOffset, genericBoolean?0:-1, biomeCobblestoneBlock, biomeCobblestoneMeta);
     		BlueprintData.addPlaceBlock(blueprint, genericBoolean?1:0, 0+vertOffset, genericBoolean?0:1, biomeCobblestoneBlock, biomeCobblestoneMeta);

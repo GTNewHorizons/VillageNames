@@ -324,7 +324,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // === FORCE A SPECIFIC STARTER FOR TESTING PURPOSES === //
-        	start = new SwampStructures.SwampWillow(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+        	start = new SwampStructures.SwampStatue(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
             
         	
         	

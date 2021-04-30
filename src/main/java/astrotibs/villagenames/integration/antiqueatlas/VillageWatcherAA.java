@@ -137,6 +137,7 @@ public class VillageWatcherAA
 	JUNGLE_VILLA = "VNJuVil", // Jungle Villa
 	
 	SWAMP_TREE = "VNSwWil", // Swamp Willow
+	SWAMP_STATUE = "VNSwSta", // Swamp Statue
 	
 	// Village Structures
 	PLAINS_FLOWER_PLANTER = "VNPlAcc1", // Plains Flower Planter
@@ -356,6 +357,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_GARDEN, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_VILLA, TILE_VILLAGE_L_HOUSE);
 		builder.put(SWAMP_TREE, TILE_VILLAGE_TREE);
+		builder.put(SWAMP_STATUE, TILE_VILLAGE_WELL);
 		
 		// Plains
 		builder.put(PLAINS_FLOWER_PLANTER, TILE_VILLAGE_FARMLAND_SMALL);
