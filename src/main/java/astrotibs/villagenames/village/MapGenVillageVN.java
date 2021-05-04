@@ -288,7 +288,10 @@ public class MapGenVillageVN extends MapGenVillage
             
             StructureVillageVN.StartVN[] swampStarters = new StructureVillageVN.StartVN[]
             {
-            	new SwampStructures.SwampWillow(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Willow
+                	new SwampStructures.SwampWillow(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Willow
+                	new SwampStructures.SwampStatue(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Statue
+                	new SwampStructures.SwampPavilion(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Pavilion
+                	new SwampStructures.SwampMonolith(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize), // Swamp Monolith
             };
             
             
@@ -324,7 +327,7 @@ public class MapGenVillageVN extends MapGenVillage
             
             
             // === FORCE A SPECIFIC STARTER FOR TESTING PURPOSES === //
-        	start = new SwampStructures.SwampStatue(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
+        	//start = new SwampStructures.SwampMonolith(world.getWorldChunkManager(), 0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageSize);
             
         	
         	

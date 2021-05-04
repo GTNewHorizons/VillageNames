@@ -108,15 +108,18 @@ public class ModObjects {
 	// Bountiful rocks
 	public static final String andesiteC2 = DOM_CHISEL + ":andesite";
 	public static final String dioriteC2 = DOM_CHISEL + ":diorite";
-	public static final String graniteC2 = DOM_CHISEL + ":granite";
-	public static final String stoneBo = DOM_BOTANIA + ":stone";
-	public static final String stoneEF = DOM_ETFUTURUM + ":stone";
-	public static final String stoneGS = DOM_GANYSSURFACE + ":18Stones";
-	public static final String stoneUTD = DOM_UPTODATE + ":stone";
+	public static final String graniteC2 = DOM_CHISEL + ":granite"; // Polished is 1
+	public static final String stoneBo = DOM_BOTANIA + ":stone"; // Polished granite is 7
+	public static final String stoneEF = DOM_ETFUTURUM + ":stone"; // Polished granite is 2
+	public static final String stoneGS = DOM_GANYSSURFACE + ":18Stones"; // Polished granite is 2
+	public static final String stoneUTD = DOM_UPTODATE + ":stone"; // Polished granite is 2
 	// Polished blocks
+	
+	
 	// Slabs
 	public static final String andesiteSlabUTD = DOM_UPTODATE + ":slab_andesite";
 	public static final String dioriteSlabUTD = DOM_UPTODATE + ":slab_diorite";
+	public static final String polishedAndesiteSlabUTD = DOM_UPTODATE + ":slab_polished_andesite";
 	public static final String polishedDioriteSlabUTD = DOM_UPTODATE + ":slab_polished_diorite";
 	public static final String graniteSlabUTD = DOM_UPTODATE + ":slab_granite";
 	public static final String andesiteSlabBo = DOM_BOTANIA + ":stone0Slab";
@@ -955,9 +958,6 @@ public class ModObjects {
 		}
 		return null;
 	}
-	/**
-	 * Select an andesite wall from a mod; returns null otherwise
-	 */
 	public static Object[] chooseModAndesiteWallBlock()
 	{
 		String[] modprioritylist = GeneralConfig.modBountifulStone;
@@ -975,6 +975,27 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
 				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	public static Object[] chooseModPolishedAndesiteSlabObject(boolean upper)
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneSlab2EF);
+				if (modblock != null) {return new Object[]{modblock, upper ? 13:5};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.polishedAndesiteSlabUTD);
+				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
 			}
 		}
 		return null;
@@ -2195,6 +2216,42 @@ public class ModObjects {
 		}
 		return null;
 	}
+	public static Object[] chooseModPolishedGraniteBlockObject()
+	{
+		String[] modprioritylist = GeneralConfig.modBountifulStone;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("chisel"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.graniteC2);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("ganyssurface"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneGS);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().equals("botania"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneBo);
+				if (modblock != null) {return new Object[]{modblock, 7};}
+			}
+		}
+		return null;
+	}
 	public static ItemStack chooseModGraniteItem()
 	{
 		String[] modprioritylist = GeneralConfig.modBountifulStone;
@@ -3374,7 +3431,7 @@ public class ModObjects {
 	
 	
 	// Smooth Stone
-	public static Object[] chooseModSmoothStoneBlock()
+	public static Object[] chooseModSmoothStoneBlockObject()
 	{
 		String[] modprioritylist = GeneralConfig.modSmoothStone;
 		

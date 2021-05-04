@@ -207,6 +207,16 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSnowyWeaponSmith1_string; public static ArrayList<Double> componentModernSnowyWeaponSmith1_vals;
 	public static String componentModernSnowyStreetDecor1_string; public static ArrayList<Double> componentModernSnowyStreetDecor1_vals;
 	
+	public static String componentModernJungleArmorerHouse_string; public static ArrayList<Double> componentModernJungleArmorerHouse_vals;
+	public static String componentModernJungleCartographerHouse1_string; public static ArrayList<Double> componentModernJungleCartographerHouse1_vals;
+	public static String componentModernJungleFisherCottage_string; public static ArrayList<Double> componentModernJungleFisherCottage_vals;
+	public static String componentModernJungleLibrary_string; public static ArrayList<Double> componentModernJungleLibrary_vals;
+	public static String componentModernJungleMediumHouse1_string; public static ArrayList<Double> componentModernJungleMediumHouse1_vals;
+	public static String componentModernJungleMediumHouse2_string; public static ArrayList<Double> componentModernJungleMediumHouse2_vals;
+	public static String componentModernJungleSmallHouse1_string; public static ArrayList<Double> componentModernJungleSmallHouse1_vals;
+	public static String componentModernJungleTemple_string; public static ArrayList<Double> componentModernJungleTemple_vals;
+	public static String componentModernJungleToolSmithy_string; public static ArrayList<Double> componentModernJungleToolSmithy_vals;
+	
 	// Decor
 	public static boolean allowTaigaTroughs;
 	public static boolean restrictTaigaTroughs;
@@ -260,6 +270,8 @@ public class VillageGeneratorConfigHandler
 		String taigaVillages = "taiga villages";
 		String savannaVillages = "savanna villages";
 		String snowyVillages = "snowy villages";
+		String jungleVillages = "jungle villages";
+		String swampVillages = "swamp villages";
 		
 		newVillageGenerator = config.getBoolean("Activate New Village Generator", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Use replacement village generation system. You may need to deactivate village generation from other mods. All other settings in this section require this to be true.");
 		
@@ -891,6 +903,33 @@ public class VillageGeneratorConfigHandler
 		componentModernSnowyStreetDecor1_string = config.getString(componentModern+"Snowy Road Decor", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+snowyVillages);
 		componentModernSnowyStreetDecor1_vals = parseDoubleArray(componentModernSnowyStreetDecor1_string, modifiedDefaults);
 		
+		componentModernJungleArmorerHouse_string = config.getString(componentModern+"Jungle Cartographer House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleArmorerHouse_vals = parseDoubleArray(componentModernJungleArmorerHouse_string, modernDefaults);
+		
+		componentModernJungleCartographerHouse1_string = config.getString(componentModern+"Jungle Armorer House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleCartographerHouse1_vals = parseDoubleArray(componentModernJungleCartographerHouse1_string, modernDefaults);
+		
+		componentModernJungleFisherCottage_string = config.getString(componentModern+"Jungle Fisher Cottage", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleFisherCottage_vals = parseDoubleArray(componentModernJungleFisherCottage_string, modernDefaults);
+		
+		componentModernJungleLibrary_string = config.getString(componentModern+"Jungle Library", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleLibrary_vals = parseDoubleArray(componentModernJungleLibrary_string, modernDefaults);
+		
+		componentModernJungleMediumHouse1_string = config.getString(componentModern+"Jungle Medium House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleMediumHouse1_vals = parseDoubleArray(componentModernJungleMediumHouse1_string, modernDefaults);
+		
+		componentModernJungleMediumHouse2_string = config.getString(componentModern+"Jungle Medium House 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleMediumHouse2_vals = parseDoubleArray(componentModernJungleMediumHouse2_string, modernDefaults);
+		
+		componentModernJungleSmallHouse1_string = config.getString(componentModern+"Jungle Small House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleSmallHouse1_vals = parseDoubleArray(componentModernJungleSmallHouse1_string, modernDefaults);
+		
+		componentModernJungleTemple_string = config.getString(componentModern+"Jungle Temple", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleTemple_vals = parseDoubleArray(componentModernJungleTemple_string, modernDefaults);
+		
+		componentModernJungleToolSmithy_string = config.getString(componentModern+"Jungle Tool Smithy", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleToolSmithy_vals = parseDoubleArray(componentModernJungleToolSmithy_string, modernDefaults);
+		
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
@@ -1083,7 +1122,18 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ToolSmith1|snowy",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "WeaponSmith1|snowy",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
+						// Custom buildings
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ArmorerHouse|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "CartographerHouse1|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FisherCottage|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Library|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse1|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse2|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse1|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Temple|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ToolSmithy|jungle",
 						
+						// Mod buildings
 						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna",
 						
 						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy",

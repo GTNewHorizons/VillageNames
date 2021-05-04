@@ -136,8 +136,10 @@ public class VillageWatcherAA
 	JUNGLE_GARDEN = "VNJuGar", // Jungle Garden
 	JUNGLE_VILLA = "VNJuVil", // Jungle Villa
 	
-	SWAMP_TREE = "VNSwWil", // Swamp Willow
+	SWAMP_WILLOW = "VNSwWil", // Swamp Willow
 	SWAMP_STATUE = "VNSwSta", // Swamp Statue
+	SWAMP_PAVILION = "VNSwPav", // Swamp Pavilion
+	SWAMP_MONOLITH = "VNSwMon", // Swamp Monolith
 	
 	// Village Structures
 	PLAINS_FLOWER_PLANTER = "VNPlAcc1", // Plains Flower Planter
@@ -307,7 +309,18 @@ public class VillageWatcherAA
 	SNOWY_TEMPLE = "VNSnTem1", // Snowy Temple
 	SNOWY_TOOL_SMITHY = "VNSnTSm1", // Snowy Tool Smithy
 	SNOWY_WEAPON_SMITHY = "VNSnWSm1", // Snowy Weapon Smithy
-	SNOWY_ROAD_DECOR = "VNSnStD1"; // Snowy Road Decor
+	SNOWY_ROAD_DECOR = "VNSnStD1", // Snowy Road Decor
+	
+	JUNGLE_ARMORER_HOUSE = "VNJuArmH", // Jungle Armorer House
+	JUNGLE_CARTOGRAPHER_HOUSE_1 = "VNJuCaH1", // Jungle Cartographer House 1
+	JUNGLE_FISHER_COTTAGE = "VNJuFshC", // Jungle Fisher Cottage
+	JUNGLE_LIBRARY = "VNJuLibr", // Jungle Library
+	JUNGLE_MEDIUM_HOUSE_1 = "VNJuMeH1", // Jungle Medium House 1
+	JUNGLE_MEDIUM_HOUSE_2 = "VNJuMeH2", // Jungle Medium House 2
+	JUNGLE_SMALL_HOUSE_1 = "VNJuSmH1", // Jungle Small House 1
+	JUNGLE_TEMPLE = "VNJuTemp", // Jungle Temple
+	JUNGLE_TOOL_SMITHY = "VNJuTlSm", // Jungle Tool Smithy
+	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	
 		
 	// Associates village structure components with an AA map icon
@@ -356,8 +369,10 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_TREE, TILE_VILLAGE_TREE);
 		builder.put(JUNGLE_GARDEN, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_VILLA, TILE_VILLAGE_L_HOUSE);
-		builder.put(SWAMP_TREE, TILE_VILLAGE_TREE);
+		builder.put(SWAMP_WILLOW, TILE_VILLAGE_TREE);
 		builder.put(SWAMP_STATUE, TILE_VILLAGE_WELL);
+		builder.put(SWAMP_PAVILION, TILE_VILLAGE_HUT);
+		builder.put(SWAMP_MONOLITH, TILE_VILLAGE_WELL);
 		
 		// Plains
 		builder.put(PLAINS_FLOWER_PLANTER, TILE_VILLAGE_FARMLAND_SMALL);
@@ -534,6 +549,15 @@ public class VillageWatcherAA
 		builder.put(SNOWY_ROAD_DECOR, TILE_VILLAGE_TORCH);
 		
 		// TODO - Jungle
+		builder.put(JUNGLE_ARMORER_HOUSE, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_CARTOGRAPHER_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(JUNGLE_FISHER_COTTAGE, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(JUNGLE_LIBRARY, TILE_VILLAGE_LIBRARY);
+		builder.put(JUNGLE_MEDIUM_HOUSE_1, TILE_VILLAGE_HOUSE);
+		builder.put(JUNGLE_MEDIUM_HOUSE_2, TILE_VILLAGE_HOUSE);
+		builder.put(JUNGLE_SMALL_HOUSE_1, TILE_VILLAGE_L_HOUSE);
+		builder.put(JUNGLE_TEMPLE, TILE_VILLAGE_CHURCH);
+		builder.put(JUNGLE_TOOL_SMITHY, TILE_VILLAGE_HUT);
 		
 		// TODO - Swamp
 		
@@ -810,6 +834,14 @@ public class VillageWatcherAA
 				|| SNOWY_FOUNTAIN.equals(childID)
 				|| SNOWY_PAVILION.equals(childID)
 				// TODO - Add Jungle/Swamp centers
+				|| JUNGLE_STATUE.equals(childID)
+				|| JUNGLE_TREE.equals(childID)
+				|| JUNGLE_GARDEN.equals(childID)
+				|| JUNGLE_VILLA.equals(childID)
+				|| SWAMP_WILLOW.equals(childID)
+				|| SWAMP_STATUE.equals(childID)
+				|| SWAMP_PAVILION.equals(childID)
+				|| SWAMP_MONOLITH.equals(childID)
 				;
 	}
 }

@@ -239,6 +239,8 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleVilla.class, "VNJuVil"); // Jungle Villa
 	        MapGenStructureIO.func_143031_a(SwampStructures.SwampWillow.class, "VNSwWil"); // Swamp Willow
 	        MapGenStructureIO.func_143031_a(SwampStructures.SwampStatue.class, "VNSwSta"); // Swamp Statue
+	        MapGenStructureIO.func_143031_a(SwampStructures.SwampPavilion.class, "VNSwPav"); // Swamp Pavilion
+	        MapGenStructureIO.func_143031_a(SwampStructures.SwampMonolith.class, "VNSwMon"); // Swamp Monolith
 	        
 	        // Village Structures
 	        registerVillageComponentBuilding(PlainsStructures.PlainsAccessory1.class, "VNPlAcc1", new StructureCreationHandlers.PlainsAccessory1_Handler());
@@ -409,7 +411,17 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SnowyStructures.SnowyToolSmith1.class, "VNSnTSm1", new StructureCreationHandlers.SnowyToolSmith1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyWeaponSmith1.class, "VNSnWSm1", new StructureCreationHandlers.SnowyWeaponSmith1_Handler());
 	        registerVillageComponentBuilding(SnowyStructures.SnowyStreetDecor1.class, "VNSnStD1", new StructureCreationHandlers.SnowyStreetDecor1_Handler());
-
+	        
+	        registerVillageComponentBuilding(JungleStructures.JungleArmorerHouse.class, "VNJuArmH", new StructureCreationHandlers.JungleArmorerHouse_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleCartographerHouse1.class, "VNJuCaH1", new StructureCreationHandlers.JungleCartographerHouse1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleFisherCottage.class, "VNJuFshC", new StructureCreationHandlers.JungleFisherCottage_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleLibrary.class, "VNJuLibr", new StructureCreationHandlers.JungleLibrary_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse1.class, "VNJuSmH1", new StructureCreationHandlers.JungleSmallHouse1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse1.class, "VNJuMeH1", new StructureCreationHandlers.JungleMediumHouse1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse2.class, "VNJuMeH2", new StructureCreationHandlers.JungleMediumHouse2_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleTemple.class, "VNJuTemp", new StructureCreationHandlers.JungleTemple_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleToolSmithy.class, "VNJuTlSm", new StructureCreationHandlers.JungleToolSmithy_Handler());
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

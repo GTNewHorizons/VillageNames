@@ -88,5 +88,7 @@ public class Reference
     DESERT_BUILDING_STUB =  "DesertStructures$Desert",
     TAIGA_BUILDING_STUB =   "TaigaStructures$Taiga",
     SAVANNA_BUILDING_STUB = "SavannaStructures$Savanna",
-    SNOWY_BUILDING_STUB =   "SnowyStructures$Snowy";
+    SNOWY_BUILDING_STUB =   "SnowyStructures$Snowy",
+    JUNGLE_BUILDING_STUB =   "JungleStructures$Jungle",
+    SWAMP_BUILDING_STUB =   "SwampStructures$Swamp";
 }

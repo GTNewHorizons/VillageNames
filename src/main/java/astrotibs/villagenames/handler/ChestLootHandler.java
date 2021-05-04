@@ -441,7 +441,7 @@ public class ChestLootHandler {
 			{new ItemStack(Blocks.stonebrick), def_min, def_max, 2},
 			{new ItemStack(Items.bread), 1, 4, 4},
 			{new ItemStack(Items.dye, 1, 11), def_min, def_max, def_weight}, // Dandelion Yellow
-			{new ItemStack((Block) ModObjects.chooseModSmoothStoneBlock()[0], 1, (Integer) ModObjects.chooseModSmoothStoneBlock()[1]), def_min, def_max, def_weight},
+			{new ItemStack((Block) ModObjects.chooseModSmoothStoneBlockObject()[0], 1, (Integer) ModObjects.chooseModSmoothStoneBlockObject()[1]), def_min, def_max, def_weight},
 			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
 		})
 		{

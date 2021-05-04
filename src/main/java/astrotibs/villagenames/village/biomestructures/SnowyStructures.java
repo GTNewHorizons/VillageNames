@@ -3441,7 +3441,7 @@ public class SnowyStructures
         	
         	
         	// Smooth Stone Block
-        	blockObject = ModObjects.chooseModSmoothStoneBlock(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModSmoothStoneBlockObject(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
             for (int[] uuvvww : new int[][]{
             	{4,2,3, 4,2,3},
             	})

@@ -2161,7 +2161,7 @@ public class StructureVillageVN
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SWAMP)
             	{
-            		decorBlueprint = SwampStructures.getSwampDecorBlueprint(randomFromXYZ.nextInt(4), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = SwampStructures.getSwampDecorBlueprint(randomFromXYZ.nextInt(7), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else // Plains
             	{
@@ -3071,15 +3071,15 @@ public class StructureVillageVN
     	Block flowerModded = null;
     	
     	// If the block is a modded flower, return "false"
-    	for (String modFlower : new String[]{
-    			ModObjects.flowerUTD,
-    			ModObjects.flowerCornflowerEF,
-    			ModObjects.flowerLilyOfTheValleyEF,
-    	})
-    	{
-    		flowerModded = Block.getBlockFromName(modFlower);
-    		if (flowerModded!=null && block==flowerModded) {return false;}
-    	}
+//    	for (String modFlower : new String[]{
+//    			ModObjects.flowerUTD,
+//    			ModObjects.flowerCornflowerEF,
+//    			ModObjects.flowerLilyOfTheValleyEF,
+//    	})
+//    	{
+//    		flowerModded = Block.getBlockFromName(modFlower);
+//    		if (flowerModded!=null && block==flowerModded) {return false;}
+//    	}
     	
         return     block != Blocks.yellow_flower
         		&& block != Blocks.red_flower

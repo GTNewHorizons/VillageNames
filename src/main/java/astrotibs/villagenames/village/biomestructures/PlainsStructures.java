@@ -3019,7 +3019,7 @@ public class PlainsStructures
             }
             
             // Counter
-        	blockObject = ModObjects.chooseModSmoothStoneBlock(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModSmoothStoneBlockObject(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
             for (int[] uuww : new int[][]{
             	{2,2,2,5},
             	{2,5,6,6}
@@ -15207,7 +15207,7 @@ public class PlainsStructures
             
             
             // Smooth stone
-        	blockObject = ModObjects.chooseModSmoothStoneBlock(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModSmoothStoneBlockObject(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
             this.placeBlockAtCurrentPosition(world, smoothStoneBlock, smoothStoneMeta, 2, 1, 4, structureBB);
             
         	

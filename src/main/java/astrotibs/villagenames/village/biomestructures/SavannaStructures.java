@@ -13670,7 +13670,7 @@ public class SavannaStructures
         	
         	
         	// Smooth Stone Block
-        	blockObject = ModObjects.chooseModSmoothStoneBlock(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModSmoothStoneBlockObject(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
             for (int[] uuvvww : new int[][]{
             	{2,1,3, 2,1,3},
             	})
@@ -16069,7 +16069,7 @@ public class SavannaStructures
         	
         	
         	// Smooth Stone Block
-        	blockObject = ModObjects.chooseModSmoothStoneBlock(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
+        	blockObject = ModObjects.chooseModSmoothStoneBlockObject(); Block smoothStoneBlock = (Block)blockObject[0]; int smoothStoneMeta = (Integer)blockObject[1];
             for (int[] uuvvww : new int[][]{
             	// Entryway
             	{5,1,1, 7,1,3}, 
