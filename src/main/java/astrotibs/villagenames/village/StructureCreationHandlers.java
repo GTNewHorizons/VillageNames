@@ -39,6 +39,7 @@ import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertTem
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertToolSmith1;
 import astrotibs.villagenames.village.biomestructures.DesertStructures.DesertWeaponsmith1;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleArmorerHouse;
+import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleButcherShop;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleCartographerHouse1;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleFisherCottage;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleLibrary;
@@ -4143,6 +4144,30 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return JungleArmorerHouse.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Jungle Butcher Shop
+	public static class JungleButcherShop_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernJungleButcherShop_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(JungleButcherShop.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return JungleButcherShop.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return JungleButcherShop.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	

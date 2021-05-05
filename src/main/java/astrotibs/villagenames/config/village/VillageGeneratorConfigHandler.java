@@ -38,6 +38,17 @@ public class VillageGeneratorConfigHandler
 	public static String componentLegacyHouse2_string; public static ArrayList<Double> componentLegacyHouse2_vals;
 	public static String componentLegacyHouse3_string; public static ArrayList<Double> componentLegacyHouse3_vals;
 	// Modern Village buildings
+	
+	// Town centers
+	public static int 
+	componentModernPlainsFountain, componentModernPlainsWell, componentModernPlainsMarket, componentModernPlainsOakTree,
+	componentModernDesertFountain, componentModernDesertWell, componentModernDesertMarket, 
+	componentModernTaigaSquare, componentModernTaigaWell,
+	componentModernSavannaMarket, componentModernSavannaFountain, componentModernSavannaDoubleWell, componentModernSavannaWell, 
+	componentModernSnowyIceSpire, componentModernSnowyFountain, componentModernSnowyPavilion, 
+	componentModernJungleStatue, componentModernJungleCocoaTree, componentModernJungleGarden, componentModernJungleVilla, 
+	componentModernSwampWillow, componentModernSwampStatue, componentModernSwampPavilion, componentModernSwampMonolith; 
+	
 	public static String componentModernPlainsAccessory1_string; public static ArrayList<Double> componentModernPlainsAccessory1_vals;
 	public static String componentModernPlainsAnimalPen1_string; public static ArrayList<Double> componentModernPlainsAnimalPen1_vals;
 	public static String componentModernPlainsAnimalPen2_string; public static ArrayList<Double> componentModernPlainsAnimalPen2_vals;
@@ -208,6 +219,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSnowyStreetDecor1_string; public static ArrayList<Double> componentModernSnowyStreetDecor1_vals;
 	
 	public static String componentModernJungleArmorerHouse_string; public static ArrayList<Double> componentModernJungleArmorerHouse_vals;
+	public static String componentModernJungleButcherShop_string; public static ArrayList<Double> componentModernJungleButcherShop_vals;
 	public static String componentModernJungleCartographerHouse1_string; public static ArrayList<Double> componentModernJungleCartographerHouse1_vals;
 	public static String componentModernJungleFisherCottage_string; public static ArrayList<Double> componentModernJungleFisherCottage_vals;
 	public static String componentModernJungleLibrary_string; public static ArrayList<Double> componentModernJungleLibrary_vals;
@@ -261,6 +273,7 @@ public class VillageGeneratorConfigHandler
 		// --- New Villages --- //
 		String componentLegacy = "Component: Legacy ";
 		String componentModern = "Component: Modern ";
+		String townCenter = "Town Center - ";
 /*		String decor = "Decor: ";
 		String allowForThisDecorTypeIn = "Allow this decor type in ";*/
 		String generationStatsForL = "Generation stats for this component in all villages. Vanilla weight is ";
@@ -350,6 +363,80 @@ public class VillageGeneratorConfigHandler
 		
 		// Modern Village components
 		
+		// Town centers
+		componentModernPlainsFountain = config.getInt(componentModern+"Plains "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Plains village's town center instead of other Plains town centers. Set to 0 to disable.");
+		
+		componentModernPlainsWell = config.getInt(componentModern+"Plains "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Plains village's town center instead of other Plains town centers. Set to 0 to disable.");
+		
+		componentModernPlainsMarket = config.getInt(componentModern+"Plains "+townCenter+"Market", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Plains village's town center instead of other Plains town centers. Set to 0 to disable.");
+		
+		componentModernPlainsOakTree = config.getInt(componentModern+"Plains "+townCenter+"Oak Tree", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Plains village's town center instead of other Plains town centers. Set to 0 to disable.");
+		
+		componentModernDesertFountain = config.getInt(componentModern+"Desert "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Desert village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernDesertWell = config.getInt(componentModern+"Desert "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Desert village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernDesertMarket = config.getInt(componentModern+"Desert "+townCenter+"Market", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Desert village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernTaigaSquare = config.getInt(componentModern+"Taiga "+townCenter+"Square", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Taiga village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernTaigaWell = config.getInt(componentModern+"Taiga "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Taiga village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSavannaMarket = config.getInt(componentModern+"Savanna "+townCenter+"Market", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSavannaFountain = config.getInt(componentModern+"Savanna "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSavannaDoubleWell = config.getInt(componentModern+"Savanna "+townCenter+"Double Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSavannaWell = config.getInt(componentModern+"Savanna "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSnowyIceSpire = config.getInt(componentModern+"Snowy "+townCenter+"Ice Spire", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSnowyFountain = config.getInt(componentModern+"Snowy "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSnowyPavilion = config.getInt(componentModern+"Snowy "+townCenter+"Pavilion", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernJungleStatue = config.getInt(componentModern+"Jungle "+townCenter+"Statue", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernJungleCocoaTree = config.getInt(componentModern+"Jungle "+townCenter+"Cocoa Tree", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernJungleGarden = config.getInt(componentModern+"Jungle "+townCenter+"Garden", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernJungleVilla = config.getInt(componentModern+"Jungle "+townCenter+"Villa", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSwampWillow = config.getInt(componentModern+"Swamp "+townCenter+"Willow", Reference.CATEGORY_VILLAGE_GENERATOR, 6, 0, 10000,
+				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSwampStatue = config.getInt(componentModern+"Swamp "+townCenter+"Statue", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
+				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSwampPavilion = config.getInt(componentModern+"Swamp "+townCenter+"Pavilion", Reference.CATEGORY_VILLAGE_GENERATOR, 6, 0, 10000,
+				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		componentModernSwampMonolith = config.getInt(componentModern+"Swamp "+townCenter+"Monolith", Reference.CATEGORY_VILLAGE_GENERATOR, 3, 0, 10000,
+				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+		
+		
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
 				(91D/9), //= 10.11111111111111
 				((76D/91) * 9D/(152D/5)), //=  0.24725274725274726
@@ -384,6 +471,7 @@ public class VillageGeneratorConfigHandler
 		
 		
 		// Plains components
+		
 		componentModernPlainsAccessory1_string = config.getString(componentModern+"Plains Flower Planter", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+plainsVillages);
 		componentModernPlainsAccessory1_vals = parseDoubleArray(componentModernPlainsAccessory1_string, modernDefaults);
 		
@@ -906,6 +994,9 @@ public class VillageGeneratorConfigHandler
 		componentModernJungleArmorerHouse_string = config.getString(componentModern+"Jungle Cartographer House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleArmorerHouse_vals = parseDoubleArray(componentModernJungleArmorerHouse_string, modernDefaults);
 		
+		componentModernJungleButcherShop_string = config.getString(componentModern+"Jungle Butcher Shop", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleButcherShop_vals = parseDoubleArray(componentModernJungleButcherShop_string, modernDefaults);
+		
 		componentModernJungleCartographerHouse1_string = config.getString(componentModern+"Jungle Armorer House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleCartographerHouse1_vals = parseDoubleArray(componentModernJungleCartographerHouse1_string, modernDefaults);
 		
@@ -1124,6 +1215,7 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
 						// Custom buildings
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ArmorerHouse|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ButcherShop|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "CartographerHouse1|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FisherCottage|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Library|jungle",

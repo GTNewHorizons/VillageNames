@@ -312,6 +312,7 @@ public class VillageWatcherAA
 	SNOWY_ROAD_DECOR = "VNSnStD1", // Snowy Road Decor
 	
 	JUNGLE_ARMORER_HOUSE = "VNJuArmH", // Jungle Armorer House
+	JUNGLE_BUTCHER_SHOP = "VNJuButS", // Jungle Butcher Shop
 	JUNGLE_CARTOGRAPHER_HOUSE_1 = "VNJuCaH1", // Jungle Cartographer House 1
 	JUNGLE_FISHER_COTTAGE = "VNJuFshC", // Jungle Fisher Cottage
 	JUNGLE_LIBRARY = "VNJuLibr", // Jungle Library
@@ -550,6 +551,7 @@ public class VillageWatcherAA
 		
 		// TODO - Jungle
 		builder.put(JUNGLE_ARMORER_HOUSE, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_BUTCHER_SHOP, TILE_VILLAGE_BUTCHERS_SHOP);
 		builder.put(JUNGLE_CARTOGRAPHER_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(JUNGLE_FISHER_COTTAGE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(JUNGLE_LIBRARY, TILE_VILLAGE_LIBRARY);

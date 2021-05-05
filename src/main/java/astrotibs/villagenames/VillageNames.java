@@ -234,7 +234,7 @@ public final class VillageNames
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint2.class, "VNSnMP2"); // Frozen Fountain
 	        MapGenStructureIO.func_143031_a(SnowyStructures.SnowyMeetingPoint3.class, "VNSnMP3"); // Snowy Pavilion
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleStatue.class, "VNJuSta"); // Jungle Statue
-	        MapGenStructureIO.func_143031_a(JungleStructures.JungleTree.class, "VNJuTre"); // Jungle Tree
+	        MapGenStructureIO.func_143031_a(JungleStructures.JungleCocoaTree.class, "VNJuTre"); // Jungle Tree
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleGarden.class, "VNJuGar"); // Jungle Garden
 	        MapGenStructureIO.func_143031_a(JungleStructures.JungleVilla.class, "VNJuVil"); // Jungle Villa
 	        MapGenStructureIO.func_143031_a(SwampStructures.SwampWillow.class, "VNSwWil"); // Swamp Willow
@@ -413,6 +413,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SnowyStructures.SnowyStreetDecor1.class, "VNSnStD1", new StructureCreationHandlers.SnowyStreetDecor1_Handler());
 	        
 	        registerVillageComponentBuilding(JungleStructures.JungleArmorerHouse.class, "VNJuArmH", new StructureCreationHandlers.JungleArmorerHouse_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleButcherShop.class, "VNJuButS", new StructureCreationHandlers.JungleButcherShop_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleCartographerHouse1.class, "VNJuCaH1", new StructureCreationHandlers.JungleCartographerHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleFisherCottage.class, "VNJuFshC", new StructureCreationHandlers.JungleFisherCottage_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleLibrary.class, "VNJuLibr", new StructureCreationHandlers.JungleLibrary_Handler());

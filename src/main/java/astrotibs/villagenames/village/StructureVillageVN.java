@@ -91,6 +91,15 @@ public class StructureVillageVN
 	};
 	
 	// Indexed by [orientation][horizIndex]
+	public static final int[][] BED_META_ARRAY = new int[][]{
+		{2,3,0,1}, // Forward
+		{1,2,1,2}, // Right
+		{0,1,2,3}, // Back
+		{3,0,3,0}, // Left
+	   //N E S W
+	};
+	
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] VINE_META_ARRAY = new int[][]{
 		{4,8,1,2}, // Forward
 		{2,4,2,4}, // Right
@@ -2645,27 +2654,25 @@ public class StructureVillageVN
 	}
 	
 	
-	
 	/**
 	 * relativeOrientation
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
 	public static int getBedOrientationMeta(int relativeOrientation, int coordBaseMode, boolean isHead)
 	{
-		switch (relativeOrientation)
-		{
-		case 0: // Facing away
-			return new int[]{2,3,0,1}[coordBaseMode] + (isHead ? 8:0);
-		case 1: // Facing right
-			return new int[]{1,2,1,2}[coordBaseMode] + (isHead ? 8:0);
-		case 2: // Facing you
-			return new int[]{0,1,2,3}[coordBaseMode] + (isHead ? 8:0);
-		case 3: // Facing left
-			return new int[]{3,0,3,0}[coordBaseMode] + (isHead ? 8:0);
-		}
-		return 0 + (isHead ? 8:0);
+		return BED_META_ARRAY[relativeOrientation][coordBaseMode] + (isHead ? 8:0);
 	}
 	
+	
+	/**
+	 * relativeOrientation
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 * stage is growth stage: 0-2. This results in an additional meta of +0/+4/+8
+	 */
+	public static int getCocoaPodOrientationMeta(int relativeOrientation, int coordBaseMode, int stage)
+	{
+		return BED_META_ARRAY[relativeOrientation][coordBaseMode] + (stage*4);
+	}
 	
 	
 	/**
