@@ -76,7 +76,16 @@ public class ModObjects {
 	// --- Blocks and items reference for trades and generation --- //
 	// ------------------------------------------------------------ //
 	
-	// --- Blocks --- //
+	// Bamboo
+	// Stalks (Blocks)
+	public static final String bambooStalk_BoP = DOM_BIOMESOPLENTY + ":bamboo";
+	public static final String bambooStalk_GrC = "Growthcraft|Bamboo:grc.bambooStalk"; // 0 for verdant, 1 for dead
+	// Saplings (Items)
+	public static final String sapling_BoP = DOM_BIOMESOPLENTY + ":saplings"; // Meta 2
+	public static final String bambooShoot_GrC = "Growthcraft|Bamboo:grc.bambooShoot";
+	// Leaves
+	public static final String bambooLeaves_BoP = DOM_BIOMESOPLENTY + ":leaves1"; // Meta 1
+	public static final String bambooLeaves_GrC = "Growthcraft|Bamboo:grc.bambooLeaves";
 	
 	// Banner
 	public static final String bannerEF = DOM_ETFUTURUM + ":banner";
@@ -90,11 +99,35 @@ public class ModObjects {
 	public static final String barrelUTD = DOM_UPTODATE + ":barrel";
 	public static final String barrelEF = DOM_ETFUTURUM + ":barrel";
 
+	// Bed
+	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
+	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
+	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
+
+	// Beetroot
+	public static final String beetrootItemEF = DOM_ETFUTURUM + ":beetroot";
+	public static final String beetrootItemGS = DOM_GANYSSURFACE + ":beetroot";
+	public static final String beetrootCropEF = DOM_ETFUTURUM + ":beetroots";
+	public static final String beetrootCropGS = DOM_GANYSSURFACE + ":beetrootBlock";
+	// Beetroot Seeds
+	public static final String beetrootSeedsEF = DOM_ETFUTURUM + ":beetroot_seeds";
+	public static final String beetrootSeedsGS = DOM_GANYSSURFACE + ":beetrootSeeds";
+	// Beetroot Soup
+	public static final String beetrootSoupEF = DOM_ETFUTURUM + ":beetroot_soup";
+	public static final String beetrootSoupGS = DOM_GANYSSURFACE + ":beetrootSoup";
+	
 	// Blast Furnace
 	public static final String blastFurnace_EF = DOM_ETFUTURUM + ":blast_furnace";
 	
 	// Blue Ice
 	public static final String blueIce_EF = DOM_ETFUTURUM + ":blue_ice";
+	
+	// Boats
+	public static final String boatBirchUTD = DOM_UPTODATE + ":item_boat_birch";
+	public static final String boatSpruceUTD = DOM_UPTODATE + ":item_boat_spruce";
+	public static final String boatDarkOakUTD = DOM_UPTODATE + ":item_boat_dark_oak";
+	public static final String boatJungleUTD = DOM_UPTODATE + ":item_boat_jungle";
+	public static final String boatAcaciaUTD = DOM_UPTODATE + ":item_boat_acacia";
 	
 	// Bookshelf
 	public static final String bookshelfGS = DOM_GANYSSURFACE + ":bookshelf";
@@ -113,9 +146,6 @@ public class ModObjects {
 	public static final String stoneEF = DOM_ETFUTURUM + ":stone"; // Polished granite is 2
 	public static final String stoneGS = DOM_GANYSSURFACE + ":18Stones"; // Polished granite is 2
 	public static final String stoneUTD = DOM_UPTODATE + ":stone"; // Polished granite is 2
-	// Polished blocks
-	
-	
 	// Slabs
 	public static final String andesiteSlabUTD = DOM_UPTODATE + ":slab_andesite";
 	public static final String dioriteSlabUTD = DOM_UPTODATE + ":slab_diorite";
@@ -192,11 +222,8 @@ public class ModObjects {
 	public static final String chestAcaciaWS = DOM_WOODSTUFF + ":chest_tile.wood_4";
 	public static final String chestDarkOakWS = DOM_WOODSTUFF + ":chest_tile.wood_5";
 	
-	// Colored Bed
-	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
-	
 	// Compost Bin
-	public static final String compostBinGC = "GardenCore:compost_bin";
+	public static final String compostBin_GaC = "GardenCore:compost_bin";
 	
 	// Concrete
 	public static final String concreteUTD = DOM_UPTODATE + ":concrete";
@@ -320,6 +347,11 @@ public class ModObjects {
 	public static final String doorAcaciaUTD = DOM_UPTODATE + ":door_acacia";
 	public static final String doorDarkOakUTD = DOM_UPTODATE + ":door_dark_oak";
 	
+	// Dyes
+	public static final String miscBOP = DOM_BIOMESOPLENTY + ":misc"; // Usually used for dyes
+	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
+	public static final String dyeUTD = DOM_UPTODATE + ":dye";
+	
 	// Fence
 	public static final String fenceOakEF = DOM_ETFUTURUM + ":fence_oak";
 	public static final String fenceSpruceEF = DOM_ETFUTURUM + ":fence_spruce";
@@ -381,6 +413,10 @@ public class ModObjects {
 	public static final String fenceGateAcaciaWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_4";
 	public static final String fenceGateDarkOakWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_5";
 	
+	// Flowers
+	public static final String flowerUTD = DOM_UPTODATE + ":flower";
+	public static final String flowerCornflowerEF = DOM_ETFUTURUM + ":cornflower";
+	public static final String flowerLilyOfTheValleyEF = DOM_ETFUTURUM + ":lily_of_the_valley";
 	
 	// Glazed Terracotta
 	// Et Futurum Requiem versions:
@@ -431,6 +467,11 @@ public class ModObjects {
 	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
 	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
 	
+	// Kelp and Kelp Accessories
+	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
+	public static final String kelpWrapMC = "Mariculture:food"; // Use meta 8
+	public static final String kelpDriedBOP = DOM_BIOMESOPLENTY + ":coral1"; // Use meta 11 
+	
 	// Ladders
 	public static final String ladderSpruceGS = DOM_GANYSSURFACE + ":ladder1";
 	public static final String ladderBirchGS = DOM_GANYSSURFACE + ":ladder2";
@@ -453,6 +494,16 @@ public class ModObjects {
 	public static final String stoneSlab2EF = DOM_ETFUTURUM + ":stone_slab_2"; // 3 and 11 are polished diorite
 	public static final String mossyCobblestoneSlabUTD = DOM_UPTODATE + ":slab_mossy_cobblestone";
 	public static final String mossyStoneBrickSlabUTD = DOM_UPTODATE + ":slab_mossy_stone_bricks";
+	
+	// Mutton
+	public static final String muttonRawEF = DOM_ETFUTURUM + ":mutton_raw";
+	public static final String muttonCookedEF = DOM_ETFUTURUM + ":mutton_cooked";
+	public static final String muttonRawGS = DOM_GANYSSURFACE + ":mutton_raw";
+	public static final String muttonCookedGS = DOM_GANYSSURFACE + ":mutton_cooked";
+	public static final String muttonRawHC = DOM_HARVESTCRAFT + ":muttonrawItem";
+	public static final String muttonCookedHC = DOM_HARVESTCRAFT + ":muttoncookedItem";
+	public static final String muttonRawUTD = DOM_UPTODATE + ":raw_mutton";
+	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
 	
 	// Prismarine
 	public static final String prismarine_VN = Reference.MOD_ID + ":prismarine";    // Meta - 0:regular, 1:bricks, 2:dark
@@ -496,6 +547,23 @@ public class ModObjects {
 	public static final String brownClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockBrownClay";
 	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
 	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
+	
+	// Prismarine
+	public static final String prismarineShard_VN = Reference.MOD_ID + ":prismarine_shard";
+	public static final String manaResource_Bo = DOM_BOTANIA + ":manaResource"; // meta 10
+	public static final String prismarineShard_EF = DOM_ETFUTURUM + ":prismarine_shard";
+	public static final String prismarineShard_UTD = DOM_UPTODATE + ":prismarine_shard";
+	// Prismarine Crystals
+	public static final String prismarineCrystal_VN = Reference.MOD_ID + ":prismarine_crystals";
+	public static final String prismarineCrystal_EF = DOM_ETFUTURUM + ":prismarine_crystals";
+	public static final String prismarineCrystal_UTD = DOM_UPTODATE + ":prismarine_crystals";
+	
+	// Rabbit
+	public static final String rabbitHideEF = DOM_ETFUTURUM + ":rabbit_hide";
+	public static final String rabbitFootEF = DOM_ETFUTURUM + ":rabbit_foot";
+	public static final String rabbitRawEF = DOM_ETFUTURUM + ":rabbit_raw";
+	public static final String rabbitCookedEF = DOM_ETFUTURUM + ":rabbit_cooked";
+	public static final String rabbitStewEF = DOM_ETFUTURUM + ":rabbit_stew";
 	
 	// Red Sandstone - regular is meta 0, chiseled is 1, cut is 2
 	public static final String redSandstoneEF = DOM_ETFUTURUM + ":red_sandstone";
@@ -547,6 +615,32 @@ public class ModObjects {
 	public static final String sponge_EF = DOM_ETFUTURUM + ":sponge";
 	public static final String sponge_UTD = DOM_UPTODATE + ":sponge";
 	
+	// Stripped log
+	public static final String strippedLog1EF = DOM_ETFUTURUM + ":log_stripped";
+	public static final String strippedLog2EF = DOM_ETFUTURUM + ":log2_stripped";
+	public static final String strippedLogOakUTD = DOM_UPTODATE + ":stripped_log_oak";
+	public static final String strippedLogSpruceUTD = DOM_UPTODATE + ":stripped_log_spruce";
+	public static final String strippedLogBirchUTD = DOM_UPTODATE + ":stripped_log_birch";
+	public static final String strippedLogJungleUTD = DOM_UPTODATE + ":stripped_log_jungle";
+	public static final String strippedLogAcaciaUTD = DOM_UPTODATE + ":stripped_log_acacia";
+	public static final String strippedLogDarkOakUTD = DOM_UPTODATE + ":stripped_log_dark_oak";
+	
+	// Stripped wood
+	public static final String strippedWood1EF = DOM_ETFUTURUM + ":wood_stripped";
+	public static final String strippedWood2EF = DOM_ETFUTURUM + ":wood2_stripped";
+	// stripped wood for UTD is just log with meta value of 12
+	
+	// Suspicious Stew
+	public static final String suspiciousStewEF = DOM_ETFUTURUM + ":suspicious_stew";
+	public static final String suspiciousStewUTD = DOM_UPTODATE + ":suspicious_stew";
+
+	// Sweet Berries
+	public static final String sweetBerriesEF = DOM_ETFUTURUM + ":sweet_berries";
+	public static final String sweetBerriesUTD = DOM_UPTODATE + ":sweet_berries";
+	
+	// Tipped arrows
+	public static final String tippedArrowEF = DOM_ETFUTURUM + ":tipped_arrow";
+		
 	// Walls
 	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
 	public static final String redSandstoneWallUTD = DOM_UPTODATE + ":wall_red_sandstone";
@@ -558,6 +652,9 @@ public class ModObjects {
 	public static final String graniteWallUTD = DOM_UPTODATE + ":wall_granite";
 	public static final String bountifulWallBo = DOM_BOTANIA + ":stone0Wall"; // Meta 0:Andesite, 2:Diorite, 3:Granite
 	public static final String wallRC = "Railcraft:wall.alpha"; // Meta 10:Brick, 11:Sandstone
+	
+	// Wood block
+	public static final String woodBlockUTD = DOM_UPTODATE + ":wood";
 	
 	// Wooden Pressure Plate
 	public static final String pressurePlateSpruceGS = DOM_GANYSSURFACE + ":pressurePlate1";
@@ -602,6 +699,13 @@ public class ModObjects {
 	public static final String wallSignAcaciaBlock_EF = DOM_ETFUTURUM + ":wall_sign_acacia";
 	public static final String wallSignDarkOakBlock_EF = DOM_ETFUTURUM + ":wall_sign_dark_oak";
 	
+	public static final String signSpruceItem_EF = DOM_ETFUTURUM + ":item_sign_spruce";
+	public static final String signBirchItem_EF = DOM_ETFUTURUM + "item_sign_birch";
+	public static final String signJungleItem_EF = DOM_ETFUTURUM + ":item_sign_jungle";
+	public static final String signAcaciaItem_EF = DOM_ETFUTURUM + ":item_sign_acacia";
+	public static final String signDarkOakItem_EF = DOM_ETFUTURUM + ":item_sign_dark_oak";
+	
+	
 	// Wooden Trapdoor
 	public static final String trapdoorSpruceEF = DOM_ETFUTURUM + ":trapdoor_spruce";
 	public static final String trapdoorBirchEF = DOM_ETFUTURUM + ":trapdoor_birch";
@@ -624,114 +728,6 @@ public class ModObjects {
 	public static final String trapdoorAcaciaUTD = DOM_UPTODATE + ":trap_door_acacia";
 	public static final String trapdoorDarkOakUTD = DOM_UPTODATE + ":trap_door_dark_oak";
 	
-	
-	
-	
-	// --- Items --- //
-	
-	
-	// Beetroot
-	public static final String beetrootItemEF = DOM_ETFUTURUM + ":beetroot";
-	public static final String beetrootItemGS = DOM_GANYSSURFACE + ":beetroot";
-	public static final String beetrootCropEF = DOM_ETFUTURUM + ":beetroots";
-	public static final String beetrootCropGS = DOM_GANYSSURFACE + ":beetrootBlock";
-	
-	// Beetroot Seeds
-	public static final String beetrootSeedsEF = DOM_ETFUTURUM + ":beetroot_seeds";
-	public static final String beetrootSeedsGS = DOM_GANYSSURFACE + ":beetrootSeeds";
-
-	// Beetroot Soup
-	public static final String beetrootSoupEF = DOM_ETFUTURUM + ":beetroot_soup";
-	public static final String beetrootSoupGS = DOM_GANYSSURFACE + ":beetrootSoup";
-	
-	// Boats
-	public static final String boatBirchUTD = DOM_UPTODATE + ":item_boat_birch";
-	public static final String boatSpruceUTD = DOM_UPTODATE + ":item_boat_spruce";
-	public static final String boatDarkOakUTD = DOM_UPTODATE + ":item_boat_dark_oak";
-	public static final String boatJungleUTD = DOM_UPTODATE + ":item_boat_jungle";
-	public static final String boatAcaciaUTD = DOM_UPTODATE + ":item_boat_acacia";
-	
-	// Colored beds
-	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
-	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
-	
-	// Dyes
-	public static final String miscBOP = DOM_BIOMESOPLENTY + ":misc"; // Usually used for dyes
-	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
-	public static final String dyeUTD = DOM_UPTODATE + ":dye";
-	
-	// Flowers
-	public static final String flowerUTD = DOM_UPTODATE + ":flower";
-	public static final String flowerCornflowerEF = DOM_ETFUTURUM + ":cornflower";
-	public static final String flowerLilyOfTheValleyEF = DOM_ETFUTURUM + ":lily_of_the_valley";
-	
-	// Kelp and Kelp Accessories
-	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
-	public static final String kelpWrapMC = "Mariculture:food"; // Use meta 8
-	public static final String kelpDriedBOP = DOM_BIOMESOPLENTY + ":coral1"; // Use meta 11 
-	
-	// Mutton
-	public static final String muttonRawEF = DOM_ETFUTURUM + ":mutton_raw";
-	public static final String muttonCookedEF = DOM_ETFUTURUM + ":mutton_cooked";
-	public static final String muttonRawGS = DOM_GANYSSURFACE + ":mutton_raw";
-	public static final String muttonCookedGS = DOM_GANYSSURFACE + ":mutton_cooked";
-	public static final String muttonRawHC = DOM_HARVESTCRAFT + ":muttonrawItem";
-	public static final String muttonCookedHC = DOM_HARVESTCRAFT + ":muttoncookedItem";
-	public static final String muttonRawUTD = DOM_UPTODATE + ":raw_mutton";
-	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
-	
-	// Prismarine
-	public static final String prismarineShard_VN = Reference.MOD_ID + ":prismarine_shard";
-	public static final String manaResource_Bo = DOM_BOTANIA + ":manaResource"; // meta 10
-	public static final String prismarineShard_EF = DOM_ETFUTURUM + ":prismarine_shard";
-	public static final String prismarineShard_UTD = DOM_UPTODATE + ":prismarine_shard";
-	// Prismarine Crystals
-	public static final String prismarineCrystal_VN = Reference.MOD_ID + ":prismarine_crystals";
-	public static final String prismarineCrystal_EF = DOM_ETFUTURUM + ":prismarine_crystals";
-	public static final String prismarineCrystal_UTD = DOM_UPTODATE + ":prismarine_crystals";
-	
-	// Rabbit
-	public static final String rabbitHideEF = DOM_ETFUTURUM + ":rabbit_hide";
-	public static final String rabbitFootEF = DOM_ETFUTURUM + ":rabbit_foot";
-	public static final String rabbitRawEF = DOM_ETFUTURUM + ":rabbit_raw";
-	public static final String rabbitCookedEF = DOM_ETFUTURUM + ":rabbit_cooked";
-	public static final String rabbitStewEF = DOM_ETFUTURUM + ":rabbit_stew";
-	
-	// Stripped log
-	public static final String strippedLog1EF = DOM_ETFUTURUM + ":log_stripped";
-	public static final String strippedLog2EF = DOM_ETFUTURUM + ":log2_stripped";
-	public static final String strippedLogOakUTD = DOM_UPTODATE + ":stripped_log_oak";
-	public static final String strippedLogSpruceUTD = DOM_UPTODATE + ":stripped_log_spruce";
-	public static final String strippedLogBirchUTD = DOM_UPTODATE + ":stripped_log_birch";
-	public static final String strippedLogJungleUTD = DOM_UPTODATE + ":stripped_log_jungle";
-	public static final String strippedLogAcaciaUTD = DOM_UPTODATE + ":stripped_log_acacia";
-	public static final String strippedLogDarkOakUTD = DOM_UPTODATE + ":stripped_log_dark_oak";
-	
-	// Stripped wood
-	public static final String strippedWood1EF = DOM_ETFUTURUM + ":wood_stripped";
-	public static final String strippedWood2EF = DOM_ETFUTURUM + ":wood2_stripped";
-	// stripped wood for UTD is just log with meta value of 12
-	
-	// Suspicious Stew
-	public static final String suspiciousStewEF = DOM_ETFUTURUM + ":suspicious_stew";
-	public static final String suspiciousStewUTD = DOM_UPTODATE + ":suspicious_stew";
-
-	// Sweet Berries
-	public static final String sweetBerriesEF = DOM_ETFUTURUM + ":sweet_berries";
-	public static final String sweetBerriesUTD = DOM_UPTODATE + ":sweet_berries";
-	
-	// Tipped arrows
-	public static final String tippedArrowEF = DOM_ETFUTURUM + ":tipped_arrow";
-	
-	// Wood block
-	public static final String woodBlockUTD = DOM_UPTODATE + ":wood";
-	
-	// Wooden Sign
-	public static final String signSpruceItem_EF = DOM_ETFUTURUM + ":item_sign_spruce";
-	public static final String signBirchItem_EF = DOM_ETFUTURUM + "item_sign_birch";
-	public static final String signJungleItem_EF = DOM_ETFUTURUM + ":item_sign_jungle";
-	public static final String signAcaciaItem_EF = DOM_ETFUTURUM + ":item_sign_acacia";
-	public static final String signDarkOakItem_EF = DOM_ETFUTURUM + ":item_sign_dark_oak";
 	
 	
 	// --------------------------- //
@@ -996,6 +992,73 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedAndesiteSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
+			}
+		}
+		return null;
+	}
+	
+	// Bamboo
+	public static Object[] chooseModBambooStalk()
+	{
+		String[] modprioritylist = GeneralConfig.modBamboo;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooStalk_BoP);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().equals("growthcraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooStalk_GrC);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	// Leaves
+	public static Object[] chooseModBambooLeaves()
+	{
+		String[] modprioritylist = GeneralConfig.modBamboo;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooLeaves_BoP);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().equals("growthcraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooLeaves_GrC);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		return null;
+	}
+	// Shoot
+	public static ItemStack chooseModBambooShoot()
+	{
+		String[] modprioritylist = GeneralConfig.modBamboo;
+		
+		for (String mod : modprioritylist)
+		{
+			Item moditem=null;
+			
+			if (mod.toLowerCase().equals("biomesoplenty"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.sapling_BoP));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+			else if (mod.toLowerCase().equals("growthcraft"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bambooShoot_GrC));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
 		}
 		return null;
@@ -1435,7 +1498,7 @@ public class ModObjects {
 	{
 		Block modobject=null;
 		
-		modobject = Block.getBlockFromName(ModObjects.compostBinGC);
+		modobject = Block.getBlockFromName(ModObjects.compostBin_GaC);
 		if (modobject != null) {return modobject;}
 		
 		return null;

@@ -78,11 +78,12 @@ public class GeneralConfig {
 	
 	public static boolean pyramidTerracotta;
 	
-	public static String[] modBountifulStone;
+	public static String[] modBamboo;
 	public static String[] modBanner;
 	public static String[] modBarrel;
 	public static String[] modBeetroot;
 	public static String[] modBookshelf;
+	public static String[] modBountifulStone;
 	public static String[] modButton;
 	public static String[] modChest;
 	public static String[] modConcrete;
@@ -435,7 +436,14 @@ public class GeneralConfig {
 		harvestcraftCropFarmRate = config.getFloat("Crop rate: Harvestcraft", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Harvestcraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
 		dragonQuestCropFarmRate = config.getFloat("Crop rate: DQ Respect", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Dragon Quest Respect crops in farms. Only used with Village Generator. Set to 0 for no DQR crops.");
 		antiqueAtlasMarkerNames = config.getBoolean("Antique Atlas: Village Marker Names", Reference.CATEGORY_MOD_INTEGRATION, true, "Label a new village marker with the village's name in your Antique Atlases.");
-	    
+
+		modBamboo = config.getStringList("Mod Priority: Bamboo", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"growthcraft",
+ 				"biomesoplenty",
+ 				},
+ 				"Priority order for referencing Bamboo for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+		
 		modBanner = config.getStringList("Mod Priority: Banner", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"ganyssurface",

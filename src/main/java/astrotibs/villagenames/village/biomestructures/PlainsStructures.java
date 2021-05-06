@@ -1375,7 +1375,7 @@ public class PlainsStructures
         	
         	
         	// Dirt block
-        	world.setBlock(this.getXWithOffset(5, 5), this.getYWithOffset(0), this.getZWithOffset(5, 5), Blocks.dirt, 0, 2);
+        	world.setBlock(this.getXWithOffset(5, 5), this.getYWithOffset(0), this.getZWithOffset(5, 5), biomeDirtBlock, biomeDirtMeta, 2);
         	
         	// Leaves placed into world
         	for (int u=3; u<=7; u++) {for (int v=5; v<=6; v++) {for (int w=4; w<=6; w++) {world.setBlock(this.getXWithOffset(u, w), this.getYWithOffset(v), this.getZWithOffset(u, w), Blocks.leaves, 0, 2);}}}
@@ -6163,8 +6163,8 @@ public class PlainsStructures
             Block compostBin = ModObjects.chooseModComposterBlock();
             if (compostBin != null)
             {
-            	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 1, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
-            	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 11, structureBB); this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 1, 0, 1, structureBB);
+            	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 1, structureBB); this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 1, 0, 1, structureBB);
+            	this.placeBlockAtCurrentPosition(world, compostBin, 0, 1, 1, 11, structureBB); this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 1, 0, 11, structureBB);
             }
             
             
@@ -10367,7 +10367,7 @@ public class PlainsStructures
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, STRUCTURE_WIDTH-2, 1, STRUCTURE_DEPTH-2, structureBB);
-            	this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, STRUCTURE_WIDTH-2, 0, STRUCTURE_DEPTH-2, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, STRUCTURE_WIDTH-2, 0, STRUCTURE_DEPTH-2, structureBB);
             }
             
             

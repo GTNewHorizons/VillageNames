@@ -3506,7 +3506,7 @@ public class DesertStructures
             if (compostBin != null)
             {
             	this.placeBlockAtCurrentPosition(world, compostBin, 0, 5, 1, 2, structureBB);
-            	this.placeBlockAtCurrentPosition(world, Blocks.dirt, 0, 5, 0, 2, structureBB);
+            	this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, 5, 0, 2, structureBB);
             }
             
             

@@ -420,8 +420,10 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse1.class, "VNJuSmH1", new StructureCreationHandlers.JungleSmallHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse1.class, "VNJuMeH1", new StructureCreationHandlers.JungleMediumHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse2.class, "VNJuMeH2", new StructureCreationHandlers.JungleMediumHouse2_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleTamedFarm.class, "VNJuTaFa", new StructureCreationHandlers.JungleTamedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTemple.class, "VNJuTemp", new StructureCreationHandlers.JungleTemple_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleToolSmithy.class, "VNJuTlSm", new StructureCreationHandlers.JungleToolSmithy_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleWildFarm.class, "VNJuWiFa", new StructureCreationHandlers.JungleWildFarm_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

@@ -319,8 +319,10 @@ public class VillageWatcherAA
 	JUNGLE_MEDIUM_HOUSE_1 = "VNJuMeH1", // Jungle Medium House 1
 	JUNGLE_MEDIUM_HOUSE_2 = "VNJuMeH2", // Jungle Medium House 2
 	JUNGLE_SMALL_HOUSE_1 = "VNJuSmH1", // Jungle Small House 1
+	JUNGLE_TAMED_FARM = "VNJuTaFa", // Jungle Tamed Farm
 	JUNGLE_TEMPLE = "VNJuTemp", // Jungle Temple
 	JUNGLE_TOOL_SMITHY = "VNJuTlSm", // Jungle Tool Smithy
+	JUNGLE_WILD_FARM = "VNJuWiFa", // Jungle Wild Farm
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	
 		
@@ -558,8 +560,10 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_MEDIUM_HOUSE_1, TILE_VILLAGE_HOUSE);
 		builder.put(JUNGLE_MEDIUM_HOUSE_2, TILE_VILLAGE_HOUSE);
 		builder.put(JUNGLE_SMALL_HOUSE_1, TILE_VILLAGE_L_HOUSE);
+		builder.put(JUNGLE_TAMED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TEMPLE, TILE_VILLAGE_CHURCH);
 		builder.put(JUNGLE_TOOL_SMITHY, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_WILD_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		
 		// TODO - Swamp
 		
