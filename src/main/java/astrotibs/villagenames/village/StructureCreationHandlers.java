@@ -43,12 +43,15 @@ import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleBut
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleCartographerHouse1;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleFisherCottage;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleLibrary;
+import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleMasonHouse;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleMediumHouse1;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleMediumHouse2;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleSmallHouse1;
+import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleSteppedFarm;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleTamedFarm;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleTemple;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleToolSmithy;
+import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleWeaponSmithy;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleWildFarm;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAccessory1;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures.PlainsAnimalPen1;
@@ -4245,6 +4248,30 @@ public class StructureCreationHandlers
 	    }
 	}
 	
+	// Jungle Mason House
+	public static class JungleMasonHouse_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernJungleMasonHouse_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(JungleMasonHouse.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return JungleMasonHouse.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return JungleMasonHouse.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
 	// Jungle Medium House 1
 	public static class JungleMediumHouse1_Handler implements IVillageCreationHandler
 	{
@@ -4317,6 +4344,30 @@ public class StructureCreationHandlers
 	    }
 	}
 	
+	// Jungle Stepped Farm
+	public static class JungleSteppedFarm_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernJungleSteppedFarm_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(JungleSteppedFarm.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return JungleSteppedFarm.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return JungleSteppedFarm.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
 	// Jungle Tamed Farm
 	public static class JungleTamedFarm_Handler implements IVillageCreationHandler
 	{
@@ -4386,6 +4437,30 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return JungleToolSmithy.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Jungle Weapon Smithy
+	public static class JungleWeaponSmithy_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernJungleWeaponSmithy_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(JungleWeaponSmithy.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return JungleWeaponSmithy.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return JungleWeaponSmithy.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	

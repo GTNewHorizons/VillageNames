@@ -805,7 +805,11 @@ public class StructureVillageVN
         	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=1; break;} // Cut sandstone into mossy stone brick
         	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
         	if (block == Blocks.sandstone)                     {block=Blocks.mossy_cobblestone; meta=0; break;}
-        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.stone_slab && (meta==1||meta==9)) {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;} // Sandstone slab into mossy stone brick slab
+        	if (block == Blocks.stone_slab && (meta==5||meta==13)) // Stone brick slab into mossy stone brick slab
+        													   {Object[] modobject = ModObjects.chooseModMossyStoneBrickSlabBlockObject(meta==13);
+        														if (modobject!=null) {block=(Block)modobject[0]; meta=(Integer)modobject[1];}
+        														break;}
         	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
         	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
         	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}
@@ -918,6 +922,7 @@ public class StructureVillageVN
         	if (block == Blocks.stonebrick && meta==0)         {block=Blocks.sandstone; meta=2; break;} // Stone brick into cut sandstone
         	if (block == Blocks.cobblestone && meta==3)        {block=Blocks.sandstone; meta=1; break;} // Chiseled sandstone
         	if (block == Blocks.cobblestone)                   {block=Blocks.sandstone; meta=0; break;} // Regular sandstone
+        	if (block == Blocks.stone && meta == 0)            {block=Blocks.sandstone; meta=0; break;} // Regular stone into regular sandstone
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.sandstone; meta=0; break;} // Regular sandstone
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;} // Jungle planks
         	if (block == Blocks.fence)                         {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;} // Jungle fence
@@ -963,6 +968,7 @@ public class StructureVillageVN
         case MESA:
         	
         	if (block == Blocks.cobblestone)                   {block=Blocks.hardened_clay; meta=0; break;}
+        	if (block == Blocks.stone && meta==0)              {block=Blocks.hardened_clay; meta=0; break;} // Regular stone into terracotta
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.hardened_clay; meta=0; break;}
         	if (block == Blocks.stone_stairs)                  {block=Blocks.brick_stairs; break;}
         	if (block == Blocks.gravel)                        {block=Blocks.hardened_clay; meta=0; break;}
@@ -1052,7 +1058,12 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.strippedLog1EF)) {block=Block.getBlockFromName(ModObjects.strippedLog1EF); meta=4*meta + woodMeta%4; break;}
         	if (block == Blocks.sandstone && meta==2)          {block=Blocks.stonebrick; meta=0; break;} // Cut sandstone into stone brick
         	if (block == Blocks.sandstone && meta==1)          {block=Blocks.stonebrick; meta=3; break;} // Chiseled sandstone into chiseled stone
-        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block == Blocks.sandstone)                     {block=Blocks.cobblestone; meta=0; break;}        	
+        	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==1? 3: meta==9? 11 : meta; break;}
+        	if (block!=null && ModObjects.chooseModMossyStoneBrickSlabBlockObject(true)!=null && block == (Block)ModObjects.chooseModMossyStoneBrickSlabBlockObject(true)[0]) // Mossy stone brick slab into stone brick slab
+															   {block = Blocks.stone_slab;
+        														meta = meta==(Integer)ModObjects.chooseModMossyStoneBrickSlabBlockObject(true)[1]?13:5;
+																break;}
         	if (block == Blocks.double_stone_slab && meta==9)  {block=Blocks.planks; meta=woodMeta; break;} // Smooth sandstone into planks
         	if (block == Blocks.double_stone_slab)             {block=Blocks.double_stone_slab; meta=meta==1? 0 : meta; break;}
         	if (block == Blocks.sandstone_stairs)              {block=Blocks.stone_stairs; break;}

@@ -490,7 +490,7 @@ public class ModObjects {
 	public static final String mossyCobblestoneStairsUTD = DOM_UPTODATE + ":stairs_mossy_cobblestone";
 	public static final String mossyStoneBrickStairsEF = DOM_ETFUTURUM + ":mossy_stone_brick_stairs";
 	public static final String mossyStoneBrickStairsUTD = DOM_UPTODATE + ":stairs_mossy_stone_bricks";
-	public static final String mossyStoneSlabEF = DOM_ETFUTURUM + ":stone_slab";
+	public static final String mossyStoneSlabEF = DOM_ETFUTURUM + ":stone_slab"; // 2 and 10 are mossy stone brick
 	public static final String stoneSlab2EF = DOM_ETFUTURUM + ":stone_slab_2"; // 3 and 11 are polished diorite
 	public static final String mossyCobblestoneSlabUTD = DOM_UPTODATE + ":slab_mossy_cobblestone";
 	public static final String mossyStoneBrickSlabUTD = DOM_UPTODATE + ":slab_mossy_stone_bricks";
@@ -2775,7 +2775,7 @@ public class ModObjects {
 		}
 		return null;
 	}
-	public static Object[] chooseModMossyStoneBrickSlabBlock(boolean upper)
+	public static Object[] chooseModMossyStoneBrickSlabBlockObject(boolean upper)
 	{
 		String[] modprioritylist = GeneralConfig.modMossyStone;
 		
@@ -2785,7 +2785,7 @@ public class ModObjects {
 			
 			if (mod.toLowerCase().equals("etfuturum"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.stoneEF);
+				modblock = Block.getBlockFromName(ModObjects.mossyStoneSlabEF);
 				if (modblock != null) {return new Object[]{modblock, upper? 10:2};}
 			}
 			else if (mod.toLowerCase().equals("uptodate"))
