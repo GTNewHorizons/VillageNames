@@ -315,17 +315,23 @@ public class VillageWatcherAA
 	JUNGLE_BUTCHER_SHOP = "VNJuButS", // Jungle Butcher Shop
 	JUNGLE_CARTOGRAPHER_HOUSE_1 = "VNJuCaH1", // Jungle Cartographer House 1
 	JUNGLE_FISHER_COTTAGE = "VNJuFshC", // Jungle Fisher Cottage
+	JUNGLE_LARGE_HOUSE = "VNJuLaHo", // Jungle Large House
 	JUNGLE_LIBRARY = "VNJuLibr", // Jungle Library
 	JUNGLE_MASON_HOUSE = "VNJuMasH", // Jungle Mason House
 	JUNGLE_MEDIUM_HOUSE_1 = "VNJuMeH1", // Jungle Medium House 1
 	JUNGLE_MEDIUM_HOUSE_2 = "VNJuMeH2", // Jungle Medium House 2
+	JUNGLE_MEDIUM_HOUSE_3 = "VNJuMeH3", // Jungle Medium House 3
 	JUNGLE_SMALL_HOUSE_1 = "VNJuSmH1", // Jungle Small House 1
+	JUNGLE_SMALL_HOUSE_2 = "VNJuSmH2", // Jungle Small House 2
+	JUNGLE_SMALL_HOUSE_3 = "VNJuSmH3", // Jungle Small House 3
+	JUNGLE_SMALL_HOUSE_4 = "VNJuSmH4", // Jungle Small House 4
 	JUNGLE_STEPPED_FARM = "VNJuStFa", // Jungle Stepped Farm
 	JUNGLE_TAMED_FARM = "VNJuTaFa", // Jungle Tamed Farm
 	JUNGLE_TEMPLE = "VNJuTemp", // Jungle Temple
 	JUNGLE_TOOL_SMITHY = "VNJuTlSm", // Jungle Tool Smithy
 	JUNGLE_WEAPON_SMITHY = "VNJuWpSm", // Jungle Weapon Smithy
 	JUNGLE_WILD_FARM = "VNJuWiFa", // Jungle Wild Farm
+	JUNGLE_ROAD_DECOR = "VNSnJuDE", // Jungle Road Decor
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	
 		
@@ -560,16 +566,22 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_CARTOGRAPHER_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(JUNGLE_FISHER_COTTAGE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(JUNGLE_MASON_HOUSE, TILE_VILLAGE_SMITHY);
+		builder.put(JUNGLE_LARGE_HOUSE, TILE_VILLAGE_HOUSE);
 		builder.put(JUNGLE_LIBRARY, TILE_VILLAGE_LIBRARY);
 		builder.put(JUNGLE_MEDIUM_HOUSE_1, TILE_VILLAGE_HOUSE);
 		builder.put(JUNGLE_MEDIUM_HOUSE_2, TILE_VILLAGE_HOUSE);
+		builder.put(JUNGLE_MEDIUM_HOUSE_3, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_SMALL_HOUSE_1, TILE_VILLAGE_L_HOUSE);
+		builder.put(JUNGLE_SMALL_HOUSE_2, TILE_VILLAGE_L_HOUSE);
+		builder.put(JUNGLE_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_SMALL_HOUSE_4, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_STEPPED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TAMED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TEMPLE, TILE_VILLAGE_CHURCH);
 		builder.put(JUNGLE_TOOL_SMITHY, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_WEAPON_SMITHY, TILE_VILLAGE_SMITHY);
 		builder.put(JUNGLE_WILD_FARM, TILE_VILLAGE_FARMLAND_LARGE);
+		builder.put(JUNGLE_ROAD_DECOR, TILE_VILLAGE_TORCH);
 		
 		// TODO - Swamp
 		
