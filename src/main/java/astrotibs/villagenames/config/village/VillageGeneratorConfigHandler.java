@@ -232,6 +232,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleSmallHouse2_string; public static ArrayList<Double> componentModernJungleSmallHouse2_vals;
 	public static String componentModernJungleSmallHouse3_string; public static ArrayList<Double> componentModernJungleSmallHouse3_vals;
 	public static String componentModernJungleSmallHouse4_string; public static ArrayList<Double> componentModernJungleSmallHouse4_vals;
+	public static String componentModernJungleSmallHouse5_string; public static ArrayList<Double> componentModernJungleSmallHouse5_vals;
 	public static String componentModernJungleSteppedFarm_string; public static ArrayList<Double> componentModernJungleSteppedFarm_vals;
 	public static String componentModernJungleTamedFarm_string; public static ArrayList<Double> componentModernJungleTamedFarm_vals;
 	public static String componentModernJungleTemple_string; public static ArrayList<Double> componentModernJungleTemple_vals;
@@ -239,7 +240,9 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleWeaponSmithy_string; public static ArrayList<Double> componentModernJungleWeaponSmithy_vals;
 	public static String componentModernJungleWildFarm_string; public static ArrayList<Double> componentModernJungleWildFarm_vals;
 	public static String componentModernJungleStreetDecor_string; public static ArrayList<Double> componentModernJungleStreetDecor_vals;
-
+	public static String componentModernJungleRoadAccent1_string; public static ArrayList<Double> componentModernJungleRoadAccent1_vals;
+	public static String componentModernJungleRoadAccent2_string; public static ArrayList<Double> componentModernJungleRoadAccent2_vals;
+	
 	// Decor
 	public static boolean allowTaigaTroughs;
 	public static boolean restrictTaigaTroughs;
@@ -468,6 +471,8 @@ public class VillageGeneratorConfigHandler
 		
 		int desertStreetsAndEndcaps = 11+2;
 		int savannaStreetsAndEndcaps = 19+1;
+		int jungleStreetsAndEndcaps = 16;
+		int swampStreetsAndEndcaps = 17;
 		
 		double plainsDecorToHouseRatio = 19D/13D;
 		
@@ -482,7 +487,10 @@ public class VillageGeneratorConfigHandler
 		double snowyDecorToHouseRatio = 28D/24D; 
 		
 		double jungleDecorToHouseRatio = 2D; 
-		
+		double jungleStreetToHouseRatio = 20D/17D;
+
+		double swampDecorToHouseRatio = 2D; 
+		double swampStreetToHouseRatio = 26D/17D;
 		
 		// Plains components
 		
@@ -1047,6 +1055,9 @@ public class VillageGeneratorConfigHandler
 		componentModernJungleSmallHouse4_string = config.getString(componentModern+"Jungle Small House 4", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSmallHouse4_vals = parseDoubleArray(componentModernJungleSmallHouse4_string, modernDefaults);
 		
+		componentModernJungleSmallHouse5_string = config.getString(componentModern+"Jungle Small House 5", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleSmallHouse5_vals = parseDoubleArray(componentModernJungleSmallHouse5_string, modernDefaults);
+		
 		componentModernJungleSteppedFarm_string = config.getString(componentModern+"Jungle Stepped Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSteppedFarm_vals = parseDoubleArray(componentModernJungleSteppedFarm_string, modernDefaults);
 		
@@ -1070,6 +1081,15 @@ public class VillageGeneratorConfigHandler
 		componentModernJungleStreetDecor_string = config.getString(componentModern+"Jungle Road Decor", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleStreetDecor_vals = parseDoubleArray(componentModernJungleStreetDecor_string, modifiedDefaults);
 		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);}
+		componentModernJungleRoadAccent1_string = config.getString(componentModern+"Jungle Road Accent 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
+		componentModernJungleRoadAccent1_vals = parseDoubleArray(componentModernJungleRoadAccent1_string, modifiedDefaults);
+		
+		modifiedDefaults.set(0, modernDefaults.get(0)*9D * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);
+		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);}
+		componentModernJungleRoadAccent2_string = config.getString(componentModern+"Jungle Road Accent 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
+		componentModernJungleRoadAccent2_vals = parseDoubleArray(componentModernJungleRoadAccent2_string, modifiedDefaults);
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
@@ -1284,6 +1304,7 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WeaponSmithy|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WildFarm|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StreetDecor|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
 						
 						// Mod buildings
 						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna",

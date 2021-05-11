@@ -426,6 +426,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse2.class, "VNJuSmH2", new StructureCreationHandlers.JungleSmallHouse2_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse3.class, "VNJuSmH3", new StructureCreationHandlers.JungleSmallHouse3_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse4.class, "VNJuSmH4", new StructureCreationHandlers.JungleSmallHouse4_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse5.class, "VNJuSmH5", new StructureCreationHandlers.JungleSmallHouse5_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSteppedFarm.class, "VNJuStFa", new StructureCreationHandlers.JungleSteppedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTamedFarm.class, "VNJuTaFa", new StructureCreationHandlers.JungleTamedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTemple.class, "VNJuTemp", new StructureCreationHandlers.JungleTemple_Handler());
@@ -433,6 +434,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleWeaponSmithy.class, "VNJuWpSm", new StructureCreationHandlers.JungleWeaponSmithy_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleWildFarm.class, "VNJuWiFa", new StructureCreationHandlers.JungleWildFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleStreetDecor.class, "VNJuStDe", new StructureCreationHandlers.JungleStreetDecor_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent1.class, "VNJuRdA1", new StructureCreationHandlers.JungleRoadAccent1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent2.class, "VNJuRdA2", new StructureCreationHandlers.JungleRoadAccent2_Handler());
 	        
 	        
 	        // Listener that interrupts old village generation with the new one

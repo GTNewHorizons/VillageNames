@@ -325,6 +325,7 @@ public class VillageWatcherAA
 	JUNGLE_SMALL_HOUSE_2 = "VNJuSmH2", // Jungle Small House 2
 	JUNGLE_SMALL_HOUSE_3 = "VNJuSmH3", // Jungle Small House 3
 	JUNGLE_SMALL_HOUSE_4 = "VNJuSmH4", // Jungle Small House 4
+	JUNGLE_SMALL_HOUSE_5 = "VNJuSmH5", // Jungle Small House 5
 	JUNGLE_STEPPED_FARM = "VNJuStFa", // Jungle Stepped Farm
 	JUNGLE_TAMED_FARM = "VNJuTaFa", // Jungle Tamed Farm
 	JUNGLE_TEMPLE = "VNJuTemp", // Jungle Temple
@@ -332,6 +333,8 @@ public class VillageWatcherAA
 	JUNGLE_WEAPON_SMITHY = "VNJuWpSm", // Jungle Weapon Smithy
 	JUNGLE_WILD_FARM = "VNJuWiFa", // Jungle Wild Farm
 	JUNGLE_ROAD_DECOR = "VNSnJuDE", // Jungle Road Decor
+	JUNGLE_ROAD_ACCENT_1 = "VNJuRdA1", // Jungle Well
+	JUNGLE_ROAD_ACCENT_2 = "VNJuRdA2", // Jungle Treehouse
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	
 		
@@ -575,6 +578,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_SMALL_HOUSE_2, TILE_VILLAGE_L_HOUSE);
 		builder.put(JUNGLE_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_SMALL_HOUSE_4, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_SMALL_HOUSE_5, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_STEPPED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TAMED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TEMPLE, TILE_VILLAGE_CHURCH);
@@ -582,6 +586,8 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_WEAPON_SMITHY, TILE_VILLAGE_SMITHY);
 		builder.put(JUNGLE_WILD_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_ROAD_DECOR, TILE_VILLAGE_TORCH);
+		builder.put(JUNGLE_ROAD_ACCENT_1, TILE_VILLAGE_WELL);
+		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
 		// TODO - Swamp
 		
