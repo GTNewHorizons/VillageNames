@@ -602,6 +602,8 @@ public class ChestLootHandler {
 		case TAIGA:   return "vn_taiga_house";
 		case SAVANNA: return "vn_savanna_house";
 		case SNOWY:   return "vn_snowy_house";
+		case JUNGLE:  return "vn_jungle_house";
+		case SWAMP:   return "vn_swamp_house";
 		}
 	}
 }

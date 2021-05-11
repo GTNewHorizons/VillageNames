@@ -422,11 +422,14 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse1.class, "VNJuMeH1", new StructureCreationHandlers.JungleMediumHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse2.class, "VNJuMeH2", new StructureCreationHandlers.JungleMediumHouse2_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleMediumHouse3.class, "VNJuMeH3", new StructureCreationHandlers.JungleMediumHouse3_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleShepherdHouse.class, "VNJuShpH", new StructureCreationHandlers.JungleShepherdHouse_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse1.class, "VNJuSmH1", new StructureCreationHandlers.JungleSmallHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse2.class, "VNJuSmH2", new StructureCreationHandlers.JungleSmallHouse2_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse3.class, "VNJuSmH3", new StructureCreationHandlers.JungleSmallHouse3_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse4.class, "VNJuSmH4", new StructureCreationHandlers.JungleSmallHouse4_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse5.class, "VNJuSmH5", new StructureCreationHandlers.JungleSmallHouse5_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse6.class, "VNJuSmH6", new StructureCreationHandlers.JungleSmallHouse6_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse7.class, "VNJuSmH7", new StructureCreationHandlers.JungleSmallHouse7_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSteppedFarm.class, "VNJuStFa", new StructureCreationHandlers.JungleSteppedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTamedFarm.class, "VNJuTaFa", new StructureCreationHandlers.JungleTamedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTemple.class, "VNJuTemp", new StructureCreationHandlers.JungleTemple_Handler());

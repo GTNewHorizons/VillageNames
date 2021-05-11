@@ -1341,7 +1341,36 @@ public class ModObjects {
 		
     	return new Object[]{modblock, 0};
     }
-	
+    
+    
+    // Boat
+	public static ItemStack chooseModBoatItemStack(int woodMeta)
+	{
+		Item modobject=null;
+		
+		switch (woodMeta)
+		{
+		case 1: // Spruce
+			modobject = FunctionsVN.getItemFromName(ModObjects.boatSpruceUTD);
+			break;
+		case 2: // Birch
+			modobject = FunctionsVN.getItemFromName(ModObjects.boatBirchUTD);
+			break;
+		case 3: // Jungle
+			modobject = FunctionsVN.getItemFromName(ModObjects.boatJungleUTD);
+			break;
+		case 4: // Acacia
+			modobject = FunctionsVN.getItemFromName(ModObjects.boatAcaciaUTD);
+			break;
+		case 5: // Dark Oak
+			modobject = FunctionsVN.getItemFromName(ModObjects.boatDarkOakUTD);
+			break;
+		default:
+		}
+		if (modobject==null) {modobject=Items.boat;}
+		
+		return new ItemStack(modobject);
+	}
 	
 	// Bookshelves
 	public static Object[] chooseModBookshelf(int materialMeta)

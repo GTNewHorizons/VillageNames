@@ -326,6 +326,7 @@ public class VillageWatcherAA
 	JUNGLE_SMALL_HOUSE_3 = "VNJuSmH3", // Jungle Small House 3
 	JUNGLE_SMALL_HOUSE_4 = "VNJuSmH4", // Jungle Small House 4
 	JUNGLE_SMALL_HOUSE_5 = "VNJuSmH5", // Jungle Small House 5
+	JUNGLE_SMALL_HOUSE_6 = "VNJuSmH6", // Jungle Small House 6
 	JUNGLE_STEPPED_FARM = "VNJuStFa", // Jungle Stepped Farm
 	JUNGLE_TAMED_FARM = "VNJuTaFa", // Jungle Tamed Farm
 	JUNGLE_TEMPLE = "VNJuTemp", // Jungle Temple
@@ -579,6 +580,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_SMALL_HOUSE_4, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_SMALL_HOUSE_5, TILE_VILLAGE_HUT);
+		builder.put(JUNGLE_SMALL_HOUSE_6, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_STEPPED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TAMED_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		builder.put(JUNGLE_TEMPLE, TILE_VILLAGE_CHURCH);

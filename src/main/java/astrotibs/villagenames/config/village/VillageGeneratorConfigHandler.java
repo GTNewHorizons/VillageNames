@@ -233,6 +233,9 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleSmallHouse3_string; public static ArrayList<Double> componentModernJungleSmallHouse3_vals;
 	public static String componentModernJungleSmallHouse4_string; public static ArrayList<Double> componentModernJungleSmallHouse4_vals;
 	public static String componentModernJungleSmallHouse5_string; public static ArrayList<Double> componentModernJungleSmallHouse5_vals;
+	public static String componentModernJungleSmallHouse6_string; public static ArrayList<Double> componentModernJungleSmallHouse6_vals;
+	public static String componentModernJungleSmallHouse7_string; public static ArrayList<Double> componentModernJungleSmallHouse7_vals;
+	public static String componentModernJungleShepherdHouse_string; public static ArrayList<Double> componentModernJungleShepherdHouse_vals;
 	public static String componentModernJungleSteppedFarm_string; public static ArrayList<Double> componentModernJungleSteppedFarm_vals;
 	public static String componentModernJungleTamedFarm_string; public static ArrayList<Double> componentModernJungleTamedFarm_vals;
 	public static String componentModernJungleTemple_string; public static ArrayList<Double> componentModernJungleTemple_vals;
@@ -1042,6 +1045,9 @@ public class VillageGeneratorConfigHandler
 
 		componentModernJungleMediumHouse3_string = config.getString(componentModern+"Jungle Medium House 3", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleMediumHouse3_vals = parseDoubleArray(componentModernJungleMediumHouse3_string, modernDefaults);
+
+		componentModernJungleShepherdHouse_string = config.getString(componentModern+"Jungle Shepherd House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleShepherdHouse_vals = parseDoubleArray(componentModernJungleShepherdHouse_string, modernDefaults);
 		
 		componentModernJungleSmallHouse1_string = config.getString(componentModern+"Jungle Small House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSmallHouse1_vals = parseDoubleArray(componentModernJungleSmallHouse1_string, modernDefaults);
@@ -1057,6 +1063,12 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernJungleSmallHouse5_string = config.getString(componentModern+"Jungle Small House 5", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSmallHouse5_vals = parseDoubleArray(componentModernJungleSmallHouse5_string, modernDefaults);
+		
+		componentModernJungleSmallHouse6_string = config.getString(componentModern+"Jungle Small House 6", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleSmallHouse6_vals = parseDoubleArray(componentModernJungleSmallHouse6_string, modernDefaults);
+		
+		componentModernJungleSmallHouse7_string = config.getString(componentModern+"Jungle Small House 7", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleSmallHouse7_vals = parseDoubleArray(componentModernJungleSmallHouse7_string, modernDefaults);
 		
 		componentModernJungleSteppedFarm_string = config.getString(componentModern+"Jungle Stepped Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSteppedFarm_vals = parseDoubleArray(componentModernJungleSteppedFarm_string, modernDefaults);
@@ -1293,10 +1305,14 @@ public class VillageGeneratorConfigHandler
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse1|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse2|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse3|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ShepherdHouse|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse1|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse2|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse3|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse4|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse5|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse6|jungle",
+						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse7|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SteppedFarm|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "TamedFarm|jungle",
 						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Temple|jungle",
