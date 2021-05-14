@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import net.minecraftforge.common.config.Configuration;
@@ -222,12 +223,15 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleButcherShop_string; public static ArrayList<Double> componentModernJungleButcherShop_vals;
 	public static String componentModernJungleCartographerHouse1_string; public static ArrayList<Double> componentModernJungleCartographerHouse1_vals;
 	public static String componentModernJungleFisherCottage_string; public static ArrayList<Double> componentModernJungleFisherCottage_vals;
+	public static String componentModernJungleFletcherHouse1_string; public static ArrayList<Double> componentModernJungleFletcherHouse1_vals;
+	public static String componentModernJungleFletcherHouse2_string; public static ArrayList<Double> componentModernJungleFletcherHouse2_vals;
 	public static String componentModernJungleLargeHouse_string; public static ArrayList<Double> componentModernJungleLargeHouse_vals;
 	public static String componentModernJungleLibrary_string; public static ArrayList<Double> componentModernJungleLibrary_vals;
 	public static String componentModernJungleMasonHouse_string; public static ArrayList<Double> componentModernJungleMasonHouse_vals;
 	public static String componentModernJungleMediumHouse1_string; public static ArrayList<Double> componentModernJungleMediumHouse1_vals;
 	public static String componentModernJungleMediumHouse2_string; public static ArrayList<Double> componentModernJungleMediumHouse2_vals;
 	public static String componentModernJungleMediumHouse3_string; public static ArrayList<Double> componentModernJungleMediumHouse3_vals;
+	public static String componentModernJungleMediumHouse4_string; public static ArrayList<Double> componentModernJungleMediumHouse4_vals;
 	public static String componentModernJungleSmallHouse1_string; public static ArrayList<Double> componentModernJungleSmallHouse1_vals;
 	public static String componentModernJungleSmallHouse2_string; public static ArrayList<Double> componentModernJungleSmallHouse2_vals;
 	public static String componentModernJungleSmallHouse3_string; public static ArrayList<Double> componentModernJungleSmallHouse3_vals;
@@ -237,14 +241,222 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleSmallHouse7_string; public static ArrayList<Double> componentModernJungleSmallHouse7_vals;
 	public static String componentModernJungleShepherdHouse_string; public static ArrayList<Double> componentModernJungleShepherdHouse_vals;
 	public static String componentModernJungleSteppedFarm_string; public static ArrayList<Double> componentModernJungleSteppedFarm_vals;
+	public static String componentModernJungleStoneAnimalPen_string; public static ArrayList<Double> componentModernJungleStoneAnimalPen_vals;
 	public static String componentModernJungleTamedFarm_string; public static ArrayList<Double> componentModernJungleTamedFarm_vals;
+	public static String componentModernJungleTannery1_string; public static ArrayList<Double> componentModernJungleTannery1_vals;
 	public static String componentModernJungleTemple_string; public static ArrayList<Double> componentModernJungleTemple_vals;
-	public static String componentModernJungleToolSmithy_string; public static ArrayList<Double> componentModernJungleToolSmithy_vals;
+	public static String componentModernJungleToolSmithy1_string; public static ArrayList<Double> componentModernJungleToolSmithy1_vals;
+	public static String componentModernJungleToolSmithy2_string; public static ArrayList<Double> componentModernJungleToolSmithy2_vals;
 	public static String componentModernJungleWeaponSmithy_string; public static ArrayList<Double> componentModernJungleWeaponSmithy_vals;
 	public static String componentModernJungleWildFarm_string; public static ArrayList<Double> componentModernJungleWildFarm_vals;
+	public static String componentModernJungleWoodAnimalPen_string; public static ArrayList<Double> componentModernJungleWoodAnimalPen_vals;
 	public static String componentModernJungleStreetDecor_string; public static ArrayList<Double> componentModernJungleStreetDecor_vals;
 	public static String componentModernJungleRoadAccent1_string; public static ArrayList<Double> componentModernJungleRoadAccent1_vals;
 	public static String componentModernJungleRoadAccent2_string; public static ArrayList<Double> componentModernJungleRoadAccent2_vals;
+	
+	// Default values used to restrict modern vanilla components to specific village biome types
+	public static final String[] MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS = new String[] {
+			// Village Names 1.14 buildings
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Accessory1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen3|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ArmorerHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "BigHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Cartographer1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FisherCottage1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FletcherHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "LargeFarm1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MasonsHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint4|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint5|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ShepherdsHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallFarm1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse3|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse4|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse5|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse6|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse7|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse8|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable2|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Tannery1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple3|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple4|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ToolSmith1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Weaponsmith1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "StreetDecor1|plains",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Armorer1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ButcherShop1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "CartographerHouse1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Fisher1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "FletcherHouse1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "LargeFarm1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Library1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Mason1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ShepherdHouse1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse3|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse4|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse5|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse6|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse7|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse8|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Tannery1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ToolSmith1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Weaponsmith1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetDecor1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute1|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute2|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute3|desert",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "AnimalPen1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Armorer2|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ArmorerHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ButcherShop1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "CartographerHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FisherCottage1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FletcherHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm2|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Library1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MasonsHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse2|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse3|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse4|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ShepherdsHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallFarm1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse2|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse3|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse4|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse5|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Tannery1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Temple1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ToolSmith1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith2|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "StreetDecor1|taiga",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen3|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Armorer1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Cartographer1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FisherCottage1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FletcherHouse1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Library1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Mason1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Shepherd1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallFarm|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse3|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse4|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse5|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse6|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse7|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse8|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Tannery1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ToolSmith1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetDecor1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute1|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute2|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute3|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute4|savanna",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "CartographerHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FisherCottage|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FletcherHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Library1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse3|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ShepherdsHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse2|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse3|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse4|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse5|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse6|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse7|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse8|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Tannery1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Temple1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ToolSmith1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "WeaponSmith1|snowy",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
+			// Custom buildings
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ArmorerHouse|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ButcherShop|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "CartographerHouse1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FisherCottage|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FletcherHouse1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FletcherHouse2|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "LargeHouse|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Library|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MasonHouse|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse2|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse3|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse4|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ShepherdHouse|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse2|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse3|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse4|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse5|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse6|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse7|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SteppedFarm|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StoneAnimalPen|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "TamedFarm|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Tannery1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Temple|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ToolSmithy1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ToolSmithy2|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WeaponSmithy|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WildFarm|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WoodAnimalPen|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StreetDecor|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent2|jungle",
+			};
 	
 	// Decor
 	public static boolean allowTaigaTroughs;
@@ -1027,6 +1239,12 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernJungleFisherCottage_string = config.getString(componentModern+"Jungle Fisher Cottage", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleFisherCottage_vals = parseDoubleArray(componentModernJungleFisherCottage_string, modernDefaults);
+
+		componentModernJungleFletcherHouse1_string = config.getString(componentModern+"Jungle Fletcher House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleFletcherHouse1_vals = parseDoubleArray(componentModernJungleFletcherHouse1_string, modernDefaults);
+
+		componentModernJungleFletcherHouse2_string = config.getString(componentModern+"Jungle Fletcher House 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleFletcherHouse2_vals = parseDoubleArray(componentModernJungleFletcherHouse2_string, modernDefaults);
 		
 		componentModernJungleLargeHouse_string = config.getString(componentModern+"Jungle Large House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleLargeHouse_vals = parseDoubleArray(componentModernJungleLargeHouse_string, modernDefaults);
@@ -1045,6 +1263,9 @@ public class VillageGeneratorConfigHandler
 
 		componentModernJungleMediumHouse3_string = config.getString(componentModern+"Jungle Medium House 3", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleMediumHouse3_vals = parseDoubleArray(componentModernJungleMediumHouse3_string, modernDefaults);
+
+		componentModernJungleMediumHouse4_string = config.getString(componentModern+"Jungle Medium House 4", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleMediumHouse4_vals = parseDoubleArray(componentModernJungleMediumHouse4_string, modernDefaults);
 
 		componentModernJungleShepherdHouse_string = config.getString(componentModern+"Jungle Shepherd House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleShepherdHouse_vals = parseDoubleArray(componentModernJungleShepherdHouse_string, modernDefaults);
@@ -1072,21 +1293,33 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernJungleSteppedFarm_string = config.getString(componentModern+"Jungle Stepped Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleSteppedFarm_vals = parseDoubleArray(componentModernJungleSteppedFarm_string, modernDefaults);
+
+		componentModernJungleStoneAnimalPen_string = config.getString(componentModern+"Jungle Stone Animal Pen", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleStoneAnimalPen_vals = parseDoubleArray(componentModernJungleStoneAnimalPen_string, modernDefaults);
 		
 		componentModernJungleTamedFarm_string = config.getString(componentModern+"Jungle Tamed Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleTamedFarm_vals = parseDoubleArray(componentModernJungleTamedFarm_string, modernDefaults);
+
+		componentModernJungleTannery1_string = config.getString(componentModern+"Jungle Tannery 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleTannery1_vals = parseDoubleArray(componentModernJungleTannery1_string, modernDefaults);
 		
 		componentModernJungleTemple_string = config.getString(componentModern+"Jungle Temple", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleTemple_vals = parseDoubleArray(componentModernJungleTemple_string, modernDefaults);
 		
-		componentModernJungleToolSmithy_string = config.getString(componentModern+"Jungle Tool Smithy", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
-		componentModernJungleToolSmithy_vals = parseDoubleArray(componentModernJungleToolSmithy_string, modernDefaults);
+		componentModernJungleToolSmithy1_string = config.getString(componentModern+"Jungle Tool Smithy 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleToolSmithy1_vals = parseDoubleArray(componentModernJungleToolSmithy1_string, modernDefaults);
+		
+		componentModernJungleToolSmithy2_string = config.getString(componentModern+"Jungle Tool Smithy 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleToolSmithy2_vals = parseDoubleArray(componentModernJungleToolSmithy2_string, modernDefaults);
 
 		componentModernJungleWeaponSmithy_string = config.getString(componentModern+"Jungle Weapon Smithy", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleWeaponSmithy_vals = parseDoubleArray(componentModernJungleWeaponSmithy_string, modernDefaults);
 		
 		componentModernJungleWildFarm_string = config.getString(componentModern+"Jungle Wild Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleWildFarm_vals = parseDoubleArray(componentModernJungleWildFarm_string, modernDefaults);
+
+		componentModernJungleWoodAnimalPen_string = config.getString(componentModern+"Jungle Wood Animal Pen", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+jungleVillages);
+		componentModernJungleWoodAnimalPen_vals = parseDoubleArray(componentModernJungleWoodAnimalPen_string, modernDefaults);
 		
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * jungleDecorToHouseRatio); 
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleDecorToHouseRatio);}
@@ -1125,203 +1358,10 @@ public class VillageGeneratorConfigHandler
 		decorSnowyLampPost1 = config.getBoolean(decor+"Snowy Lamp (Two Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
 		decorSnowyLampPost02 = config.getBoolean(decor+"Snowy Lamp (One Lantern)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
 		decorSnowyLampPost03 = config.getBoolean(decor+"Snowy Lamp (Four Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);*/
-		
+				
 		
 		componentVillageTypes = config.getStringList("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,
-				new String[] {
-						// Village Names 1.14 buildings
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Accessory1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "AnimalPen3|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ArmorerHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "BigHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ButcherShop2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Cartographer1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FisherCottage1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "FletcherHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "LargeFarm1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Library2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MasonsHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MediumHouse2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint4|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "MeetingPoint5|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ShepherdsHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallFarm1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse3|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse4|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse5|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse6|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse7|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "SmallHouse8|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Stable2|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Tannery1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple3|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Temple4|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "ToolSmith1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "Weaponsmith1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.PLAINS_BUILDING_STUB + "StreetDecor1|plains",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "AnimalPen2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Armorer1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ButcherShop1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "CartographerHouse1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Farm2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Fisher1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "FletcherHouse1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "LargeFarm1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Library1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Mason1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "MediumHouse2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ShepherdHouse1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse3|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse4|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse5|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse6|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse7|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "SmallHouse8|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Tannery1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Temple2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "ToolSmith1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "Weaponsmith1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetDecor1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute1|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute2|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.DESERT_BUILDING_STUB + "StreetSubstitute3|desert",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "AnimalPen1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Armorer2|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ArmorerHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ButcherShop1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "CartographerHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FisherCottage1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "FletcherHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "LargeFarm2|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Library1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MasonsHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse2|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse3|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "MediumHouse4|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ShepherdsHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallFarm1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse2|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse3|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse4|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "SmallHouse5|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Tannery1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Temple1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "ToolSmith1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "Weaponsmith2|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.TAIGA_BUILDING_STUB + "StreetDecor1|taiga",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "AnimalPen3|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Armorer1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ButchersShop2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Cartographer1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FisherCottage1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "FletcherHouse1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "LargeFarm2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Library1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Mason1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "MediumHouse2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Shepherd1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallFarm|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse3|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse4|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse5|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse6|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse7|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "SmallHouse8|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Tannery1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Temple2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "ToolSmith1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "Weaponsmith2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetDecor1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute1|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute2|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute3|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SAVANNA_BUILDING_STUB + "StreetSubstitute4|savanna",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "AnimalPen2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ArmorerHouse2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ButchersShop2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "CartographerHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Farm2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FisherCottage|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "FletcherHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Library1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MasonsHouse2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "MediumHouse3|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ShepherdsHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse2|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse3|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse4|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse5|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse6|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse7|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "SmallHouse8|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Tannery1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "Temple1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "ToolSmith1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "WeaponSmith1|snowy",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SNOWY_BUILDING_STUB + "StreetDecor1|snowy",
-						// Custom buildings
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ArmorerHouse|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ButcherShop|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "CartographerHouse1|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "FisherCottage|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "LargeHouse|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Library|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MasonHouse|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse1|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse2|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "MediumHouse3|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ShepherdHouse|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse1|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse2|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse3|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse4|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse5|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse6|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SmallHouse7|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "SteppedFarm|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "TamedFarm|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "Temple|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "ToolSmithy|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WeaponSmithy|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "WildFarm|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StreetDecor|jungle",
-						Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
-						
+				FunctionsVN.joinTwoStringArrays(MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS, new String[] {
 						// Mod buildings
 						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna",
 						
@@ -1331,7 +1371,7 @@ public class VillageGeneratorConfigHandler
 						"growthcraft.grapes.common.village.ComponentVillageGrapeVineyard|plains taiga snowy",
 						"growthcraft.hops.common.village.ComponentVillageHopVineyard|plains taiga snowy",
 						"growthcraft.rice.common.village.ComponentVillageRiceField|plains taiga savanna snowy",
-						},
+						}),
 				"List of village components that only appear in certain village types. Format is: classPaths|villageTypes\n"
 				+ "classPaths: The class address to the specific structure component. If debugMessages is true, every time a village generates, a list of village components not yet specified on this list will be printed to the console.\n"
    				+ "villageTypes: list of the types this component can appear in. Multiple types can be separator with a delimiter of your choice, aside from | (pipe). Leave this blank, or enter something that doesn't include a village type, to prevent the component from spawning."

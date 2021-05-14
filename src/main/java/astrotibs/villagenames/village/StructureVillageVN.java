@@ -83,6 +83,16 @@ public class StructureVillageVN
 	public static final int VILLAGE_RADIUS_BUFFER = 112;
 	
 	// Indexed by [orientation][horizIndex]
+	// 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	public static final int[][] HANGING_META_ARRAY = new int[][]{
+		{0,1,2,3}, // Fore-facing (away from you)
+		{3,0,3,0}, // Right-facing
+		{2,3,0,1}, // Back-facing (toward you)
+		{1,2,1,2}, // Left-facing
+	//   N E S W
+	};
+	
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] FURNACE_META_ARRAY = new int[][]{
 		{3,4,2,5},
 		{5,3,5,3},
@@ -275,18 +285,14 @@ public class StructureVillageVN
         
         VillagerRegistry.addExtraVillageComponents(arraylist, random, Math.floor(villageSize)+villageSize%1<random.nextFloat()?1:0); // Round to integer stochastically
         
-
-		ArrayList<String> classPaths = new ArrayList();
-		ArrayList<String> villageTypes = new ArrayList();
         
         // keys: "ClassPaths", "VillageTypes"
 		Map<String, ArrayList> mappedComponentVillageTypes = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
-		
-		classPaths.addAll( mappedComponentVillageTypes.get("ClassPaths") );
-		villageTypes.addAll( mappedComponentVillageTypes.get("VillageTypes") );
-		
+		Map<String, ArrayList> mappedComponentVillageTypesNonModDefaults = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS);
         
         Iterator iterator = arraylist.iterator();
+        
+        String villageTypeToCompare = villageType.toString().toLowerCase();
         
         while (iterator.hasNext())
         {
@@ -307,31 +313,30 @@ public class StructureVillageVN
             if (VillageGeneratorConfigHandler.componentLegacyHouse3_vals.get(0)<=0 && pw.villagePieceClass.toString().substring(6).equals(Reference.House3_CLASS)) {iterator.remove(); continue;}
             
             // Remove buildings that aren't appropriate for the current biome
-            
-			String villageTypeToCompare = "";
-			
-			switch (villageType)
-			{
-				default:
-				case PLAINS: villageTypeToCompare = "plains"; break;
-				case DESERT: villageTypeToCompare = "desert"; break;
-				case TAIGA: villageTypeToCompare = "taiga"; break;
-				case SAVANNA: villageTypeToCompare = "savanna"; break;
-				case SNOWY: villageTypeToCompare = "snowy"; break;
-				case JUNGLE: villageTypeToCompare = "jungle"; break;
-				case SWAMP: villageTypeToCompare = "swamp"; break;
-			}
-			
 			int classPathListIndex = mappedComponentVillageTypes.get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
 			
-			if (
-					classPathListIndex!=-1 &&
+			if (classPathListIndex==-1) // It's not in the "Component Village Types" config entries
+			{
+				int classPathListIndexNonModDefaults = mappedComponentVillageTypesNonModDefaults.get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
+				
+				if (classPathListIndexNonModDefaults!=-1) // It is in the "Component Village Types" default values
+				{
+					if (
+							!((String) ((mappedComponentVillageTypesNonModDefaults.get("VillageTypes")).get(classPathListIndexNonModDefaults))).trim().toLowerCase().contains(villageTypeToCompare)
+							|| ((String) ((mappedComponentVillageTypesNonModDefaults.get("VillageTypes")).get(classPathListIndexNonModDefaults))).trim().toLowerCase().equals("")
+							)
+					{
+						iterator.remove(); continue;
+					}
+				}
+			}
+			else if (
 					!((String) ((mappedComponentVillageTypes.get("VillageTypes")).get(classPathListIndex))).trim().toLowerCase().contains(villageTypeToCompare)
-            		)
+					|| ((String) ((mappedComponentVillageTypes.get("VillageTypes")).get(classPathListIndex))).trim().toLowerCase().equals("")
+					)
             {
             	iterator.remove(); continue;
             }
-            
         }
         
         return arraylist;
@@ -862,7 +867,7 @@ public class StructureVillageVN
         	if (block != null && block == Block.getBlockFromName(ModObjects.smoothSandstoneUTD)) {block=Blocks.planks; meta=woodMeta; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.sandstoneWallUTD)) {Object[] modobject = ModObjects.chooseModFence(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block != null && block == Block.getBlockFromName(ModObjects.wallRC) && meta==11) {block=Blocks.cobblestone_wall; meta=0; break;}
-        	if (block == Blocks.sapling)                       {LogHelper.info("Acacia sapling!");block=Blocks.sapling; meta=woodMeta; break;}
+        	if (block == Blocks.sapling)                       {block=Blocks.sapling; meta=woodMeta; break;}
         	if (block == Blocks.snow)                          {block=Blocks.dirt; meta=0; break;}
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
@@ -2587,6 +2592,16 @@ public class StructureVillageVN
         return metaIn;
     }
     
+    /**
+	 * hangingOrientation:
+	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+	 * -X: returns the value X - used for things like upright barrels
+	 */
+	public static int chooseHangingMeta(int orientation, int horizIndex)
+	{
+		if (orientation<0) {return -orientation;}
+		return HANGING_META_ARRAY[orientation][horizIndex];
+	}
     /**
 	 * vineOrientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing

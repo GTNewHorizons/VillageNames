@@ -11,6 +11,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.biomestructures.DesertStructures;
 import astrotibs.villagenames.village.biomestructures.JungleStructures;
 import astrotibs.villagenames.village.biomestructures.PlainsStructures;
@@ -207,7 +208,7 @@ public class MapGenVillageVN extends MapGenVillage
 			catch (Exception e) {startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);}
 			
             
-            
+			
             // My modified version, which allows the user to disable each building
             List list = StructureVillageVN.getStructureVillageWeightedPieceList(random, villageSize, startVillageType);
             
@@ -215,26 +216,50 @@ public class MapGenVillageVN extends MapGenVillage
             if (GeneralConfig.debugMessages)
             {
             	Map<String, ArrayList> mappedComponentVillageTypes = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
-            	
+        		Map<String, ArrayList> mappedComponentVillageTypesNonModDefaults = VillageGeneratorConfigHandler.unpackComponentVillageTypes(VillageGeneratorConfigHandler.MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS);
+        		
             	Iterator iterator = list.iterator();
             	
             	int unmappedComponent=0; // Counts how many structure components try to generate. If none, no text is printed.
+            	
+            	ArrayList<PieceWeight> unmapped_mod_components = new ArrayList<PieceWeight>();
             	
                 while (iterator.hasNext())
                 {
                 	PieceWeight pw = (StructureVillagePieces.PieceWeight)iterator.next();
                 	
+                	// This component does not appear in the "Component Village Types" config entry
                 	if (!mappedComponentVillageTypes.get("ClassPaths").contains(pw.villagePieceClass.toString().substring(6)))
                 	{
-                		LogHelper.info("Weight " + pw.villagePieceWeight + ", Limit " + pw.villagePiecesLimit + ": " + pw.villagePieceClass.toString().substring(6));
-                		unmappedComponent++;
+                		if (mappedComponentVillageTypesNonModDefaults.get("ClassPaths").contains(pw.villagePieceClass.toString().substring(6)))
+                    	{
+                			int classPathListIndexNonModDefaults = mappedComponentVillageTypesNonModDefaults.get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
+            				
+            				if (classPathListIndexNonModDefaults!=-1) // It is in the "Component Village Types" default values
+            				{
+            					// This component is a default type
+                    			LogHelper.warn("A village queued "+Reference.MOD_NAME+" building component " + pw.villagePieceClass.toString().substring(6) + " which does not appear in your \"Component Village Types\" config entry. Its default biome type of " + ((String) ((mappedComponentVillageTypesNonModDefaults.get("VillageTypes")).get(classPathListIndexNonModDefaults))).trim().toLowerCase() + " will be used.");
+            				}
+                    	}
+                    	else
+                    	{
+                    		// This component is not a default type
+                    		unmapped_mod_components.add(pw);
+                    	}
                 	}
                 }
                 
-                if (unmappedComponent>0)
-                {
-                	LogHelper.info("The above village candidate components for " + startVillageType.toString().toLowerCase() + " village at x=" + ((chunkX << 4) + 2) + ", z=" + ((chunkZ << 4) + 2) + " are not currently listed in the Component Village Types config entry.");
-                }
+                if (unmapped_mod_components.size()>0)
+        		{
+        			LogHelper.warn("A village queued the following modded village components which do not appear in your \"Component Village Types\" config entry. They will be registered for all village types until otherwise specified:");
+        			
+        			Iterator unmapped_mod_components_iterator = unmapped_mod_components.iterator();
+        			while (unmapped_mod_components_iterator.hasNext())
+                    {
+        				PieceWeight pw_unmapped = (StructureVillagePieces.PieceWeight)unmapped_mod_components_iterator.next();
+        				LogHelper.warn("Weight " + pw_unmapped.villagePieceWeight + ", Limit " + pw_unmapped.villagePiecesLimit + ": " + pw_unmapped.villagePieceClass.toString().substring(6));
+                    }
+        		}
             }
             
             // Generate the "start" component and add it to the list
