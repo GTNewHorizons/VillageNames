@@ -347,6 +347,9 @@ public class ModObjects {
 	public static final String doorAcaciaUTD = DOM_UPTODATE + ":door_acacia";
 	public static final String doorDarkOakUTD = DOM_UPTODATE + ":door_dark_oak";
 	
+	// Dusty Book
+	public static final String dustyBook_LB = "LostBooks:randomBook";
+	
 	// Dyes
 	public static final String miscBOP = DOM_BIOMESOPLENTY + ":misc"; // Usually used for dyes
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes

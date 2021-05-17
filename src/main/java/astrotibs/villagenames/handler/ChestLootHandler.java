@@ -423,6 +423,33 @@ public class ChestLootHandler {
 		
 		
 		
+		// --- Library --- //
+		// Custom
+		chestGenHooks = ChestGenHooks.getInfo("vn_library");
+		
+		// Number of stacks in a chest
+		stacks_min=1;
+		stacks_max=5;
+		
+		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
+		
+		// Register chest entries: ItemStack, stackMin, stackMax, weight
+		for (Object[] chestItemObject : new Object[][]{
+			{new ItemStack(Items.paper), def_min, 3, def_weight},
+			{new ItemStack(Items.dye, 1, 0), def_min, 3, 6}, // Ink sac
+			{new ItemStack(Items.feather), def_min, 3, 6},
+			{new ItemStack(Items.writable_book), def_min, def_max, def_weight},
+			{new ItemStack(Items.book), def_min, 3, 3},
+			{new ItemStack(Items.apple), def_min, def_max, 15},
+			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
+			{new ItemStack(FunctionsVN.getItemFromName(ModObjects.dustyBook_LB)), def_min, def_max, 2}, // Lost Book
+		})
+		{
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
+		}
+		
+		
+		
 		// --- Mason --- //
 		
 		chestGenHooks = ChestGenHooks.getInfo("vn_mason");
@@ -447,7 +474,6 @@ public class ChestLootHandler {
 		{
 			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
-		
 		
 		
 		// --- Shepherd --- //

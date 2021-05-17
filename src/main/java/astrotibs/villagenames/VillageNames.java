@@ -415,6 +415,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleArmorerHouse.class, "VNJuArmH", new StructureCreationHandlers.JungleArmorerHouse_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleButcherShop.class, "VNJuButS", new StructureCreationHandlers.JungleButcherShop_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleCartographerHouse1.class, "VNJuCaH1", new StructureCreationHandlers.JungleCartographerHouse1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleCartographerHouse2.class, "VNJuCaH2", new StructureCreationHandlers.JungleCartographerHouse2_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleFisherCottage.class, "VNJuFshC", new StructureCreationHandlers.JungleFisherCottage_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleFletcherHouse1.class, "VNJuFlH1", new StructureCreationHandlers.JungleFletcherHouse1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleFletcherHouse2.class, "VNJuFlH2", new StructureCreationHandlers.JungleFletcherHouse2_Handler());
@@ -433,10 +434,13 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse5.class, "VNJuSmH5", new StructureCreationHandlers.JungleSmallHouse5_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse6.class, "VNJuSmH6", new StructureCreationHandlers.JungleSmallHouse6_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse7.class, "VNJuSmH7", new StructureCreationHandlers.JungleSmallHouse7_Handler());
-	        registerVillageComponentBuilding(JungleStructures.JungleStoneAnimalPen.class, "VNJuStAP", new StructureCreationHandlers.JungleStoneAnimalPen_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleSmallHouse8.class, "VNJuSmH8", new StructureCreationHandlers.JungleSmallHouse8_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleStable.class, "VNJuStbl", new StructureCreationHandlers.JungleStable_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleSteppedFarm.class, "VNJuStFa", new StructureCreationHandlers.JungleSteppedFarm_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleStoneAnimalPen.class, "VNJuStAP", new StructureCreationHandlers.JungleStoneAnimalPen_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTamedFarm.class, "VNJuTaFa", new StructureCreationHandlers.JungleTamedFarm_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTannery1.class, "VNJuTan1", new StructureCreationHandlers.JungleTannery1_Handler());
+	        registerVillageComponentBuilding(JungleStructures.JungleTannery2.class, "VNJuTan2", new StructureCreationHandlers.JungleTannery2_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleTemple.class, "VNJuTemp", new StructureCreationHandlers.JungleTemple_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleToolSmithy1.class, "VNJuTSm1", new StructureCreationHandlers.JungleToolSmithy1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleToolSmithy2.class, "VNJuTSm2", new StructureCreationHandlers.JungleToolSmithy2_Handler());
@@ -447,6 +451,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent1.class, "VNJuRdA1", new StructureCreationHandlers.JungleRoadAccent1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent2.class, "VNJuRdA2", new StructureCreationHandlers.JungleRoadAccent2_Handler());
 	        
+	        registerVillageComponentBuilding(SwampStructures.SwampLibrary.class, "VNSwLibr", new StructureCreationHandlers.SwampLibrary_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
