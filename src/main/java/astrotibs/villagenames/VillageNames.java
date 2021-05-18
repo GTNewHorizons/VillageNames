@@ -451,7 +451,12 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent1.class, "VNJuRdA1", new StructureCreationHandlers.JungleRoadAccent1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent2.class, "VNJuRdA2", new StructureCreationHandlers.JungleRoadAccent2_Handler());
 	        
+	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage1.class, "VNSwFiC1", new StructureCreationHandlers.SwampFisherCottage1_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampLargeHouse.class, "VNSwLaHo", new StructureCreationHandlers.SwampLargeHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampLibrary.class, "VNSwLibr", new StructureCreationHandlers.SwampLibrary_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampMediumHouse1.class, "VNSwSmH1", new StructureCreationHandlers.SwampMediumHouse1_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse1.class, "VNSwSmH1", new StructureCreationHandlers.SwampSmallHouse1_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampSmallHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());
 	        
 	        // Listener that interrupts old village generation with the new one

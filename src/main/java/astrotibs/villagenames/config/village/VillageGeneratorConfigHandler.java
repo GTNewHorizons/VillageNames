@@ -257,8 +257,13 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleStreetDecor_string; public static ArrayList<Double> componentModernJungleStreetDecor_vals;
 	public static String componentModernJungleRoadAccent1_string; public static ArrayList<Double> componentModernJungleRoadAccent1_vals;
 	public static String componentModernJungleRoadAccent2_string; public static ArrayList<Double> componentModernJungleRoadAccent2_vals;
-
+	
+	public static String componentModernSwampFisherCottage1_string; public static ArrayList<Double> componentModernSwampFisherCottage1_vals;
+	public static String componentModernSwampLargeHouse_string; public static ArrayList<Double> componentModernSwampLargeHouse_vals;
 	public static String componentModernSwampLibrary_string; public static ArrayList<Double> componentModernSwampLibrary_vals;
+	public static String componentModernSwampMediumHouse1_string; public static ArrayList<Double> componentModernSwampMediumHouse1_vals;
+	public static String componentModernSwampSmallHouse1_string; public static ArrayList<Double> componentModernSwampSmallHouse1_vals;
+	public static String componentModernSwampSmallHouse2_string; public static ArrayList<Double> componentModernSwampSmallHouse2_vals;
 	public static String componentModernSwampTemple_string; public static ArrayList<Double> componentModernSwampTemple_vals;
 	
 	// Default values used to restrict modern vanilla components to specific village biome types
@@ -467,6 +472,13 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StreetDecor|jungle",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent2|jungle",
+			
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FisherCottage1|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "LargeHouse|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Library|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "MediumHouse1|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse1|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Temple|swamp",
 			};
 	
@@ -1359,9 +1371,24 @@ public class VillageGeneratorConfigHandler
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);}
 		componentModernJungleRoadAccent2_string = config.getString(componentModern+"Jungle Road Accent 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
 		componentModernJungleRoadAccent2_vals = parseDoubleArray(componentModernJungleRoadAccent2_string, modifiedDefaults);
+
+		componentModernSwampFisherCottage1_string = config.getString(componentModern+"Swamp Fisher Cottage 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampFisherCottage1_vals = parseDoubleArray(componentModernSwampFisherCottage1_string, modernDefaults);
+		
+		componentModernSwampLargeHouse_string = config.getString(componentModern+"Swamp Large House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampLargeHouse_vals = parseDoubleArray(componentModernSwampLargeHouse_string, modernDefaults);
 		
 		componentModernSwampLibrary_string = config.getString(componentModern+"Swamp Library", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampLibrary_vals = parseDoubleArray(componentModernSwampLibrary_string, modernDefaults);
+		
+		componentModernSwampMediumHouse1_string = config.getString(componentModern+"Swamp Medium House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampMediumHouse1_vals = parseDoubleArray(componentModernSwampMediumHouse1_string, modernDefaults);
+		
+		componentModernSwampSmallHouse1_string = config.getString(componentModern+"Swamp Small House 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampSmallHouse1_vals = parseDoubleArray(componentModernSwampSmallHouse1_string, modernDefaults);
+		
+		componentModernSwampSmallHouse2_string = config.getString(componentModern+"Swamp Small House 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampSmallHouse2_vals = parseDoubleArray(componentModernSwampSmallHouse2_string, modernDefaults);
 		
 		componentModernSwampTemple_string = config.getString(componentModern+"Swamp Temple", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampTemple_vals = parseDoubleArray(componentModernSwampTemple_string, modernDefaults);
@@ -1393,14 +1420,14 @@ public class VillageGeneratorConfigHandler
 		componentVillageTypes = config.getStringList("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,
 				FunctionsVN.joinTwoStringArrays(MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS, new String[] {
 						// Mod buildings
-						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna",
+						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna jungle swamp",
 						
-						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy",
-						"growthcraft.bamboo.common.village.ComponentVillageBambooYard|plains taiga savanna snowy",
-						"growthcraft.bees.common.village.ComponentVillageApiarist|plains taiga savanna",
-						"growthcraft.grapes.common.village.ComponentVillageGrapeVineyard|plains taiga snowy",
-						"growthcraft.hops.common.village.ComponentVillageHopVineyard|plains taiga snowy",
-						"growthcraft.rice.common.village.ComponentVillageRiceField|plains taiga savanna snowy",
+						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy jungle swamp",
+						"growthcraft.bamboo.common.village.ComponentVillageBambooYard|plains taiga savanna snowy jungle swamp",
+						"growthcraft.bees.common.village.ComponentVillageApiarist|plains taiga savanna jungle swamp",
+						"growthcraft.grapes.common.village.ComponentVillageGrapeVineyard|plains taiga snowy swamp",
+						"growthcraft.hops.common.village.ComponentVillageHopVineyard|plains taiga snowy swamp",
+						"growthcraft.rice.common.village.ComponentVillageRiceField|plains taiga savanna snowy jungle swamp",
 						}),
 				"List of village components that only appear in certain village types. Format is: classPaths|villageTypes\n"
 				+ "classPaths: The class address to the specific structure component. If debugMessages is true, every time a village generates, a list of village components not yet specified on this list will be printed to the console.\n"

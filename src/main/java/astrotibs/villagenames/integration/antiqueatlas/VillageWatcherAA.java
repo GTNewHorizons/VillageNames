@@ -349,7 +349,12 @@ public class VillageWatcherAA
 	JUNGLE_ROAD_ACCENT_1 = "VNJuRdA1", // Jungle Well
 	JUNGLE_ROAD_ACCENT_2 = "VNJuRdA2", // Jungle Treehouse
 	
+	SWAMP_FISHER_COTTAGE_1 = "VNSwFiC1", // Swamp Fisher Cottage 1
+	SWAMP_LARGE_HOUSE = "VNSwLaHo", // Swamp Large House
 	SWAMP_LIBRARY = "VNSwLibr", // Swamp Library
+	SWAMP_MEDIUM_HOUSE_1 = "VNSwMeH1", // Swamp Medium House 1
+	SWAMP_SMALL_HOUSE_1 = "VNSwSmH1", // Swamp Small House 1
+	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_TEMPLE = "VNSwTemp", // Swamp Temple
 	
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
@@ -618,7 +623,12 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_ROAD_ACCENT_1, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
+		builder.put(SWAMP_FISHER_COTTAGE_1, TILE_VILLAGE_HOUSE);
+		builder.put(SWAMP_LARGE_HOUSE, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_LIBRARY, TILE_VILLAGE_LIBRARY);
+		builder.put(SWAMP_MEDIUM_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(SWAMP_SMALL_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(SWAMP_SMALL_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_TEMPLE, TILE_VILLAGE_CHURCH);
 		
 		

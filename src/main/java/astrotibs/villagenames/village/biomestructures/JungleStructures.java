@@ -18914,7 +18914,7 @@ public class JungleStructures
     
     
     // --- Weapon Smithy --- //
-    // designed by AstroTibs
+    // designed by Lonemind
     
     public static class JungleWeaponSmithy extends StructureVillagePieces.Village
     {
@@ -19380,14 +19380,14 @@ public class JungleStructures
             }
         	
         	
-//        	// Sitting Lanterns
-//        	blockObject = ModObjects.chooseModLanternBlock(false); Block biomeSittingLanternBlock = (Block)blockObject[0]; int biomeSittingLanternMeta = (Integer)blockObject[1];
-//        	for (int[] uvw : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
-//            	{7,2,1}, 
-//            	{4,6,8}, 
-//            	}) {
-//            	this.placeBlockAtCurrentPosition(world, biomeSittingLanternBlock, biomeSittingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
-//            }
+        	// Sitting Lanterns
+        	blockObject = ModObjects.chooseModLanternBlock(false); Block biomeSittingLanternBlock = (Block)blockObject[0]; int biomeSittingLanternMeta = (Integer)blockObject[1];
+        	for (int[] uvw : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	//{7,2,1}, 
+            	{4,6,8}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, biomeSittingLanternBlock, biomeSittingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
+            }
     		
     		
     		// Villagers
