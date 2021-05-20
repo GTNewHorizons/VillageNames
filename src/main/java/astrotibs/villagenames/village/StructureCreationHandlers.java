@@ -180,6 +180,7 @@ import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyTanne
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyTemple1;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyToolSmith1;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyWeaponSmith1;
+import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampButcherShop;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampFisherCottage1;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampFisherCottage2;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampLargeHouse;
@@ -189,6 +190,7 @@ import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmall
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse2;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse3;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampTemple;
+import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampWildFarm;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaAnimalPen1;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorer2;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures.TaigaArmorerHouse1;
@@ -5072,6 +5074,30 @@ public class StructureCreationHandlers
 	    }
 	}
 	
+	// Swamp Butcher Shop
+	public static class SwampButcherShop_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSwampButcherShop_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SwampButcherShop.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SwampButcherShop.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SwampButcherShop.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
 	// Swamp Fisher Cottage 1
 	public static class SwampFisherCottage1_Handler implements IVillageCreationHandler
 	{
@@ -5285,6 +5311,30 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SwampTemple.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Swamp Wild Farm
+	public static class SwampWildFarm_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSwampWildFarm_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SwampWildFarm.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SwampWildFarm.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SwampWildFarm.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 }

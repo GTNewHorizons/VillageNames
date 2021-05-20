@@ -359,6 +359,7 @@ public class VillageWatcherAA
 	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_SMALL_HOUSE_3 = "VNSwSmH3", // Swamp Small House 3
 	SWAMP_TEMPLE = "VNSwTemp", // Swamp Temple
+	SWAMP_WILD_FARM = "VNSwWiFa", // Swamp WildFarm
 	
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	

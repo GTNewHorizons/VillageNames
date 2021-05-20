@@ -268,6 +268,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSwampSmallHouse2_string; public static ArrayList<Double> componentModernSwampSmallHouse2_vals;
 	public static String componentModernSwampSmallHouse3_string; public static ArrayList<Double> componentModernSwampSmallHouse3_vals;
 	public static String componentModernSwampTemple_string; public static ArrayList<Double> componentModernSwampTemple_vals;
+	public static String componentModernSwampWildFarm_string; public static ArrayList<Double> componentModernSwampWildFarm_vals;
 	
 	// Default values used to restrict modern vanilla components to specific village biome types
 	public static final String[] MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS = new String[] {
@@ -486,6 +487,7 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse3|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Temple|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "WildFarm|swamp",
 			};
 	
 	// Decor
@@ -1407,6 +1409,9 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernSwampTemple_string = config.getString(componentModern+"Swamp Temple", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampTemple_vals = parseDoubleArray(componentModernSwampTemple_string, modernDefaults);
+		
+		componentModernSwampWildFarm_string = config.getString(componentModern+"Swamp Wild Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampWildFarm_vals = parseDoubleArray(componentModernSwampWildFarm_string, modernDefaults);
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");

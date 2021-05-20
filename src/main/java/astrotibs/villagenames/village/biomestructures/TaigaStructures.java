@@ -3535,7 +3535,7 @@ public class TaigaStructures
             	{6,0,11, 8,0,11}, {9,0,10, 9,0,10}, {6,0,7, 6,0,7}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeSandBlock, biomeSandMeta, biomeSandBlock, biomeSandMeta, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeGravelBlock, biomeGravelMeta, biomeGravelBlock, biomeGravelMeta, false);	
             }
             // Clay
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.clay, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeClayBlock = (Block)blockObject[0]; int biomeClayMeta = (Integer)blockObject[1];
