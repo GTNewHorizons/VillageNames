@@ -454,14 +454,19 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampButcherShop.class, "VNSwBuSh", new StructureCreationHandlers.SwampButcherShop_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage1.class, "VNSwFiC1", new StructureCreationHandlers.SwampFisherCottage1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage2.class, "VNSwFiC2", new StructureCreationHandlers.SwampFisherCottage2_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampHutFarm.class, "VNSwHuFa", new StructureCreationHandlers.SwampHutFarm_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampLargeHouse.class, "VNSwLaHo", new StructureCreationHandlers.SwampLargeHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampLibrary.class, "VNSwLibr", new StructureCreationHandlers.SwampLibrary_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampMasonHouse.class, "VNSwMaHo", new StructureCreationHandlers.SwampMasonHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampMediumHouse1.class, "VNSwSmH1", new StructureCreationHandlers.SwampMediumHouse1_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampMediumHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampMediumHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse1.class, "VNSwSmH1", new StructureCreationHandlers.SwampSmallHouse1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampSmallHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse3.class, "VNSwSmH3", new StructureCreationHandlers.SwampSmallHouse3_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampToolSmithy.class, "VNSwToSm", new StructureCreationHandlers.SwampToolSmithy_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampWildFarm.class, "VNSwWiFa", new StructureCreationHandlers.SwampWildFarm_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampStreetDecor.class, "VNSwStDe", new StructureCreationHandlers.SwampStreetDecor_Handler());
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

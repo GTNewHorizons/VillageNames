@@ -371,6 +371,33 @@ public class ChestLootHandler {
 		
 		
 		
+		// --- Farm --- //
+		// Custom by AstroTibs
+		chestGenHooks = ChestGenHooks.getInfo("vn_farm");
+		
+		// Number of stacks in a chest
+		stacks_min=1;
+		stacks_max=5;
+		
+		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
+		
+		// Register chest entries: ItemStack, stackMin, stackMax, weight
+		for (Object[] chestItemObject : new Object[][]{
+			{new ItemStack(Items.emerald), def_min, def_max, def_weight},
+			{new ItemStack(Items.wheat_seeds), def_min, 5, 5},
+			{new ItemStack(Items.potato), def_min, 5, 2},
+			{new ItemStack(Items.carrot), def_min, 5, 2},
+			{ModObjects.chooseModBeetrootSeeds(), def_min, 5, def_weight},
+			{new ItemStack(Items.pumpkin_seeds), def_min, 5, def_weight},
+			{new ItemStack(Items.reeds), def_min, 5, def_weight},
+			{new ItemStack(Items.bucket), def_min, def_max, def_weight},
+		})
+		{
+			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
+		}
+		
+		
+		
 		// --- Fisher Cottage --- //
 		
 		chestGenHooks = ChestGenHooks.getInfo("vn_fisher");
@@ -424,7 +451,7 @@ public class ChestLootHandler {
 		
 		
 		// --- Library --- //
-		// Custom
+		// Custom by AstroTibs
 		chestGenHooks = ChestGenHooks.getInfo("vn_library");
 		
 		// Number of stacks in a chest
