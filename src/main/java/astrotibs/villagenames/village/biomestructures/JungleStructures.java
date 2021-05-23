@@ -7001,7 +7001,7 @@ public class JungleStructures
         		this.fillWithMetadataBlocks(world, structureBB, uvwm[0], uvwm[1], uvwm[2], uvwm[3], uvwm[4], uvwm[5], Blocks.carpet, carpetMeta, Blocks.carpet, carpetMeta, false);
             }
             
-                    	
+            
             // Stone pressure plate
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
         	for (int[] uvw : new int[][]{

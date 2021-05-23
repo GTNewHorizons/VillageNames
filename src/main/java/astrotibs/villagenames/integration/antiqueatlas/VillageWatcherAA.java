@@ -352,6 +352,7 @@ public class VillageWatcherAA
 	SWAMP_BUTCHER_SHOP = "VNSwBuSh", // Swamp Butcher Shop
 	SWAMP_FISHER_COTTAGE_1 = "VNSwFiC1", // Swamp Fisher Cottage 1
 	SWAMP_FISHER_COTTAGE_2 = "VNSwFiC2", // Swamp Fisher Cottage 2
+	SWAMP_HORRIBLE_SECRET = "VNSwHoSe", // Swamp Horrible Secret - NO MAPPING for this because it's supposed to be a secret!
 	SWAMP_HUT_FARM = "VNSwHuFa", // Swamp Hut Farm
 	SWAMP_LARGE_HOUSE = "VNSwLaHo", // Swamp Large House
 	SWAMP_LIBRARY = "VNSwLibr", // Swamp Library

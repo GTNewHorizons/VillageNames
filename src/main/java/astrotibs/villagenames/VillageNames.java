@@ -455,6 +455,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage1.class, "VNSwFiC1", new StructureCreationHandlers.SwampFisherCottage1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage2.class, "VNSwFiC2", new StructureCreationHandlers.SwampFisherCottage2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampHutFarm.class, "VNSwHuFa", new StructureCreationHandlers.SwampHutFarm_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampHorribleSecret.class, "VNSwHoSe", new StructureCreationHandlers.SwampHorribleSecret_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampLargeHouse.class, "VNSwLaHo", new StructureCreationHandlers.SwampLargeHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampLibrary.class, "VNSwLibr", new StructureCreationHandlers.SwampLibrary_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampMasonHouse.class, "VNSwMaHo", new StructureCreationHandlers.SwampMasonHouse_Handler());
