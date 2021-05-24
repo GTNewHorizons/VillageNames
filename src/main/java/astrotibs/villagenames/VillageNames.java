@@ -452,6 +452,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent2.class, "VNJuRdA2", new StructureCreationHandlers.JungleRoadAccent2_Handler());
 	        
 	        registerVillageComponentBuilding(SwampStructures.SwampButcherShop.class, "VNSwBuSh", new StructureCreationHandlers.SwampButcherShop_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampCartographerHouse.class, "VNSwCaHo", new StructureCreationHandlers.SwampCartographerHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage1.class, "VNSwFiC1", new StructureCreationHandlers.SwampFisherCottage1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampFisherCottage2.class, "VNSwFiC2", new StructureCreationHandlers.SwampFisherCottage2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampHutFarm.class, "VNSwHuFa", new StructureCreationHandlers.SwampHutFarm_Handler());

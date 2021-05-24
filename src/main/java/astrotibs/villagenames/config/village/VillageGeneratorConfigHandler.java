@@ -259,6 +259,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleRoadAccent2_string; public static ArrayList<Double> componentModernJungleRoadAccent2_vals;
 	
 	public static String componentModernSwampButcherShop_string; public static ArrayList<Double> componentModernSwampButcherShop_vals;
+	public static String componentModernSwampCartographerHouse_string; public static ArrayList<Double> componentModernSwampCartographerHouse_vals;
 	public static String componentModernSwampFisherCottage1_string; public static ArrayList<Double> componentModernSwampFisherCottage1_vals;
 	public static String componentModernSwampFisherCottage2_string; public static ArrayList<Double> componentModernSwampFisherCottage2_vals;
 	public static String componentModernSwampHutFarm_string; public static ArrayList<Double> componentModernSwampHutFarm_vals;
@@ -484,6 +485,7 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent2|jungle",
 			
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "ButcherShop|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "CartographerHouse|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FisherCottage1|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FisherCottage2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "HutFarm|swamp",
@@ -1394,6 +1396,9 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernSwampButcherShop_string = config.getString(componentModern+"Swamp Butcher Shop", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampButcherShop_vals = parseDoubleArray(componentModernSwampButcherShop_string, modernDefaults);
+		
+		componentModernSwampCartographerHouse_string = config.getString(componentModern+"Swamp Cartographer House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampCartographerHouse_vals = parseDoubleArray(componentModernSwampCartographerHouse_string, modernDefaults);
 
 		componentModernSwampFisherCottage1_string = config.getString(componentModern+"Swamp Fisher Cottage 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampFisherCottage1_vals = parseDoubleArray(componentModernSwampFisherCottage1_string, modernDefaults);

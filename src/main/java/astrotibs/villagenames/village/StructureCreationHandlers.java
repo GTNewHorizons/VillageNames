@@ -181,6 +181,7 @@ import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyTempl
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyToolSmith1;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures.SnowyWeaponSmith1;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampButcherShop;
+import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampCartographerHouse;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampFisherCottage1;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampFisherCottage2;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampHorribleSecret;
@@ -5101,6 +5102,30 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SwampButcherShop.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Swamp Cartographer
+	public static class SwampCartographerHouse_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSwampCartographerHouse_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SwampCartographerHouse.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SwampCartographerHouse.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SwampCartographerHouse.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	

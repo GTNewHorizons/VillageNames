@@ -350,6 +350,7 @@ public class VillageWatcherAA
 	JUNGLE_ROAD_ACCENT_2 = "VNJuRdA2", // Jungle Treehouse
 	
 	SWAMP_BUTCHER_SHOP = "VNSwBuSh", // Swamp Butcher Shop
+	SWAMP_CARTOGRAPHER_HOUSE = "VNSwCaHo", // Swamp Cartographer House
 	SWAMP_FISHER_COTTAGE_1 = "VNSwFiC1", // Swamp Fisher Cottage 1
 	SWAMP_FISHER_COTTAGE_2 = "VNSwFiC2", // Swamp Fisher Cottage 2
 	SWAMP_HORRIBLE_SECRET = "VNSwHoSe", // Swamp Horrible Secret - NO MAPPING for this because it's supposed to be a secret!
@@ -634,6 +635,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
 		builder.put(SWAMP_BUTCHER_SHOP, TILE_VILLAGE_HUT);
+		builder.put(SWAMP_CARTOGRAPHER_HOUSE, TILE_VILLAGE_LIBRARY);
 		builder.put(SWAMP_FISHER_COTTAGE_1, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_FISHER_COTTAGE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_HUT_FARM, TILE_VILLAGE_FARMLAND_SMALL);
