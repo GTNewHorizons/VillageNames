@@ -16,6 +16,7 @@ import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
+import astrotibs.villagenames.utility.FunctionsVN.VillageType;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import astrotibs.villagenames.village.biomestructures.JungleStructures.JungleStreetDecor;
@@ -28,11 +29,13 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -3225,33 +3228,6 @@ public class SwampStructures
     			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
     		}}
     		
-    		// Follow the blueprint to set up the starting foundation
-//    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
-//    			
-//    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
-//    			int posX = this.getXWithOffset(u, w);
-//    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
-//    			int posZ = this.getZWithOffset(u, w);
-//    					
-//    			if (unitLetter.equals("F"))
-//    			{
-//    				// If marked with F: fill with dirt foundation
-//    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-//    			}
-//    			else if (unitLetter.equals("P"))
-//    			{
-//    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
-//    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
-//    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
-//    			}
-//    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-//    			{
-//    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-//    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-//    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-//    			}
-//    		}}
-            
             
             // Grass
             for(int[] uuvvww : new int[][]{
@@ -3281,21 +3257,19 @@ public class SwampStructures
             	this.fillWithAir(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5]);	
     		}
             
-
-            // Marker
+            
+            // Coarse Dirt
             for(int[] uuvvww : new int[][]{
             	// Covered up hole in the ground
-            	{3,21,2, 5,22,2}, 
+            	{3,21,2, 5,21,2}, 
             	})
             {
-            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.obsidian, 0, Blocks.obsidian, 0, false);	
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.dirt, 1, Blocks.dirt, 1, false);	
             }
             
             
             // Dirt
             for(int[] uuvvww : new int[][]{
-            	// Covered up hole in the ground
-            	{3,21,2, 5,21,2}, 
             	// Dirt top
     			{3,19,6, 5,20,6}, 
     			{2,19,5, 6,20,5}, 
@@ -3535,8 +3509,39 @@ public class SwampStructures
             	{6,6,4, 3}, 
             	})
             {
-                this.placeBlockAtCurrentPosition(world, Blocks.dispenser, 0, uvwo[0], uvwo[1], uvwo[2], structureBB);
-                world.setBlockMetadataWithNotify(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2]), StructureVillageVN.chooseFurnaceMeta(uvwo[3], this.coordBaseMode), 2);
+            	int x = this.getXWithOffset(uvwo[0], uvwo[2]);
+            	int y = this.getYWithOffset(uvwo[1]);
+            	int z = this.getZWithOffset(uvwo[0], uvwo[2]);
+            	
+                // Set contents
+                if (structureBB.isVecInside(x, y, z) && world.getBlock(x, y, z) != Blocks.dispenser)
+                {
+                	this.placeBlockAtCurrentPosition(world, Blocks.dispenser, 0, uvwo[0], uvwo[1], uvwo[2], structureBB);
+                	world.setBlockMetadataWithNotify(x, y, z, StructureVillageVN.chooseFurnaceMeta(uvwo[3], this.coordBaseMode), 2);
+                	
+                    TileEntityDispenser tileentitydispenser = (TileEntityDispenser)world.getTileEntity(x, y, z);
+
+                    if (tileentitydispenser != null)
+                    {
+                    	
+                    	// Potion IDs taken from https://www.minecraftinfo.com/IDList.htm
+                    	int potionID;
+                    	
+                    	switch(random.nextInt(5))
+                    	{
+                    	default:
+                    	case 0: potionID = 16385; break; // Splash potion of Regeneration (33 sec)
+                    	case 1: potionID = 16389; break; // Splash potion of Healing
+                    	case 2: potionID = 16392; break; // Splash potion of Weakness (1m07s)
+                    	case 3: potionID = 16394; break; // Splash potion of Slowness (1m07s)
+                    	case 4: potionID = 16396; break; // Splash potion of Harming
+                    	}
+                    	
+                    	ItemStack dispenserItem = new ItemStack(Items.potionitem, 1, potionID);
+                    	
+                    	tileentitydispenser.setInventorySlotContents(random.nextInt(tileentitydispenser.getSizeInventory()), dispenserItem);
+                    }
+                }
             }
             
                     	
@@ -11404,7 +11409,7 @@ public class SwampStructures
     				break;
     			// Lantern behind
     			case 4:
-    				BlueprintData.addFillWithBlocks(blueprint, 0,lantern2height,0, 1,lantern2height+1,0, biomeFenceBlock, 0);
+    				BlueprintData.addFillWithBlocks(blueprint, 0,lantern2height,0, 0,lantern2height+1,1, biomeFenceBlock, 0);
     				BlueprintData.addPlaceBlock(blueprint, 0,lantern2height,1, biomeHangingLanternBlock, biomeHangingLanternMeta);
     				break;
     			}
