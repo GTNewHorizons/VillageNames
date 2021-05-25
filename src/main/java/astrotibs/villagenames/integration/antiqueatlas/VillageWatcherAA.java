@@ -349,10 +349,12 @@ public class VillageWatcherAA
 	JUNGLE_ROAD_ACCENT_1 = "VNJuRdA1", // Jungle Well
 	JUNGLE_ROAD_ACCENT_2 = "VNJuRdA2", // Jungle Treehouse
 	
+	SWAMP_ARMORER_HOUSE = "VNSwArHo", // Swamp Armorer House
 	SWAMP_BUTCHER_SHOP = "VNSwBuSh", // Swamp Butcher Shop
 	SWAMP_CARTOGRAPHER_HOUSE = "VNSwCaHo", // Swamp Cartographer House
 	SWAMP_FISHER_COTTAGE_1 = "VNSwFiC1", // Swamp Fisher Cottage 1
 	SWAMP_FISHER_COTTAGE_2 = "VNSwFiC2", // Swamp Fisher Cottage 2
+	SWAMP_FLETCHER_HOUSE = "VNSwFlHo", // Swamp Fletcher House
 	SWAMP_HORRIBLE_SECRET = "VNSwHoSe", // Swamp Horrible Secret - NO MAPPING for this because it's supposed to be a secret!
 	SWAMP_HUT_FARM = "VNSwHuFa", // Swamp Hut Farm
 	SWAMP_LARGE_HOUSE = "VNSwLaHo", // Swamp Large House
@@ -634,10 +636,12 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_ROAD_ACCENT_1, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
+		builder.put(SWAMP_ARMORER_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_BUTCHER_SHOP, TILE_VILLAGE_HUT);
 		builder.put(SWAMP_CARTOGRAPHER_HOUSE, TILE_VILLAGE_LIBRARY);
 		builder.put(SWAMP_FISHER_COTTAGE_1, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_FISHER_COTTAGE_2, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(SWAMP_FLETCHER_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_HUT_FARM, TILE_VILLAGE_FARMLAND_SMALL);
 		builder.put(SWAMP_LARGE_HOUSE, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_LIBRARY, TILE_VILLAGE_LIBRARY);
