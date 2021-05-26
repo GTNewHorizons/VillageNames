@@ -363,6 +363,8 @@ public class VillageWatcherAA
 	SWAMP_MEDIUM_HOUSE_1 = "VNSwMeH1", // Swamp Medium House 1
 	SWAMP_MEDIUM_HOUSE_2 = "VNSwMeH2", // Swamp Medium House 2
 	SWAMP_ROAD_DECOR = "VNSwStDe", // Swamp Road Decor
+	SWAMP_SHEPHERD_HOUSE_1 = "VNSwShH1", // Swamp Shepherd House 1
+	SWAMP_SHEPHERD_HOUSE_2 = "VNSwShH2", // Swamp Shepherd House 2
 	SWAMP_SMALL_HOUSE_1 = "VNSwSmH1", // Swamp Small House 1
 	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_SMALL_HOUSE_3 = "VNSwSmH3", // Swamp Small House 3
@@ -649,6 +651,8 @@ public class VillageWatcherAA
 		builder.put(SWAMP_MEDIUM_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_MEDIUM_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_ROAD_DECOR, TILE_VILLAGE_TORCH);
+		builder.put(SWAMP_SHEPHERD_HOUSE_1, TILE_VILLAGE_HOUSE);
+		builder.put(SWAMP_SHEPHERD_HOUSE_2, TILE_VILLAGE_HUT);
 		builder.put(SWAMP_SMALL_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_3, TILE_VILLAGE_HUT);

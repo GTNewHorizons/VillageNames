@@ -10956,7 +10956,7 @@ public class JungleStructures
         	blockObject = ModObjects.chooseModLoom(biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
             for(int[] uvw : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
             	// Back Shutters
-            	{7,1,5}, 
+            	{7,1,5, 2}, 
             	})
             {
             	this.placeBlockAtCurrentPosition(world, loomBlock, loomMeta, uvw[0], uvw[1], uvw[2], structureBB);
