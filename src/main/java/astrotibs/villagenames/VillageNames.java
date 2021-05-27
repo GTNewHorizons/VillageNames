@@ -469,8 +469,10 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampMediumHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampMediumHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampShepherdHouse1.class, "VNSwShH1", new StructureCreationHandlers.SwampShepherdHouse1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampShepherdHouse2.class, "VNSwShH2", new StructureCreationHandlers.SwampShepherdHouse2_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse1.class, "VNSwSmH1", new StructureCreationHandlers.SwampSmallHouse1_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampSmallHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse3.class, "VNSwSmH3", new StructureCreationHandlers.SwampSmallHouse3_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse4.class, "VNSwSmH4", new StructureCreationHandlers.SwampSmallHouse4_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampStable.class, "VNSwStbl", new StructureCreationHandlers.SwampStable_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTannery.class, "VNSwTann", new StructureCreationHandlers.SwampTannery_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());

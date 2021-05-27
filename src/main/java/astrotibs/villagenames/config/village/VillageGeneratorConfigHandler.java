@@ -278,6 +278,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSwampSmallHouse1_string; public static ArrayList<Double> componentModernSwampSmallHouse1_vals;
 	public static String componentModernSwampSmallHouse2_string; public static ArrayList<Double> componentModernSwampSmallHouse2_vals;
 	public static String componentModernSwampSmallHouse3_string; public static ArrayList<Double> componentModernSwampSmallHouse3_vals;
+	public static String componentModernSwampSmallHouse4_string; public static ArrayList<Double> componentModernSwampSmallHouse4_vals;
 	public static String componentModernSwampStable_string; public static ArrayList<Double> componentModernSwampStable_vals;
 	public static String componentModernSwampTannery_string; public static ArrayList<Double> componentModernSwampTannery_vals;
 	public static String componentModernSwampTemple_string; public static ArrayList<Double> componentModernSwampTemple_vals;
@@ -513,6 +514,7 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse1|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse3|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse4|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Stable|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "StreetDecor|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Tannery|swamp",
@@ -1472,6 +1474,9 @@ public class VillageGeneratorConfigHandler
 		
 		componentModernSwampSmallHouse3_string = config.getString(componentModern+"Swamp Small House 3", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampSmallHouse3_vals = parseDoubleArray(componentModernSwampSmallHouse3_string, modernDefaults);
+		
+		componentModernSwampSmallHouse4_string = config.getString(componentModern+"Swamp Small House 4", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampSmallHouse4_vals = parseDoubleArray(componentModernSwampSmallHouse4_string, modernDefaults);
 		
 		componentModernSwampStable_string = config.getString(componentModern+"Swamp Stable", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampStable_vals = parseDoubleArray(componentModernSwampStable_string, modernDefaults);

@@ -200,6 +200,7 @@ import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSheph
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse1;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse2;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse3;
+import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampSmallHouse4;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampStable;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampStreetDecor;
 import astrotibs.villagenames.village.biomestructures.SwampStructures.SwampTannery;
@@ -5591,6 +5592,30 @@ public class StructureCreationHandlers
 	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
 	    {
 	    	if (startPiece instanceof StartVN) {return SwampSmallHouse3.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
+	    }
+	}
+	
+	// Swamp Small House 4
+	public static class SwampSmallHouse4_Handler implements IVillageCreationHandler
+	{
+		ArrayList<Double> ali = VillageGeneratorConfigHandler.componentModernSwampSmallHouse4_vals;
+		
+	    @Override
+	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
+	    {
+	    	double weightDouble = ali.get(0); int weightStochastic = MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0);
+	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
+	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);
+	    	return new PieceWeight(SwampSmallHouse4.class, weightStochastic, MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+	    }
+	    
+	    @Override
+	    public Class<?> getComponentClass() {return SwampSmallHouse4.class;}
+	    
+	    @Override
+	    public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x, int y, int z, int horizIndex, int componentType)
+	    {
+	    	if (startPiece instanceof StartVN) {return SwampSmallHouse4.buildComponent((StartVN)startPiece, pieces, random, x, y, z, horizIndex, componentType);} return null;
 	    }
 	}
 	

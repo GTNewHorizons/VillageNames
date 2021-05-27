@@ -370,6 +370,7 @@ public class VillageWatcherAA
 	SWAMP_SMALL_HOUSE_1 = "VNSwSmH1", // Swamp Small House 1
 	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_SMALL_HOUSE_3 = "VNSwSmH3", // Swamp Small House 3
+	SWAMP_SMALL_HOUSE_4 = "VNSwSmH4", // Swamp Small House 4
 	SWAMP_STABLE = "VNSwStb;", // Swamp Stable
 	SWAMP_TANNERY = "VNSwTann", // Swamp Tannery
 	SWAMP_TEMPLE = "VNSwTemp", // Swamp Temple
@@ -663,6 +664,7 @@ public class VillageWatcherAA
 		builder.put(SWAMP_SMALL_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
+		builder.put(SWAMP_SMALL_HOUSE_4, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_STABLE, TILE_VILLAGE_BUTCHERS_SHOP);
 		builder.put(SWAMP_TANNERY, TILE_VILLAGE_L_HOUSE);
 		builder.put(SWAMP_TEMPLE, TILE_VILLAGE_CHURCH);
