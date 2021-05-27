@@ -26,6 +26,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
@@ -1848,6 +1850,799 @@ public class SwampStructures
     }
     
     
+    // --- Animal Pen 1 --- //
+    // designed by THASSELHOFF
+    
+    public static class SwampAnimalPen1 extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	public BiomeGenBase biome=null;
+    	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+    			"        ",
+    			" F    F ",
+    			"        ",
+    			" F    F ",
+    			"  F     ",
+        };
+    	// Here are values to assign to the bounding box
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 4;
+    	// Values for lining things up
+    	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
+    	public static final byte MEDIAN_BORDERS = 1; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 3;
+    	private static final int INCREASE_MIN_W = 0;
+    	private static final int DECREASE_MAX_W = 0;
+    	
+    	private int averageGroundLevel = -1;
+    	
+    	public SwampAnimalPen1() {}
+
+    	public SwampAnimalPen1(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+    	{
+    		super();
+    		this.coordBaseMode = coordBaseMode;
+    		this.boundingBox = boundingBox;
+    		// Additional stuff to be used in the construction
+    		if (start!=null)
+    		{
+    			this.villageType=start.villageType;
+    			this.materialType=start.materialType;
+    			this.disallowModSubs=start.disallowModSubs;
+    			this.townColor=start.townColor;
+    			this.townColor2=start.townColor2;
+    			this.townColor3=start.townColor3;
+    			this.townColor4=start.townColor4;
+    			this.townColor5=start.townColor5;
+    			this.townColor6=start.townColor6;
+    			this.townColor7=start.townColor7;
+    			this.namePrefix=start.namePrefix;
+    			this.nameRoot=start.nameRoot;
+    			this.nameSuffix=start.nameSuffix;
+    			this.biome=start.biome;
+    		}
+    	}
+    	
+    	public static SwampAnimalPen1 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    	{
+    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+    		
+    		return (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null) ? new SwampAnimalPen1(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+    	}
+    	
+    	
+    	@Override
+    	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+    	{
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
+    		
+    		// In the event that this village construction is resuming after being unloaded
+    		// you may need to reestablish the village name/color/type info
+    		if (
+    				this.townColor==-1
+    				|| this.townColor2==-1
+    				|| this.townColor3==-1
+    				|| this.townColor4==-1
+    				|| this.townColor5==-1
+    				|| this.townColor6==-1
+    				|| this.townColor7==-1
+    				|| this.nameRoot.equals("")
+    				)
+    		{
+    			NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+    					(this.boundingBox.minX+this.boundingBox.maxX)/2,
+    					(this.boundingBox.minY+this.boundingBox.maxY)/2,
+    					(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+    			
+    			// Load the values of interest into memory
+    			this.townColor = villageNBTtag.getInteger("townColor");
+    			this.townColor2 = villageNBTtag.getInteger("townColor2");
+    			this.townColor3 = villageNBTtag.getInteger("townColor3");
+    			this.townColor4 = villageNBTtag.getInteger("townColor4");
+    			this.townColor5 = villageNBTtag.getInteger("townColor5");
+    			this.townColor6 = villageNBTtag.getInteger("townColor6");
+    			this.townColor7 = villageNBTtag.getInteger("townColor7");
+    			this.namePrefix = villageNBTtag.getString("namePrefix");
+    			this.nameRoot = villageNBTtag.getString("nameRoot");
+    			this.nameSuffix = villageNBTtag.getString("nameSuffix");
+    		}
+    		
+    		WorldChunkManager chunkManager= world.getWorldChunkManager();
+    		int bbCenterX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int bbCenterZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+    		BiomeGenBase biome = chunkManager.getBiomeGenAt(bbCenterX, bbCenterZ);
+    		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+    		if (this.villageType==null)
+    		{
+    			try {
+    				String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+    				}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (this.materialType==null)
+    		{
+    			try {
+    				String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+    				}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (!this.disallowModSubs)
+    		{
+    			try {
+    				String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+    				else {this.disallowModSubs = false;}
+    				}
+    			catch (Exception e) {this.disallowModSubs = false;}
+    		}
+    		// Reestablish biome if start was null or something
+    		if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+    		Object[] blockObject;
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    		// Establish top and filler blocks, substituting Grass and Dirt if they're null
+    		Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+    		Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+    		
+    		// Clear space above
+    		for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+    			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+    		}}
+    		
+    		// Follow the blueprint to set up the starting foundation
+    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
+    			
+    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
+    			int posX = this.getXWithOffset(u, w);
+    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
+    			int posZ = this.getZWithOffset(u, w);
+    					
+    			if (unitLetter.equals("F"))
+    			{
+    				// If marked with F: fill with dirt foundation
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    			else if (unitLetter.equals("P"))
+    			{
+    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
+    			}
+    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+    			{
+    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    		}}
+    		
+    		
+    		// Stripped logs (Vertical)
+        	Block biomeLogVertBlock = Blocks.log; int biomeLogVertMeta = 0;
+    		Block biomeStrippedLogVerticBlock = biomeLogVertBlock; int biomeStrippedLogVerticMeta = biomeLogVertMeta;
+    		// Try to see if stripped logs exist
+    		blockObject = ModObjects.chooseModStrippedLog(biomeLogVertMeta, 0); biomeStrippedLogVerticBlock = (Block)blockObject[0]; biomeStrippedLogVerticMeta = (Integer)blockObject[1];
+    		for (int[] uuvvww : new int[][]{
+        		// Front Awning
+        		{1,0,3, 1,1,3}, {6,0,3, 6,1,3}, 
+        		{1,0,1, 1,1,1}, {6,0,1, 6,1,1}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+            
+            
+            // Planks
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{
+            	{1,1,2, 1,1,2}, {2,1,3, 5,1,3}, {6,1,2, 6,1,2}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+    		
+    		
+    		// Wooden slabs (Bottom)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabBottomBlock = (Block)blockObject[0]; int biomeWoodSlabBottomMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{2,0,0, 2,0,0}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, false);	
+    		}
+    		
+    		
+    		// Wooden slabs (Top)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 8, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabTopBlock = (Block)blockObject[0]; int biomeWoodSlabTopMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{2,0,3, 5,0,3}, 
+    			{1,0,2, 6,0,2}, 
+    			{2,0,1, 5,0,1}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeWoodSlabTopBlock, biomeWoodSlabTopMeta, biomeWoodSlabTopBlock, biomeWoodSlabTopMeta, false);	
+    		}
+    		
+    		
+    		// Cobblestone
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{1,2,1, 1,2,2}, {2,2,1, 5,2,1}, {6,2,1, 6,2,3}, {2,2,3, 5,2,3}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
+    		}
+    		
+    		
+    		// Mossy Cobblestone
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.mossy_cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{1,2,3, 1,2,3}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, false);	
+    		}
+    		
+    		
+    		// Cobblestone Slab (lower)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 3, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneSlabLowerBlock = (Block)blockObject[0]; int biomeCobblestoneSlabLowerMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{0,2,1, 0,2,4}, 
+    			{1,2,4, 2,2,4}, {5,2,4, 7,2,4}, 
+    			{7,2,0, 7,2,4}, 
+    			{2,2,0, 6,2,0}, 
+    			{2,3,2, 3,3,2}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, false);	
+    		}
+    		
+    		
+    		// Mossy Cobblestone Slab (lower)
+    		Block biomeMossyCobblestoneSlabLowerBlock = biomeCobblestoneSlabLowerBlock; int biomeMossyCobblestoneSlabLowerMeta = biomeCobblestoneSlabLowerMeta;
+    		blockObject = ModObjects.chooseModMossyCobblestoneSlabBlock(false);
+    		if (blockObject != null)
+    		{
+    			blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);
+    			biomeMossyCobblestoneSlabLowerBlock = (Block)blockObject[0]; biomeMossyCobblestoneSlabLowerMeta = (Integer)blockObject[1];
+    		}
+    		for(int[] uuvvww : new int[][]{
+    			{3,2,4, 4,2,4}, 
+    			{4,3,2, 5,3,2}, 
+    			{0,2,0, 1,2,0}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneSlabLowerBlock, biomeMossyCobblestoneSlabLowerMeta, biomeMossyCobblestoneSlabLowerBlock, biomeMossyCobblestoneSlabLowerMeta, false);	
+    		}
+    		
+    		
+    		// Trapdoor (Top Vertical)
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.trapdoor, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{2,1,1, 2}, {3,1,1, 2}, {4,1,1, 2}, {5,1,1, 2}, 
+            	})
+            {
+            	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[3], this.coordBaseMode, true, true), uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+            }
+            
+            
+            // Hanging Lanterns
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeHangingLanternMeta = (Integer)blockObject[1];
+        	for (int[] uvw : new int[][]{
+        		{0,1,4}, {7,1,4}, 
+        		{0,1,0}, {7,1,0}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeHangingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+    		
+    		// Entities
+    		if (!this.entitiesGenerated)
+    		{
+    			this.entitiesGenerated=true;
+    			
+            	// Chickens
+            	for (int[] uvw : new int[][]{
+        			{3, 1, 2},
+        			{5, 1, 2},
+        			})
+        		{
+    				EntityChicken entityChicken = new EntityChicken(world);
+    				IEntityLivingData ientitylivingdata = entityChicken.onSpawnWithEgg(null);
+    				entityChicken.setLocationAndAngles(getXWithOffset(uvw[0], uvw[2]) + 0.5D, getYWithOffset(uvw[1]) + 0.5D, getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
+    				world.spawnEntityInWorld((Entity)entityChicken);
+        		}
+    		}
+    		
+    		// Clean items
+    		if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
+    		return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 0;}
+    }
+    
+    
+    // --- Animal Pen 2 --- //
+    // designed by THASSELHOFF
+    
+    public static class SwampAnimalPen2 extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	public BiomeGenBase biome=null;
+    	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+    			"FFFFFFFFFFFFFF",
+        };
+    	// Here are values to assign to the bounding box
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 6;
+    	// Values for lining things up
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	public static final byte MEDIAN_BORDERS = 1+2+4+8; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 0;
+    	private static final int INCREASE_MIN_W = 0;
+    	private static final int DECREASE_MAX_W = 0;
+    	
+    	private int averageGroundLevel = -1;
+    	
+    	public SwampAnimalPen2() {}
+
+    	public SwampAnimalPen2(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+    	{
+    		super();
+    		this.coordBaseMode = coordBaseMode;
+    		this.boundingBox = boundingBox;
+    		// Additional stuff to be used in the construction
+    		if (start!=null)
+    		{
+    			this.villageType=start.villageType;
+    			this.materialType=start.materialType;
+    			this.disallowModSubs=start.disallowModSubs;
+    			this.townColor=start.townColor;
+    			this.townColor2=start.townColor2;
+    			this.townColor3=start.townColor3;
+    			this.townColor4=start.townColor4;
+    			this.townColor5=start.townColor5;
+    			this.townColor6=start.townColor6;
+    			this.townColor7=start.townColor7;
+    			this.namePrefix=start.namePrefix;
+    			this.nameRoot=start.nameRoot;
+    			this.nameSuffix=start.nameSuffix;
+    			this.biome=start.biome;
+    		}
+    	}
+    	
+    	public static SwampAnimalPen2 buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    	{
+    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+    		
+    		return (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null) ? new SwampAnimalPen2(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+    	}
+    	
+    	
+    	@Override
+    	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+    	{
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
+    		
+    		// In the event that this village construction is resuming after being unloaded
+    		// you may need to reestablish the village name/color/type info
+    		if (
+    				this.townColor==-1
+    				|| this.townColor2==-1
+    				|| this.townColor3==-1
+    				|| this.townColor4==-1
+    				|| this.townColor5==-1
+    				|| this.townColor6==-1
+    				|| this.townColor7==-1
+    				|| this.nameRoot.equals("")
+    				)
+    		{
+    			NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+    					(this.boundingBox.minX+this.boundingBox.maxX)/2,
+    					(this.boundingBox.minY+this.boundingBox.maxY)/2,
+    					(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+    			
+    			// Load the values of interest into memory
+    			this.townColor = villageNBTtag.getInteger("townColor");
+    			this.townColor2 = villageNBTtag.getInteger("townColor2");
+    			this.townColor3 = villageNBTtag.getInteger("townColor3");
+    			this.townColor4 = villageNBTtag.getInteger("townColor4");
+    			this.townColor5 = villageNBTtag.getInteger("townColor5");
+    			this.townColor6 = villageNBTtag.getInteger("townColor6");
+    			this.townColor7 = villageNBTtag.getInteger("townColor7");
+    			this.namePrefix = villageNBTtag.getString("namePrefix");
+    			this.nameRoot = villageNBTtag.getString("nameRoot");
+    			this.nameSuffix = villageNBTtag.getString("nameSuffix");
+    		}
+    		
+    		WorldChunkManager chunkManager= world.getWorldChunkManager();
+    		int bbCenterX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int bbCenterZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+    		BiomeGenBase biome = chunkManager.getBiomeGenAt(bbCenterX, bbCenterZ);
+    		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+    		if (this.villageType==null)
+    		{
+    			try {
+    				String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+    				}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (this.materialType==null)
+    		{
+    			try {
+    				String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+    				}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (!this.disallowModSubs)
+    		{
+    			try {
+    				String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+    				else {this.disallowModSubs = false;}
+    				}
+    			catch (Exception e) {this.disallowModSubs = false;}
+    		}
+    		// Reestablish biome if start was null or something
+    		if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+    		Object[] blockObject;
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    		// Establish top and filler blocks, substituting Grass and Dirt if they're null
+    		Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+    		Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+    		
+    		// Clear space above
+    		for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+    			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+    		}}
+    		
+    		// Follow the blueprint to set up the starting foundation
+    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
+    			
+    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
+    			int posX = this.getXWithOffset(u, w);
+    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
+    			int posZ = this.getZWithOffset(u, w);
+    					
+    			if (unitLetter.equals("F"))
+    			{
+    				// If marked with F: fill with dirt foundation
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    			else if (unitLetter.equals("P"))
+    			{
+    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
+    			}
+    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+    			{
+    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    		}}
+            
+            
+            // Grass
+            for(int[] uuvvww : new int[][]{
+    			{0,0,0, 0,0,13}, 
+    			{1,0,0, 1,0,3}, {1,0,7, 3,0,13}, 
+    			{2,0,0, 3,0,2}, 
+    			{4,0,0, 4,0,1}, {4,0,6, 4,0,7}, {4,0,10, 4,0,13}, 
+    			{5,0,0, 6,0,0}, {5,0,5, 5,0,6}, {5,0,11, 5,0,13}, 
+    			{6,0,4, 6,0,7}, {6,0,12, 8,0,13}, 
+    			{7,0,0, 7,0,4}, {7,0,6, 7,0,9}, 
+    			{8,0,0, 8,0,3}, {8,0,7, 8,0,10}, 
+    			{9,0,0, 10,0,2}, {9,0,8, 9,0,13}, 
+    			{10,0,10, 10,0,13}, 
+    			{11,0,0, 11,0,3}, {11,0,10, 11,0,13}, 
+    			{12,0,0, 12,0,4}, {12,0,8, 12,0,13}, 
+    			{13,0,0, 13,0,13}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);	
+            }
+    		
+    		
+    		// Stripped logs (Vertical)
+        	Block biomeLogVertBlock = Blocks.log; int biomeLogVertMeta = 0;
+    		Block biomeStrippedLogVerticBlock = biomeLogVertBlock; int biomeStrippedLogVerticMeta = biomeLogVertMeta;
+    		// Try to see if stripped logs exist
+    		blockObject = ModObjects.chooseModStrippedLog(biomeLogVertMeta, 0); biomeStrippedLogVerticBlock = (Block)blockObject[0]; biomeStrippedLogVerticMeta = (Integer)blockObject[1];
+    		for (int[] uuvvww : new int[][]{
+        		// Front Awning
+        		{0,1,13, 0,5,13}, {13,1,13, 13,5,13}, 
+        		{0,1,0, 0,4,0}, {13,1,0, 13,4,0}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+        	
+        	            
+            // Fences
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
+            for (int[] uuvvww : new int[][]{
+            	// Lantern posts
+            	{0,5,12}, {1,5,13}, {12,4,13}, {13,5,12}, 
+            	{0,5,0}, {0,5,1}, {1,5,0}, {12,5,0}, {13,5,0}, {13,4,1}, 
+            	// Fence
+            	{1,1,13}, {2,1,13}, {3,1,13}, {4,1,13}, {5,1,13}, {6,1,13}, {9,1,13}, {10,1,13}, {11,1,13}, {12,1,13}, 
+            	{0,1,1}, {0,1,2}, {0,1,3}, {0,1,6}, {0,1,7}, {0,1,8}, {0,1,9}, {0,1,10}, {0,1,11}, {0,1,12}, 
+            	{13,1,1}, {13,1,2}, {13,1,5}, {13,1,6}, {13,1,7}, {13,1,8}, {13,1,9}, {13,1,10}, {13,1,11}, {13,1,12}, 
+            	{1,1,0}, {2,1,0}, {3,1,0}, {4,1,0}, {5,1,0}, {6,1,0}, {7,1,0}, {8,1,0}, {9,1,0}, {12,1,0}, 
+        		})
+            {
+            	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+            }
+            
+            
+        	// Fence Gate (Across)
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence_gate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceGateBlock = (Block)blockObject[0]; int biomeFenceGateMeta = (Integer)blockObject[1];
+        	for(int[] uvw : new int[][]{
+        		{7,1,13}, {8,1,13}, 
+        		
+        		{10,1,0}, {11,1,0}, 
+            	})
+            {
+        		this.placeBlockAtCurrentPosition(world, biomeFenceGateBlock, StructureVillageVN.getMetadataWithOffset(biomeFenceGateBlock, biomeFenceGateMeta, this.coordBaseMode), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+            
+            
+        	// Fence Gate (Along)
+        	for(int[] uvw : new int[][]{
+        		{0,1,4}, {0,1,5}, {13,1,3}, {13,1,4}, 
+            	})
+            {
+        		this.placeBlockAtCurrentPosition(world, biomeFenceGateBlock, StructureVillageVN.getMetadataWithOffset(biomeFenceGateBlock, (biomeFenceGateMeta+1)%8, this.coordBaseMode), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+            
+            
+            // Hanging Lanterns
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeHangingLanternMeta = (Integer)blockObject[1];
+        	for (int[] uvw : new int[][]{
+        		{0,3,12}, {1,4,13}, {12,4,13}, {13,4,12}, 
+        		{1,3,0}, {0,4,1}, {12,4,0}, {13,3,1}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeHangingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	            
+    		// Water
+    		for(int[] uuvvww : new int[][]{
+    			// Back left
+    			{1,0,7, 1,0,8}, {2,0,7, 2,0,9}, {3,0,7, 3,0,11}, {4,0,8, 4,0,12}, {5,0,9, 5,0,12}, {6,0,10, 6,0,12}, 
+    			// Back right
+    			{7,0,8, 7,0,8}, {8,0,7, 9,0,9}, {10,0,6, 10,0,8}, {11,0,5, 11,0,7}, 
+    			// Front pond
+    			{3,0,3, 3,0,4}, {4,0,2, 4,0,5}, {5,0,1, 5,0,6}, {6,0,1, 6,0,5}, {7,0,1, 7,0,4}, {8,0,2, 9,0,3}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.flowing_water, 0, Blocks.flowing_water, 0, false);	
+    		}
+    		
+    		
+    		// Lilypad
+    		for (int[] uvw : new int[][]{
+    			{2,1,8}, 
+    			{3,1,10}, {3,1,11}, 
+    			{4,1,5}, {4,1,10}, 
+    			{5,1,3}, {5,1,9}, 
+    			{7,1,3}, 
+    			{9,1,7}, {9,1,9}, 
+    			{11,1,6}, 
+    			}) {
+    			this.placeBlockAtCurrentPosition(world, Blocks.waterlily, 0, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
+            
+            
+            // Hay bales (vertical)
+        	for (int[] uvw : new int[][]{
+        		{9,1,10}, {9,1,11}, 
+        		{10,2,10}, {10,1,11}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Hay bales (along)
+        	for (int[] uvw : new int[][]{
+        		{10,1,9}, {10,1,10}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 4+(this.coordBaseMode%2!=0? 0:4), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Hay bales (across)
+        	for (int[] uvw : new int[][]{
+        		{11,1,10}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 4+(this.coordBaseMode%2==0? 0:4), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+    		
+    		
+    		// Unkempt Grass
+    		for (int[] uvwg : new int[][]{ // g is grass type
+    			{1,1,5, 0}, {1,1,11, 2}, {1,1,12, 1}, 
+    			{2,1,4, 0}, {2,1,12, 1}, 
+    			{7,1,11, 0}, 
+    			{9,1,5, 1}, 
+    			{10,1,1, 2}, {10,1,3, 0}, {10,1,4, 0}, 
+    			{11,1,1, 1}, {11,1,4, 0}, 
+    			{12,1,1, 2}, 
+    		})
+    		{
+    			if (uvwg[3]==0) // Short grass
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 1, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    			}
+    			else if (uvwg[3]==1) // Tall grass
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 2, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uvwg[0], uvwg[1]+1, uvwg[2], structureBB);
+    			}
+    			else if (uvwg[3]==2) // Fern
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 2, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    			}
+    			else // Large Fern
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 3, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uvwg[0], uvwg[1]+1, uvwg[2], structureBB);
+    			}
+    		}
+        	
+    		
+    		// Entities
+    		if (!this.entitiesGenerated)
+    		{
+    			this.entitiesGenerated=true;
+    			
+    			// Livestock
+            	for (int[] uvw : new int[][]{
+        			{2, 1, 10}, 
+        			{8, 1, 5}, 
+        			})
+        		{
+                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
+                    animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(animal);
+                    
+                    // Dirt block underneath
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+        		}
+            	
+    			// Horse
+            	for (int[] uvw : new int[][]{
+            		{2, 1, 2}, 
+        			})
+        		{
+    				EntityHorse entityHorse = new EntityHorse(world);
+    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
+    				
+                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
+                	{
+                		String[] petname_a = NameGenerator.newRandomName("pet", random);
+                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
+                	}
+                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityHorse);
+                    
+                    // Dirt block underneath
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+        		}
+    		}
+			
+    		
+    		// Clean items
+    		if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
+    		return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 0;}
+    }
+    
+    
     // --- Armorer House --- //
     // designed by AstroTibs
     
@@ -1935,22 +2730,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -2561,22 +3353,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -3126,22 +3915,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -3629,22 +4415,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -4256,23 +5039,20 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel <= this.STRUCTURE_HEIGHT+5) {return true;} // Do not construct if ground level is too low
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel <= this.STRUCTURE_HEIGHT+5) {return true;} // Do not construct if ground level is too low
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		    		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -4880,22 +5660,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -5440,22 +6217,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -6114,22 +6888,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -6640,22 +7411,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -7259,22 +8027,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -7884,22 +8649,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -8478,22 +9240,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -9093,22 +9852,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -10541,6 +11297,556 @@ public class SwampStructures
 	}
     
     
+    // --- Stable --- //
+    // designed by THASSELHOFF
+    
+    public static class SwampStable extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	public BiomeGenBase biome=null;
+    	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+    			"            FFFF  ",
+    			" F      FFFFFFFFF ",
+    			"        FFFFFFFFFF",
+    			"        FFFFFFFFFF",
+    			"        FFFFFFFFFF",
+    			"        FFFFFFFFFF",
+    			"        FFFFFFFFFF",
+    			" F      FFFFFFFFF ",
+    			"            FFFF  ",
+        };
+    	// Here are values to assign to the bounding box
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 9;
+    	// Values for lining things up
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	public static final byte MEDIAN_BORDERS = 1; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	private static final int INCREASE_MIN_U = 13;
+    	private static final int DECREASE_MAX_U = 0;
+    	private static final int INCREASE_MIN_W = 0;
+    	private static final int DECREASE_MAX_W = 0;
+    	
+    	private int averageGroundLevel = -1;
+    	
+    	public SwampStable() {}
+
+    	public SwampStable(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+    	{
+    		super();
+    		this.coordBaseMode = coordBaseMode;
+    		this.boundingBox = boundingBox;
+    		// Additional stuff to be used in the construction
+    		if (start!=null)
+    		{
+    			this.villageType=start.villageType;
+    			this.materialType=start.materialType;
+    			this.disallowModSubs=start.disallowModSubs;
+    			this.townColor=start.townColor;
+    			this.townColor2=start.townColor2;
+    			this.townColor3=start.townColor3;
+    			this.townColor4=start.townColor4;
+    			this.townColor5=start.townColor5;
+    			this.townColor6=start.townColor6;
+    			this.townColor7=start.townColor7;
+    			this.namePrefix=start.namePrefix;
+    			this.nameRoot=start.nameRoot;
+    			this.nameSuffix=start.nameSuffix;
+    			this.biome=start.biome;
+    		}
+    	}
+    	
+    	public static SwampStable buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    	{
+    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+    		
+    		return (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null) ? new SwampStable(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+    	}
+    	
+    	
+    	@Override
+    	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+    	{
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
+    		
+    		// In the event that this village construction is resuming after being unloaded
+    		// you may need to reestablish the village name/color/type info
+    		if (
+    				this.townColor==-1
+    				|| this.townColor2==-1
+    				|| this.townColor3==-1
+    				|| this.townColor4==-1
+    				|| this.townColor5==-1
+    				|| this.townColor6==-1
+    				|| this.townColor7==-1
+    				|| this.nameRoot.equals("")
+    				)
+    		{
+    			NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+    					(this.boundingBox.minX+this.boundingBox.maxX)/2,
+    					(this.boundingBox.minY+this.boundingBox.maxY)/2,
+    					(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+    			
+    			// Load the values of interest into memory
+    			this.townColor = villageNBTtag.getInteger("townColor");
+    			this.townColor2 = villageNBTtag.getInteger("townColor2");
+    			this.townColor3 = villageNBTtag.getInteger("townColor3");
+    			this.townColor4 = villageNBTtag.getInteger("townColor4");
+    			this.townColor5 = villageNBTtag.getInteger("townColor5");
+    			this.townColor6 = villageNBTtag.getInteger("townColor6");
+    			this.townColor7 = villageNBTtag.getInteger("townColor7");
+    			this.namePrefix = villageNBTtag.getString("namePrefix");
+    			this.nameRoot = villageNBTtag.getString("nameRoot");
+    			this.nameSuffix = villageNBTtag.getString("nameSuffix");
+    		}
+    		
+    		WorldChunkManager chunkManager= world.getWorldChunkManager();
+    		int bbCenterX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int bbCenterZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+    		BiomeGenBase biome = chunkManager.getBiomeGenAt(bbCenterX, bbCenterZ);
+    		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+    		if (this.villageType==null)
+    		{
+    			try {
+    				String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+    				}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (this.materialType==null)
+    		{
+    			try {
+    				String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+    				}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (!this.disallowModSubs)
+    		{
+    			try {
+    				String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+    				else {this.disallowModSubs = false;}
+    				}
+    			catch (Exception e) {this.disallowModSubs = false;}
+    		}
+    		// Reestablish biome if start was null or something
+    		if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+    		Object[] blockObject;
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    		// Establish top and filler blocks, substituting Grass and Dirt if they're null
+    		Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+    		Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+    		
+    		// Clear space above
+    		for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+    			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+    		}}
+    		
+    		// Follow the blueprint to set up the starting foundation
+    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
+    			
+    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
+    			int posX = this.getXWithOffset(u, w);
+    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
+    			int posZ = this.getZWithOffset(u, w);
+    					
+    			if (unitLetter.equals("F"))
+    			{
+    				// If marked with F: fill with dirt foundation
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    			else if (unitLetter.equals("P"))
+    			{
+    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
+    			}
+    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+    			{
+    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    		}}
+            
+            
+            // Grass
+            for(int[] uuvvww : new int[][]{
+    			{8,0,2, 8,0,6}, 
+    			{9,0,1, 11,0,7}, 
+    			{12,0,0, 12,0,8}, 
+    			{13,0,0, 13,0,6}, {13,0,8, 14,0,8}, 
+    			{14,0,0, 14,0,5}, 
+    			{15,0,1, 16,0,3}, {15,0,7, 15,0,8}, {16,0,6, 16,0,7}, 
+    			{17,0,2, 17,0,6}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeGrassBlock, biomeGrassMeta, biomeGrassBlock, biomeGrassMeta, false);	
+            }
+    		
+    		
+    		// Unkempt Grass
+    		for (int[] uvwg : new int[][]{ // g is grass type
+    			{13,1,1, 1}, 
+    		})
+    		{
+    			if (uvwg[3]==0) // Short grass
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 1, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    			}
+    			else if (uvwg[3]==1)// Tall grass
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 2, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uvwg[0], uvwg[1]+1, uvwg[2], structureBB);
+    			}
+    			else if (uvwg[3]==2) // Fern
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.tallgrass, 2, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    			}
+    			else // Large Fern
+    			{
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 3, uvwg[0], uvwg[1], uvwg[2], structureBB);
+    				this.placeBlockAtCurrentPosition(world, Blocks.double_plant, 11, uvwg[0], uvwg[1]+1, uvwg[2], structureBB);
+    			}
+    		}
+    		
+    		
+    		// Stripped logs (Vertical)
+        	Block biomeLogVertBlock = Blocks.log; int biomeLogVertMeta = 0;
+    		Block biomeStrippedLogVerticBlock = biomeLogVertBlock; int biomeStrippedLogVerticMeta = biomeLogVertMeta;
+    		// Try to see if stripped logs exist
+    		blockObject = ModObjects.chooseModStrippedLog(biomeLogVertMeta, 0); biomeStrippedLogVerticBlock = (Block)blockObject[0]; biomeStrippedLogVerticMeta = (Integer)blockObject[1];
+    		for (int[] uuvvww : new int[][]{
+        		{1,1,7, 1,5,7}, {8,1,7, 8,5,7}, 
+        		{1,1,1, 1,5,1}, {8,1,1, 8,5,1}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+            
+            
+            // Planks
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{
+            	// Back wall
+            	{2,3,7, 7,3,7}, {2,4,7, 2,4,7}, {4,4,7, 5,4,7}, {7,4,7, 7,4,7}, {2,5,7, 7,5,7},
+            	// Left wall
+            	{1,3,2, 1,3,6}, {1,4,2, 1,4,2}, {1,4,4, 1,4,4}, {1,4,6, 1,4,6}, {1,5,2, 1,5,6},
+            	// Right wall
+            	{8,3,2, 8,5,2}, {8,3,6, 8,5,6}, 
+            	// Front wall
+            	{2,3,1, 7,3,1}, {2,4,1, 2,4,1}, {4,4,1, 5,4,1}, {7,4,1, 7,4,1}, {2,5,1, 7,5,1}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+    		
+    		
+    		// Wooden slabs (Bottom)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabBottomBlock = (Block)blockObject[0]; int biomeWoodSlabBottomMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{11,1,3, 11,1,5}, {9,2,3, 9,2,5}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, false);	
+    		}
+    		
+    		
+    		// Wooden slabs (Top)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 8, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabTopBlock = (Block)blockObject[0]; int biomeWoodSlabTopMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			// Floor main
+    			{2,2,2, 8,2,6}, 
+    			// Floor fringe
+    			{2,2,7, 2,2,7}, {4,2,7, 5,2,7}, {7,2,7, 7,2,7}, 
+    			{1,2,2, 1,2,3}, {1,2,5, 1,2,6}, 
+    			{2,2,1, 2,2,1}, {4,2,1, 5,2,1}, {7,2,1, 7,2,1}, 
+    			// Ramp
+    			{10,1,3, 10,1,5}, 
+    			// Entrance lip
+    			{8,5,3, 8,5,5}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeWoodSlabTopBlock, biomeWoodSlabTopMeta, biomeWoodSlabTopBlock, biomeWoodSlabTopMeta, false);	
+    		}
+    		
+    		
+    		// Cobblestone
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			// Roof
+    			{1,6,1, 1,6,7}, {2,6,7, 2,6,7}, {4,6,7, 7,6,7}, 
+    			{8,6,1, 8,6,3}, {8,6,5, 8,6,7}, 
+    			{4,6,1, 5,6,1}, 
+    			{3,7,3, 6,7,3}, {3,7,4, 3,7,4}, {6,7,4, 6,7,4}, {3,7,5, 6,7,5}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
+    		}
+    		
+    		
+    		// Mossy Cobblestone
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.mossy_cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{3,6,7, 4,6,7}, {8,6,4, 8,6,4}, 
+    			{2,6,1, 3,6,1}, {6,6,1, 7,6,1}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, false);	
+    		}
+    		
+    		
+    		// Cobblestone Slab (lower)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 3, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneSlabLowerBlock = (Block)blockObject[0]; int biomeCobblestoneSlabLowerMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{0,6,1, 0,6,8}, 
+    			{1,6,8, 6,6,8}, 
+    			{9,6,0, 9,6,2}, {9,6,5, 9,6,6}, 
+    			{2,6,0, 5,6,0}, {7,6,0, 8,6,0}, 
+    			{2,7,2, 2,7,6}, {3,7,2, 6,7,2}, {3,7,6, 6,7,6}, {7,7,2, 7,7,6}, 
+    			{4,8,4, 4,8,4}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, false);	
+    		}
+    		
+    		
+    		// Mossy Cobblestone Slab (lower)
+    		Block biomeMossyCobblestoneSlabLowerBlock = biomeCobblestoneSlabLowerBlock; int biomeMossyCobblestoneSlabLowerMeta = biomeCobblestoneSlabLowerMeta;
+    		blockObject = ModObjects.chooseModMossyCobblestoneSlabBlock(false);
+    		if (blockObject != null)
+    		{
+    			blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);
+    			biomeMossyCobblestoneSlabLowerBlock = (Block)blockObject[0]; biomeMossyCobblestoneSlabLowerMeta = (Integer)blockObject[1];
+    		}
+    		for(int[] uuvvww : new int[][]{
+    			{0,6,0, 1,6,0}, {6,6,0, 6,6,0}, {7,6,8, 9,6,8}, 
+    			{9,6,3, 9,6,4}, {9,6,7, 9,6,7}, 
+    			{5,8,4, 5,8,4}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneSlabLowerBlock, biomeMossyCobblestoneSlabLowerMeta, biomeMossyCobblestoneSlabLowerBlock, biomeMossyCobblestoneSlabLowerMeta, false);	
+    		}
+    		
+    		
+    		// Trapdoor (Bottom Vertical)
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.trapdoor, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeTrapdoorBlock = (Block)blockObject[0]; int biomeTrapdoorMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+            	{6,3,2, 3}, 
+            	{7,3,3, 0}, 
+            	})
+            {
+            	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[3], this.coordBaseMode, false, true), uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+            }
+    		
+            
+    		// Water
+    		for(int[] uuvvww : new int[][]{
+    			// Trough
+    			{7,3,2, 7,3,2}, 
+    			// Pond
+    			{13,0,7, 13,0,7}, 
+    			{14,0,6, 14,0,7}, 
+    			{15,0,4, 15,0,6}, 
+    			{16,0,4, 16,0,5}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.flowing_water, 0, Blocks.flowing_water, 0, false);	
+    		}
+    		
+    		
+    		// Lilypad
+    		for (int[] uvw : new int[][]{
+    			{14,1,7}, 
+    			{15,1,5}, 
+    			{16,1,4}, 
+    			}) {
+    			this.placeBlockAtCurrentPosition(world, Blocks.waterlily, 0, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
+            
+            
+            // Hanging Lanterns
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeHangingLanternMeta = (Integer)blockObject[1];
+        	for (int[] uvw : new int[][]{
+        		// In hut
+        		{2,6,4}, {7,6,4}, 
+        		// Under house
+        		{3,2,7}, {6,2,7}, 
+        		{1,2,4}, 
+        		{3,2,1}, {6,2,1}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeHangingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+    		
+    		
+    		// Fences
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
+    		for (int[] uuvvww : new int[][]{
+    			// Pen
+    			{9,1,1, 12,1,1}, {12,1,0, 14,1,0}, {14,1,1, 14,1,1}, 
+    			{9,3,1, 10,3,1}, {9,2,1, 12,2,1}, 
+    			{16,1,1, 16,1,2}, {17,1,2, 17,1,6}, {16,1,6, 16,1,7}, {15,1,7, 15,1,8}, {12,1,8, 14,1,8}, 
+    			{9,1,7, 12,1,7}, 
+    			{9,3,7, 10,3,7}, {9,2,7, 12,2,7}, 
+    			{8,1,2, 8,1,6}, 
+    			// Windows
+    			{3,4,7, 3,4,7}, {6,4,7, 6,4,7}, 
+    			{1,4,3, 1,4,3}, {1,4,5, 1,4,5}, 
+    			{3,4,1, 3,4,1}, {6,4,1, 6,4,1}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+    		}
+            
+            
+        	// Fence Gate (Across)
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence_gate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceGateBlock = (Block)blockObject[0]; int biomeFenceGateMeta = (Integer)blockObject[1];
+        	for(int[] uvw : new int[][]{
+        		{15,1,1}, 
+            	})
+            {
+        		this.placeBlockAtCurrentPosition(world, biomeFenceGateBlock, StructureVillageVN.getMetadataWithOffset(biomeFenceGateBlock, biomeFenceGateMeta, this.coordBaseMode), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+            
+            
+            // Hay bales (vertical)
+        	for (int[] uvw : new int[][]{
+        		{2,3,6}, {2,4,6}, 
+        		{4,3,3}, {4,4,2}, {5,3,2}, 
+        		{6,3,6}, {8,3,5}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 0, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Hay bales (along)
+        	for (int[] uvw : new int[][]{
+        		{2,3,5}, 
+        		{3,3,2}, {4,3,2}, 
+        		{4,3,2}, {7,3,5}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 4+(this.coordBaseMode%2!=0? 0:4), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Hay bales (across)
+        	for (int[] uvw : new int[][]{
+        		{3,3,6}, 
+        		{7,3,6}, {7,4,6}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.hay_block, 4+(this.coordBaseMode%2==0? 0:4), uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Vines
+        	if (this.villageType==FunctionsVN.VillageType.JUNGLE || this.villageType==FunctionsVN.VillageType.SWAMP)
+        	{
+        		for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1: rightward, 2:backward, 3: leftward
+        			// Back-facing vines
+        			{1,5,0, 2}, {1,4,0, 2}, 
+            		})
+                {
+        			// Replace only when air to prevent overwriting stuff outside the bb
+        			if (world.isAirBlock(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2])))
+        			{
+        				this.placeBlockAtCurrentPosition(world, Blocks.vine, StructureVillageVN.chooseVineMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
+        			}
+                }
+        	}
+        	
+    		
+    		// Entities
+    		if (!this.entitiesGenerated)
+    		{
+    			this.entitiesGenerated=true;
+    			
+    			// Cow
+            	for (int[] uvw : new int[][]{
+        			{15, 1, 3}, 
+        			})
+        		{
+            		EntityCow entityCow = new EntityCow(world);
+    				IEntityLivingData ientitylivingdata = entityCow.onSpawnWithEgg(null);
+    				
+                    entityCow.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityCow);
+                    
+                    // Dirt block underneath
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+        		}
+            	
+    			// Horse
+            	for (int[] uvw : new int[][]{
+            		{13, 1, 4}, 
+        			})
+        		{
+    				EntityHorse entityHorse = new EntityHorse(world);
+    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
+    				
+                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
+                	{
+                		String[] petname_a = NameGenerator.newRandomName("pet", random);
+                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
+                	}
+                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+                    world.spawnEntityInWorld(entityHorse);
+                    
+                    // Dirt block underneath
+                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+        		}
+    		}
+    		
+    		// Clean items
+    		if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
+    		return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 0;}
+    }
+    
+    
     // --- Small House 1 --- //
     // designed by AstroTibs
     
@@ -10628,22 +11934,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -11082,22 +12385,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -11499,6 +12799,440 @@ public class SwampStructures
     }
     
     
+    // --- Tannery --- //
+    // designed by AstroTibs
+    
+    public static class SwampTannery extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	public BiomeGenBase biome=null;
+    	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+    			"    FFFFFFFF",
+    			" FFFFFFFFFFF",
+    			"FFF FFFFFFFF",
+    			"FFF FFFFFFFF",
+    			"FFF FFFFFFFF",
+    			"    FFF     ",
+    			"    FFF     ",
+        };
+    	// Here are values to assign to the bounding box
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
+    	// Values for lining things up
+    	private static final int GROUND_LEVEL = 1; // Spaces above the bottom of the structure considered to be "ground level"
+    	public static final byte MEDIAN_BORDERS = 1; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	private static final int INCREASE_MIN_U = 0;
+    	private static final int DECREASE_MAX_U = 5;
+    	private static final int INCREASE_MIN_W = 0;
+    	private static final int DECREASE_MAX_W = 1;
+    	
+    	private int averageGroundLevel = -1;
+    	
+    	public SwampTannery() {}
+
+    	public SwampTannery(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+    	{
+    		super();
+    		this.coordBaseMode = coordBaseMode;
+    		this.boundingBox = boundingBox;
+    		// Additional stuff to be used in the construction
+    		if (start!=null)
+    		{
+    			this.villageType=start.villageType;
+    			this.materialType=start.materialType;
+    			this.disallowModSubs=start.disallowModSubs;
+    			this.townColor=start.townColor;
+    			this.townColor2=start.townColor2;
+    			this.townColor3=start.townColor3;
+    			this.townColor4=start.townColor4;
+    			this.townColor5=start.townColor5;
+    			this.townColor6=start.townColor6;
+    			this.townColor7=start.townColor7;
+    			this.namePrefix=start.namePrefix;
+    			this.nameRoot=start.nameRoot;
+    			this.nameSuffix=start.nameSuffix;
+    			this.biome=start.biome;
+    		}
+    	}
+    	
+    	public static SwampTannery buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    	{
+    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+    		
+    		return (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null) ? new SwampTannery(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+    	}
+    	
+    	
+    	@Override
+    	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+    	{
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
+    		
+    		// In the event that this village construction is resuming after being unloaded
+    		// you may need to reestablish the village name/color/type info
+    		if (
+    				this.townColor==-1
+    				|| this.townColor2==-1
+    				|| this.townColor3==-1
+    				|| this.townColor4==-1
+    				|| this.townColor5==-1
+    				|| this.townColor6==-1
+    				|| this.townColor7==-1
+    				|| this.nameRoot.equals("")
+    				)
+    		{
+    			NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+    					(this.boundingBox.minX+this.boundingBox.maxX)/2,
+    					(this.boundingBox.minY+this.boundingBox.maxY)/2,
+    					(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+    			
+    			// Load the values of interest into memory
+    			this.townColor = villageNBTtag.getInteger("townColor");
+    			this.townColor2 = villageNBTtag.getInteger("townColor2");
+    			this.townColor3 = villageNBTtag.getInteger("townColor3");
+    			this.townColor4 = villageNBTtag.getInteger("townColor4");
+    			this.townColor5 = villageNBTtag.getInteger("townColor5");
+    			this.townColor6 = villageNBTtag.getInteger("townColor6");
+    			this.townColor7 = villageNBTtag.getInteger("townColor7");
+    			this.namePrefix = villageNBTtag.getString("namePrefix");
+    			this.nameRoot = villageNBTtag.getString("nameRoot");
+    			this.nameSuffix = villageNBTtag.getString("nameSuffix");
+    		}
+    		
+    		WorldChunkManager chunkManager= world.getWorldChunkManager();
+    		int bbCenterX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int bbCenterZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+    		BiomeGenBase biome = chunkManager.getBiomeGenAt(bbCenterX, bbCenterZ);
+    		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+    		if (this.villageType==null)
+    		{
+    			try {
+    				String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+    				}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (this.materialType==null)
+    		{
+    			try {
+    				String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+    				}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (!this.disallowModSubs)
+    		{
+    			try {
+    				String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+    				else {this.disallowModSubs = false;}
+    				}
+    			catch (Exception e) {this.disallowModSubs = false;}
+    		}
+    		// Reestablish biome if start was null or something
+    		if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+    		Object[] blockObject;
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    		// Establish top and filler blocks, substituting Grass and Dirt if they're null
+    		Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+    		Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+    		
+    		// Clear space above
+    		for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+    			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+    		}}
+    		
+    		// Follow the blueprint to set up the starting foundation
+    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
+    			
+    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
+    			int posX = this.getXWithOffset(u, w);
+    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
+    			int posZ = this.getZWithOffset(u, w);
+    					
+    			if (unitLetter.equals("F"))
+    			{
+    				// If marked with F: fill with dirt foundation
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    			else if (unitLetter.equals("P"))
+    			{
+    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
+    			}
+    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+    			{
+    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    		}}
+            
+            
+            // Planks
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{
+            	// Lookout
+            	{0,0,2, 0,2,4}, 
+            	{1,0,2, 1,0,4}, {1,1,2, 1,2,2}, 
+            	{2,0,2, 2,2,4}, 
+            	// Main house
+            	// Front porch
+            	{4,0,0, 6,0,1}, 
+            	// Floor
+            	{4,0,2, 4,0,6}, 
+            	{5,0,2, 6,0,2}, 
+            	{5,0,6, 6,0,6}, 
+            	{7,0,2, 11,0,6}, 
+            	// Left wall
+            	{4,1,2, 4,3,4}, {4,3,5, 4,3,5}, {4,1,6, 4,3,6}, 
+            	// Back wall
+            	{5,1,6, 6,3,6}, 
+            	// Outside rim
+            	{7,1,2, 11,1,2}, 
+            	{11,1,3, 11,1,5}, 
+            	{7,1,6, 11,1,6}, 
+            	// Front wall
+            	{5,3,2, 5,3,2}, {6,1,2, 6,3,2}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);	
+            }
+    		
+    		
+    		// Wood stairs
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.oak_stairs, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodStairsBlock = (Block)blockObject[0];
+    		for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
+    			// Lookout
+    			{0,3,4, 2+4}, {1,3,4, 2+4}, {2,3,4, 2+4}, 
+    			{0,3,3, 0+4}, {2,3,3, 1+4}, 
+    			{0,3,2, 3+4}, {1,3,2, 3+4}, {2,3,2, 3+4}, 
+    			// House roof
+    			{3,3,6, 0}, {4,4,6, 0}, {6,4,6, 1}, {7,3,6, 1}, 
+    			{3,3,5, 0}, {4,4,5, 0}, {6,4,5, 1}, {7,3,5, 1}, 
+    			{3,3,4, 0}, {4,4,4, 0}, {6,4,4, 1}, {7,3,4, 1}, 
+    			{3,3,3, 0}, {4,4,3, 0}, {6,4,3, 1}, {7,3,3, 1}, 
+    			{3,3,2, 0}, {4,4,2, 0}, {6,4,2, 1}, {7,3,2, 1}, 
+    			})
+    		{
+    			this.placeBlockAtCurrentPosition(world, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uvwo[3]%4)+(uvwo[3]/4)*4, uvwo[0], uvwo[1], uvwo[2], structureBB);	
+    		}
+    		
+    		
+    		// Fences
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
+    		for (int[] uuvvww : new int[][]{
+    			// Lookout
+    			{0,4,4, 2,4,4}, 
+    			{0,4,3, 0,4,3}, {2,4,3, 2,4,3}, 
+    			{0,4,2, 2,4,2}, 
+    			{1,5,2, 1,6,2}, {1,6,1, 1,6,1}, 
+    			// Front porch
+    			{4,1,0, 6,1,0}, {4,2,0, 4,2,0}, {6,2,0, 6,2,0}, 
+    			// Awning
+    			{9,2,6, 9,2,6}, {11,2,6, 11,2,6}, 
+    			{9,2,2, 9,2,2}, {11,2,2, 11,2,2}, 
+    			// Top windows
+    			{5,4,2, 5,4,2}, {5,4,6, 5,4,6}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+    		}
+    		
+    		
+    		// Wooden slabs (Bottom)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabBottomBlock = (Block)blockObject[0]; int biomeWoodSlabBottomMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			// Front entrance
+    			{4,3,0, 6,3,1}, 
+    			// Awning
+    			{8,3,2, 11,3,6}, 
+    			// Roof
+    			{5,5,2, 5,5,6}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, biomeWoodSlabBottomBlock, biomeWoodSlabBottomMeta, false);	
+    		}
+            
+            
+            // Ladder
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.ladder, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLadderBlock = (Block)blockObject[0];
+        	for (int[] uuvvwwo : new int[][]{ // Orientation - 3:leftward, 1:rightward, 2:backward, 0:forward
+        		{1,1,3, 1,3,3, 0}, 
+        		})
+            {
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+            }
+            
+    		
+    		// Doors
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_door, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodDoorBlock = (Block)blockObject[0];
+    		for (int[] uvwoor : new int[][]{ // u, v, w, orientation, isShut (1/0 for true/false), isRightHanded (1/0 for true/false)
+    			// orientation: 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+    			{5,1,2, 2, 1, 0}, 
+    			{4,1,5, 3, 1, 1}, 
+    		})
+    		{
+    			for (int height=0; height<=1; height++)
+    			{
+    				this.placeBlockAtCurrentPosition(world, biomeWoodDoorBlock, StructureVillageVN.getDoorMetas(uvwoor[3], this.coordBaseMode, uvwoor[4]==1, uvwoor[5]==1)[height],
+    						uvwoor[0], uvwoor[1]+height, uvwoor[2], structureBB);
+    			}
+    		}
+            
+        	
+            // Cauldron
+        	for (int[] uuvvww : new int[][]{
+        		{10,1,5}, 
+        		{10,1,3}, 
+        		})
+            {
+        		this.placeBlockAtCurrentPosition(world, Blocks.cauldron, 3, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
+            }
+        	
+        	
+        	// Potted plant
+        	for (int[] uvws : new int[][]{ // u,v,w, sapling
+        		{11,2,4, 0}, // Oak
+           		})
+        	{
+            	StructureVillageVN.generateStructureFlowerPot(world, structureBB, random, 
+            			this.getXWithOffset(uvws[0], uvws[2]), 
+            			this.getYWithOffset(uvws[1]), 
+            			this.getZWithOffset(uvws[0], uvws[2]), 
+            			Blocks.sapling, uvws[3]);
+        	}
+        	
+        	
+            // Glazed terracotta
+        	Object[] tryGlazedTerracotta;
+        	for (int[] uvwoc : new int[][]{ // u,v,w, orientation, dye color
+        		// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+        		{5,0,5, 2, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{6,0,5, 3, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{5,0,4, 1, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{6,0,4, 0, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{5,0,3, 2, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{6,0,3, 3, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+           		})
+        	{
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		if (tryGlazedTerracotta != null)
+            	{
+        			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
+            	}
+        		else
+        		{
+        			this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, uvwoc[4], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
+        		}
+            }
+            
+            
+            // Hanging Lanterns
+        	blockObject = ModObjects.chooseModLanternBlock(true); Block biomeHangingLanternBlock = (Block)blockObject[0]; int biomeHangingLanternMeta = (Integer)blockObject[1];
+        	for (int[] uvw : new int[][]{
+        		// In house
+        		{6,3,4}, 
+        		// Hanging
+        		{1,5,1}, 
+            	}) {
+            	this.placeBlockAtCurrentPosition(world, biomeHangingLanternBlock, biomeHangingLanternMeta, uvw[0], uvw[1], uvw[2], structureBB);
+            }
+        	
+        	
+        	// Vines
+        	if (this.villageType==FunctionsVN.VillageType.JUNGLE || this.villageType==FunctionsVN.VillageType.SWAMP)
+        	{
+        		for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1: rightward, 2:backward, 3: leftward
+        			// Left side
+        			{0,2,4, 3}, 
+        			// Right side
+        			{12,1,5, 1}, 
+        			// Forward-facing vines
+        			{0,2,5, 0}, {0,1,5, 0}, 
+        			{5,3,7, 0}, {5,2,7, 0}, {6,3,7, 0}, 
+        			{9,1,7, 0}, {10,1,7, 0}, 
+        			// Back-facing vines
+        			{0,2,1, 2}, 
+        			{1,2,1, 2}, {1,1,1, 2}, 
+        			{9,1,1, 2}, {10,1,1, 2}, 
+            		})
+                {
+        			// Replace only when air to prevent overwriting stuff outside the bb
+        			if (world.isAirBlock(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2])))
+        			{
+        				this.placeBlockAtCurrentPosition(world, Blocks.vine, StructureVillageVN.chooseVineMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
+        			}
+                }
+        	}
+    		
+    		
+    		// Villagers
+    		if (!this.entitiesGenerated)
+    		{
+    			this.entitiesGenerated=true;
+    			
+    			int s = random.nextInt(16);
+    			
+    			int u = s==15 ? 1 : 5+(s/3);
+    			int v = 1;
+    			int w = s==15 ? 3 : 5+(s%3);
+    			
+    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 4, 2, 0); // Leatherworker
+    			
+    			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
+    			world.spawnEntityInWorld(entityvillager);
+    		}
+    		
+    		// Clean items
+    		if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
+    		return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 4;}
+    }
+    
+    
     // --- Small House 3 --- //
     // Shrek's House
     // designed by AstroTibs
@@ -11587,22 +13321,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -12145,22 +13876,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -12706,22 +14434,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -13287,6 +15012,459 @@ public class SwampStructures
     }
     
     
+    // --- Weapon Smithy --- //
+    // designed by AstroTibs
+    
+    public static class SwampWeaponSmithy extends StructureVillagePieces.Village
+    {
+    	// Stuff to be used in the construction
+    	public boolean entitiesGenerated = false;
+    	public ArrayList<Integer> decorHeightY = new ArrayList();
+    	public FunctionsVN.VillageType villageType=null;
+    	public FunctionsVN.MaterialType materialType=null;
+    	public boolean disallowModSubs=false;
+    	public int townColor=-1;
+    	public int townColor2=-1;
+    	public int townColor3=-1;
+    	public int townColor4=-1;
+    	public int townColor5=-1;
+    	public int townColor6=-1;
+    	public int townColor7=-1;
+    	public String namePrefix="";
+    	public String nameRoot="";
+    	public String nameSuffix="";
+    	public BiomeGenBase biome=null;
+    	
+    	// Make foundation with blanks as empty air and F as foundation spaces
+        private static final String[] foundationPattern = new String[]{
+    			" F    F ",
+    			"  FFFF  ",
+    			"  FFFF  ",
+    			" FFFFFF ",
+    			"FFFFFFFF",
+    			" FFFFFF ",
+    			"  FFFF  ",
+    			"   PP   ",
+    			"  FPPF  ",
+        };
+    	// Here are values to assign to the bounding box
+    	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
+    	public static final int STRUCTURE_DEPTH = foundationPattern.length;
+    	public static final int STRUCTURE_HEIGHT = 7;
+    	// Values for lining things up
+    	private static final int GROUND_LEVEL = 2; // Spaces above the bottom of the structure considered to be "ground level"
+    	public static final byte MEDIAN_BORDERS = 1; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	private static final int INCREASE_MIN_U = 2;
+    	private static final int DECREASE_MAX_U = 2;
+    	private static final int INCREASE_MIN_W = 0;
+    	private static final int DECREASE_MAX_W = 0;
+    	
+    	private int averageGroundLevel = -1;
+    	
+    	public SwampWeaponSmithy() {}
+
+    	public SwampWeaponSmithy(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+    	{
+    		super();
+    		this.coordBaseMode = coordBaseMode;
+    		this.boundingBox = boundingBox;
+    		// Additional stuff to be used in the construction
+    		if (start!=null)
+    		{
+    			this.villageType=start.villageType;
+    			this.materialType=start.materialType;
+    			this.disallowModSubs=start.disallowModSubs;
+    			this.townColor=start.townColor;
+    			this.townColor2=start.townColor2;
+    			this.townColor3=start.townColor3;
+    			this.townColor4=start.townColor4;
+    			this.townColor5=start.townColor5;
+    			this.townColor6=start.townColor6;
+    			this.townColor7=start.townColor7;
+    			this.namePrefix=start.namePrefix;
+    			this.nameRoot=start.nameRoot;
+    			this.nameSuffix=start.nameSuffix;
+    			this.biome=start.biome;
+    		}
+    	}
+    	
+    	public static SwampWeaponSmithy buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z, int coordBaseMode, int componentType)
+    	{
+    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, STRUCTURE_WIDTH, STRUCTURE_HEIGHT, STRUCTURE_DEPTH, coordBaseMode);
+    		
+    		return (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null) ? new SwampWeaponSmithy(villagePiece, componentType, random, structureboundingbox, coordBaseMode) : null;
+    	}
+    	
+    	
+    	@Override
+    	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
+    	{
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
+    		
+    		// In the event that this village construction is resuming after being unloaded
+    		// you may need to reestablish the village name/color/type info
+    		if (
+    				this.townColor==-1
+    				|| this.townColor2==-1
+    				|| this.townColor3==-1
+    				|| this.townColor4==-1
+    				|| this.townColor5==-1
+    				|| this.townColor6==-1
+    				|| this.townColor7==-1
+    				|| this.nameRoot.equals("")
+    				)
+    		{
+    			NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+    					(this.boundingBox.minX+this.boundingBox.maxX)/2,
+    					(this.boundingBox.minY+this.boundingBox.maxY)/2,
+    					(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+    			
+    			// Load the values of interest into memory
+    			this.townColor = villageNBTtag.getInteger("townColor");
+    			this.townColor2 = villageNBTtag.getInteger("townColor2");
+    			this.townColor3 = villageNBTtag.getInteger("townColor3");
+    			this.townColor4 = villageNBTtag.getInteger("townColor4");
+    			this.townColor5 = villageNBTtag.getInteger("townColor5");
+    			this.townColor6 = villageNBTtag.getInteger("townColor6");
+    			this.townColor7 = villageNBTtag.getInteger("townColor7");
+    			this.namePrefix = villageNBTtag.getString("namePrefix");
+    			this.nameRoot = villageNBTtag.getString("nameRoot");
+    			this.nameSuffix = villageNBTtag.getString("nameSuffix");
+    		}
+    		
+    		WorldChunkManager chunkManager= world.getWorldChunkManager();
+    		int bbCenterX = (this.boundingBox.minX+this.boundingBox.maxX)/2; int bbCenterZ = (this.boundingBox.minZ+this.boundingBox.maxZ)/2;
+    		BiomeGenBase biome = chunkManager.getBiomeGenAt(bbCenterX, bbCenterZ);
+    		Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler.unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+    		if (this.villageType==null)
+    		{
+    			try {
+    				String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedVillageType.equals("")) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.villageType = FunctionsVN.VillageType.getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);}
+    				}
+    			catch (Exception e) {this.villageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (this.materialType==null)
+    		{
+    			try {
+    				String mappedMaterialType = (String) (mappedBiomes.get("MaterialTypes")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedMaterialType.equals("")) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    				else {this.materialType = FunctionsVN.MaterialType.getMaterialTypeFromName(mappedMaterialType, FunctionsVN.MaterialType.OAK);}
+    				}
+    			catch (Exception e) {this.materialType = FunctionsVN.MaterialType.getMaterialTemplateForBiome(chunkManager, bbCenterX, bbCenterZ);}
+    		}
+    		
+    		if (!this.disallowModSubs)
+    		{
+    			try {
+    				String mappedBlockModSubs = (String) (mappedBiomes.get("DisallowModSubs")).get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+    				if (mappedBlockModSubs.toLowerCase().trim().equals("nosub")) {this.disallowModSubs = true;}
+    				else {this.disallowModSubs = false;}
+    				}
+    			catch (Exception e) {this.disallowModSubs = false;}
+    		}
+    		// Reestablish biome if start was null or something
+    		if (this.biome==null) {this.biome = world.getBiomeGenForCoords((this.boundingBox.minX+this.boundingBox.maxX)/2, (this.boundingBox.minZ+this.boundingBox.maxZ)/2);}
+    		Object[] blockObject;
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
+    		// Establish top and filler blocks, substituting Grass and Dirt if they're null
+    		Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
+    		Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
+    		
+    		// Clear space above
+    		for (int u = 0; u < STRUCTURE_WIDTH; ++u) {for (int w = 0; w < STRUCTURE_DEPTH; ++w) {
+    			this.clearCurrentPositionBlocksUpwards(world, u, GROUND_LEVEL, w, structureBB);
+    		}}
+    		
+    		// Follow the blueprint to set up the starting foundation
+    		for (int w=0; w < foundationPattern.length; w++) {for (int u=0; u < foundationPattern[0].length(); u++) {
+    			
+    			String unitLetter = foundationPattern[foundationPattern.length-1-w].substring(u, u+1).toUpperCase();
+    			int posX = this.getXWithOffset(u, w);
+    			int posY = this.getYWithOffset(GROUND_LEVEL-1);
+    			int posZ = this.getZWithOffset(u, w);
+    					
+    			if (unitLetter.equals("F"))
+    			{
+    				// If marked with F: fill with dirt foundation
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    			else if (unitLetter.equals("P"))
+    			{
+    				// If marked with P: fill with dirt foundation and top with block-and-biome-appropriate path
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
+    				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
+    			}
+    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+    			{
+    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
+    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+    			}
+    		}}
+        	
+        	
+        	// Cobblestone wall
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneWallBlock = (Block)blockObject[0]; int biomeCobblestoneWallMeta = (Integer)blockObject[1];
+        	for (int[] uuvvww : new int[][]{
+        		{0,2,4, 0,2,4}, 
+        		{1,2,8, 1,2,8}, 
+        		{7,2,4, 7,2,4}, 
+        		})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneWallBlock, biomeCobblestoneWallMeta, biomeCobblestoneWallBlock, biomeCobblestoneWallMeta, false);
+            }
+        	
+        	
+        	// Mossy Cobblestone wall
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone_wall, 1, this.materialType, this.biome, this.disallowModSubs); Block biomeMossyCobblestoneWallBlock = (Block)blockObject[0]; int biomeMossyCobblestoneWallMeta = (Integer)blockObject[1];
+        	for (int[] uuvvww : new int[][]{
+        		{6,2,8, 6,2,8}, 
+        		})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneWallBlock, biomeMossyCobblestoneWallMeta, biomeMossyCobblestoneWallBlock, biomeMossyCobblestoneWallMeta, false);
+            }
+            
+            
+        	// Torches
+            for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward, -1:upright;
+            	{0,3,4, -1}, 
+        		{1,3,8, -1}, {6,3,8, -1}, 
+        		{7,3,4, -1}, 
+        	})
+        	{
+            	this.placeBlockAtCurrentPosition(world, Blocks.torch, StructureVillageVN.getTorchRotationMeta(uvwo[3], this.coordBaseMode), uvwo[0], uvwo[1], uvwo[2], structureBB);
+        	}
+        	
+        	
+        	// Cobblestone
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	for (int[] uuvvww : new int[][]{
+            	{0,1,4, 0,1,4}, 
+            	{1,1,3, 1,4,3}, {1,1,4, 1,3,4}, {1,1,5, 1,4,5}, 
+            	{2,1,2, 2,4,2}, {2,5,4, 2,5,5}, {2,4,5, 2,4,5}, {2,1,6, 2,7,6}, {2,1,7, 2,3,7}, 
+            	{3,1,7, 4,7,7}, {3,5,5, 4,7,5}, 
+            	{5,1,2, 5,4,2}, {5,5,4, 5,5,5}, {5,4,5, 5,4,5}, {5,1,6, 5,7,6}, {5,1,7, 5,3,7}, 
+            	{6,1,3, 6,4,3}, {6,1,4, 6,3,4}, {6,1,5, 6,4,5}, 
+            	{7,1,4, 7,1,4}, 
+            	// Upper entry lip
+            	{3,4,2, 4,4,2}, 
+            	// Lip in front of basin
+            	{2,1,5, 5,1,5}, 
+            	// Bottom of basin
+            	{2,0,5, 5,0,7}, 
+        		})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
+            }
+        	
+        	
+        	// Mossy Cobblestone
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.mossy_cobblestone, 0, materialType, biome, disallowModSubs); Block biomeMossyCobblestoneBlock = (Block)blockObject[0]; int biomeMossyCobblestoneMeta = (Integer)blockObject[1];
+        	for (int[] uuvvww : new int[][]{
+            	{1,1,8, 1,1,8}, {6,1,8, 6,1,8}, 
+        		})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, biomeMossyCobblestoneBlock, biomeMossyCobblestoneMeta, false);
+            }
+    		
+    		
+    		// Cobblestone stairs
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_stairs, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneStairsBlock = (Block)blockObject[0];
+    		for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
+    			// Roof
+    			{1,5,5, 0}, {1,5,4, 0}, {1,5,3, 3}, 
+    			{2,5,3, 0}, 
+    			{2,5,2, 3}, {3,5,2, 3}, {4,5,2, 3}, {5,5,2, 3}, 
+    			{5,5,3, 1}, 
+    			{6,5,5, 1}, {6,5,4, 1}, {6,5,3, 3}, 
+    			// Ceiling
+    			{3,4,5, 3+4}, {4,4,5, 3+4}, 
+    			})
+    		{
+    			this.placeBlockAtCurrentPosition(world, biomeCobblestoneStairsBlock, this.getMetadataWithOffset(Blocks.stone_stairs, uvwo[3]%4)+(uvwo[3]/4)*4, uvwo[0], uvwo[1], uvwo[2], structureBB);	
+    		}
+    		
+    		
+    		// Cobblestone Slab (lower)
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.stone_slab, 3, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneSlabLowerBlock = (Block)blockObject[0]; int biomeCobblestoneSlabLowerMeta = (Integer)blockObject[1];
+    		for(int[] uuvvww : new int[][]{
+    			{1,4,4, 1,4,4}, 
+    			{6,4,4, 6,4,4}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, biomeCobblestoneSlabLowerBlock, biomeCobblestoneSlabLowerMeta, false);	
+    		}
+        	
+        	
+            // Glazed terracotta
+        	Object[] tryGlazedTerracotta;
+        	for (int[] uvwoc : new int[][]{ // u,v,w, orientation, dye color
+        		// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+        		{3,5,3, 2, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{3,5,4, 3, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{4,5,3, 1, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+        		{4,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
+           		})
+        	{
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		if (tryGlazedTerracotta != null)
+            	{
+        			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
+            	}
+        		else
+        		{
+        			this.placeBlockAtCurrentPosition(world, Blocks.stained_hardened_clay, uvwoc[4], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
+        		}
+            }
+    		
+    		
+            // Gravel
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.gravel, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGravelBlock = (Block)blockObject[0]; int biomeGravelMeta = (Integer)blockObject[1];
+            for(int[] uuvvww : new int[][]{
+    			{2,1,3, 5,1,4}, 
+    			{3,1,2, 4,1,2}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeGravelBlock, biomeGravelMeta, biomeGravelBlock, biomeGravelMeta, false);	
+            }
+    		
+    		
+    		// Fences
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
+    		for (int[] uuvvww : new int[][]{
+    			// Support posts
+    			{2,2,0, 2,3,0}, {5,2,0, 5,3,0}, 
+    			})
+    		{
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+    		}
+			
+			
+			// Wool
+			for (int[] uvwo : new int[][]{
+				{2,4,0, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+				{3,4,0, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+				{4,4,0, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+				{5,4,0, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+				{2,4,1, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+				{3,4,1, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+				{4,4,1, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+				{5,4,1, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+			})
+			{
+				this.placeBlockAtCurrentPosition(world, Blocks.wool, uvwo[3], uvwo[0], uvwo[1], uvwo[2], structureBB);
+			}
+            
+            
+            // Grindstone
+        	for (int[] uvwoh : new int[][]{ // u,v,w, orientation, isHanging
+        		// Orientation: 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+        		{2,2,5, 1, 1}, 
+        		})
+            {
+        		// Generate the blockObject here so that we have the correct meta on hand
+        		blockObject = ModObjects.chooseModGrindstone(uvwoh[3], this.coordBaseMode, uvwoh[4]==1); Block biomeGrindstoneBlock = (Block)blockObject[0]; int biomeGrindstoneMeta = (Integer)blockObject[1];
+            	
+        		this.placeBlockAtCurrentPosition(world, biomeGrindstoneBlock, biomeGrindstoneMeta, uvwoh[0], uvwoh[1], uvwoh[2], structureBB);
+            }
+        	
+        	
+        	// Furnaces
+            for (int[] uvwo : new int[][]{ // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+            	{5,3,5, 2}, 
+            	{5,2,5, 2}, 
+            	})
+            {
+                this.placeBlockAtCurrentPosition(world, Blocks.furnace, 0, uvwo[0], uvwo[1], uvwo[2], structureBB);
+                world.setBlockMetadataWithNotify(this.getXWithOffset(uvwo[0], uvwo[2]), this.getYWithOffset(uvwo[1]), this.getZWithOffset(uvwo[0], uvwo[2]), StructureVillageVN.chooseFurnaceMeta(uvwo[3], this.coordBaseMode), 2);
+            }
+        	
+        	
+            // Iron bars
+            for(int[] uuvvww : new int[][]{
+            	{3,7,6, 4,7,6}, 
+            	{3,2,6, 4,2,6}, 
+            	})
+            {
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.iron_bars, 0, Blocks.iron_bars, 0, false);
+            }
+    		
+    		
+    		// Lava
+    		for(int[] uvw : new int[][]{
+    			// Floor
+    			{3,1,6}, {4,1,6}, 
+    			})
+    		{
+                this.placeBlockAtCurrentPosition(world,  Blocks.lava, 0, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
+        	
+        	
+            // Chest
+        	// https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/modification-development/1431724-forge-custom-chest-loot-generation
+            int chestU = 2;
+        	int chestV = 2;
+        	int chestW = 3;
+        	int chestO = 0; // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+        	Block biomeChestBlock = (Block)StructureVillageVN.getBiomeSpecificBlockObject(Blocks.chest, 0, this.materialType, this.biome, this.disallowModSubs)[0];
+        	this.placeBlockAtCurrentPosition(world, biomeChestBlock, 0, chestU, chestV, chestW, structureBB);
+            world.setBlockMetadataWithNotify(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW), StructureVillageVN.chooseFurnaceMeta(chestO, this.coordBaseMode), 2);
+        	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
+        	if (te instanceof IInventory)
+        	{
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_weaponsmith");
+            	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
+        	}
+    		
+    		
+    		// Villagers
+    		if (!this.entitiesGenerated)
+    		{
+    			this.entitiesGenerated=true;
+    			
+    			// Villager
+    			int s = random.nextInt(9); 
+    			
+    			int u = s <=0 ? 2 : s <=3 ? 3 : s <=6 ? 4 : 5;
+    			int v = 2;
+    			int w = s <=0 ? 4 : s <=6 ? 3+((s-1)%3) : s-4;
+    			
+    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 3, 2, 0); // Weapon Smith
+    			
+    			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
+    			world.spawnEntityInWorld(entityvillager);
+    		}
+    		
+    		// Clean items
+    		if (VillageGeneratorConfigHandler.cleanDroppedItems) {StructureVillageVN.cleanEntityItems(world, this.boundingBox);}
+    		return true;
+        }
+        
+        /**
+         * Returns the villager type to spawn in this component, based on the number
+         * of villagers already spawned.
+         */
+        @Override
+        protected int getVillagerType (int number) {return 3;}
+    }
+    
+    
     // --- Wild Farm --- //
     // designed by THASSELHOFF
     
@@ -13379,22 +15557,19 @@ public class SwampStructures
     	@Override
     	public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
     	{
-    		if (this.averageGroundLevel < 0)
-    		{
-    			if (this.averageGroundLevel < 0)
-    			{
-    				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-    						// Set the bounding box version as this bounding box but with Y going from 0 to 512
-    						new StructureBoundingBox(
-    								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-    								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-    						true, MEDIAN_BORDERS, this.coordBaseMode);
-    				
-    				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
-    				
-    				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-    			}
-    		}
+			if (this.averageGroundLevel < 0)
+			{
+				this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+						// Set the bounding box version as this bounding box but with Y going from 0 to 512
+						new StructureBoundingBox(
+								this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+								this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+						true, MEDIAN_BORDERS, this.coordBaseMode);
+				
+				if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+				
+				this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
+			}
     		
     		// In the event that this village construction is resuming after being unloaded
     		// you may need to reestablish the village name/color/type info
@@ -13847,19 +16022,16 @@ public class SwampStructures
         {
         	if (this.averageGroundLevel < 0)
             {
-            	if (this.averageGroundLevel < 0)
-                {
-            		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
-            				// Set the bounding box version as this bounding box but with Y going from 0 to 512
-            				new StructureBoundingBox(
-            						this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
-            						this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
-            				true, (byte)1, this.coordBaseMode);
-            		
-                    if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
+        		this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(world,
+        				// Set the bounding box version as this bounding box but with Y going from 0 to 512
+        				new StructureBoundingBox(
+        						this.boundingBox.minX+(new int[]{INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U,INCREASE_MIN_W}[this.coordBaseMode]), this.boundingBox.minZ+(new int[]{INCREASE_MIN_W,INCREASE_MIN_U,DECREASE_MAX_W,INCREASE_MIN_U}[this.coordBaseMode]),
+        						this.boundingBox.maxX-(new int[]{DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U,DECREASE_MAX_W}[this.coordBaseMode]), this.boundingBox.maxZ-(new int[]{DECREASE_MAX_W,DECREASE_MAX_U,INCREASE_MIN_W,DECREASE_MAX_U}[this.coordBaseMode])),
+        				true, (byte)1, this.coordBaseMode);
+        		
+                if (this.averageGroundLevel < 0) {return true;} // Do not construct in a void
 
-                    this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
-                }
+                this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
         	// In the event that this village construction is resuming after being unloaded

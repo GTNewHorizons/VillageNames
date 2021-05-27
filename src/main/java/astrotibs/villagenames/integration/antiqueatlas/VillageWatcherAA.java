@@ -349,6 +349,8 @@ public class VillageWatcherAA
 	JUNGLE_ROAD_ACCENT_1 = "VNJuRdA1", // Jungle Well
 	JUNGLE_ROAD_ACCENT_2 = "VNJuRdA2", // Jungle Treehouse
 	
+	SWAMP_ANIMAL_PEN_1 = "VNSwAnP1", // Swamp Animal Pen 1
+	SWAMP_ANIMAL_PEN_2 = "VNSwAnP2", // Swamp Animal Pen 2
 	SWAMP_ARMORER_HOUSE = "VNSwArHo", // Swamp Armorer House
 	SWAMP_BUTCHER_SHOP = "VNSwBuSh", // Swamp Butcher Shop
 	SWAMP_CARTOGRAPHER_HOUSE = "VNSwCaHo", // Swamp Cartographer House
@@ -368,8 +370,11 @@ public class VillageWatcherAA
 	SWAMP_SMALL_HOUSE_1 = "VNSwSmH1", // Swamp Small House 1
 	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_SMALL_HOUSE_3 = "VNSwSmH3", // Swamp Small House 3
+	SWAMP_STABLE = "VNSwStb;", // Swamp Stable
+	SWAMP_TANNERY = "VNSwTann", // Swamp Tannery
 	SWAMP_TEMPLE = "VNSwTemp", // Swamp Temple
 	SWAMP_TOOL_SMITHY = "VNSwToSm", // Swamp Tool Smithy
+	SWAMP_WEAPON_SMITHY = "VNSwWeSm", // Swamp Weapon Smithy
 	SWAMP_WILD_FARM = "VNSwWiFa", // Swamp Wild Farm
 	
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
@@ -638,6 +643,8 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_ROAD_ACCENT_1, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
+		builder.put(SWAMP_ANIMAL_PEN_1, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(SWAMP_ANIMAL_PEN_2, TILE_VILLAGE_FENCE);
 		builder.put(SWAMP_ARMORER_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_BUTCHER_SHOP, TILE_VILLAGE_HUT);
 		builder.put(SWAMP_CARTOGRAPHER_HOUSE, TILE_VILLAGE_LIBRARY);
@@ -656,8 +663,11 @@ public class VillageWatcherAA
 		builder.put(SWAMP_SMALL_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
+		builder.put(SWAMP_STABLE, TILE_VILLAGE_BUTCHERS_SHOP);
+		builder.put(SWAMP_TANNERY, TILE_VILLAGE_L_HOUSE);
 		builder.put(SWAMP_TEMPLE, TILE_VILLAGE_CHURCH);
 		builder.put(SWAMP_TOOL_SMITHY, TILE_VILLAGE_HOUSE);
+		builder.put(SWAMP_WEAPON_SMITHY, TILE_VILLAGE_SMITHY);
 		builder.put(SWAMP_WILD_FARM, TILE_VILLAGE_FARMLAND_LARGE);
 		
 		COMPONENT_TO_TILE_MAP = builder.build();

@@ -43,6 +43,7 @@ public class ChestLootHandler {
 		if (VillageGeneratorConfigHandler.newVillageGenerator)
 		{
 			ChestGenHooks.addItem("vn_cartographer", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 2, 4));
+			ChestGenHooks.addItem("vn_library", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 2, 4));
 			ChestGenHooks.addItem("vn_mason", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 1, 1));
 			ChestGenHooks.addItem("vn_toolsmith", new WeightedRandomChestContent(new ItemStack(ModItems.codex), 1, 1, 3));
 		}

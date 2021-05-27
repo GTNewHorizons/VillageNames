@@ -258,6 +258,8 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernJungleRoadAccent1_string; public static ArrayList<Double> componentModernJungleRoadAccent1_vals;
 	public static String componentModernJungleRoadAccent2_string; public static ArrayList<Double> componentModernJungleRoadAccent2_vals;
 	
+	public static String componentModernSwampAnimalPen1_string; public static ArrayList<Double> componentModernSwampAnimalPen1_vals;
+	public static String componentModernSwampAnimalPen2_string; public static ArrayList<Double> componentModernSwampAnimalPen2_vals;
 	public static String componentModernSwampArmorerHouse_string; public static ArrayList<Double> componentModernSwampArmorerHouse_vals;
 	public static String componentModernSwampButcherShop_string; public static ArrayList<Double> componentModernSwampButcherShop_vals;
 	public static String componentModernSwampCartographerHouse_string; public static ArrayList<Double> componentModernSwampCartographerHouse_vals;
@@ -276,8 +278,11 @@ public class VillageGeneratorConfigHandler
 	public static String componentModernSwampSmallHouse1_string; public static ArrayList<Double> componentModernSwampSmallHouse1_vals;
 	public static String componentModernSwampSmallHouse2_string; public static ArrayList<Double> componentModernSwampSmallHouse2_vals;
 	public static String componentModernSwampSmallHouse3_string; public static ArrayList<Double> componentModernSwampSmallHouse3_vals;
+	public static String componentModernSwampStable_string; public static ArrayList<Double> componentModernSwampStable_vals;
+	public static String componentModernSwampTannery_string; public static ArrayList<Double> componentModernSwampTannery_vals;
 	public static String componentModernSwampTemple_string; public static ArrayList<Double> componentModernSwampTemple_vals;
 	public static String componentModernSwampToolSmithy_string; public static ArrayList<Double> componentModernSwampToolSmithy_vals;
+	public static String componentModernSwampWeaponSmithy_string; public static ArrayList<Double> componentModernSwampWeaponSmithy_vals;
 	public static String componentModernSwampWildFarm_string; public static ArrayList<Double> componentModernSwampWildFarm_vals;
 	public static String componentModernSwampStreetDecor_string; public static ArrayList<Double> componentModernSwampStreetDecor_vals;
 	
@@ -488,6 +493,8 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent2|jungle",
 			
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "AnimalPen1|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "AnimalPen2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "ArmorerHouse|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "ButcherShop|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "CartographerHouse|swamp",
@@ -506,8 +513,12 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse1|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "SmallHouse3|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Stable|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "StreetDecor|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Tannery|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Temple|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "ToolSmithy|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "WeaponSmithy|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "WildFarm|swamp",
 			};
 	
@@ -1402,6 +1413,12 @@ public class VillageGeneratorConfigHandler
 		componentModernJungleRoadAccent2_string = config.getString(componentModern+"Jungle Road Accent 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
 		componentModernJungleRoadAccent2_vals = parseDoubleArray(componentModernJungleRoadAccent2_string, modifiedDefaults);
 		
+		componentModernSwampAnimalPen1_string = config.getString(componentModern+"Swamp Animal Pen 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampAnimalPen1_vals = parseDoubleArray(componentModernSwampAnimalPen1_string, modernDefaults);
+		
+		componentModernSwampAnimalPen2_string = config.getString(componentModern+"Swamp Animal Pen 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampAnimalPen2_vals = parseDoubleArray(componentModernSwampAnimalPen2_string, modernDefaults);
+		
 		componentModernSwampArmorerHouse_string = config.getString(componentModern+"Swamp Armorer House", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampArmorerHouse_vals = parseDoubleArray(componentModernSwampArmorerHouse_string, modernDefaults);
 		
@@ -1456,11 +1473,20 @@ public class VillageGeneratorConfigHandler
 		componentModernSwampSmallHouse3_string = config.getString(componentModern+"Swamp Small House 3", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampSmallHouse3_vals = parseDoubleArray(componentModernSwampSmallHouse3_string, modernDefaults);
 		
+		componentModernSwampStable_string = config.getString(componentModern+"Swamp Stable", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampStable_vals = parseDoubleArray(componentModernSwampStable_string, modernDefaults);
+		
+		componentModernSwampTannery_string = config.getString(componentModern+"Swamp Tannery", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampTannery_vals = parseDoubleArray(componentModernSwampTannery_string, modernDefaults);
+		
 		componentModernSwampTemple_string = config.getString(componentModern+"Swamp Temple", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampTemple_vals = parseDoubleArray(componentModernSwampTemple_string, modernDefaults);
 		
 		componentModernSwampToolSmithy_string = config.getString(componentModern+"Swamp Tool Smithy", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampToolSmithy_vals = parseDoubleArray(componentModernSwampToolSmithy_string, modernDefaults);
+		
+		componentModernSwampWeaponSmithy_string = config.getString(componentModern+"Swamp Weapon Smithy", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
+		componentModernSwampWeaponSmithy_vals = parseDoubleArray(componentModernSwampWeaponSmithy_string, modernDefaults);
 		
 		componentModernSwampWildFarm_string = config.getString(componentModern+"Swamp Wild Farm", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
 		componentModernSwampWildFarm_vals = parseDoubleArray(componentModernSwampWildFarm_string, modernDefaults);

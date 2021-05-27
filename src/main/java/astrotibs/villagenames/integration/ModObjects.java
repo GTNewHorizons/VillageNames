@@ -2546,7 +2546,7 @@ public class ModObjects {
 	
 	
 	// Grindstone
-	public static Object[] chooseModGrindstone(int orientation, int horizIndex)
+	public static Object[] chooseModGrindstone(int orientation, int horizIndex, boolean isHanging)
 	{
 		Block modblock = Blocks.anvil;
 		int meta = StructureVillageVN.chooseAnvilMeta(orientation, horizIndex);

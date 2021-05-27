@@ -451,6 +451,8 @@ public final class VillageNames
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent1.class, "VNJuRdA1", new StructureCreationHandlers.JungleRoadAccent1_Handler());
 	        registerVillageComponentBuilding(JungleStructures.JungleRoadAccent2.class, "VNJuRdA2", new StructureCreationHandlers.JungleRoadAccent2_Handler());
 	        
+	        registerVillageComponentBuilding(SwampStructures.SwampAnimalPen1.class, "VNSwAnP1", new StructureCreationHandlers.SwampAnimalPen1_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampAnimalPen2.class, "VNSwAnP2", new StructureCreationHandlers.SwampAnimalPen2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampArmorerHouse.class, "VNSwArHo", new StructureCreationHandlers.SwampArmorerHouse_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampButcherShop.class, "VNSwBuSh", new StructureCreationHandlers.SwampButcherShop_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampCartographerHouse.class, "VNSwCaHo", new StructureCreationHandlers.SwampCartographerHouse_Handler());
@@ -469,8 +471,11 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampShepherdHouse2.class, "VNSwShH2", new StructureCreationHandlers.SwampShepherdHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampSmallHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse3.class, "VNSwSmH3", new StructureCreationHandlers.SwampSmallHouse3_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampStable.class, "VNSwStbl", new StructureCreationHandlers.SwampStable_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampTannery.class, "VNSwTann", new StructureCreationHandlers.SwampTannery_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampToolSmithy.class, "VNSwToSm", new StructureCreationHandlers.SwampToolSmithy_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampWeaponSmithy.class, "VNSwWeSm", new StructureCreationHandlers.SwampWeaponSmithy_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampWildFarm.class, "VNSwWiFa", new StructureCreationHandlers.SwampWildFarm_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampStreetDecor.class, "VNSwStDe", new StructureCreationHandlers.SwampStreetDecor_Handler());
 	        
