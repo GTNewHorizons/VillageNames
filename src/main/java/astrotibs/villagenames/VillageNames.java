@@ -473,6 +473,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse2.class, "VNSwSmH2", new StructureCreationHandlers.SwampSmallHouse2_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse3.class, "VNSwSmH3", new StructureCreationHandlers.SwampSmallHouse3_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse4.class, "VNSwSmH4", new StructureCreationHandlers.SwampSmallHouse4_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampSmallHouse5.class, "VNSwSmH5", new StructureCreationHandlers.SwampSmallHouse5_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampStable.class, "VNSwStbl", new StructureCreationHandlers.SwampStable_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTannery.class, "VNSwTann", new StructureCreationHandlers.SwampTannery_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampTemple.class, "VNSwTemp", new StructureCreationHandlers.SwampTemple_Handler());
@@ -480,6 +481,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampWeaponSmithy.class, "VNSwWeSm", new StructureCreationHandlers.SwampWeaponSmithy_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampWildFarm.class, "VNSwWiFa", new StructureCreationHandlers.SwampWildFarm_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampStreetDecor.class, "VNSwStDe", new StructureCreationHandlers.SwampStreetDecor_Handler());
+	        registerVillageComponentBuilding(SwampStructures.SwampRoadAccent.class, "VNSwRdAc", new StructureCreationHandlers.SwampRoadAccent_Handler());
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());

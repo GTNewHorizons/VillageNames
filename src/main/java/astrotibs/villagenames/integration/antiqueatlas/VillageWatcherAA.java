@@ -364,19 +364,21 @@ public class VillageWatcherAA
 	SWAMP_MASON_HOUSE = "VNSwMaHo", // Swamp Mason House
 	SWAMP_MEDIUM_HOUSE_1 = "VNSwMeH1", // Swamp Medium House 1
 	SWAMP_MEDIUM_HOUSE_2 = "VNSwMeH2", // Swamp Medium House 2
-	SWAMP_ROAD_DECOR = "VNSwStDe", // Swamp Road Decor
 	SWAMP_SHEPHERD_HOUSE_1 = "VNSwShH1", // Swamp Shepherd House 1
 	SWAMP_SHEPHERD_HOUSE_2 = "VNSwShH2", // Swamp Shepherd House 2
 	SWAMP_SMALL_HOUSE_1 = "VNSwSmH1", // Swamp Small House 1
 	SWAMP_SMALL_HOUSE_2 = "VNSwSmH2", // Swamp Small House 2
 	SWAMP_SMALL_HOUSE_3 = "VNSwSmH3", // Swamp Small House 3
 	SWAMP_SMALL_HOUSE_4 = "VNSwSmH4", // Swamp Small House 4
+	SWAMP_SMALL_HOUSE_5 = "VNSwSmH5", // Swamp Small House 5
 	SWAMP_STABLE = "VNSwStb;", // Swamp Stable
 	SWAMP_TANNERY = "VNSwTann", // Swamp Tannery
 	SWAMP_TEMPLE = "VNSwTemp", // Swamp Temple
 	SWAMP_TOOL_SMITHY = "VNSwToSm", // Swamp Tool Smithy
 	SWAMP_WEAPON_SMITHY = "VNSwWeSm", // Swamp Weapon Smithy
 	SWAMP_WILD_FARM = "VNSwWiFa", // Swamp Wild Farm
+	SWAMP_ROAD_DECOR = "VNSwStDe", // Swamp Road Decor
+	SWAMP_ROAD_ACCENT = "VNSwRdAc", // Swamp Road Accent
 	
 	PLACEHOLDER = "plcholdr"; // TODO - placeholder while you add other components to the list
 	
@@ -658,19 +660,21 @@ public class VillageWatcherAA
 		builder.put(SWAMP_MASON_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_MEDIUM_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_MEDIUM_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
-		builder.put(SWAMP_ROAD_DECOR, TILE_VILLAGE_TORCH);
 		builder.put(SWAMP_SHEPHERD_HOUSE_1, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_SHEPHERD_HOUSE_2, TILE_VILLAGE_HUT);
 		builder.put(SWAMP_SMALL_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_2, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
 		builder.put(SWAMP_SMALL_HOUSE_4, TILE_VILLAGE_SMALL_HOUSE);
+		builder.put(SWAMP_SMALL_HOUSE_5, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_STABLE, TILE_VILLAGE_BUTCHERS_SHOP);
 		builder.put(SWAMP_TANNERY, TILE_VILLAGE_L_HOUSE);
 		builder.put(SWAMP_TEMPLE, TILE_VILLAGE_CHURCH);
 		builder.put(SWAMP_TOOL_SMITHY, TILE_VILLAGE_HOUSE);
 		builder.put(SWAMP_WEAPON_SMITHY, TILE_VILLAGE_SMITHY);
 		builder.put(SWAMP_WILD_FARM, TILE_VILLAGE_FARMLAND_LARGE);
+		builder.put(SWAMP_ROAD_DECOR, TILE_VILLAGE_TORCH);
+		builder.put(SWAMP_ROAD_ACCENT, TILE_VILLAGE_TORCH);
 		
 		COMPONENT_TO_TILE_MAP = builder.build();
 	}
