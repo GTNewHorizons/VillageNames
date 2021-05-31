@@ -38,6 +38,7 @@ public class VillageGeneratorConfigHandler
 	public static String componentLegacyField2_string; public static ArrayList<Double> componentLegacyField2_vals;
 	public static String componentLegacyHouse2_string; public static ArrayList<Double> componentLegacyHouse2_vals;
 	public static String componentLegacyHouse3_string; public static ArrayList<Double> componentLegacyHouse3_vals;
+	
 	// Modern Village buildings
 	
 	// Town centers
@@ -495,7 +496,6 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "StreetDecor|jungle",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent1|jungle",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.JUNGLE_BUILDING_STUB + "RoadAccent2|jungle",
-			
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "AnimalPen1|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "AnimalPen2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "ArmorerHouse|swamp",
@@ -504,8 +504,8 @@ public class VillageGeneratorConfigHandler
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FisherCottage1|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FisherCottage2|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "FletcherHouse|swamp",
-			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "HutFarm|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "HorribleSecret|swamp",
+			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "HutFarm|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "LargeHouse|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "Library|swamp",
 			Reference.VN_BUILDING_CLASSPATH_STUB + Reference.SWAMP_BUILDING_STUB + "MasonHouse|swamp",
@@ -737,7 +737,7 @@ public class VillageGeneratorConfigHandler
 		
 		
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
-				(91D/9), //= 10.11111111111111
+				(10D*91D/9), //= 10.11111111111111
 				((76D/91) * 9D/(152D/5)), //=  0.24725274725274726
 				((23D/91) * 9D/(152D/5)), //= 0.07482648930017351
 				((112D/91) * 9D/(152D/5)), //= 0.3643724696356275
@@ -753,7 +753,7 @@ public class VillageGeneratorConfigHandler
 		int savannaHouses = 31;
 		int snowyHouses = 30;
 		int jungleHouses = 35;  
-		int swampHouses = 25;  
+		int swampHouses = 28;  
 		
 		int desertStreetsAndEndcaps = 11+2;
 		int savannaStreetsAndEndcaps = 19+1;
@@ -1512,6 +1512,7 @@ public class VillageGeneratorConfigHandler
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*swampHouses * swampStreetToHouseRatio/swampStreetsAndEndcaps);}
 		componentModernSwampRoadAccent_string = config.getString(componentModern+"Swamp Road Accent", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
 		componentModernSwampRoadAccent_vals = parseDoubleArray(componentModernSwampRoadAccent_string, modifiedDefaults);
+		
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");

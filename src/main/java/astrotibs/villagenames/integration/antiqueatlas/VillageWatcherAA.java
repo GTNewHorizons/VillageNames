@@ -325,6 +325,7 @@ public class VillageWatcherAA
 	JUNGLE_MEDIUM_HOUSE_2 = "VNJuMeH2", // Jungle Medium House 2
 	JUNGLE_MEDIUM_HOUSE_3 = "VNJuMeH3", // Jungle Medium House 3
 	JUNGLE_MEDIUM_HOUSE_4 = "VNJuMeH4", // Jungle Medium House 4
+	JUNGLE_SHEPHERD_HOUSE = "VNJuShpH", // Jungle Shepherd House
 	JUNGLE_SMALL_HOUSE_1 = "VNJuSmH1", // Jungle Small House 1
 	JUNGLE_SMALL_HOUSE_2 = "VNJuSmH2", // Jungle Small House 2
 	JUNGLE_SMALL_HOUSE_3 = "VNJuSmH3", // Jungle Small House 3
@@ -608,6 +609,7 @@ public class VillageWatcherAA
 		builder.put(SNOWY_WEAPON_SMITHY, TILE_VILLAGE_SMITHY);
 		builder.put(SNOWY_ROAD_DECOR, TILE_VILLAGE_TORCH);
 		
+		// Jungle
 		builder.put(JUNGLE_ARMORER_HOUSE, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_BUTCHER_SHOP, TILE_VILLAGE_BUTCHERS_SHOP);
 		builder.put(JUNGLE_CARTOGRAPHER_HOUSE_1, TILE_VILLAGE_SMALL_HOUSE);
@@ -622,6 +624,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_MEDIUM_HOUSE_2, TILE_VILLAGE_HOUSE);
 		builder.put(JUNGLE_MEDIUM_HOUSE_3, TILE_VILLAGE_HUT);
 		builder.put(JUNGLE_MEDIUM_HOUSE_4, TILE_VILLAGE_HOUSE);
+		builder.put(JUNGLE_SHEPHERD_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(JUNGLE_SMALL_HOUSE_1, TILE_VILLAGE_L_HOUSE);
 		builder.put(JUNGLE_SMALL_HOUSE_2, TILE_VILLAGE_L_HOUSE);
 		builder.put(JUNGLE_SMALL_HOUSE_3, TILE_VILLAGE_HUT);
@@ -646,6 +649,7 @@ public class VillageWatcherAA
 		builder.put(JUNGLE_ROAD_ACCENT_1, TILE_VILLAGE_WELL);
 		builder.put(JUNGLE_ROAD_ACCENT_2, TILE_VILLAGE_TREE);
 		
+		// Swamp
 		builder.put(SWAMP_ANIMAL_PEN_1, TILE_VILLAGE_SMALL_HOUSE);
 		builder.put(SWAMP_ANIMAL_PEN_2, TILE_VILLAGE_FENCE);
 		builder.put(SWAMP_ARMORER_HOUSE, TILE_VILLAGE_SMALL_HOUSE);
@@ -947,7 +951,6 @@ public class VillageWatcherAA
 				|| SNOWY_ICE_SPIRE.equals(childID)
 				|| SNOWY_FOUNTAIN.equals(childID)
 				|| SNOWY_PAVILION.equals(childID)
-				// TODO - Add Jungle/Swamp centers
 				|| JUNGLE_STATUE.equals(childID)
 				|| JUNGLE_TREE.equals(childID)
 				|| JUNGLE_GARDEN.equals(childID)

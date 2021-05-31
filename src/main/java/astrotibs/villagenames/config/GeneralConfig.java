@@ -366,8 +366,8 @@ public class GeneralConfig {
 				"villager-demon||com.emoniph.witchery.entity.EntityVampire|add",
 				"villager|Witch Hunter|com.emoniph.witchery.entity.EntityWitchHunter|add",
 				"demon|Horned Huntsman|com.emoniph.witchery.entity.EntityHornedHuntsman|add",
-				"demon|Lord of Torment|com.emoniph.witchery.entity.EntityLordOfTorment|add"
-
+				"demon|Lord of Torment|com.emoniph.witchery.entity.EntityLordOfTorment|add",
+				
 				},
 				"List of entities that will generate a name automatically when they appear. Useful for aggressive or boss mobs.\n"
 				+ "Format is: nameType|profession|classPath|addOrRemove\n"
@@ -375,7 +375,7 @@ public class GeneralConfig {
 				+ "profession is displayed if that config flag is enabled. It can be left blank for no profession.\n"
 				+ "classPath is the mod's address to the entity class.\n"
 								+ "nameType options:\n"
-								+ "villager, dragon, golem, alien, angel, demon, goblin, custom\n"
+								+ "villager, dragon, golem, alien, angel, demon, goblin, pet, custom\n"
 				+ "addOrRemove - type \"add\" to automatically add names tags to ALL COPIES of this entity upon spawning, or \"remove\" to automatically remove.\n"
 				+ "Be VERY CAUTIOUS about what entities you choose to add to this list!"
 								);
@@ -419,7 +419,10 @@ public class GeneralConfig {
 				"villager|Blacksmith|net.daveyx0.primitivemobs.entity.passive.EntitySheepmanSmith",
 				
 				// Improving Minecraft
-				"villager-goblin||imc.entities.EntityPigman"
+				"villager-goblin||imc.entities.EntityPigman",
+				
+				// Netherlicious
+				"villager-goblin||DelirusCrux.Netherlicious.Common.Entities.Passive.EntityPiglin"
 				
 				},
 				"List of entities that can generate a name when right-clicked. Format is: nameType|profession|classPath\n"
@@ -427,7 +430,7 @@ public class GeneralConfig {
 				+ "profession is displayed if that config flag is enabled. It can be left blank for no profession.\n"
 				+ "classPath is mod's address to the entity class.\n"
 								+ "nameType options:\n"
-								+ "villager, dragon, golem, alien, angel, demon, goblin, custom\n"
+								+ "villager, dragon, golem, alien, angel, demon, goblin, pet, custom\n"
 								);
 		
 		

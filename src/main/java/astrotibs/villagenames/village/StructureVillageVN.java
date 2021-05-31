@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import net.minecraft.item.Item;
 import astrotibs.villagenames.banner.BannerGenerator;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
@@ -51,6 +50,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -91,6 +91,15 @@ public class StructureVillageVN
 		{1,2,1,2}, // Left-facing
 	//   N E S W
 	};
+
+	// Indexed by [orientation][horizIndex]
+	public static final int[][] VINE_META_ARRAY = new int[][]{
+		{4,8,1,2}, // Forward
+		{2,4,2,4}, // Right
+		{1,2,4,8}, // Back
+		{8,1,8,1}, // Left
+	   //N E S W
+	};
 	
 	// Indexed by [orientation][horizIndex]
 	public static final int[][] FURNACE_META_ARRAY = new int[][]{
@@ -106,15 +115,6 @@ public class StructureVillageVN
 		{1,2,1,2}, // Right
 		{0,1,2,3}, // Back
 		{3,0,3,0}, // Left
-	   //N E S W
-	};
-	
-	// Indexed by [orientation][horizIndex]
-	public static final int[][] VINE_META_ARRAY = new int[][]{
-		{4,8,1,2}, // Forward
-		{2,4,2,4}, // Right
-		{1,2,4,8}, // Back
-		{8,1,8,1}, // Left
 	   //N E S W
 	};
 	
@@ -2187,7 +2187,7 @@ public class StructureVillageVN
             	}
             	else if (this.villageType==FunctionsVN.VillageType.JUNGLE)
             	{
-            		decorBlueprint = JungleStructures.getJungleDecorBlueprint(2+randomFromXYZ.nextInt(6), this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
+            		decorBlueprint = JungleStructures.getJungleDecorBlueprint(2+randomFromXYZ.nextInt(6), this.villageType, this.materialType, this.disallowModSubs, this.biome, this.coordBaseMode, randomFromXYZ);
             	}
             	else if (this.villageType==FunctionsVN.VillageType.SWAMP)
             	{
@@ -3024,7 +3024,7 @@ public class StructureVillageVN
 		case SNOWY:
 			return SnowyStructures.getRandomSnowyDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		case JUNGLE:
-			return JungleStructures.getRandomJungleDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
+			return JungleStructures.getRandomJungleDecorBlueprint(villageType, materialType, disallowModSubs, biome, horizIndex, random);
 		case SWAMP:
 			return SwampStructures.getRandomSwampDecorBlueprint(materialType, disallowModSubs, biome, horizIndex, random);
 		}

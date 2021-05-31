@@ -483,6 +483,7 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampStreetDecor.class, "VNSwStDe", new StructureCreationHandlers.SwampStreetDecor_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampRoadAccent.class, "VNSwRdAc", new StructureCreationHandlers.SwampRoadAccent_Handler());
 	        
+	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
 			
