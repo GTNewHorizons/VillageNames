@@ -8769,7 +8769,7 @@ public class SwampStructures
     			// Floor
     			{1,0,1, 5,0,2}, 
     			{1,0,3, 2,0,6}, {4,0,3, 5,0,6}, 
-    			{1,0,7, 4,0,9}, 
+    			{1,0,7, 4,0,9}, {1,0,10, 1,0,10}, 
     			{4,0,10, 5,0,10}, 
     			})
     		{
@@ -8783,7 +8783,7 @@ public class SwampStructures
     			// Outline
     			{0,0,2, 0,0,3}, {0,0,6, 0,0,8}, 
     			{1,0,11, 4,0,11}, {2,0,10, 3,0,10}, 
-    			{6,0,9, 6,0,10}, {6,0,3, 6,0,7}, {5,0,8, 5,0,9}, 
+    			{6,0,9, 6,0,10}, {6,0,2, 6,0,7}, {5,0,8, 5,0,9}, 
     			{1,0,0, 2,0,0}, {5,0,0, 5,0,0}, 
     			})
     		{
@@ -17003,7 +17003,7 @@ public class SwampStructures
     			int[] farmerPosition = farmerPositions[random.nextInt(farmerPositions.length)];
     			
     			int u = farmerPosition[0];
-    			int v = farmerPosition[1]+2;
+    			int v = farmerPosition[1]+1;
     			int w = farmerPosition[2];
 
     			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 1, 0); // Farmer

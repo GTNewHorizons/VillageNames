@@ -737,7 +737,7 @@ public class VillageGeneratorConfigHandler
 		
 		
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
-				(10D*91D/9), //= 10.11111111111111
+				(91D/9), //= 10.11111111111111
 				((76D/91) * 9D/(152D/5)), //=  0.24725274725274726
 				((23D/91) * 9D/(152D/5)), //= 0.07482648930017351
 				((112D/91) * 9D/(152D/5)), //= 0.3643724696356275
@@ -772,10 +772,10 @@ public class VillageGeneratorConfigHandler
 		
 		double snowyDecorToHouseRatio = 28D/24D; 
 		
-		double jungleDecorToHouseRatio = 2D; // Arbitrary
+		double jungleDecorToHouseRatio = 5D/3D; // Arbitrary
 		double jungleStreetToHouseRatio = 20D/17D; // Arbitrary
 
-		double swampDecorToHouseRatio = 2D; // Arbitrary
+		double swampDecorToHouseRatio = 4D/3D; // Arbitrary
 		double swampStreetToHouseRatio = 26D/17D; // Arbitrary
 		
 		// Plains components

@@ -610,7 +610,7 @@ public class JungleStructures
         			for(int capeU : new int[]{5, 6})
                     {
                         int bannerU = capeU;
-            			int bannerV = 6;
+            			int bannerV = 7;
             			int bannerW = 6;
             			int bannerO = 0; // Facing away from you
             			boolean hanging=true;
@@ -3639,13 +3639,7 @@ public class JungleStructures
         		{7,1,6, 7,1,6}, 
             	})
             {
-            	// Grab a random crop
-            	Block cropBlock = StructureVillageVN.chooseCropPair(random)[0];
-            	
-            	for (int i=0; i<2; i++)
-            	{
-            		this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carrots, 7, Blocks.carrots, 7, false);
-            	}
+            	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carrots, 7, Blocks.carrots, 7, false);
             }
             
             
@@ -3795,7 +3789,7 @@ public class JungleStructures
     	public static final int STRUCTURE_HEIGHT = 7;
     	// Values for lining things up
     	private static final int GROUND_LEVEL = 0; // Spaces above the bottom of the structure considered to be "ground level"
-    	public static final byte MEDIAN_BORDERS = 1 + 2 + 4 + 8; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
+    	public static final byte MEDIAN_BORDERS = 1 + 2; // Sides of the bounding box to count toward ground level median. +1: front; +2: left; +4: back; +8: right;
     	private static final int INCREASE_MIN_U = 0;
     	private static final int DECREASE_MAX_U = 1;
     	private static final int INCREASE_MIN_W = 0;
@@ -21525,19 +21519,19 @@ public class JungleStructures
     			break;
     		case 1: // Facing left
     			// Bale in center
-    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Bale in front
-    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 0, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, -1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, 1, 0, 1, hayBlock, 0);
     			BlueprintData.addFillBelowTo(blueprint, 1, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
-    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, hayBlock, 0);
+    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Right side
-    			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, -1, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, 0, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			break;
     		case 2: // Facing away
@@ -21559,19 +21553,19 @@ public class JungleStructures
     			break;
     		case 3: // Facing right
     			// Bale in center
-    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 0, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Bale in front
-    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, 1, 0, 0, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, 1, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-left corner
     			BlueprintData.addPlaceBlock(blueprint, -1, 0, -1, hayBlock, 0);
     			BlueprintData.addFillBelowTo(blueprint, -1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Back-right corner
-    			BlueprintData.addPlaceBlock(blueprint, 1, 0, -1, hayBlock, 0);
-    			BlueprintData.addFillBelowTo(blueprint, 1, -1, -1, biomeFillerBlock, biomeFillerMeta); // Foundation
+    			BlueprintData.addPlaceBlock(blueprint, -1, 0, 1, hayBlock, 0);
+    			BlueprintData.addFillBelowTo(blueprint, -1, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			// Right side
-    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, hayBlock, horizIndex%2==0?8:4);
+    			BlueprintData.addPlaceBlock(blueprint, 0, 0, 1, hayBlock, horizIndex%2!=0?8:4);
     			BlueprintData.addFillBelowTo(blueprint, 0, -1, 1, biomeFillerBlock, biomeFillerMeta); // Foundation
     			break;
     		}
