@@ -1532,7 +1532,7 @@ public class SwampStructures
 			// Eastward
 			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ + new int[]{4,5,5,4}[this.coordBaseMode], 3, this.getComponentType());
 			// Southward
-			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + new int[]{3,5,5,4}[this.coordBaseMode], this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX + new int[]{4,5,5,4}[this.coordBaseMode], this.boundingBox.minY, this.boundingBox.maxZ + 1, 0, this.getComponentType());
 			// Westward
 			StructureVillageVN.generateAndAddRoadPiece((StructureVillagePieces.Start)start, components, random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ + new int[]{5,4,4,5}[this.coordBaseMode], 1, this.getComponentType());
 		}
@@ -5301,7 +5301,7 @@ public class SwampStructures
             	{3,2,2, 3,2,8}, 
             	{4,2,3, 4,3,5}, {4,2,7, 4,2,7}, {4,4,3, 4,4,3}, {4,4,5, 4,4,5}, {4,5,3, 4,5,5}, 
             	{5,2,2, 5,2,8}, {5,3,2, 5,3,2}, {5,6,6, 5,6,6}, 
-            	{6,2,2, 6,2,5}, {6,2,7, 6,2,7}, {6,3,2, 6,4,2}, {5,6,2, 7,6,2}, 
+            	{6,2,2, 6,2,5}, {6,2,7, 6,2,7}, {6,3,2, 6,4,2}, {5,6,2, 7,6,2}, {6,7,2, 6,7,2}, 
             	{7,2,2, 7,2,8}, {7,3,2, 7,3,2}, {7,3,6, 7,3,6}, {7,6,6, 7,6,6}, 
             	{8,2,3, 8,3,5}, {8,4,3, 8,4,3}, {8,4,5, 8,4,5}, {8,5,3, 8,5,5}, {8,2,7, 8,2,7}, 
             	{9,2,6, 9,2,8}, 
@@ -6599,20 +6599,24 @@ public class SwampStructures
                     	
                     	// Potion IDs taken from https://www.minecraftinfo.com/IDList.htm
                     	int potionID;
-                    	
-                    	switch(random.nextInt(5))
+
+                    	int number_of_potions = 2; // How many attempts to add potions to a slot. Sometimes there's slot overlap
+                    	for (int i=0; i<number_of_potions; i++)
                     	{
-                    	default:
-                    	case 0: potionID = 16385; break; // Splash potion of Regeneration (33 sec)
-                    	case 1: potionID = 16389; break; // Splash potion of Healing
-                    	case 2: potionID = 16392; break; // Splash potion of Weakness (1m07s)
-                    	case 3: potionID = 16394; break; // Splash potion of Slowness (1m07s)
-                    	case 4: potionID = 16396; break; // Splash potion of Harming
+                        	switch(random.nextInt(5))
+                        	{
+                        	default:
+                        	case 0: potionID = 16385; break; // Splash potion of Regeneration (33 sec)
+                        	case 1: potionID = 16389; break; // Splash potion of Healing
+                        	case 2: potionID = 16392; break; // Splash potion of Weakness (1m07s)
+                        	case 3: potionID = 16394; break; // Splash potion of Slowness (1m07s)
+                        	case 4: potionID = 16396; break; // Splash potion of Harming
+                        	}
+                        	
+                        	ItemStack dispenserItem = new ItemStack(Items.potionitem, 1, potionID);
+                        	
+                        	tileentitydispenser.setInventorySlotContents(random.nextInt(tileentitydispenser.getSizeInventory()), dispenserItem);
                     	}
-                    	
-                    	ItemStack dispenserItem = new ItemStack(Items.potionitem, 1, potionID);
-                    	
-                    	tileentitydispenser.setInventorySlotContents(random.nextInt(tileentitydispenser.getSizeInventory()), dispenserItem);
                     }
                 }
             }
@@ -15702,6 +15706,9 @@ public class SwampStructures
     			{3,2,4, 3,3,4}, 
     			{3,2,3, 3,3,3}, 
     			{3,3,1, 4,4,2}, 
+    			// Next to the tree
+    			{2,1,-1, 2,2,4}, 
+    			{3,1,-1, 3,2,-1}, 
     			})
     		{
             	this.fillWithAir(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5]);	
