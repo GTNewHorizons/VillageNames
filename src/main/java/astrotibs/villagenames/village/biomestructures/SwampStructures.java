@@ -180,8 +180,14 @@ public class SwampStructures
         		}
         		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
         		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
@@ -685,8 +691,14 @@ public class SwampStructures
         		}
         		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
         		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
@@ -1242,8 +1254,14 @@ public class SwampStructures
         		}
         		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
         		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
@@ -1590,8 +1608,14 @@ public class SwampStructures
         		}
         		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
         		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
         			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
         			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
         		}
             }}
@@ -2041,12 +2065,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -2404,12 +2434,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -2830,12 +2866,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -3453,12 +3495,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -3843,13 +3891,13 @@ public class SwampStructures
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
     			"          ",
-    			" F     F  ",
     			"          ",
-    			"   F F    ",
     			"          ",
-    			"   F F    ",
     			"          ",
-    			" F     F F",
+    			"          ",
+    			"          ",
+    			"          ",
+    			"         F",
     			"         P",
         };
     	// Here are values to assign to the bounding box
@@ -4015,12 +4063,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
         	
         	
@@ -4037,7 +4091,16 @@ public class SwampStructures
             {
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], darkPrismarineBlock, darkPrismarineMeta, darkPrismarineBlock, darkPrismarineMeta, false);
             }
-    		
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+            	{1,0,7}, {7,0,7}, 
+            	{3,0,5}, {5,0,5}, 
+            	{3,0,3}, {5,0,3}, 
+            	{1,0,1}, {7,0,1}, 
+    			})
+    		{
+    			this.func_151554_b(world, darkPrismarineBlock, darkPrismarineMeta, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
     		
             // Purple Terracotta
         	for (int[] uuvvww : new int[][]{
@@ -4514,12 +4577,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -5016,9 +5085,9 @@ public class SwampStructures
     			" FFFFFFFFFFF ",
     			" FFFFFFFFFFF ",
     			" FFFFFFFFFFF ",
-    			"  F          ",
     			"             ",
-    			"  F F   F    ",
+    			"             ",
+    			"             ",
     			"             ",
     			"  FF         ",
         };
@@ -5185,12 +5254,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -5209,7 +5284,15 @@ public class SwampStructures
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
     		}
-            
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+    			// Feet
+        		{2,0,4}, 
+        		{2,0,2}, {4,0,2}, {8,0,2}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
             
         	// Stripped Log (Across)
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 4+(this.coordBaseMode%2!=0? 4:0), this.materialType, this.biome, this.disallowModSubs); Block biomeLogHorAcrossBlock = (Block)blockObject[0]; int biomeLogHorAcrossMeta = (Integer)blockObject[1];
@@ -5533,15 +5616,15 @@ public class SwampStructures
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
     			"            ",
-    			"      F     ",
-    			"   F     F  ",
     			"            ",
-    			"      F     ",
-    			"  F  FFF  F ",
-    			"      F     ",
     			"            ",
-    			" F F     F  ",
-    			"FF    F     ",
+    			"            ",
+    			"            ",
+    			"            ",
+    			"            ",
+    			"            ",
+    			" F          ",
+    			"FF          ",
     			"PFFF        ",
     			"PPF         ",
         };
@@ -5708,12 +5791,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -5739,6 +5828,19 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+        		{6,0,10}, 
+        		{3,0,9}, {9,0,9}, 
+        		{6,0,7},
+        		{2,0,6}, {5,0,6}, {6,0,6}, {7,0,6}, {10,0,6}, 
+        		{6,0,5}, 
+        		{3,0,3}, {9,0,3}, 
+        		{6,0,2}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
             
             
@@ -6102,7 +6204,7 @@ public class SwampStructures
 				w = s<=2? s+5 : s<=7? s+1 : s<=9? s-4 : s<=11? s-3 : s<=16? s-8 : s-12;
     			
     			
-    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 3, 0); // Shepherd
+    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 4, 0); // Fletcher
     			
     			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
     			world.spawnEntityInWorld(entityvillager);
@@ -6145,17 +6247,6 @@ public class SwampStructures
     	public String nameSuffix="";
     	public BiomeGenBase biome=null;
     	
-    	// Make foundation with blanks as empty air and F as foundation spaces
-//        private static final String[] foundationPattern = new String[]{
-//    			"FFFFFFF ",
-//    			"FFFFFFF ",
-//    			"FFFFFFF ",
-//    			"FFFFFFFF",
-//    			"FFFFFFFF",
-//    			"FFFFFFFF",
-//    			"FFFFFFF ",
-//    			"FFFFFF  ",
-//        };
     	// Here are values to assign to the bounding box
     	public static final int STRUCTURE_WIDTH = 8;//foundationPattern[0].length();
     	public static final int STRUCTURE_DEPTH = 8;//foundationPattern.length;
@@ -6943,12 +7034,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -7571,12 +7668,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -8131,12 +8234,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
                     	
@@ -8753,12 +8862,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -9170,15 +9285,15 @@ public class SwampStructures
     	
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
-    			"     F    ",
-    			" F       F",
-    			"          ",
-    			"          ",
-    			" F   F   F",
     			"          ",
     			"          ",
     			"          ",
-    			" F   F   F",
+    			"          ",
+    			"          ",
+    			"          ",
+    			"          ",
+    			"          ",
+    			"          ",
     			"F         ",
         };
     	// Here are values to assign to the bounding box
@@ -9344,12 +9459,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
         	
         	            
@@ -9368,7 +9489,16 @@ public class SwampStructures
             {
             	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
             }
-        	
+    		// Foot foundation
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uvw : new int[][]{
+            	{1,-1,8}, {5,-1,9}, {9,-1,8}, 
+            	{1,-1,5}, {5,-1,5}, {9,-1,5}, 
+            	{1,-1,1}, {5,-1,1}, {9,-1,1}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
         	
         	// For stripped logs specifically
         	Block biomeLogVertBlock = Blocks.log; int biomeLogVertMeta = 0;
@@ -9407,7 +9537,6 @@ public class SwampStructures
     		
     		
     		// Cobblestone
-    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
     		for(int[] uuvvww : new int[][]{
     			// Roof
     			{2,4,8, 2,4,8}, {4,5,8, 6,5,8}, {6,5,4, 6,5,4}, {8,4,8, 8,4,8}, 
@@ -9956,12 +10085,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -10029,6 +10164,17 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+    		}
+    		// Foot foundation
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uvw : new int[][]{
+    			{1,-1,9}, {7,-1,9}, 
+    			{1,-1,5}, {7,-1,5}, 
+    			{2,-1,2}, {6,-1,2}, 
+    			{2,-1,0}, {4,-1,0}, {6,-1,0}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
             
             
@@ -10185,7 +10331,6 @@ public class SwampStructures
     		
     		
     		// Cobblestone
-    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
     		for(int[] uuvvww : new int[][]{
     			{2,5,4, 2,5,4}, 
     			})
@@ -10666,7 +10811,7 @@ public class SwampStructures
     			int v = 4;
     			int j = (s <= 1) ? (s - 3) : ((s <= 16) ? ((s - 2) % 5 + 2) : (s - 14));
     			
-    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 4, 0); // Fletcher
+    			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 0, 3, 0); // Shepherd
     			entityvillager.setLocationAndAngles(getXWithOffset(i, j) + 0.5D, getYWithOffset(v) + 0.5D, getZWithOffset(i, j) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
     			
     			world.spawnEntityInWorld((Entity)entityvillager);
@@ -11491,12 +11636,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -11942,12 +12093,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -12445,12 +12602,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -12826,11 +12989,11 @@ public class SwampStructures
         private static final String[] foundationPattern = new String[]{
     			"         ",
     			"         ",
-    			"  F   F  ",
     			"         ",
     			"         ",
     			"         ",
-    			"  F   F  ",
+    			"         ",
+    			"         ",
     			"         ",
     			"  F      ",
         };
@@ -12997,12 +13160,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -13017,6 +13186,15 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+    			// Feet
+        		{2,-1,6}, {6,-1,6}, 
+        		{2,-1,2}, {6,-1,2}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
             
             
@@ -13349,11 +13527,11 @@ public class SwampStructures
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
     			"     ",
-    			"F   F",
+    			"     ",
     			"  FF ",
     			"     ",
     			" F   ",
-    			"F   F",
+    			"     ",
     			"F    ",
     			"F    ",
         };
@@ -13520,12 +13698,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -13540,6 +13724,15 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+    			// Feet
+        		{0,0,6}, {4,0,6}, 
+        		{0,0,2}, {4,0,2}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
             
             
@@ -13917,13 +14110,13 @@ public class SwampStructures
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
     			"            FFFF  ",
-    			" F      FFFFFFFFF ",
+    			"         FFFFFFFF ",
     			"        FFFFFFFFFF",
     			"        FFFFFFFFFF",
     			"        FFFFFFFFFF",
     			"        FFFFFFFFFF",
     			"        FFFFFFFFFF",
-    			" F      FFFFFFFFF ",
+    			"         FFFFFFFF ",
     			"            FFFF  ",
         };
     	// Here are values to assign to the bounding box
@@ -14089,12 +14282,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -14150,6 +14349,15 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, false);
+    		}
+    		// Foot foundation
+    		for(int[] uvw : new int[][]{
+    			// Feet
+        		{1,0,7}, {8,0,7}, 
+        		{1,0,1}, {8,0,1}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
             
             
@@ -14637,12 +14845,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -15076,12 +15290,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
     		
     		
@@ -15461,15 +15681,15 @@ public class SwampStructures
     	
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
-    			"   F F F F",
+    			"          ",
     			"          ",
     			"          ",
     			"          ",
     			"FFFF      ",
-    			"FFF F   F ",
     			"FFF       ",
     			"FFF       ",
-    			"FFFF F F F",
+    			"FFF       ",
+    			"FFF       ",
         };
     	// Here are values to assign to the bounding box
     	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
@@ -15634,12 +15854,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -15835,6 +16061,16 @@ public class SwampStructures
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
+    		}
+    		// Foot foundation
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uvw : new int[][]{
+    			{3,0,8}, {5,0,8}, {7,0,8}, {9,0,8}, 
+    			{4,0,3}, {8,0,3}, 
+    			{3,0,0}, {5,0,0}, {7,0,0}, {9,0,0}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
     		
     		
@@ -16302,12 +16538,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
         	
         	
@@ -16760,12 +17002,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
             
@@ -17348,11 +17596,11 @@ public class SwampStructures
     	
     	// Make foundation with blanks as empty air and F as foundation spaces
     	private static final String[] foundationPattern = new String[]{
-				" F ",
+				"   ",
 				"PPP",
 				"PPP",
 				"PPP",
-				" F ",
+				"   ",
     	};
     	// Here are values to assign to the bounding box
     	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
@@ -17537,12 +17785,18 @@ public class SwampStructures
     				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1+(world.getBlock(posX, posY, posZ).isNormalCube()?-1:0), w, structureBB);
     				StructureVillageVN.setPathSpecificBlock(world, materialType, biome, disallowModSubs, posX, posY, posZ, false);
     			}
-    			else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
-    			{
-    				// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
-    				this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-1, w, structureBB);
-    				this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
-    			}
+        		else if (world.getBlock(posX, posY, posZ)==biomeFillerBlock)
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation
+        			this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, u, GROUND_LEVEL-2, w, structureBB);
+        		}
+        		
+        		// Then, if the top is dirt with a non-full cube above it, make it grass
+        		if (world.getBlock(posX, posY, posZ)==biomeFillerBlock && !world.getBlock(posX, posY+1, posZ).isNormalCube())
+        		{
+        			// If the space is blank and the block itself is dirt, add dirt foundation and then cap with grass:
+        			this.placeBlockAtCurrentPosition(world, biomeTopBlock, biomeTopMeta, u, GROUND_LEVEL-1, w, structureBB);
+        		}
     		}}
             
         	
@@ -17556,6 +17810,15 @@ public class SwampStructures
             {
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeFenceBlock, 0, biomeFenceBlock, 0, false);
             }
+    		// Foot foundation
+    		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+    		for(int[] uvw : new int[][]{
+        		{1,0,4}, 
+        		{1,0,0}, 
+    			})
+    		{
+    			this.func_151554_b(world, biomeCobblestoneBlock, biomeCobblestoneMeta, uvw[0], uvw[1], uvw[2], structureBB);
+    		}
             
             
             // Hanging Lanterns
