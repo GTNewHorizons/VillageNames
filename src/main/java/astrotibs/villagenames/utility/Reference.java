@@ -6,7 +6,7 @@ public class Reference
 	public static final String
 	MOD_ID = "VillageNames",
 	MOD_NAME = "Village Names",
-	VERSION = "4.3.0 DEV",
+	VERSION = "4.3.0",
 	URL = "https://www.curseforge.com/minecraft/mc-mods/village-names",
 	VERSION_CHECKER_URL = "https://gitgud.io/AstroTibs/VillageNames/raw/1.7.10/CURRENT_VERSION",
 	MOD_CHANNEL = "vnChannel",

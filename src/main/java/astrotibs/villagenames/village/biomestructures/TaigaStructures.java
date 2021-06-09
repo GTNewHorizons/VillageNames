@@ -2975,7 +2975,7 @@ public class TaigaStructures
         		{4,2,5, 4,3,5, 2},  
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
         	
         	
@@ -5474,7 +5474,9 @@ public class TaigaStructures
             			this.getZWithOffset(uvwo[0], uvwo[2]),
             			uvwo[3],
             			this.coordBaseMode,
-            			biomePlankMeta);
+            			biomePlankMeta,
+            			-1 // Carpet color
+        				);
             }
             
             // Bookshelves
@@ -12287,7 +12289,7 @@ public class TaigaStructures
         		{7,2,7, 7,5,7, 2},  
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
         	
 

@@ -1044,33 +1044,33 @@ public class DesertStructures
     		// Stall contents
     		
     		// Glazed terracotta
-    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, StructureVillageVN.chooseGlazedTerracottaMeta(0, this.coordBaseMode));
         	
         	if (tryGlazedTerracotta != null)
         	{
         		// Square under square awning
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 13, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, StructureVillageVN.chooseGlazedTerracottaMeta(1, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 13, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, StructureVillageVN.chooseGlazedTerracottaMeta(2, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 1, 12, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor : 0, StructureVillageVN.chooseGlazedTerracottaMeta(3, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 1, 12, structureBB);
         		
         		// Halved square under strip awning
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, StructureVillageVN.chooseGlazedTerracottaMeta(0, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 2, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, StructureVillageVN.chooseGlazedTerracottaMeta(1, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 2, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, StructureVillageVN.chooseGlazedTerracottaMeta(2, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 9, 1, 0, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(GeneralConfig.useVillageColors ? townColor2 : 0, StructureVillageVN.chooseGlazedTerracottaMeta(3, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 8, 1, 0, structureBB);
         	}
         	else
@@ -4760,7 +4760,7 @@ public class DesertStructures
         		{10,1,3, 10,6,3, 3},  
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
         	
         	
@@ -5576,7 +5576,9 @@ public class DesertStructures
             			this.getZWithOffset(uvwo[0], uvwo[2]),
             			uvwo[3],
             			this.coordBaseMode,
-            			biomePlankMeta);
+            			biomePlankMeta,
+            			-1 // Carpet color
+        				);
             }
         	
         	// Bookshelves
@@ -6826,7 +6828,7 @@ public class DesertStructures
         		{6,2,4, 6,3,4, 1},  
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
             
             
@@ -11578,20 +11580,20 @@ public class DesertStructures
         	
     		// Glazed terracotta
         	int gtColor = GeneralConfig.useVillageColors ? this.townColor2 : 0; // White
-    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(0, this.coordBaseMode));
     		
         	if (tryGlazedTerracotta != null)
         	{
         		// Square under square awning
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 0, 6, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(1, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 0, 6, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(2, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 0, 5, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(3, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 4, 0, 5, structureBB);
         	}
         	else
@@ -12022,20 +12024,20 @@ public class DesertStructures
         	
     		// Glazed terracotta
         	int gtColor = GeneralConfig.useVillageColors ? this.townColor : 5; // Lime
-    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (0 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+    		Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(0, this.coordBaseMode));
         	
         	if (tryGlazedTerracotta != null)
         	{
         		// Square under square awning
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 0, 7, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (1 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(1, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 7, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (2 + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(2, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 6, 0, 6, structureBB);
         		
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, (3 + this.coordBaseMode + (this.coordBaseMode < 2 ? 3 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(gtColor, StructureVillageVN.chooseGlazedTerracottaMeta(3, this.coordBaseMode));
         		this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], 5, 0, 6, structureBB);
         	}
         	else
@@ -12489,7 +12491,7 @@ public class DesertStructures
         		{2,0,7, 3, GeneralConfig.useVillageColors ? this.townColor5 : 3}, // Light Blue
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);

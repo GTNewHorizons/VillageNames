@@ -2681,7 +2681,10 @@ public class ModObjects {
 		return (StructureVillageVN.ANVIL_META_ARRAY[orientation][horizIndex]+2)%4;
 	}
 	
-	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta)
+	
+	// Lectern
+	// Carpet color only applies to Bibliocraft writing desks. Set to -1 for no carpet.
+	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta, int carpetColor)
 	{
 		Block modblock=null; int meta=0;
 		boolean setTE = false; // Flagged as true if you need to set a tile entity
@@ -2705,6 +2708,25 @@ public class ModObjects {
         	TileEntity tileentity = world.getTileEntity(x, y, z);
         	tileentity.writeToNBT(nbtCompound);
         	nbtCompound.setInteger("deskAngle", chooseBibliocraftDeskMeta(orientation, horizIndex));
+        	
+        	// Add carpet
+        	if (carpetColor!=-1)
+        	{
+        		// Add carpet as an inventory item
+        		NBTTagCompound deskinvo = new NBTTagCompound();
+        		deskinvo.setByte("Count", (byte)1);
+        		deskinvo.setByte("Slot", (byte)9);
+        		deskinvo.setShort("Damage", (short)carpetColor);
+        		deskinvo.setShort("id", (short)171);
+        		NBTTagList taglist = new NBTTagList();
+        		taglist.appendTag(deskinvo);
+        		nbtCompound.setTag("Inventory", taglist);
+        		
+        		// Turn on flags to display the carpet
+        		nbtCompound.setInteger("carpetColor", carpetColor);
+        		nbtCompound.setByte("hasCarpet", (byte)1);
+        	}
+        	
         	tileentity.readFromNBT(nbtCompound);
         	world.setTileEntity(x, y, z, tileentity);
 		}

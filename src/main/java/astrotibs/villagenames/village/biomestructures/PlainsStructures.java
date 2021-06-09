@@ -6700,7 +6700,9 @@ public class PlainsStructures
             			this.getZWithOffset(uvwo[0], uvwo[2]),
             			uvwo[3],
             			this.coordBaseMode,
-            			biomePlankMeta);
+            			biomePlankMeta,
+            			-1 // Carpet color
+        				);
             }
             
             
@@ -7183,7 +7185,9 @@ public class PlainsStructures
             			this.getZWithOffset(uvwo[0], uvwo[2]),
             			uvwo[3],
             			this.coordBaseMode,
-            			biomePlankMeta);
+            			biomePlankMeta,
+            			-1 // Carpet color
+        				);
             }
             
             // Doors
@@ -12669,7 +12673,7 @@ public class PlainsStructures
             
             // Ladder
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.ladder, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLadderBlock = (Block)blockObject[0];
-            this.fillWithMetadataBlocks(world, structureBB, 2, 2, 4, 2, 4, 4, biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(1, this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(1, this.coordBaseMode), false);
+            this.fillWithMetadataBlocks(world, structureBB, 2, 2, 4, 2, 4, 4, biomeLadderBlock, StructureVillageVN.chooseLadderMeta(1, this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(1, this.coordBaseMode), false);
             
             // Beds
             for (int[] uvwo : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
@@ -16242,7 +16246,7 @@ public class PlainsStructures
         		{4,1,4, 4,10,4, 3},  
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
             
             

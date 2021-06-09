@@ -1361,7 +1361,7 @@ public class SwampStructures
         		{4,4,4, 2, GeneralConfig.useVillageColors ? this.townColor3 : 10}, // Purple
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -2936,7 +2936,9 @@ public class SwampStructures
     		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
     		for(int[] uuvvww : new int[][]{
     			// Floor
-    			{0,0,4, 8,0,7}, 
+    			{0,0,4, 8,0,4}, 
+    			{0,0,5, 0,0,6}, {8,0,5, 8,0,6}, 
+    			{0,0,7, 8,0,7}, 
     			})
     		{
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);	
@@ -2981,7 +2983,7 @@ public class SwampStructures
         		{5,2,4, 0, GeneralConfig.useVillageColors ? this.townColor2 : 13}, // Green
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -3177,12 +3179,12 @@ public class SwampStructures
             }
             
             
-        	// Carpet
+        	// Wool - carpet in front of the door prevents villagers from passing through
         	for(int[] uuvvww : new int[][]{
-        		{2,1,5, 6,1,6, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+        		{2,0,5, 6,0,6, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
         		})
             {
-    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carpet, uuvvww[6], Blocks.carpet, uuvvww[6], false);	
+    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.wool, uuvvww[6], Blocks.wool, uuvvww[6], false);	
             }
             
             
@@ -4125,7 +4127,7 @@ public class SwampStructures
             	// Porch
             	{0,3,0, 0,3,1}, {1,3,0, 8,3,0}, {8,3,1, 8,3,3}, {8,3,5, 8,3,8}, {9,3,4, 9,3,5}, {6,3,8, 7,3,8}, 
             	// Left wall
-            	{0,4,2, 0,5,8}, 
+            	{0,3,2, 0,5,8}, 
             	// Right wall
             	{6,4,2, 6,5,4}, {6,4,6, 6,5,8}, 
             	})
@@ -4248,7 +4250,7 @@ public class SwampStructures
         		{5,4,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 10}, // Purple
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -5485,7 +5487,7 @@ public class SwampStructures
         		{7,3,3, 3, GeneralConfig.useVillageColors ? this.townColor2 : 13}, // Green
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -6109,7 +6111,7 @@ public class SwampStructures
         		{4,3,3, 3, GeneralConfig.useVillageColors ? this.townColor4 : 14}, // Red
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -7912,7 +7914,7 @@ public class SwampStructures
         		{4,3,7, 4,8,7, 2}, 
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
             
             
@@ -8574,7 +8576,9 @@ public class SwampStructures
             			this.getZWithOffset(uvwo[0], uvwo[2]),
             			uvwo[3],
             			this.coordBaseMode,
-            			biomePlankMeta);
+            			biomePlankMeta,
+            			-1 // Carpet color
+        				);
             }
         	
         	
@@ -8920,7 +8924,7 @@ public class SwampStructures
         		{3,0,6, 2, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -9910,17 +9914,16 @@ public class SwampStructures
     	
     	// Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
-    			" F     F    ",
     			"            ",
     			"            ",
     			"            ",
-    			" F     F    ",
     			"            ",
     			"            ",
-    			"  F   F  FF ",
+    			"            ",
+    			"            ",
+    			"         FF ",
     			"         F  ",
-    			"  F F F  FF ",
-
+    			"         FF ",
         };
     	// Here are values to assign to the bounding box
     	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();
@@ -10256,13 +10259,14 @@ public class SwampStructures
             }
             
             
-        	// Carpet
-        	for(int[] uuvvww : new int[][]{
-        		// Lower
-        		{3,2,3, 5,2,4, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        	// Carpet (Black)
+        	for(int[] uvwm : new int[][]{
+        		// Carpet in front of the door prevents villagers from passing through
+        		{3,2,4}, {5,2,4}, 
+        		{4,2,3}, 
         		})
             {
-    			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carpet, uuvvww[6], Blocks.carpet, uuvvww[6], false);	
+    			this.placeBlockAtCurrentPosition(world, Blocks.carpet, (GeneralConfig.useVillageColors ? this.townColor : 15), uvwm[0], uvwm[1], uvwm[2], structureBB);
             }
         	
         	
@@ -10273,7 +10277,7 @@ public class SwampStructures
         		{4,5,0, 2, GeneralConfig.useVillageColors ? this.townColor4 : 14}, // Red
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -10767,7 +10771,12 @@ public class SwampStructures
     		}
     		
     		// Carpet
-    		for (int[] uuvvww : new int[][] { { 6, 4, 3, 6, 4, 6, GeneralConfig.useVillageColors ? this.townColor4 : 14 }, { 5, 4, 2, 5, 4, 6, GeneralConfig.useVillageColors ? this.townColor4 : 14 } })
+    		for (int[] uuvvww : new int[][]
+    		{
+    			// Carpet in front of the door prevents villagers from passing through
+    			{6,4,3, 6,4,5, GeneralConfig.useVillageColors ? this.townColor4 : 14 }, 
+    			{5,4,2, 5,4,5, GeneralConfig.useVillageColors ? this.townColor4 : 14 }
+    		})
     		{
     			fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carpet, uuvvww[6], Blocks.carpet, uuvvww[6], false);
     		}
@@ -11164,8 +11173,7 @@ public class SwampStructures
 				{6,0,5, 6,3,9}, 
 				{1,0,5, 2,3,5}, {4,0,5, 5,3,5}, 
 				// Floor
-				{2,0,9, 4,0,9}, 
-				{1,0,6, 5,0,8}, 
+				{1,0,6, 1,0,8}, {5,0,6, 5,0,8}, 
 				{3,0,4, 3,0,5}, 
 				// Left entrance wall
 				{2,1,3, 2,3,4}, {4,1,3, 4,3,4}, 
@@ -11274,36 +11282,30 @@ public class SwampStructures
 			}
 			
 			
-			// Wool
+			// Wool - carpet in front of the door prevents villagers from passing through
 			for (int[] uvwo : new int[][]{
 				{1,1,6, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+				
+        		// Floor carpeting
+        		{2,0,9, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		{3,0,9, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        		{4,0,9, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		
+        		{2,0,8, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        		{3,0,8, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		{4,0,8, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        		
+        		{2,0,7, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		{3,0,7, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        		{4,0,7, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		
+        		{2,0,6, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
+        		{3,0,6, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
+        		{4,0,6, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
 			})
 			{
 				this.placeBlockAtCurrentPosition(world, Blocks.wool, uvwo[3], uvwo[0], uvwo[1], uvwo[2], structureBB);
 			}
-			
-			
-			// Carpet
-        	for(int[] uvwc : new int[][]{
-        		{2,1,9, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		{3,1,9, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		{4,1,9, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		
-        		{2,1,8, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		{3,1,8, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		{4,1,8, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		
-        		{2,1,7, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		{3,1,7, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		{4,1,7, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		
-        		{2,1,6, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		{3,1,6, (GeneralConfig.useVillageColors ? this.townColor4 : 14)}, // Red
-        		{4,1,6, (GeneralConfig.useVillageColors ? this.townColor : 15)}, // Black
-        		})
-            {
-            	this.placeBlockAtCurrentPosition(world, Blocks.carpet, uvwc[3], uvwc[0], uvwc[1], uvwc[2], structureBB);
-            }
         	
         	
 			// Solid color banners
@@ -12127,7 +12129,7 @@ public class SwampStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
     			// Entry/floor
-    			{1,0,3, 5,0,10}, 
+            	{1,0,3, 5,0,5}, {1,0,6, 1,0,7}, {5,0,6, 5,0,7}, {1,0,8, 5,0,10}, 
     			// Front wall
     			{1,1,5, 2,3,5}, {3,3,5, 3,3,5}, {4,1,5, 5,3,5}, {2,4,6, 4,4,6},
     			// Left wall
@@ -12250,18 +12252,18 @@ public class SwampStructures
             }
             
             
-        	// Carpet
+        	// Wool - carpet in front of the door prevents villagers from passing through
         	for(int[] uvwc : new int[][]{
         		// Lower
-        		{2,1,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
-        		{3,1,6, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
-        		{4,1,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
-        		{2,1,6, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
-        		{3,1,7, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
-        		{4,1,6, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
+        		{2,0,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+        		{3,0,6, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+        		{4,0,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+        		{2,0,6, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
+        		{3,0,7, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
+        		{4,0,6, (GeneralConfig.useVillageColors ? this.townColor2 : 13)}, // Green
         		})
             {
-            	this.placeBlockAtCurrentPosition(world, Blocks.carpet, uvwc[3], uvwc[0], uvwc[1], uvwc[2], structureBB);
+            	this.placeBlockAtCurrentPosition(world, Blocks.wool, uvwc[3], uvwc[0], uvwc[1], uvwc[2], structureBB);
             }
             
     		
@@ -14952,7 +14954,7 @@ public class SwampStructures
         		{1,1,3, 1,3,3, 0}, 
         		})
             {
-        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseFurnaceMeta(uuvvwwo[6], this.coordBaseMode), false);
+        		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), biomeLadderBlock, StructureVillageVN.chooseLadderMeta(uuvvwwo[6], this.coordBaseMode), false);
             }
             
     		
@@ -15007,7 +15009,7 @@ public class SwampStructures
         		{6,0,3, 3, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -15065,9 +15067,9 @@ public class SwampStructures
     			
     			int s = random.nextInt(16);
     			
-    			int u = s==15 ? 1 : 5+(s/3);
+    			int u = s==15 ? 10 : 5+(s/3);
     			int v = 1;
-    			int w = s==15 ? 3 : 5+(s%3);
+    			int w = s==15 ? 4 : 3+(s%3);
     			
     			EntityVillager entityvillager = StructureVillageVN.makeVillagerWithProfession(world, random, 4, 2, 0); // Leatherworker
     			
@@ -15503,8 +15505,8 @@ public class SwampStructures
             
         	// Carpet
         	for(int[] uuvvww : new int[][]{
-        		// Lower
-        		{3,1,2, 4,1,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
+        		// Carpet in front of the door prevents villagers from passing through
+        		{3,1,3, 4,1,7, (GeneralConfig.useVillageColors ? this.townColor3 : 10)}, // Purple
         		})
             {
     			this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], Blocks.carpet, uuvvww[6], Blocks.carpet, uuvvww[6], false);	
@@ -16656,7 +16658,7 @@ public class SwampStructures
         		{4,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 15}, // Black
            		})
         	{
-        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], (uvwoc[3] + this.coordBaseMode + (this.coordBaseMode < 2 ? 1 : 0))%4);
+        		tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(uvwoc[4], StructureVillageVN.chooseGlazedTerracottaMeta(uvwoc[3], this.coordBaseMode));
         		if (tryGlazedTerracotta != null)
             	{
         			this.placeBlockAtCurrentPosition(world, (Block)tryGlazedTerracotta[0], (Integer)tryGlazedTerracotta[1], uvwoc[0], uvwoc[1], uvwoc[2], structureBB);
@@ -17506,7 +17508,7 @@ public class SwampStructures
 	            	}
             	}
             	
-            	this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
+            	//this.func_151554_b(world, biomeFillerBlock, biomeFillerMeta, uvw[0], decorHeightY-1, uvw[2], structureBB);
             	this.clearCurrentPositionBlocksUpwards(world, uvw[0], decorHeightY+1, uvw[2], structureBB);
             	
             	// Get ground level
@@ -17997,8 +17999,7 @@ public class SwampStructures
     		}
     		
     		// Post
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
-    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeFillerBlock, biomeFillerMeta); // Foundation
+    		BlueprintData.addFillBelowTo(blueprint, 0, -1, 0, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta); // Foundation
     		BlueprintData.addFillWithBlocks(blueprint, 0,0,0, 0,postheight-1,0, biomeStrippedLogVerticBlock, biomeStrippedLogVerticMeta);
     		break;
     		
