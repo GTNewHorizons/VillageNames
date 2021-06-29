@@ -575,6 +575,7 @@ public class GeneralConfig {
  				"railcraft",
  				"mariculture",
  				"netherlicious",
+ 				"ganysnether",
  				},
  				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
  				);

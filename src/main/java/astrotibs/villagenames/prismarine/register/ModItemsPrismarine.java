@@ -4,6 +4,7 @@ import astrotibs.villagenames.prismarine.item.PrismarineCrystals;
 import astrotibs.villagenames.prismarine.item.PrismarineShard;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModItemsPrismarine {
 	
@@ -14,7 +15,10 @@ public class ModItemsPrismarine {
 	public static void init () {
 		GameRegistry.registerItem(prismarine_shard, "prismarine_shard");
 		GameRegistry.registerItem(prismarine_crystals, "prismarine_crystals");
-
+		
+		// Oredict registries
+		OreDictionary.registerOre("gemPrismarine", prismarine_shard);
+		OreDictionary.registerOre("dustPrismarine", prismarine_crystals);
 	}
 	
 }

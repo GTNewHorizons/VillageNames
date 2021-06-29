@@ -469,6 +469,8 @@ public class ModObjects {
 	public static final String ironNuggetUTD = DOM_UPTODATE + ":iron_nugget";
 	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
 	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
+	public static final String nuggetGS = "ganysnether" + ":ironNugget";
+	
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
@@ -2598,6 +2600,11 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetNL);
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().equals("ganysnether"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetGS);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
 		}
 		return null;
