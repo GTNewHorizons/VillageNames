@@ -56,8 +56,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 public class EntityInteractHandler {
 	
-	//Random random = new Random();
-	
 	public static int villageRadiusBuffer = 16;
 	
 	// This will only be used for getting the class path to a block
@@ -66,7 +64,7 @@ public class EntityInteractHandler {
 	public void onPlayerInteractEvent(PlayerInteractEvent event)
 	{
 		if ( 
-				!event.entityPlayer.worldObj.isRemote
+				!event.world.isRemote
 				&& event.action == Action.RIGHT_CLICK_BLOCK
 				&& GeneralConfig.debugMessages
 				)
@@ -89,45 +87,6 @@ public class EntityInteractHandler {
 	@SubscribeEvent(receiveCanceled=true)
 	public void onEntityInteract(EntityInteractEvent event)
 	{
-		// This was used to verify server-client syncing of Careers
-		/*
-		if (GeneralConfig.debugMessages && event.target instanceof EntityVillager)
-		{
-			EntityVillager villager = (EntityVillager)event.target;
-			//int career = ReflectionHelper.getPrivateValue(EntityVillager.class, villager, new String[]{"careerId", "field_175563_bv"});
-			
-			// v3.1.1 - Placed into null check to prevent crash
-			
-			ExtendedVillager ev = ExtendedVillager.get(villager);
-			
-			if (ev != null)
-			{
-				LogHelper.info(
-						"SYNC CHECKING Profession: " + villager.getProfession()
-						+ ", Career: " + (ExtendedVillager.get(villager)).getCareer()
-						+ ", BiomeType: " + (ExtendedVillager.get(villager)).getBiomeType()
-						+ ", ProfessionLevel: " + (ExtendedVillager.get(villager)).getProfessionLevel()
-						+ ", SkinTone: " + (ExtendedVillager.get(villager)).getSkinTone()
-						);
-			}
-		}
-		if (event.target instanceof EntityZombie)
-		{
-			EntityZombie zombie = (EntityZombie)event.target;
-			ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
-			
-			// v3.1.1 - Placed into null check to prevent crash
-			if (ezv != null)
-			{
-				int career = ezv.getCareer();
-				int profLevel = ezv.getProfessionLevel();
-				LogHelper.info("SYNC CHECKING Profession: " + ezv.getProfession() + ", Career: " + career + ", BiomeType: " + ezv.getBiomeType() + ", ProfessionLevel: " + profLevel
-						+ ", SkinTone: " + ezv.getSkinTone() //v3.2
-						);
-			}
-		}
-		*/
-		
 		// summon Zombie ~ ~ ~ {IsVillager:1}
 		
 		// This is the placeholder for creating Witchery Village Guards
@@ -135,10 +94,10 @@ public class EntityInteractHandler {
 				Loader.isModLoaded("witchery")
 				&& event.entity instanceof EntityPlayer
 				&& event.target instanceof EntityVillager
-				//&& event.target.getClass().toString().substring(6).equals(Reference.WitcheryGuardClass)
 				&& event.entity.isSneaking()
 				&& ((EntityPlayer)event.entity).inventory.getCurrentItem() != null
 				&& ((EntityPlayer)event.entity).inventory.getCurrentItem().getItem() == Items.leather_chestplate
+				&& event.entity.worldObj.villageCollectionObj!=null
 				&& event.entity.worldObj.villageCollectionObj.findNearestVillage((int)event.entity.posX, (int)event.entity.posY, (int)event.entity.posZ, villageRadiusBuffer) !=null
 				) {
 			
@@ -152,8 +111,6 @@ public class EntityInteractHandler {
                 		+ ( villager.getCustomNameTag().equals("")||villager.getCustomNameTag().equals(null) ? "(None)" : villager.getCustomNameTag() ) 
                 		+ " [" + villager.getEntityId() + "] "
                 		+ "at [" + 
-                		//villager.getPosition(1.0F)
-                		//Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Changed because of server crash
                 		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
                 		+ "]");
             }
@@ -161,7 +118,6 @@ public class EntityInteractHandler {
 		
 		else if (
 				event.entity instanceof EntityPlayer		// IF A PLAYER INITIALIZES THIS INTERACTION
-				&& !event.entityPlayer.worldObj.isRemote	// WORLD MUST NOT BE CLIENT
 				&& event.target instanceof EntityLiving		// AND THE TARGET IS A LIVING THING
 				&& !(event.target instanceof EntityPlayer)	// BUT NOT A PLAYER
 				) {
@@ -175,8 +131,13 @@ public class EntityInteractHandler {
 			World world = player.worldObj;												// Reference to the world object
 			
 			// Hard-code workaround to allow reference to the Elder Guardian in the configs
-			if (target instanceof EntityGuardian) {
-				if ( ((EntityGuardian) target).isElder() ) { // Reference "Elder" guardians using the below string. Reference ordinary guardians as EntityGuardian
+			if (target instanceof EntityGuardian)
+			{
+				if (
+						!world.isRemote
+						&& ((EntityGuardian) target).isElder() // Reference "Elder" guardians using the below string. Reference ordinary guardians as EntityGuardian
+						)
+				{
 					targetClassPath = Reference.ELDER_GUARDIAN_CLASS;
 				}
 			}
@@ -195,10 +156,11 @@ public class EntityInteractHandler {
 			int villagerMappedProfession = -1; // Should be assigned below
 			
 			// Nearest village to the target entity
-			Village villageNearTarget = world.villageCollectionObj.findNearestVillage((int)targetX, (int)targetY, (int)targetZ, villageRadiusBuffer);
+			Village villageNearTarget = null;
+			try {villageNearTarget = world.villageCollectionObj.findNearestVillage((int)targetX, (int)targetY, (int)targetZ, villageRadiusBuffer);}
+			catch (Exception e) {}
 			
-			
-			// Player rep evaluated near the start - v3.2.2
+			// Player rep evaluated near the start
 			int playerRep = 0;
 			try{playerRep = ReputationHandler.getVNReputationForPlayer((EntityPlayerMP) player, ReputationHandler.getVillageTagPlayerIsIn((EntityPlayerMP) player), villageNearTarget);}
 			catch (Exception e) {}
@@ -208,18 +170,22 @@ public class EntityInteractHandler {
 			Map<String, ArrayList> mappedNamesAutomatic = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingAutomatic);
 			Map<String, ArrayList> mappedNamesClickable = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingClickable);
 			
-			//if (!world.isRemote) { // Since messages get sent on both sides
-				
+			
 			// Read the target's NBT data
 			NBTTagCompound compound = new NBTTagCompound();
 			target.writeEntityToNBT(compound);
 			targetProfession = compound.getInteger("Profession");
 			
 			// Used to ascertain career for 1.7 mod version
-			if (target instanceof EntityVillager && GeneralConfig.villagerCareers) {
+			if (
+					!world.isRemote
+					&& target instanceof EntityVillager
+					&& GeneralConfig.villagerCareers)
+			{
 				targetCareer = (ExtendedVillager.get((EntityVillager)target)).getCareer();
-			 }
-			else {
+			}
+			else
+			{
 				targetCareer = compound.getInteger("Career");
 			}
 			
@@ -232,26 +198,29 @@ public class EntityInteractHandler {
 			Map<String, ArrayList> mappedProfessions = GeneralConfig.unpackMappedProfessions(GeneralConfig.modProfessionMapping);
 	    	 // If the below fails, do none
 			
-			if (target instanceof EntityVillager) { // Put this into if block -v3.2.3
+			if (!world.isRemote
+					&& target instanceof EntityVillager)
+			{
 		    	try {
 		    		villagerMappedProfession =  
 		    				(Integer) ((targetProfession >= 0 && targetProfession <= 5)
 		    				? targetProfession : ((mappedProfessions.get("VanillaProfMaps")).get( mappedProfessions.get("IDs").indexOf(targetProfession) )));
 		    		}
-		    	catch (Exception e) {
-		    		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID. Check your formatting!");
-		    		}
-			} // v3.2.3
+		    	catch (Exception e) {LogHelper.error("Error evaluating mod profession ID. Check your formatting!");}
+			}
 			
 	    	// Primitive Mobs hard coding for career detection
-	    	if (targetClassPath.equals( ModObjects.PMTravelingMerchantClass ) )
-					{villagerMappedProfession = GeneralConfig.PMMerchantProfessionMap;}
-	    	else if (targetClassPath.equals( ModObjects.PMLostMinerClass ) )
-					{villagerMappedProfession = GeneralConfig.PMLostMinerProfessionMap;}
-	    	else if (targetClassPath.equals( ModObjects.PMSheepmanSmithClass ) )
-					{villagerMappedProfession = 3;}
+			if (!world.isRemote)
+			{
+		    	if (targetClassPath.equals( ModObjects.PMTravelingMerchantClass ) )
+						{villagerMappedProfession = GeneralConfig.PMMerchantProfessionMap;}
+		    	else if (targetClassPath.equals( ModObjects.PMLostMinerClass ) )
+						{villagerMappedProfession = GeneralConfig.PMLostMinerProfessionMap;}
+		    	else if (targetClassPath.equals( ModObjects.PMSheepmanSmithClass ) )
+						{villagerMappedProfession = 3;}
+			}
 							
-			if (GeneralConfig.debugMessages) {
+			if (!world.isRemote && GeneralConfig.debugMessages) {
 				player.addChatComponentMessage(new ChatComponentText("Class path of this entity: " + targetClassPath));
 				player.addChatComponentMessage(new ChatComponentText(""));
 				
@@ -261,12 +230,12 @@ public class EntityInteractHandler {
 						LogHelper.info("Profession: " + targetProfession 
 								+ (GeneralConfig.villagerCareers ? ", Career: " + (ExtendedVillager.get((EntityVillager) target)).getCareer()
 										: "")
-								+ (GeneralConfig.modernVillagerSkins ? ", BiomeType: " + (ExtendedVillager.get((EntityVillager) target)).getBiomeType() // Added in v3.1
+								+ (GeneralConfig.modernVillagerSkins ? ", BiomeType: " + (ExtendedVillager.get((EntityVillager) target)).getBiomeType()
 										: "")
-								+ (GeneralConfig.modernVillagerSkins ? ", Profession Level: " + (ExtendedVillager.get((EntityVillager) target)).getProfessionLevel() // Added in v3.1
+								+ (GeneralConfig.modernVillagerSkins ? ", Profession Level: " + (ExtendedVillager.get((EntityVillager) target)).getProfessionLevel()
 										: "")
 								+ ", Mapped profession: " + villagerMappedProfession
-								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedVillager.get((EntityVillager) target)).getSkinTone() // Added in v3.2
+								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedVillager.get((EntityVillager) target)).getSkinTone()
 										: "")
 								);
 					}
@@ -280,11 +249,11 @@ public class EntityInteractHandler {
 										: "") 
 								+ ((GeneralConfig.villagerCareers && GeneralConfig.modernZombieSkins) ? ", Career: " + (ExtendedZombieVillager.get((EntityZombie) target)).getCareer()
 										: "")
-								+ (GeneralConfig.modernZombieSkins ? ", BiomeType: " + (ExtendedZombieVillager.get((EntityZombie) target)).getBiomeType() // Added in v3.1
+								+ (GeneralConfig.modernZombieSkins ? ", BiomeType: " + (ExtendedZombieVillager.get((EntityZombie) target)).getBiomeType()
 										: "")
-								+ (GeneralConfig.modernZombieSkins ? ", Profession Level: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfessionLevel() // Added in v3.1
+								+ (GeneralConfig.modernZombieSkins ? ", Profession Level: " + (ExtendedZombieVillager.get((EntityZombie) target)).getProfessionLevel()
 										: "")
-								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedZombieVillager.get((EntityZombie) target)).getSkinTone() // Added in v3.2
+								+ (GeneralConfig.villagerSkinTones ? ", Skin Tone: " + (ExtendedZombieVillager.get((EntityZombie) target)).getSkinTone()
 										: "")
 								);
 						}
@@ -296,12 +265,11 @@ public class EntityInteractHandler {
 				
 				try {
 					LogHelper.info(player.getDisplayName() + " reputation in this village: "
-							+ playerRep // v3.2.2
+							+ playerRep
 							);
 				}
 				catch (Exception e) {}
 			}
-			//}
 			
 			// If you're talking to a nitwit, cancel the trade gui
 			if (
@@ -310,10 +278,9 @@ public class EntityInteractHandler {
 					&& targetProfession==5
 					) {
 				// summon Villager ~ ~ ~ {Profession:5}
-				if (!target.worldObj.isRemote) {
+				if (!world.isRemote) {
 					// Blank out the trade
 					MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue(EntityVillager.class, (EntityVillager)target, new String[]{"buyingList", "field_70963_i"});
-					//buyingList.clear();
 					if (	
 							buyingList!=null
 							) {
@@ -338,6 +305,37 @@ public class EntityInteractHandler {
 					&& itemstack.getItem() == Items.name_tag
 					)
 			{
+				
+				// Cancel naming an entity that has special name registration
+				if (
+						itemstack.hasDisplayName()
+						&& !itemstack.getDisplayName().equals(customName)
+						) {
+					if (!player.capabilities.isCreativeMode)
+					{
+						//check to see if the target is a Villager or an entry from the other mod config list.
+						if (
+								
+								(target instanceof EntityVillager && GeneralConfig.nameEntities)
+								|| (target instanceof EntityIronGolem && GeneralConfig.nameGolems && !targetPlayerCreated)
+								|| mappedNamesAutomatic.get("ClassPaths").contains(targetClassPath)
+								|| mappedNamesClickable.get("ClassPaths").contains(targetClassPath)
+								) {
+							// If so, you should be prevented from naming the entity.
+							event.setCanceled(true);
+							if (!world.isRemote) player.addChatComponentMessage(new ChatComponentText("That is not its name!"));
+							return;
+						}
+					}
+					else
+					{
+						// Force-name the entity
+						target.setCustomNameTag(itemstack.getDisplayName());
+						event.setCanceled(true);
+						return;
+					}
+				}
+				
 				// Randomly name an unnamed pet you own using a blank name tag
 				
 				/*
@@ -347,7 +345,8 @@ public class EntityInteractHandler {
 				try
 				{
 					if (
-							(
+							!world.isRemote
+							&& (
 								(target instanceof EntityTameable
 								&& ((EntityTameable)target).isTamed()
 								&& ((EntityTameable)target).func_152114_e(player))
@@ -373,27 +372,6 @@ public class EntityInteractHandler {
 					}
 				}
 				catch (Exception e) {LogHelper.error("Caught exception when naming a pet: " + e);}
-				
-				// Cancel naming an entity that has special name registration
-				if (
-						itemstack.hasDisplayName()
-						&& !itemstack.getDisplayName().equals(customName)
-						&& !player.capabilities.isCreativeMode
-						) {
-					
-					//check to see if the target is a Villager or an entry from the other mod config list.
-					if (
-							(target instanceof EntityVillager && GeneralConfig.nameEntities)
-							|| (target instanceof EntityIronGolem && GeneralConfig.nameGolems && !targetPlayerCreated)
-							|| mappedNamesAutomatic.get("ClassPaths").contains(targetClassPath)
-							|| mappedNamesClickable.get("ClassPaths").contains(targetClassPath)
-							) {
-						// If so, you should be prevented from naming the entity.
-						event.setCanceled(true);
-						if (!world.isRemote) player.addChatComponentMessage(new ChatComponentText("That is not its name!"));
-						//target.setCustomNameTag(customName);
-					}
-				}
 			}
 			
 			
@@ -413,7 +391,6 @@ public class EntityInteractHandler {
 					) {
 				
 				int population = -1;
-				// reputationRemoved in v3.2.2
 				
 				try {
 					population = villageNearTarget.getNumVillagers();
@@ -428,7 +405,7 @@ public class EntityInteractHandler {
 				try{
 					// Load in the vanilla structure file
 					
-					// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
+					// Updated to allow for Open Terrain Generation compatibility
 
 					MapGenStructureData structureData;
 		    		NBTTagCompound nbttagcompound = null;
@@ -485,7 +462,7 @@ public class EntityInteractHandler {
 				
 				if (   
 						(population == 0 || (playerIsInVillage && population == -1)) // No Villagers in the village
-						&& playerRep >= -15 // This may be redundant in the event of an empty village. Changed to playerRep in v3.2.2
+						&& playerRep >= -15 // This may be redundant in the event of an empty village.
 						) {
 						EntityIronGolem ironGolemTarget = (EntityIronGolem) target;
 						
@@ -518,8 +495,9 @@ public class EntityInteractHandler {
 			
 			// If you're holding an emerald or iron/gold ingot,
 			else if (
-					GeneralConfig.villagerSellsCodex &&
-					itemstack != null
+					!world.isRemote
+					&& GeneralConfig.villagerSellsCodex
+					&& itemstack != null
 					&& ( itemstack.getItem() == Items.emerald
 					  || itemstack.getItem() == Items.gold_ingot
 					  || itemstack.getItem() == Items.iron_ingot )
@@ -527,16 +505,12 @@ public class EntityInteractHandler {
 					&& !player.isSneaking() // I'm disallowing you from making a Codex when crouching because it doesn't visually update your itemstacks correctly
 					&& targetProfession==1 //check to see if the target is a Villager with Profession 1 (Librarian).
 					&& villagerMappedProfession==1 // To prevent things like Traveling Merchant from selling you the Codex
-					//&& !targetClassPath.equals(Reference.PMTravelingMerchantClass)
-					//&& !targetClassPath.equals(Reference.PMLostMinerClass)
-					//&& !targetClassPath.equals(Reference.PMSheepmanClass)
-					//&& !targetClassPath.equals(Reference.PMSheepmanSmithClass)
 					) {
 				event.setCanceled(true);
 				// If so, you can do the Codex interaction.
 				if ( targetAge < 0 ) {
 					// Villager is a baby, so can't make you a codex.
-					if (!event.entityPlayer.worldObj.isRemote) { // Messages get sent on both sides.
+					if (!world.isRemote) { // Messages get sent on both sides.
 						babyCantHelpString("codex");
 					}
 				}
@@ -545,8 +519,6 @@ public class EntityInteractHandler {
 					// Finds the nearest village to this target, but only if the villager's coordinates are within its bounding radius plus the buffer
 					
 					if (villageNearTarget != null) { // The Villager is inside/near a village
-						
-						// Removed playerRep because it's calculated up top - v3.2.2
 						
 						if (playerRep < 0) { // Your reputation is too low.
 							if (!world.isRemote) {player.addChatComponentMessage(new ChatComponentText( "The villager does not trust you." ) );}
@@ -606,7 +578,6 @@ public class EntityInteractHandler {
             						
             						EntityItem eitem = (GeneralConfig.villagerDropBook ? target : player).entityDropItem(new ItemStack(ModItems.codex), 1);
 	            			        eitem.delayBeforeCanPickup = 0; // No delay: directly into the inventory!
-        							
             					}
             					else if (!world.isRemote) { // Messages send to both sides
             						if (emeralds < emeraldRequired && goldIngots < goldRequired) {player.addChatComponentMessage(new ChatComponentText( "The Villager wants more emeralds and gold from you." ) );}
@@ -653,7 +624,8 @@ public class EntityInteractHandler {
 			
 			// If you're holding a book...
 			else if (
-					itemstack != null
+					!world.isRemote
+					&& itemstack != null
 					&& itemstack.getItem() == Items.book
 					) {
 				
@@ -663,12 +635,10 @@ public class EntityInteractHandler {
 					EntityVillager villager = (EntityVillager)target;
 					if ( targetAge >= 0 ) { // Villager is an adult.
 						
-						if ( villageNearTarget == null) { // Remove dimension limitation - v3.2.2
+						if ( villageNearTarget == null) {
 							if (!world.isRemote) {villagerConfused(player);}
 						}
 						else { // There is a town.
-							
-							// Removed player rep assertion - v3.2.2
 							
 							if (playerRep < 0) { // Your reputation is too low.
 								if (!world.isRemote) {player.addChatComponentMessage(new ChatComponentText( "The villager does not trust you." ) );}
@@ -708,7 +678,7 @@ public class EntityInteractHandler {
 		    			            // Now find the nearest Village to that sign's coordinate, within villageRadiusBuffer blocks outside the radius.
 		    			            Village villageNearSign = world.villageCollectionObj.findNearestVillage(townX, townY, townZ, villageRadiusBuffer);
 		    			            
-		    			            // Player rep evaluated here before writing book - v3.2.2
+		    			            // Player rep evaluated here before writing book
 		    						int playerRepInVillageNearSign = 0;
 		    						try{playerRepInVillageNearSign = ReputationHandler.getVNReputationForPlayer((EntityPlayerMP) player, ReputationHandler.getVillageTagPlayerIsIn((EntityPlayerMP) player), villageNearSign);}
 		    						catch (Exception e) {}
@@ -723,13 +693,13 @@ public class EntityInteractHandler {
 		    			            				"village", target.getCustomNameTag(),
 		    			            				townX, townY, townZ,
 		    			            				isColony ? "Colony" : "Village",
-		    			            				// Explicit book dimension below - v3.2.2
+		    			            				// Explicit book dimension below
 		    			            				player.dimension==0 ? "" : player.dimension==-1 ? "The Nether" : player.dimension==1 ? "The End": "Dimension "+player.dimension,
 		    			            				namePrefix, nameRoot, nameSuffix,
 		    			            				true, villageNearSign, event,
 		    			            				targetProfession, targetCareer, 
-		    			            				( villager.getRecipes(player) ).size(), //villageNearSign.getReputationForPlayer(player.getDisplayName()),
-		    			            				playerRepInVillageNearSign, // v3.2.2
+		    			            				( villager.getRecipes(player) ).size(),
+		    			            				playerRepInVillageNearSign,
 		    			            				player, target
 		    			            				);
 		    			            		}
@@ -739,7 +709,7 @@ public class EntityInteractHandler {
 		    			        if (!signLocated) {
 		    			        	// No well sign was found that matched the villager's village.
 		    			        	// We can assume this is a village WITHOUT a sign. So let's at least give it a name!
-		    			        	// Name type based on dimension - v3.2.2
+		    			        	// Name type based on dimension
 		    			        	Random deterministic = new Random(); deterministic.setSeed(world.getSeed() + FunctionsVN.getUniqueLongForXYZ(centerX, centerY, centerZ));
 		    			        	String[] newVillageName = NameGenerator.newRandomName(player.dimension==-1 ? "Village-Fortress" : player.dimension==1 ? "Village-EndCity" : "Village", deterministic);
 		    			        	String headerTags = newVillageName[0];
@@ -747,7 +717,6 @@ public class EntityInteractHandler {
 	                        		String nameRoot = newVillageName[2];
 	                        		String nameSuffix = newVillageName[3];
 	                        		
-	                        		// Changed color block in v3.1banner
                         			// Generate banner info, regardless of if we make a banner.
                             		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(deterministic, -1, -1);
                     				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
@@ -771,7 +740,7 @@ public class EntityInteractHandler {
 	                                nbttagcompound1.setBoolean("fromEntity", true); // Record whether this name was generated from interaction with an entity
 	                                
 	                                if (
-	                                		player.dimension == 0 && // Added to avoid a crash by loading a null list of villages - v3.2.2
+	                                		player.dimension == 0 && // Added to avoid a crash by loading a null list of villages
 	                                		!ReputationHandler.getVillageTagPlayerIsIn((EntityPlayerMP)player).equals("none")
 	                                		) {
 		                                nbttagcompound1.setBoolean("preVN", true); // No Village Names entry was discovered, so presumably this village was generated before including VN
@@ -781,7 +750,6 @@ public class EntityInteractHandler {
 		                                isColony = true;
 	                                }
 
-	                                // Added in v3.1banner
                                     // Form and append banner info
 	                                // If you don't have a mod banner, this will not be added. It will be generated once you do.
                                     if (villageBanner!=null) {nbttagcompound1.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
@@ -803,13 +771,13 @@ public class EntityInteractHandler {
 	    			            				"village", target.getCustomNameTag(),
 	    			            				centerX, centerY, centerZ,
 	    			            				isColony ? "Colony" : "Village",
-			            						// Explicit book dimension below - v3.2.2
+			            						// Explicit book dimension below
 	    			            				player.dimension==0 ? "" : player.dimension==-1 ? "The Nether" : player.dimension==1 ? "The End": "Dimension "+player.dimension,
 	    			            				namePrefix, nameRoot, nameSuffix,
 	    			            				true, villageNearTarget, event,
 	    			            				targetProfession, targetCareer, 
-	    			            				( villager.getRecipes(player) ).size(), //villageNearTarget.getReputationForPlayer(player.getDisplayName()),
-	    			            				playerRep, // v3.2.2
+	    			            				( villager.getRecipes(player) ).size(),
+	    			            				playerRep,
 	    			            				player, target
 	    			            				);
 	                                	}
@@ -1047,14 +1015,14 @@ public class EntityInteractHandler {
 			
 			// If you're holding a village book, right clicking a villager will return your village reputation. 
 			else if (
-					itemstack != null
+					!world.isRemote
+					&& itemstack != null
 					&& itemstack.getItem() == ModItems.villageBook
 					&& target instanceof EntityVillager
-					&& !world.isRemote
 					) {
 				event.setCanceled(true);
 				
-				// Revised village-book-reputation to only work in dimension 0 - v3.2.2
+				// Revised village-book-reputation to only work in dimension 0 
 				if (villageNearTarget != null && player.dimension==0) // Villager is in a town, so get the rep message
 				{
 					try
@@ -1093,14 +1061,12 @@ public class EntityInteractHandler {
 					if ( (customName.trim()).equals("") || customName.equals(null)
 						||
 						 (targetClassPath.equals("net.daveyx0.primitivemobs.entity.passive.EntityTravelingMerchant")
-								 //&& customName.equals("Traveling Merchant")
 								 && 
 								 ( customName.equals( PMTMUnloc )
 									|| customName.equals( PMTMUnlocModern ) )// Contingency in there specifically for PM's Traveling Merchants
 								 )
 						 ||
 						 (targetClassPath.equals("net.daveyx0.primitivemobs.entity.passive.EntitySheepman")
-								 //&& customName.equals("Sheepman")
 								 &&
 								 ( customName.equals( PMShUnloc )
 									|| customName.equals( PMShUnlocModern ) ) // Contingency in there specifically for PM's Sheepman
@@ -1228,7 +1194,7 @@ public class EntityInteractHandler {
 					}
 				}
 				// Entity is a Village Golem
-				else if (target instanceof EntityIronGolem && GeneralConfig.nameGolems //&& !targetPlayerCreated
+				else if (target instanceof EntityIronGolem && GeneralConfig.nameGolems
 						&& ( (customName.trim()).equals("") || customName.equals(null)) ) {
 					// This is a village Golem without a name. Determine whether it is player controlled.
 					if (targetPlayerCreated) {
@@ -1236,8 +1202,8 @@ public class EntityInteractHandler {
 						if(!world.isRemote) player.addChatComponentMessage(new ChatComponentText( "You can give this golem a name tag!" ) );
 					}
 					else {
-						//Determine whether it's in/near a populated village.
-						Village villageNearGolem = world.villageCollectionObj.findNearestVillage((int)targetX, (int)targetY, (int)targetZ, villageRadiusBuffer);
+						// Determine whether it's in/near a populated village.
+						Village villageNearGolem = world.villageCollectionObj==null ? null : world.villageCollectionObj.findNearestVillage((int)targetX, (int)targetY, (int)targetZ, villageRadiusBuffer);
 						if (villageNearGolem != null) { // The golem is in/near a village
 							if ( (customName.trim()).equals("") || customName.equals(null) ) {
 								if (villageNearGolem.getNumVillagers() > 0) {

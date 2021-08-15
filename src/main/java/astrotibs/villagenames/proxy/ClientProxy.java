@@ -1,6 +1,5 @@
 package astrotibs.villagenames.proxy;
 
-import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.color.RenderGlazedTerracotta;
 import astrotibs.villagenames.client.renderer.entity.RenderVillagerModern;
 import astrotibs.villagenames.client.renderer.entity.RenderZombieVillagerModern;
@@ -15,7 +14,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.monster.EntityZombie;
@@ -40,14 +38,6 @@ public class ClientProxy extends CommonProxy {
 		{ 
 			VillageWatcherAA.registerTextures();
 		}
-	}
-	
-	@Override
-	public void postInit(FMLPostInitializationEvent e) {
-		super.postInit(e);
-		//VillageNames.versionChecker = new VersionChecker();
-		Thread versionCheckThread = new Thread(VillageNames.versionChecker, "Version Check");
-		versionCheckThread.start();
 	}
 	
 	@Override

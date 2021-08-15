@@ -1963,11 +1963,6 @@ public class FunctionsVN
 			//villager.func_146091_a(buyingList, Items.blaze_powder, new Random(), 1.0F);
 			//buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
 		}
-    	
-		// v3.2 moved outside trade monitor so that non-vanilla can be sync-checked
-		if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
-		if (ev.getSkinTone()==-99) {ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));} // v3.2
-		
 	}
 	
 	

@@ -210,6 +210,7 @@ public class GeneralConfig {
 				"msm_swordsmith||66", // More Swords mod version 2
 				"for_apiarist|for_apiarist|80", // Forestry
 				"for_arborist|for_arborist|81", // Forestry
+				"tc_stationchief||86", // Traincraft
 				"psy_dealer||87", // Psychedelicraft
 				"thc_wizard||190", // Thaumcraft
 				"thc_banker||191", // Thaumcraft
@@ -278,7 +279,7 @@ public class GeneralConfig {
  				+ "limit is the maximum number of blocks in this group that will apply the group speedup effect."
  				);
  		
- 	    versionChecker = config.getBoolean("Version Checker", Reference.CATEGORY_MISCELLANEOUS, false, "Displays a client-side chat message on login if there's an update available. If the URL pinged by the checker happens to be down, your game will freeze for a while on login. Turn this on at your own risk.");
+ 	    versionChecker = config.getBoolean("Version Checker", Reference.CATEGORY_MISCELLANEOUS, true, "Displays a client-side chat message on login if there's an update available.");
 	    codexChestLoot = config.getBoolean("Codex Chest Loot", Reference.CATEGORY_MISCELLANEOUS, true, "The Codex can appear as rare chest loot.");
 	    allowInGameConfig = config.getBoolean("Allow in-game config access", Reference.CATEGORY_MISCELLANEOUS, true, "Set this to false to deacactivate the in-game config GUI, in case it conflicts with other mods.");
 	    debugMessages = config.getBoolean("Debug messages", Reference.CATEGORY_MISCELLANEOUS, false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
@@ -422,7 +423,24 @@ public class GeneralConfig {
 				"villager-goblin||imc.entities.EntityPigman",
 				
 				// Netherlicious
-				"villager-goblin||DelirusCrux.Netherlicious.Common.Entities.Passive.EntityPiglin"
+				"villager-goblin||DelirusCrux.Netherlicious.Common.Entities.Passive.EntityPiglin",
+				
+				// DQ Respect
+				"villager|MP Exchanger|dqr.entity.npcEntity.npc.DqmEntityNPCBankMP",
+				"villager|Banker|dqr.entity.npcEntity.npc.DqmEntityNPCBank",
+				"villager|Equipment Merchant|dqr.entity.npcEntity.npc.DqmEntityNPCBukiya",
+				"villager|Soldier|dqr.entity.npcEntity.npc.DqmEntityNPCGuntai",
+				"villager|Equipment Buyer|dqr.entity.npcEntity.npc.DqmEntityNPCKaitoriya",
+				"villager|Blackjack Dealer|dqr.entity.npcEntity.npc.DqmEntityNPCKajinoBJ",
+				"villager|Chinchirorin Dealer|dqr.entity.npcEntity.npc.DqmEntityNPCKajinoCCR",
+				"villager|Token Exchange|dqr.entity.npcEntity.npc.DqmEntityNPCKajinoCoin",
+				"villager|Prize Exchange|dqr.entity.npcEntity.npc.DqmEntityNPCKajinoEXC",
+				"villager|Poker Dealer|dqr.entity.npcEntity.npc.DqmEntityNPCKajinoPK",
+				"villager|Medal King|dqr.entity.npcEntity.npc.DqmEntityNPCMedalking",
+				"villager|Job Priest|dqr.entity.npcEntity.npc.DqmEntityNPCSinkan",
+				"villager|Skill Priest|dqr.entity.npcEntity.npc.DqmEntityNPCSinkan2",
+				"villager|Weapon Priest|dqr.entity.npcEntity.npc.DqmEntityNPCSinkan3",
+				"villager|Repair Smith|dqr.entity.npcEntity.npc.DqmEntityNPCSyuuri",
 				
 				},
 				"List of entities that can generate a name when right-clicked. Format is: nameType|profession|classPath\n"
@@ -631,6 +649,7 @@ public class GeneralConfig {
  				);
 	    
 	    modRedSandstone = config.getStringList("Mod Priority: Red Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    		"etfuturum",
 	    		"uptodate",
  				"ganyssurface",
  				},
@@ -638,8 +657,8 @@ public class GeneralConfig {
  				);
 	    
 	    modSign = config.getStringList("Mod Priority: Sign", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
- 				"ganyssurface",
  				"etfuturum",
+ 				"ganyssurface",
  				},
  				"Priority order for referencing Signs for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -747,6 +766,7 @@ public class GeneralConfig {
 				"Swordsmith|66|5", // More Swords mod version 2
 				"Apiarist|80|4", // Forestry
 				"Arborist|81|0", // Forestry
+				"Station Chief|86|0", // Traincraft
 				"Dealer|87|0", // Psychedelicraft
 				"Wizard|190|2", // Thaumcraft
 				"Banker|191|0", // Thaumcraft
@@ -1089,5 +1109,4 @@ public class GeneralConfig {
 		
 		return map;
 	}
-	
 }

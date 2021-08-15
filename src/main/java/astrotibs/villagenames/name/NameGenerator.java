@@ -470,6 +470,7 @@ public class NameGenerator {
 		String r_prefix = "";
 		String r_suffix = "";
 		String rootName = "";
+		StringBuilder sb = new StringBuilder();
 		
 		int rootname_syllable_inserts = 1; // How many syllables are inserted between the name's starting and ending half-syllables
 		
@@ -566,7 +567,8 @@ public class NameGenerator {
 			}
 			else
 			{
-				rootName = root_initial[random.nextInt(root_initial.length)];
+				sb.delete(0, sb.length());
+				sb.append(root_initial[random.nextInt(root_initial.length)]);
 			}
 			
 			// Step 2.2: Generate some number of inserted syllables
@@ -576,11 +578,11 @@ public class NameGenerator {
 				{
 					String errorMessage = "Name type " + nameType + " has no root-syllable entries! You need at least one, even if it's the blank entry character: ~";
 					LogHelper.error(errorMessage);
-					rootName += "~";
+					sb.append("~");
 				}
 				else
 				{
-					rootName += root_sylBegin[random.nextInt(root_sylBegin.length)];
+					sb.append(root_sylBegin[random.nextInt(root_sylBegin.length)]);
 				}
 			}
 			
@@ -589,17 +591,17 @@ public class NameGenerator {
 			{
 				String errorMessage = "Name type " + nameType + " has no root-terminal entries! You need at least one, even if it's the blank entry character: ~";
 				LogHelper.error(errorMessage);
-				rootName += "~";
+				sb.append("~");
 			}
 			else
 			{
-				rootName += root_terminal[random.nextInt(root_terminal.length)];
+				sb.append(root_terminal[random.nextInt(root_terminal.length)]);
 			}
 			
 			
 			// Step 2V: clean up for validation
 			
-			rootName = rootName.trim();
+			rootName = sb.toString().trim();
 						
 			// Remove any spaces
 			rootName = rootName.replace(" ", "");

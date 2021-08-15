@@ -242,7 +242,7 @@ public class RenderVillagerModern extends RenderVillager {
         // Set the indexing values, and clamp them just in case
         int biometype = MathHelper.clamp_int(ev.getBiomeType(), 0, biomeTypeTextures.length-1);
         int career = GeneralConfig.villagerCareers ? ev.getCareer() : -1;
-        int proflevel = villager.isChild() ? 0 : MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
+        int proflevel = (villager.isChild() | villager.getProfession()==5) ? 0 : MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
         int skinTone_i = GeneralConfig.villagerSkinTones ? ev.getSkinTone() : 0;
         MathHelper.clamp_int(skinTone_i = (skinTone_i == -99 ? 0 : skinTone_i)+4, 0, skintoneTextures.length-1); // Added in v3.2
         

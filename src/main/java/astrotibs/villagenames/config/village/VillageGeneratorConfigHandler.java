@@ -588,8 +588,8 @@ public class VillageGeneratorConfigHandler
 		newVillageGenerator = config.getBoolean("Activate New Village Generator", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Use replacement village generation system. You may need to deactivate village generation from other mods. All other settings in this section require this to be true.");
 		
 		// --- Village Size stuff --- //
-		newVillageSizeMinimum = config.getFloat("Village Size: Minimum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 10, "Lower limit for the randomly-selected size of a village. Vanilla is 1.");
-		newVillageSizeMaximum = config.getFloat("Village Size: Maximum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 10, "Upper limit for the randomly-selected size of a village. Vanilla is 1.");
+		newVillageSizeMinimum = config.getFloat("Village Size: Minimum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 5, "Lower limit for the randomly-selected size of a village. Vanilla is 1.");
+		newVillageSizeMaximum = config.getFloat("Village Size: Maximum", Reference.CATEGORY_VILLAGE_GENERATOR, 1.0F, 1, 5, "Upper limit for the randomly-selected size of a village. Vanilla is 1.");
 		
 		// If someone was an idiot and made Minimum greater than Maximum, fix that
 		if (newVillageSizeMinimum > newVillageSizeMaximum)
@@ -1617,6 +1617,7 @@ public class VillageGeneratorConfigHandler
 						"Prairie",
 						"Rainforest",
 						"Redwood Forest",
+						"RedwoodForest",
 						"Sacred Springs",
 						"Seasonal Forest",
 						"Shield",
@@ -1633,6 +1634,8 @@ public class VillageGeneratorConfigHandler
 						"Scrubland",
 						"Seasonal Forest Clearing",
 						"Spruce Woods",
+						"Mountain Foothills",
+						"MountainFoothills",
 						// ATG
 						"Rocky Steppe",
 						// ExtrabiomeXL
@@ -1641,7 +1644,9 @@ public class VillageGeneratorConfigHandler
 						"Mountain Taiga",
 						"Pine Forest",
 						"Redwood Lush",
+						"Lush Redwoods",
 						"Snowy Forest",
+						"Snow Forest",
 						"Snowy Rainforest",
 						"Woodlands",
 						// Highlands
@@ -1675,8 +1680,6 @@ public class VillageGeneratorConfigHandler
 	{
 		try
 		{
-			LogHelper.info("VALUE IS: " + configvalue);
-			
 			String[] sMPA1_stringarray = configvalue.split(",");
 			ArrayList<Double> doubleArrayListToReturn = new ArrayList<Double>();
 			

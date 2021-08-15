@@ -10,11 +10,9 @@ import astrotibs.villagenames.config.ConfigInit;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.handler.ChestLootHandler;
-import astrotibs.villagenames.handler.DevVersionWarning;
 import astrotibs.villagenames.handler.EntityMonitorHandler;
 import astrotibs.villagenames.handler.ServerCleanExpired;
 import astrotibs.villagenames.handler.ServerTrackerStarter;
-import astrotibs.villagenames.handler.VersionChecker;
 import astrotibs.villagenames.handler.VillagerTradeHandler;
 import astrotibs.villagenames.igloo.IglooGeneratorIWG;
 import astrotibs.villagenames.igloo.VNComponentIglooPieces;
@@ -43,6 +41,8 @@ import astrotibs.villagenames.spawnegg.ItemSpawnEggVN;
 import astrotibs.villagenames.spawnegg.SpawnEggRegistry;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
+import astrotibs.villagenames.version.DevVersionWarning;
+import astrotibs.villagenames.version.VersionChecker;
 import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureCreationHandlers;
 import astrotibs.villagenames.village.StructureVillageVN;
@@ -113,11 +113,6 @@ public final class VillageNames
 	public static Achievement archaeologist;
 	public static Achievement laputa;
 	
-	// Version checking instance
-	public static VersionChecker versionChecker = new VersionChecker();
-	public static boolean haveWarnedVersionOutOfDate = false;
-	public static boolean devVersionWarned = false;
-	
 	// Disallow trades that discriminate meta values sold from player unless this mod is loaded
 	public static boolean canVillagerTradesDistinguishMeta = false;
 	
@@ -161,7 +156,7 @@ public final class VillageNames
 			}
 		}
 		
-		canVillagerTradesDistinguishMeta = Loader.isModLoaded("VillagerMetaFix");
+		if (Loader.isModLoaded("VillagerMetaFix")) {canVillagerTradesDistinguishMeta = true;} // Written this way so that BugTorch et al. can make this value true if they want to
 		
 		
 		// Moved down here to make sure config fires first!?
@@ -503,8 +498,8 @@ public final class VillageNames
         FMLCommonHandler.instance().bus().register(new ServerCleanExpired());
         
         // Version check monitor
-        if (GeneralConfig.versionChecker) {FMLCommonHandler.instance().bus().register(versionChecker);}
-        if ((Reference.VERSION).contains("DEV")) {FMLCommonHandler.instance().bus().register(new DevVersionWarning());}
+        if ((Reference.VERSION).contains("DEV")) {FMLCommonHandler.instance().bus().register(DevVersionWarning.instance);}
+        else if (GeneralConfig.versionChecker) {FMLCommonHandler.instance().bus().register(VersionChecker.instance);}
         
         
 		PROXY.preInit(event);
@@ -552,7 +547,7 @@ public final class VillageNames
 	       		EnumChatFormatting.GREEN +
 	       		"Generates random names for villages, villagers, and other structures and entities.";
         
-        event.getModMetadata().logoFile = "assets/villagenames/vn_banner.png";
+        event.getModMetadata().logoFile = "assets"+File.separator+"villagenames"+File.separator+"vn_banner.png";
         
         
         
