@@ -21666,55 +21666,55 @@ public class JungleStructures
     		
     		
         	// Patterned banners
-    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
-			if (testForBanner!=null)
-			{
-    			for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color
-    				// 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-    				
-    				{0,5,5, 3, 1}, // Orange
-    			})
-    			{
-        			int bannerU = uvwoc[0];
-        			int bannerV = uvwoc[1];
-        			int bannerW = uvwoc[2];
-        			
-        			int bannerX = this.getXWithOffset(bannerU, bannerW);
-        			int bannerY = this.getYWithOffset(bannerV);
-                    int bannerZ = this.getZWithOffset(bannerU, bannerW);
-                    
-                	// Set the banner and its orientation
-    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
-    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(uvwoc[3], this.coordBaseMode, true), 2);
-    				
-    				// Set the tile entity
-    				TileEntity tilebanner = new TileEntityBanner();
-    				NBTTagCompound modifystanding = new NBTTagCompound();
-    				tilebanner.writeToNBT(modifystanding);
-    				modifystanding.setBoolean("IsStanding", false);
-    				
-    				if (GeneralConfig.useVillageColors)
-    				{
-    	            	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
-    	            			(this.boundingBox.minX+this.boundingBox.maxX)/2,
-    	            			(this.boundingBox.minY+this.boundingBox.maxY)/2,
-    	            			(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
-    					
-        				tilebanner.readFromNBT(modifystanding);
-        				ItemStack villageBanner = ModObjects.chooseModBannerItem();
-        				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
-        				
-            			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
-    				}
-    				else
-    				{
-    					modifystanding.setInteger("Base", uvwoc[4]);
-        				tilebanner.readFromNBT(modifystanding);
-    				}
-    				
-            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
-    			}
-			}
+//    		Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
+//			if (testForBanner!=null)
+//			{
+//    			for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color
+//    				// 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
+//    				
+//    				{0,5,5, 3, 1}, // Orange
+//    			})
+//    			{
+//        			int bannerU = uvwoc[0];
+//        			int bannerV = uvwoc[1];
+//        			int bannerW = uvwoc[2];
+//        			
+//        			int bannerX = this.getXWithOffset(bannerU, bannerW);
+//        			int bannerY = this.getYWithOffset(bannerV);
+//                    int bannerZ = this.getZWithOffset(bannerU, bannerW);
+//                    
+//                	// Set the banner and its orientation
+//    				world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
+//    				world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, StructureVillageVN.getSignRotationMeta(uvwoc[3], this.coordBaseMode, true), 2);
+//    				
+//    				// Set the tile entity
+//    				TileEntity tilebanner = new TileEntityBanner();
+//    				NBTTagCompound modifystanding = new NBTTagCompound();
+//    				tilebanner.writeToNBT(modifystanding);
+//    				modifystanding.setBoolean("IsStanding", false);
+//    				
+//    				if (GeneralConfig.useVillageColors)
+//    				{
+//    	            	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
+//    	            			(this.boundingBox.minX+this.boundingBox.maxX)/2,
+//    	            			(this.boundingBox.minY+this.boundingBox.maxY)/2,
+//    	            			(this.boundingBox.minZ+this.boundingBox.maxZ)/2);
+//    					
+//        				tilebanner.readFromNBT(modifystanding);
+//        				ItemStack villageBanner = ModObjects.chooseModBannerItem();
+//        				villageBanner.setTagInfo("BlockEntityTag", villageNBTtag.getCompoundTag("BlockEntityTag"));
+//        				
+//            			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
+//    				}
+//    				else
+//    				{
+//    					modifystanding.setInteger("Base", uvwoc[4]);
+//        				tilebanner.readFromNBT(modifystanding);
+//    				}
+//    				
+//            		world.setTileEntity(bannerX, bannerY, bannerZ, tilebanner);
+//    			}
+//			}
     		
     		
         	// Vines
