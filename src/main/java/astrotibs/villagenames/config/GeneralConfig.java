@@ -110,6 +110,7 @@ public class GeneralConfig {
 	public static String[] modStrippedLog;
 	public static String[] modSweetBerries;
 	public static String[] modWall;
+	public static String[] modWoodenTable;
 	public static String[] modWoodenTrapdoor;
 	
 
@@ -711,6 +712,15 @@ public class GeneralConfig {
  				"railcraft",
  				},
  				"Priority order for referencing walls for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modWoodenTable = config.getStringList("Mod Priority: Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    		"minecraft",
+	    		"bibliocraft",
+	    		"mrcrayfishsfurnituremod",
+ 				},
+ 				"Priority order for referencing Wooden Tables for village generation. The version highest on the list and registered in your game will be used. "
+ 				+ "The \"minecraft\" entry refers to the vanilla-style pressure plate atop a fence post."
  				);
 	    
 	    modWoodenTrapdoor = config.getStringList("Mod Priority: Trapdoor", Reference.CATEGORY_MOD_INTEGRATION, new String[]{

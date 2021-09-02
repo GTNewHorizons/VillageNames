@@ -6474,21 +6474,22 @@ public class TaigaStructures
             for (int[] uvw : new int[][]{
             	// Posts
             	{3,3,6}, {3,4,6}, 
-            	// Table
-            	{4,6,3}, 
         		})
             {
             	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0],uvw[1],uvw[2], structureBB);
             }
         	
         	
-            // Wooden pressure plate
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-        	for (int[] uvw : new int[][]{
-        		{4,7,3}, 
+            // Table
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+        		{4,6,3},
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, uvw[0], uvw[1], uvw[2], structureBB);
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
             }
             
 
@@ -8511,8 +8512,6 @@ public class TaigaStructures
             	{2,2,6}, {2,2,7}, {2,2,8}, {2,2,9}, 
             	{3,2,9}, {4,2,9}, {5,2,9}, {6,2,9}, {7,2,9}, 
             	{8,2,6}, {8,2,7}, {8,2,8}, {8,2,9}, 
-            	// Tables
-            	{8,2,3}, {8,2,4}, 
         		})
             {
             	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0],uvw[1],uvw[2], structureBB);
@@ -8643,13 +8642,17 @@ public class TaigaStructures
             }
         	
         	
-            // Wooden Pressure Plate
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-        	for (int[] uvw : new int[][]{
-        		{8,3,3}, {8,3,4}, 
+            // Table
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+        		{8,2,3}, 
+        		{8,2,4}, 
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, uvw[0], uvw[1], uvw[2], structureBB);
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
             }
         	
         	

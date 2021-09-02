@@ -8,7 +8,7 @@ public class Reference
 	public static final String MOD_ID = "VillageNames";
 	public static final String MOD_NAME = "Village Names";
 	public static final String MOD_NAME_COLORIZED = EnumChatFormatting.GOLD + MOD_NAME;
-	public static final String VERSION = "4.3.3";
+	public static final String VERSION = "4.3.4";
 	public static final String URL = "https://www.curseforge.com/minecraft/mc-mods/village-names";
 	public static final String VERSION_CHECKER_URL = "https://gitgud.io/AstroTibs/VillageNames/-/raw/1.7.10/CURRENT_VERSION";
 	public static final String MOD_CHANNEL = "vnChannel";

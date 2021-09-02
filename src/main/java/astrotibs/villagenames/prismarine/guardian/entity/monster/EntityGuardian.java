@@ -8,14 +8,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import astrotibs.villagenames.VillageNames;
+import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.prismarine.guardian.entity.ai.EntityAIWanderExtender;
 import astrotibs.villagenames.prismarine.guardian.entity.pathfinding.PathNavigateSwimmer;
 import astrotibs.villagenames.prismarine.guardian.particle.PacketHandlerClient;
 import astrotibs.villagenames.prismarine.guardian.particle.SToCMessage;
 import astrotibs.villagenames.prismarine.guardian.util.MathHelper1122;
-import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
-import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import astrotibs.villagenames.proxy.ClientProxy;
+import astrotibs.villagenames.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.Unpooled;
@@ -35,6 +35,7 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityFishHook;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -679,22 +680,33 @@ public class EntityGuardian extends EntityMob //implements IMob
 
         if (i > 0)
         {
-            this.entityDropItem(new ItemStack(ModItemsPrismarine.prismarine_shard, i, 0), 1.0F);
+        	ItemStack prismarineItem = ModObjects.chooseModPrismarineShardItemStack();
+        	if (prismarineItem!=null)
+        	{
+        		this.entityDropItem(new ItemStack(prismarineItem.getItem(), i, 0), 1.0F);
+        	}
         }
 
         if (this.rand.nextInt(3 + looting) > 1)
         {
-            //this.entityDropItem(new ItemStack(Items.fish, 1, ItemFishFood.FishType.COD.getMetadata()), 1.0F);
         	this.entityDropItem(new ItemStack(Items.fish, 1), 1.0F);
         }
         else if (this.rand.nextInt(3 + looting) > 1)
         {
-            this.entityDropItem(new ItemStack(ModItemsPrismarine.prismarine_crystals, 1, 0), 1.0F);
+        	ItemStack prismarineCrystalsItem = ModObjects.chooseModPrismarineShardItemStack();
+        	
+        	if (prismarineCrystalsItem!=null)
+        	{
+        		this.entityDropItem(new ItemStack(prismarineCrystalsItem.getItem(), 1, 0), 1.0F);
+        	}
         }
 
         if (recentlyHit && this.isElder())
         {
-        	this.entityDropItem(new ItemStack(ModBlocksPrismarine.blockSpongeVN, 1, 1), 1.0F);
+        	Object[] spongeObject = ModObjects.chooseModSpongeBlockObject(true);
+        	if (spongeObject==null) {spongeObject = new Object[] {Blocks.sponge, 0};}
+        	
+        	this.entityDropItem(new ItemStack((Block)spongeObject[0], 1, (Integer)spongeObject[1]), 1.0F);
         }
     }
 

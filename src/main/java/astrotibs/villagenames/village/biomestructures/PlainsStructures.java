@@ -3964,9 +3964,16 @@ public class PlainsStructures
             this.fillWithMetadataBlocks(world, structureBB, 5, 6, 8, 5, 7, 8, Blocks.cobblestone_wall, 0, Blocks.cobblestone_wall, 0, false);
             
             // Table
-            this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 2, 1, 3, structureBB);
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-            this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, 2, 2, 3, structureBB);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+            	{2,1,3},  
+        		})
+            {
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
+            }
             
             // 0: nuffin
             // 1: poppy
@@ -4905,10 +4912,17 @@ public class PlainsStructures
             // --- Interior --- //
             
             // Table
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
-            this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, 2, 1, 3, structureBB);
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-            this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, 2, 2, 3, structureBB);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+            	{2,1,3},  
+        		})
+            {
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
+            }
+            
             // Cartography Table
         	blockObject = ModObjects.chooseModCartographyTable(biomePlankMeta); Block cartographyTableBlock = (Block) blockObject[0]; int cartographyTableMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, cartographyTableBlock, cartographyTableMeta, 3, 1, 6, structureBB);
@@ -8129,19 +8143,20 @@ public class PlainsStructures
         		this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, false);
             }
         	
-        	
-            // Tables: fence with pressure plate
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-        	for (int[] uvw : new int[][]{
+            
+            // Table
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
     			{6,2,2},
     			{8,2,6},
     			{8,2,10},
     			{4,2,10},
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0], uvw[1], uvw[2], structureBB);
-        		this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, uvw[0], uvw[1]+1, uvw[2], structureBB);
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
             }
             
             
@@ -8654,17 +8669,18 @@ public class PlainsStructures
             {
         		this.placeBlockAtCurrentPosition(world, Blocks.glass_pane, 0, uvw[0], uvw[1], uvw[2], structureBB);
             }
-            
         	
-            // Tables: fence with pressure plate
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-        	for (int[] uvw : new int[][]{
-    			{3,1,4},
+            
+            // Table
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+        		{3,1,4},
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0], uvw[1], uvw[2], structureBB);
-        		this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, uvw[0], uvw[1]+1, uvw[2], structureBB);
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
             }
             
             
@@ -17120,15 +17136,17 @@ public class PlainsStructures
             	this.fillWithMetadataBlocks(world, structureBB, uuvvwwo[0], uuvvwwo[1], uuvvwwo[2], uuvvwwo[3], uuvvwwo[4], uuvvwwo[5], biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, biomeWoodStairsBlock, this.getMetadataWithOffset(Blocks.oak_stairs, uuvvwwo[6]%4)+(uuvvwwo[6]/4)*4, false);	
             }
         	
-        	
-            // Tables: fence with pressure plate
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_pressure_plate, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodPressurePlateBlock = (Block)blockObject[0]; int biomeWoodPressurePlateMeta = (Integer)blockObject[1];
-        	for (int[] uvw : new int[][]{
-    			{7,1,5},
+            
+            // Table
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+        	for (int[] uuvvww : new int[][]{
+        		{7,1,5},
         		})
             {
-        		this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0], uvw[1], uvw[2], structureBB);
-        		this.placeBlockAtCurrentPosition(world, biomeWoodPressurePlateBlock, biomeWoodPressurePlateMeta, uvw[0], uvw[1]+1, uvw[2], structureBB);
+        		for (int i=1; i>=0; i--)
+        		{
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        		}
             }
         	
         	

@@ -33,6 +33,7 @@ public class ModObjects {
 	public static final String DOM_GANYSSURFACE = "ganyssurface";
 	public static final String DOM_HARVESTCRAFT = "harvestcraft";
 	public static final String DOM_MALISISDOORS = "malisisdoors";
+	public static final String DOM_MRCRAYFISHSFURNITUREMOD = "cfm";
 	public static final String DOM_NETHERLICIOUS = "netherlicious";
 	public static final String DOM_UPTODATE = "uptodate";
 	public static final String DOM_WOODSTUFF = "woodstuff";
@@ -645,7 +646,7 @@ public class ModObjects {
 	
 	// Tipped arrows
 	public static final String tippedArrowEF = DOM_ETFUTURUM + ":tipped_arrow";
-		
+	
 	// Walls
 	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
 	public static final String redSandstoneWallUTD = DOM_UPTODATE + ":wall_red_sandstone";
@@ -710,6 +711,9 @@ public class ModObjects {
 	public static final String signAcaciaItem_EF = DOM_ETFUTURUM + ":item_sign_acacia";
 	public static final String signDarkOakItem_EF = DOM_ETFUTURUM + ":item_sign_dark_oak";
 	
+	// Wooden Table
+	public static final String table_BC = "BiblioCraft:BiblioTable";
+	public static final String tablewood_CFM = DOM_MRCRAYFISHSFURNITUREMOD+":tablewood";
 	
 	// Wooden Trapdoor
 	public static final String trapdoorSpruceEF = DOM_ETFUTURUM + ":trapdoor_spruce";
@@ -749,27 +753,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteC2);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 5};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 5};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 5};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -785,27 +789,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
@@ -821,27 +825,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.andesiteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
@@ -857,27 +861,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteC2);
 				if (modblock != null) {return new Object[]{modblock, new Integer(1)};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, new Integer(6)};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, new Integer(4)};}
@@ -896,12 +900,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteSlabUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteSlabBo);
 				if (modblock != null) {return modblock;}
@@ -920,17 +924,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteStairsUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteStairsBo);
 				if (modblock != null) {return modblock;}
@@ -946,12 +950,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedAndesiteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedAndesiteStairsUTD);
 				if (modblock != null) {return modblock;}
@@ -967,12 +971,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -988,12 +992,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneSlab2EF);
 				if (modblock != null) {return new Object[]{modblock, upper ? 13:5};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedAndesiteSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
@@ -1011,12 +1015,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooStalk_BoP);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("growthcraft"))
+			else if (mod.toLowerCase().trim().equals("growthcraft"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooStalk_GrC);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -1033,12 +1037,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooLeaves_BoP);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("growthcraft"))
+			else if (mod.toLowerCase().trim().equals("growthcraft"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooLeaves_GrC);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -1055,12 +1059,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.sapling_BoP));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
-			else if (mod.toLowerCase().equals("growthcraft"))
+			else if (mod.toLowerCase().trim().equals("growthcraft"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bambooShoot_GrC));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
@@ -1078,12 +1082,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerEF));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bannerGS));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -1100,12 +1104,12 @@ public class ModObjects {
 		{
 			Block moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Block.getBlockFromName(ModObjects.bannerEF);
 				if (moditem != null) {return moditem;}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Block.getBlockFromName(ModObjects.bannerGS);
 				if (moditem != null) {return moditem;}
@@ -1124,12 +1128,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.barrelEF));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.barrelUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -1146,12 +1150,12 @@ public class ModObjects {
 		{
 			Block moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Block.getBlockFromName(ModObjects.barrelEF);
 				if (moditem != null) {return moditem;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Block.getBlockFromName(ModObjects.barrelUTD);
 				if (moditem != null) {return moditem;}
@@ -1230,12 +1234,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootItemEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootItemGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -1252,12 +1256,12 @@ public class ModObjects {
 		{
 			Block modblock = null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.beetrootCropEF); 
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.beetrootCropGS);
 				if (modblock != null) {return modblock;}
@@ -1278,12 +1282,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSeedsEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSeedsGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -1304,12 +1308,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSoupEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.beetrootSoupGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -1386,7 +1390,7 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().equals("woodstuff"))
+			if (mod.toLowerCase().trim().equals("woodstuff"))
 			{
 				switch (materialMeta)
 				{
@@ -1399,7 +1403,7 @@ public class ModObjects {
 				}
 				if (modblock!=null) {return new Object[]{modblock, meta};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				if (materialMeta>0)
 				{
@@ -1432,12 +1436,12 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.brickWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("railcraft"))
+			if (mod.toLowerCase().trim().equals("railcraft"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.wallRC);
 				if (modblock != null) {return new Object[]{modblock, 10};}
@@ -1495,7 +1499,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("ganyssurface"))
+			if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (woodMeta)
 				{
@@ -1508,7 +1512,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("woodstuff"))
+			else if (mod.toLowerCase().trim().equals("woodstuff"))
 			{
 				switch (woodMeta)
 				{
@@ -1548,16 +1552,16 @@ public class ModObjects {
 		{
 			Block modblock=null;
 
-			if (mod.toLowerCase().equals("villagenames") && GeneralConfig.addConcrete)
+			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete)
 			{
 				return new Object[]{ModBlocksVN.blockConcrete, new Integer(meta)};
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.concreteUTD);
 				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				// Try Et Futurum: Requiem entries
 				modblock = Block.getBlockFromName(ModObjects.concreteEF);
@@ -1628,27 +1632,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteC2);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 3};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 3};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 3};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 2};}
@@ -1664,27 +1668,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteC2);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 4};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 4};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 4};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 6};}
@@ -1701,27 +1705,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
-			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
@@ -1738,27 +1742,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.dioriteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
@@ -1777,17 +1781,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneSlab2EF);
 				if (modblock != null) {return new Object[]{modblock, upper ? 10:2};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteSlabBo);
 				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
@@ -1803,12 +1807,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneSlab2EF);
 				if (modblock != null) {return new Object[]{modblock, upper ? 11:3};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedDioriteSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper ? 8:0};}
@@ -1827,17 +1831,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteStairsUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteStairsBo);
 				if (modblock != null) {return modblock;}
@@ -1853,12 +1857,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedDioriteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedDioriteStairsUTD);
 				if (modblock != null) {return modblock;}
@@ -1878,12 +1882,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
 				if (modblock != null) {return new Object[]{modblock, 2};}
@@ -1902,17 +1906,17 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
 				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
-			else if (mod.toLowerCase().equals("mariculture"))
+			else if (mod.toLowerCase().trim().equals("mariculture"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 28);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
@@ -1928,12 +1932,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
 				if (moditem != null) {return new ItemStack(moditem, 1, 9);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
@@ -1949,17 +1953,17 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
 			}
-			else if (mod.toLowerCase().equals("mariculture"))
+			else if (mod.toLowerCase().trim().equals("mariculture"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 32);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
@@ -1975,17 +1979,17 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.miscBOP);
 				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
 			}
-			else if (mod.toLowerCase().equals("mariculture"))
+			else if (mod.toLowerCase().trim().equals("mariculture"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 27);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
@@ -2004,7 +2008,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -2016,7 +2020,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -2029,7 +2033,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -2042,7 +2046,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("woodstuff"))
+			else if (mod.toLowerCase().trim().equals("woodstuff"))
 			{
 				switch (materialMeta)
 				{
@@ -2070,7 +2074,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -2082,7 +2086,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -2094,7 +2098,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -2107,7 +2111,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("malisisdoors"))
+			else if (mod.toLowerCase().trim().equals("malisisdoors"))
 			{
 				switch (materialMeta)
 				{
@@ -2119,7 +2123,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("woodstuff"))
+			else if (mod.toLowerCase().trim().equals("woodstuff"))
 			{
 				switch (materialMeta)
 				{
@@ -2156,12 +2160,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.flowerCornflowerEF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.flowerUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2178,12 +2182,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.flowerLilyOfTheValleyEF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.flowerUTD);
 				if (modblock != null) {return new Object[]{modblock, 1};}
@@ -2202,7 +2206,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 
-			if (mod.toLowerCase().equals("villagenames") && GeneralConfig.addConcrete)
+			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete)
 			{
 				switch (colorMeta/4)
 				{
@@ -2223,7 +2227,7 @@ public class ModObjects {
 				return new Object[]{modblock, new Integer(convolvedMeta)};
 			}
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				// Try original Et Futurum entries
 				switch (colorMeta)
@@ -2248,7 +2252,7 @@ public class ModObjects {
 				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};}
 			}
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (colorMeta)
 				{
@@ -2285,27 +2289,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteC2);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("uptodate") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("etfuturum") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("ganyssurface") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("botania") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 3};}
@@ -2321,27 +2325,27 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteC2);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneEF);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneGS);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 7};}
@@ -2357,27 +2361,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
@@ -2394,27 +2398,27 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("chisel"))
+			if (mod.toLowerCase().trim().equals("chisel"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.graniteC2));
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneEF));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneGS));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 7);}
@@ -2433,12 +2437,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteSlabUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteSlabBo);
 				if (modblock != null) {return modblock;}
@@ -2457,17 +2461,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteStairsUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteStairsBo);
 				if (modblock != null) {return modblock;}
@@ -2483,12 +2487,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedGraniteStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.polishedGraniteStairsUTD);
 				if (modblock != null) {return modblock;}
@@ -2507,12 +2511,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bountifulWallBo);
 				if (modblock != null) {return new Object[]{modblock, 3};}
@@ -2532,12 +2536,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.grassPathUTD);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
 				if (modblock != null) {return modblock;}
@@ -2566,42 +2570,42 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("tinkersconstruct"))
+			else if (mod.toLowerCase().trim().equals("tinkersconstruct"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsTC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 19);}
 			}
-			else if (mod.toLowerCase().equals("thermalfoundation"))
+			else if (mod.toLowerCase().trim().equals("thermalfoundation"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsTF);
 				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
 			}
-			else if (mod.toLowerCase().equals("railcraft"))
+			else if (mod.toLowerCase().trim().equals("railcraft"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetRC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("mariculture"))
+			else if (mod.toLowerCase().trim().equals("mariculture"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 33);}
 			}
-			else if (mod.toLowerCase().equals("netherlicious"))
+			else if (mod.toLowerCase().trim().equals("netherlicious"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetNL);
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
-			else if (mod.toLowerCase().equals("ganysnether"))
+			else if (mod.toLowerCase().trim().equals("ganysnether"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -2618,22 +2622,22 @@ public class ModObjects {
     	
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternUTD);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternEF);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
 			}
-			if (mod.toLowerCase().equals("netherlicious"))
+			if (mod.toLowerCase().trim().equals("netherlicious"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.lanternNL);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, isHanging? 1:0};} // 1 is hanging, 0 is sitting
 			}
-			if (mod.toLowerCase().equals("enviromine"))
+			if (mod.toLowerCase().trim().equals("enviromine"))
 			{
 				Block tryLantern = Block.getBlockFromName(ModObjects.davyLampEM);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, 1};} // 1 is lit
@@ -2651,12 +2655,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.lanternUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("enviromine"))
+			else if (mod.toLowerCase().trim().equals("enviromine"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.davyLampEM));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -2781,12 +2785,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyCobblestoneStairsUTD);
 				if (modblock != null) {return modblock;}
@@ -2802,12 +2806,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyStoneBrickStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyStoneBrickStairsUTD);
 				if (modblock != null) {return modblock;}
@@ -2823,12 +2827,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneSlabEF);
 				if (modblock != null) {return new Object[]{modblock, upper? 9:1};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyCobblestoneSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper? 8:0};}
@@ -2844,12 +2848,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneSlabEF);
 				if (modblock != null) {return new Object[]{modblock, upper? 10:2};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.mossyStoneBrickSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper? 8:0};}
@@ -2889,22 +2893,22 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2921,22 +2925,22 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
 				if (modblock != null) {return new Object[]{modblock, 1};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineBricks_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2953,22 +2957,22 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_VN);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_Bo);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarine_EF);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.darkPrismarine_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2984,17 +2988,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("botania"))
+			if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_Bo);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_EF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineStairs_UTD);
 				if (modblock != null) {return modblock;}
@@ -3011,12 +3015,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("botania"))
+			if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineSlab_Bo);
 				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineSlab_EF);
 				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
@@ -3034,12 +3038,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("botania"))
+			if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineWall_Bo);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineWall_UTD);
 				if (modblock != null) {return modblock;}
@@ -3057,27 +3061,27 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			Block modblock=null;
+			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineShard_VN);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineShard_VN);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.manaResource_Bo);
-				if (modblock != null) {return new ItemStack(modblock, 1, 10);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.manaResource_Bo);
+				if (moditem != null) {return new ItemStack(moditem, 1, 10);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineShard_EF);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineShard_EF);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineShard_UTD);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineShard_UTD);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
 		}
 		return null;
@@ -3091,22 +3095,22 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			Block modblock=null;
+			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_VN);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineCrystal_VN);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_EF);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineCrystal_EF);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
-				modblock = Block.getBlockFromName(ModObjects.prismarineCrystal_UTD);
-				if (modblock != null) {return new ItemStack(modblock);}
+				moditem = FunctionsVN.getItemFromName(ModObjects.prismarineCrystal_UTD);
+				if (moditem != null) {return new ItemStack(moditem);}
 			}
 		}
 		return null;
@@ -3122,22 +3126,22 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.seaLantern_VN);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("botania"))
+			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.seaLantern_Bo);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.seaLantern_EF);
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.seaLantern_UTD);
 				if (modblock != null) {return modblock;}
@@ -3147,7 +3151,7 @@ public class ModObjects {
 	}
 	
 	
-	// Sea Lantern
+	// Sponge
 	public static Object[] chooseModSpongeBlockObject(boolean isWet)
 	{
 		String[] modprioritylist = GeneralConfig.modSponge;
@@ -3156,17 +3160,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("villagenames"))
+			if (mod.toLowerCase().trim().equals("villagenames"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.sponge_VN);
 				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.sponge_EF);
 				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.sponge_UTD);
 				if (modblock != null) {return new Object[]{modblock, isWet?1:0};}
@@ -3187,7 +3191,7 @@ public class ModObjects {
 		{
 			moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -3199,7 +3203,7 @@ public class ModObjects {
 				}
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -3281,17 +3285,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneUTD);
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneEF);
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneGS);
 				if (modblock != null) {return modblock;}
@@ -3311,17 +3315,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, upper?8:0};}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabEF);
 				if (modblock != null) {return new Object[]{modblock, upper?1:0};}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabGS);
 				if (modblock != null) {return new Object[]{modblock, upper?1:0};}
@@ -3341,17 +3345,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabEF);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneSlabGS);
 				if (modblock != null) {return new Object[]{modblock, 2};}
@@ -3381,17 +3385,17 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsUTD);
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsEF);
 				if (modblock != null) {return modblock;}
 			}
-			if (mod.toLowerCase().equals("ganyssurface"))
+			if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.redSandstoneStairsGS);
 				if (modblock != null) {return modblock;}
@@ -3440,7 +3444,7 @@ public class ModObjects {
 		{
 			for (String mod : modprioritylist)
 			{
-				if (mod.toLowerCase().equals("uptodate"))
+				if (mod.toLowerCase().trim().equals("uptodate"))
 				{
 					modblock = Block.getBlockFromName(ModObjects.redSandstoneWallUTD);
 					if (modblock != null) {return new Object[]{modblock, 0};}
@@ -3451,12 +3455,12 @@ public class ModObjects {
 		{
 			for (String mod : modprioritylist)
 			{
-				if (mod.toLowerCase().equals("uptodate"))
+				if (mod.toLowerCase().trim().equals("uptodate"))
 				{
 					modblock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
 					if (modblock != null) {return new Object[]{modblock, 0};}
 				}
-				if (mod.toLowerCase().equals("railcraft"))
+				if (mod.toLowerCase().trim().equals("railcraft"))
 				{
 					modblock = Block.getBlockFromName(ModObjects.wallRC);
 					if (modblock != null) {return new Object[]{modblock, 11};}
@@ -3487,12 +3491,12 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(isRed ? ModObjects.smoothRedSandstoneEF : ModObjects.smoothSandstoneEF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.smoothSandstoneUTD);
 				if (modblock != null) {return new Object[]{modblock, isRed?3:0};}
@@ -3563,12 +3567,12 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.smoothStoneEF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.smoothStoneUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -3605,7 +3609,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				int addMeta=0;
 				
@@ -3620,7 +3624,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, orientation*4+addMeta};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -3646,7 +3650,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				int meta=0;
 				
@@ -3661,7 +3665,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, meta};}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -3703,7 +3707,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -3715,7 +3719,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -3727,7 +3731,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -3739,7 +3743,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			/*else if (mod.toLowerCase().equals("malisisdoors"))
+			/*else if (mod.toLowerCase().trim().equals("malisisdoors"))
 			{
 				switch (materialMeta)
 				{
@@ -3765,12 +3769,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("mariculture") & VillageNames.canVillagerTradesDistinguishMeta)
+			if (mod.toLowerCase().trim().equals("mariculture") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.kelpWrapMC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 8);}
 			}
-			else if (mod.toLowerCase().equals("biomesoplenty") & VillageNames.canVillagerTradesDistinguishMeta)
+			else if (mod.toLowerCase().trim().equals("biomesoplenty") & VillageNames.canVillagerTradesDistinguishMeta)
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.kelpDriedBOP);
 				if (moditem != null) {return new ItemStack(moditem, 9, 11);} // Use nine because BoP doesn't have a way to consolidate them
@@ -3788,22 +3792,22 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonRawUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonRawEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonRawGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("harvestcraft"))
+			else if (mod.toLowerCase().trim().equals("harvestcraft"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonRawHC);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -3821,22 +3825,22 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonCookedUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonCookedEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonCookedGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().equals("harvestcraft"))
+			else if (mod.toLowerCase().trim().equals("harvestcraft"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.muttonCookedHC);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -3854,12 +3858,12 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesEF);
 				if (moditem != null) {return moditem;}
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
 				if (moditem != null) {return moditem;}
@@ -3904,11 +3908,11 @@ public class ModObjects {
 		{
 			Item moditem=null;
 			
-			if (mod.toLowerCase().equals("etfuturum"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewEF);
 			}
-			else if (mod.toLowerCase().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.suspiciousStewUTD);
 			}
@@ -3948,7 +3952,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (materialMeta)
 				{
@@ -3960,7 +3964,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				switch (materialMeta)
 				{
@@ -3972,7 +3976,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("ganyssurface"))
+			else if (mod.toLowerCase().trim().equals("ganyssurface"))
 			{
 				switch (materialMeta)
 				{
@@ -3984,7 +3988,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
-			else if (mod.toLowerCase().equals("woodstuff"))
+			else if (mod.toLowerCase().trim().equals("woodstuff"))
 			{
 				switch (materialMeta)
 				{
@@ -4022,4 +4026,52 @@ public class ModObjects {
 	}
 	
 	
+	// Wooden table (Vanilla is a fence with a pressure plate on top)
+	public static Object[][] chooseModWoodenTable(int materialMeta)
+	{
+		String[] modprioritylist = GeneralConfig.modWoodenTable;
+		
+		Block modblock = null;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().trim().equals("minecraft"))
+			{
+				return chooseVanillaWoodenTable(materialMeta);
+			}
+			else if (mod.toLowerCase().trim().equals("bibliocraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.table_BC);
+				
+				if (modblock != null)
+				{
+					return new Object[][] {
+							new Object[] {Blocks.air, 0},
+							new Object[] {modblock, materialMeta}
+							};
+				}
+			}
+			else if (mod.toLowerCase().trim().equals("mrcrayfishsfurnituremod"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.tablewood_CFM);
+				
+				if (modblock != null)
+				{
+					return new Object[][] {
+							new Object[] {Blocks.air, 0},
+							new Object[] {modblock, 0}
+							};
+				}
+			}
+		}
+		// If all else fails, grab the vanilla version
+		return chooseVanillaWoodenTable(materialMeta);
+	}
+	public static Object[][] chooseVanillaWoodenTable(int materialMeta)
+	{
+		return new Object[][] {
+			new Object[] {ModObjects.chooseModPressurePlate(materialMeta), 0},
+			ModObjects.chooseModFence(materialMeta)
+			};
+	}
 }
