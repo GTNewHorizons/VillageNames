@@ -15,7 +15,6 @@ import astrotibs.villagenames.prismarine.guardian.particle.PacketHandlerClient;
 import astrotibs.villagenames.prismarine.guardian.particle.SToCMessage;
 import astrotibs.villagenames.prismarine.guardian.util.MathHelper1122;
 import astrotibs.villagenames.proxy.ClientProxy;
-import astrotibs.villagenames.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.Unpooled;
