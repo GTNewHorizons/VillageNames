@@ -2,7 +2,6 @@ package astrotibs.villagenames.name;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -732,21 +731,15 @@ public class NameGenerator {
 	 */
 	public static String getCareerTag(String entityClasspath, int villagerProfession, int villagerCareer) {
 		
-		// keys: "NameTypes", "Professions", "ClassPaths", "AddOrRemove"
-		Map<String, ArrayList> mappedNamesAutomatic = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingAutomatic);
-		Map<String, ArrayList> mappedNamesClickable = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingClickable);
-		// keys: "Professions", "IDs", "VanillaProfMaps"
-		Map<String, ArrayList> mappedProfessions = GeneralConfig.unpackMappedProfessions(GeneralConfig.modProfessionMapping);
-		
 		String careerTag = "(";
 		
 		// The entity is identified in the "clickable" or "automatic" config entry
-		if ( mappedNamesClickable.get("ClassPaths").contains(entityClasspath) ) {
-			careerTag += (String) ((mappedNamesClickable.get("Professions")).get( mappedNamesClickable.get("ClassPaths").indexOf(entityClasspath) ));
+		if ( GeneralConfig.modNameMappingClickable_map.get("ClassPaths").contains(entityClasspath) ) {
+			careerTag += (String) ((GeneralConfig.modNameMappingClickable_map.get("Professions")).get( GeneralConfig.modNameMappingClickable_map.get("ClassPaths").indexOf(entityClasspath) ));
 			careerTag = careerTag.trim();
 		}
-		else if ( mappedNamesAutomatic.get("ClassPaths").contains(entityClasspath) ) {
-			careerTag += (String) ((mappedNamesAutomatic.get("Professions")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClasspath) ));
+		else if ( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").contains(entityClasspath) ) {
+			careerTag += (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClasspath) ));
 			careerTag = careerTag.trim();
 		}
 		
@@ -898,7 +891,7 @@ public class NameGenerator {
 			}
 			if (!(villagerProfession >= 0 && villagerProfession <= 5)) { // This is a modded profession.
 				try {
-					String otherModProfString = (String) ((mappedProfessions.get("Professions")).get( mappedProfessions.get("IDs").indexOf(villagerProfession) ));
+					String otherModProfString = (String) ((GeneralConfig.modProfessionMapping_map.get("Professions")).get( GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession) ));
 					otherModProfString = otherModProfString.replaceAll("\\(", "");
 					otherModProfString = otherModProfString.replaceAll("\\)", "");
 					otherModProfString = otherModProfString.trim();

@@ -1,8 +1,6 @@
 package astrotibs.villagenames.handler;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Map;
 
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
@@ -314,11 +312,6 @@ public class EntityMonitorHandler
                         }
                     }
                 }
-            	//if (vanillaRollbackTicks!=0 && GeneralConfigHandler.debugMessages) {LogHelper.info("Counteracting vanilla effects resulting in a " + vanillaRollbackTicks + " tick adjustment");}
-            	
-            	// Next, apply the values as per the config entries
-            	Map<String, ArrayList> zombieCureCatalysts = GeneralConfig.unpackZombieCureCatalysts(GeneralConfig.zombieCureCatalysts);
-            	Map<String, ArrayList> zombieCureGroups = GeneralConfig.unpackZombieCureGroups(GeneralConfig.zombieCureGroups);
             	
             	// Finally, update the conversion value. Do this once every ten ticks I suppose.
             	
@@ -326,11 +319,11 @@ public class EntityMonitorHandler
             	
             	if (zombie.worldObj.rand.nextFloat() < (0.01F*checkfactor) ) {
             		
-                	for ( int groupi=0 ; groupi < zombieCureGroups.get("Groups").size(); groupi++ ) { // Go through all the groups in zombieCureGroups
+                	for ( int groupi=0 ; groupi < GeneralConfig.zombieCureGroups_map.get("Groups").size(); groupi++ ) { // Go through all the groups in GeneralConfig.zombieCureGroups_map
                 		
-                		String group = (String) zombieCureGroups.get("Groups").get(groupi);
-                		int groupLimit = (Integer) zombieCureGroups.get("Limits").get(groupi);
-                		double groupSpeedup = ((Double) zombieCureGroups.get("Speedups").get(groupi))/checkfactor;
+                		String group = (String) GeneralConfig.zombieCureGroups_map.get("Groups").get(groupi);
+                		int groupLimit = (Integer) GeneralConfig.zombieCureGroups_map.get("Limits").get(groupi);
+                		double groupSpeedup = ((Double) GeneralConfig.zombieCureGroups_map.get("Speedups").get(groupi))/checkfactor;
                 		
                 		// Extract sign and apply it later
                 		int speedupSign = groupSpeedup<0?-1:1;
@@ -347,12 +340,12 @@ public class EntityMonitorHandler
                                     String blockClassPath = block.getClass().toString().substring(6);
                                     String blockUnlocName = block.getUnlocalizedName();
                                     
-                                    for ( int blocki=0 ; blocki < zombieCureCatalysts.get("Groups").size(); blocki++ ) { // Go through all the custom block entries
+                                    for ( int blocki=0 ; blocki < GeneralConfig.zombieCureCatalysts_map.get("Groups").size(); blocki++ ) { // Go through all the custom block entries
                                     	
-                                    	String catalystGroup = (String) zombieCureCatalysts.get("Groups").get(blocki);
-                                    	String catalystClassPath = (String) zombieCureCatalysts.get("ClassPaths").get(blocki);
-                                    	String catalystUnlocName = (String) zombieCureCatalysts.get("UnlocNames").get(blocki);
-                                    	int catalystMeta = (Integer) zombieCureCatalysts.get("Metas").get(blocki);
+                                    	String catalystGroup = (String) GeneralConfig.zombieCureCatalysts_map.get("Groups").get(blocki);
+                                    	String catalystClassPath = (String) GeneralConfig.zombieCureCatalysts_map.get("ClassPaths").get(blocki);
+                                    	String catalystUnlocName = (String) GeneralConfig.zombieCureCatalysts_map.get("UnlocNames").get(blocki);
+                                    	int catalystMeta = (Integer) GeneralConfig.zombieCureCatalysts_map.get("Metas").get(blocki);
                                     	
                                     	if (
                                     			catalystGroup.equals(group)

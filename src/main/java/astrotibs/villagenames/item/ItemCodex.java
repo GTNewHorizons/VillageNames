@@ -2,7 +2,6 @@ package astrotibs.villagenames.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 import astrotibs.villagenames.VillageNames;
@@ -153,14 +152,11 @@ public class ItemCodex extends Item {
     			
     			// Add in custom structure types from the config
     			
-    			// keys: "NameTypes", "StructureTypes", "StructureTitles", "DimensionNames", "BookTypes", "ClassPaths"
-				Map<String, ArrayList> mappedModStructureNames = GeneralConfig.unpackModStructures(GeneralConfig.modStructureNames);
-				
-				nameTypes.addAll( mappedModStructureNames.get("NameTypes") );
-				structureTypes.addAll( mappedModStructureNames.get("StructureTypes") );
-				structureTitles.addAll( mappedModStructureNames.get("StructureTitles") );
-				dimensionNames.addAll( mappedModStructureNames.get("DimensionNames") );
-				bookTypes.addAll( mappedModStructureNames.get("BookTypes") );
+				nameTypes.addAll( GeneralConfig.modStructureNames_map.get("NameTypes") );
+				structureTypes.addAll( GeneralConfig.modStructureNames_map.get("StructureTypes") );
+				structureTitles.addAll( GeneralConfig.modStructureNames_map.get("StructureTitles") );
+				dimensionNames.addAll( GeneralConfig.modStructureNames_map.get("DimensionNames") );
+				bookTypes.addAll( GeneralConfig.modStructureNames_map.get("BookTypes") );
 				
     			String headerTags = new String();
 				String namePrefix = new String();

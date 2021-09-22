@@ -355,6 +355,7 @@ public class ModObjects {
 	public static final String miscBOP = DOM_BIOMESOPLENTY + ":misc"; // Usually used for dyes
 	public static final String materialsMC = "Mariculture:materials"; // Usually used for dyes
 	public static final String dyeUTD = DOM_UPTODATE + ":dye";
+	public static final String dye_EFR = DOM_ETFUTURUM + ":dye";
 	
 	// Fence
 	public static final String fenceOakEF = DOM_ETFUTURUM + ":fence_oak";
@@ -1921,6 +1922,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dye_EFR);
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
 		}
 		return null;
 	}
@@ -1941,6 +1947,11 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dye_EFR);
+				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
 		}
 		return null;
@@ -1968,6 +1979,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dye_EFR);
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
+			}
 		}
 		return null;
 	}
@@ -1993,6 +2009,11 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.dyeUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.dye_EFR);
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
 		}
 		return null;

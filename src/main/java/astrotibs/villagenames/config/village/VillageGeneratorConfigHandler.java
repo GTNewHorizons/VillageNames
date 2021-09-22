@@ -557,6 +557,7 @@ public class VillageGeneratorConfigHandler
 	public static boolean spawnVillagersInTownCenters;
 	public static boolean nameVillageHorses;
 	public static boolean cleanDroppedItems;
+	public static int villageAnimalRestrictionLevel;
 	
 	public static void init(File configFile)
 	{
@@ -1564,7 +1565,13 @@ public class VillageGeneratorConfigHandler
 		spawnVillagersInTownCenters = config.getBoolean("Spawn Extra Villagers in Town Centers", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Spawn villagers with random professions and ages in the town center.");
 		nameVillageHorses = config.getBoolean("Name Village Horses", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Domesticated horses spawn with names generated from the \"pet\" syllable pool.");
 		cleanDroppedItems = config.getBoolean("Clean Dropped Items", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Deletes most blocks and items accidentally broken and dropped onto the ground by village generation, such as torches, doors, beds, and chest contents.");
-	    
+		villageAnimalRestrictionLevel = config.getInt("Village Livestock Restriction Level", Reference.CATEGORY_VILLAGE_GENERATOR, 0, 0, 3, "Limits whether animals are spawned in VN village components."
+				+ "\n0: No restriction"
+				+ "\n1: Do not spawn vanilla animals in their respective components"
+				+ "\n2: Do not spawn any animals in their respective components"
+				+ "\n3: Do not spawn any village components that would have animals"
+				);
+		
 		spawnBiomesNames = config.getStringList("Spawn Biome Names", Reference.CATEGORY_VILLAGE_GENERATOR,
 				new String[] {
 						// Vanilla

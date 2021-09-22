@@ -1,7 +1,5 @@
 package astrotibs.villagenames.handler;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
@@ -20,9 +18,6 @@ public class SpawnNamingHandler {
 	
 	@SubscribeEvent()
 	public void onPopulating(EntityJoinWorldEvent event) {
-	//public void onPopulating(EntityConstructing event) {
-		
-		Map<String, ArrayList> mappedNamesAutomatic = GeneralConfig.unpackMappedNames(GeneralConfig.modNameMappingAutomatic);
 		
 		if (event.entity instanceof EntityLiving
 				&& !(event.entity instanceof EntityPlayer)
@@ -51,9 +46,9 @@ public class SpawnNamingHandler {
 			}
 			
 			// keys: "NameTypes", "Professions", "ClassPaths", "AddOrRemove"
-			if (mappedNamesAutomatic.get("ClassPaths").contains(entityClassPath) ) {
+			if (GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").contains(entityClassPath) ) {
 				// "true" means "add"
-				String addOrRemove = (String) ((mappedNamesAutomatic.get("AddOrRemove")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClassPath) ));
+				String addOrRemove = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("AddOrRemove")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
 				
 				// The spawning entity matches the list. Now check to see if it should GAIN or LOSE its tag.
 				
@@ -65,7 +60,7 @@ public class SpawnNamingHandler {
 							   && entity.getCustomNameTag().trim().equals("Traveling Merchant")) // Contingency in there specifically for PM's Traveling Merchants
 							) {
 						
-						String nameType = (String) ((mappedNamesAutomatic.get("NameTypes")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClassPath) ));
+						String nameType = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("NameTypes")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
 						
 						String[] newNameA = NameGenerator.newRandomName(nameType, new Random());
 						String newName = (newNameA[1]+" "+newNameA[2]+" "+newNameA[3]).trim();
@@ -74,7 +69,7 @@ public class SpawnNamingHandler {
 								GeneralConfig.addJobToName
 								&& ( !(entity instanceof EntityVillager) || targetAge>=0 )
 								) {
-							String careerTag = (String) ((mappedNamesAutomatic.get("Professions")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClassPath) ));
+							String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
 							newName += ( (careerTag.trim().equals("") || careerTag.trim().equals(null)) ? "" : " ("+careerTag+")" );
 						}
 						// Apply the name
@@ -85,7 +80,7 @@ public class SpawnNamingHandler {
 							entity.getCustomNameTag().trim().indexOf("(")==-1 && GeneralConfig.addJobToName
 							&& ( !(entity instanceof EntityVillager) || targetAge>=0 )
 							) { // Target is named but does not have job tag: add one!
-						String careerTag = (String) ((mappedNamesAutomatic.get("Professions")).get( mappedNamesAutomatic.get("ClassPaths").indexOf(entityClassPath) ));
+						String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
 						String newCustomName = entity.getCustomNameTag().trim()
 								+ ( (careerTag.trim().equals("") || careerTag.trim().equals(null)) ? "" : " ("+careerTag+")" );
 						// Apply the name

@@ -2666,7 +2666,8 @@ public class StructureVillageVN
 				DOOR_META_ARRAY[0][isRightHanded?1:0][isShut?1:0][orientation][horizIndex]
 						};
 	}
-
+	
+	
 	/**
 	 * Returns a random animal from the /structures/village/common/animals folder, not including cats
 	 */

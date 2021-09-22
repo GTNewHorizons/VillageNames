@@ -27,6 +27,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
@@ -2204,17 +2205,21 @@ public class SwampStructures
     		{
     			this.entitiesGenerated=true;
     			
-            	// Chickens
-            	for (int[] uvw : new int[][]{
-        			{3, 1, 2},
-        			{5, 1, 2},
-        			})
-        		{
-    				EntityChicken entityChicken = new EntityChicken(world);
-    				IEntityLivingData ientitylivingdata = entityChicken.onSpawnWithEgg(null);
-    				entityChicken.setLocationAndAngles(getXWithOffset(uvw[0], uvw[2]) + 0.5D, getYWithOffset(uvw[1]) + 0.5D, getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
-    				world.spawnEntityInWorld((Entity)entityChicken);
-        		}
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+	            	// Chickens
+	            	for (int[] uvw : new int[][]{
+	        			{3, 1, 2},
+	        			{5, 1, 2},
+	        			})
+	        		{
+	    				EntityChicken entityChicken = new EntityChicken(world);
+	    				IEntityLivingData ientitylivingdata = entityChicken.onSpawnWithEgg(null);
+	    				
+	    				entityChicken.setLocationAndAngles(getXWithOffset(uvw[0], uvw[2]) + 0.5D, getYWithOffset(uvw[1]) + 0.5D, getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
+	    				world.spawnEntityInWorld((Entity)entityChicken);
+	        		}
+            	}
     		}
     		
     		// Clean items
@@ -2618,39 +2623,42 @@ public class SwampStructures
     		{
     			this.entitiesGenerated=true;
     			
-    			// Livestock
-            	for (int[] uvw : new int[][]{
-        			{2, 1, 10}, 
-        			{8, 1, 5}, 
-        			})
-        		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
-                    animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(animal);
-                    
-                    // Dirt block underneath
-                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-        		}
-            	
-    			// Horse
-            	for (int[] uvw : new int[][]{
-            		{2, 1, 2}, 
-        			})
-        		{
-    				EntityHorse entityHorse = new EntityHorse(world);
-    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
-    				
-                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
-                	{
-                		String[] petname_a = NameGenerator.newRandomName("pet", random);
-                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
-                	}
-                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityHorse);
-                    
-                    // Dirt block underneath
-                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-        		}
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+	    			// Livestock
+	            	for (int[] uvw : new int[][]{
+	        			{2, 1, 10}, 
+	        			{8, 1, 5}, 
+	        			})
+	        		{
+	                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
+	                    animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(animal);
+	                    
+	                    // Dirt block underneath
+	                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+	        		}
+	            	
+	    			// Horse
+	            	for (int[] uvw : new int[][]{
+	            		{2, 1, 2}, 
+	        			})
+	        		{
+	    				EntityHorse entityHorse = new EntityHorse(world);
+	    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
+	    				
+	                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
+	                	{
+	                		String[] petname_a = NameGenerator.newRandomName("pet", random);
+	                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
+	                	}
+	                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityHorse);
+	                    
+	                    // Dirt block underneath
+	                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+	        		}
+            	}
     		}
 			
     		
@@ -3831,19 +3839,21 @@ public class SwampStructures
     			entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
     			world.spawnEntityInWorld(entityvillager);
     			
-    			
-            	// Animals
-            	for (int[] uvw : new int[][]{
-        			{6, 6, 6},
-        			})
-        		{
-                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
-                    animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(animal);
-                    
-                    // Dirt block underneath
-                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-        		}
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+	            	// Animals
+	            	for (int[] uvw : new int[][]{
+	        			{6, 6, 6},
+	        			})
+	        		{
+	                	EntityLiving animal = StructureVillageVN.getVillageAnimal(world, random, false, this.materialType==MaterialType.MUSHROOM);
+	                    animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(animal);
+	                    
+	                    // Dirt block underneath
+	                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+	        		}
+            	}
     		}
     		
     		// Clean items
@@ -4917,7 +4927,6 @@ public class SwampStructures
             	
     			// Underneath
     			{1,1,7, 2,-1}, 
-    			{2,2,8, 2,2}, 
     			{2,1,8, 2,1}, {3,1,8, 2,-1}, 
     			{7,1,3, 3,-1}, 
     			// At entrance
@@ -10820,13 +10829,16 @@ public class SwampStructures
     			
     			world.spawnEntityInWorld((Entity)entityvillager);
     			
-    			// Sheep
-    			for (int[] uvw : new int[][] { { 3, 1, 6 }, { 6, 1, 4 } }) {
-    				EntitySheep entitySheep = new EntitySheep(world);
-    				IEntityLivingData ientitylivingdata = entitySheep.onSpawnWithEgg(null);
-    				entitySheep.setLocationAndAngles(getXWithOffset(uvw[0], uvw[2]) + 0.5D, getYWithOffset(uvw[1]) + 0.5D, getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
-    				world.spawnEntityInWorld((Entity)entitySheep);
-    			} 
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+	    			// Sheep
+	    			for (int[] uvw : new int[][] { { 3, 1, 6 }, { 6, 1, 4 } }) {
+	    				EntitySheep entitySheep = new EntitySheep(world);
+	    				IEntityLivingData ientitylivingdata = entitySheep.onSpawnWithEgg(null);
+	    				entitySheep.setLocationAndAngles(getXWithOffset(uvw[0], uvw[2]) + 0.5D, getYWithOffset(uvw[1]) + 0.5D, getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat() * 360.0F, 0.0F);
+	    				world.spawnEntityInWorld((Entity)entitySheep);
+	    			}
+            	}
     		}
     		
     		// Clean items
@@ -11404,21 +11416,23 @@ public class SwampStructures
 				entityvillager.setLocationAndAngles((double)this.getXWithOffset(u, w) + 0.5D, (double)this.getYWithOffset(v) + 0.5D, (double)this.getZWithOffset(u, w) + 0.5D, random.nextFloat()*360F, 0.0F);
 				world.spawnEntityInWorld(entityvillager);
 				
-				
-				// Sheep in the yard
-				for (int[] uvw : new int[][]{
-					{3,6,6}, 
-					})
-				{
-					EntityLiving animal = new EntitySheep(world);
-					IEntityLivingData ientitylivingdata = animal.onSpawnWithEgg(null); // To give the animal random spawning properties (horse pattern, sheep color, etc)
-					
-					animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-					world.spawnEntityInWorld(animal);
-					
-					// Dirt block underneath
-					//this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-				}
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+					// Sheep in the yard
+					for (int[] uvw : new int[][]{
+						{3,6,6}, 
+						})
+					{
+						EntityLiving animal = new EntitySheep(world);
+						IEntityLivingData ientitylivingdata = animal.onSpawnWithEgg(null); // To give the animal random spawning properties (horse pattern, sheep color, etc)
+						
+						animal.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+						world.spawnEntityInWorld(animal);
+						
+						// Dirt block underneath
+						//this.placeBlockAtCurrentPosition(world, biomeDirtBlock, biomeDirtMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+					}
+            	}
 			}
 			
 			// Clean items
@@ -14596,41 +14610,44 @@ public class SwampStructures
     		if (!this.entitiesGenerated)
     		{
     			this.entitiesGenerated=true;
-    			
-    			// Cow
-            	for (int[] uvw : new int[][]{
-        			{15, 1, 3}, 
-        			})
-        		{
-            		EntityCow entityCow = new EntityCow(world);
-    				IEntityLivingData ientitylivingdata = entityCow.onSpawnWithEgg(null);
-    				
-                    entityCow.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityCow);
-                    
-                    // Dirt block underneath
-                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-        		}
-            	
-    			// Horse
-            	for (int[] uvw : new int[][]{
-            		{13, 1, 4}, 
-        			})
-        		{
-    				EntityHorse entityHorse = new EntityHorse(world);
-    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
-    				
-                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
-                	{
-                		String[] petname_a = NameGenerator.newRandomName("pet", random);
-                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
-                	}
-                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
-                    world.spawnEntityInWorld(entityHorse);
-                    
-                    // Dirt block underneath
-                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
-        		}
+
+            	if (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<1)
+            	{
+	    			// Cow
+	            	for (int[] uvw : new int[][]{
+	        			{15, 1, 3}, 
+	        			})
+	        		{
+	            		EntityLiving entityCow = this.materialType==FunctionsVN.MaterialType.MUSHROOM ? new EntityMooshroom(world) : new EntityCow(world);
+	    				IEntityLivingData ientitylivingdata = entityCow.onSpawnWithEgg(null);
+	    				
+	                    entityCow.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityCow);
+	                    
+	                    // Dirt block underneath
+	                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+	        		}
+	            	
+	    			// Horse
+	            	for (int[] uvw : new int[][]{
+	            		{13, 1, 4}, 
+	        			})
+	        		{
+	    				EntityHorse entityHorse = new EntityHorse(world);
+	    				IEntityLivingData ientitylivingdata = entityHorse.onSpawnWithEgg(null);
+	    				
+	                	if (VillageGeneratorConfigHandler.nameVillageHorses && GeneralConfig.nameEntities)
+	                	{
+	                		String[] petname_a = NameGenerator.newRandomName("pet", random);
+	                		entityHorse.setCustomNameTag((petname_a[1]+" "+petname_a[2]+" "+petname_a[3]).trim());
+	                	}
+	                	entityHorse.setLocationAndAngles((double)this.getXWithOffset(uvw[0], uvw[2]) + 0.5D, (double)this.getYWithOffset(uvw[1]) + 0.5D, (double)this.getZWithOffset(uvw[0], uvw[2]) + 0.5D, random.nextFloat()*360F, 0.0F);
+	                    world.spawnEntityInWorld(entityHorse);
+	                    
+	                    // Dirt block underneath
+	                    //this.placeBlockAtCurrentPosition(world, biomeGrassBlock, biomeGrassMeta, uvw[0], uvw[1]-1, uvw[2], structureBB);
+	        		}
+            	}
     		}
     		
     		// Clean items
