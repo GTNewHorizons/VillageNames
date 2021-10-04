@@ -110,6 +110,14 @@ public class StructureVillageVN
 	};
 	
 	// Indexed by [orientation][horizIndex]
+	public static final int[][] MMM_LECTERN_META_ARRAY = new int[][]{
+		{2,3,4,5},
+		{5,2,5,2},
+		{4,5,2,3},
+		{3,4,3,4},
+	};
+	
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] BED_META_ARRAY = new int[][]{
 		{2,3,0,1}, // Forward
 		{1,2,1,2}, // Right
@@ -2625,6 +2633,13 @@ public class StructureVillageVN
 		if (orientation<0) {return -orientation;}
 		return FURNACE_META_ARRAY[orientation][horizIndex];
 	}
+	
+	// Lectern meta for ManaMetalMod
+	public static int chooseMMLecternMeta(int orientation, int horizIndex)
+	{
+		return MMM_LECTERN_META_ARRAY[orientation][horizIndex];
+	}
+	
     /**
 	 * buttonOrientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing

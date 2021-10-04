@@ -92,10 +92,12 @@ public class GeneralConfig {
 	public static String[] modBamboo;
 	public static String[] modBanner;
 	public static String[] modBarrel;
+	public static String[] modBed;
 	public static String[] modBeetroot;
 	public static String[] modBookshelf;
 	public static String[] modBountifulStone;
 	public static String[] modButton;
+	public static String[] modCampfire;
 	public static String[] modChest;
 	public static String[] modConcrete;
 	public static String[] modDoor;
@@ -108,6 +110,7 @@ public class GeneralConfig {
 	public static String[] modIronNugget;
 	public static String[] modKelp;
 	public static String[] modLantern;
+	public static String[] modLectern;
 	public static String[] modMossyStone;
 	public static String[] modMutton;
 	public static String[] modPressurePlate;
@@ -128,6 +131,7 @@ public class GeneralConfig {
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
 	public static boolean antiqueAtlasMarkerNames;
+	public static boolean manaMetalCartographersSellMapFragments;
 	
     public static boolean villagerSkinTones;
     public static float villagerSkinToneVarianceAnnealing;
@@ -492,8 +496,11 @@ public class GeneralConfig {
 		harvestcraftCropFarmRate = config.getFloat("Crop rate: Harvestcraft", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Harvestcraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
 		dragonQuestCropFarmRate = config.getFloat("Crop rate: DQ Respect", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Dragon Quest Respect crops in farms. Only used with Village Generator. Set to 0 for no DQR crops.");
 		antiqueAtlasMarkerNames = config.getBoolean("Antique Atlas: Village Marker Names", Reference.CATEGORY_MOD_INTEGRATION, true, "Label a new village marker with the village's name in your Antique Atlases.");
-
+		manaMetalCartographersSellMapFragments = config.getBoolean("ManaMetal: Cartographers Sell Map Fragments", Reference.CATEGORY_MOD_INTEGRATION, true, "Cartographer villagers can sell Map Fragments");
+		
+		
 		modBamboo = config.getStringList("Mod Priority: Bamboo", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"manametal",
  				"growthcraft",
  				"biomesoplenty",
  				},
@@ -512,6 +519,14 @@ public class GeneralConfig {
  				"uptodate",
  				},
  				"Priority order for referencing Barrels for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modBed = config.getStringList("Mod Priority: Bed", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"manametal",
+ 				"bettervanilla",
+ 				"carpentersblocks",
+ 				},
+ 				"Priority order for referencing Beds for village generation and villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modBeetroot = config.getStringList("Mod Priority: Beetroot", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
@@ -534,6 +549,7 @@ public class GeneralConfig {
 	    		"uptodate",
  				"ganyssurface",
  				"botania",
+ 				"manametal",
  				},
  				"Priority order for referencing Granite, Diorite, and Andesite for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
@@ -547,6 +563,13 @@ public class GeneralConfig {
  				"Priority order for referencing wood buttons for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
+	    modCampfire = config.getStringList("Mod Priority: Campfire", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"campfirebackport",
+ 				"manametal",
+ 				},
+ 				"Priority order for referencing Campfires for village generation and villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modChest = config.getStringList("Mod Priority: Chest", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"woodstuff",
  				"ganyssurface",
@@ -558,6 +581,7 @@ public class GeneralConfig {
  				"villagenames",
 	    		"uptodate",
  				"etfuturum",
+ 				"manametal",
  				},
  				"Priority order for referencing concrete for well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
@@ -610,6 +634,7 @@ public class GeneralConfig {
  				"villagenames",
  				"etfuturum",
 	    		"uptodate",
+	    		"manametal",
  				},
  				"Priority order for referencing Glazed Terracotta for villager trade offers and well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
@@ -617,6 +642,7 @@ public class GeneralConfig {
 	    modGrassPath = config.getStringList("Mod Priority: Grass Path", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
+	    		"manametal",
  				},
  				"Priority order for referencing Grass Path blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -630,6 +656,7 @@ public class GeneralConfig {
  				"mariculture",
  				"netherlicious",
  				"ganysnether",
+ 				"manametal",
  				},
  				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
  				);
@@ -646,8 +673,16 @@ public class GeneralConfig {
  				"netherlicious",
  				"uptodate",
 	    		"enviromine",
+	    		"manametal",
  				},
  				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modLectern = config.getStringList("Mod Priority: Lectern", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"manametal",
+	    		"bibliocraft",
+ 				},
+ 				"Priority order for referencing Lecterns for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modMossyStone = config.getStringList("Mod Priority: Mossy Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
@@ -680,6 +715,7 @@ public class GeneralConfig {
  				"botania",
  				"etfuturum",
 	    		"uptodate",
+	    		"manametal",
  				},
  				"Priority order for referencing Prismarine blocks and items for monument and village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -702,6 +738,7 @@ public class GeneralConfig {
 	    modSmoothStone = config.getStringList("Mod Priority: Smooth Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
+	    		"manametal",
  				},
  				"Priority order for referencing Smooth Stone for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -724,6 +761,7 @@ public class GeneralConfig {
 	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"uptodate",
  				"etfuturum",
+	    		"manametal",
  				},
  				"Priority order for referencing Stripped Logs/Wood for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -738,6 +776,7 @@ public class GeneralConfig {
 	    modSweetBerries = config.getStringList("Mod Priority: Sweet Berries", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
+	    		"manametal",
  				},
  				"Priority order for referencing sweet berries for villager trade offers. The version highest on the list and registered in your game will be used."
  				);
@@ -1125,9 +1164,9 @@ public class GeneralConfig {
 	 * Loads the (careerAsset|zombieCareerAsset|professionID) string lists and assigns them to this instance's variables.
 	 */
 	public static Map<String, List> unpackModVillagerSkins(String[] inputList) {
-		List<String>  careerAsset_a = new ArrayList<String>();
+		List<String> careerAsset_a = new ArrayList<String>();
 		List<String> zombieCareerAsset_a = new ArrayList<String>();
-		List<String> professionID_a = new ArrayList<String>();
+		List<Integer> professionID_a = new ArrayList<Integer>();
 		
 		for (String entry : inputList) {
 			// Remove slashes and double dots to prevent address abuse
@@ -1140,12 +1179,12 @@ public class GeneralConfig {
 			// Initialize temp fields
 			String careerAsset="";
 			String zombieCareerAsset="";
-			String professionID="";
+			Integer professionID=-1;
 			
 			// Place entries into variables
-			try {careerAsset = splitEntry[0].trim();}       catch (Exception e) {}
-			try {zombieCareerAsset = splitEntry[1].trim();} catch (Exception e) {}
-			try {professionID = splitEntry[2].trim();}     	catch (Exception e) {}
+			try {careerAsset = splitEntry[0].trim();}       			catch (Exception e) {}
+			try {zombieCareerAsset = splitEntry[1].trim();} 			catch (Exception e) {}
+			try {professionID = Integer.valueOf(splitEntry[2].trim());} catch (Exception e) {}
 			
 			if(!careerAsset.equals("")) { // Something was actually assigned in the try block
 				careerAsset_a.add(careerAsset);
@@ -1155,9 +1194,9 @@ public class GeneralConfig {
 		}
 		
 		Map<String, List> map = new HashMap();
-		map.put("careerAsset",careerAsset_a);
-		map.put("zombieCareerAsset",zombieCareerAsset_a);
-		map.put("professionID",professionID_a);
+		map.put("careerAsset", careerAsset_a);
+		map.put("zombieCareerAsset", zombieCareerAsset_a);
+		map.put("professionID", professionID_a);
 		
 		return map;
 	}

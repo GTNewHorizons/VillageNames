@@ -120,7 +120,6 @@ public class ModelZombieVillagerModern extends ModelZombie {
 		this.zombieVillagerHatRimLow.rotateAngleX = this.bipedHead.rotateAngleX;
 	}
 	
-	// Added in v3.1
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
@@ -128,17 +127,24 @@ public class ModelZombieVillagerModern extends ModelZombie {
 		
 		if (entity instanceof EntityZombie && ((EntityZombie)entity).isVillager())
 		{
-			// Changed in v3.2 to accommodate config-specifiable professions
 			final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(((EntityZombie)entity));
 			int prof = ezv.getProfession();
 			
-			if (prof > 5 && !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof)) // This is a non-vanilla villager profession and is not whitelisted
+			if (
+					prof > 5 // This is a non-vanilla villager profession
+					&& !this.isChild // and is not a child
+					&& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+					&& // and... 
+						(GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
+						|| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+						)
+					)
 			{
-				// Is in the blacklist, or headwear is turned off at large
-				if (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) || !GeneralConfig.moddedVillagerHeadwear) {return;}
+				return;
 			}
+
+			// You reach this point if the zombie needs its head rescaled
 			
-			// Fixed in v3.1.1 - Child hats and rims render properly
 			// summon Zombie ~ ~ ~ {IsVillager:1, IsBaby:1}
 	        if (this.isChild)
 	        {

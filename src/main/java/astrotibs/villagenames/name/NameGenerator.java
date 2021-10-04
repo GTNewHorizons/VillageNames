@@ -968,6 +968,8 @@ public class NameGenerator {
 		"lan", "nunu",
 		"rynz", "rynzrs",
 		"rvq",
+		// lqd
+		"arzrf",
 	};
 	
 	/**

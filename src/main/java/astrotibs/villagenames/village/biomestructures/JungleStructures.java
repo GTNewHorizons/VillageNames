@@ -16708,22 +16708,24 @@ public class JungleStructures
             
             
     		// Bamboo
-    		blockObject = ModObjects.chooseModBambooStalk();
-			Block bambooBlock; int bambooMeta;
+    		blockObject = ModObjects.chooseModBambooStalk(0);
 			if (blockObject!=null)
     		{
-				bambooBlock = (Block)blockObject[0]; bambooMeta = (Integer)blockObject[1];
-				
-				for (int[] uuvvww : new int[][]{
-					{2,1,8, 2,6,8}, 
-					{2,1,9, 2,4,9}, 
-					{4,1,9, 4,3,9}, 
-					{8,1,9, 8,2,9}, 
-					{9,1,8, 9,5,8}, 
-					{10,1,2, 10,4,2}, 
+				for (int[] uuvvwws : new int[][]{
+					{2,1,8, 2,3,8, 3}, {2,4,8, 2,4,8, 4}, {2,5,8, 2,6,8, 5}, 
+					{2,1,9, 2,1,9, 3}, {2,2,9, 2,3,9, 4}, {2,4,9, 2,4,9, 5}, 
+					
+					{4,1,9, 4,1,9, 0}, {4,2,9, 4,3,9, 1},
+					
+					{8,1,9, 8,1,9, 0}, {8,2,9, 8,2,9, 1}, 
+					{9,1,8, 9,2,8, 3}, {9,3,8, 9,3,8, 4}, {9,4,8, 9,5,8, 5}, 
+					
+					{10,1,2, 10,1,2, 3}, {10,2,2, 10,3,2, 4}, {10,4,2, 10,4,2, 5}, 
             		})
                 {
-					this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], bambooBlock, bambooMeta, bambooBlock, bambooMeta, false);	
+					blockObject = ModObjects.chooseModBambooStalk(uuvvwws[6]);
+					this.fillWithMetadataBlocks(world, structureBB, uuvvwws[0], uuvvwws[1], uuvvwws[2], uuvvwws[3], uuvvwws[4], uuvvwws[5],
+							(Block)blockObject[0], (Integer)blockObject[1], (Block)blockObject[0], (Integer)blockObject[1], false);	
                 }
 				
 				// Leaf toppers
@@ -16745,7 +16747,7 @@ public class JungleStructures
     		}
 			else // As sugarcane
 			{
-				bambooBlock = Blocks.reeds; bambooMeta = 0;
+				Block bambooBlock = Blocks.reeds; int bambooMeta = 0;
 
 				// Add water to support the sugarcane
 				for(int[] uvw : new int[][]{
@@ -20011,19 +20013,18 @@ public class JungleStructures
     		}
             
     		// Bamboo
-    		blockObject = ModObjects.chooseModBambooStalk();
-			Block bambooBlock; int bambooMeta;
+    		blockObject = ModObjects.chooseModBambooStalk(0);
 			if (blockObject!=null)
     		{
-				bambooBlock = (Block)blockObject[0]; bambooMeta = (Integer)blockObject[1];
-				
-				for (int[] uuvvww : new int[][]{
-					{3,1,10, 3,8,10}, 
-        			{4,1,8, 4,4,8}, 
-        			{5,1,9, 5,2,9}, 
+				for (int[] uuvvwws : new int[][]{
+					{3,1,10, 3,5,10, 3}, {3,6,10, 3,6,10, 4}, {3,7,10, 3,8,10, 5}, 
+        			{4,1,8, 4,1,8, 3}, {4,2,8, 4,3,8, 4}, {4,4,8, 4,4,8, 5}, 
+        			{5,1,9, 5,1,9, 0}, {5,2,9, 5,2,9, 1},  
             		})
                 {
-					this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], bambooBlock, bambooMeta, bambooBlock, bambooMeta, false);	
+					blockObject = ModObjects.chooseModBambooStalk(uuvvwws[6]);
+					this.fillWithMetadataBlocks(world, structureBB, uuvvwws[0], uuvvwws[1], uuvvwws[2], uuvvwws[3], uuvvwws[4], uuvvwws[5],
+							(Block)blockObject[0], (Integer)blockObject[1], (Block)blockObject[0], (Integer)blockObject[1], false);	
                 }
 				
 				// Leaf toppers
@@ -20043,7 +20044,7 @@ public class JungleStructures
     		}
 			else // As sugarcane
 			{
-				bambooBlock = Blocks.reeds; bambooMeta = 0;
+				Block bambooBlock = Blocks.reeds; int bambooMeta = 0;
 
 				// Add water to support the sugarcane
 				for(int[] uvw : new int[][]{

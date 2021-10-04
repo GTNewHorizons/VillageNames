@@ -278,7 +278,6 @@ public class StructureCreationHandlers
 	    public PieceWeight getVillagePieceWeight(Random random, int villageSize)
 	    {
 	    	// This component spawns animals, so it might be switched off
-	    	// This component spawns animals, so it might be switched off
 	    	double weightDouble = ali.get(0); int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel<3) ? MathHelper.floor_double(weightDouble) + (random.nextDouble()<(weightDouble%1) ? 1:0) : 0;
 	    	double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2); int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble) + (random.nextDouble()<(lowerLimitDouble%1) ? 1:0);
 	    	double upperLimitDouble = villageSize * ali.get(3) + ali.get(4); int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble) + (random.nextDouble()<(upperLimitDouble%1) ? 1:0);

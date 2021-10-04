@@ -84,42 +84,40 @@ public class ModelVillagerModern extends ModelVillager
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		
-		// Changed in v3.2 to accommodate config-specifiable professions
 		int prof = ((EntityVillager)entity).getProfession();
 		
-		if (entity instanceof EntityVillager)
+		if (
+				prof > 5 // This is a non-vanilla villager profession
+				&& !((EntityVillager) entity).isChild() // and is not a child
+				&& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+				&& // and... 
+					(GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
+					|| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+					)
+				)
 		{
-			if (prof > 5 && !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof)) // This is a non-vanilla villager profession and is not whitelisted
-			{
-				// Is in the blacklist, or headwear is turned off at large
-				if (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) || !GeneralConfig.moddedVillagerHeadwear) {return;}
-			}
-			
-	        if (((EntityVillager) entity).isChild())
-	        {
-	        	//Re-upscale baby head lmao
-	            GL11.glPushMatrix();
-	            GL11.glScalef(1.5F, 1.5F, 1.5F);
-	            //GL11.glTranslatef(0.0F, 0.0F, 0.0F);
-	            this.villagerHead.render(f5);
-	            this.villagerHeadwear.render(f5);
-	    		this.villagerHatRimHigh.render(f5);
-	    		this.villagerHatRimLow.render(f5);
-	            GL11.glPopMatrix();
-	        }
-	        else
-	        {
-	        	this.villagerHeadwear.render(f5);
-	    		this.villagerHatRimHigh.render(f5);
-	    		this.villagerHatRimLow.render(f5);
-	        }
-	        
-			/*
-			this.villagerHeadwear.render(f5);
-			this.villagerHatRimHigh.render(f5);
-			this.villagerHatRimLow.render(f5);
-			*/
+			return;
 		}
+		
+		// You reach this point if the villager needs its head examined lol gottem
+		
+        if (((EntityVillager) entity).isChild())
+        {
+        	//Re-upscale baby head lmao
+            GL11.glPushMatrix();
+            GL11.glScalef(1.5F, 1.5F, 1.5F);
+            this.villagerHead.render(f5);
+            this.villagerHeadwear.render(f5);
+    		this.villagerHatRimHigh.render(f5);
+    		this.villagerHatRimLow.render(f5);
+            GL11.glPopMatrix();
+        }
+        else
+        {
+        	this.villagerHeadwear.render(f5);
+    		this.villagerHatRimHigh.render(f5);
+    		this.villagerHatRimLow.render(f5);
+        }
 	}
 	
 }

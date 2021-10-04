@@ -33,6 +33,7 @@ public class ModObjects {
 	public static final String DOM_GANYSSURFACE = "ganyssurface";
 	public static final String DOM_HARVESTCRAFT = "harvestcraft";
 	public static final String DOM_MALISISDOORS = "malisisdoors";
+	public static final String DOM_MANAMETAL = "manametalmod";
 	public static final String DOM_MRCRAYFISHSFURNITUREMOD = "cfm";
 	public static final String DOM_NETHERLICIOUS = "netherlicious";
 	public static final String DOM_UPTODATE = "uptodate";
@@ -84,6 +85,7 @@ public class ModObjects {
 	// Saplings (Items)
 	public static final String sapling_BoP = DOM_BIOMESOPLENTY + ":saplings"; // Meta 2
 	public static final String bambooShoot_GrC = "Growthcraft|Bamboo:grc.bambooShoot";
+	public static final String bambooCrop_MM = DOM_MANAMETAL + ":Bamboo_cropBlock";
 	// Leaves
 	public static final String bambooLeaves_BoP = DOM_BIOMESOPLENTY + ":leaves1"; // Meta 1
 	public static final String bambooLeaves_GrC = "Growthcraft|Bamboo:grc.bambooLeaves";
@@ -102,9 +104,40 @@ public class ModObjects {
 
 	// Bed
 	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
+	public static final String bed_black_MM_block = DOM_MANAMETAL + ":Bed_Black";
+	public static final String bed_green_MM_block = DOM_MANAMETAL + ":Bed_Green";
+	public static final String bed_brown_MM_block = DOM_MANAMETAL + ":Bed_Brown";
+	public static final String bed_blue_MM_block = DOM_MANAMETAL + ":Bed_Blue";
+	public static final String bed_cyan_MM_block = DOM_MANAMETAL + ":Bed_Cyan";
+	public static final String bed_lightGray_MM_block = DOM_MANAMETAL + ":Bed_LightGray";
+	public static final String bed_pink_MM_block = DOM_MANAMETAL + ":Bed_Pink";
+	public static final String bed_magenta_MM_block = DOM_MANAMETAL + ":Bed_Magenta";
+	public static final String bed_red_MM_block = DOM_MANAMETAL + ":Bed_Red";
+	public static final String bed_purple_MM_block = DOM_MANAMETAL + ":Bed_Purple";
+	public static final String bed_yellow_MM_block = DOM_MANAMETAL + ":Bed_Yellow";
+	public static final String bed_orange_MM_block = DOM_MANAMETAL + ":Bed_Orange";
+	public static final String bed_gray_MM_block = DOM_MANAMETAL + ":Bed_Gray";
+	public static final String bed_lime_MM_block = DOM_MANAMETAL + ":Bed_Lime";
+	public static final String bed_lightBlue_MM_block = DOM_MANAMETAL + ":Bed_LightBlue";
 	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
+	public static final String bed_black_MM_item = DOM_MANAMETAL + ":ItemBed_Black";
+	public static final String bed_green_MM_item = DOM_MANAMETAL + ":ItemBed_Green";
+	public static final String bed_brown_MM_item = DOM_MANAMETAL + ":ItemBed_Brown";
+	public static final String bed_blue_MM_item = DOM_MANAMETAL + ":ItemBed_Blue";
+	public static final String bed_cyan_MM_item = DOM_MANAMETAL + ":ItemBed_Cyan";
+	public static final String bed_lightGray_MM_item = DOM_MANAMETAL + ":ItemBed_LightGray";
+	public static final String bed_pink_MM_item = DOM_MANAMETAL + ":ItemBed_Pink";
+	public static final String bed_magenta_MM_item = DOM_MANAMETAL + ":ItemBed_Magenta";
+	public static final String bed_red_MM_item = DOM_MANAMETAL + ":ItemBed_Red";
+	public static final String bed_purple_MM_item = DOM_MANAMETAL + ":ItemBed_Purple";
+	public static final String bed_yellow_MM_item = DOM_MANAMETAL + ":ItemBed_Yellow";
+	public static final String bed_orange_MM_item = DOM_MANAMETAL + ":ItemBed_Orange";
+	public static final String bed_gray_MM_item = DOM_MANAMETAL + ":ItemBed_Gray";
+	public static final String bed_lime_MM_item = DOM_MANAMETAL + ":ItemBed_Lime";
+	public static final String bed_lightBlue_MM_item = DOM_MANAMETAL + ":ItemBed_LightBlue";
 
+	
 	// Beetroot
 	public static final String beetrootItemEF = DOM_ETFUTURUM + ":beetroot";
 	public static final String beetrootItemGS = DOM_GANYSSURFACE + ":beetroot";
@@ -139,7 +172,7 @@ public class ModObjects {
 	public static final String bookshelfAcaciaWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_4";
 	public static final String bookshelfDarkOakWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_5";
 	
-	// Bountiful rocks
+	// Bountiful stone
 	public static final String andesiteC2 = DOM_CHISEL + ":andesite";
 	public static final String dioriteC2 = DOM_CHISEL + ":diorite";
 	public static final String graniteC2 = DOM_CHISEL + ":granite"; // Polished is 1
@@ -206,7 +239,8 @@ public class ModObjects {
 	public static final String polishedBlackstoneButton_NL = DOM_NETHERLICIOUS + ":blackstoneButton";
 	
 	// Campfire
-	public static final String campfirebackport = "campfirebackport:campfire";
+	public static final String campfire_CB = "campfirebackport:campfire";
+	public static final String campfire_MM = DOM_MANAMETAL+":campfire";
 	
 	// Chests
 	public static final String chestOakGS = DOM_GANYSSURFACE + ":chest0";
@@ -236,7 +270,7 @@ public class ModObjects {
 	public static final String concreteLimeEF = DOM_ETFUTURUM + ":concrete_lime";
 	public static final String concretePinkEF = DOM_ETFUTURUM + ":concrete_pink";
 	public static final String concreteGrayEF = DOM_ETFUTURUM + ":concrete_gray";
-	public static final String concreteSilverEF = DOM_ETFUTURUM + ":concrete_silver";
+	public static final String concreteLightGrayEF = DOM_ETFUTURUM + ":concrete_silver";
 	public static final String concreteCyanEF = DOM_ETFUTURUM + ":concrete_cyan";
 	public static final String concretePurpleEF = DOM_ETFUTURUM + ":concrete_purple";
 	public static final String concreteBlueEF = DOM_ETFUTURUM + ":concrete_blue";
@@ -244,7 +278,8 @@ public class ModObjects {
 	public static final String concreteGreenEF = DOM_ETFUTURUM + ":concrete_green";
 	public static final String concreteRedEF = DOM_ETFUTURUM + ":concrete_red";
 	public static final String concreteBlackEF = DOM_ETFUTURUM + ":concrete_black";
-	public static final String concreteEF = DOM_ETFUTURUM + "etfuturum:concrete"; // EF:R
+	public static final String concrete_EFR = DOM_ETFUTURUM + ":concrete"; // EF:R
+	public static final String concrete_MM = DOM_MANAMETAL + ":concrete";
 	
 	// Crafting Table
 	public static final String craftingTableOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_0"; 
@@ -424,7 +459,6 @@ public class ModObjects {
 	public static final String flowerLilyOfTheValleyEF = DOM_ETFUTURUM + ":lily_of_the_valley";
 	
 	// Glazed Terracotta
-	// Et Futurum Requiem versions:
 	public static final String glazedTerracottaWhiteEF = DOM_ETFUTURUM + ":white_glazed_terracotta";
 	public static final String glazedTerracottaOrangeEF = DOM_ETFUTURUM + ":orange_glazed_terracotta";
 	public static final String glazedTerracottaMagentaEF = DOM_ETFUTURUM + ":magenta_glazed_terracotta";
@@ -441,7 +475,6 @@ public class ModObjects {
 	public static final String glazedTerracottaGreenEF = DOM_ETFUTURUM + ":green_glazed_terracotta";
 	public static final String glazedTerracottaRedEF = DOM_ETFUTURUM + ":red_glazed_terracotta";
 	public static final String glazedTerracottaBlackEF = DOM_ETFUTURUM + ":black_glazed_terracotta";
-	
 	public static final String glazedTerracottaWhiteUTD = DOM_UPTODATE + ":glazed_terracotta_white";
 	public static final String glazedTerracottaOrangeUTD = DOM_UPTODATE + ":glazed_terracotta_orange";
 	public static final String glazedTerracottaMagentaUTD = DOM_UPTODATE + ":glazed_terracotta_magenta";
@@ -458,10 +491,12 @@ public class ModObjects {
 	public static final String glazedTerracottaGreenUTD = DOM_UPTODATE + ":glazed_terracotta_green";
 	public static final String glazedTerracottaRedUTD = DOM_UPTODATE + ":glazed_terracotta_red";
 	public static final String glazedTerracottaBlackUTD = DOM_UPTODATE + ":glazed_terracotta_black";
+	public static final String glazedTerracotta_MM = DOM_MANAMETAL + ":glazed_terracotta";
 	
 	// Grass Path
 	public static final String grassPathUTD = DOM_UPTODATE + ":grass_path";
 	public static final String grassPathEF = DOM_ETFUTURUM + ":grass_path";
+	public static final String grassPath_MM = DOM_MANAMETAL + ":BlockGrassPaths";
 	
 	// Iron Nuggets
 	// Mariculture nugget is Mariculture:materials:33
@@ -472,7 +507,7 @@ public class ModObjects {
 	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
 	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
 	public static final String nuggetGS = "ganysnether" + ":ironNugget";
-	
+	public static final String ironNugget_MM = DOM_MANAMETAL + ":nuggetIron";
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
@@ -491,6 +526,10 @@ public class ModObjects {
 	public static final String lanternEF = DOM_ETFUTURUM + ":lantern";
 	public static final String lanternNL = DOM_NETHERLICIOUS + ":Lantern";
 	public static final String lanternUTD = DOM_UPTODATE + ":lantern";
+	public static final String ironLantern_MM = DOM_MANAMETAL + ":BlockLanterns";
+	
+	// Lectern
+	public static final String lectern_MM = DOM_MANAMETAL + ":BlockLecternM3";
 	
 	// Mossy Stone
 	public static final String mossyCobblestoneStairsEF = DOM_ETFUTURUM + ":mossy_cobblestone_stairs";
@@ -596,6 +635,10 @@ public class ModObjects {
 	public static final String seaLantern_Bo = DOM_BOTANIA + ":seaLamp";
 	public static final String seaLantern_EF = DOM_ETFUTURUM + ":sea_lantern";
 	public static final String seaLantern_UTD = DOM_UPTODATE + ":sea_lantern";
+	public static final String seaLantern_MM = DOM_MANAMETAL + ":sea_lantern";
+	
+	// Smithing Table
+	public static final String smithingTable_MM = DOM_MANAMETAL+":BlockCastingWeldings";
 	
 	// Smoker
 	public static final String smoker_EF = DOM_ETFUTURUM + ":smoker";
@@ -622,6 +665,9 @@ public class ModObjects {
 	public static final String sponge_EF = DOM_ETFUTURUM + ":sponge";
 	public static final String sponge_UTD = DOM_UPTODATE + ":sponge";
 	
+	// Stone (Generic)
+	public static final String rock_MM = DOM_MANAMETAL + ":RockBlockNewMinecraft";
+	
 	// Stripped log
 	public static final String strippedLog1EF = DOM_ETFUTURUM + ":log_stripped";
 	public static final String strippedLog2EF = DOM_ETFUTURUM + ":log2_stripped";
@@ -631,6 +677,8 @@ public class ModObjects {
 	public static final String strippedLogJungleUTD = DOM_UPTODATE + ":stripped_log_jungle";
 	public static final String strippedLogAcaciaUTD = DOM_UPTODATE + ":stripped_log_acacia";
 	public static final String strippedLogDarkOakUTD = DOM_UPTODATE + ":stripped_log_dark_oak";
+	public static final String strippedLog1_MM = DOM_MANAMETAL + ":BlockLogMC1break";
+	public static final String strippedLog2_MM = DOM_MANAMETAL + ":BlockLogMC2break";
 	
 	// Stripped wood
 	public static final String strippedWood1EF = DOM_ETFUTURUM + ":wood_stripped";
@@ -644,9 +692,13 @@ public class ModObjects {
 	// Sweet Berries
 	public static final String sweetBerriesEF = DOM_ETFUTURUM + ":sweet_berries";
 	public static final String sweetBerriesUTD = DOM_UPTODATE + ":sweet_berries";
+	public static final String sweetBerries_MM = DOM_MANAMETAL + ":SweetBerrie_crop";
 	
 	// Tipped arrows
 	public static final String tippedArrowEF = DOM_ETFUTURUM + ":tipped_arrow";
+	
+	// Treasure maps
+	public static final String fishingMap_MM = DOM_MANAMETAL + ":ItemFishingMaps"; // 0: bottled; 1: full map; 2: map fragment
 	
 	// Walls
 	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
@@ -779,6 +831,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 5};}
+			}
 		}
 		return null;
 	}
@@ -814,6 +871,11 @@ public class ModObjects {
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal") & VillageNames.canVillagerTradesDistinguishMeta)
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
 			}
 		}
 		return null;
@@ -851,6 +913,11 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 4);}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal") & VillageNames.canVillagerTradesDistinguishMeta)
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
 		}
 		return null;
 	}
@@ -886,6 +953,11 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, new Integer(4)};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 6};}
 			}
 		}
 		return null;
@@ -1008,7 +1080,7 @@ public class ModObjects {
 	}
 	
 	// Bamboo
-	public static Object[] chooseModBambooStalk()
+	public static Object[] chooseModBambooStalk(int state)
 	{
 		String[] modprioritylist = GeneralConfig.modBamboo;
 		
@@ -1025,6 +1097,40 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooStalk_GrC);
 				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooCrop_MM);
+				
+				int mm_to_vanilla = 0;
+				
+				// MM meta guide
+				// 0: bamboo sprout
+				// 1: bamboo shoot
+				// 2: thick stalk without leaves
+				// 3: thick stalk with leaves
+				// 4: thick stalk with many leaves
+				
+				switch (state)
+				{
+				default:
+				case 0: // thin stalk without leaves
+					mm_to_vanilla = 2; break;
+				case 1: // thin stalk with leaves
+					mm_to_vanilla = 3; break;
+				case 2: // thin stalk with many leaves
+					mm_to_vanilla = 4; break;
+				case 3: // thick stalk without leaves
+					mm_to_vanilla = 2; break;
+				case 4: // thick stalk with leaves
+					mm_to_vanilla = 3; break;
+				case 5: // thick stalk with many leaves
+					mm_to_vanilla = 4; break;
+				case 11: // terminating thick stalk with many leaves
+					mm_to_vanilla = 4; break;
+				}
+				
+				if (modblock != null) {return new Object[]{modblock, mm_to_vanilla};}
 			}
 		}
 		return null;
@@ -1048,6 +1154,10 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.bambooLeaves_GrC);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				return null;
+			}
 		}
 		return null;
 	}
@@ -1068,6 +1178,11 @@ public class ModObjects {
 			else if (mod.toLowerCase().trim().equals("growthcraft"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bambooShoot_GrC));
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.bambooCrop_MM));
 				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
 			}
 		}
@@ -1196,35 +1311,128 @@ public class ModObjects {
 	public static void setModBedBlock(World world, int x, int y, int z, int orientationMeta, int colorMeta)
 	{
 		Block modblock=null;
-		boolean setTE = false; // Flagged as true if you need to set a tile entity
 		
-		modblock = Block.getBlockFromName(ModObjects.coloredBedBlockBV);
-		if (modblock != null)
+		String[] modprioritylist = GeneralConfig.modBed;
+		
+		for (String mod : modprioritylist)
 		{
-			setTE = true;
+			if (mod.toLowerCase().trim().equals("bettervanilla"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.coloredBedBlockBV);
+				if (modblock != null)
+				{
+					// Set the bed block and metadata here
+					world.setBlock(x, y, z, modblock);
+					world.setBlockMetadataWithNotify(x, y, z, orientationMeta, 2);
+					
+					// Set the tile entity so that you can assign the color via NBT 
+					NBTTagCompound bedNBT = new NBTTagCompound();
+		        	TileEntity tileentity = world.getTileEntity(x, y, z);
+		        	tileentity.writeToNBT(bedNBT);
+		        	bedNBT.setInteger("_color", colorMeta);
+		        	tileentity.readFromNBT(bedNBT);
+		        	world.setTileEntity(x, y, z, tileentity);
+		        	
+		        	return;
+				}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				switch (colorMeta)
+				{
+				default:
+				case 0: 
+					// Check if MM's beds are available before returning the default one
+					if (Block.getBlockFromName(ModObjects.bed_black_MM_block) != null)
+					{
+						modblock = Blocks.bed; break;
+					}
+					else {continue;}
+				case 1: modblock = Block.getBlockFromName(ModObjects.bed_orange_MM_block); break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.bed_magenta_MM_block); break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.bed_lightBlue_MM_block); break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.bed_yellow_MM_block); break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.bed_lime_MM_block); break;
+				case 6: modblock = Block.getBlockFromName(ModObjects.bed_pink_MM_block); break;
+				case 7: modblock = Block.getBlockFromName(ModObjects.bed_gray_MM_block); break;
+				case 8: modblock = Block.getBlockFromName(ModObjects.bed_lightGray_MM_block); break;
+				case 9: modblock = Block.getBlockFromName(ModObjects.bed_cyan_MM_block); break;
+				case 10: modblock = Block.getBlockFromName(ModObjects.bed_purple_MM_block); break;
+				case 11: modblock = Block.getBlockFromName(ModObjects.bed_blue_MM_block); break;
+				case 12: modblock = Block.getBlockFromName(ModObjects.bed_brown_MM_block); break;
+				case 13: modblock = Block.getBlockFromName(ModObjects.bed_green_MM_block); break;
+				case 14: modblock = Block.getBlockFromName(ModObjects.bed_red_MM_block); break;
+				case 15: modblock = Block.getBlockFromName(ModObjects.bed_black_MM_block); break;
+				}
+				
+				if (modblock != null) {break;}
+			}
 		}
-		else
-		{
-			// Vanilla bed only; no nbt value necessary
-			modblock = Blocks.bed;
-		}
+		
+		// Use vanilla bed if all else fails
+		if (modblock == null) {modblock = Blocks.bed;}
 		
 		// Set the bed block and metadata here
 		world.setBlock(x, y, z, modblock);
 		world.setBlockMetadataWithNotify(x, y, z, orientationMeta, 2);
-		
-		if (setTE)
-		{
-			// Set the tile entity so that you can assign the color via NBT 
-			NBTTagCompound bedNBT = new NBTTagCompound();
-        	TileEntity tileentity = world.getTileEntity(x, y, z);
-        	tileentity.writeToNBT(bedNBT);
-        	bedNBT.setInteger("_color", colorMeta);
-        	tileentity.readFromNBT(bedNBT);
-        	world.setTileEntity(x, y, z, tileentity);
-		}
 	}
 	
+	
+	public static ItemStack chooseModBedItemStack(int colorMeta)
+	{
+		Item moditem=null;
+		
+		String[] modprioritylist = GeneralConfig.modBed;
+		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				switch (colorMeta)
+				{
+				default:
+				case 0: 
+					// Check if MM's beds are available before returning the default one
+					if (FunctionsVN.getItemFromName(ModObjects.bed_black_MM_item) != null)
+					{
+						moditem = Items.bed; break;
+					}
+					else {continue;}
+				case 1: moditem = FunctionsVN.getItemFromName(ModObjects.bed_orange_MM_item); break;
+				case 2: moditem = FunctionsVN.getItemFromName(ModObjects.bed_magenta_MM_item); break;
+				case 3: moditem = FunctionsVN.getItemFromName(ModObjects.bed_lightBlue_MM_item); break;
+				case 4: moditem = FunctionsVN.getItemFromName(ModObjects.bed_yellow_MM_item); break;
+				case 5: moditem = FunctionsVN.getItemFromName(ModObjects.bed_lime_MM_item); break;
+				case 6: moditem = FunctionsVN.getItemFromName(ModObjects.bed_pink_MM_item); break;
+				case 7: moditem = FunctionsVN.getItemFromName(ModObjects.bed_gray_MM_item); break;
+				case 8: moditem = FunctionsVN.getItemFromName(ModObjects.bed_lightGray_MM_item); break;
+				case 9: moditem = FunctionsVN.getItemFromName(ModObjects.bed_cyan_MM_item); break;
+				case 10: moditem = FunctionsVN.getItemFromName(ModObjects.bed_purple_MM_item); break;
+				case 11: moditem = FunctionsVN.getItemFromName(ModObjects.bed_blue_MM_item); break;
+				case 12: moditem = FunctionsVN.getItemFromName(ModObjects.bed_brown_MM_item); break;
+				case 13: moditem = FunctionsVN.getItemFromName(ModObjects.bed_green_MM_item); break;
+				case 14: moditem = FunctionsVN.getItemFromName(ModObjects.bed_red_MM_item); break;
+				case 15: moditem = FunctionsVN.getItemFromName(ModObjects.bed_black_MM_item); break;
+				}
+				
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().trim().equals("bettervanilla"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.coloredBedItemBV);
+				if (moditem != null) {return new ItemStack(moditem, 1, colorMeta);}
+			}
+			else if (mod.toLowerCase().trim().equals("carpentersblocks"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.bedCB);
+				if (moditem != null) {return new ItemStack(moditem, 1, colorMeta);}
+			}
+		}
+		
+		// Use vanilla bed if all else fails
+		if (moditem == null) {moditem = Items.bed;}
+		return new ItemStack(moditem, 1, 0);
+	}
 	
 	// Beetroot
 	public static ItemStack chooseModBeetrootItem()
@@ -1467,13 +1675,28 @@ public class ModObjects {
      */
 	public static Object[] chooseModCampfireBlock(int relativeOrientation, int coordBaseMode)
 	{
-		Block tryCampfire = Block.getBlockFromName(ModObjects.campfirebackport);
+		String[] modprioritylist = GeneralConfig.modCampfire;
 		
-		if (tryCampfire!=null)
+		Block modblock=null;
+		
+		for (String mod : modprioritylist)
 		{
-			return new Object[]{tryCampfire, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, true)};
+			if (mod.toLowerCase().trim().equals("campfirebackport"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.campfire_CB);
+				if (modblock != null)
+				{
+					return new Object[]{modblock, StructureVillageVN.getSignRotationMeta(relativeOrientation, coordBaseMode, true)};
+				}
+			}
+			if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.campfire_MM);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
 		}
 		
+		// Return a torch if nothing else counts
 		return new Object[]{Blocks.torch, 0};
 	}
 	
@@ -1544,7 +1767,7 @@ public class ModObjects {
 	}
 	
 	
-	// Concrete - added in v3.1.2
+	// Concrete
 	public static Object[] chooseModConcrete(int meta)
 	{
 		String[] modprioritylist = GeneralConfig.modConcrete;
@@ -1565,7 +1788,7 @@ public class ModObjects {
 			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				// Try Et Futurum: Requiem entries
-				modblock = Block.getBlockFromName(ModObjects.concreteEF);
+				modblock = Block.getBlockFromName(ModObjects.concrete_EFR);
 				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
 				
 				// Try original Et Futurum entries
@@ -1579,7 +1802,7 @@ public class ModObjects {
 					case 5: modblock = Block.getBlockFromName(ModObjects.concreteLimeEF); break;
 					case 6: modblock = Block.getBlockFromName(ModObjects.concretePinkEF); break;
 					case 7: modblock = Block.getBlockFromName(ModObjects.concreteGrayEF); break;
-					case 8: modblock = Block.getBlockFromName(ModObjects.concreteSilverEF); break;
+					case 8: modblock = Block.getBlockFromName(ModObjects.concreteLightGrayEF); break;
 					case 9: modblock = Block.getBlockFromName(ModObjects.concreteCyanEF); break;
 					case 10: modblock = Block.getBlockFromName(ModObjects.concretePurpleEF); break;
 					case 11: modblock = Block.getBlockFromName(ModObjects.concreteBlueEF); break;
@@ -1590,8 +1813,20 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, new Integer(0)};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.concrete_MM);
+				if (modblock != null) {return new Object[]{modblock, new Integer(meta)};}
+			}
 		}
 		return null;
+	}
+	
+	
+	// Coral
+	public static Object[] chooseGreenCoralOrPottedCactus()
+	{
+		return new Object[]{Blocks.flower_pot, 9};
 	}
 	
 	
@@ -1612,15 +1847,6 @@ public class ModObjects {
 		if (modblock==null) {modblock = Blocks.crafting_table;}
 		
 		return modblock;
-	}
-	
-	
-	/**
-	 * Returns a potted cactus
-	 */
-	public static Object[] chooseGreenCoralOrPottedCactus()
-	{
-		return new Object[]{Blocks.flower_pot, 9};
 	}
 	
 	
@@ -1658,6 +1884,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
 		}
 		return null;
 	}
@@ -1693,6 +1924,11 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 6};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 4};}
 			}
 		}
 		return null;
@@ -1731,6 +1967,11 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal") & VillageNames.canVillagerTradesDistinguishMeta)
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
+				if (moditem != null) {return new ItemStack(moditem, 1, 5);}
+			}
 		}
 		return null;
 	}
@@ -1766,6 +2007,11 @@ public class ModObjects {
 			else if (mod.toLowerCase().trim().equals("botania"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
+				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal") & VillageNames.canVillagerTradesDistinguishMeta)
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
 				if (moditem != null) {return new ItemStack(moditem, 1, 6);}
 			}
 		}
@@ -2218,7 +2464,7 @@ public class ModObjects {
 	}
 	
 	
-	// Glazed Terracotta - added in v3.1.2
+	// Glazed Terracotta
 	public static Object[] chooseModGlazedTerracotta(int colorMeta, int orientationMeta)
 	{
 		String[] modprioritylist = GeneralConfig.modGlazedTerracotta;
@@ -2247,8 +2493,7 @@ public class ModObjects {
 				
 				return new Object[]{modblock, new Integer(convolvedMeta)};
 			}
-			
-			if (mod.toLowerCase().trim().equals("etfuturum"))
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
 				// Try original Et Futurum entries
 				switch (colorMeta)
@@ -2272,8 +2517,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};}
 			}
-			
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				switch (colorMeta)
 				{
@@ -2295,6 +2539,11 @@ public class ModObjects {
 					case 15: modblock = Block.getBlockFromName(ModObjects.glazedTerracottaBlackUTD); break;
 				}
 				if (modblock != null) {return new Object[]{modblock, new Integer(orientationMeta)};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.glazedTerracotta_MM);
+				if (modblock != null) {return new Object[]{modblock, new Integer(colorMeta)};}
 			}
 		}
 		return null;
@@ -2335,6 +2584,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 3};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal") & VillageNames.canVillagerTradesDistinguishMeta)
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
 		}
 		return null;
 	}
@@ -2370,6 +2624,11 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.stoneBo);
 				if (modblock != null) {return new Object[]{modblock, 7};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 2};}
 			}
 		}
 		return null;
@@ -2407,6 +2666,11 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 3);}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
+				if (moditem != null) {return new ItemStack(moditem, 1, 1);}
+			}
 		}
 		return null;
 	}
@@ -2443,6 +2707,11 @@ public class ModObjects {
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.stoneBo));
 				if (moditem != null) {return new ItemStack(moditem, 1, 7);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.rock_MM));
+				if (moditem != null) {return new ItemStack(moditem, 1, 2);}
 			}
 		}
 		return null;
@@ -2567,6 +2836,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
 				if (modblock != null) {return modblock;}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPath_MM);
+				if (modblock != null) {return modblock;}
+			}
 		}
 		return Blocks.gravel;
 	}
@@ -2631,6 +2905,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetGS);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.ironNugget_MM);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
 		}
 		return null;
 	}
@@ -2663,6 +2942,11 @@ public class ModObjects {
 				Block tryLantern = Block.getBlockFromName(ModObjects.davyLampEM);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, 1};} // 1 is lit
 			}
+			if (mod.toLowerCase().trim().equals("manametal") && !isHanging) // No hanging version exists
+			{
+				Block tryLantern = Block.getBlockFromName(ModObjects.ironLantern_MM);
+		    	if (tryLantern!=null) {return new Object[]{tryLantern, 2};} // 2 is sitting and iron
+			}
 		}
 		
     	// None are found, so return ordinary glowstone
@@ -2681,10 +2965,15 @@ public class ModObjects {
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.lanternUTD));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			else if (mod.toLowerCase().trim().equals("enviromine"))
+			else if (mod.toLowerCase().trim().equals("bibliocraft"))
 			{
 				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.davyLampEM));
 				if (moditem != null) {return new ItemStack(moditem, 1);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.ironLantern_MM));
+				if (moditem != null) {return new ItemStack(moditem, 2);} // 2 is iron
 			}
 		}
 		return null;
@@ -2718,50 +3007,70 @@ public class ModObjects {
 	// Carpet color only applies to Bibliocraft writing desks. Set to -1 for no carpet.
 	public static void setModLecternBlock(World world, int x, int y, int z, int orientation, int horizIndex, int woodMeta, int carpetColor)
 	{
+		String[] modprioritylist = GeneralConfig.modLectern;
+
 		Block modblock=null; int meta=0;
-		boolean setTE = false; // Flagged as true if you need to set a tile entity
 		
-		modblock = Block.getBlockFromName(ModObjects.deskBC);
-		
-		if (modblock != null) {setTE = true;}
-		else
+		for (String mod : modprioritylist)
 		{
-			Object modobject[] = ModObjects.chooseModBookshelf(woodMeta); modblock=(Block)modobject[0]; meta=(Integer)modobject[1];
+			if (mod.toLowerCase().trim().equals("bibliocraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.deskBC);
+				
+				if (modblock != null)
+				{
+					world.setBlock(x, y, z, modblock, meta, 2);
+					
+					world.setBlockMetadataWithNotify(x, y, z, woodMeta, 2);
+					
+					// Set the tile entity so that you can assign the orientation via NBT 
+					NBTTagCompound nbtCompound = new NBTTagCompound();
+		        	TileEntity tileentity = world.getTileEntity(x, y, z);
+		        	tileentity.writeToNBT(nbtCompound);
+		        	nbtCompound.setInteger("deskAngle", chooseBibliocraftDeskMeta(orientation, horizIndex));
+		        	
+		        	// Add carpet
+		        	if (carpetColor!=-1)
+		        	{
+		        		// Add carpet as an inventory item
+		        		NBTTagCompound deskinvo = new NBTTagCompound();
+		        		deskinvo.setByte("Count", (byte)1);
+		        		deskinvo.setByte("Slot", (byte)9);
+		        		deskinvo.setShort("Damage", (short)carpetColor);
+		        		deskinvo.setShort("id", (short)171);
+		        		NBTTagList taglist = new NBTTagList();
+		        		taglist.appendTag(deskinvo);
+		        		nbtCompound.setTag("Inventory", taglist);
+		        		
+		        		// Turn on flags to display the carpet
+		        		nbtCompound.setInteger("carpetColor", carpetColor);
+		        		nbtCompound.setByte("hasCarpet", (byte)1);
+		        	}
+		        	
+		        	tileentity.readFromNBT(nbtCompound);
+		        	world.setTileEntity(x, y, z, tileentity);
+		        	
+		        	return;
+				}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.lectern_MM);
+				
+				if (modblock != null)
+				{
+					world.setBlock(x, y, z, modblock, StructureVillageVN.chooseMMLecternMeta(orientation, horizIndex), 2);
+					
+		        	return;
+				}
+			}
 		}
+		
+		// If lectern fails, substitute a bookshelf
+		Object modobject[] = ModObjects.chooseModBookshelf(woodMeta);
+		modblock=(Block)modobject[0]; meta=(Integer)modobject[1];
 		
 		world.setBlock(x, y, z, modblock, meta, 2);
-		
-		if (setTE)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, woodMeta, 2);
-			
-			// Set the tile entity so that you can assign the orientation via NBT 
-			NBTTagCompound nbtCompound = new NBTTagCompound();
-        	TileEntity tileentity = world.getTileEntity(x, y, z);
-        	tileentity.writeToNBT(nbtCompound);
-        	nbtCompound.setInteger("deskAngle", chooseBibliocraftDeskMeta(orientation, horizIndex));
-        	
-        	// Add carpet
-        	if (carpetColor!=-1)
-        	{
-        		// Add carpet as an inventory item
-        		NBTTagCompound deskinvo = new NBTTagCompound();
-        		deskinvo.setByte("Count", (byte)1);
-        		deskinvo.setByte("Slot", (byte)9);
-        		deskinvo.setShort("Damage", (short)carpetColor);
-        		deskinvo.setShort("id", (short)171);
-        		NBTTagList taglist = new NBTTagList();
-        		taglist.appendTag(deskinvo);
-        		nbtCompound.setTag("Inventory", taglist);
-        		
-        		// Turn on flags to display the carpet
-        		nbtCompound.setInteger("carpetColor", carpetColor);
-        		nbtCompound.setByte("hasCarpet", (byte)1);
-        	}
-        	
-        	tileentity.readFromNBT(nbtCompound);
-        	world.setTileEntity(x, y, z, tileentity);
-		}
 	}
 	
 	
@@ -2934,6 +3243,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.prismarine_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 8};}
+			}
 		}
 		return null;
 	}
@@ -2966,6 +3280,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.prismarineBricks_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 9};}
+			}
 		}
 		return null;
 	}
@@ -2997,6 +3316,11 @@ public class ModObjects {
 			{
 				modblock = Block.getBlockFromName(ModObjects.darkPrismarine_UTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
+				if (modblock != null) {return new Object[]{modblock, 10};}
 			}
 		}
 		return null;
@@ -3167,6 +3491,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.seaLantern_UTD);
 				if (modblock != null) {return modblock;}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.seaLantern_MM);
+				if (modblock != null) {return modblock;}
+			}
 		}
 		return null;
 	}
@@ -3275,9 +3604,7 @@ public class ModObjects {
 	// Smithing Table
 	public static Object[] chooseModSmithingTable(int woodMeta)
 	{
-		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
-		
-		return new Object[]{modblock, meta};
+		return new Object[]{chooseModCraftingTable(woodMeta), 0};
 	}
 	
 	
@@ -3593,9 +3920,14 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.smoothStoneEF);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.smoothStoneUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.rock_MM);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
 		}
@@ -3657,6 +3989,21 @@ public class ModObjects {
 				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLogDarkOakUTD); break;
 				}
 				if (modblock != null) {return new Object[]{modblock, orientation*4};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				int addMeta=0;
+				
+				switch (materialMeta)
+				{
+				case 0: modblock = Block.getBlockFromName(ModObjects.strippedLog1_MM); addMeta=0; break;
+				case 1: modblock = Block.getBlockFromName(ModObjects.strippedLog1_MM); addMeta=1; break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.strippedLog1_MM); addMeta=2; break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.strippedLog1_MM); addMeta=3; break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.strippedLog2_MM); addMeta=0; break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.strippedLog2_MM); addMeta=1; break;
+				}
+				if (modblock != null) {return new Object[]{modblock, orientation*4+addMeta};}
 			}
 		}
 		// If all else fails, grab the vanilla version
@@ -3889,6 +4236,11 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerriesUTD);
 				if (moditem != null) {return moditem;}
 			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.sweetBerries_MM);
+				if (moditem != null) {return moditem;}
+			}
 		}
 		return null;
 	}
@@ -4027,26 +4379,6 @@ public class ModObjects {
 		return Blocks.wooden_pressure_plate;
 	}
 	
-	// Wood block (has bark on all surfaces)
-	public static Object[] chooseModWoodBlock(Block block, int meta)
-	{
-		// Pass the original block if it's not a vanilla log
-		if (block!=Blocks.log && block!=Blocks.log2) {return new Object[]{block, meta};}
-		
-		// Specifically UpToDate stuff
-		Block logBlock = Block.getBlockFromName(ModObjects.woodBlockUTD);
-		
-		if (logBlock!=null) // Use the UTD block
-		{
-			return new Object[]{logBlock, meta+(block==Blocks.log2?4:0)};
-		}
-		else // Use vanilla wood with bark on all sides
-		{
-			return chooseModBarkBlock(block, meta);
-		}
-	}
-	
-	
 	// Wooden table (Vanilla is a fence with a pressure plate on top)
 	public static Object[][] chooseModWoodenTable(int materialMeta)
 	{
@@ -4094,5 +4426,19 @@ public class ModObjects {
 			new Object[] {ModObjects.chooseModPressurePlate(materialMeta), 0},
 			ModObjects.chooseModFence(materialMeta)
 			};
+	}
+	
+	// Woodland Explorer Map
+	public static ItemStack chooseModWoodlandExplorerMap()
+	{
+		String[] modprioritylist = GeneralConfig.modBamboo;
+		
+		if (GeneralConfig.manaMetalCartographersSellMapFragments)
+		{
+			Item moditem = FunctionsVN.getItemFromName(ModObjects.fishingMap_MM);
+			if (moditem != null) {return new ItemStack(moditem, 1, 2);} // Treasure Map Fragment
+		}
+		
+		return null;
 	}
 }

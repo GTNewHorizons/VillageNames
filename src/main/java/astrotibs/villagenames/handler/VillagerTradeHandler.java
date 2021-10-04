@@ -299,7 +299,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								}
 								
 								// TODO - Emerald to Campfire
-								moditemstack =  new ItemStack(Item.getItemFromBlock(Block.getBlockFromName(ModObjects.campfirebackport)));
+								moditemstack =  new ItemStack(Item.getItemFromBlock(Block.getBlockFromName(ModObjects.campfire_CB)));
 								if (moditemstack != null)
 								{
 									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
@@ -622,37 +622,27 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							if (nextSlotToFill == 3 || nextSlotToFill > 5)
 							{
 								// Emerald to Bed
-								while (true)
+								
+								color1 = random.nextInt(16);
+								moditemstack = ModObjects.chooseModBedItemStack(color1);
+								
+								if (moditemstack != null)
 								{
-									moditem = FunctionsVN.getItemFromName(ModObjects.coloredBedItemBV);
-									if (moditem != null) {
-										color1 = random.nextInt(16);
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(3, 1, nextSlotToFill, 3) ),
+											new ItemStack( moditemstack.getItem(), 1, moditemstack.getItemDamage() ) ) );
+								}
+								
+								color2 = random.nextInt(16);
+								if (color2 != color1)
+								{
+									moditemstack = ModObjects.chooseModBedItemStack(color2);
+									if (moditemstack != null)
+									{
 										FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 												new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(3, 1, nextSlotToFill, 3) ),
-												new ItemStack( moditem, 1, color1 ) ) );
-										color2 = random.nextInt(16);
-										if (color2 != color1) {
-											FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
-													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(3, 1, nextSlotToFill, 3) ),
-													new ItemStack( moditem, 1, color2 ) ) );
-											}
-										break;
-										}
-									moditem = FunctionsVN.getItemFromName(ModObjects.bedCB);
-									if (moditem != null) {
-										for (int i=(random.nextInt(16)==0 ? 1:0); i<2 ; i++) {
-											recipeList.add(new MerchantRecipe(
-													new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(3, 1, nextSlotToFill, 3) ),
-													new ItemStack( moditem, 1 ) ) );
-										}
-										break;
-										}
-									for (int i=(random.nextInt(16)==0 ? 1:0); i<2 ; i++) {
-									recipeList.add(new MerchantRecipe(
-											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(3, 1, nextSlotToFill, 3) ),
-											new ItemStack( Items.bed, 1 ) ) );
+												new ItemStack( moditemstack.getItem(), 1, moditemstack.getItemDamage() ) ) );
 									}
-									break;
 								}
 							}
 							
@@ -1351,7 +1341,15 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 								FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
 										new ItemStack( Items.compass, FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 3) ),
 										new ItemStack( Items.emerald, 1 ) ) );
-								// TODO - Emerald and Compass to Woodland Explorer map
+								// Emerald and Compass to Woodland Explorer map
+								moditemstack = ModObjects.chooseModWoodlandExplorerMap();
+								if (moditemstack!=null)
+								{
+									FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.compass, 1 ),
+											new ItemStack( Items.emerald, FunctionsVN.modernTradeCostBySlot(16+random.nextInt(13), 0, nextSlotToFill, 3) ), // Multiplier set to zero to prevent gutting
+											new ItemStack( moditemstack.getItem(), 1, moditemstack.getItemDamage() ) ) );
+								}
 							}
 							
 							// Level 4: Expert 

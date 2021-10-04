@@ -1665,6 +1665,21 @@ public class VillageGeneratorConfigHandler
 						"Sahel",
 						"Tall Pine Forest",
 						"Tropics",
+						// ManaMetal
+						"BiomeAppleTree",
+						"BiomeBarley",
+						"BiomeCedarForest",
+						"BiomeFertileForest",
+						"BiomeFlower",
+						"BiomeFlowerPall",
+						"BiomeForestFX",
+						"BiomeLavender",
+						"BiomeMagic",
+						"BiomeOasis",
+						"BiomePineForest",
+						"BiomeRichForest",
+						"BiomeSnowmountain",
+						"BiomeTallGrass",
 						},
 				"Names of biomes which can spawn villages. Only used with Village Generator, and only applies to Overworld. Note that this list is EXCLUSIVE: other mod configs won't override this. You have to paste all biome names here."
 					+ "Format is: biomeName|villageType|materialType|disallowModSub OR simply: biomeName \n"
