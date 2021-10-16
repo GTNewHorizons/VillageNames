@@ -595,11 +595,11 @@ public class WellDecorateEvent {
 		if (
 				GeneralConfig.pyramidTerracotta
 				&& event.world.provider.dimensionId == 0
-				&& event.world.getBiomeGenForCoordsBody(event.chunkX, event.chunkZ) != BiomeGenBase.jungle
-				&& event.world.getBiomeGenForCoordsBody(event.chunkX, event.chunkZ) != BiomeGenBase.jungleHills
-				&& event.world.getBiomeGenForCoordsBody(event.chunkX, event.chunkZ) != BiomeGenBase.swampland
-				&& event.world.getBiomeGenForCoordsBody(event.chunkX, event.chunkZ) != BiomeGenBase.coldTaiga
-				&& event.world.getBiomeGenForCoordsBody(event.chunkX, event.chunkZ) != BiomeGenBase.icePlains
+				&& event.world.getBiomeGenForCoordsBody((event.chunkX<<4) + 8, (event.chunkZ<<4) + 8) != BiomeGenBase.jungle
+				&& event.world.getBiomeGenForCoordsBody((event.chunkX<<4) + 8, (event.chunkZ<<4) + 8) != BiomeGenBase.jungleHills
+				&& event.world.getBiomeGenForCoordsBody((event.chunkX<<4) + 8, (event.chunkZ<<4) + 8) != BiomeGenBase.swampland
+				&& event.world.getBiomeGenForCoordsBody((event.chunkX<<4) + 8, (event.chunkZ<<4) + 8) != BiomeGenBase.coldTaiga
+				&& event.world.getBiomeGenForCoordsBody((event.chunkX<<4) + 8, (event.chunkZ<<4) + 8) != BiomeGenBase.icePlains
 				) {
 			
 			//Block blocktoscan;

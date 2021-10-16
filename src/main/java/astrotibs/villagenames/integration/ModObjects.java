@@ -382,6 +382,11 @@ public class ModObjects {
 	public static final String doorJungleUTD = DOM_UPTODATE + ":door_jungle";
 	public static final String doorAcaciaUTD = DOM_UPTODATE + ":door_acacia";
 	public static final String doorDarkOakUTD = DOM_UPTODATE + ":door_dark_oak";
+	public static final String doorSpruceMM = DOM_MANAMETAL + ":sprucedoor";
+	public static final String doorBirchMM = DOM_MANAMETAL + ":birchdoor";
+	public static final String doorJungleMM = DOM_MANAMETAL + ":jungledoor";
+	public static final String doorAcaciaMM = DOM_MANAMETAL + ":acaciadoor";
+	public static final String doorDarkOakMM = DOM_MANAMETAL + ":dark_oakdoor";
 	
 	// Dusty Book
 	public static final String dustyBook_LB = "LostBooks:randomBook";
@@ -420,6 +425,12 @@ public class ModObjects {
 	public static final String fenceAcaciaWS = DOM_WOODSTUFF + ":fence_tile.wood_4";
 	public static final String fenceDarkOakWS = DOM_WOODSTUFF + ":fence_tile.wood_5";
 	
+	public static final String fenceSpruceMM = DOM_MANAMETAL + ":fence_spruce";
+	public static final String fenceBirchMM = DOM_MANAMETAL + ":fence_birch";
+	public static final String fenceJungleMM = DOM_MANAMETAL + ":fence_jungle";
+	public static final String fenceAcaciaMM = DOM_MANAMETAL + ":fence_acacia";
+	public static final String fenceDarkOakMM = DOM_MANAMETAL + ":fence_big_oak";
+		
 	// Fence Gate
 	public static final String fenceGateSpruceEF = DOM_ETFUTURUM + ":fence_gate_spruce";
 	public static final String fenceGateBirchEF = DOM_ETFUTURUM + ":fence_gate_birch";
@@ -2326,6 +2337,19 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
+			// Disabled until torches can be placed onto MM doors
+//			else if (mod.toLowerCase().trim().equals("manametal"))
+//			{
+//				switch (materialMeta)
+//				{
+//					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceMM); break;
+//					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchMM); break;
+//					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleMM); break;
+//					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaMM); break;
+//					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakMM); break;
+//				}
+//				if (modblock != null) {return new Object[]{modblock, 0};}
+//			}
 		}
 		
 		return new Object[] {Blocks.fence, 0};

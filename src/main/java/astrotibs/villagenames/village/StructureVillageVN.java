@@ -2814,6 +2814,18 @@ public class StructureVillageVN
 				}
 				if (modblock != null) {return modblock;}
 			}
+			else if (mod.toLowerCase().equals("manametal"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.doorSpruceMM); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.doorBirchMM); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.doorJungleMM); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.doorAcaciaMM); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.doorDarkOakMM); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
 		}
 		// If all else fails, grab the vanilla version
 		return Blocks.wooden_door;

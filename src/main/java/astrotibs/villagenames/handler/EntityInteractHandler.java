@@ -78,7 +78,7 @@ public class EntityInteractHandler {
 			event.entityPlayer.addChatComponentMessage(new ChatComponentText( "" ));
 			
 			// For setting blocks into the world
-//			Block blockToSet = Block.getBlockFromName(ModObjects.grassPath_MMM);
+//			Block blockToSet = Block.getBlockFromName(ModObjects.doorAcaciaMM);
 //			if (blockToSet!=null) {event.world.setBlock((int)event.entityPlayer.posX+2, (int)event.entityPlayer.posY, (int)event.entityPlayer.posZ, blockToSet,
 //					0, // Meta
 //					2);}
