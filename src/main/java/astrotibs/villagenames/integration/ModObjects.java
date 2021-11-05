@@ -537,7 +537,9 @@ public class ModObjects {
 	public static final String lanternEF = DOM_ETFUTURUM + ":lantern";
 	public static final String lanternNL = DOM_NETHERLICIOUS + ":Lantern";
 	public static final String lanternUTD = DOM_UPTODATE + ":lantern";
-	public static final String ironLantern_MM = DOM_MANAMETAL + ":BlockLanterns";
+	public static final String ironLantern_sitting_MM = DOM_MANAMETAL + ":BlockLanterns";
+	public static final String ironLantern_hanging_MM = DOM_MANAMETAL + ":BlockLanternsUP";
+	
 	
 	// Lectern
 	public static final String lectern_MM = DOM_MANAMETAL + ":BlockLecternM3";
@@ -2337,19 +2339,18 @@ public class ModObjects {
 				}
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			// Disabled until torches can be placed onto MM doors
-//			else if (mod.toLowerCase().trim().equals("manametal"))
-//			{
-//				switch (materialMeta)
-//				{
-//					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceMM); break;
-//					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchMM); break;
-//					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleMM); break;
-//					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaMM); break;
-//					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakMM); break;
-//				}
-//				if (modblock != null) {return new Object[]{modblock, 0};}
-//			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceSpruceMM); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceBirchMM); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceJungleMM); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceAcaciaMM); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceDarkOakMM); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
 		}
 		
 		return new Object[] {Blocks.fence, 0};
@@ -2968,7 +2969,7 @@ public class ModObjects {
 			}
 			if (mod.toLowerCase().trim().equals("manametal") && !isHanging) // No hanging version exists
 			{
-				Block tryLantern = Block.getBlockFromName(ModObjects.ironLantern_MM);
+				Block tryLantern = Block.getBlockFromName(isHanging ? ModObjects.ironLantern_hanging_MM :ModObjects.ironLantern_sitting_MM);
 		    	if (tryLantern!=null) {return new Object[]{tryLantern, 2};} // 2 is sitting and iron
 			}
 		}
@@ -2996,7 +2997,7 @@ public class ModObjects {
 			}
 			else if (mod.toLowerCase().trim().equals("manametal"))
 			{
-				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.ironLantern_MM));
+				moditem = Item.getItemFromBlock(Block.getBlockFromName(ModObjects.ironLantern_sitting_MM));
 				if (moditem != null) {return new ItemStack(moditem, 2);} // 2 is iron
 			}
 		}

@@ -5701,7 +5701,7 @@ public class SavannaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{2,1,5}, 
         		{8,1,5}, 
@@ -7588,7 +7588,7 @@ public class SavannaStructures
             
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{3,1,2}, 
         		{6,1,2}, 
@@ -10046,7 +10046,7 @@ public class SavannaStructures
             
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{2,1,4}, 
         		})
@@ -11892,7 +11892,7 @@ public class SavannaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{4,1,4}, 
         		})
@@ -16161,7 +16161,7 @@ public class SavannaStructures
             
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{9,2,6}, 
         		})

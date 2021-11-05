@@ -2234,7 +2234,7 @@ public class JungleStructures
         	
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{13,5,12}, 
         		{13,5,6}, 
@@ -3590,7 +3590,7 @@ public class JungleStructures
             
                     	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{2,5,5}, 
         		})
@@ -5751,7 +5751,7 @@ public class JungleStructures
     		
     		
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{5,1,7}, 
         		})
@@ -8161,7 +8161,7 @@ public class JungleStructures
         	
     		blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{3,2,9}, 
         		})
@@ -9258,7 +9258,7 @@ public class JungleStructures
             
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{2,2,4}, 
         		{10,2,4}, 
@@ -11574,7 +11574,7 @@ public class JungleStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{10,1,7}, 
         		})

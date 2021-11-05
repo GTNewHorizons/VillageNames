@@ -610,7 +610,7 @@ public class GeneralConfig {
 	    		"woodstuff",
  				"etfuturum",
  				"ganyssurface",
- 				// "manametal", Disabled until torches can be placed onto fences
+ 				"manametal",
  				},
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
  				);

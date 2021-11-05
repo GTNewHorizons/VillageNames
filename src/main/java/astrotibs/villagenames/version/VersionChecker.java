@@ -141,6 +141,8 @@ public class VersionChecker extends Thread
             		&& !(Reference.VERSION).contains("DEV")
         			)
         	{
+                quitChecking=true;
+                
                 event.player.addChatComponentMessage(
                 		new ChatComponentText(
                 				Reference.MOD_NAME_COLORIZED + 
@@ -148,7 +150,6 @@ public class VersionChecker extends Thread
                 				" is available! Get it at:"
                 		 ));
                 event.player.addChatComponentMessage(ForgeHooks.newChatWithLinks(Reference.URL));
-                quitChecking=true;
         	}
         }
         

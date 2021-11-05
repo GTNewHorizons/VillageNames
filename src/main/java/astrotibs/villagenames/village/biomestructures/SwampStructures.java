@@ -3132,7 +3132,7 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{7,1,6}, 
         		})
@@ -9668,7 +9668,7 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{7,2,2}, 
         		})
@@ -10239,7 +10239,7 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{6,2,6}, 
         		})
@@ -13270,7 +13270,7 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{3,3,4}, 
         		})

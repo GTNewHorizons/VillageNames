@@ -3972,7 +3972,7 @@ public class PlainsStructures
             this.fillWithMetadataBlocks(world, structureBB, 5, 6, 8, 5, 7, 8, Blocks.cobblestone_wall, 0, Blocks.cobblestone_wall, 0, false);
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
             	{2,1,3},  
         		})
@@ -4926,7 +4926,7 @@ public class PlainsStructures
             // --- Interior --- //
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
             	{2,1,3},  
         		})
@@ -8159,7 +8159,7 @@ public class PlainsStructures
         	
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
     			{6,2,2},
     			{8,2,6},
@@ -8686,7 +8686,7 @@ public class PlainsStructures
         	
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{3,1,4},
         		})
@@ -17161,7 +17161,7 @@ public class PlainsStructures
         	
             
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{7,1,5},
         		})

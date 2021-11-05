@@ -6487,7 +6487,7 @@ public class TaigaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{4,6,3},
         		})
@@ -8649,7 +8649,7 @@ public class TaigaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankMeta);
+            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
         	for (int[] uuvvww : new int[][]{
         		{8,2,3}, 
         		{8,2,4}, 
