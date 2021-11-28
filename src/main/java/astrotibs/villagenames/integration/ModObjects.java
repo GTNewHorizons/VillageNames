@@ -582,6 +582,7 @@ public class ModObjects {
 	public static final String prismarineSlab_EF = DOM_ETFUTURUM + ":prismarine_slab";
 	// Prismarine Wall
 	public static final String prismarineWall_Bo = DOM_BOTANIA + ":prismarine0Wall";
+	public static final String prismarineWall_EF = DOM_ETFUTURUM + ":prismarine_wall";
 	public static final String prismarineWall_UTD = DOM_UPTODATE + ":wall_prismarine";
 	
 	// Quicksand
@@ -714,6 +715,8 @@ public class ModObjects {
 	public static final String fishingMap_MM = DOM_MANAMETAL + ":ItemFishingMaps"; // 0: bottled; 1: full map; 2: map fragment
 	
 	// Walls
+	public static final String stoneWallEF = DOM_ETFUTURUM + ":stone_wall"; // 0: stone bricks; 1: mossy stone bricks ; 2: sandstone ; 3: bricks
+	public static final String bountifulWallEF = DOM_ETFUTURUM + ":stone_wall_2"; // 0: granite; 1: diorite ; 2: andesite
 	public static final String sandstoneWallUTD = DOM_UPTODATE + ":wall_sandstone";
 	public static final String redSandstoneWallUTD = DOM_UPTODATE + ":wall_red_sandstone";
 	public static final String brickWallUTD = DOM_UPTODATE + ":wall_bricks";
@@ -1057,7 +1060,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallEF);
+				if (modblock != null) {return new Object[]{modblock, 2};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.andesiteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -1654,16 +1662,21 @@ public class ModObjects {
 	{
 		String[] modprioritylist = GeneralConfig.modWall;
 		
-		Block modblock=null;
-		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			Block modblock=null;
+			
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneWallEF);
+				if (modblock != null) {return new Object[]{modblock, 3};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.brickWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
-			if (mod.toLowerCase().trim().equals("railcraft"))
+			else if (mod.toLowerCase().trim().equals("railcraft"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.wallRC);
 				if (modblock != null) {return new Object[]{modblock, 10};}
@@ -2142,7 +2155,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallEF);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.dioriteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2826,7 +2844,12 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bountifulWallEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.graniteWallUTD);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -3216,12 +3239,25 @@ public class ModObjects {
 		}
 		return null;
 	}
-	public static Block chooseModMossyStoneBrickWallBlock()
+	public static Object[] chooseModMossyStoneBrickWallBlock()
 	{
-		Block modblock=null;
+		String[] modprioritylist = GeneralConfig.modMossyStone;
 		
-		modblock = Block.getBlockFromName(ModObjects.mossystonebrickWallUTD);
-		if (modblock != null) {return modblock;}
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneWallEF);
+				if (modblock != null) {return new Object[]{modblock, 1};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.mossystonebrickWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
 		
 		return null;
 	}
@@ -3411,6 +3447,11 @@ public class ModObjects {
 			if (mod.toLowerCase().trim().equals("botania"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.prismarineWall_Bo);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.prismarineWall_EF);
 				if (modblock != null) {return modblock;}
 			}
 			else if (mod.toLowerCase().trim().equals("uptodate"))
@@ -3828,12 +3869,17 @@ public class ModObjects {
 		{
 			for (String mod : modprioritylist)
 			{
-				if (mod.toLowerCase().trim().equals("uptodate"))
+				if (mod.toLowerCase().trim().equals("etfuturum"))
+				{
+					modblock = Block.getBlockFromName(ModObjects.stoneWallEF);
+					if (modblock != null) {return new Object[]{modblock, 2};}
+				}				
+				else if (mod.toLowerCase().trim().equals("uptodate"))
 				{
 					modblock = Block.getBlockFromName(ModObjects.sandstoneWallUTD);
 					if (modblock != null) {return new Object[]{modblock, 0};}
 				}
-				if (mod.toLowerCase().trim().equals("railcraft"))
+				else if (mod.toLowerCase().trim().equals("railcraft"))
 				{
 					modblock = Block.getBlockFromName(ModObjects.wallRC);
 					if (modblock != null) {return new Object[]{modblock, 11};}
@@ -3963,13 +4009,32 @@ public class ModObjects {
 	
 	
 	// Stone brick wall
-	public static Block chooseModStoneBrickWallBlock()
+	public static Object[] chooseModStoneBrickWallBlock()
 	{
 		Block modblock=null;
 		
-		modblock = Block.getBlockFromName(ModObjects.stonebrickWallUTD);
-		if (modblock != null) {return modblock;}
+		String[] modprioritylist = GeneralConfig.modWall;
 		
+		for (String mod : modprioritylist)
+		{
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stoneWallEF);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("uptodate"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.stonebrickWallUTD);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("railcraft"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.wallRC);
+				if (modblock != null) {return new Object[]{modblock, 5};}
+			}
+		}
+		
+		// Return vanilla polished stone slab with top face on all sides
 		return null;
 	}
 	

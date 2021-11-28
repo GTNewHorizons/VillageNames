@@ -268,8 +268,10 @@ public class VNGuiConfig extends GuiConfig
                         FMLCommonHandler.instance().bus().post(event);
                         
                         if (!event.getResult().equals(Result.DENY))
+                        {
                             FMLCommonHandler.instance().bus().post(new PostConfigChangedEvent(modID, configID, isWorldRunning, requiresMcRestart));
                         	ConfigReloader.reloadConfigs(); // To force-sync the config options
+                        }
                         if (requiresMcRestart)
                         {
                             flag = false;

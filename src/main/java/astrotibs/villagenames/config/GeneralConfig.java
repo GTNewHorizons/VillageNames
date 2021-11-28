@@ -555,9 +555,9 @@ public class GeneralConfig {
  				);
 	    
 		modButton = config.getStringList("Mod Priority: Button", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    		"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
-	    		"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing wood buttons for village generation. The version highest on the list and registered in your game will be used."
@@ -579,16 +579,16 @@ public class GeneralConfig {
 	    
 	    modConcrete = config.getStringList("Mod Priority: Concrete", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
-	    		"uptodate",
  				"etfuturum",
+	    		"uptodate",
  				"manametal",
  				},
  				"Priority order for referencing concrete for well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modDoor = config.getStringList("Mod Priority: Door", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
-	    		"uptodate",
 	    		"etfuturum",
+	    		"uptodate",
  				"ganyssurface",
  				"malisisdoors",
  				"manametal",
@@ -606,9 +606,9 @@ public class GeneralConfig {
  				);
 	    
 	    modFence = config.getStringList("Mod Priority: Fence", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
- 				"etfuturum",
  				"ganyssurface",
  				"manametal",
  				},
@@ -695,8 +695,8 @@ public class GeneralConfig {
  				);
 	    
 	    modMutton = config.getStringList("Mod Priority: Mutton", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
-	    		"uptodate",
  				"etfuturum",
+	    		"uptodate",
  				"ganyssurface",
  				"harvestcraft",
  				},
@@ -704,9 +704,9 @@ public class GeneralConfig {
  				);
 	    
 	    modPressurePlate = config.getStringList("Mod Priority: Pressure Plate", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
- 				"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
@@ -714,8 +714,8 @@ public class GeneralConfig {
 	    
 	    modPrismarine = config.getStringList("Mod Priority: Prismarine", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
- 				"botania",
  				"etfuturum",
+ 				"botania",
 	    		"uptodate",
 	    		"manametal",
  				},
@@ -761,8 +761,8 @@ public class GeneralConfig {
  				);
 	    
 	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
-	    		"uptodate",
  				"etfuturum",
+	    		"uptodate",
 	    		"manametal",
  				},
  				"Priority order for referencing Stripped Logs/Wood for village generation. The version highest on the list and registered in your game will be used."
@@ -784,6 +784,7 @@ public class GeneralConfig {
  				);
 	    
 	    modWall = config.getStringList("Mod Priority: Wall", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    		"etfuturum",
 	    		"uptodate",
  				"railcraft",
  				},
@@ -800,8 +801,8 @@ public class GeneralConfig {
  				);
 	    
 	    modWoodenTrapdoor = config.getStringList("Mod Priority: Trapdoor", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
-	    		"uptodate",
 	    		"etfuturum",
+	    		"uptodate",
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Trapdoors for village generation. The version highest on the list and registered in your game will be used."

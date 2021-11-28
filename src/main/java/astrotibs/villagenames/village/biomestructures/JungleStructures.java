@@ -8053,8 +8053,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
             	{6,2,6, 10,2,6}, {10,2,7, 10,2,9}, {6,2,10, 10,2,10}, 
         		})
@@ -13346,8 +13347,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		{3,4,6, 3,4,6}, //{3,5,5, 3,5,5}, 
             	{2,1,8, 2,3,8}, {4,1,8, 4,3,8}, 
@@ -14273,8 +14275,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		{1,1,7, 1,2,7}, {2,3,7, 2,4,7}, {5,3,7, 5,4,7}, {6,1,7, 6,2,7}, 
         		{1,3,6, 1,4,6}, {6,3,6, 6,4,6}, 
@@ -17087,8 +17090,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
             	{3,1,8, 3,1,8}, {6,1,8, 6,1,8}, 
             	{2,1,7, 2,1,7}, {7,1,7, 7,1,7}, 
@@ -17558,8 +17562,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		// Left wall
             	{1,1,0, 1,1,0}, {1,1,1, 1,2,1}, {1,1,2, 1,3,2}, {1,1,3, 1,4,3}, 
@@ -18927,8 +18932,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
         		// Outside decoration
             	{3,5,8, 3,5,8}, {8,5,8, 8,5,8}, 
@@ -19500,8 +19506,9 @@ public class JungleStructures
     		
         	
         	// Stone Brick wall
-    		Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(modblock!=null?modblock:Blocks.cobblestone_wall, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
+    		Object[] tryStoneBrickWall = ModObjects.chooseModStoneBrickWallBlock();
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(tryStoneBrickWall!=null?(Block)tryStoneBrickWall[0]:Blocks.cobblestone_wall, tryStoneBrickWall!=null?(Integer)tryStoneBrickWall[1]:0, this.materialType, this.biome, this.disallowModSubs);
+        	Block biomeStoneBrickWallBlock = (Block)blockObject[0]; int biomeStoneBrickWallMeta = (Integer)blockObject[1];
         	for (int[] uuvvww : new int[][]{
             	{1,3,0, 1,3,0}, {5,3,0, 5,3,0}, 
         		})

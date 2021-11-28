@@ -793,11 +793,10 @@ public class StructureVillageVN
 													        		break;
         													   } // Mossy stone brick stairs
         	if (block == Blocks.cobblestone_wall)              {meta=1; break;} // Mossy cobblestone wall
-        	if (block != null && block == ModObjects.chooseModStoneBrickWallBlock())
+        	if (block != null && ModObjects.chooseModStoneBrickWallBlock() != null && block == (Block)ModObjects.chooseModStoneBrickWallBlock()[0])
 															   {
-																	Block modblock = ModObjects.chooseModMossyStoneBrickWallBlock();
-														    		if (modblock!=null) {block=modblock; meta=0;}
-														    		break;
+        															Object[] modobject = ModObjects.chooseModMossyStoneBrickWallBlock();
+														    		if (modobject!=null) {block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
 														       } // Mossy stone brick wall
         	
         	if (block == Blocks.planks)                        {block=Blocks.planks; meta=woodMeta; break;}
@@ -1061,12 +1060,11 @@ public class StructureVillageVN
         	if (block != null && block == ModObjects.chooseModMossyCobblestoneStairsBlock()) {block = Blocks.stone_stairs; break; } // Mossy cobblestone stairs
 			if (block != null && block == ModObjects.chooseModMossyStoneBrickStairsBlock()) {block = Blocks.stone_brick_stairs; break;} // Mossy stone brick stairs
         	if (block == Blocks.cobblestone_wall && meta==1)   {meta=0;} // Mossy cobblestone wall to regular
-        	if (block != null && block == ModObjects.chooseModMossyStoneBrickWallBlock())
-        													   {
-        															Block modblock = ModObjects.chooseModStoneBrickWallBlock();
-														    		if (modblock!=null) {block=modblock; meta=0;}
-														    		break;
-														       }
+        	if (block != null && ModObjects.chooseModMossyStoneBrickWallBlock() != null && block == (Block)ModObjects.chooseModMossyStoneBrickWallBlock()[0])
+			   												   {
+        															Object[] modobject = ModObjects.chooseModStoneBrickWallBlock();
+																	if (modobject!=null) {block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
+			   												   }
         	if (block != null && block == ModObjects.chooseModMossyCobblestoneStairsBlock()) {block = Blocks.stone_stairs; break;} // Mossy cobblestone stairs
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
         	if (block == Blocks.wall_sign)                     {block=ModObjects.chooseModWoodenSignBlock(woodMeta, false); break;}
