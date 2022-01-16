@@ -99,6 +99,7 @@ public class GeneralConfig {
 	public static String[] modButton;
 	public static String[] modCampfire;
 	public static String[] modChest;
+	public static String[] modComposter;
 	public static String[] modConcrete;
 	public static String[] modDoor;
 	public static String[] modDye;
@@ -117,6 +118,7 @@ public class GeneralConfig {
 	public static String[] modPrismarine;
 	public static String[] modRedSandstone;
 	public static String[] modSign;
+	public static String[] modSmithingTable;
 	public static String[] modSmoothSandstone;
 	public static String[] modSmoothStone;
 	public static String[] modSponge;
@@ -577,6 +579,13 @@ public class GeneralConfig {
  				"Priority order for referencing Wooden Chests for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
+	    modComposter = config.getStringList("Mod Priority: Composter", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
+ 				"gardenstuff",
+ 				},
+ 				"Priority order for referencing composters for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
 	    modConcrete = config.getStringList("Mod Priority: Concrete", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
  				"etfuturum",
@@ -653,6 +662,7 @@ public class GeneralConfig {
 	    		"etfuturum",
 	    		"uptodate",
  				"tinkersconstruct",
+ 				"thaumcraft",
  				"thermalfoundation",
  				"railcraft",
  				"mariculture",
@@ -743,6 +753,13 @@ public class GeneralConfig {
 	    		"manametal",
  				},
  				"Priority order for referencing Smooth Stone for village generation. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modSmithingTable = config.getStringList("Mod Priority: Smithing Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
+	    		"manametal",
+ 				},
+ 				"Priority order for referencing Smithing Table for tool smithy buildings. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modSmoothSandstone = config.getStringList("Mod Priority: Smooth Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
@@ -928,7 +945,7 @@ public class GeneralConfig {
 	 */
 	public static Map<String, List> unpackMappedProfessions(String[] inputList) {
 		List<String>  otherModProfessions = new ArrayList<String>();
-		List<String> otherModIDs = new ArrayList<String>();
+		List<Integer> otherModIDs = new ArrayList<Integer>();
 		List<Integer> vanillaProfMaps = new ArrayList<Integer>();
 		
 		for (String entry : inputList) {
@@ -940,15 +957,15 @@ public class GeneralConfig {
 			
 			// Initialize temp fields
 			String otherModProfession="";
-			String otherModID="";
+			int otherModID=-1;
 			int vanillaProfMap=-1;
 			
 			// Place entries into variables
 			try {otherModProfession = splitEntry[0].trim();}               catch (Exception e) {otherModProfession="";}
-			try {otherModID = splitEntry[1].trim();}                       catch (Exception e) {otherModID="";}
+			try {otherModID = Integer.parseInt(splitEntry[1].trim());}                       catch (Exception e) {otherModID=-1;}
 			try {vanillaProfMap = Integer.parseInt(splitEntry[2].trim());} catch (Exception e) {vanillaProfMap=-1;}
 			
-			if( !otherModProfession.equals("") && !otherModID.equals("") ) {
+			if( !otherModProfession.equals("") && otherModID!=-1 ) {
 				otherModProfessions.add(otherModProfession);
 				otherModIDs.add(otherModID);
 				vanillaProfMaps.add(vanillaProfMap);

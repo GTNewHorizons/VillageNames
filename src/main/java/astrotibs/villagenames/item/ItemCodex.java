@@ -2,6 +2,7 @@ package astrotibs.villagenames.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import astrotibs.villagenames.VillageNames;
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -54,6 +56,16 @@ public class ItemCodex extends Item {
     public String getUnlocalizedName(ItemStack itemStack)
     {
         return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+    {
+    	super.addInformation(stack, playerIn, tooltip, advanced);
+        tooltip.add(I18n.format("itemtooltip.codex.1a"));
+        tooltip.add(I18n.format("itemtooltip.codex.1b"));
+        tooltip.add(I18n.format("itemtooltip.codex.2a"));
+        tooltip.add(I18n.format("itemtooltip.codex.2b"));
     }
     
     @Override

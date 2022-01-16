@@ -242,6 +242,9 @@ public class ModObjects {
 	public static final String campfire_CB = "campfirebackport:campfire";
 	public static final String campfire_MM = DOM_MANAMETAL+":campfire";
 	
+	// Cartography Table
+	public static final String cartographyTable_EFR = DOM_ETFUTURUM + ":cartography_table";
+	
 	// Chests
 	public static final String chestOakGS = DOM_GANYSSURFACE + ":chest0";
 	public static final String chestSpruceGS = DOM_GANYSSURFACE + ":chest1";
@@ -258,6 +261,7 @@ public class ModObjects {
 	public static final String chestDarkOakWS = DOM_WOODSTUFF + ":chest_tile.wood_5";
 	
 	// Compost Bin
+	public static final String composter_EFR = DOM_ETFUTURUM + ":composter";
 	public static final String compostBin_GaC = "GardenCore:compost_bin";
 	
 	// Concrete
@@ -464,6 +468,9 @@ public class ModObjects {
 	public static final String fenceGateAcaciaWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_4";
 	public static final String fenceGateDarkOakWS = DOM_WOODSTUFF + ":fence_gate_tile.wood_5";
 	
+	// Fletching Table
+	public static final String fletchingTable_EFR = DOM_ETFUTURUM + ":fletching_table";
+	
 	// Flowers
 	public static final String flowerUTD = DOM_UPTODATE + ":flower";
 	public static final String flowerCornflowerEF = DOM_ETFUTURUM + ":cornflower";
@@ -519,6 +526,7 @@ public class ModObjects {
 	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
 	public static final String nuggetGS = "ganysnether" + ":ironNugget";
 	public static final String ironNugget_MM = DOM_MANAMETAL + ":nuggetIron";
+	public static final String nuggetTC = "Thaumcraft:ItemNugget"; // There is only the one nugget
 	
 	// Kelp and Kelp Accessories
 	public static final String kelpDriedMC = "Mariculture:plant_static"; // Use meta 1
@@ -543,6 +551,9 @@ public class ModObjects {
 	
 	// Lectern
 	public static final String lectern_MM = DOM_MANAMETAL + ":BlockLecternM3";
+	
+	// Loom
+	public static final String loom_EFR = DOM_ETFUTURUM + ":loom";
 	
 	// Mossy Stone
 	public static final String mossyCobblestoneStairsEF = DOM_ETFUTURUM + ":mossy_cobblestone_stairs";
@@ -652,7 +663,8 @@ public class ModObjects {
 	public static final String seaLantern_MM = DOM_MANAMETAL + ":sea_lantern";
 	
 	// Smithing Table
-	public static final String smithingTable_MM = DOM_MANAMETAL+":BlockCastingWeldings";
+	public static final String smithingTable_EFR = DOM_ETFUTURUM + ":smithing_table";
+	public static final String smithingTable_MM = DOM_MANAMETAL + ":BlockCastingWeldings";
 	
 	// Smoker
 	public static final String smoker_EF = DOM_ETFUTURUM + ":smoker";
@@ -681,6 +693,9 @@ public class ModObjects {
 	
 	// Stone (Generic)
 	public static final String rock_MM = DOM_MANAMETAL + ":RockBlockNewMinecraft";
+	
+	// Stonecutter
+	public static final String stonecutter_EFR = DOM_ETFUTURUM + ":stonecutter";
 	
 	// Stripped log
 	public static final String strippedLog1EF = DOM_ETFUTURUM + ":log_stripped";
@@ -1734,9 +1749,13 @@ public class ModObjects {
 	 */
 	public static Object[] chooseModCartographyTable(int woodMeta)
 	{
-		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
+		Block modblock=null;
 		
-		return new Object[]{modblock, meta};
+		modblock = Block.getBlockFromName(ModObjects.cartographyTable_EFR);
+		if (modblock != null) {return new Object[]{modblock, 0};}
+		
+		// Return crafting table by default
+		return new Object[]{chooseModCraftingTable(woodMeta), 0};
 	}
 	
 	
@@ -1784,10 +1803,23 @@ public class ModObjects {
 	// Composter
 	public static Block chooseModComposterBlock()
 	{
-		Block modobject=null;
+		String[] modprioritylist = GeneralConfig.modComposter;
 		
-		modobject = Block.getBlockFromName(ModObjects.compostBin_GaC);
-		if (modobject != null) {return modobject;}
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.composter_EFR);
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().trim().equals("gardenstuff"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.compostBin_GaC);
+				if (modblock != null) {return modblock;}
+			}
+		}
 		
 		return null;
 	}
@@ -2455,9 +2487,13 @@ public class ModObjects {
 	// Fletching Table
 	public static Object[] chooseModFletchingTable(int woodMeta)
 	{
-		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
+		Block modblock=null;
 		
-		return new Object[]{modblock, meta};
+		modblock = Block.getBlockFromName(ModObjects.fletchingTable_EFR);
+		if (modblock != null) {return new Object[]{modblock, 0};}
+		
+		// Return crafting table by default
+		return new Object[]{chooseModCraftingTable(woodMeta), 0};
 	}
 	
 	
@@ -2918,7 +2954,7 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetEF);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
-			if (mod.toLowerCase().trim().equals("uptodate"))
+			else if (mod.toLowerCase().trim().equals("uptodate"))
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNuggetUTD);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
@@ -2927,6 +2963,11 @@ public class ModObjects {
 			{
 				moditem = FunctionsVN.getItemFromName(ModObjects.materialsTC);
 				if (moditem != null) {return new ItemStack(moditem, 1, 19);}
+			}
+			else if (mod.toLowerCase().trim().equals("thaumcraft"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.nuggetTC);
+				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
 			else if (mod.toLowerCase().trim().equals("thermalfoundation"))
 			{
@@ -3123,11 +3164,14 @@ public class ModObjects {
 	
 	
 	// Loom
-	public static Object[] chooseModLoom(int woodMeta)
+	public static Object[] chooseModLoom(int orientation, int horizIndex, int woodMeta)
 	{
-		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
+		Block modblock = null;
 		
-		return new Object[]{modblock, meta};
+		modblock = Block.getBlockFromName(ModObjects.loom_EFR);
+		if (modblock != null) {return new Object[]{modblock, StructureVillageVN.chooseStonecutterMeta(orientation, horizIndex)};}
+		
+		return new Object[]{chooseModCraftingTable(woodMeta), 0};
 	}
 	
 	
@@ -3670,6 +3714,25 @@ public class ModObjects {
 	// Smithing Table
 	public static Object[] chooseModSmithingTable(int woodMeta)
 	{
+		String[] modprioritylist = GeneralConfig.modSmithingTable;
+		
+		for (String mod : modprioritylist)
+		{
+			Block modblock=null;
+			
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smithingTable_EFR);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smithingTable_MM);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+		}
+		
+		// Return crafting table by default
 		return new Object[]{chooseModCraftingTable(woodMeta), 0};
 	}
 	
@@ -4147,10 +4210,15 @@ public class ModObjects {
 	 * Orientation:
 	 * 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
 	 */
-	public static Object[] chooseModStonecutter(int orientation, int woodMeta)
+	public static Object[] chooseModStonecutter(int orientation, int horizIndex, int woodMeta)
 	{
-		Block modblock = chooseModCraftingTable(woodMeta); int meta = 0;
+		Block modblock = null;
 		
+		modblock = Block.getBlockFromName(ModObjects.stonecutter_EFR);
+		if (modblock != null) {return new Object[]{modblock, StructureVillageVN.chooseStonecutterMeta(orientation, horizIndex)};}
+		
+		// Return a crafting table if nothing else lands
+		modblock = chooseModCraftingTable(woodMeta); int meta = 0;
 		return new Object[]{modblock, meta};
 	}
 	

@@ -9127,7 +9127,7 @@ public class SwampStructures
         	
         	// Stone Cutter
         	// Orientation:0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-        	blockObject = ModObjects.chooseModStonecutter(2, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+        	blockObject = ModObjects.chooseModStonecutter(2, this.coordBaseMode, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 3, 1, 8, structureBB);
     		
     		
@@ -10760,10 +10760,10 @@ public class SwampStructures
     		}
     		
     		// Loom
-    		blockObject = ModObjects.chooseModLoom(biomePlankMeta);
+    		blockObject = ModObjects.chooseModLoom(0, this.coordBaseMode, biomePlankMeta);
     		Block loomBlock = (Block)blockObject[0];
     		int loomMeta = ((Integer)blockObject[1]).intValue();
-    		for (int[] uvw : new int[][] { { 2, 4, 2, 0 } })
+    		for (int[] uvw : new int[][] { { 2, 4, 2 } })
     		{
     			placeBlockAtCurrentPosition(world, loomBlock, loomMeta, uvw[0], uvw[1], uvw[2], structureBB);
     		}
@@ -11280,9 +11280,9 @@ public class SwampStructures
 			
 			// Loom
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
-			blockObject = ModObjects.chooseModLoom(biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
+			blockObject = ModObjects.chooseModLoom(1, this.coordBaseMode, biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
 			for(int[] uvw : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-				{1,1,7, 1}, 
+				{1,1,7}, 
 				})
 			{
 				this.placeBlockAtCurrentPosition(world, loomBlock, loomMeta, uvw[0], uvw[1], uvw[2], structureBB);

@@ -8176,7 +8176,7 @@ public class JungleStructures
         	
             // Stone Cutter
         	// Orientation:0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-        	blockObject = ModObjects.chooseModStonecutter(3, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+        	blockObject = ModObjects.chooseModStonecutter(3, this.coordBaseMode, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 8, 2, 8, structureBB);
     		
     		
@@ -11057,10 +11057,10 @@ public class JungleStructures
         	
         	
             // Loom
-        	blockObject = ModObjects.chooseModLoom(biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
+        	blockObject = ModObjects.chooseModLoom(2, this.coordBaseMode, biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
             for(int[] uvw : new int[][]{ // Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
             	// Back Shutters
-            	{7,1,5, 2}, 
+            	{7,1,5}, 
             	})
             {
             	this.placeBlockAtCurrentPosition(world, loomBlock, loomMeta, uvw[0], uvw[1], uvw[2], structureBB);

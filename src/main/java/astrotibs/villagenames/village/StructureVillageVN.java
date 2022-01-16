@@ -110,6 +110,14 @@ public class StructureVillageVN
 	};
 	
 	// Indexed by [orientation][horizIndex]
+	public static final int[][] STONECUTTER_META_ARRAY = new int[][]{
+		{1,2,0,3},
+		{3,1,3,1},
+		{0,3,1,2},
+		{2,0,2,0},
+	};
+	
+	// Indexed by [orientation][horizIndex]
 	public static final int[][] MMM_LECTERN_META_ARRAY = new int[][]{
 		{2,3,4,5},
 		{5,2,5,2},
@@ -1220,7 +1228,9 @@ public class StructureVillageVN
     		Block surfaceBlock = world.getBlock(posX, surfaceY, posZ);
     		
     		// Replace grass with grass path
-    		if ((surfaceBlock instanceof BlockGrass || surfaceBlock instanceof BlockDirt) && world.isAirBlock(posX, surfaceY+1, posZ))
+    		if ((surfaceBlock instanceof BlockGrass || surfaceBlock instanceof BlockDirt
+    				|| (surfaceBlock.getMaterial() == Material.grass && surfaceBlock.isBlockNormalCube())
+    				) && world.isAirBlock(posX, surfaceY+1, posZ))
     		{
     	    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
     			world.setBlock(posX, surfaceY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
@@ -2630,6 +2640,12 @@ public class StructureVillageVN
 	{
 		if (orientation<0) {return -orientation;}
 		return FURNACE_META_ARRAY[orientation][horizIndex];
+	}
+	
+	public static int chooseStonecutterMeta(int orientation, int horizIndex)
+	{
+		if (orientation<0) {return -orientation;}
+		return STONECUTTER_META_ARRAY[orientation][horizIndex];
 	}
 	
 	// Lectern meta for ManaMetalMod

@@ -7654,7 +7654,7 @@ public class PlainsStructures
         	
             // Stone Cutter
             // 0=fore-facing (away from you); 1=right-facing; 2=back-facing (toward you); 3=left-facing
-        	blockObject = ModObjects.chooseModStonecutter(3, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
+        	blockObject = ModObjects.chooseModStonecutter(3, this.coordBaseMode, biomePlankMeta); Block stonecutterBlock = (Block) blockObject[0]; int stonecutterMeta = (Integer) blockObject[1];
             this.placeBlockAtCurrentPosition(world, stonecutterBlock, stonecutterMeta, 6, 1, 4, structureBB);
             
             // Doors
@@ -10137,7 +10137,7 @@ public class PlainsStructures
             // --- Interior --- //
             
             // Loom
-        	blockObject = ModObjects.chooseModLoom(biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
+        	blockObject = ModObjects.chooseModLoom(1, this.coordBaseMode, biomePlankMeta); Block loomBlock = (Block) blockObject[0]; int loomMeta = (Integer) blockObject[1];
             for (int i=0; i<2; i++)
             {
             	this.placeBlockAtCurrentPosition(world, loomBlock, loomMeta, 2, 1, 3+i, structureBB);
