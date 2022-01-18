@@ -1229,7 +1229,7 @@ public class StructureVillageVN
     		
     		// Replace grass with grass path
     		if ((surfaceBlock instanceof BlockGrass || surfaceBlock instanceof BlockDirt
-    				|| (surfaceBlock.getMaterial() == Material.grass && surfaceBlock.isBlockNormalCube())
+    				|| (surfaceBlock.getMaterial() == Material.grass && surfaceBlock.getMaterial().blocksMovement() && surfaceBlock.renderAsNormalBlock())
     				) && world.isAirBlock(posX, surfaceY+1, posZ))
     		{
     	    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
