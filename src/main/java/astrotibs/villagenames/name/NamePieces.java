@@ -4,6 +4,7 @@ public class NamePieces {
 	
 	// Characters that are replaced:
 	// § with \u00a7
+	// À with \u00c0
 	// Á with \u00c1
 	// É with \u00c9
 	// æ with \u00e6

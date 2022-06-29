@@ -391,7 +391,6 @@ public class GeneralConfig {
 				"villager-demon||com.emoniph.witchery.entity.EntityVampire|add",
 				"villager|Witch Hunter|com.emoniph.witchery.entity.EntityWitchHunter|add",
 				"demon|Horned Huntsman|com.emoniph.witchery.entity.EntityHornedHuntsman|add",
-				"demon|Lord of Torment|com.emoniph.witchery.entity.EntityLordOfTorment|add",
 				
 				},
 				"List of entities that will generate a name automatically when they appear. Useful for aggressive or boss mobs.\n"
@@ -629,6 +628,7 @@ public class GeneralConfig {
  				"ganyssurface",
 	    		"uptodate",
 	    		"woodstuff",
+	    		"manametal",
 	    		"malisisdoors",
  				},
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."

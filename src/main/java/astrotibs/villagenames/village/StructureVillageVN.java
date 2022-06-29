@@ -28,7 +28,6 @@ import astrotibs.villagenames.village.biomestructures.SavannaStructures;
 import astrotibs.villagenames.village.biomestructures.SnowyStructures;
 import astrotibs.villagenames.village.biomestructures.SwampStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -1226,6 +1225,7 @@ public class StructureVillageVN
     	do
     	{
     		Block surfaceBlock = world.getBlock(posX, surfaceY, posZ);
+    		String targetBlockRegistryName = Block.blockRegistry.getNameForObject(surfaceBlock);
     		
     		// Replace grass with grass path
     		if ((surfaceBlock instanceof BlockGrass || surfaceBlock instanceof BlockDirt
@@ -1248,41 +1248,31 @@ public class StructureVillageVN
     		}
     		
     		// Replace lava with two-layer cobblestone
-    		if (surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava)
+    		if (surfaceBlock==Blocks.lava || surfaceBlock==Blocks.flowing_lava
+					|| targetBlockRegistryName.contains("streams:river/tile.lava")
+					)
     		{
     	    	Object[] cobblestone = getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs);
     			world.setBlock(posX, surfaceY, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
-    			world.setBlock(posX, surfaceY-1, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    			
+    			// Add cobblestone supports
+    			int yDownScan = surfaceY;
+    			if (MathHelper.abs_int(posX)%2==0 && MathHelper.abs_int(posZ)%2==0)
+    			{
+    				while(world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid() && yDownScan>0)
+    				{
+    					world.setBlock(posX, yDownScan, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
+    				}
+    			}
+    			
     			return surfaceY;
     		}
     		
     		// Replace other liquid or ice with planks
     		if (surfaceBlock.getMaterial().isLiquid() || surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
-    				|| (Loader.isModLoaded(Reference.MORE_FUN_QUICKSAND_MOD_MODID)
-    						&&
-    						(
-								surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudBOP_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softSnowMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.jungleQuicksandMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.moorMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.dryQuicksandMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidMireMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.liquidChocolateMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingClayMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.wetPeatMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mudMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softQuicksandMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.bogMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.softGravelMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.mireMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.sinkingSlimeMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.slurryMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.quicksandMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.brownClayMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.denseWebbingMFQM_classPath)
-			    				|| surfaceBlock.getClass().toString().substring(6).equals(ModObjects.tarMFQM_classPath)
-    								)
-    						)
+					|| targetBlockRegistryName.equals(ModObjects.mudBOP)
+					|| targetBlockRegistryName.contains("MFQM:")
+					|| targetBlockRegistryName.contains("streams:river/tile.water")
     				)
     		{
     	    	Object[] planks = getBiomeSpecificBlockObject(Blocks.planks, 0, materialType, biome, disallowModSubs);

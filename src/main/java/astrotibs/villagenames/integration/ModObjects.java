@@ -455,6 +455,12 @@ public class ModObjects {
 	public static final String fenceGateAcaciaMD = DOM_MALISISDOORS + ":acaciaFenceGate";
 	public static final String fenceGateDarkOakMD = DOM_MALISISDOORS + ":darkOakFenceGate";
 	
+	public static final String fenceGateSpruceMM = DOM_MANAMETAL + ":wood_gate_base1";
+	public static final String fenceGateBirchMM = DOM_MANAMETAL + ":wood_gate_base2";
+	public static final String fenceGateJungleMM = DOM_MANAMETAL + ":wood_gate_base3";
+	public static final String fenceGateAcaciaMM = DOM_MANAMETAL + ":wood_gate_base4";
+	public static final String fenceGateDarkOakMM = DOM_MANAMETAL + ":wood_gate_base5";
+	
 	public static final String fenceGateSpruceUTD = DOM_UPTODATE + ":fence_gate_spruce";
 	public static final String fenceGateBirchUTD = DOM_UPTODATE + ":fence_gate_birch";
 	public static final String fenceGateJungleUTD = DOM_UPTODATE + ":fence_gate_jungle";
@@ -574,6 +580,29 @@ public class ModObjects {
 	public static final String muttonCookedHC = DOM_HARVESTCRAFT + ":muttoncookedItem";
 	public static final String muttonRawUTD = DOM_UPTODATE + ":raw_mutton";
 	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
+
+	// Mud
+	public static final String mudBOP = "BiomesOPlenty:mud";
+//	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
+//	public static final String softSnowMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftSnow";
+//	public static final String jungleQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockJungleQuicksand";
+//	public static final String moorMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMorass";
+//	public static final String dryQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSand";
+//	public static final String liquidMireMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockStableLiquidMire";
+//	public static final String liquidChocolateMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockChocolate";
+//	public static final String sinkingClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSinkingClay";
+//	public static final String wetPeatMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockWetPeat";
+//	public static final String mudMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMud";
+//	public static final String softQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftQuicksand";
+//	public static final String bogMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockBog";
+//	public static final String softGravelMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftGravel";
+//	public static final String mireMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMire";
+//	public static final String sinkingSlimeMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlime";
+//	public static final String slurryMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlurry";
+//	public static final String quicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockQuicksand";
+//	public static final String brownClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockBrownClay";
+//	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
+//	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
 	
 	// Prismarine
 	public static final String prismarine_VN = Reference.MOD_ID + ":prismarine";    // Meta - 0:regular, 1:bricks, 2:dark
@@ -595,30 +624,7 @@ public class ModObjects {
 	public static final String prismarineWall_Bo = DOM_BOTANIA + ":prismarine0Wall";
 	public static final String prismarineWall_EF = DOM_ETFUTURUM + ":prismarine_wall";
 	public static final String prismarineWall_UTD = DOM_UPTODATE + ":wall_prismarine";
-	
-	// Quicksand
-	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
-	
-	public static final String softSnowMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftSnow";
-	public static final String jungleQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockJungleQuicksand";
-	public static final String moorMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMorass";
-	public static final String dryQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSand";
-	public static final String liquidMireMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockStableLiquidMire";
-	public static final String liquidChocolateMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockChocolate";
-	public static final String sinkingClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSinkingClay";
-	public static final String wetPeatMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockWetPeat";
-	public static final String mudMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMud";
-	public static final String softQuicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftQuicksand";
-	public static final String bogMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockBog";
-	public static final String softGravelMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftGravel";
-	public static final String mireMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockMire";
-	public static final String sinkingSlimeMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlime";
-	public static final String slurryMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockSlurry";
-	public static final String quicksandMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockQuicksand";
-	public static final String brownClayMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockBrownClay";
-	public static final String denseWebbingMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockDenseWeb";
-	public static final String tarMFQM_classPath = MFQM_CLASS_ROOT + ".liquids.BlockTar";
-	
+		
 	// Prismarine
 	public static final String prismarineShard_VN = Reference.MOD_ID + ":prismarine_shard";
 	public static final String manaResource_Bo = DOM_BOTANIA + ":manaResource"; // meta 10
@@ -2462,6 +2468,18 @@ public class ModObjects {
 					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleMD); break;
 					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaMD); break;
 					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakMD); break;
+				}
+				if (modblock != null) {return modblock;}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
+			{
+				switch (materialMeta)
+				{
+					case 1: modblock = Block.getBlockFromName(ModObjects.fenceGateSpruceMM); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.fenceGateBirchMM); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.fenceGateJungleMM); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.fenceGateAcaciaMM); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.fenceGateDarkOakMM); break;
 				}
 				if (modblock != null) {return modblock;}
 			}
