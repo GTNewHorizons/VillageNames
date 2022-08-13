@@ -1271,6 +1271,7 @@ public class StructureVillageVN
     		// Replace other liquid or ice with planks
     		if (surfaceBlock.getMaterial().isLiquid() || surfaceBlock instanceof BlockIce || surfaceBlock instanceof BlockPackedIce 
 					|| targetBlockRegistryName.equals(ModObjects.mudBOP)
+					|| targetBlockRegistryName.equals(ModObjects.mudEF)
 					|| targetBlockRegistryName.contains("MFQM:")
 					|| targetBlockRegistryName.contains("streams:river/tile.water")
     				)

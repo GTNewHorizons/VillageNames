@@ -230,6 +230,7 @@ public class GeneralConfig {
 				"for_arborist|for_arborist|81", // Forestry
 				"tc_stationchief||86", // Traincraft
 				"psy_dealer||87", // Psychedelicraft
+				"pc_mechanic||125", // PneumaticCraft
 				"thc_wizard||190", // Thaumcraft
 				"thc_banker||191", // Thaumcraft
 				"fa_archaeologist||303", // Fossils and Archaeology
@@ -430,7 +431,7 @@ public class GeneralConfig {
 				"goblin||thaumcraft.common.entities.monster.EntityPech",
 				
 				// Twilight Forest
-				"angel-goblin|Questing Ram|twilightforest.entity.passive.EntityTFQuestRam",
+				"angel-golem-goblin|Questing Ram|twilightforest.entity.passive.EntityTFQuestRam",
 				
 				// Witchery
 				"villager|Guard|com.emoniph.witchery.entity.EntityVillageGuard",
@@ -875,6 +876,7 @@ public class GeneralConfig {
 				"Arborist|81|0", // Forestry
 				"Station Chief|86|0", // Traincraft
 				"Dealer|87|0", // Psychedelicraft
+				"Mechanic|125|3", // PneumaticCraft
 				"Wizard|190|2", // Thaumcraft
 				"Banker|191|0", // Thaumcraft
 				"Archaeologist|303|2", // Fossils and Archaeology

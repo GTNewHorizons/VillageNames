@@ -81,6 +81,28 @@ public class Reference
 	CATEGORY_ALIEN_VILLAGE_SYLLABLE_POOL = "alien village"+SYL_SUF,
 	CATEGORY_CUSTOM_SYLLABLE_POOL = "custom"+SYL_SUF,
 	
+	NAME_PREFIXES = "Prefixes",
+	NAME_ROOT_INITIAL = "Root: Initial",
+	NAME_ROOT_SYLLABLES = "Root: Syllables",
+	NAME_ROOT_TERMINAL = "Root: Terminal",
+	NAME_SUFFIXES = "Suffixes",
+	NAME_SYLLABLE_COUNT_WEIGHTING = "Syllable Count Weighting",
+	NAME_TERMINAL_BLANK_COUNTS = "Terminal Blank Counts",
+	NAME_PREFIX_CHANCE = "Prefix Chance",
+	NAME_SUFFIX_CHANCE = "Suffix Chance",
+	
+	DESCRIPTION_PREFIXES = "Prefixes that can occur before the core name.",
+	DESCRIPTION_ROOT_INITIAL = "Core names begin with one of these half-syllables. Use _ to represent a space.",
+	DESCRIPTION_ROOT_SYLLABLES = "Core names insert zero or more of these elements to build to their target lengths. Use _ to represent a space, and ^ for a blank entry.",
+	DESCRIPTION_ROOT_TERMINAL = "Core names end with one of these half-syllables. Use _ to represent a space, and ^ for a blank entry.\nThe raw number of ^ entries will be ignored if \"Syllable Count Weighting\" and \"Terminal Blank Counts\" are formatted correctly.",
+	DESCRIPTION_SUFFIXES = "Suffixes that can occur after the core name.",
+	DESCRIPTION_SYLLABLE_COUNT_WEIGHTING = "How often core names of various lengths are generated. The number in the Nth row is the weighting for N-syllable names.",
+	DESCRIPTION_TERMINAL_BLANK_COUNTS = "The number of names that end on a blank \"Root: Terminal\" character (typically this means ending on a vowel sound). The number in the Nth row is the weighting for N-syllable names. "
+			+ "If this number is larger than the corresponding row's number in \"Syllable Count Weighting\" or smaller than 0, then this config will be ignored and the \"Root: Terminal\" character "
+			+ "will be drawn from directly.",
+	DESCRIPTION_PREFIX_CHANCE = "The fraction of names that include a prefix.",
+	DESCRIPTION_SUFFIX_CHANCE = "The fraction of names that include a suffix.",
+	
 	// Village generator
 	CATEGORY_VILLAGE_GENERATOR = "village generator",
 	

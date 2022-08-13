@@ -260,7 +260,7 @@ public class ModObjects {
 	public static final String chestAcaciaWS = DOM_WOODSTUFF + ":chest_tile.wood_4";
 	public static final String chestDarkOakWS = DOM_WOODSTUFF + ":chest_tile.wood_5";
 	
-	// Compost Bin
+	// Composter
 	public static final String composter_EFR = DOM_ETFUTURUM + ":composter";
 	public static final String compostBin_GaC = "GardenCore:compost_bin";
 	
@@ -582,6 +582,7 @@ public class ModObjects {
 	public static final String muttonCookedUTD = DOM_UPTODATE + ":cooked_mutton";
 
 	// Mud
+	public static final String mudEF = DOM_ETFUTURUM + ":mud";
 	public static final String mudBOP = "BiomesOPlenty:mud";
 //	public static final String mudBOP_classPath = "biomesoplenty.common.blocks.BlockMud";
 //	public static final String softSnowMFQM_classPath = MFQM_CLASS_ROOT + ".blocks.BlockSoftSnow";
