@@ -24,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
  * @author AstroTibs
  */
 
-//Added in v3.1
 @SideOnly(Side.CLIENT)
 public class RenderVillagerModern extends RenderVillager {
 	
@@ -39,135 +38,133 @@ public class RenderVillagerModern extends RenderVillager {
 	// --- Skin resource elements --- //
 	// ------------------------------ //
 	
-	// Added in v3.2
 	static final String VAD = "textures/entity/villager/"; // Villager address, because it's used so damn much
 	static final String MIDLC = (Reference.MOD_ID).toLowerCase(); // Same with Mod ID
 	
 	// Base skin texture
-	private static final ResourceLocation villagerBaseSkin = new ResourceLocation(MIDLC, VAD + "villager.png");
+	private static final ResourceLocation VILLAGER_BASE_SKIN = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("villager.png").toString());
 	
 	// Biome-based types
-	private static final ResourceLocation villagerTypeDesert  = new ResourceLocation(MIDLC, VAD + "type/desert.png");
-	private static final ResourceLocation villagerTypeJungle  = new ResourceLocation(MIDLC, VAD + "type/jungle.png");
-	private static final ResourceLocation villagerTypePlains  = new ResourceLocation(MIDLC, VAD + "type/plains.png");
-	private static final ResourceLocation villagerTypeSavanna = new ResourceLocation(MIDLC, VAD + "type/savanna.png");
-	private static final ResourceLocation villagerTypeSnow    = new ResourceLocation(MIDLC, VAD + "type/snow.png");
-	private static final ResourceLocation villagerTypeSwamp   = new ResourceLocation(MIDLC, VAD + "type/swamp.png");
-	private static final ResourceLocation villagerTypeTaiga   = new ResourceLocation(MIDLC, VAD + "type/taiga.png");
+	private static final ResourceLocation VILLAGER_TYPE_DESERT  = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/desert.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_JUNGLE  = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/jungle.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_PLAINS  = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/plains.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_SAVANNA = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/savanna.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_SNOW    = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/snow.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_SWAMP   = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/swamp.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_TAIGA   = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/taiga.png").toString());
 	// Custom biome types
-	private static final ResourceLocation villagerTypeForest   = new ResourceLocation(MIDLC, VAD + "type/forest.png");
-	private static final ResourceLocation villagerTypeAquatic  = new ResourceLocation(MIDLC, VAD + "type/aquatic.png");
-	private static final ResourceLocation villagerTypeHighland = new ResourceLocation(MIDLC, VAD + "type/highland.png");
-	private static final ResourceLocation villagerTypeMushroom = new ResourceLocation(MIDLC, VAD + "type/mushroom.png");
-	private static final ResourceLocation villagerTypeMagical  = new ResourceLocation(MIDLC, VAD + "type/magical.png");
-	private static final ResourceLocation villagerTypeNether   = new ResourceLocation(MIDLC, VAD + "type/nether.png");
-	private static final ResourceLocation villagerTypeEnd      = new ResourceLocation(MIDLC, VAD + "type/end.png");
+	private static final ResourceLocation VILLAGER_TYPE_FOREST   = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/forest.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_AQUATIC  = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/aquatic.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_HIGHLAND = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/highland.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_MUSHROOM = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/mushroom.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_MAGICAL  = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/magical.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_NETHER   = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/nether.png").toString());
+	private static final ResourceLocation VILLAGER_TYPE_END      = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("type/end.png").toString());
 	
 	// Profession-based layer
-	private static final ResourceLocation villagerProfessionArmorer = new ResourceLocation(MIDLC, VAD + "profession/armorer.png");
-	private static final ResourceLocation villagerProfessionButcher = new ResourceLocation(MIDLC, VAD + "profession/butcher.png");
-	private static final ResourceLocation villagerProfessionCartographer = new ResourceLocation(MIDLC, VAD + "profession/cartographer.png");
-	private static final ResourceLocation villagerProfessionCleric = new ResourceLocation(MIDLC, VAD + "profession/cleric.png");
-	private static final ResourceLocation villagerProfessionFarmer = new ResourceLocation(MIDLC, VAD + "profession/farmer.png");
-	private static final ResourceLocation villagerProfessionFisherman = new ResourceLocation(MIDLC, VAD + "profession/fisherman.png");
-	private static final ResourceLocation villagerProfessionFletcher = new ResourceLocation(MIDLC, VAD + "profession/fletcher.png");
-	private static final ResourceLocation villagerProfessionLeatherworker = new ResourceLocation(MIDLC, VAD + "profession/leatherworker.png");
-	private static final ResourceLocation villagerProfessionLibrarian = new ResourceLocation(MIDLC, VAD + "profession/librarian.png");
-	private static final ResourceLocation villagerProfessionMason = new ResourceLocation(MIDLC, VAD + "profession/mason.png");
-	private static final ResourceLocation villagerProfessionNitwit = new ResourceLocation(MIDLC, VAD + "profession/nitwit.png");
-	private static final ResourceLocation villagerProfessionShepherd = new ResourceLocation(MIDLC, VAD + "profession/shepherd.png");
-	private static final ResourceLocation villagerProfessionToolsmith = new ResourceLocation(MIDLC, VAD + "profession/toolsmith.png");
-	private static final ResourceLocation villagerProfessionWeaponsmith = new ResourceLocation(MIDLC, VAD + "profession/weaponsmith.png");
+	private static final ResourceLocation VILLAGER_PROFESSION_ARMORER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/armorer.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_BUTCHER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/butcher.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_CARTOGRAPHER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/cartographer.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_CLERIC = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/cleric.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_FARMER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/farmer.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_FISHERMAN = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/fisherman.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_FLETCHER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/fletcher.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LEATHERWORKER = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/leatherworker.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LIBRARIAN = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/librarian.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_MASON = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/mason.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_NITWIT = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/nitwit.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_SHEPHERD = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/shepherd.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_TOOLSMITH = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/toolsmith.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_WEAPONSMITH = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/weaponsmith.png").toString());
 	
 	// Profession level purses
-	private static final ResourceLocation villagerProfessionLevelStone = new ResourceLocation(MIDLC, VAD + "profession_level/stone.png");
-	private static final ResourceLocation villagerProfessionLevelIron = new ResourceLocation(MIDLC, VAD + "profession_level/iron.png");
-	private static final ResourceLocation villagerProfessionLevelGold = new ResourceLocation(MIDLC, VAD + "profession_level/gold.png");
-	private static final ResourceLocation villagerProfessionLevelEmerald = new ResourceLocation(MIDLC, VAD + "profession_level/emerald.png");
-	private static final ResourceLocation villagerProfessionLevelDiamond = new ResourceLocation(MIDLC, VAD + "profession_level/diamond.png");
+	private static final ResourceLocation VILLAGER_PROFESSION_LEVEL_STONE = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession_level/stone.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LEVEL_IRON = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession_level/iron.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LEVEL_GOLD = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession_level/gold.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LEVEL_EMERALD = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession_level/emerald.png").toString());
+	private static final ResourceLocation VILLAGER_PROFESSION_LEVEL_DIAMOND = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession_level/diamond.png").toString());
 	
 	// Vanilla textures
-    private static final ResourceLocation defaultOldNitwit = new ResourceLocation(VAD + "villager.png");
-    private static final ResourceLocation defaultOldFarmer = new ResourceLocation(VAD + "farmer.png");
-    private static final ResourceLocation defaultOldLibrarian = new ResourceLocation(VAD + "librarian.png");
-    private static final ResourceLocation defaultOldPriest = new ResourceLocation(VAD + "priest.png");
-    private static final ResourceLocation defaultOldSmith = new ResourceLocation(VAD + "smith.png");
-    private static final ResourceLocation defaultOldButcher = new ResourceLocation(VAD + "butcher.png");
+    private static final ResourceLocation DEFAULT_OLD_NITWIT = new ResourceLocation((new StringBuilder()).append(VAD).append("villager.png").toString());
+    private static final ResourceLocation DEFAULT_OLD_FARMER = new ResourceLocation((new StringBuilder()).append(VAD).append("farmer.png").toString());
+    private static final ResourceLocation DEFAULT_OLD_LIBRARIAN = new ResourceLocation((new StringBuilder()).append(VAD).append("librarian.png").toString());
+    private static final ResourceLocation DEFAULT_OLD_PRIEST = new ResourceLocation((new StringBuilder()).append(VAD).append("priest.png").toString());
+    private static final ResourceLocation DEFAULT_OLD_SMITH = new ResourceLocation((new StringBuilder()).append(VAD).append("smith.png").toString());
+    private static final ResourceLocation DEFAULT_OLD_BUTCHER = new ResourceLocation((new StringBuilder()).append(VAD).append("butcher.png").toString());
 	
-	// Added in v3.2: Skin tones, arranged lightest to darkest
-    private static final ResourceLocation villageSkinToneLight3 = new ResourceLocation(MIDLC, VAD + "skintone/l3.png");
-    private static final ResourceLocation villageSkinToneLight2 = new ResourceLocation(MIDLC, VAD + "skintone/l2.png");
-    private static final ResourceLocation villageSkinToneLight1 = new ResourceLocation(MIDLC, VAD + "skintone/l1.png");
-    private static final ResourceLocation villageSkinToneMedium = new ResourceLocation(MIDLC, VAD + "skintone/m0.png"); // Identical to default skin
-    private static final ResourceLocation villageSkinToneDark1 = new ResourceLocation(MIDLC, VAD + "skintone/d1.png");
-    private static final ResourceLocation villageSkinToneDark2 = new ResourceLocation(MIDLC, VAD + "skintone/d2.png");
-    private static final ResourceLocation villageSkinToneDark3 = new ResourceLocation(MIDLC, VAD + "skintone/d3.png");
-    private static final ResourceLocation villageSkinToneDark4 = new ResourceLocation(MIDLC, VAD + "skintone/d4.png");
+	// Skin tones, arranged lightest to darkest
+    private static final ResourceLocation VILLAGER_SKIN_TONE_LIGHT3 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/l3.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_LIGHT2 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/l2.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_LIGHT1 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/l1.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_MEDIUM = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/m0.png").toString()); // Identical to default skin
+    private static final ResourceLocation VILLAGER_SKIN_TONE_DARK1 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d1.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_DARK2 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d2.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_DARK3 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d3.png").toString());
+    private static final ResourceLocation VILLAGER_SKIN_TONE_DARK4 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d4.png").toString());
     
 
     /**
-     * Added in v3.1.1: machinery for modular textures, adapted from RenderHorse
+     * Machinery for modular textures, adapted from RenderHorse
      */
     
     //private String[] layeredTextureAddressArray = new String[4]; // Holds the different layer textures as resource address strings
     private static final Map skinComboHashmap = Maps.newHashMap(); // Populates a hash map with various combinations so you don't have to constantly ascertain them on the fly
     //private String skinComboHashKey; // String that will be the hashmap key corresponding to the particular biome/career combination
     
-    // Added in v3.2 - skin tones
     // Made this 2D so that I can always make sure to add the proper key
     private static final String[][] skintoneTextures = new String[][] {
-    		{villageSkinToneDark4.toString(), "std4"},
-    		{villageSkinToneDark3.toString(), "std3"},
-    		{villageSkinToneDark2.toString(), "std2"},
-    		{villageSkinToneDark1.toString(), "std1"},
-    		{villageSkinToneMedium.toString(), "stm0"},
-    		{villageSkinToneLight1.toString(), "stl1"},
-    		{villageSkinToneLight2.toString(), "stl2"},
-    		{villageSkinToneLight3.toString(), "stl3"},
+    		{VILLAGER_SKIN_TONE_DARK4.toString(), "std4"},
+    		{VILLAGER_SKIN_TONE_DARK3.toString(), "std3"},
+    		{VILLAGER_SKIN_TONE_DARK2.toString(), "std2"},
+    		{VILLAGER_SKIN_TONE_DARK1.toString(), "std1"},
+    		{VILLAGER_SKIN_TONE_MEDIUM.toString(), "stm0"},
+    		{VILLAGER_SKIN_TONE_LIGHT1.toString(), "stl1"},
+    		{VILLAGER_SKIN_TONE_LIGHT2.toString(), "stl2"},
+    		{VILLAGER_SKIN_TONE_LIGHT3.toString(), "stl3"},
     		};
     
     // Made this 2D so that I can always make sure to add the proper key
     private static final String[][] biomeTypeTextures = new String[][] {
-    		{villagerTypePlains.toString(), "pla"},
-    		{villagerTypeMagical.toString(), "mag"},
-    		{villagerTypeHighland.toString(), "hig"},
-    		{villagerTypeForest.toString(), "for"},
-    		{villagerTypeAquatic.toString(), "aqu"},
-    		{villagerTypeJungle.toString(), "jun"},
-    		{villagerTypeSwamp.toString(), "swa"},
-    		{villagerTypeTaiga.toString(), "tai"},
-    		{villagerTypeDesert.toString(), "des"},
-    		{villagerTypeSavanna.toString(), "sav"},
-    		{villagerTypeMushroom.toString(), "mus"},
-    		{villagerTypeSnow.toString(), "sno"},
-    		{villagerTypeEnd.toString(), "end"},
-    		{villagerTypeNether.toString(), "net"},
+    		{VILLAGER_TYPE_PLAINS.toString(), "pla"},
+    		{VILLAGER_TYPE_MAGICAL.toString(), "mag"},
+    		{VILLAGER_TYPE_HIGHLAND.toString(), "hig"},
+    		{VILLAGER_TYPE_FOREST.toString(), "for"},
+    		{VILLAGER_TYPE_AQUATIC.toString(), "aqu"},
+    		{VILLAGER_TYPE_JUNGLE.toString(), "jun"},
+    		{VILLAGER_TYPE_SWAMP.toString(), "swa"},
+    		{VILLAGER_TYPE_TAIGA.toString(), "tai"},
+    		{VILLAGER_TYPE_DESERT.toString(), "des"},
+    		{VILLAGER_TYPE_SAVANNA.toString(), "sav"},
+    		{VILLAGER_TYPE_MUSHROOM.toString(), "mus"},
+    		{VILLAGER_TYPE_SNOW.toString(), "sno"},
+    		{VILLAGER_TYPE_END.toString(), "end"},
+    		{VILLAGER_TYPE_NETHER.toString(), "net"},
     		};
     
     private static final String[][] careerTextures = new String[][] {
-    	{villagerProfessionFarmer.toString(), "far"}, // 0
-    	{villagerProfessionFisherman.toString(), "fis"},
-    	{villagerProfessionShepherd.toString(), "she"},
-    	{villagerProfessionFletcher.toString(), "fle"},
-    	{villagerProfessionLibrarian.toString(), "lib"}, // 4
-    	{villagerProfessionCartographer.toString(), "car"},
-    	{villagerProfessionCleric.toString(), "cle"}, // 6
-    	{villagerProfessionArmorer.toString(), "arm"},
-    	{villagerProfessionWeaponsmith.toString(), "wea"},
-    	{villagerProfessionToolsmith.toString(), "too"}, // 9
-    	{villagerProfessionMason.toString(), "mas"},
-    	{villagerProfessionButcher.toString(), "but"}, // 11
-    	{villagerProfessionLeatherworker.toString(), "lea"},
-    	{villagerProfessionNitwit.toString(), "nit"}, //13
+    	{VILLAGER_PROFESSION_FARMER.toString(), "far"}, // 0
+    	{VILLAGER_PROFESSION_FISHERMAN.toString(), "fis"},
+    	{VILLAGER_PROFESSION_SHEPHERD.toString(), "she"},
+    	{VILLAGER_PROFESSION_FLETCHER.toString(), "fle"},
+    	{VILLAGER_PROFESSION_LIBRARIAN.toString(), "lib"}, // 4
+    	{VILLAGER_PROFESSION_CARTOGRAPHER.toString(), "car"},
+    	{VILLAGER_PROFESSION_CLERIC.toString(), "cle"}, // 6
+    	{VILLAGER_PROFESSION_ARMORER.toString(), "arm"},
+    	{VILLAGER_PROFESSION_WEAPONSMITH.toString(), "wea"},
+    	{VILLAGER_PROFESSION_TOOLSMITH.toString(), "too"}, // 9
+    	{VILLAGER_PROFESSION_MASON.toString(), "mas"},
+    	{VILLAGER_PROFESSION_BUTCHER.toString(), "but"}, // 11
+    	{VILLAGER_PROFESSION_LEATHERWORKER.toString(), "lea"},
+    	{VILLAGER_PROFESSION_NITWIT.toString(), "nit"}, //13
     	};
     
     private static final String[][] profLevelTextures = new String[][] {
-    	{null, "pl0"}, // Added in v3.2 so that some villagers can have no badge.
-    	{villagerProfessionLevelStone.toString(), "pl1"},
-    	{villagerProfessionLevelIron.toString(), "pl2"},
-    	{villagerProfessionLevelGold.toString(), "pl3"},
-    	{villagerProfessionLevelEmerald.toString(), "pl4"},
-    	{villagerProfessionLevelDiamond.toString(), "pl5"},
+    	{null, "pl0"}, // Added so that some villagers can have no badge.
+    	{VILLAGER_PROFESSION_LEVEL_STONE.toString(), "pl1"},
+    	{VILLAGER_PROFESSION_LEVEL_IRON.toString(), "pl2"},
+    	{VILLAGER_PROFESSION_LEVEL_GOLD.toString(), "pl3"},
+    	{VILLAGER_PROFESSION_LEVEL_EMERALD.toString(), "pl4"},
+    	{VILLAGER_PROFESSION_LEVEL_DIAMOND.toString(), "pl5"},
     	};
     
 	/**
@@ -176,10 +173,11 @@ public class RenderVillagerModern extends RenderVillager {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityVillager villager)
 	{
+		int profession = villager.getProfession();
+		
 		if (
 				GeneralConfig.modernVillagerSkins
-				&& villager.getProfession() >= 0
-				//&& villager.getProfession() <= 5 // Removed in v3.2 to allow modular mod villager skins
+				& profession >= 0
 				)
 		{
 			return this.getHashmappedSkinCombo(villager);
@@ -187,20 +185,20 @@ public class RenderVillagerModern extends RenderVillager {
 		else
 		{
 			// Condition for modern villager skins OFF
-		    switch (villager.getProfession())
+		    switch (profession)
 		    {
 		        case 0:
-		            return defaultOldFarmer;
+		            return DEFAULT_OLD_FARMER;
 		        case 1:
-		            return defaultOldLibrarian;
+		            return DEFAULT_OLD_LIBRARIAN;
 		        case 2:
-		            return defaultOldPriest;
+		            return DEFAULT_OLD_PRIEST;
 		        case 3:
-		            return defaultOldSmith;
+		            return DEFAULT_OLD_SMITH;
 		        case 4:
-		            return defaultOldButcher;
+		            return DEFAULT_OLD_BUTCHER;
 		        default:
-		        	return VillagerRegistry.getVillagerSkin(villager.getProfession(), defaultOldNitwit);
+		        	return VillagerRegistry.getVillagerSkin(profession, DEFAULT_OLD_NITWIT);
 		    }
 		}
 	}
@@ -229,12 +227,12 @@ public class RenderVillagerModern extends RenderVillager {
     {
     	final ExtendedVillager ev = ExtendedVillager.get(villager);
     	
-        String skinComboHashKey = "villager/";
+        StringBuilder skinComboHashKey = (new StringBuilder()).append("villager/");
         
         String[] layeredTextureAddressArray = new String[4]; 
         
         // Reset the layer array
-        layeredTextureAddressArray[0] = villagerBaseSkin.toString(); // Leaving this in by default just in case something goes wrong
+        layeredTextureAddressArray[0] = VILLAGER_BASE_SKIN.toString(); // Leaving this in by default just in case something goes wrong
         layeredTextureAddressArray[1] = null;
         layeredTextureAddressArray[2] = null;
         layeredTextureAddressArray[3] = null;
@@ -242,19 +240,19 @@ public class RenderVillagerModern extends RenderVillager {
         // Set the indexing values, and clamp them just in case
         int biometype = MathHelper.clamp_int(ev.getBiomeType(), 0, biomeTypeTextures.length-1);
         int career = GeneralConfig.villagerCareers ? ev.getCareer() : -1;
-        int proflevel = (villager.isChild() | villager.getProfession()==5) ? 0 : MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
+        int profession = villager.getProfession();
+        int extended_profession = ev.getProfession(); 
+        int proflevel = (villager.isChild() | profession==5) ? 0 : MathHelper.clamp_int(ev.getProfessionLevel(), 0, profLevelTextures.length-1);
         int skinTone_i = GeneralConfig.villagerSkinTones ? ev.getSkinTone() : 0;
-        MathHelper.clamp_int(skinTone_i = (skinTone_i == -99 ? 0 : skinTone_i)+4, 0, skintoneTextures.length-1); // Added in v3.2
+        MathHelper.clamp_int(skinTone_i = (skinTone_i == -99 ? 0 : skinTone_i)+4, 0, skintoneTextures.length-1);
         
-        
-        // Re-arranged in v3.2
         
         // ---------------------------- //
         // --- PART 0: set the skin --- //
         // ---------------------------- //
         
         layeredTextureAddressArray[0] = skintoneTextures[skinTone_i][0];
-        skinComboHashKey = skinComboHashKey + skintoneTextures[skinTone_i][1];
+        skinComboHashKey.append(skintoneTextures[skinTone_i][1]);
         
         
         // ---------------------------------- //
@@ -262,34 +260,34 @@ public class RenderVillagerModern extends RenderVillager {
         // ---------------------------------- //
         
         layeredTextureAddressArray[1] = biomeTypeTextures[biometype][0];
-        skinComboHashKey = skinComboHashKey + biomeTypeTextures[biometype][1];
+        skinComboHashKey.append(biomeTypeTextures[biometype][1]);
         
         
         // ----------------------------- //
         // --- PART 2: set the career--- //
         // ----------------------------- //
         
-        int indexofmodprof = GeneralConfig.professionID_a.indexOf(ev.getProfession());
+        int indexofmodprof = GeneralConfig.professionID_a.indexOf(extended_profession);
         
         if (!villager.isChild())
         {
 	        if ( 
-	        		ev.getProfession() > 5 // Is non-vanilla
-	        		&& indexofmodprof > -1 // Has a skin asset mapping
+	        		extended_profession > (GeneralConfig.enableNitwit ? 5 : 4) // Is non-vanilla
+	        		& indexofmodprof > -1 // Has a skin asset mapping
 	        		&& !((String) GeneralConfig.careerAsset_a.get(indexofmodprof)).equals("") ) // That mapping isn't blank
 	        {
 	        	// This is a modded profession ID with a supported skin
 	        	
 	        	final String profRootName = (String) (GeneralConfig.careerAsset_a.get(indexofmodprof));
-	        	final ResourceLocation modCareerSkin = new ResourceLocation(MIDLC, VAD + "profession/"+profRootName+".png");
+	        	final ResourceLocation modCareerSkin = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("profession/").append(profRootName).append(".png").toString());
 	        	
 	            layeredTextureAddressArray[2] = modCareerSkin.toString();
-	            skinComboHashKey = skinComboHashKey + "_" + profRootName;
+	            skinComboHashKey.append("_").append(profRootName);
 	        }
-	        else // This is vanilla skin or is otherwise unsupported
+	        else if (extended_profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
 	        {
-	            int careerIndex = 0;
-	            switch (ev.getProfession())
+	            int careerIndex = -1;
+	            switch (extended_profession)
 	            {
 	    	    	case 0: // Farmer type
 	    	    		switch (career)
@@ -352,7 +350,11 @@ public class RenderVillagerModern extends RenderVillager {
 	            
 	            // Set the career
 	            layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
-	            skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+	            skinComboHashKey.append("_").append(careerTextures[careerIndex][1]);
+	        }
+	        else
+	        {
+	        	skinComboHashKey.append("_non");
 	        }
         }
         
@@ -361,10 +363,10 @@ public class RenderVillagerModern extends RenderVillager {
         // ---------------------------------------- //
         
         layeredTextureAddressArray[3] = profLevelTextures[proflevel][0];
-        skinComboHashKey = skinComboHashKey + "_" + profLevelTextures[proflevel][1];
+        skinComboHashKey.append("_").append(profLevelTextures[proflevel][1]);
         
         //return skinComboHashKey;
-        return new Object[] {layeredTextureAddressArray, skinComboHashKey};
+        return new Object[] {layeredTextureAddressArray, skinComboHashKey.toString()};
     }
     
     @SideOnly(Side.CLIENT)

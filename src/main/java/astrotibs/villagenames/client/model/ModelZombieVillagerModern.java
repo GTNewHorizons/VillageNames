@@ -20,12 +20,10 @@ import net.minecraft.entity.monster.EntityZombie;
 @SideOnly(Side.CLIENT)
 public class ModelZombieVillagerModern extends ModelZombie {
 	
-	// Added in v3.1
 	public ModelRenderer zombieVillagerHeadwear;
 	public ModelRenderer zombieVillagerHatRimHigh;
 	public ModelRenderer zombieVillagerHatRimLow;
 	
-	// Changed in v3.1
 	public ModelZombieVillagerModern(float headScale) {
 		this(headScale, 0F, 64, 64);
 	}
@@ -35,14 +33,11 @@ public class ModelZombieVillagerModern extends ModelZombie {
         return 10;
     }	
 	
-	// Changed in v3.1
 	public ModelZombieVillagerModern(float headScale, float noseY, int textureFileWidth, int textureFileHeight) {
 		
-		// Changed in v3.1
 		super(headScale, noseY, textureFileWidth, textureFileHeight);
 		
 		
-		// Added in v3.1
 		float headscaleOffset = 0.5F; // How much the mantle layer gets "inflated"
 		
 		// Main headwear portion
@@ -104,7 +99,6 @@ public class ModelZombieVillagerModern extends ModelZombie {
 		bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, headScale);
 	}
 	
-	// Added in v3.1
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
@@ -125,24 +119,24 @@ public class ModelZombieVillagerModern extends ModelZombie {
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		
-		if (entity instanceof EntityZombie && ((EntityZombie)entity).isVillager())
+		if (entity instanceof EntityZombie & ((EntityZombie)entity).isVillager())
 		{
-			final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(((EntityZombie)entity));
-			int prof = ezv.getProfession();
+			final ExtendedZombieVillager ieep = ExtendedZombieVillager.get(((EntityZombie)entity));
+			int prof = ieep.getProfession();
 			
 			if (
 					prof > 5 // This is a non-vanilla villager profession
-					&& !this.isChild // and is not a child
-					&& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
-					&& // and... 
+					& !this.isChild // and is not a child
+					& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+					& // and... 
 						(GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
-						|| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+						| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
 						)
 					)
 			{
 				return;
 			}
-
+			
 			// You reach this point if the zombie needs its head rescaled
 			
 			// summon Zombie ~ ~ ~ {IsVillager:1, IsBaby:1}

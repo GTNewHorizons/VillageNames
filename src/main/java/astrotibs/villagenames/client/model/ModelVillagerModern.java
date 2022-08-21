@@ -16,7 +16,6 @@ import net.minecraft.entity.passive.EntityVillager;
  * @author AstroTibs
  */
 
-// Added in v3.1
 @SideOnly(Side.CLIENT)
 public class ModelVillagerModern extends ModelVillager
 {
@@ -83,16 +82,18 @@ public class ModelVillagerModern extends ModelVillager
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
+
+		EntityVillager villager = (EntityVillager)entity;
 		
-		int prof = ((EntityVillager)entity).getProfession();
+		int prof = villager.getProfession();
 		
 		if (
 				prof > 5 // This is a non-vanilla villager profession
-				&& !((EntityVillager) entity).isChild() // and is not a child
-				&& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
-				&& // and... 
+				& !villager.isChild() // and is not a child
+				& !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+				& // and... 
 					(GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
-					|| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+					| !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
 					)
 				)
 		{
@@ -101,7 +102,7 @@ public class ModelVillagerModern extends ModelVillager
 		
 		// You reach this point if the villager needs its head examined lol gottem
 		
-        if (((EntityVillager) entity).isChild())
+        if (villager.isChild())
         {
         	//Re-upscale baby head lmao
             GL11.glPushMatrix();

@@ -31,58 +31,59 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderZombieVillagerModern extends RenderBiped
 {
-
 	// ------------------------------ //
 	// --- Skin resource elements --- //
 	// ------------------------------ //
 	
+	static final String ZVAD = "textures/entity/zombie_villager/";
+	
 	// Base skin texture
-	private static final ResourceLocation zombieVillagerBaseSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/zombie_villager.png");
+	private static final ResourceLocation ZOMBIE_VILLAGER_BASE_SKIN = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("zombie_villager.png").toString());
 	
 	// Biome-based types
-	private static final ResourceLocation zombieVillagerTypeDesert  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/desert.png");
-	private static final ResourceLocation zombieVillagerTypeJungle  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/jungle.png");
-	private static final ResourceLocation zombieVillagerTypePlains  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/plains.png");
-	private static final ResourceLocation zombieVillagerTypeSavanna = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/savanna.png");
-	private static final ResourceLocation zombieVillagerTypeSnow    = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/snow.png");
-	private static final ResourceLocation zombieVillagerTypeSwamp   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/swamp.png");
-	private static final ResourceLocation zombieVillagerTypeTaiga   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/taiga.png");
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_DESERT  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/desert.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_JUNGLE  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/jungle.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_PLAINS  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/plains.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_SAVANNA = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/savanna.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_SNOW    = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/snow.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_SWAMP   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/swamp.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_TAIGA   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/taiga.png").toString());
 	// Custom biome types
-	private static final ResourceLocation zombieVillagerTypeForest   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/forest.png");
-	private static final ResourceLocation zombieVillagerTypeAquatic  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/aquatic.png");
-	private static final ResourceLocation zombieVillagerTypeHighland = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/highland.png");
-	private static final ResourceLocation zombieVillagerTypeMushroom = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/mushroom.png");
-	private static final ResourceLocation zombieVillagerTypeMagical  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/magical.png");
-	private static final ResourceLocation zombieVillagerTypeNether   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/nether.png");
-	private static final ResourceLocation zombieVillagerTypeEnd      = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/type/end.png");
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_FOREST   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/forest.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_AQUATIC  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/aquatic.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_HIGHLAND = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/highland.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_MUSHROOM = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/mushroom.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_MAGICAL  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/magical.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_NETHER   = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/nether.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_END      = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/end.png").toString());
 	
 	// Profession-based layer
-	private static final ResourceLocation zombieVillagerProfessionArmorer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/armorer.png");
-	private static final ResourceLocation zombieVillagerProfessionButcher = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/butcher.png");
-	private static final ResourceLocation zombieVillagerProfessionCartographer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/cartographer.png");
-	private static final ResourceLocation zombieVillagerProfessionCleric = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/cleric.png");
-	private static final ResourceLocation zombieVillagerProfessionFarmer = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/farmer.png");
-	private static final ResourceLocation zombieVillagerProfessionFisherman = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/fisherman.png");
-	private static final ResourceLocation zombieVillagerProfessionFletcher = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/fletcher.png");
-	private static final ResourceLocation zombieVillagerProfessionLeatherworker = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/leatherworker.png");
-	private static final ResourceLocation zombieVillagerProfessionLibrarian = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/librarian.png");
-	private static final ResourceLocation zombieVillagerProfessionMason = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/mason.png");
-	private static final ResourceLocation zombieVillagerProfessionNitwit = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/nitwit.png");
-	private static final ResourceLocation zombieVillagerProfessionShepherd = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/shepherd.png");
-	private static final ResourceLocation zombieVillagerProfessionToolsmith = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/toolsmith.png");
-	private static final ResourceLocation zombieVillagerProfessionWeaponsmith = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/weaponsmith.png");
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_ARMORER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/armorer.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_BUTCHER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/butcher.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_CARTOGRAPHER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/cartographer.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_CLERIC = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/cleric.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_FARMER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/farmer.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_FISHERMAN = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/fisherman.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_FLETCHER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/fletcher.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEATHERWORKER = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/leatherworker.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LIBRARIAN = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/librarian.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_MASON = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/mason.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_NITWIT = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/nitwit.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_SHEPHERD = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/shepherd.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_TOOLSMITH = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/toolsmith.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_WEAPONSMITH = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/weaponsmith.png").toString());
 	
 	// Profession level purses
-	private static final ResourceLocation zombieVillagerProfessionLevelStone = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession_level/stone.png");
-	private static final ResourceLocation zombieVillagerProfessionLevelIron = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession_level/iron.png");
-	private static final ResourceLocation zombieVillagerProfessionLevelGold = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession_level/gold.png");
-	private static final ResourceLocation zombieVillagerProfessionLevelEmerald = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession_level/emerald.png");
-	private static final ResourceLocation zombieVillagerProfessionLevelDiamond = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession_level/diamond.png");
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEVEL_STONE = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession_level/stone.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEVEL_IRON = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession_level/iron.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEVEL_GOLD = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession_level/gold.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEVEL_EMERALD = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession_level/emerald.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_PROFESSION_LEVEL_DIAMOND = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession_level/diamond.png").toString());
 	
 	// Vanilla textures
-    private static final ResourceLocation zombiePigmanTextures = new ResourceLocation("textures/entity/zombie_pigman.png");
-    private static final ResourceLocation zombieTextures = new ResourceLocation("textures/entity/zombie/zombie.png");
-    private static final ResourceLocation zombieVillagerTextures = new ResourceLocation("textures/entity/zombie/zombie_villager.png");
+    private static final ResourceLocation ZOMBIE_PIGMAN_TEXTURE = new ResourceLocation("textures/entity/zombie_pigman.png");
+    private static final ResourceLocation ZOMBIE_TEXTURE = new ResourceLocation("textures/entity/zombie/zombie.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURE = new ResourceLocation("textures/entity/zombie/zombie_villager.png");
     
     
 	
@@ -117,7 +118,6 @@ public class RenderZombieVillagerModern extends RenderBiped
     /**
      * Queries whether should render the specified pass or not.
      */
-    // Reset to vanilla style - v3.1.1
     protected int shouldRenderPass(EntityZombie zombie, int passNumber, float progress)
     {
         this.modelSetter(zombie); // Whether or not this will render as a villager-type zombie
@@ -273,7 +273,7 @@ public class RenderZombieVillagerModern extends RenderBiped
     
     
     /**
-     * Added in v3.1.1: machinery for modular textures, adapted from RenderHorse
+     * Machinery for modular textures, adapted from RenderHorse
      */
     
     // summon Zombie ~ ~ ~ {IsVillager:1}
@@ -284,45 +284,45 @@ public class RenderZombieVillagerModern extends RenderBiped
     
     // Made this 2D so that I can always make sure to add the proper key
     private static final String[][] biomeTypeTextures = new String[][] {
-    		{zombieVillagerTypePlains.toString(), "pla"},
-    		{zombieVillagerTypeMagical.toString(), "mag"},
-    		{zombieVillagerTypeHighland.toString(), "hig"},
-    		{zombieVillagerTypeForest.toString(), "for"},
-    		{zombieVillagerTypeAquatic.toString(), "aqu"},
-    		{zombieVillagerTypeJungle.toString(), "jun"},
-    		{zombieVillagerTypeSwamp.toString(), "swa"},
-    		{zombieVillagerTypeTaiga.toString(), "tai"},
-    		{zombieVillagerTypeDesert.toString(), "des"},
-    		{zombieVillagerTypeSavanna.toString(), "sav"},
-    		{zombieVillagerTypeMushroom.toString(), "mus"},
-    		{zombieVillagerTypeSnow.toString(), "sno"},
-    		{zombieVillagerTypeEnd.toString(), "end"},
-    		{zombieVillagerTypeNether.toString(), "net"},
+    		{ZOMBIE_VILLAGER_TYPE_PLAINS.toString(), "pla"},
+    		{ZOMBIE_VILLAGER_TYPE_MAGICAL.toString(), "mag"},
+    		{ZOMBIE_VILLAGER_TYPE_HIGHLAND.toString(), "hig"},
+    		{ZOMBIE_VILLAGER_TYPE_FOREST.toString(), "for"},
+    		{ZOMBIE_VILLAGER_TYPE_AQUATIC.toString(), "aqu"},
+    		{ZOMBIE_VILLAGER_TYPE_JUNGLE.toString(), "jun"},
+    		{ZOMBIE_VILLAGER_TYPE_SWAMP.toString(), "swa"},
+    		{ZOMBIE_VILLAGER_TYPE_TAIGA.toString(), "tai"},
+    		{ZOMBIE_VILLAGER_TYPE_DESERT.toString(), "des"},
+    		{ZOMBIE_VILLAGER_TYPE_SAVANNA.toString(), "sav"},
+    		{ZOMBIE_VILLAGER_TYPE_MUSHROOM.toString(), "mus"},
+    		{ZOMBIE_VILLAGER_TYPE_SNOW.toString(), "sno"},
+    		{ZOMBIE_VILLAGER_TYPE_END.toString(), "end"},
+    		{ZOMBIE_VILLAGER_TYPE_NETHER.toString(), "net"},
     		};
     
     private static final String[][] careerTextures = new String[][] {
-    	{zombieVillagerProfessionFarmer.toString(), "far"}, // 0
-    	{zombieVillagerProfessionFisherman.toString(), "fis"},
-    	{zombieVillagerProfessionShepherd.toString(), "she"},
-    	{zombieVillagerProfessionFletcher.toString(), "fle"},
-    	{zombieVillagerProfessionLibrarian.toString(), "lib"}, // 4
-    	{zombieVillagerProfessionCartographer.toString(), "car"},
-    	{zombieVillagerProfessionCleric.toString(), "cle"}, // 6
-    	{zombieVillagerProfessionArmorer.toString(), "arm"},
-    	{zombieVillagerProfessionWeaponsmith.toString(), "wea"},
-    	{zombieVillagerProfessionToolsmith.toString(), "too"}, // 9
-    	{zombieVillagerProfessionMason.toString(), "mas"},
-    	{zombieVillagerProfessionButcher.toString(), "but"}, // 11
-    	{zombieVillagerProfessionLeatherworker.toString(), "lea"},
-    	{zombieVillagerProfessionNitwit.toString(), "nit"}, //13
+    	{ZOMBIE_VILLAGER_PROFESSION_FARMER.toString(), "far"}, // 0
+    	{ZOMBIE_VILLAGER_PROFESSION_FISHERMAN.toString(), "fis"},
+    	{ZOMBIE_VILLAGER_PROFESSION_SHEPHERD.toString(), "she"},
+    	{ZOMBIE_VILLAGER_PROFESSION_FLETCHER.toString(), "fle"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LIBRARIAN.toString(), "lib"}, // 4
+    	{ZOMBIE_VILLAGER_PROFESSION_CARTOGRAPHER.toString(), "car"},
+    	{ZOMBIE_VILLAGER_PROFESSION_CLERIC.toString(), "cle"}, // 6
+    	{ZOMBIE_VILLAGER_PROFESSION_ARMORER.toString(), "arm"},
+    	{ZOMBIE_VILLAGER_PROFESSION_WEAPONSMITH.toString(), "wea"},
+    	{ZOMBIE_VILLAGER_PROFESSION_TOOLSMITH.toString(), "too"}, // 9
+    	{ZOMBIE_VILLAGER_PROFESSION_MASON.toString(), "mas"},
+    	{ZOMBIE_VILLAGER_PROFESSION_BUTCHER.toString(), "but"}, // 11
+    	{ZOMBIE_VILLAGER_PROFESSION_LEATHERWORKER.toString(), "lea"},
+    	{ZOMBIE_VILLAGER_PROFESSION_NITWIT.toString(), "nit"}, //13
     	};
     
     private static final String[][] profLevelTextures = new String[][] {
-    	{zombieVillagerProfessionLevelStone.toString(), "pl1"},
-    	{zombieVillagerProfessionLevelIron.toString(), "pl2"},
-    	{zombieVillagerProfessionLevelGold.toString(), "pl3"},
-    	{zombieVillagerProfessionLevelEmerald.toString(), "pl4"},
-    	{zombieVillagerProfessionLevelDiamond.toString(), "pl5"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LEVEL_STONE.toString(), "pl1"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LEVEL_IRON.toString(), "pl2"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LEVEL_GOLD.toString(), "pl3"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LEVEL_EMERALD.toString(), "pl4"},
+    	{ZOMBIE_VILLAGER_PROFESSION_LEVEL_DIAMOND.toString(), "pl5"},
     	};
     
     /**
@@ -331,21 +331,21 @@ public class RenderZombieVillagerModern extends RenderBiped
     protected ResourceLocation getEntityTexture(EntityZombie zombie)
     {
     	if (zombie instanceof EntityPigZombie) { // Is a zombie pigman
-    		return zombiePigmanTextures;
+    		return ZOMBIE_PIGMAN_TEXTURE;
     	}
     	else if ( zombie.isVillager() ) // Is a zombie villager
     	{
-    		if (GeneralConfig.modernZombieSkins) // v3.2.3
+    		if (GeneralConfig.modernZombieSkins)
     		{
     			return this.getHashmappedSkinCombo(zombie);
     		}
     		else
     		{
-    			return zombieVillagerTextures;
+    			return ZOMBIE_VILLAGER_TEXTURE;
     		}
         } 
         else { // Is an ordinary zombie
-            return zombieTextures; // The default zombie skin
+            return ZOMBIE_TEXTURE; // The default zombie skin
         }
     }
     
@@ -371,25 +371,23 @@ public class RenderZombieVillagerModern extends RenderBiped
     @SideOnly(Side.CLIENT)
     private Object[] setModularZombieVillagerTexturePaths(EntityZombie zombievillager)
     {
-    	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombievillager);
+    	final ExtendedZombieVillager ieep = ExtendedZombieVillager.get(zombievillager);
     	
-        String skinComboHashKey = "zombievillager/";
+        StringBuilder skinComboHashKey = (new StringBuilder()).append("zombievillager/");
         
         String[] layeredTextureAddressArray = new String[4]; 
         
         // Reset the layer array
-        layeredTextureAddressArray[0] = zombieVillagerBaseSkin.toString();
+        layeredTextureAddressArray[0] = ZOMBIE_VILLAGER_BASE_SKIN.toString();
         layeredTextureAddressArray[1] = null;
         layeredTextureAddressArray[2] = null;
         layeredTextureAddressArray[3] = null;
         
         // Set the indexing values, and clamp them just in case
-        int biometype = MathHelper.clamp_int(ezv.getBiomeType(), 0, biomeTypeTextures.length-1);
-        int career = GeneralConfig.villagerCareers ? ezv.getCareer() : -1;
-        int proflevel = MathHelper.clamp_int(ezv.getProfessionLevel(), 0, profLevelTextures.length-1);
+        int biometype = MathHelper.clamp_int(ieep.getBiomeType(), 0, biomeTypeTextures.length-1);
+        int career = GeneralConfig.villagerCareers ? ieep.getCareer() : -1;
+        int proflevel = MathHelper.clamp_int(ieep.getProfessionLevel(), 0, profLevelTextures.length-1);
         
-        
-        // Re-arranged in v3.2
         
         // ---------------------------- //
         // --- PART 0: set the skin --- //
@@ -403,28 +401,29 @@ public class RenderZombieVillagerModern extends RenderBiped
         // ---------------------------------- //
         
         layeredTextureAddressArray[1] = biomeTypeTextures[biometype][0];
-        skinComboHashKey = skinComboHashKey + biomeTypeTextures[biometype][1];
+        skinComboHashKey.append(biomeTypeTextures[biometype][1]);
         
         
         // ----------------------------- //
         // --- PART 2: set the career--- //
         // ----------------------------- //
         
-        int indexofmodprof = GeneralConfig.professionID_a.indexOf(ezv.getProfession());
+        int profession = ieep.getProfession(); 
+        int indexofmodprof = GeneralConfig.professionID_a.indexOf(profession);
         
         if (!zombievillager.isChild())
         {
             if ( 
-            		ezv.getProfession() > 5 // Is non-vanilla
-            		&& indexofmodprof > -1 // Has a skin asset mapping
+            		profession > (GeneralConfig.enableNitwit ? 5 : 4) // Is non-vanilla
+            		& indexofmodprof > -1 // Has a skin asset mapping
             		//&& !((String) (moddedVillagerCareerSkins.get("zombieCareerAsset")).get(indexofmodprof)).equals("") ) // That mapping isn't blank
             		)
             {
             	// This is a modded profession ID with a supported skin -- possibly.
             	
             	// If there is no zombie or non-zombie version, just default the asset to the Nitwit style.
-            	ResourceLocation modCareerSkin = zombieVillagerProfessionNitwit;
-            	String profRootName = "nit"; 
+            	ResourceLocation modCareerSkin = ZOMBIE_VILLAGER_PROFESSION_NITWIT;
+            	String profRootName = "non";
             	
             	// First check if there is an explicit zombie profession texture.
             	profRootName = ((String) (GeneralConfig.zombieCareerAsset_a).get(indexofmodprof));
@@ -437,23 +436,24 @@ public class RenderZombieVillagerModern extends RenderBiped
             		if (!profRootName.equals(""))
             		{
             			// A non-zombie texture was found.
-                    	modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/villager/profession/"+profRootName+".png");
+                    	modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append("textures/entity/villager/profession/").append(profRootName).append(".png").toString());
+                    	layeredTextureAddressArray[2] = modCareerSkin.toString();
             		}
             	}
             	else
             	{
             		// A zombie texture was found.
-            		modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), "textures/entity/zombie_villager/profession/"+profRootName+".png");
+            		modCareerSkin = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("profession/").append(profRootName).append(".png").toString());
+            		layeredTextureAddressArray[2] = modCareerSkin.toString();
             	}
             	
-                layeredTextureAddressArray[2] = modCareerSkin.toString();
-                skinComboHashKey = skinComboHashKey + "_" + profRootName;
+                skinComboHashKey.append("_").append(profRootName);
             }
-            else // This is vanilla skin or is otherwise unsupported
+            else if (profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
             {
             	// Use the profession and career values to zero in on the value stored in the careerTextures array
-                int careerIndex = 0;
-                switch (ezv.getProfession())
+                int careerIndex = -1;
+                switch (profession)
                 {
         	    	case 0: // Farmer type
         	    		switch (career)
@@ -516,8 +516,12 @@ public class RenderZombieVillagerModern extends RenderBiped
                 
                 // Set the career
                 layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
-                skinComboHashKey = skinComboHashKey + "_" + careerTextures[careerIndex][1];
+                skinComboHashKey.append("_").append(careerTextures[careerIndex][1]);
             }
+	        else
+	        {
+	        	skinComboHashKey.append("_non");
+	        }
         }
         
 
@@ -527,10 +531,10 @@ public class RenderZombieVillagerModern extends RenderBiped
         // ---------------------------------------- //
         
         layeredTextureAddressArray[3] = null;//profLevelTextures[proflevel][0]; // Left off for now: no need to see prof level
-        skinComboHashKey = skinComboHashKey + "_" + profLevelTextures[proflevel][1];
+        skinComboHashKey.append("_").append(profLevelTextures[proflevel][1]);
         
         //return skinComboHashKey;
-        return new Object[] {layeredTextureAddressArray, skinComboHashKey};
+        return new Object[] {layeredTextureAddressArray, skinComboHashKey.toString()};
     }
     
     @SideOnly(Side.CLIENT)

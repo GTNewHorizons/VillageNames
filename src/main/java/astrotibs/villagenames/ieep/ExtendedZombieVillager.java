@@ -20,12 +20,12 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
 {
 
     public    final static String Identifier = "VillagerInfo";
-    protected final static String ProfessionKey = "Profession";             // Controls zombie villager profession
-    protected final static String CareerKey = "Career";             // Controls zombie villager profession
-	public final static String biomeKey = "BiomeType"; // Added in v3.1
-	public final static String professionLevelKey = "ProfessionLevel"; // Added in v3.1
-	public final static String skinToneKey = "SkinTone"; // Added in v3.2
-    protected final static String InitializedKey = "Defined";               // Controls if a zombie villager was assigned a profession
+    protected final static String ProfessionKey = "Profession"; // Controls zombie villager profession
+    protected final static String CareerKey = "Career"; // Controls zombie villager profession
+	public final static String biomeKey = "BiomeType";
+	public final static String professionLevelKey = "ProfessionLevel";
+	public final static String skinToneKey = "SkinTone";
+    protected final static String InitializedKey = "Defined"; // Controls if a zombie villager was assigned a profession
     
     //@SuppressWarnings("unused")
     private final EntityZombie zombieWoof;
@@ -38,11 +38,11 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
     //---------------------------------------------------------
     private int profession;
     private int career;
-	private int biomeType; // Added in v3.1
-	private int professionLevel; // Added in v3.1
-	private int skinTone; // Added in v3.2
+	private int biomeType;
+	private int professionLevel;
+	private int skinTone;
 
-    private Boolean hasValidData;      // TODO: Attempt to refactor and get rid of this property
+    private Boolean hasValidData; // TODO: Attempt to refactor and get rid of this property
     
     
     public int getProfession()
@@ -67,7 +67,6 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         this.hasValidData = true;
     }
     
-    // Added in v3.1
 	public int getBiomeType()
 	{
 		return this.biomeType;
@@ -106,7 +105,7 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         	int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0 and 5
             int c = -1;
             
-            // Added break conditions in v3.1.1 to actually properly select sub-professions for zombie villagers 
+            // Added break conditions to actually properly select sub-professions for zombie villagers 
 			switch(p) {
 				
 				case 0: // FARMER
@@ -149,9 +148,9 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         this.zombieWoof = zombie;
         this.profession = -1;
         this.career = -1;
-		this.biomeType = -1; // Added in v3.1
-		this.professionLevel = -1; // Added in v3.1
-		this.skinTone = -99; // Added in v3.2
+		this.biomeType = -1;
+		this.professionLevel = -1;
+		this.skinTone = -99;
 		this.hasValidData = false;
     }
     
@@ -177,18 +176,18 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         if (this.hasValidData == null) {
             this.profession = -1;
             this.career = -1;
-            this.biomeType = -1; // Added in v3.1
-            this.professionLevel = -1; // Added in v3.1
-    		this.skinTone = -99; // Added in v3.2
+            this.biomeType = -1;
+            this.professionLevel = -1;
+    		this.skinTone = -99;
             this.hasValidData = false;
         }
         
         NBTTagCompound properties = new NBTTagCompound();
         properties.setInteger(ProfessionKey, this.profession);
         properties.setInteger(CareerKey, this.career);
-        properties.setInteger(biomeKey, this.biomeType); // Added in v3.1
-        properties.setInteger(professionLevelKey, this.professionLevel); // Added in v3.1
-        properties.setInteger(skinToneKey, this.skinTone); // Added in v3.2
+        properties.setInteger(biomeKey, this.biomeType);
+        properties.setInteger(professionLevelKey, this.professionLevel);
+        properties.setInteger(skinToneKey, this.skinTone);
         properties.setBoolean(InitializedKey, this.hasValidData);
 
         compound.setTag(Identifier, properties); 
@@ -204,16 +203,16 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
             hasValidData = false;
             profession = -1;
             career = -1;
-            biomeType = -1; // Added in v3.1
-            professionLevel = -1; // Added in v3.1
-            skinTone = -99; // Added in v3.2
+            biomeType = -1;
+            professionLevel = -1;
+            skinTone = -99;
         } 
         else {
             this.profession = properties.getInteger(ProfessionKey);
             this.career = properties.getInteger(CareerKey);
-            this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1; // Added in v3.1
-            this.professionLevel = properties.getInteger(professionLevelKey); // Added in v3.1
-            this.skinTone = properties.hasKey(skinToneKey) ? properties.getInteger(skinToneKey) : -99; // Added in v3.2
+            this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1;
+            this.professionLevel = properties.getInteger(professionLevelKey);
+            this.skinTone = properties.hasKey(skinToneKey) ? properties.getInteger(skinToneKey) : -99;
             this.hasValidData = properties.getBoolean(InitializedKey);
         }
 

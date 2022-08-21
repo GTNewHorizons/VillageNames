@@ -20,26 +20,26 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 	
 	public final static String VN_VILLAGER_TAGS = "VNExtendedVillager";
 	public final static String careerKey = "Career";
-	public final static String biomeKey = "BiomeType"; // Added in v3.1
-	public final static String professionLevelKey = "ProfessionLevel"; // Added in v3.1
-	public final static String skinToneKey = "SkinTone"; // Added in v3.2
-    protected final static String InitializedKey = "Defined";               // Controls if a villager was assigned a career and career level
+	public final static String biomeKey = "BiomeType";
+	public final static String professionLevelKey = "ProfessionLevel";
+	public final static String skinToneKey = "SkinTone";
+    protected final static String InitializedKey = "Defined"; // Controls if a villager was assigned a career and career level
     
 	private final EntityVillager villager;
 	private int career;
-	private int biomeType; // Added in v3.1
-	private int professionLevel; // Added in v3.1
-	private int skinTone; // Added in v3.2
+	private int biomeType;
+	private int professionLevel;
+	private int skinTone;
 	//private int careerLevel;
-    private Boolean hasValidData;      // TODO: Attempt to refactor and get rid of this property
+    private Boolean hasValidData; // TODO: Attempt to refactor and get rid of this property
     protected World theWorld;
     
 	public ExtendedVillager(EntityVillager villager) {
 		this.villager = villager;
 		this.career = -1;
-		this.biomeType = -1; // Added in v3.1
-		this.professionLevel = -1; // Added in v3.1
-		this.skinTone = -99; // Added in v3.2
+		this.biomeType = -1;
+		this.professionLevel = -1;
+		this.skinTone = -99;
 	}
 	
 	/**
@@ -69,7 +69,6 @@ public class ExtendedVillager implements IExtendedEntityProperties {
         this.hasValidData = true;
 	}
 	
-	// Added in v3.1
 	public int getProfession()
 	{
 		return villager.getProfession();
@@ -93,7 +92,6 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 		//this.hasValidData = true;
 	}
 
-	// Added in v3.2
 	public int getSkinTone() {return this.skinTone;}
 	public void setSkinTone(int pl) {this.skinTone = pl;}
 	
@@ -103,17 +101,17 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 		
         if (this.hasValidData == null) {
             this.career = -1;
-            this.biomeType = -1; // Added in v3.1
-            this.professionLevel = -1; // Added in v3.1
-            this.skinTone = -99; // Added in v3.2
+            this.biomeType = -1;
+            this.professionLevel = -1;
+            this.skinTone = -99;
             this.hasValidData = false;
         }
         
         NBTTagCompound properties = new NBTTagCompound();
         properties.setInteger(careerKey, this.career);
-        properties.setInteger(biomeKey, this.biomeType); // Added in v3.1
-        properties.setInteger(professionLevelKey, this.professionLevel); // Added in v3.1
-        properties.setInteger(skinToneKey, this.skinTone); // Added in v3.2
+        properties.setInteger(biomeKey, this.biomeType);
+        properties.setInteger(professionLevelKey, this.professionLevel);
+        properties.setInteger(skinToneKey, this.skinTone);
         properties.setBoolean(InitializedKey, this.hasValidData);
 
         compound.setTag(VN_VILLAGER_TAGS, properties); 
@@ -189,7 +187,6 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 	}
 	
 	
-	// Added in v3.1
 	/**
 	 * Set the profession level based on the number of trades
 	 */

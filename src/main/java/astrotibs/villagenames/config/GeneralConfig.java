@@ -197,8 +197,10 @@ public class GeneralConfig {
 				"80", // Forestry Apiarist
 				"-190", // Thaumcraft Wizard -- turned off because of hat brim rendering issues
 				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
+				"512", // Immersive Engineering Engineer
 				"-6156", // Open Blocks Music Merchant
 				"7766", // Growthcraft Community Edition Apiarist
+				"935153", // Enchanting Plus v4 Enchanter
 	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers. A normal value will be whitelisted: it will display that villager's headwear layer even if Modded Villager Headwear is false. "
 	    		+ "Adding a negative sign in front of the ID int will blacklist the profession so that its headwear layer never renders.");
@@ -217,34 +219,56 @@ public class GeneralConfig {
 	    }
 	    
 	    moddedVillagerModularSkins = config.getStringList("Modded Villager Modular Skins", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
-				"gc_brewer||10", // Growthcraft
-				"gc_apiarist||14", // Growthcraft
-		        "amt_cafemaster||15", // Apple & Milk & Tea
-		        "amt_warehousemanager||16", // Apple & Milk & Tea
-		        "vt_barwench||42", // Village Taverns
-		        "vt_hostler||43", // Village Taverns
-		        "vt_shepherdess||44", // Village Taverns
-		        "vt_baker||45", // Village Taverns
-				"msm_swordsmith||66", // More Swords mod version 2
-				"for_apiarist|for_apiarist|80", // Forestry
-				"for_arborist|for_arborist|81", // Forestry
-				"tc_stationchief||86", // Traincraft
-				"psy_dealer||87", // Psychedelicraft
-				"pc_mechanic||125", // PneumaticCraft
-				"thc_wizard||190", // Thaumcraft
-				"thc_banker||191", // Thaumcraft
-				"fa_archaeologist||303", // Fossils and Archaeology
-				"rc_engineer|rc_engineer|456", // Railcraft
-				"wit_apothecary||2435", // Witchery
-				"ob_musicmerchant||6156", // Open Blocks
-				"gc_brewer||6677", // Growthcraft Community Edition
-				"gc_apiarist||7766", // Growthcraft Community Edition
-				"mus_clerk||52798", // Musica
-				"tc_tinkerer||78943", // Tinkers Construct
-				"ccp_stablehand||19940402", // ChocoCraft Plus
-				"myc_archivist||1210950779", // Mystcraft
 				// Actually Additions
 				"aa_jam|aa_jam|493827",
+				// Apple & Milk & Tea
+		        "amt_cafemaster||15",
+		        "amt_warehousemanager||16",
+				// ChocoCraft Plus
+				"ccp_stablehand||19940402",
+				// Enchanting Plus v4 Enchanter
+				"ep_enchanter||935153",
+				// Forestry
+				"for_apiarist|for_apiarist|80",
+				"for_arborist|for_arborist|81",
+				// Fossils and Archaeology
+				"fa_archaeologist||303",
+	    		// Growthcraft
+	    		"gc_brewer||10",
+				"gc_apiarist||14",
+				// Growthcraft Community Edition
+				"gc_brewer||6677",
+				"gc_apiarist||7766",
+				// Immersive Engineering
+				"ie_engineer||512",
+		        // More Swords mod version 2
+				"msm_swordsmith||66",
+				// Musica
+				"mus_clerk||52798",
+				// Mystcraft
+				"myc_archivist||1210950779",
+				// Open Blocks
+				"ob_musicmerchant||6156",
+				// PneumaticCraft
+				"pc_mechanic||125",
+				// Psychedelicraft
+				"psy_dealer||87",
+				// Railcraft
+				"rc_engineer|rc_engineer|456",
+				// Thaumcraft
+				"thc_wizard||190",
+				"thc_banker||191",
+				// Tinkers Construct
+				"tc_tinkerer||78943",
+				// Traincraft
+				"tc_stationchief||86", 
+		        // Village Taverns
+		        "vt_barwench||42",
+		        "vt_hostler||43",
+		        "vt_shepherdess||44",
+		        "vt_baker||45",
+				// Witchery
+				"wit_apothecary||2435",
 	    		},
 	    		"(If modern skins are enabled) List of profession IDs for other mods' villagers to render in the modular skin style. Format is: careerAsset|zombieCareerAsset|professionID\n"+
 	    		"careerAsset: career skin png to be overlaid onto the villager, located in assets\\"+Reference.MOD_ID.toLowerCase()+"\\textures\\entity\\villager\\profession\n"+
@@ -253,6 +277,7 @@ public class GeneralConfig {
 	    						+ "professionID: the ID associated with the mod profession.");
 	    
 	    // Assign the map now and immediately extract it into arrays for faster lookup
+	    moddedVillagerCareerSkins_map.clear();
 	    moddedVillagerCareerSkins_map = GeneralConfig.unpackModVillagerSkins(GeneralConfig.moddedVillagerModularSkins);
 	    careerAsset_a = (ArrayList<String>)moddedVillagerCareerSkins_map.get("careerAsset");
 	    zombieCareerAsset_a = (ArrayList<String>)moddedVillagerCareerSkins_map.get("zombieCareerAsset");
@@ -758,6 +783,8 @@ public class GeneralConfig {
 	    
 	    modSmithingTable = config.getStringList("Mod Priority: Smithing Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
+ 				"smithinginthe90s",
+ 				"netheriteplus",
 	    		"manametal",
  				},
  				"Priority order for referencing Smithing Table for tool smithy buildings. The version highest on the list and registered in your game will be used."
@@ -863,35 +890,56 @@ public class GeneralConfig {
 		
 		// New mod profession mapping
 		modProfessionMapping = config.getStringList("Mod Professions", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
-				"Brewer|10|0", // Growthcraft
-		        "Cafe Master|15|0", // Apple & Milk & Tea
-		        "Warehouse Manager|16|0", // Apple & Milk & Tea
-		        "Bar Wench|42|0", // Village Taverns
-		        "Hostler|43|0", // Village Taverns
-		        "Shepherd|44|0", // Village Taverns
-		        "Baker|45|0", // Village Taverns
-				"Apiarist|14|4", // Growthcraft
-				"Swordsmith|66|5", // More Swords mod version 2
-				"Apiarist|80|4", // Forestry
-				"Arborist|81|0", // Forestry
-				"Station Chief|86|0", // Traincraft
-				"Dealer|87|0", // Psychedelicraft
-				"Mechanic|125|3", // PneumaticCraft
-				"Wizard|190|2", // Thaumcraft
-				"Banker|191|0", // Thaumcraft
-				"Archaeologist|303|2", // Fossils and Archaeology
-				"Engineer|456|3", // Railcraft
-				"Apothecary|2435|2", // Witchery
-				"Music Merchant|6156|5", // Open Blocks
-				"Brewer|6677|0", // Growthcraft Community Edition
-				"Apiarist|7766|4", // Growthcraft Community Edition
-				"Clerk|52798|0", // Musica
-				"Tinkerer|78943|5", // Tinkers Construct
-				"Enchanter|935153|2", 
-				"Stablehand|19940402|0", // ChocoCraft Plus
-				"Archivist|1210950779|1", // Mystcraft
 				// Actually Additions
 				"Jam Guy|493827|0",
+				// Apple & Milk & Tea
+		        "Cafe Master|15|0",
+		        "Warehouse Manager|16|0",
+				// ChocoCraft Plus
+				"Stablehand|19940402|0",
+				// Enchanting Plus v4
+				"Enchanter|935153|2",
+				// Forestry
+				"Apiarist|80|4",
+				"Arborist|81|0",
+				// Fossils and Archaeology
+				"Archaeologist|303|2",
+				// Growthcraft
+				"Brewer|10|0",
+				"Apiarist|14|4",
+				// Growthcraft Community Edition
+				"Brewer|6677|0",
+				"Apiarist|7766|4",
+				// Immersive Engineering
+				"Engineer|512|0",
+				// More Swords mod version 2
+				"Swordsmith|66|5",
+				// Musica
+				"Clerk|52798|0",
+				// Mystcraft
+				"Archivist|1210950779|1",
+				// Open Blocks
+				"Music Merchant|6156|5",
+				// PneumaticCraft
+				"Mechanic|125|3",
+				// Psychedelicraft
+				"Dealer|87|0",
+				// Railcraft
+				"Engineer|456|3",
+				// Thaumcraft
+				"Wizard|190|2",
+				"Banker|191|0",
+				// Tinkers Construct
+				"Tinkerer|78943|5",
+				// Traincraft
+				"Station Chief|86|0",
+		        // Village Taverns
+		        "Bar Wench|42|0",
+		        "Hostler|43|0",
+		        "Shepherd|44|0",
+		        "Baker|45|0",
+				// Witchery
+				"Apothecary|2435|2",
 				},
 				"List of professions for other mods' villagers. Format is: Name|ID|pageType\n"
 				+ "Name is your choice of name for the profession.\n"
@@ -951,9 +999,9 @@ public class GeneralConfig {
 		List<Integer> vanillaProfMaps = new ArrayList<Integer>();
 		
 		for (String entry : inputList) {
-			// Remove parentheses
-			entry.replaceAll("\\)", "");
-			entry.replaceAll("\\(", "");
+			entry.replaceAll("/", ""); // Forward slashses don't need to be escaped
+			entry.replaceAll("\\\\", ""); // \ is BOTH String and regex; needs to be double-escaped. See https://stackoverflow.com/questions/1701839/string-replaceall-single-backslashes-with-double-backslashes
+			entry.replaceAll("..", "");
 			// Split by pipe
 			String[] splitEntry = entry.split("\\|");
 			
@@ -1185,12 +1233,14 @@ public class GeneralConfig {
 	/**
 	 * Loads the (careerAsset|zombieCareerAsset|professionID) string lists and assigns them to this instance's variables.
 	 */
-	public static Map<String, List> unpackModVillagerSkins(String[] inputList) {
+	public static Map<String, List> unpackModVillagerSkins(String[] inputList)
+	{
 		List<String> careerAsset_a = new ArrayList<String>();
 		List<String> zombieCareerAsset_a = new ArrayList<String>();
 		List<Integer> professionID_a = new ArrayList<Integer>();
 		
-		for (String entry : inputList) {
+		for (String entry : inputList)
+		{
 			// Remove slashes and double dots to prevent address abuse
 			entry.replaceAll("/", ""); // Forward slashses don't need to be escaped
 			entry.replaceAll("\\\\", ""); // \ is BOTH String and regex; needs to be double-escaped. See https://stackoverflow.com/questions/1701839/string-replaceall-single-backslashes-with-double-backslashes
@@ -1204,11 +1254,12 @@ public class GeneralConfig {
 			Integer professionID=-1;
 			
 			// Place entries into variables
-			try {careerAsset = splitEntry[0].trim();}       			catch (Exception e) {}
-			try {zombieCareerAsset = splitEntry[1].trim();} 			catch (Exception e) {}
-			try {professionID = Integer.valueOf(splitEntry[2].trim());} catch (Exception e) {}
+			try {careerAsset = splitEntry[0].trim();}       			catch (Exception e) {careerAsset="";}
+			try {zombieCareerAsset = splitEntry[1].trim();} 			catch (Exception e) {zombieCareerAsset="";}
+			try {professionID = Integer.valueOf(splitEntry[2].trim());} catch (Exception e) {professionID=-1;}
 			
-			if(!careerAsset.equals("")) { // Something was actually assigned in the try block
+			if(!careerAsset.equals(""))
+			{ // Something was actually assigned in the try block
 				careerAsset_a.add(careerAsset);
 				zombieCareerAsset_a.add(zombieCareerAsset);
 				professionID_a.add(professionID);

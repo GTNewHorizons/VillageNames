@@ -672,6 +672,8 @@ public class ModObjects {
 	// Smithing Table
 	public static final String smithingTable_EFR = DOM_ETFUTURUM + ":smithing_table";
 	public static final String smithingTable_MM = DOM_MANAMETAL + ":BlockCastingWeldings";
+	public static final String smithingTable_NP = "netheriteplus:SmithingTable";
+	public static final String smithingTable_Sit90s = "smithing:smithing_table";
 	
 	// Smoker
 	public static final String smoker_EF = DOM_ETFUTURUM + ":smoker";
@@ -3747,6 +3749,16 @@ public class ModObjects {
 			else if (mod.toLowerCase().trim().equals("manametal"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.smithingTable_MM);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("netheriteplus"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smithingTable_NP);
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("smithinginthe90s"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.smithingTable_Sit90s);
 				if (modblock != null) {return new Object[]{modblock, 0};}
 			}
 		}

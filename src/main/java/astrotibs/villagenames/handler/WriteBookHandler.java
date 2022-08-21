@@ -188,7 +188,7 @@ public class WriteBookHandler {
             	// All the machinery to make a second page should only work if the villager is named.
             	// Alternatively, do not require a name if you have the "Name Villagers" flag off.
             	
-        		// Put second page call into try/catch - v3.2.2
+        		// Put second page call into try/catch
         		try {
         			String structureHintPageText = makeSecondPage(
                 			event, targetClassPath, villageYouAreIn,
@@ -408,14 +408,18 @@ public class WriteBookHandler {
     	// Convert a non-vanilla profession into a vanilla one for the purposes of generating a hint page
     	int villagerMappedProfession = -1; // If the below fails, do none
     	
-    	try {
+    	try
+    	{
+    		int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession);
+    		
     		villagerMappedProfession =  
-    				(Integer) ((villagerProfession >= 0 && villagerProfession <= 5)
-    				? villagerProfession : ((GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps")).get( GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession) )));
-    		}
-    	catch (Exception e) {
+    				villagerProfession > (GeneralConfig.enableNitwit ? 5 : 4)
+    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : villagerProfession;
+		}
+    	catch (Exception e)
+    	{
     		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID. Check your formatting!");
-    		}
+		}
     	
     	// Primitive Mobs hard coding for career detection
     	if (targetClassPath.equals( ModObjects.PMTravelingMerchantClass ) )
@@ -432,7 +436,7 @@ public class WriteBookHandler {
         switch (villagerMappedProfession) {
 	        case 0: // Villager is a Farmer
 	        	
-	        	// v3.2.1 - calculate distances here
+	        	// Calculate distances here
 	        	nearestMonumentXYZ = nearestStructureLoc("Monument", event);
 	        	monumentDistSq =
 		    		(nearestMonumentXYZ[0]==0 && nearestMonumentXYZ[1]==0 && nearestMonumentXYZ[2]==0) ? Double.MAX_VALUE :
