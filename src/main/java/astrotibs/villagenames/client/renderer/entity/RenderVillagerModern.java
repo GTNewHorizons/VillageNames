@@ -101,7 +101,7 @@ public class RenderVillagerModern extends RenderVillager {
     private static final ResourceLocation VILLAGER_SKIN_TONE_DARK2 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d2.png").toString());
     private static final ResourceLocation VILLAGER_SKIN_TONE_DARK3 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d3.png").toString());
     private static final ResourceLocation VILLAGER_SKIN_TONE_DARK4 = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/d4.png").toString());
-    
+    private static final ResourceLocation VILLAGER_SKIN_TIBS = new ResourceLocation(MIDLC, (new StringBuilder()).append(VAD).append("skintone/t_v.png").toString());
 
     /**
      * Machinery for modular textures, adapted from RenderHorse
@@ -251,8 +251,24 @@ public class RenderVillagerModern extends RenderVillager {
         // --- PART 0: set the skin --- //
         // ---------------------------- //
         
-        layeredTextureAddressArray[0] = skintoneTextures[skinTone_i][0];
-        skinComboHashKey.append(skintoneTextures[skinTone_i][1]);
+        // give @p minecraft:name_tag 1 0 {display:{Name:"Tibs"}}
+        // give @p minecraft:name_tag 1 0 {display:{Name:"AstroTibs"}}
+        
+        String trimmed_lc_villager_name = villager.getCustomNameTag().toLowerCase().trim();
+        if (!trimmed_lc_villager_name.equals(Reference.NAME_TIBS)
+        		& !trimmed_lc_villager_name.equals(Reference.NAME_ASTROTIBS)
+        		& !(trimmed_lc_villager_name.length()>=11 && trimmed_lc_villager_name.substring(0, 11).equals(Reference.NAME_ASTROTIBS_OPENP))
+        		& !(trimmed_lc_villager_name.length()>=6 && trimmed_lc_villager_name.substring(0, 6).equals(Reference.NAME_TIBS_OPENP))
+        		)
+        {
+        	layeredTextureAddressArray[0] = skintoneTextures[skinTone_i][0];
+            skinComboHashKey.append(skintoneTextures[skinTone_i][1]);
+        }
+        else
+        {
+        	layeredTextureAddressArray[0] = VILLAGER_SKIN_TIBS.toString();
+            skinComboHashKey.append("tibs");
+        }
         
         
         // ---------------------------------- //
@@ -284,7 +300,7 @@ public class RenderVillagerModern extends RenderVillager {
 	            layeredTextureAddressArray[2] = modCareerSkin.toString();
 	            skinComboHashKey.append("_").append(profRootName);
 	        }
-	        else if (extended_profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
+	        else if (extended_profession >= 0 & extended_profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
 	        {
 	            int careerIndex = -1;
 	            switch (extended_profession)

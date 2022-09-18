@@ -39,6 +39,7 @@ public class RenderZombieVillagerModern extends RenderBiped
 	
 	// Base skin texture
 	private static final ResourceLocation ZOMBIE_VILLAGER_BASE_SKIN = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("zombie_villager.png").toString());
+	private static final ResourceLocation ZOMBIE_VILLAGER_TIBS_SKIN = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("t_zv.png").toString());
 	
 	// Biome-based types
 	private static final ResourceLocation ZOMBIE_VILLAGER_TYPE_DESERT  = new ResourceLocation((Reference.MOD_ID).toLowerCase(), (new StringBuilder()).append(ZVAD).append("type/desert.png").toString());
@@ -377,8 +378,27 @@ public class RenderZombieVillagerModern extends RenderBiped
         
         String[] layeredTextureAddressArray = new String[4]; 
         
-        // Reset the layer array
-        layeredTextureAddressArray[0] = ZOMBIE_VILLAGER_BASE_SKIN.toString();
+        // summon Zombie ~ ~ ~ {IsVillager:1}
+        
+        // give @p minecraft:name_tag 1 0 {display:{Name:"Tibs"}}
+        // give @p minecraft:name_tag 1 0 {display:{Name:"AstroTibs"}}
+
+        // Reset the layer array        
+        String trimmed_lc_zombievillager_name = zombievillager.getCustomNameTag().toLowerCase().trim();
+        if (!trimmed_lc_zombievillager_name.equals(Reference.NAME_TIBS)
+        		& !trimmed_lc_zombievillager_name.equals(Reference.NAME_ASTROTIBS)
+        		& !(trimmed_lc_zombievillager_name.length()>=11 && trimmed_lc_zombievillager_name.substring(0, 11).equals(Reference.NAME_ASTROTIBS_OPENP))
+        		& !(trimmed_lc_zombievillager_name.length()>=6 && trimmed_lc_zombievillager_name.substring(0, 6).equals(Reference.NAME_TIBS_OPENP))
+        		)
+        {
+        	layeredTextureAddressArray[0] = ZOMBIE_VILLAGER_BASE_SKIN.toString();
+        	skinComboHashKey.append("zomb_");
+        }
+        else
+        {
+        	layeredTextureAddressArray[0] = ZOMBIE_VILLAGER_TIBS_SKIN.toString();
+        	skinComboHashKey.append("tibs_");
+        }
         layeredTextureAddressArray[1] = null;
         layeredTextureAddressArray[2] = null;
         layeredTextureAddressArray[3] = null;
@@ -408,13 +428,13 @@ public class RenderZombieVillagerModern extends RenderBiped
         // --- PART 2: set the career--- //
         // ----------------------------- //
         
-        int profession = ieep.getProfession(); 
-        int indexofmodprof = GeneralConfig.professionID_a.indexOf(profession);
+        int extended_profession = ieep.getProfession(); 
+        int indexofmodprof = GeneralConfig.professionID_a.indexOf(extended_profession);
         
         if (!zombievillager.isChild())
         {
             if ( 
-            		profession > (GeneralConfig.enableNitwit ? 5 : 4) // Is non-vanilla
+            		extended_profession > (GeneralConfig.enableNitwit ? 5 : 4) // Is non-vanilla
             		& indexofmodprof > -1 // Has a skin asset mapping
             		//&& !((String) (moddedVillagerCareerSkins.get("zombieCareerAsset")).get(indexofmodprof)).equals("") ) // That mapping isn't blank
             		)
@@ -449,11 +469,11 @@ public class RenderZombieVillagerModern extends RenderBiped
             	
                 skinComboHashKey.append("_").append(profRootName);
             }
-            else if (profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
+            else if (extended_profession >= 0 & extended_profession <= (GeneralConfig.enableNitwit ? 5 : 4)) // This is vanilla skin or is otherwise unsupported
             {
             	// Use the profession and career values to zero in on the value stored in the careerTextures array
                 int careerIndex = -1;
-                switch (profession)
+                switch (extended_profession)
                 {
         	    	case 0: // Farmer type
         	    		switch (career)
@@ -515,7 +535,7 @@ public class RenderZombieVillagerModern extends RenderBiped
                 }
                 
                 // Set the career
-                layeredTextureAddressArray[2] = careerTextures[careerIndex][0];
+                layeredTextureAddressArray[2] = careerTextures[careerIndex][0]; // TODO - IOOB exception: careerIndex is -1?
                 skinComboHashKey.append("_").append(careerTextures[careerIndex][1]);
             }
 	        else

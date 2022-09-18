@@ -156,7 +156,6 @@ public class VersionChecker extends Thread
         if (quitChecking)
         {
     		FMLCommonHandler.instance().bus().unregister(instance);
-    		FMLCommonHandler.instance().bus().unregister(VersionChecker.instance);
     		return;
         }
     }

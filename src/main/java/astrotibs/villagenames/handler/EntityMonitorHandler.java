@@ -80,7 +80,6 @@ public class EntityMonitorHandler
     	
     	if (!event.entity.worldObj.isRemote) // Encased in notremote if - v3.1
     	{
-        	// Added in v3.1
         	if (
         			event.target instanceof EntityVillager
         			&& GeneralConfig.villagerCareers // Removed not-remote condition - v3.1
@@ -153,7 +152,6 @@ public class EntityMonitorHandler
                 	ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));
                 }
                 
-                // Added in v3.2
                 if (ezv.getSkinTone() == -99)
                 {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
                 
@@ -206,7 +204,6 @@ public class EntityMonitorHandler
             if (GeneralConfig.modernVillagerTrades) {FunctionsVN.monitorVillagerTrades(villager);}
             
             
-        	// Added in v3.1
             ExtendedVillager ev = ExtendedVillager.get(villager);
             
             // Renovated in v3.1
@@ -436,12 +433,11 @@ public class EntityMonitorHandler
                 }
             }
             
-            // Added in v3.1
             if (!zombie.worldObj.isRemote)
             {
             	final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
             	if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
-            	if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));} // Added in v3.2
+            	if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
             	
     			if ((zombie.ticksExisted + zombie.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
     			{
@@ -460,7 +456,7 @@ public class EntityMonitorHandler
     				// Sends a ping to everyone within 80 blocks
     				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(zombie.dimension, zombie.lastTickPosX, zombie.lastTickPosY, zombie.lastTickPosZ, 16*5);
     				VillageNames.VNNetworkWrapper.sendToAllAround(
-    						new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()), // v3.2
+    						new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()),
     						targetPoint);
     			}
             }
