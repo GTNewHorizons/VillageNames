@@ -107,7 +107,7 @@ public class MapGenVillageVN extends MapGenVillage
     {
     	// Deny villages less than a config-specified distance away from spawn
     	int noVillagesRadius = VillageGeneratorConfigHandler.noVillagesRadius;
-    	if ((chunkXin*chunkXin) + (chunkZin*chunkXin) < (noVillagesRadius*noVillagesRadius)) {return false;}
+    	if ((chunkXin*chunkXin) + (chunkZin*chunkZin) < (noVillagesRadius*noVillagesRadius)) {return false;}
     	
         int chunkX = chunkXin;
         int chunkZ = chunkZin;
