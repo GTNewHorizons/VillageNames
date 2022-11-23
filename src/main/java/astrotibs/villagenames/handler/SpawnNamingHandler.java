@@ -26,7 +26,6 @@ public class SpawnNamingHandler {
 			EntityLiving entity = (EntityLiving)(event.entity); // Makes things easier to manage
 			NBTTagCompound compound = new NBTTagCompound();
 			
-			// v3.1: put into try loop in case the player ruins the stone mason by removing mods that contain blocks that it trades
 			try {entity.writeEntityToNBT(compound);}
 			catch (Exception e)
 			{

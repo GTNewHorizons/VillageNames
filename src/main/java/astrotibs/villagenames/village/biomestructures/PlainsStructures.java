@@ -414,16 +414,16 @@ public class PlainsStructures
     {
         // Make foundation with blanks as empty air and F as foundation spaces
         private static final String[] foundationPattern = new String[]{
-            	"    PP    ",
+            	"    PPP   ",
             	" PPPPPPPP ",
             	" PFFFFFFP ",
-            	" PFFFFFFP ",
+            	"PPFFFFFFP ",
             	"PPFFFFFFPP",
             	"PPFFFFFFPP",
-            	" PFFFFFFP ",
+            	" PFFFFFFPP",
             	" PFFFFFFP ",
             	" PPPPPPPP ",
-            	"    PP    ",
+            	"   PPP    ",
         };
     	// Here are values to assign to the bounding box
     	public static final int STRUCTURE_WIDTH = foundationPattern[0].length();

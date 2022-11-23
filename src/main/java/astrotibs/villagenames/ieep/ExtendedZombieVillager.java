@@ -94,7 +94,6 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         }
     }
 
-	// Added in v3.2
 	public int getSkinTone() {return this.skinTone;}
 	public void setSkinTone(int pl) {this.skinTone = pl;}
 	

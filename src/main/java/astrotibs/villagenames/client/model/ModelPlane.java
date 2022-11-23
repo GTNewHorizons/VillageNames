@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.Tessellator;
  * @author AstroTibs
  */
 
-//Added in v3.1
 public class ModelPlane extends ModelBox
 {
     /** The (x,y,z) vertex positions and (u,v) texture coordinates for each of the 8 points on a cube */

@@ -49,8 +49,8 @@ public class NetworkHelper
             		villagerID,
             		ev.getProfession(),
             		ev.getCareer(),
-            		ev.getBiomeType(), // Updated in v3.1
-            		ev.getProfessionLevel(), // Updated in v3.1
+            		ev.getBiomeType(),
+            		ev.getProfessionLevel(),
             		ev.getSkinTone()
             		);
             
@@ -65,12 +65,12 @@ public class NetworkHelper
         @Override
         public IMessage onMessage(MessageModernVillagerSkin message, MessageContext ctx) {
             
-            if ( // Changed if condition in v3.1
+            if (
     				//GeneralConfig.villagerCareers
     				//&& (
 					message.getEntityID() > 0
 					&& message.getProfession() >= 0
-					//&& message.getProfession() <= 5 // v3.2 - Deactivated to allow modded modular villager skins
+					//&& message.getProfession() <= 5 // Deactivated to allow modded modular villager skins
 					//&& message.getCareer() > 0 // Deactivated to allow Nitwit syncing
     				//		)
             		) { 
@@ -100,7 +100,7 @@ public class NetworkHelper
      */
     public static void sendZombieVillagerProfessionMessage(int zombieId, ExtendedZombieVillager properties, EntityPlayer target) {
         if (
-        		( GeneralConfig.villagerCareers && (zombieId > 0 && properties != null && properties.getProfession() >= 0 && properties.getCareer() >= 0) ) // Career 0 condition v3.2 to allow non-standard profs
+        		( GeneralConfig.villagerCareers && (zombieId > 0 && properties != null && properties.getProfession() >= 0 && properties.getCareer() >= 0) ) // Career 0 condition to allow non-standard profs
         		|| ( zombieId > 0 && properties != null && properties.getProfession() >= 0 )
         		) 
         {
@@ -108,9 +108,9 @@ public class NetworkHelper
             		zombieId,
             		properties.getProfession(),
             		properties.getCareer(),
-            		properties.getBiomeType(), // Updated in v3.1
-            		properties.getProfessionLevel(), // Updated in v3.1
-            		properties.getSkinTone() // v3.2
+            		properties.getBiomeType(),
+            		properties.getProfessionLevel(),
+            		properties.getSkinTone()
             		);
             if (GeneralConfig.debugMessages) { // Debug
             	//LogHelper.info("** Sending Message: Zombie Profession **");

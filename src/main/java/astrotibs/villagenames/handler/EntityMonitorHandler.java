@@ -78,11 +78,11 @@ public class EntityMonitorHandler
     @SubscribeEvent
     public void onPlayerStartTracking(PlayerEvent.StartTracking event) {
     	
-    	if (!event.entity.worldObj.isRemote) // Encased in notremote if - v3.1
+    	if (!event.entity.worldObj.isRemote)
     	{
         	if (
         			event.target instanceof EntityVillager
-        			&& GeneralConfig.villagerCareers // Removed not-remote condition - v3.1
+        			&& GeneralConfig.villagerCareers
         			)
         	{
         		final EntityVillager villager = (EntityVillager) event.target;
@@ -91,7 +91,7 @@ public class EntityMonitorHandler
         	}
         	
             // Check if the player started tracking a zombie villager (happens on server-side).
-        	else if (FunctionsVN.isVanillaZombie(event.target)) { // Removed not-remote condition - v3.1
+        	else if (FunctionsVN.isVanillaZombie(event.target)) {
                 final EntityZombie zombie = (EntityZombie) event.target;
 
                 if (zombie.isVillager()) {
@@ -104,7 +104,7 @@ public class EntityMonitorHandler
             }
             
             // Check if the player started tracking a village guard
-        	else if (event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) { // Removed not-remote condition and added ELSE - v3.1
+        	else if (event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) {
                 //final EntityZombie zombie = (EntityZombie) event.target;
             	final EntityLiving guard = (EntityLiving) event.target;
 
@@ -125,8 +125,6 @@ public class EntityMonitorHandler
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
 
-    	// Renovated in v3.1
-    	
     	// summon Zombie ~ ~ ~ {IsVillager:1}
     	// New entity is a Zombie. Check to see if it came into being via a killed Villager.
         if (
@@ -138,14 +136,11 @@ public class EntityMonitorHandler
             
             ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
             
-            // Renovated in v3.1
             if (event.world.isRemote) {
                 // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
                 ClientInfoTracker.SyncZombieMessage(zombie);
             }
             else {
-            	
-            	// Moved into server-side world in v3.2
         		// Try to assign a biome number if this villager has none.
                 if (ezv.getBiomeType() <0)
                 {
@@ -206,7 +201,6 @@ public class EntityMonitorHandler
             
             ExtendedVillager ev = ExtendedVillager.get(villager);
             
-            // Renovated in v3.1
             if (event.world.isRemote)
             {
                 // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
@@ -238,7 +232,6 @@ public class EntityMonitorHandler
 
                 }
                 /*
-                // Moved inside server-side check in v3.2
         		// Try to assign a biome number if this villager has none.
                 if (
                 		ev != null
@@ -250,7 +243,7 @@ public class EntityMonitorHandler
                 	(ExtendedVillager.get(villager)).setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
                 }
                 
-                // v3.2 Try to assign a skin tone number if this villager has none.
+                // Try to assign a skin tone number if this villager has none.
                 if (
                 		ev != null
                 		&& (ExtendedVillager.get(villager)).getSkinTone()==-99
@@ -655,7 +648,7 @@ public class EntityMonitorHandler
             
             // Adds the extended properties to villagers
             if (
-            		ExtendedVillager.get(villager) == null // Removed careers condition for v3.1 so that villagers always render
+            		ExtendedVillager.get(villager) == null
             		) {
 
             	ExtendedVillager.register(villager);

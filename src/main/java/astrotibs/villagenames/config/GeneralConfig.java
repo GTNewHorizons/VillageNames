@@ -192,8 +192,8 @@ public class GeneralConfig {
 	    
 	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
 				"14", // Growthcraft Apiarist
-				"-15", // Apple & Milk & Tea's Cafe Master -- turned off because I enjoy his sexy hair v3.2.3
-				"44", // Village Taverns's Shepherdess -- turned on to better differentiate from the vanilla Shepherd v3.2.3
+				"-15", // Apple & Milk & Tea's Cafe Master -- turned off because I enjoy his sexy hair
+				"44", // Village Taverns's Shepherdess -- turned on to better differentiate from the vanilla Shepherd
 				"80", // Forestry Apiarist
 				"-190", // Thaumcraft Wizard -- turned off because of hat brim rendering issues
 				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
@@ -335,9 +335,8 @@ public class GeneralConfig {
 	    debugMessages = config.getBoolean("Debug messages", Reference.CATEGORY_MISCELLANEOUS, false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
 	    pyramidTerracotta = config.getBoolean("Pyramid Terracotta", Reference.CATEGORY_MISCELLANEOUS, true, "Replace the wool blocks in desert pyramids with terracotta as in 1.8+");
 	    addOceanMonuments = config.getBoolean("Add Monuments", Reference.CATEGORY_MISCELLANEOUS, true, "Generate Ocean Monuments, Prismarine, Guardians, and absorbent Sponges");
-	    //alternateGuardianNamespace = config.getBoolean("Alternate Guardian Namespace", Reference.CATEGORY_MISCELLANEOUS, false, "WARNING: TOGGLING THIS VALUE WILL REMOVE OR REPLACE ALL CURRENTLY-SPAWNED GUARDIANS FROM YOUR WORLD, INCLUDING ELDERS!\n"+"Set this to true if you have fatal conflicts loading another mod using the entity name minecraft:Guardian by instead using the name minecraft:Guardian_VN."); // v3.2.3
+	    //alternateGuardianNamespace = config.getBoolean("Alternate Guardian Namespace", Reference.CATEGORY_MISCELLANEOUS, false, "WARNING: TOGGLING THIS VALUE WILL REMOVE OR REPLACE ALL CURRENTLY-SPAWNED GUARDIANS FROM YOUR WORLD, INCLUDING ELDERS!\n"+"Set this to true if you have fatal conflicts loading another mod using the entity name minecraft:Guardian by instead using the name minecraft:Guardian_VN.");
 	    addIgloos = config.getBoolean("Add Igloos", Reference.CATEGORY_MISCELLANEOUS, true, "Generate Igloos from 1.9+");
-	    // Added in v3.1
 	    biomedictIgloos = config.getBoolean("Allow Igloos in modded biomes", Reference.CATEGORY_MISCELLANEOUS, false, "Igloos can generate in mods' snowy plains biomes, rather than just vanilla's Ice Plains and Cold Taiga");
 	    
 	    

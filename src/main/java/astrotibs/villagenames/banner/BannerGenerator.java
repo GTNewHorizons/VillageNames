@@ -378,7 +378,7 @@ public class BannerGenerator
 					{ new String[]{}, new int[]{}, new String[]{ba1 ? (ba1a ? "tl" : "tr") : (ba1a ? "bl" : "br")}, new int[]{-2} }, // Zambia
 					{ new String[]{"ss", "cs", b3 ? "bt" : "tt"}, new int[]{-2, -2, -2}, new String[]{}, new int[]{} }, // Zimbabwe
 					// Custom flaggy stuff that's otherwise unused patterns
-					{ new String[]{"FORCEACCENT", b1 ? "bri" : (b1a ? "gra" : "gru")}, new int[]{-2}, new String[]{ ba1 ? "cbo" : "sku" }, new int[]{-2} }, // v3.1.1 added FORCEACCENT notation
+					{ new String[]{"FORCEACCENT", b1 ? "bri" : (b1a ? "gra" : "gru")}, new int[]{-2}, new String[]{ ba1 ? "cbo" : "sku" }, new int[]{-2} },
 					
 			};
 			
@@ -388,7 +388,7 @@ public class BannerGenerator
 			baseColors = (int[]) nationBaseTemplates[chosencountry][1];
 			
 			// Choose the accent
-			// v3.1.1 - Force an accent if the base template contains the FORCEACCENT key in slot 0
+			// Force an accent if the base template contains the FORCEACCENT key in slot 0
 			while (true)
 			{
 				chosencountry = random.nextInt(nationBaseTemplates.length);
@@ -399,7 +399,7 @@ public class BannerGenerator
 				break;
 			}
 			
-			// v3.1.1 - simplifies calculations below
+			// Simplifies calculations below
 			int baseTemplateLengthWithoutTriggers = baseTemplate.length - ((baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT")) ? 1 : 0);
 			int accentTemplateLengthWithoutTriggers = accentTemplate.length - ((accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND")) ? 1 : 0);
 			
@@ -430,7 +430,7 @@ public class BannerGenerator
 			
 			
 			if(
-					baseTemplateLengthWithoutTriggers == baseColors.length // Changed in v3.1.1
+					baseTemplateLengthWithoutTriggers == baseColors.length
 					&& (accentTemplate.length - ((accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND")) ? 1 : 0)) == accentColors.length
 					&& (baseTemplateLengthWithoutTriggers + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) <= 6 // You are limited to six layers in survival
 					&& (baseTemplateLengthWithoutTriggers + accentTemplate.length - (accentTemplate.length > 0 && accentTemplate[0].equals("BEHIND") ? 1 : 0)) > 0 // I'd rather not have completely blank banners
@@ -492,12 +492,12 @@ public class BannerGenerator
 		
 		// Add in the base template and colors
 		int colorint = 1;
-		boolean isAccentForced = (baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT")); // Added in v3.1.1
+		boolean isAccentForced = (baseTemplate.length > 0 && baseTemplate[0].equals("FORCEACCENT"));
 		
-		for (int i=0; i < baseTemplate.length - (isAccentForced ? 1 : 0); i++) // Changed in v3.1.1
+		for (int i=0; i < baseTemplate.length - (isAccentForced ? 1 : 0); i++)
 		{
 			// Add pattern piece
-			patternArray.add(baseTemplate[i+(isAccentForced ? 1 : 0)]); // Changed in v3.1.1
+			patternArray.add(baseTemplate[i+(isAccentForced ? 1 : 0)]);
 			
 			// Add color value
 			if (baseColors[i]==-2) // -2 indicates "draw a new color"
@@ -671,7 +671,7 @@ public class BannerGenerator
 	 * creating it if necessary. It also returns the village's name.
 	 * ONLY run this with !world.isRemote
 	 */
-	public static Object[] getVillageBannerData(EntityLivingBase entity) // v3.1.1 - Changed to EntityLivingBase to allow the player to be an argument
+	public static Object[] getVillageBannerData(EntityLivingBase entity)
 	{
 		NBTTagCompound bannerNBT = new NBTTagCompound(); // The thing we're after
 		String locationFullName = ""; // Also returned, in case it's useful.
@@ -804,7 +804,6 @@ public class BannerGenerator
 		            nbttagcompound1.setString("nameSuffix", nameSuffix);
 		            nbttagcompound1.setBoolean("fromEntity", true); // Record whether this name was generated from interaction with an entity
 		            
-		            // Added in v3.1banner
 		            // Form and append banner info
 		            bannerNBT = BannerGenerator.getNBTFromBanner(villageBanner);
 		            nbttagcompound1.setTag("BlockEntityTag", bannerNBT);

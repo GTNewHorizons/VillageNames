@@ -25,9 +25,6 @@ public class ReputationHandler {
      */
     public static int getVNReputationForPlayer(EntityPlayerMP player, String villageTopTag, Village village)
     {
-    	
-    	// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
-		
 		MapGenStructureData structureData = null;
 		NBTTagCompound nbttagcompound = null;
 		
@@ -46,7 +43,6 @@ public class ReputationHandler {
     		catch (Exception e1) {} // OTGVillage.dat does not exist
 		}
     	
-		// v3.2.1 - Put it all in a try/catch thanks to OTG
 		NBTTagCompound villageTag = null;
 		
 		try
@@ -165,8 +161,6 @@ public class ReputationHandler {
 		
 		// First, check to see if the player is in a village bounding box as defined in Village.dat
 		// If so, check to see if the player is also in a village as defined in villages.dat
-
-		// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
 
 		MapGenStructureData structureData;
 		NBTTagCompound nbttagcompound = null;

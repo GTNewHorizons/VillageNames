@@ -6819,7 +6819,7 @@ public class SwampStructures
             		zombie.setCustomNameTag((villager_name_a[1]+" "+villager_name_a[2]+" "+villager_name_a[3]).trim());
             	}
                 
-                //if(GeneralConfig.modernZombieSkins) (ExtendedZombieVillager.get( zombie )).setProfession(2); // v3.2.3
+                //if(GeneralConfig.modernZombieSkins) (ExtendedZombieVillager.get( zombie )).setProfession(2);
                                                 
                 world.spawnEntityInWorld(zombie);
             }

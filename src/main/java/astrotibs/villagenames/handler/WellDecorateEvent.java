@@ -58,8 +58,6 @@ public class WellDecorateEvent {
 			
 			Random random = event.world.rand;
 			
-			// v3.1.2 - Removed config pre-load values to be more human readable 
-			
 			int i = (event.chunkX << 4) + 8;//Villages are offset
 			int k = (event.chunkZ << 4) + 8;
 			int y;
@@ -75,8 +73,6 @@ public class WellDecorateEvent {
 			List<int[]> listWater3;
 
 			
-			
-            // Re-worked in v3.1banner
 			Block testForBanner = ModObjects.chooseModBannerBlock(); // Checks to see if supported mod banners are available. Will be null if there aren't any.
 			
 			int inwardYaw = (GeneralConfig.villageBanners && testForBanner!=null) ? GeneralConfig.signYaw : 4; // Value from 0 to 4 indicating how inward the signs are oriented. 0 is away from the well. 4 has the sign and banner facing each other.
@@ -234,9 +230,7 @@ public class WellDecorateEvent {
                                 		if ( event.world.getBlock(x+signXOffset, y+2, z+signZOffset).isAir(event.world, x+signXOffset, y+2, z+signZOffset) ||
                                 			 event.world.getBlock(x+signXOffset, y+2, z+signZOffset).isLeaves(event.world, x+signXOffset, y+2, z+signZOffset)	) {
                                 			// Set the sign now!
-
                                 			
-                                			// Changed color block in v3.1banner
                                 			// Generate banner info, regardless of if we make a banner.
                                     		Object[] newRandomBanner = BannerGenerator.randomBannerArrays(deterministic, -1, -1);
                             				ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
@@ -257,8 +251,6 @@ public class WellDecorateEvent {
                                     		
                                     		// Try via NBT access
                                     		
-                                    		// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
-                                    		
                                     		MapGenStructureData structureData;
                                     		NBTTagCompound nbttagcompound = null;
 
@@ -276,8 +268,6 @@ public class WellDecorateEvent {
                                         		}
                                         		catch (Exception e1) {} // OTGVillage.dat does not exist
                                     		}
-                                    		
-                                    		// v3.2.1 - At this point, you may or may not have data to work with.
                                     		
                                     		try
                                     		{
@@ -399,7 +389,6 @@ public class WellDecorateEvent {
                                         		event.world.setBlock(x+signXOffset, y+2, z+signZOffset, Blocks.standing_sign, signOrientation, 2); //Last field 2 for some reason please
             		    			        }
 
-                                    		// Added in v3.1banner
                                     		if (
                                     				villageBanner != null &&
                                     						GeneralConfig.wellDecorations && GeneralConfig.villageBanners && signLocation!=bannerLocation
@@ -427,15 +416,12 @@ public class WellDecorateEvent {
                                     		
             		    			        if (GeneralConfig.wellDecorations && GeneralConfig.wellBoundary) {
                                         		
-            		                        	// v3.1.2 - Allow concrete well decoration even if Village Names concrete is unavailable 
+            		                        	// Allow concrete well decoration even if Village Names concrete is unavailable 
             		                        	Object[] tryConcrete = ModObjects.chooseModConcrete(townColorMeta);
             		                        	
             		    			        	// Clay base OR concrete
                                     			if (tryConcrete != null && GeneralConfig.concreteWell) {
                                     				
-                                    				// v3.1.2 - Moved inside this if condition to pre-empt crashes
-                                    				
-                                    				// v3.1.2 - replace strict VN concrete with possible other concretes
                                     				Block concreteBlock = (Block) tryConcrete[0];
             		                        		int concreteMeta = (Integer) tryConcrete[1];
                                     				
@@ -458,8 +444,7 @@ public class WellDecorateEvent {
                                     				}
                                     			}
                                     			
-                                    			// v3.1.2 - Moved to after the concrete decoration just in case you're using different mod combos for concrete and GT
-                                    			// v3.1.2 - Allow concrete well decoration even if Village Names concrete is unavailable 
+                                    			// Allow concrete well decoration even if Village Names concrete is unavailable 
                                     			int metaSpin = random.nextInt(4)+4; // I've got to add 4 because modulo doesn't work properly with negative numbers :P
                                     			Object[] tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(townColorMeta, (metaSpin)%4);
             		                        	
@@ -550,7 +535,6 @@ public class WellDecorateEvent {
                                             nbttagcompound1.setString("sign2", signContents.signText[2]);
                                             nbttagcompound1.setString("sign3", signContents.signText[3]);
 
-                                            // Added in v3.1banner
                                             // Form and append banner info
                                             // If you don't have a mod banner, this will not be added. It will be generated once you do.
     	                                    if (villageBanner!=null) {nbttagcompound1.setTag("BlockEntityTag", BannerGenerator.getNBTFromBanner(villageBanner));}
@@ -707,14 +691,13 @@ public class WellDecorateEvent {
 	 */
 	public void searchTempleAndReplaceWool(PopulateChunkEvent.Post event, int buffer)
     {
-		MapGenStructureData structureData = null; // Made null in v3.2.1
+		MapGenStructureData structureData = null;
 		if (
 				event.world.provider.dimensionId==0
 				&& !event.world.isRemote
 				) { // Player is in the Overworld
 			try {
 
-				// Updated in v3.2.1 to allow for Open Terrain Generation compatibility
         		NBTTagCompound nbttagcompound = null;
 
         		try

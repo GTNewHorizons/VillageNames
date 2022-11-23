@@ -171,14 +171,14 @@ public class RenderZombieVillagerModern extends RenderBiped
         this.modelBipedMain = (ModelBiped)this.mainModel;
     }
 
-    protected void rotateCorpse(EntityZombie p_77043_1_, float p_77043_2_, float p_77043_3_, float p_77043_4_)
+    protected void rotateCorpse(EntityZombie entityLiving, float p_77043_2_, float p_77043_3_, float p_77043_4_)
     {
-        if (p_77043_1_.isConverting())
+        if (entityLiving.isConverting())
         {
-            p_77043_3_ += (float)(Math.cos((double)p_77043_1_.ticksExisted * 3.25D) * Math.PI * 0.25D);
+            p_77043_3_ += (float)(Math.cos((double)entityLiving.ticksExisted * 3.25D) * Math.PI * 0.25D);
         }
 
-        super.rotateCorpse(p_77043_1_, p_77043_2_, p_77043_3_, p_77043_4_);
+        super.rotateCorpse(entityLiving, p_77043_2_, p_77043_3_, p_77043_4_);
     }
     
     @Override

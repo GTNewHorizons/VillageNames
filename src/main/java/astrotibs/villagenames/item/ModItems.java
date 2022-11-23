@@ -19,7 +19,6 @@ public class ModItems {
 	public static final ItemVillageBook villageBook = new ItemVillageBook("villagebook");
 	public static final ItemVillageBook mineshaftBook = new ItemVillageBook("mineshaftbook");
 
-	// V3 temple types
 	public static final ItemVillageBook jungletempleBook = new ItemVillageBook("jungletemplebook");
 	public static final ItemVillageBook desertpyramidBook = new ItemVillageBook("desertpyramidbook");
 	public static final ItemVillageBook swamphutBook = new ItemVillageBook("swamphutbook");

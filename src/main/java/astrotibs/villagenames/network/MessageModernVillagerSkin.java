@@ -14,21 +14,19 @@ import io.netty.buffer.ByteBuf;
  *
  */
 
-// Added in v3.1
-
 public class MessageModernVillagerSkin implements IMessage
 {
 	// Constructors
 	public MessageModernVillagerSkin() {}
     public MessageModernVillagerSkin(int entityID, int profession, int career, int biomeType, int professionLevel
-    		, int skinTone // Added in v3.2
+    		, int skinTone
     		) {
         this.entityID = entityID;
         this.profession = profession;
         this.career = career;
         this.biomeType = biomeType;
         this.professionLevel = professionLevel;
-        this.skinTone = skinTone; // v3.2
+        this.skinTone = skinTone;
     }
     
     // Fields to be used by this message
@@ -37,7 +35,7 @@ public class MessageModernVillagerSkin implements IMessage
     private int career;
     private int biomeType;
     private int professionLevel;
-    private int skinTone; // V3.2
+    private int skinTone;
     
     
     // Getters
@@ -46,7 +44,7 @@ public class MessageModernVillagerSkin implements IMessage
     public int getEntityID() {return this.entityID;}
     public int getBiomeType() {return this.biomeType;}
     public int getProfessionLevel() {return this.professionLevel;}
-    public int getSkinTone() {return this.skinTone;} // v3.2
+    public int getSkinTone() {return this.skinTone;}
     
 
     // Reads the packet
@@ -58,7 +56,7 @@ public class MessageModernVillagerSkin implements IMessage
         this.career = buf.readInt();
         this.biomeType = buf.readInt();
         this.professionLevel = buf.readInt();
-        this.skinTone = buf.readInt(); // v3.2
+        this.skinTone = buf.readInt();
         // note - maybe use ByteBufUtils
     }
 
@@ -72,7 +70,7 @@ public class MessageModernVillagerSkin implements IMessage
         buf.writeInt(this.career);
         buf.writeInt(this.biomeType);
         buf.writeInt(this.professionLevel);
-        buf.writeInt(this.skinTone); // v3.2
+        buf.writeInt(this.skinTone);
     }
 
     
@@ -92,7 +90,6 @@ public class MessageModernVillagerSkin implements IMessage
         r.append(this.getBiomeType());
         r.append(", Profession Level = ");
         r.append(this.getProfessionLevel());
-        // v3.2
         r.append(", Skin Tone = ");
         r.append(this.getSkinTone());
         

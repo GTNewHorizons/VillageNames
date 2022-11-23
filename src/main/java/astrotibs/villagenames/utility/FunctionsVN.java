@@ -32,7 +32,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraftforge.common.BiomeDictionary;
 
-// Added in v3.1
 public class FunctionsVN
 {
 	// Represents the 1.14+ village types
@@ -342,7 +341,6 @@ public class FunctionsVN
 	/**
 	 * Returns "true" if a particular trade was flagged for removal from the villager's Offers
 	 */
-    // Relocated to "Functions" for v3.1
 	public static boolean isTradeInappropriate(MerchantRecipe merchantrecipe, int profession, int career, int slotPosition) {
 		
 		
@@ -1003,8 +1001,6 @@ public class FunctionsVN
     }
     
     
-    // Added in v3.1banner
-    
     /**
      * Inputs an array of objects and a corresponding array of weights, and returns a randomly-selected element
      * with a probability proportional to its weight.
@@ -1042,7 +1038,6 @@ public class FunctionsVN
     	}
     }
     
-    // Added in v3.2
 	/**
 	 * Determine the skinTone of the biome the entity is currently in
 	 */
@@ -1200,9 +1195,8 @@ public class FunctionsVN
         // Try modifying trades
 		// summon Villager ~ ~ ~ {Profession:0}
 		
-    	// Added in v3.1
     	// Update IEEP stuff
-    	int professionLevel = ev.getProfessionLevel(); // Added in v3.1
+    	int professionLevel = ev.getProfessionLevel();
 		if (professionLevel < 0) {ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));}
 		
     	
@@ -1305,7 +1299,7 @@ public class FunctionsVN
 						
 						int slot = i+1;
 						
-						// v3.1 First pass: check to see if metas have been replaced in certain cases
+						// First pass: check to see if metas have been replaced in certain cases
 						if (GeneralConfig.modernVillagerTrades)
 						{
 							// Fisherman
@@ -1790,7 +1784,7 @@ public class FunctionsVN
                 		// If the Villager is a Librarian who already has an enchanted book, they can't get another one,
 						// and that's probably why the search failed. So give them one manually.
 						if (
-								!(GeneralConfig.modernVillagerTrades) // Added in v3.1
+								!(GeneralConfig.modernVillagerTrades)
 								&& profession== 1 // Profession: Librarian
 								&& career == 1 // Career: Librarian
 								&& buyingList!=null
@@ -1867,7 +1861,7 @@ public class FunctionsVN
 					}
 					// Special handler: if this is a shepherd and the final slot is _selling wool_, then add all the colored varieties.
 					else if (
-							!(GeneralConfig.modernVillagerTrades) // Added in v3.1
+							!(GeneralConfig.modernVillagerTrades)
 							&& profession== 0 // Profession: Farmer
 							&& career == 3 // Career: Shepherd
 							&& buyingList!=null
@@ -1888,7 +1882,7 @@ public class FunctionsVN
 						ReflectionHelper.setPrivateValue(EntityVillager.class, villager, buyingList, new String[]{"buyingList", "field_70963_i"});
 					}
 					// Go through list of Blacksmith items, and enchant stuff that is not enchanted.
-					else if (!(GeneralConfig.modernVillagerTrades) // Added in v3.1
+					else if (!(GeneralConfig.modernVillagerTrades)
 							&& profession == 3) { // Profession: Blacksmith
 						
 						for (int i=buyingList.size()-1; i >= 0; i--) {
@@ -1916,7 +1910,7 @@ public class FunctionsVN
 						}
 					}
 					// If it's a Leather Tunic, it might be enchanted.
-					else if (!(GeneralConfig.modernVillagerTrades) // Added in v3.1
+					else if (!(GeneralConfig.modernVillagerTrades)
 							&& profession == 4 && career == 2)
 					{ // Profession: Blacksmith
 						

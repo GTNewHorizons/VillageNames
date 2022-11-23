@@ -599,7 +599,6 @@ public final class VillageNames
 		PROXY.init(event);
 		PROXY.registerRender();
 		PROXY.registerEvents();
-		// Added in v3.1banner
 		GameRegistry.registerTileEntity(TileEntityBanner.class, Reference.MOD_ID + ".banner");
 		GameRegistry.registerTileEntity(TileEntityWoodSign.class, Reference.MOD_ID + ".sign"); // VillageNames.sign // ganyssurface.wood_sign
 		
@@ -624,7 +623,7 @@ public final class VillageNames
 	{
 	    // register server commands
 		event.registerServerCommand(new CommandName());
-		event.registerServerCommand(new CommandBanner()); // Added in v3.1.1
+		event.registerServerCommand(new CommandBanner());
 	}
 
 	/**

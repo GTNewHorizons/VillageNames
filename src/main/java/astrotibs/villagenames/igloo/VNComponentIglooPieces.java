@@ -613,8 +613,7 @@ public class VNComponentIglooPieces
                                 zombie.func_110163_bv(); //.enablePersistence() in 1.8
                                 zombie.setVillager(true);
                                 
-                                // MIGHT HAVE FORGOTTEN TO SAVE THE BELOW CHANGE TO ZOMBIE CONFIG VALUE BEFORE PUBLISHING v3.2.3
-                                if(GeneralConfig.modernZombieSkins) (ExtendedZombieVillager.get( zombie )).setProfession(2); // v3.2.3
+                                if(GeneralConfig.modernZombieSkins) (ExtendedZombieVillager.get( zombie )).setProfession(2);
                                                                 
                                 worldIn.spawnEntityInWorld(zombie);
                 				

@@ -675,31 +675,34 @@ public class EntityGuardian extends EntityMob //implements IMob
      */
     protected void dropFewItems(boolean recentlyHit, int looting)
     {
-        int i = this.rand.nextInt(3) + this.rand.nextInt(looting + 1);
-
-        if (i > 0)
+        // Drop Prismarine shards
+        int num_prismarine_shards = this.rand.nextInt(3) + this.rand.nextInt(looting + 1);
+        if (num_prismarine_shards > 0)
         {
         	ItemStack prismarineItem = ModObjects.chooseModPrismarineShardItemStack();
         	if (prismarineItem!=null)
         	{
-        		this.entityDropItem(new ItemStack(prismarineItem.getItem(), i, 0), 1.0F);
+        		this.entityDropItem(new ItemStack(prismarineItem.getItem(), num_prismarine_shards, prismarineItem.getItemDamage()), 1.0F);
         	}
         }
-
+        
+        // Additionally, drop some cod
         if (this.rand.nextInt(3 + looting) > 1)
         {
         	this.entityDropItem(new ItemStack(Items.fish, 1), 1.0F);
         }
+        // or some Prismarine crystals
         else if (this.rand.nextInt(3 + looting) > 1)
         {
-        	ItemStack prismarineCrystalsItem = ModObjects.chooseModPrismarineShardItemStack();
+        	ItemStack prismarineCrystalsItem = ModObjects.chooseModPrismarineCrystalsItemStack();
         	
         	if (prismarineCrystalsItem!=null)
         	{
-        		this.entityDropItem(new ItemStack(prismarineCrystalsItem.getItem(), 1, 0), 1.0F);
+        		this.entityDropItem(new ItemStack(prismarineCrystalsItem.getItem(), 1, prismarineCrystalsItem.getItemDamage()), 1.0F);
         	}
         }
-
+        
+        // Elders drop sponge
         if (recentlyHit && this.isElder())
         {
         	Object[] spongeObject = ModObjects.chooseModSpongeBlockObject(true);

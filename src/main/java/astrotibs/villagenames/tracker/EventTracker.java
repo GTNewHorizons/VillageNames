@@ -124,17 +124,16 @@ public class EventTracker
         				
         				villager.getProfession(),
         				
-        				// Changed in v3.2 to actually use ieep
         				(GeneralConfig.villagerCareers) ? ieep.getCareer() : 0,
 						villager.isChild(),
-        				(GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1, // Added in v3.1
-        				(GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1, // Added in v3.1
-						(GeneralConfig.modernVillagerSkins && GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99 // Added in v3.2
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1,
+        				(GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1,
+						(GeneralConfig.modernVillagerSkins && GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99
         				/*
         				(GeneralConfig.villagerCareers) ? (ExtendedVillager.get(villager)).getCareer() : 0,
         				villager.isChild(),
-        				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getBiomeType() : -1, // Added in v3.1
-        				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getProfessionLevel() : -1 // Added in v3.1
+        				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getBiomeType() : -1,
+        				(GeneralConfig.modernVillagerSkins) ? (ExtendedVillager.get(villager)).getProfessionLevel() : -1
         				*/
         				}
         		);
@@ -163,14 +162,13 @@ public class EventTracker
     			//Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ), // Replaced because of mp server-side crash
     			new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ),
     			zombie.getCustomNameTag(), 
-    			 // Added Object structure in v3.1
     			new Object[] {
     					ieep.getProfession(),
         				(GeneralConfig.villagerCareers) ? (ieep).getCareer() : 0,
         				zombie.isChild(),
-        				(GeneralConfig.modernZombieSkins) ? ieep.getBiomeType() : -1, // v3.2.3
-        				(GeneralConfig.modernZombieSkins) ? ieep.getProfessionLevel() : -1, // v3.2.3
-        				(GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99, // Added in v3.2
+        				(GeneralConfig.modernZombieSkins) ? ieep.getBiomeType() : -1,
+        				(GeneralConfig.modernZombieSkins) ? ieep.getProfessionLevel() : -1,
+        				(GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99,
         				}
     			);
     }
@@ -192,10 +190,9 @@ public class EventTracker
         final int profession = (Integer) extraInfo[0];
         final int career     = (Integer) extraInfo[1];
         final boolean isBaby = (Boolean) extraInfo[2];
-        // Added in v3.1
         final int biomeType = (Integer) extraInfo[3];
         final int professionLevel = (Integer) extraInfo[4];
-        final int skinTone = (Integer) extraInfo[5]; // Added in v3.2
+        final int skinTone = (Integer) extraInfo[5];
         
         // Custom name
         //if (this.getCustomName() != "") {
@@ -347,14 +344,12 @@ public class EventTracker
         final int profession = (Integer) extraInfo[0];
         final int career     = (Integer) extraInfo[1];
         final boolean isBaby = (Boolean) extraInfo[2];
-        // Added in v3.1
         final int biomeType = (Integer) extraInfo[3];
         final int professionLevel = (Integer) extraInfo[4];
-        final int skinTone = (Integer) extraInfo[5]; // Added in v3.2
+        final int skinTone = (Integer) extraInfo[5];
 
         String customName = this.getCustomName();
         
-        // Renovated in v3.1
         // Custom name
         if ( !customName.equals("") && !customName.equals(null)
         		&& !customName.equals( PMTMUnloc )
@@ -388,7 +383,6 @@ public class EventTracker
         	ieep.setCareer(0);
         }
         
-        // Added in v3.1
         // BiomeType
         if (ieep.getBiomeType() <0)
         {
@@ -399,7 +393,6 @@ public class EventTracker
         	ieep.setBiomeType(biomeType);
         }
         
-        // Added in v3.2
         // SkinTone
         if (ieep.getSkinTone() == -99) {ieep.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
         else {ieep.setSkinTone(skinTone);}

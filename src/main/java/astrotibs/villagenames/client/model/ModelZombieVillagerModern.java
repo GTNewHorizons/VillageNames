@@ -42,7 +42,7 @@ public class ModelZombieVillagerModern extends ModelZombie {
 		
 		// Main headwear portion
 		this.zombieVillagerHeadwear = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
-		this.zombieVillagerHeadwear.setTextureOffset(32, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset); // Changed in v3.1
+		this.zombieVillagerHeadwear.setTextureOffset(32, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset);
 		this.zombieVillagerHeadwear.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
 		// Higher Rim -- used for Farmer and Fisherman
@@ -78,13 +78,13 @@ public class ModelZombieVillagerModern extends ModelZombie {
 		bipedBody = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
 		bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedBody.setTextureOffset(16, 20).addBox(-4.0F, 0.0F, -3.0F, 8, 12, 6, headScale);
-		bipedBody.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, headScale + headscaleOffset); // Changed in v3.1
+		bipedBody.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, headScale + headscaleOffset);
 		
-		bipedRightArm = new ModelRenderer(this, 44, 22).setTextureSize(textureFileWidth, textureFileHeight); // Changed in v3.1
+		bipedRightArm = new ModelRenderer(this, 44, 22).setTextureSize(textureFileWidth, textureFileHeight);
 		bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, headScale);
 		bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
 		
-		bipedLeftArm = new ModelRenderer(this, 44, 22).setTextureSize(textureFileWidth, textureFileHeight); // Changed in v3.1
+		bipedLeftArm = new ModelRenderer(this, 44, 22).setTextureSize(textureFileWidth, textureFileHeight);
 		bipedLeftArm.mirror = true;
 		bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, headScale);
 		bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);

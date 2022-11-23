@@ -1384,7 +1384,6 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							{
 								// TODO - Globe pattern
 								
-								// Changed in v3.1banner
 								// Instead, offer a banner with the village's pattern!
 								
 								ItemStack trialbannerstack = ModObjects.chooseModBannerItem();
@@ -1592,7 +1591,6 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 			// summon Villager ~ ~ ~ {Profession:3}
 			case 3: // BLACKSMITH
 				
-				// v3.1 LOL NAH MATE, adding Stone Mason trades.
 				switch(career) {
 					case 1: // Armorer
 						
@@ -2396,7 +2394,6 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 
 		}
 		
-		// Added in v3.1 because I think I need it
 		Collections.shuffle(recipeList);
 	}
 	
