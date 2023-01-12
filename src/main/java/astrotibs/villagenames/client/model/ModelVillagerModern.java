@@ -27,7 +27,7 @@ public class ModelVillagerModern extends ModelVillager
 	{
 		this(headScale, 0F, 64, 64); // Texture files are 64 by 64
 	}
-
+	
 	public ModelVillagerModern(float headScale, float noseY, int textureFileWidth, int textureFileHeight)
 	{
 		super(headScale, noseY, textureFileWidth, textureFileHeight);

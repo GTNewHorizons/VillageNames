@@ -103,6 +103,22 @@ public class ModObjects {
 	public static final String barrelEF = DOM_ETFUTURUM + ":barrel";
 
 	// Bed
+	public static final String bed_white_EFR = DOM_ETFUTURUM + ":white_bed";
+	public static final String bed_orange_EFR = DOM_ETFUTURUM + ":orange_bed";
+	public static final String bed_magenta_EFR = DOM_ETFUTURUM + ":magenta_bed";
+	public static final String bed_light_blue_EFR = DOM_ETFUTURUM + ":light_blue_bed";
+	public static final String bed_yellow_EFR = DOM_ETFUTURUM + ":yellow_bed";
+	public static final String bed_lime_EFR = DOM_ETFUTURUM + ":lime_bed";
+	public static final String bed_pink_EFR = DOM_ETFUTURUM + ":pink_bed";
+	public static final String bed_gray_EFR = DOM_ETFUTURUM + ":gray_bed";
+	public static final String bed_light_gray_EFR = DOM_ETFUTURUM + ":light_gray_bed";
+	public static final String bed_cyan_EFR = DOM_ETFUTURUM + ":cyan_bed";
+	public static final String bed_purple_EFR = DOM_ETFUTURUM + ":purple_bed";
+	public static final String bed_blue_EFR = DOM_ETFUTURUM + ":blue_bed";
+	public static final String bed_brown_EFR = DOM_ETFUTURUM + ":brown_bed";
+	public static final String bed_green_EFR = DOM_ETFUTURUM + ":green_bed";
+	public static final String bed_black_EFR = DOM_ETFUTURUM + ":black_bed";
+	
 	public static final String coloredBedBlockBV = "bettervanilla:bettervanilla_colored_bed_block";
 	public static final String bed_black_MM_block = DOM_MANAMETAL + ":Bed_Black";
 	public static final String bed_green_MM_block = DOM_MANAMETAL + ":Bed_Green";
@@ -119,6 +135,7 @@ public class ModObjects {
 	public static final String bed_gray_MM_block = DOM_MANAMETAL + ":Bed_Gray";
 	public static final String bed_lime_MM_block = DOM_MANAMETAL + ":Bed_Lime";
 	public static final String bed_lightBlue_MM_block = DOM_MANAMETAL + ":Bed_LightBlue";
+	
 	public static final String coloredBedItemBV = "bettervanilla:bettervanilla_colored_bed";
 	public static final String bedCB = "CarpentersBlocks:itemCarpentersBed";
 	public static final String bed_black_MM_item = DOM_MANAMETAL + ":ItemBed_Black";
@@ -518,15 +535,17 @@ public class ModObjects {
 	public static final String glazedTerracotta_MM = DOM_MANAMETAL + ":glazed_terracotta";
 	
 	// Grass Path
-	public static final String grassPathUTD = DOM_UPTODATE + ":grass_path";
 	public static final String grassPathEF = DOM_ETFUTURUM + ":grass_path";
+	public static final String grassPathGTNH = "gregtech:gt.block.paths";
 	public static final String grassPath_MM = DOM_MANAMETAL + ":BlockGrassPaths";
+	public static final String grassPathUTD = DOM_UPTODATE + ":grass_path";
 	
 	// Iron Nuggets
 	// Mariculture nugget is Mariculture:materials:33
 	public static final String nuggetRC = "Railcraft:nugget"; // Iron Nugget is 0
 	public static final String materialsTC = "TConstruct:materials"; // Iron Nugget is 19 
 	public static final String materialsTF = "ThermalFoundation:material"; // Iron Nugget is 8
+	public static final String metalIE = "ImmersiveEngineering:metal"; // Iron Nugget is 21
 	public static final String ironNuggetUTD = DOM_UPTODATE + ":iron_nugget";
 	public static final String ironNuggetEF = DOM_ETFUTURUM + ":nugget_iron";
 	public static final String nuggetNL = DOM_NETHERLICIOUS + ":Nugget"; // Iron Nugget is 0
@@ -1361,7 +1380,31 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().trim().equals("bettervanilla"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				switch (colorMeta)
+				{
+				case 0: modblock = Block.getBlockFromName(ModObjects.bed_white_EFR); break;
+				case 1: modblock = Block.getBlockFromName(ModObjects.bed_orange_EFR); break;
+				case 2: modblock = Block.getBlockFromName(ModObjects.bed_magenta_EFR); break;
+				case 3: modblock = Block.getBlockFromName(ModObjects.bed_light_blue_EFR); break;
+				case 4: modblock = Block.getBlockFromName(ModObjects.bed_yellow_EFR); break;
+				case 5: modblock = Block.getBlockFromName(ModObjects.bed_lime_EFR); break;
+				case 6: modblock = Block.getBlockFromName(ModObjects.bed_pink_EFR); break;
+				case 7: modblock = Block.getBlockFromName(ModObjects.bed_gray_EFR); break;
+				case 8: modblock = Block.getBlockFromName(ModObjects.bed_light_gray_EFR); break;
+				case 9: modblock = Block.getBlockFromName(ModObjects.bed_cyan_EFR); break;
+				case 10: modblock = Block.getBlockFromName(ModObjects.bed_purple_EFR); break;
+				case 11: modblock = Block.getBlockFromName(ModObjects.bed_blue_EFR); break;
+				case 12: modblock = Block.getBlockFromName(ModObjects.bed_brown_EFR); break;
+				case 13: modblock = Block.getBlockFromName(ModObjects.bed_green_EFR); break;
+				case 14: modblock = Blocks.bed; break;
+				case 15: modblock = Block.getBlockFromName(ModObjects.bed_black_EFR); break;
+				}
+				
+				if (modblock != null) {break;}
+			}
+			else if (mod.toLowerCase().trim().equals("bettervanilla"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.coloredBedBlockBV);
 				if (modblock != null)
@@ -1387,10 +1430,10 @@ public class ModObjects {
 				{
 				default:
 				case 0: 
-					// Check if MM's beds are available before returning the default one
-					if (Block.getBlockFromName(ModObjects.bed_black_MM_block) != null)
+					// Check if MM's beds are available before returning the vanilla one
+					if (FunctionsVN.getItemFromName(ModObjects.bed_black_MM_item) != null)
 					{
-						modblock = Blocks.bed; break;
+						modblock = Blocks.bed; break; // Equivalent to "white" bed
 					}
 					else {continue;}
 				case 1: modblock = Block.getBlockFromName(ModObjects.bed_orange_MM_block); break;
@@ -1413,10 +1456,8 @@ public class ModObjects {
 				if (modblock != null) {break;}
 			}
 		}
-		
 		// Use vanilla bed if all else fails
 		if (modblock == null) {modblock = Blocks.bed;}
-		
 		// Set the bed block and metadata here
 		world.setBlock(x, y, z, modblock);
 		world.setBlockMetadataWithNotify(x, y, z, orientationMeta, 2);
@@ -1431,16 +1472,40 @@ public class ModObjects {
 		
 		for (String mod : modprioritylist)
 		{
-			if (mod.toLowerCase().trim().equals("manametal"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				switch (colorMeta)
+				{
+				case 0: moditem = FunctionsVN.getItemFromName(ModObjects.bed_white_EFR); break;
+				case 1: moditem = FunctionsVN.getItemFromName(ModObjects.bed_orange_EFR); break;
+				case 2: moditem = FunctionsVN.getItemFromName(ModObjects.bed_magenta_EFR); break;
+				case 3: moditem = FunctionsVN.getItemFromName(ModObjects.bed_light_blue_EFR); break;
+				case 4: moditem = FunctionsVN.getItemFromName(ModObjects.bed_yellow_EFR); break;
+				case 5: moditem = FunctionsVN.getItemFromName(ModObjects.bed_lime_EFR); break;
+				case 6: moditem = FunctionsVN.getItemFromName(ModObjects.bed_pink_EFR); break;
+				case 7: moditem = FunctionsVN.getItemFromName(ModObjects.bed_gray_EFR); break;
+				case 8: moditem = FunctionsVN.getItemFromName(ModObjects.bed_light_gray_EFR); break;
+				case 9: moditem = FunctionsVN.getItemFromName(ModObjects.bed_cyan_EFR); break;
+				case 10: moditem = FunctionsVN.getItemFromName(ModObjects.bed_purple_EFR); break;
+				case 11: moditem = FunctionsVN.getItemFromName(ModObjects.bed_blue_EFR); break;
+				case 12: moditem = FunctionsVN.getItemFromName(ModObjects.bed_brown_EFR); break;
+				case 13: moditem = FunctionsVN.getItemFromName(ModObjects.bed_green_EFR); break;
+				case 14: moditem = Items.bed; break;
+				case 15: moditem = FunctionsVN.getItemFromName(ModObjects.bed_black_EFR); break;
+				}
+				
+				if (moditem != null) {return new ItemStack(moditem, 1, 0);}
+			}
+			else if (mod.toLowerCase().trim().equals("manametal"))
 			{
 				switch (colorMeta)
 				{
 				default:
 				case 0: 
-					// Check if MM's beds are available before returning the default one
+					// Check if MM's beds are available before returning the vanilla one
 					if (FunctionsVN.getItemFromName(ModObjects.bed_black_MM_item) != null)
 					{
-						moditem = Items.bed; break;
+						moditem = Items.bed; break; // Equivalent to "white" bed
 					}
 					else {continue;}
 				case 1: moditem = FunctionsVN.getItemFromName(ModObjects.bed_orange_MM_item); break;
@@ -2941,6 +3006,11 @@ public class ModObjects {
 				modblock = Block.getBlockFromName(ModObjects.grassPathEF);
 				if (modblock != null) {return modblock;}
 			}
+			else if (mod.toLowerCase().trim().equals("gregtech"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.grassPathGTNH);
+				if (modblock != null) {return modblock;}
+			}
 			else if (mod.toLowerCase().trim().equals("manametal"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.grassPath_MM);
@@ -3020,6 +3090,12 @@ public class ModObjects {
 				moditem = FunctionsVN.getItemFromName(ModObjects.ironNugget_MM);
 				if (moditem != null) {return new ItemStack(moditem, 1);}
 			}
+			else if (mod.toLowerCase().trim().equals("immersiveengineering"))
+			{
+				moditem = FunctionsVN.getItemFromName(ModObjects.metalIE);
+				if (moditem != null) {return new ItemStack(moditem, 1, 21);}
+			}
+			
 		}
 		return null;
 	}

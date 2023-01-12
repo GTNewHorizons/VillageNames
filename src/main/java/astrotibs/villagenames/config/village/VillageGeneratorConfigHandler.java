@@ -1412,12 +1412,12 @@ public class VillageGeneratorConfigHandler
 		
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);}
-		componentModernJungleRoadAccent1_string = config.getString(componentModern+"Jungle Road Accent 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
+		componentModernJungleRoadAccent1_string = config.getString(componentModern+"Jungle Road Accent 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleRoadAccent1_vals = parseDoubleArray(componentModernJungleRoadAccent1_string, modifiedDefaults);
 		
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*jungleHouses * jungleStreetToHouseRatio/jungleStreetsAndEndcaps);}
-		componentModernJungleRoadAccent2_string = config.getString(componentModern+"Jungle Road Accent 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
+		componentModernJungleRoadAccent2_string = config.getString(componentModern+"Jungle Road Accent 2", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+jungleVillages);
 		componentModernJungleRoadAccent2_vals = parseDoubleArray(componentModernJungleRoadAccent2_string, modifiedDefaults);
 		
 		componentModernSwampAnimalPen1_string = config.getString(componentModern+"Swamp Animal Pen 1", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modernDefaults), generationStatsForM+swampVillages);
@@ -1511,7 +1511,7 @@ public class VillageGeneratorConfigHandler
 		
 		modifiedDefaults.set(0, modernDefaults.get(0)*9D * swampStreetToHouseRatio/swampStreetsAndEndcaps);
 		for (int i=1; i<modernDefaults.size(); i++) {modifiedDefaults.set(i, modernDefaults.get(i)*swampHouses * swampStreetToHouseRatio/swampStreetsAndEndcaps);}
-		componentModernSwampRoadAccent_string = config.getString(componentModern+"Swamp Road Accent", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+savannaVillages);
+		componentModernSwampRoadAccent_string = config.getString(componentModern+"Swamp Road Accent", Reference.CATEGORY_VILLAGE_GENERATOR, convertDoubleArrayToString(modifiedDefaults), generationStatsForM+swampVillages);
 		componentModernSwampRoadAccent_vals = parseDoubleArray(componentModernSwampRoadAccent_string, modifiedDefaults);
 		
 		

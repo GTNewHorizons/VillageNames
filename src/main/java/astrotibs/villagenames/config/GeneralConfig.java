@@ -199,6 +199,7 @@ public class GeneralConfig {
 				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
 				"512", // Immersive Engineering Engineer
 				"-6156", // Open Blocks Music Merchant
+				"7117", // Mine Trading Cards's Card Master
 				"7766", // Growthcraft Community Edition Apiarist
 				"935153", // Enchanting Plus v4 Enchanter
 	    		},
@@ -241,6 +242,9 @@ public class GeneralConfig {
 				"gc_apiarist||7766",
 				// Immersive Engineering
 				"ie_engineer||512",
+				// Mine Trading Cards
+				"mtc_cardmaster||7117",
+				"mtc_cardtrader||7118",
 		        // More Swords mod version 2
 				"msm_swordsmith||66",
 				// Musica
@@ -396,6 +400,14 @@ public class GeneralConfig {
 				// Primitive Mobs
 				"villager|Summoner|net.daveyx0.primitivemobs.entity.monster.EntityDSummoner|add",
 				
+				// Special Mobs
+				"villager-goblin|Witch of Domination|toast.specialMobs.entity.witch.EntityDominationWitch|add",
+				"villager-goblin|Witch of Rage|toast.specialMobs.entity.witch.EntityRageWitch|add",
+				"villager-goblin|Witch of Shadows|toast.specialMobs.entity.witch.EntityShadowsWitch|add",
+				"villager-goblin|Witch of the Undead|toast.specialMobs.entity.witch.EntityUndeadWitch|add",
+				"villager-goblin|Witch of the Wilds|toast.specialMobs.entity.witch.EntityWildsWitch|add",
+				"villager-goblin|Witch of the Wind|toast.specialMobs.entity.witch.EntityWindWitch|add",
+				
 				// Twilight Forest
 				"villager-golem||twilightforest.entity.EntityTFArmoredGiant|add",
 				"villager-golem||twilightforest.entity.EntityTFGiantMiner|add",
@@ -548,7 +560,8 @@ public class GeneralConfig {
  				);
 	    
 	    modBed = config.getStringList("Mod Priority: Bed", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
- 				"manametal",
+	    		"etfuturum",
+	    		"manametal",
  				"bettervanilla",
  				"carpentersblocks",
  				},
@@ -677,6 +690,7 @@ public class GeneralConfig {
 		
 	    modGrassPath = config.getStringList("Mod Priority: Grass Path", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
+ 				"gregtech",
 	    		"uptodate",
 	    		"manametal",
  				},
@@ -688,6 +702,7 @@ public class GeneralConfig {
 	    		"uptodate",
  				"tinkersconstruct",
  				"thaumcraft",
+ 				"immersiveengineering",
  				"thermalfoundation",
  				"railcraft",
  				"mariculture",
@@ -911,6 +926,9 @@ public class GeneralConfig {
 				"Apiarist|7766|4",
 				// Immersive Engineering
 				"Engineer|512|0",
+				// Mine Trading Cards
+				"Card Master|7117|2",
+				"Card Trader|7118|0",
 				// More Swords mod version 2
 				"Swordsmith|66|5",
 				// Musica

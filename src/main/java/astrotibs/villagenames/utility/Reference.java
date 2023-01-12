@@ -117,5 +117,28 @@ public class Reference
     SAVANNA_BUILDING_STUB = "SavannaStructures$Savanna",
     SNOWY_BUILDING_STUB =   "SnowyStructures$Snowy",
     JUNGLE_BUILDING_STUB =   "JungleStructures$Jungle",
-    SWAMP_BUILDING_STUB =   "SwampStructures$Swamp";
+    SWAMP_BUILDING_STUB =   "SwampStructures$Swamp",
+    
+    // Chest loot
+    VN_DESERT_HOUSE = "vn_desert_house",
+	VN_PLAINS_HOUSE = "vn_plains_house",
+	VN_SAVANNA_HOUSE = "vn_savanna_house",
+	VN_SNOWY_HOUSE = "vn_snowy_house",
+	VN_TAIGA_HOUSE = "vn_taiga_house",
+	VN_JUNGLE_HOUSE = "vn_jungle_house",
+	VN_SWAMP_HOUSE = "vn_swamp_house",
+	VN_ARMORER = "vn_armorer",
+	VN_BUTCHER = "vn_butcher",
+	VN_CARTOGRAPHER = "vn_cartographer",
+	VN_FARM = "vn_farm",
+	VN_FISHER = "vn_fisher",
+	VN_FLETCHER = "vn_fletcher",
+	VN_LIBRARY = "vn_library",
+	VN_MASON = "vn_mason",
+	VN_SHEPHERD = "vn_shepherd",
+	VN_TANNERY = "vn_tannery",
+	VN_TEMPLE = "vn_temple",
+	VN_TOOLSMITH = "vn_toolsmith"
+//	VN_WEAPONSMITH = "vn_weaponsmith" // This is just the vanilla blacksmith chest
+    ;
 }

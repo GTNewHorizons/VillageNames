@@ -3,6 +3,7 @@ package astrotibs.villagenames.spawnegg;
 import java.util.List;
 import java.util.Set;
 
+import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -231,6 +232,12 @@ public class ItemSpawnEggVN extends Item
 			if (!spawnData.hasNoTags())
 			{
 				addNBTData(entity, spawnData);
+			}
+			
+			if (entityliving instanceof EntityGuardian && info!=null && info.spawnData.getBoolean("Elder"))
+			{
+				((EntityGuardian)entityliving).setElder(true);
+				((EntityGuardian)entityliving).heal(((EntityGuardian)entityliving).getMaxHealth());
 			}
 			
 			world.spawnEntityInWorld(entity);

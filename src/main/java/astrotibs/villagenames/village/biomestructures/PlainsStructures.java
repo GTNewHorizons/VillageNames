@@ -15,6 +15,7 @@ import astrotibs.villagenames.utility.BlockPos;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.FunctionsVN.MaterialType;
 import astrotibs.villagenames.utility.LogHelper;
+import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.StructureVillageVN;
 import astrotibs.villagenames.village.StructureVillageVN.StartVN;
 import net.minecraft.block.Block;
@@ -4962,7 +4963,7 @@ public class PlainsStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_cartographer");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(Reference.VN_CARTOGRAPHER);
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
             
@@ -5372,7 +5373,7 @@ public class PlainsStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_fisher");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(Reference.VN_FISHER);
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
             
@@ -6311,7 +6312,7 @@ public class PlainsStructures
             	int w=3;
             	int v= 1;
             	
-            	while (w==3 || w==9)
+            	while (w==3 || w==9 || (u==1 && (w==1 || w==11)))
             	{
             		u = random.nextInt(STRUCTURE_WIDTH);
                 	w = 1+random.nextInt(STRUCTURE_DEPTH-2);
@@ -10548,9 +10549,9 @@ public class PlainsStructures
             	// Villager
             	int u=0;
             	int w=3;
-            	int v= 1;
+            	int v=1;
             	
-            	while (w==3)
+            	while (w==3 || (u==7 && w==5))
             	{
             		u = random.nextInt(STRUCTURE_WIDTH);
                 	w = 1+random.nextInt(STRUCTURE_DEPTH-2);
@@ -15455,7 +15456,7 @@ public class PlainsStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_tannery");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(Reference.VN_TANNERY);
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
         	
@@ -17218,7 +17219,7 @@ public class PlainsStructures
         	TileEntity te = world.getTileEntity(this.getXWithOffset(chestU, chestW), this.getYWithOffset(chestV), this.getZWithOffset(chestU, chestW));
         	if (te instanceof IInventory)
         	{
-            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo("vn_weaponsmith");
+            	ChestGenHooks chestGenHook = ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH);
             	WeightedRandomChestContent.generateChestContents(random, chestGenHook.getItems(random), (TileEntityChest)te, chestGenHook.getCount(random));
         	}
         	
