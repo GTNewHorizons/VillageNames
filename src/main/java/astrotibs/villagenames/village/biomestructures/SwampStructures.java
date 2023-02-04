@@ -797,7 +797,8 @@ public class SwampStructures
             		blockObject = ModObjects.chooseModPrismarineBlockObject();
                 	if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
             	}
-            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomePrismarineBlock = (Block)blockObject[0]; biomePrismarineMeta = (Integer)blockObject[1];
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);
+            	biomePrismarineBlock = (Block)blockObject[0]; biomePrismarineMeta = (Integer)blockObject[1];
             	
             	
             	// Prismarine Slabs lower
@@ -807,7 +808,8 @@ public class SwampStructures
             		blockObject = ModObjects.chooseModPrismarineSlab(false); 
                 	if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
             	}
-            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomePrismarineSlabLowerBlock = (Block)blockObject[0]; biomePrismarineSlabLowerMeta = (Integer)blockObject[1];
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);
+            	biomePrismarineSlabLowerBlock = (Block)blockObject[0]; biomePrismarineSlabLowerMeta = (Integer)blockObject[1];
             	
                 
             	// Prismarine Slabs upper
@@ -817,24 +819,25 @@ public class SwampStructures
             		blockObject = ModObjects.chooseModPrismarineSlab(true); 
                 	if (blockObject==null) {useOnlyStone=true; continue;} // Trigger flag and reset
             	}
-            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs); biomePrismarineSlabUpperBlock = (Block)blockObject[0]; biomePrismarineSlabUpperMeta = (Integer)blockObject[1];
+            	blockObject = StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs);
+            	biomePrismarineSlabUpperBlock = (Block)blockObject[0]; biomePrismarineSlabUpperMeta = (Integer)blockObject[1];
             	
             	
             	// Prismarine wall
-            	if (useOnlyStone) {blockObject = new Object[]{Blocks.cobblestone_wall, 0};} // Set to cobblestone wall
+            	if (useOnlyStone) {biomePrismarineWallBlock = Blocks.cobblestone_wall;} // Set to cobblestone wall
             	else
             	{
             		biomePrismarineWallBlock = ModObjects.chooseModPrismarineWallBlock();
                 	if (biomePrismarineWallBlock==null) {useOnlyStone=true; continue;} // Trigger flag and reset
             	}
-            	biomePrismarineWallBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject((Block)blockObject[0], (Integer)blockObject[1], this.materialType, this.biome, this.disallowModSubs)[0];
+            	biomePrismarineWallBlock = (Block) StructureVillageVN.getBiomeSpecificBlockObject(biomePrismarineWallBlock, 0, this.materialType, this.biome, this.disallowModSubs)[0];
             	
             	
             	// If you make it here, all blocks are either prismarine-type or stone-type.
             	break;
             }
         	
-        	// Now, construct the statue with either all diorite blocks, or all stone
+        	// Now, construct the statue with all stone
         	
         	for (int[] uvwo : new int[][]{ // Orientation - 0: leftward, 1: rightward, 3:backward, 2:forward
         		// Feet
