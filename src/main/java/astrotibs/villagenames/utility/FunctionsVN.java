@@ -61,7 +61,18 @@ public class FunctionsVN
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.CONIFEROUS) {return TAIGA;}}
 			if (biome.biomeName.toLowerCase().contains("savanna")) {return SAVANNA;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SAVANNA) {return SAVANNA;}}
-			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SNOWY) {return SNOWY;}}
+			
+			// Snow is only returned if there are no trees and it's a wasteland:
+			boolean isSnowy = false;
+			boolean isWasteland = false;
+			for (BiomeDictionary.Type type : typeTags)
+			{
+				if (type==BiomeDictionary.Type.SNOWY) {isSnowy=true;}
+				if (type==BiomeDictionary.Type.WASTELAND) {isWasteland=true;}
+				if (type==BiomeDictionary.Type.DENSE || type==BiomeDictionary.Type.FOREST || type==BiomeDictionary.Type.LUSH || type==BiomeDictionary.Type.SPARSE) {isSnowy=false; isWasteland=false; break;}
+			}
+			if (isSnowy && isWasteland) {return SNOWY;}
+			
 			if (biome.biomeName.toLowerCase().contains("desert")) {return DESERT;}
 			for (BiomeDictionary.Type type : typeTags) {if (type==BiomeDictionary.Type.SANDY) {return DESERT;}}
 			if (biome.biomeName.toLowerCase().contains("jungle")) {return JUNGLE;}

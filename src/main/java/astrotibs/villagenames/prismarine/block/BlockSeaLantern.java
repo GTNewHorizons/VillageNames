@@ -2,7 +2,7 @@ package astrotibs.villagenames.prismarine.block;
 
 import java.util.Random;
 
-import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
+import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,11 +12,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 public class BlockSeaLantern extends Block{
 
-	public BlockSeaLantern() {
+	public BlockSeaLantern()
+	{
 		super(Material.glass);
 		setHardness(0.3F);
 		setLightLevel(1.0F);
@@ -38,7 +40,10 @@ public class BlockSeaLantern extends Block{
 
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return ModItemsPrismarine.prismarine_crystals;
+		
+		ItemStack droppedPrismarine = ModObjects.chooseModPrismarineCrystalsItemStack();
+		
+		return droppedPrismarine==null ? null : droppedPrismarine.getItem();
 	}
 
 	@Override

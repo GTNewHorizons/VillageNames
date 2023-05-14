@@ -19,7 +19,7 @@ public class BlockPrismarine extends BlockGeneric implements IConfigurable {
 		setBlockName("prismarine"); //setBlockName(Reference.MOD_ID + "." + "prismarine_block");
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	public void setIcon(int index, IIcon icon) {
 		if (icons == null)
@@ -56,7 +56,7 @@ public class BlockPrismarine extends BlockGeneric implements IConfigurable {
 	
 	@Override
 	public boolean isEnabled() {
-		return GeneralConfig.addOceanMonuments;
+		return GeneralConfig.addPrismarine;
 	}
 	
     @Override

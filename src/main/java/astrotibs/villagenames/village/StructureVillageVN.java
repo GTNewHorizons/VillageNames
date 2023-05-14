@@ -670,7 +670,7 @@ public class StructureVillageVN
         	if (block == Blocks.fence_gate)                    {block=ModObjects.chooseModFenceGate(woodMeta); meta=0; break;}
         	if (block == Blocks.wooden_button)                 {block=chooseWoodenButton(woodMeta); break;}
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	// Other stuff
@@ -691,6 +691,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -710,7 +711,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
@@ -734,6 +735,7 @@ public class StructureVillageVN
         	// No snow conversion because snow is okay in spruce biomes
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -753,7 +755,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
@@ -778,6 +780,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -817,7 +820,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
@@ -846,6 +849,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.mossy_cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; meta=1; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -865,7 +869,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
@@ -890,6 +894,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -909,7 +914,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.standing_sign)                 {block=ModObjects.chooseModWoodenSignBlock(woodMeta, true); meta=meta/4; break;}
@@ -934,6 +939,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.planks; meta=woodMeta; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.cobblestone; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.stonebrick; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -967,7 +973,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;} // Jungle trapdoor
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.stone_slab)                    {block=Blocks.stone_slab; meta=meta==3? 1: meta==11? 9 : meta; break;} // Sandstone slab
@@ -985,6 +991,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.sandstone; meta=0; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.sandstone; meta=2; break;} // Cut sandstone
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.sandstone; meta=1; break;} // Chiseled sandstone
         	
         	break;
         	
@@ -1040,6 +1047,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.hardened_clay; meta=0; break;}
         	if (block == Blocks.packed_ice)                    {block=Blocks.hardened_clay; meta=0; break;}
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.hardened_clay; meta=0; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -1059,7 +1067,7 @@ public class StructureVillageVN
         	if (block == Blocks.wooden_pressure_plate)         {block=ModObjects.chooseModPressurePlate(woodMeta); meta=0; break;}
         	if (block == Blocks.trapdoor)                      {block=ModObjects.chooseModWoodenTrapdoor(woodMeta); break;}
         	if (block == Blocks.ladder)                        {block=ModObjects.chooseModLadderBlock(woodMeta); break;}
-        	if (block == Blocks.crafting_table)                {block=ModObjects.chooseModCraftingTable(woodMeta); meta=0; break;}
+        	if (block == Blocks.crafting_table)                {Object[] modobject = ModObjects.chooseModCraftingTable(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.bookshelf)                     {Object[] modobject = ModObjects.chooseModBookshelf(woodMeta); block=(Block)modobject[0]; meta=(Integer)modobject[1]; break;}
         	if (block == Blocks.chest)                         {block=ModObjects.chooseModChest(woodMeta); meta=0; break;}
         	if (block == Blocks.mossy_cobblestone)             {block=Blocks.cobblestone; meta=0; break;}
@@ -1125,6 +1133,7 @@ public class StructureVillageVN
         	if (block == Blocks.snow_layer)                    {block=Blocks.air; meta=0; break;}
         	if (block == Blocks.ice)                           {block=Blocks.brown_mushroom_block; meta=0; break;} // Pores on all six sides
         	if (block == Blocks.packed_ice)                    {block=Blocks.brown_mushroom_block; meta=14; break;} // Cap on all six sides
+        	if (block != null && block == (Block)ModObjects.chooseModBlueIceBlock()[0]) {block = Blocks.brown_mushroom_block; meta=14; break;} // Have to place below packed_ice because this defaults to packed_ice
         	
         	break;
         	
@@ -1234,7 +1243,18 @@ public class StructureVillageVN
     		{
     	    	Object[] grassPath = getBiomeSpecificBlockObject(ModObjects.chooseModPathBlock(), 0, materialType, biome, disallowModSubs);
     			world.setBlock(posX, surfaceY, posZ, (Block)grassPath[0], (Integer)grassPath[1], 2);
-    			return surfaceY;
+				
+    			// Check if below block is also grass path, and replace it to prevent path-on-path stacks
+				int yDownScan = surfaceY;
+				for (int i=1; i<=4; i++)
+				{
+					if (surfaceY-i > 0 && world.getBlock(posX, surfaceY-i, posZ) == ModObjects.chooseModPathBlock() && (world.getBlock(posX, surfaceY-i, posZ) != Blocks.gravel))
+					{
+						world.setBlock(posX, surfaceY-i, posZ, Blocks.dirt, 0, 2);
+					}
+				}
+				
+				return surfaceY;
     		}
     		
     		// Replace sand with gravel supported by cobblestone
@@ -1259,7 +1279,7 @@ public class StructureVillageVN
     			int yDownScan = surfaceY;
     			if (MathHelper.abs_int(posX)%2==0 && MathHelper.abs_int(posZ)%2==0)
     			{
-    				while(world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid() && yDownScan>0)
+    				while(yDownScan > 0 && world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid())
     				{
     					world.setBlock(posX, yDownScan, posZ, (Block)cobblestone[0], (Integer)cobblestone[1], 2);
     				}
@@ -1287,7 +1307,7 @@ public class StructureVillageVN
     			if (MathHelper.abs_int(posX)%2==0 && MathHelper.abs_int(posZ)%2==0)
     			{
     		    	Object[] logVert = getBiomeSpecificBlockObject(Blocks.log, 0, materialType, biome, disallowModSubs);
-    				while(world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid() && yDownScan>0)
+    				while(yDownScan > 0 && world.getBlock(posX, --yDownScan, posZ).getMaterial().isLiquid())
     				{
     					world.setBlock(posX, yDownScan, posZ, (Block)logVert[0], (Integer)logVert[1], 2);
     				}

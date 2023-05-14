@@ -181,6 +181,7 @@ public class ModObjects {
 	public static final String boatAcaciaUTD = DOM_UPTODATE + ":item_boat_acacia";
 	
 	// Bookshelf
+	public static final String bookshelfCem = "cement:wood_bookshelf";
 	public static final String bookshelfGS = DOM_GANYSSURFACE + ":bookshelf";
 	public static final String bookshelfOakWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_0";
 	public static final String bookshelfSpruceWS = DOM_WOODSTUFF + ":bookshelf_tile.wood_1";
@@ -303,12 +304,13 @@ public class ModObjects {
 	public static final String concrete_MM = DOM_MANAMETAL + ":concrete";
 	
 	// Crafting Table
+	public static final String craftingTableWoodCem = "cement:wood_crafting_table"; 
 	public static final String craftingTableOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_0"; 
 	public static final String craftingTableSpruceWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_1"; 
 	public static final String craftingTableBirchWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_2"; 
 	public static final String craftingTableJungleWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_3"; 
 	public static final String craftingTableAcaciaWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_4"; 
-	public static final String craftingTableDarkOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_5"; 
+	public static final String craftingTableDarkOakWS = DOM_WOODSTUFF + ":crafting_table_tile.wood_5";
 	
 	// Crops
 	public static final String cropHerbDRQ = DOM_DQR3 + ":blockYakusouSeed1";
@@ -1726,9 +1728,17 @@ public class ModObjects {
 			{
 				if (materialMeta>0)
 				{
-					modblock = Block.getBlockFromName(ModObjects.bookshelfGS); meta=materialMeta-1;
+					modblock = Block.getBlockFromName(ModObjects.bookshelfGS);
 				}
-				if (modblock!=null) {return new Object[]{modblock, meta};}
+				if (modblock!=null) {return new Object[]{modblock, materialMeta-1};}
+			}
+			else if (mod.toLowerCase().trim().equals("cement"))
+			{
+				if (materialMeta>0)
+				{
+					modblock = Block.getBlockFromName(ModObjects.bookshelfCem);
+				}
+				if (modblock!=null) {return new Object[]{modblock, materialMeta-1};}
 			}
 		}
 		
@@ -1829,7 +1839,7 @@ public class ModObjects {
 		if (modblock != null) {return new Object[]{modblock, 0};}
 		
 		// Return crafting table by default
-		return new Object[]{chooseModCraftingTable(woodMeta), 0};
+		return chooseModCraftingTable(woodMeta);
 	}
 	
 	
@@ -1963,22 +1973,38 @@ public class ModObjects {
 	
 	
 	// Crafting Table
-	public static Block chooseModCraftingTable(int materialMeta)
+	public static Object[] chooseModCraftingTable(int materialMeta)
 	{
-		Block modblock=null; int meta=0;
+		String[] modprioritylist = GeneralConfig.modCraftingTable;
 		
-		switch (materialMeta)
+		for (String mod : modprioritylist)
 		{
-			case 0: modblock = Block.getBlockFromName(ModObjects.craftingTableOakWS); break;
-			case 1: modblock = Block.getBlockFromName(ModObjects.craftingTableSpruceWS); break;
-			case 2: modblock = Block.getBlockFromName(ModObjects.craftingTableBirchWS); break;
-			case 3: modblock = Block.getBlockFromName(ModObjects.craftingTableJungleWS); break;
-			case 4: modblock = Block.getBlockFromName(ModObjects.craftingTableAcaciaWS); break;
-			case 5: modblock = Block.getBlockFromName(ModObjects.craftingTableDarkOakWS); break;
+			Block modblock=null; int meta=0;
+			
+			if (mod.toLowerCase().trim().equals("woodstuff"))
+			{
+				switch (materialMeta)
+				{
+					case 0: modblock = Block.getBlockFromName(ModObjects.craftingTableOakWS); break;
+					case 1: modblock = Block.getBlockFromName(ModObjects.craftingTableSpruceWS); break;
+					case 2: modblock = Block.getBlockFromName(ModObjects.craftingTableBirchWS); break;
+					case 3: modblock = Block.getBlockFromName(ModObjects.craftingTableJungleWS); break;
+					case 4: modblock = Block.getBlockFromName(ModObjects.craftingTableAcaciaWS); break;
+					case 5: modblock = Block.getBlockFromName(ModObjects.craftingTableDarkOakWS); break;
+				}
+				if (modblock != null) {return new Object[]{modblock, 0};}
+			}
+			else if (mod.toLowerCase().trim().equals("cement"))
+			{
+				if (materialMeta >= 1 && materialMeta <= 5)
+				{
+					modblock = Block.getBlockFromName(ModObjects.craftingTableWoodCem);
+				}
+				if (modblock != null) {return new Object[]{modblock, materialMeta-1};}
+			}
 		}
-		if (modblock==null) {modblock = Blocks.crafting_table;}
 		
-		return modblock;
+		return new Object[]{Blocks.crafting_table, 0};
 	}
 	
 	
@@ -2579,7 +2605,7 @@ public class ModObjects {
 		if (modblock != null) {return new Object[]{modblock, 0};}
 		
 		// Return crafting table by default
-		return new Object[]{chooseModCraftingTable(woodMeta), 0};
+		return chooseModCraftingTable(woodMeta);
 	}
 	
 	
@@ -3268,7 +3294,7 @@ public class ModObjects {
 		modblock = Block.getBlockFromName(ModObjects.loom_EFR);
 		if (modblock != null) {return new Object[]{modblock, StructureVillageVN.chooseStonecutterMeta(orientation, horizIndex)};}
 		
-		return new Object[]{chooseModCraftingTable(woodMeta), 0};
+		return chooseModCraftingTable(woodMeta);
 	}
 	
 	
@@ -3840,7 +3866,7 @@ public class ModObjects {
 		}
 		
 		// Return crafting table by default
-		return new Object[]{chooseModCraftingTable(woodMeta), 0};
+		return chooseModCraftingTable(woodMeta);
 	}
 	
 	
@@ -4325,8 +4351,7 @@ public class ModObjects {
 		if (modblock != null) {return new Object[]{modblock, StructureVillageVN.chooseStonecutterMeta(orientation, horizIndex)};}
 		
 		// Return a crafting table if nothing else lands
-		modblock = chooseModCraftingTable(woodMeta); int meta = 0;
-		return new Object[]{modblock, meta};
+		return chooseModCraftingTable(woodMeta);
 	}
 	
 	// Trap door

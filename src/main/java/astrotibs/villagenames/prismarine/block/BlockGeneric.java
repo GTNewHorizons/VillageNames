@@ -2,8 +2,8 @@ package astrotibs.villagenames.prismarine.block;
 
 import java.util.List;
 
+import astrotibs.villagenames.block.ModBlocksVN.ISubBlocksBlock;
 import astrotibs.villagenames.prismarine.item.ItemBlockGeneric;
-import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine.ISubBlocksBlock;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

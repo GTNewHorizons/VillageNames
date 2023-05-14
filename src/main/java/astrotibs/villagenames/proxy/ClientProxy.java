@@ -8,7 +8,7 @@ import astrotibs.villagenames.integration.antiqueatlas.VillageWatcherAA;
 import astrotibs.villagenames.prismarine.guardian.audio.GuardianSound;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
 import astrotibs.villagenames.prismarine.guardian.renderer.RenderGuardian;
-import astrotibs.villagenames.prismarine.register.RegisterRenderPrismarine;
+import astrotibs.villagenames.prismarine.render.RegisterRenderPrismarine;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;

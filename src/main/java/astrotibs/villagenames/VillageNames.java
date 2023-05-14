@@ -33,8 +33,6 @@ import astrotibs.villagenames.prismarine.guardian.spawning.SpawnEventListener;
 import astrotibs.villagenames.prismarine.monument.MonumentGeneratorIWG;
 import astrotibs.villagenames.prismarine.monument.StructureOceanMonument;
 import astrotibs.villagenames.prismarine.monument.StructureOceanMonumentPieces;
-import astrotibs.villagenames.prismarine.register.ModBlocksPrismarine;
-import astrotibs.villagenames.prismarine.register.ModItemsPrismarine;
 import astrotibs.villagenames.proxy.CommonProxy;
 import astrotibs.villagenames.spawnegg.DispenserBehavior;
 import astrotibs.villagenames.spawnegg.ItemSpawnEggVN;
@@ -158,23 +156,16 @@ public final class VillageNames
 		
 		if (Loader.isModLoaded("VillagerMetaFix")) {canVillagerTradesDistinguishMeta = true;} // Written this way so that BugTorch et al. can make this value true if they want to
 		
-		
 		// Moved down here to make sure config fires first!?
 		ModItems.init();
 		ModBlocksVN.init();
 		
-		
-		if (GeneralConfig.codexChestLoot) { // Chest loot
+		if (GeneralConfig.codexChestLoot) {
 			ChestLootHandler.init();
 		}
 		
 		if (GeneralConfig.addOceanMonuments)
 		{
-			// Monuments, Prismarine, Guardians, Sponges
-			// Register Prismarine stuff here
-			ModBlocksPrismarine.init();
-			ModItemsPrismarine.init();
-			
 			// Register Ocean Monument stuff here
 			GameRegistry.registerWorldGenerator(new MonumentGeneratorIWG(), 0);
 			MapGenStructureIO.registerStructure(StructureOceanMonument.StartMonument.class, "Monument");
@@ -188,8 +179,7 @@ public final class VillageNames
 			BlockDispenser.dispenseBehaviorRegistry.putObject(spawnEgg, new DispenserBehavior());
 			
 			MinecraftForge.EVENT_BUS.register(new SpawnEventListener());
-			LogHelper.info("Ocean Monuments, Prismarine, Guardians, and Sponges registered");
-			
+			LogHelper.info("Registered Guardians and ocean monuments");
 		}
 		
 		if (GeneralConfig.addIgloos)
@@ -547,7 +537,7 @@ public final class VillageNames
 	       		EnumChatFormatting.GREEN +
 	       		"Generates random names for villages, villagers, and other structures and entities.";
         
-        event.getModMetadata().logoFile = "assets"+File.separator+"villagenames"+File.separator+"vn_banner.png";
+        event.getModMetadata().logoFile = "assets/villagenames/vn_banner.png";
         
         
         

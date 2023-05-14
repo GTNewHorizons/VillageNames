@@ -28,8 +28,11 @@ public class GeneralConfig {
 	public static boolean villageBanners;
 	public static int signYaw;
 	
+	public static boolean addLunarinBlocks;
 	public static boolean addConcrete;
 	public static boolean concreteWell;
+	public static boolean addPrismarine;
+	public static boolean addSponges;
 	public static boolean addOceanMonuments;
 	//public static boolean alternateGuardianNamespace;
 	public static boolean addIgloos;
@@ -101,6 +104,7 @@ public class GeneralConfig {
 	public static String[] modChest;
 	public static String[] modComposter;
 	public static String[] modConcrete;
+	public static String[] modCraftingTable;
 	public static String[] modDoor;
 	public static String[] modDye;
 	public static String[] modFence;
@@ -338,7 +342,10 @@ public class GeneralConfig {
 	    allowInGameConfig = config.getBoolean("Allow in-game config access", Reference.CATEGORY_MISCELLANEOUS, true, "Set this to false to deacactivate the in-game config GUI, in case it conflicts with other mods.");
 	    debugMessages = config.getBoolean("Debug messages", Reference.CATEGORY_MISCELLANEOUS, false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
 	    pyramidTerracotta = config.getBoolean("Pyramid Terracotta", Reference.CATEGORY_MISCELLANEOUS, true, "Replace the wool blocks in desert pyramids with terracotta as in 1.8+");
-	    addOceanMonuments = config.getBoolean("Add Monuments", Reference.CATEGORY_MISCELLANEOUS, true, "Generate Ocean Monuments, Prismarine, Guardians, and absorbent Sponges");
+	    addLunarinBlocks = config.getBoolean("Add Lunarin Blocks", Reference.CATEGORY_MISCELLANEOUS, true, "Adds an original brick-style block for iron and gold");
+	    addPrismarine = config.getBoolean("Add Prismarine", Reference.CATEGORY_MISCELLANEOUS, true, "Adds Prismarine blocks and items. Very difficult to acquire if \"Add Monuments\" is false.");
+	    addSponges = config.getBoolean("Add Sponges", Reference.CATEGORY_MISCELLANEOUS, true, "Adds absorbent Sponges");
+	    addOceanMonuments = config.getBoolean("Add Monuments", Reference.CATEGORY_MISCELLANEOUS, true, "Generate Ocean Monuments and Guardians. Pairs well with \"Add Prismarine\" if you're not using another mod to backport prismarine.");
 	    //alternateGuardianNamespace = config.getBoolean("Alternate Guardian Namespace", Reference.CATEGORY_MISCELLANEOUS, false, "WARNING: TOGGLING THIS VALUE WILL REMOVE OR REPLACE ALL CURRENTLY-SPAWNED GUARDIANS FROM YOUR WORLD, INCLUDING ELDERS!\n"+"Set this to true if you have fatal conflicts loading another mod using the entity name minecraft:Guardian by instead using the name minecraft:Guardian_VN.");
 	    addIgloos = config.getBoolean("Add Igloos", Reference.CATEGORY_MISCELLANEOUS, true, "Generate Igloos from 1.9+");
 	    biomedictIgloos = config.getBoolean("Allow Igloos in modded biomes", Reference.CATEGORY_MISCELLANEOUS, false, "Igloos can generate in mods' snowy plains biomes, rather than just vanilla's Ice Plains and Cold Taiga");
@@ -578,6 +585,7 @@ public class GeneralConfig {
 	    modBookshelf = config.getStringList("Mod Priority: Bookshelf", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"woodstuff",
  				"ganyssurface",
+ 				"cement",
  				},
  				"Priority order for referencing Bookshelves for village generation. The version highest on the list and registered in your game will be used."
  				);
@@ -630,6 +638,13 @@ public class GeneralConfig {
  				"manametal",
  				},
  				"Priority order for referencing concrete for well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
+ 				);
+	    
+	    modCraftingTable = config.getStringList("Mod Priority: Crafting Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"woodstuff",
+ 				"cement",
+ 				},
+ 				"Priority order for referencing crafting tables for village decorations. The version highest on the list and registered in your game will be used."
  				);
 	    
 	    modDoor = config.getStringList("Mod Priority: Door", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
