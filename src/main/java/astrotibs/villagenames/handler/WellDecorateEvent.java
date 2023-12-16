@@ -324,8 +324,6 @@ public class WellDecorateEvent {
                                     		catch (Exception e) {} // Failed to evaluate the bounding box
                                     		
                                     		
-                                    		
-                                    		// Added in 3.0
                                     		// Assign the top line of the sign based on the area of the Village, determined by bounding box
                                     		
                             				int topLineRand = random.nextInt(4);
@@ -349,7 +347,6 @@ public class WellDecorateEvent {
                                     		
                                     		VNWorldDataStructure data = VNWorldDataStructure.forWorld(event.world, "villagenames3_Village", "NamedStructures");
                                     		
-                                    		// Added in 1.1
                                     		// This checks to see if the village has already been named
             		    					
             		    					NBTTagCompound tagCompound = data.getData();
@@ -393,23 +390,29 @@ public class WellDecorateEvent {
                                     				villageBanner != null &&
                                     						GeneralConfig.wellDecorations && GeneralConfig.villageBanners && signLocation!=bannerLocation
                                     				) {
-                                    			
-                                    			event.world.setBlock(x+bannerXOffset, y+1, z+bannerZOffset, Blocks.cobblestone_wall);
+
+                                				int bannerX = x+bannerXOffset;
+                                				int bannerY = y+2;
+                                				int bannerZ = z+bannerZOffset;
+                                				
+                                    			event.world.setBlock(bannerX, y+1, bannerZ, Blocks.cobblestone_wall);
                                     			if (testForBanner!=null)
                                     			{
                                     				// Set the banner and its orientation
-                                    				event.world.setBlock(x+bannerXOffset, y+2, z+bannerZOffset, testForBanner );
-                                    				event.world.setBlockMetadataWithNotify(x+bannerXOffset, y+2, z+bannerZOffset, bannerOrientation, 2);
+                                    				event.world.setBlock(bannerX, bannerY, bannerZ, testForBanner );
+                                    				event.world.setBlockMetadataWithNotify(bannerX, bannerY, bannerZ, bannerOrientation, 2);
                                     				
                                     				// Set the tile entity
-                                    				TileEntity tilebanner = new TileEntityBanner();
-                                    				NBTTagCompound modifystanding = new NBTTagCompound();
-                                    				tilebanner.writeToNBT(modifystanding);
-                                    				modifystanding.setBoolean("IsStanding", true);
-                                    				tilebanner.readFromNBT(modifystanding);
-                                        			((TileEntityBanner) tilebanner).setItemValues(villageBanner);
-                                            		
-                                            		event.world.setTileEntity(x+bannerXOffset, y+2, z+bannerZOffset, tilebanner);
+                                    				TileEntity bannerTileEntity = event.world.getTileEntity(bannerX, bannerY, bannerZ);
+                                    				if (bannerTileEntity==null) {bannerTileEntity = new TileEntityBanner();}
+                                    				NBTTagCompound bannerNBTTagCompound = new NBTTagCompound();
+                                    				bannerTileEntity.writeToNBT(bannerNBTTagCompound);
+                                    				bannerNBTTagCompound.setBoolean("IsStanding", true);
+                                    				
+                                    				bannerNBTTagCompound = FunctionsVN.setItemValues(villageBanner, bannerNBTTagCompound);
+                                    				bannerTileEntity.readFromNBT(bannerNBTTagCompound);
+                                    				
+                                    				event.world.setTileEntity(bannerX, bannerY, bannerZ, bannerTileEntity);
                                     			}
                                     			
                                     		}

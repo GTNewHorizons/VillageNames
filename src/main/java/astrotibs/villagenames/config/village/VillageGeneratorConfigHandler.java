@@ -6,14 +6,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import astrotibs.villagenames.config.ConfigurationVN;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
-import net.minecraftforge.common.config.Configuration;
 
 public class VillageGeneratorConfigHandler
 {
-	public static Configuration config;
+	public static ConfigurationVN config;
 	
 	// --- Villages --- //
 	public static boolean newVillageGenerator;
@@ -563,7 +563,7 @@ public class VillageGeneratorConfigHandler
 	{
 		if (config == null)
 		{
-			config = new Configuration(configFile);
+			config = new ConfigurationVN(configFile);
 			loadConfiguration();
 		}
 	}
@@ -1517,31 +1517,15 @@ public class VillageGeneratorConfigHandler
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
-		restrictTaigaTroughs = config.getBoolean("Decor: Restrict Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Limit taiga troughs only to the well or as street decor. "
+		restrictTaigaTroughs = config.getBoolean("Decor: Restrict Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Limit taiga troughs only to the well or as street decor. "
 				+ "Setting this to false allows them in any flagged taiga decor location, at the risk of them cutting into the parent structure.");
 		
-/*		decorPlainsLamp1 = config.getBoolean(decor+"Plains Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+plainsVillages);
 		
-		decorDesertLamp1 = config.getBoolean(decor+"Desert Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+desertVillages);
-		
-		decorTaigaDecoration1 = config.getBoolean(decor+"Taiga Trough", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration2 = config.getBoolean(decor+"Taiga Large Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration3 = config.getBoolean(decor+"Taiga Small Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration4 = config.getBoolean(decor+"Taiga Medium Boulder", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration5 = config.getBoolean(decor+"Taiga Campfire", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration6 = config.getBoolean(decor+"Taiga Campfire Over Hay Bin", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		decorTaigaDecoration7 = config.getBoolean(decor+"Taiga Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+taigaVillages);
-		
-		decorSavannaLampPost01 = config.getBoolean(decor+"Savanna Lamp", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+savannaVillages);
-		
-		decorSnowyLampPost1 = config.getBoolean(decor+"Snowy Lamp (Two Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
-		decorSnowyLampPost02 = config.getBoolean(decor+"Snowy Lamp (One Lantern)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);
-		decorSnowyLampPost03 = config.getBoolean(decor+"Snowy Lamp (Four Lanterns)", Reference.CATEGORY_VILLAGE_GENERATOR, true, allowForThisDecorTypeIn+snowyVillages);*/
-				
-		
-		componentVillageTypes = config.getStringList("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,
+		componentVillageTypes = config.getStringListWithoutDefaultsInComment("Component Village Types", Reference.CATEGORY_VILLAGE_GENERATOR,
 				FunctionsVN.joinTwoStringArrays(MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS, new String[] {
 						// Mod buildings
+						"astrotibs.villagenames.integration.antiqueatlas.signposts.SignPost|all",
+						
 						"forestry.apiculture.worldgen.ComponentVillageBeeHouse|plains taiga savanna jungle swamp",
 						
 						"growthcraft.apples.common.village.ComponentVillageAppleFarm|plains taiga snowy jungle swamp",
@@ -1553,7 +1537,7 @@ public class VillageGeneratorConfigHandler
 						}),
 				"List of village components that only appear in certain village types. Format is: classPaths|villageTypes\n"
 				+ "classPaths: The class address to the specific structure component. If debugMessages is true, every time a village generates, a list of village components not yet specified on this list will be printed to the console.\n"
-   				+ "villageTypes: list of the types this component can appear in. Multiple types can be separator with a delimiter of your choice, aside from | (pipe). Leave this blank, or enter something that doesn't include a village type, to prevent the component from spawning."
+   				+ "villageTypes: list of the types this component can appear in. Multiple types can be separator with a delimiter of your choice, aside from | (pipe). Use the word \"all\" or \"any\" (no quotes) to allow them to spawn in any village type. Leave this blank, or enter something that doesn't include a village type, to prevent the component from spawning."
 				);
 		
 		
@@ -1572,7 +1556,7 @@ public class VillageGeneratorConfigHandler
 				+ "\n3: Do not spawn any village components that would have animals"
 				);
 		
-		spawnBiomesNames = config.getStringList("Spawn Biome Names", Reference.CATEGORY_VILLAGE_GENERATOR,
+		spawnBiomesNames = config.getStringListWithoutDefaultsInComment("Spawn Biome Names", Reference.CATEGORY_VILLAGE_GENERATOR,
 				new String[] {
 						// Vanilla
 						"Plains",

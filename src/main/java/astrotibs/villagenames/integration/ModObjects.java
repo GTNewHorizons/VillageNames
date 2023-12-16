@@ -81,6 +81,7 @@ public class ModObjects {
 	// Bamboo
 	// Stalks (Blocks)
 	public static final String bambooStalk_BoP = DOM_BIOMESOPLENTY + ":bamboo";
+	public static final String bambooStalk_EF = DOM_ETFUTURUM + ":bamboo";
 	public static final String bambooStalk_GrC = "Growthcraft|Bamboo:grc.bambooStalk"; // 0 for verdant, 1 for dead
 	// Saplings (Items)
 	public static final String sapling_BoP = DOM_BIOMESOPLENTY + ":saplings"; // Meta 2
@@ -513,7 +514,7 @@ public class ModObjects {
 	public static final String glazedTerracottaLightGrayEF = DOM_ETFUTURUM + ":light_gray_glazed_terracotta";
 	public static final String glazedTerracottaCyanEF = DOM_ETFUTURUM + ":cyan_glazed_terracotta";
 	public static final String glazedTerracottaPurpleEF = DOM_ETFUTURUM + ":purple_glazed_terracotta";
-	public static final String glazedTerracottaBlueEF = DOM_ETFUTURUM + ":blueglazed_terracotta";
+	public static final String glazedTerracottaBlueEF = DOM_ETFUTURUM + ":blue_glazed_terracotta";
 	public static final String glazedTerracottaBrownEF = DOM_ETFUTURUM + ":brown_glazed_terracotta";
 	public static final String glazedTerracottaGreenEF = DOM_ETFUTURUM + ":green_glazed_terracotta";
 	public static final String glazedTerracottaRedEF = DOM_ETFUTURUM + ":red_glazed_terracotta";
@@ -689,6 +690,9 @@ public class ModObjects {
 	public static final String seaLantern_EF = DOM_ETFUTURUM + ":sea_lantern";
 	public static final String seaLantern_UTD = DOM_UPTODATE + ":sea_lantern";
 	public static final String seaLantern_MM = DOM_MANAMETAL + ":sea_lantern";
+	
+	// Sign Post
+	public static final String signPost_SP = "signposts:signPost";
 	
 	// Smithing Table
 	public static final String smithingTable_EFR = DOM_ETFUTURUM + ":smithing_table";
@@ -1154,7 +1158,40 @@ public class ModObjects {
 		{
 			Block modblock=null;
 			
-			if (mod.toLowerCase().trim().equals("biomesoplenty"))
+			if (mod.toLowerCase().trim().equals("etfuturum"))
+			{
+				modblock = Block.getBlockFromName(ModObjects.bambooStalk_EF);
+				// Meta guide
+				// 0: bamboo sprout
+				// 1: bamboo shoot
+				// 2: thick stalk without leaves
+				// 3: thick stalk with leaves
+				// 4: thick stalk with many leaves
+
+				int ef_to_vanilla = 0;
+				
+				switch (state)
+				{
+				default:
+				case 0: // thin stalk without leaves
+					ef_to_vanilla = 0; break;
+				case 1: // thin stalk with leaves
+					ef_to_vanilla = 2; break;
+				case 2: // thin stalk with many leaves
+					ef_to_vanilla = 4; break;
+				case 3: // thick stalk without leaves
+					ef_to_vanilla = 1; break;
+				case 4: // thick stalk with leaves
+					ef_to_vanilla = 3; break;
+				case 5: // thick stalk with many leaves
+					ef_to_vanilla = 5; break;
+				case 11: // terminating thick stalk with many leaves
+					ef_to_vanilla = 13; break;
+				}
+				
+				if (modblock != null) {return new Object[]{modblock, ef_to_vanilla};}
+			}
+			else if (mod.toLowerCase().trim().equals("biomesoplenty"))
 			{
 				modblock = Block.getBlockFromName(ModObjects.bambooStalk_BoP);
 				if (modblock != null) {return new Object[]{modblock, 0};}
@@ -2682,7 +2719,7 @@ public class ModObjects {
 				// Thus:
 				int convolvedMeta = colorMeta%4 + 4*orientationMeta;
 				
-				return new Object[]{modblock, new Integer(convolvedMeta)};
+				if (modblock != null) {return new Object[]{modblock, new Integer(convolvedMeta)};}
 			}
 			else if (mod.toLowerCase().trim().equals("etfuturum"))
 			{
@@ -4401,6 +4438,7 @@ public class ModObjects {
 				}
 				if (modblock != null) {return modblock;}
 			}
+			// Malisis trapdoors automatically replace vanilla
 			/*else if (mod.toLowerCase().trim().equals("malisisdoors"))
 			{
 				switch (materialMeta)

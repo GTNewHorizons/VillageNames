@@ -9,10 +9,9 @@ import java.util.Map;
 import java.util.Set;
 
 import astrotibs.villagenames.utility.Reference;
-import net.minecraftforge.common.config.Configuration;
 
 public class GeneralConfig {
-	public static Configuration config;
+	public static ConfigurationVN config;
 	
 	//public static String[] blackList;
 	public static boolean wellSlabs;
@@ -137,6 +136,8 @@ public class GeneralConfig {
 	public static float harvestcraftCropFarmRate;
 	public static float dragonQuestCropFarmRate;
 	public static boolean antiqueAtlasMarkerNames;
+	public static boolean antiqueAtlasPlaceSignPosts;
+	public static String antiqueAtlasSignPostLabel;
 	public static boolean manaMetalCartographersSellMapFragments;
 	
     public static boolean villagerSkinTones;
@@ -148,7 +149,7 @@ public class GeneralConfig {
 	{
 		if (config == null)
 		{
-			config = new Configuration(configFile);
+			config = new ConfigurationVN(configFile);
 			loadConfiguration();
 		}
 	}
@@ -194,13 +195,14 @@ public class GeneralConfig {
 	    
 	    removeMobArmor = config.getBoolean("Remove Armor for Modern Skins", Reference.CATEGORY_VILLAGER_PROFESSIONS, true, "If modern skins are enabled: automatically removes armor from villagers and zombies to avoid a rendering bug.");
 	    
-	    moddedVillagerHeadwearGraylist = config.getStringList("Modded Villager Headwear Graylist", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
+	    moddedVillagerHeadwearGraylist = config.getStringListWithoutDefaultsInComment("Modded Villager Headwear Graylist", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
 				"14", // Growthcraft Apiarist
 				"-15", // Apple & Milk & Tea's Cafe Master -- turned off because I enjoy his sexy hair
 				"44", // Village Taverns's Shepherdess -- turned on to better differentiate from the vanilla Shepherd
 				"80", // Forestry Apiarist
 				"-190", // Thaumcraft Wizard -- turned off because of hat brim rendering issues
 				"-191", // Thaumcraft Banker -- turned off because of hat brim rendering issues
+				"385", // GraveStone Mod's Undertaker
 				"512", // Immersive Engineering Engineer
 				"-6156", // Open Blocks Music Merchant
 				"7117", // Mine Trading Cards's Card Master
@@ -223,7 +225,7 @@ public class GeneralConfig {
 	    	catch (Exception e) {} // Failure to parse the string entry into an integer, so ignore it
 	    }
 	    
-	    moddedVillagerModularSkins = config.getStringList("Modded Villager Modular Skins", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
+	    moddedVillagerModularSkins = config.getStringListWithoutDefaultsInComment("Modded Villager Modular Skins", Reference.CATEGORY_VILLAGER_PROFESSIONS, new String[]{
 				// Actually Additions
 				"aa_jam|aa_jam|493827",
 				// Apple & Milk & Tea
@@ -238,6 +240,8 @@ public class GeneralConfig {
 				"for_arborist|for_arborist|81",
 				// Fossils and Archaeology
 				"fa_archaeologist||303",
+				// GraveStone Mod
+				"gs_undertaker|gs_undertaker|385",
 	    		// Growthcraft
 	    		"gc_brewer||10",
 				"gc_apiarist||14",
@@ -307,7 +311,7 @@ public class GeneralConfig {
 		
     	//--------------Miscellaneous-----------------//
 	    
-	    zombieCureCatalysts = config.getStringList("Zombie Cure Catalysts", Reference.CATEGORY_GENERAL, new String[]{
+	    zombieCureCatalysts = config.getStringListWithoutDefaultsInComment("Zombie Cure Catalysts", Reference.CATEGORY_GENERAL, new String[]{
  				"vanilla|net.minecraft.block.BlockBed|tile.bed|-1",
  				"vanilla|net.minecraft.block.BlockPane|tile.fenceIron|-1"
  				},
@@ -323,7 +327,7 @@ public class GeneralConfig {
 	    zombieCureCatalysts_map.clear();
 	    zombieCureCatalysts_map = unpackZombieCureCatalysts(zombieCureCatalysts);
 	    
-	    zombieCureGroups = config.getStringList("Zombie Cure Groups", Reference.CATEGORY_GENERAL, new String[]{
+	    zombieCureGroups = config.getStringListWithoutDefaultsInComment("Zombie Cure Groups", Reference.CATEGORY_GENERAL, new String[]{
  				"vanilla|0.3|14"
  				},
  				"When curing a zombie villager, all blocks of the same named group will use these stats. "
@@ -361,7 +365,7 @@ public class GeneralConfig {
 	    
 		// Automatic Names
 		
-		modNameMappingAutomatic = config.getStringList("Automatic Names", Reference.CATEGORY_NAMING, new String[]{
+		modNameMappingAutomatic = config.getStringListWithoutDefaultsInComment("Automatic Names", Reference.CATEGORY_NAMING, new String[]{
 				
 				// Minecraft
 				//"demon||net.minecraft.entity.boss.EntityWither|add",
@@ -454,7 +458,7 @@ public class GeneralConfig {
 
 		// Clickable Names
 	    
-		modNameMappingClickable = config.getStringList("Clickable Names", Reference.CATEGORY_NAMING, new String[]{
+		modNameMappingClickable = config.getStringListWithoutDefaultsInComment("Clickable Names", Reference.CATEGORY_NAMING, new String[]{
 				
 				// Galacticraft
 				"alien||micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager",
@@ -525,7 +529,7 @@ public class GeneralConfig {
 
 		
 		// Forced pet names
-		entitiesNameableLikePets = config.getStringList("Entities Nameable Like Pets", Reference.CATEGORY_NAMING, new String[]{
+		entitiesNameableLikePets = config.getStringListWithoutDefaultsInComment("Entities Nameable Like Pets", Reference.CATEGORY_NAMING, new String[]{
 				},
 				"List of class paths of entities that receive a random Pet name when right-clicked with a blank nametag, irrespective of if they're tamed or who tamed them.\n"
 				+ "Use this for entities that can't receive a Pet name in the intended way (typically because owner ID is stored differently or not stored at all)."
@@ -541,32 +545,35 @@ public class GeneralConfig {
 		harvestcraftCropFarmRate = config.getFloat("Crop rate: Harvestcraft", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Harvestcraft crops in farms. Only used with Village Generator. Set to 0 for no HC crops.");
 		dragonQuestCropFarmRate = config.getFloat("Crop rate: DQ Respect", Reference.CATEGORY_MOD_INTEGRATION, 0.25F, 0F, 1F, "Generate Dragon Quest Respect crops in farms. Only used with Village Generator. Set to 0 for no DQR crops.");
 		antiqueAtlasMarkerNames = config.getBoolean("Antique Atlas: Village Marker Names", Reference.CATEGORY_MOD_INTEGRATION, true, "Label a new village marker with the village's name in your Antique Atlases.");
+		antiqueAtlasPlaceSignPosts = config.getBoolean("Antique Atlas: Place Sign-Posts", Reference.CATEGORY_MOD_INTEGRATION, true, "If using harceroi's SignPosts mod, new villages will generate with a registered Sign-Post somewhere");
+		antiqueAtlasSignPostLabel = config.getString("Antique Atlas: Sign-Post Label", Reference.CATEGORY_MOD_INTEGRATION, "", "Text that will be displayed on every Antique Atlas village SignPost marker. Leave blank for the village name.");
 		manaMetalCartographersSellMapFragments = config.getBoolean("ManaMetal: Cartographers Sell Map Fragments", Reference.CATEGORY_MOD_INTEGRATION, true, "Cartographer villagers can sell Map Fragments");
 		
 		
-		modBamboo = config.getStringList("Mod Priority: Bamboo", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
- 				"manametal",
+		modBamboo = config.getStringListWithoutDefaultsInComment("Mod Priority: Bamboo", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+ 				"etfuturum",
+				"manametal",
  				"growthcraft",
  				"biomesoplenty",
  				},
  				"Priority order for referencing Bamboo for village generation. The version highest on the list and registered in your game will be used."
  				);
 		
-		modBanner = config.getStringList("Mod Priority: Banner", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+		modBanner = config.getStringListWithoutDefaultsInComment("Mod Priority: Banner", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Banners for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 		
-		modBarrel = config.getStringList("Mod Priority: Barrel", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+		modBarrel = config.getStringListWithoutDefaultsInComment("Mod Priority: Barrel", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"uptodate",
  				},
  				"Priority order for referencing Barrels for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modBed = config.getStringList("Mod Priority: Bed", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modBed = config.getStringListWithoutDefaultsInComment("Mod Priority: Bed", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"manametal",
  				"bettervanilla",
@@ -575,14 +582,14 @@ public class GeneralConfig {
  				"Priority order for referencing Beds for village generation and villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modBeetroot = config.getStringList("Mod Priority: Beetroot", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modBeetroot = config.getStringListWithoutDefaultsInComment("Mod Priority: Beetroot", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Beetroot for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modBookshelf = config.getStringList("Mod Priority: Bookshelf", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modBookshelf = config.getStringListWithoutDefaultsInComment("Mod Priority: Bookshelf", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"woodstuff",
  				"ganyssurface",
  				"cement",
@@ -590,7 +597,7 @@ public class GeneralConfig {
  				"Priority order for referencing Bookshelves for village generation. The version highest on the list and registered in your game will be used."
  				);
 		
-	    modBountifulStone = config.getStringList("Mod Priority: Bountiful Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modBountifulStone = config.getStringListWithoutDefaultsInComment("Mod Priority: Bountiful Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"chisel",
  				"etfuturum",
 	    		"uptodate",
@@ -601,7 +608,7 @@ public class GeneralConfig {
  				"Priority order for referencing Granite, Diorite, and Andesite for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-		modButton = config.getStringList("Mod Priority: Button", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+		modButton = config.getStringListWithoutDefaultsInComment("Mod Priority: Button", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
@@ -610,28 +617,28 @@ public class GeneralConfig {
  				"Priority order for referencing wood buttons for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modCampfire = config.getStringList("Mod Priority: Campfire", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modCampfire = config.getStringListWithoutDefaultsInComment("Mod Priority: Campfire", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"campfirebackport",
  				"manametal",
  				},
  				"Priority order for referencing Campfires for village generation and villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modChest = config.getStringList("Mod Priority: Chest", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modChest = config.getStringListWithoutDefaultsInComment("Mod Priority: Chest", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"woodstuff",
  				"ganyssurface",
  				},
  				"Priority order for referencing Wooden Chests for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modComposter = config.getStringList("Mod Priority: Composter", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modComposter = config.getStringListWithoutDefaultsInComment("Mod Priority: Composter", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"gardenstuff",
  				},
  				"Priority order for referencing composters for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modConcrete = config.getStringList("Mod Priority: Concrete", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modConcrete = config.getStringListWithoutDefaultsInComment("Mod Priority: Concrete", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
  				"etfuturum",
 	    		"uptodate",
@@ -640,14 +647,14 @@ public class GeneralConfig {
  				"Priority order for referencing concrete for well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modCraftingTable = config.getStringList("Mod Priority: Crafting Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modCraftingTable = config.getStringListWithoutDefaultsInComment("Mod Priority: Crafting Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"woodstuff",
  				"cement",
  				},
  				"Priority order for referencing crafting tables for village decorations. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modDoor = config.getStringList("Mod Priority: Door", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modDoor = config.getStringListWithoutDefaultsInComment("Mod Priority: Door", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"ganyssurface",
@@ -657,7 +664,7 @@ public class GeneralConfig {
  				"Priority order for referencing Doors for village generation. The version highest on the list and registered in your game will be used."
  				);
 		
-	    modDye = config.getStringList("Mod Priority: Dye", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modDye = config.getStringListWithoutDefaultsInComment("Mod Priority: Dye", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"biomesoplenty",
@@ -666,7 +673,7 @@ public class GeneralConfig {
  				"Priority order for referencing dye for villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modFence = config.getStringList("Mod Priority: Fence", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modFence = config.getStringListWithoutDefaultsInComment("Mod Priority: Fence", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
@@ -676,7 +683,7 @@ public class GeneralConfig {
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modFenceGate = config.getStringList("Mod Priority: Fence Gate", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modFenceGate = config.getStringListWithoutDefaultsInComment("Mod Priority: Fence Gate", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"ganyssurface",
 	    		"uptodate",
@@ -687,14 +694,14 @@ public class GeneralConfig {
  				"Priority order for referencing Fence Gate blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modFlower = config.getStringList("Mod Priority: Flower", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modFlower = config.getStringListWithoutDefaultsInComment("Mod Priority: Flower", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
  				},
  				"Priority order for referencing flowers for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modGlazedTerracotta = config.getStringList("Mod Priority: Glazed Terracotta", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modGlazedTerracotta = config.getStringListWithoutDefaultsInComment("Mod Priority: Glazed Terracotta", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
  				"etfuturum",
 	    		"uptodate",
@@ -703,7 +710,7 @@ public class GeneralConfig {
  				"Priority order for referencing Glazed Terracotta for villager trade offers and well decorations; essentially, if you still want these features but want to disable "+ Reference.MOD_NAME+"\'s versions. The version highest on the list and registered in your game will be used."
  				);
 		
-	    modGrassPath = config.getStringList("Mod Priority: Grass Path", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modGrassPath = config.getStringListWithoutDefaultsInComment("Mod Priority: Grass Path", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"gregtech",
 	    		"uptodate",
@@ -712,7 +719,7 @@ public class GeneralConfig {
  				"Priority order for referencing Grass Path blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 		
-	    modIronNugget = config.getStringList("Mod Priority: Iron Nugget", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modIronNugget = config.getStringListWithoutDefaultsInComment("Mod Priority: Iron Nugget", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"tinkersconstruct",
@@ -728,14 +735,14 @@ public class GeneralConfig {
  				"Priority order for referencing Iron Nuggets for e.g. village chest loot. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modKelp = config.getStringList("Mod Priority: Kelp", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modKelp = config.getStringListWithoutDefaultsInComment("Mod Priority: Kelp", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"mariculture",
 	    		"biomesoplenty",
  				},
  				"Priority order for referencing Kelp for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 		
-	    modLantern = config.getStringList("Mod Priority: Lantern", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modLantern = config.getStringListWithoutDefaultsInComment("Mod Priority: Lantern", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"netherlicious",
  				"uptodate",
@@ -745,21 +752,21 @@ public class GeneralConfig {
  				"Priority order for referencing Lanterns for e.g. village generation and villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modLectern = config.getStringList("Mod Priority: Lectern", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modLectern = config.getStringListWithoutDefaultsInComment("Mod Priority: Lectern", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"manametal",
 	    		"bibliocraft",
  				},
  				"Priority order for referencing Lecterns for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modMossyStone = config.getStringList("Mod Priority: Mossy Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modMossyStone = config.getStringListWithoutDefaultsInComment("Mod Priority: Mossy Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
  				},
  				"Priority order for referencing mossy stone blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modMutton = config.getStringList("Mod Priority: Mutton", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modMutton = config.getStringListWithoutDefaultsInComment("Mod Priority: Mutton", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
  				"ganyssurface",
@@ -768,7 +775,7 @@ public class GeneralConfig {
  				"Priority order for referencing Mutton for e.g. villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modPressurePlate = config.getStringList("Mod Priority: Pressure Plate", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modPressurePlate = config.getStringListWithoutDefaultsInComment("Mod Priority: Pressure Plate", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
 	    		"woodstuff",
@@ -777,7 +784,7 @@ public class GeneralConfig {
  				"Priority order for referencing Fence blocks for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modPrismarine = config.getStringList("Mod Priority: Prismarine", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modPrismarine = config.getStringListWithoutDefaultsInComment("Mod Priority: Prismarine", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
  				"etfuturum",
  				"botania",
@@ -787,7 +794,7 @@ public class GeneralConfig {
  				"Priority order for referencing Prismarine blocks and items for monument and village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modRedSandstone = config.getStringList("Mod Priority: Red Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modRedSandstone = config.getStringListWithoutDefaultsInComment("Mod Priority: Red Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"ganyssurface",
@@ -795,14 +802,14 @@ public class GeneralConfig {
  				"Priority order for referencing Red Sandstone and its variants for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSign = config.getStringList("Mod Priority: Sign", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSign = config.getStringListWithoutDefaultsInComment("Mod Priority: Sign", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"ganyssurface",
  				},
  				"Priority order for referencing Signs for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSmoothStone = config.getStringList("Mod Priority: Smooth Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSmoothStone = config.getStringListWithoutDefaultsInComment("Mod Priority: Smooth Stone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
 	    		"manametal",
@@ -810,7 +817,7 @@ public class GeneralConfig {
  				"Priority order for referencing Smooth Stone for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSmithingTable = config.getStringList("Mod Priority: Smithing Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSmithingTable = config.getStringListWithoutDefaultsInComment("Mod Priority: Smithing Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
  				"smithinginthe90s",
  				"netheriteplus",
@@ -819,14 +826,14 @@ public class GeneralConfig {
  				"Priority order for referencing Smithing Table for tool smithy buildings. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSmoothSandstone = config.getStringList("Mod Priority: Smooth Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSmoothSandstone = config.getStringListWithoutDefaultsInComment("Mod Priority: Smooth Sandstone", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
  				},
  				"Priority order for referencing Smooth Sandstone for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSponge = config.getStringList("Mod Priority: Sponge", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSponge = config.getStringListWithoutDefaultsInComment("Mod Priority: Sponge", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"villagenames",
  				"etfuturum",
 	    		"uptodate",
@@ -834,7 +841,7 @@ public class GeneralConfig {
  				"Priority order for referencing Sponge blocks for monument generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modStrippedLog = config.getStringList("Mod Priority: Stripped Log", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modStrippedLog = config.getStringListWithoutDefaultsInComment("Mod Priority: Stripped Log", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
 	    		"manametal",
@@ -842,14 +849,14 @@ public class GeneralConfig {
  				"Priority order for referencing Stripped Logs/Wood for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modSuspiciousStew = config.getStringList("Mod Priority: Suspicious Stew", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSuspiciousStew = config.getStringListWithoutDefaultsInComment("Mod Priority: Suspicious Stew", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
  				},
  				"Priority order for referencing Suspicious Stew for villager trades. The version highest on the list and registered in your game will be used."
  				);
 
-	    modSweetBerries = config.getStringList("Mod Priority: Sweet Berries", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modSweetBerries = config.getStringListWithoutDefaultsInComment("Mod Priority: Sweet Berries", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
  				"etfuturum",
 	    		"uptodate",
 	    		"manametal",
@@ -857,7 +864,7 @@ public class GeneralConfig {
  				"Priority order for referencing sweet berries for villager trade offers. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modWall = config.getStringList("Mod Priority: Wall", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modWall = config.getStringListWithoutDefaultsInComment("Mod Priority: Wall", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"railcraft",
@@ -865,7 +872,7 @@ public class GeneralConfig {
  				"Priority order for referencing walls for village generation. The version highest on the list and registered in your game will be used."
  				);
 	    
-	    modWoodenTable = config.getStringList("Mod Priority: Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modWoodenTable = config.getStringListWithoutDefaultsInComment("Mod Priority: Table", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"minecraft",
 	    		"bibliocraft",
 	    		"mrcrayfishsfurnituremod",
@@ -874,7 +881,7 @@ public class GeneralConfig {
  				+ "The \"minecraft\" entry refers to the vanilla-style pressure plate atop a fence post."
  				);
 	    
-	    modWoodenTrapdoor = config.getStringList("Mod Priority: Trapdoor", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+	    modWoodenTrapdoor = config.getStringListWithoutDefaultsInComment("Mod Priority: Trapdoor", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 	    		"etfuturum",
 	    		"uptodate",
  				"ganyssurface",
@@ -884,7 +891,7 @@ public class GeneralConfig {
 	    
 	    
 		// Mapping for modded structures, and the creatures that can name them
-		modStructureNames = config.getStringList("Mod Structures", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+		modStructureNames = config.getStringListWithoutDefaultsInComment("Mod Structures", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 				
 				// Galacticraft
 				"alienvillage|MoonVillage|Moon Village|Moon|moonvillage|micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager",
@@ -918,7 +925,7 @@ public class GeneralConfig {
 		modStructureNames_map = unpackModStructures(modStructureNames);
 		
 		// New mod profession mapping
-		modProfessionMapping = config.getStringList("Mod Professions", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
+		modProfessionMapping = config.getStringListWithoutDefaultsInComment("Mod Professions", Reference.CATEGORY_MOD_INTEGRATION, new String[]{
 				// Actually Additions
 				"Jam Guy|493827|0",
 				// Apple & Milk & Tea
@@ -933,6 +940,8 @@ public class GeneralConfig {
 				"Arborist|81|0",
 				// Fossils and Archaeology
 				"Archaeologist|303|2",
+				// GraveStone Mod
+				"Undertaker|385|4",
 				// Growthcraft
 				"Brewer|10|0",
 				"Apiarist|14|4",

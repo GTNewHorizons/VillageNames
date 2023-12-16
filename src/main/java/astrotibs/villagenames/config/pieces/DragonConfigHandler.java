@@ -2,13 +2,13 @@ package astrotibs.villagenames.config.pieces;
 
 import java.io.File;
 
+import astrotibs.villagenames.config.ConfigurationVN;
 import astrotibs.villagenames.name.NamePiecesEntities;
 import astrotibs.villagenames.utility.Reference;
-import net.minecraftforge.common.config.Configuration;
 
 public class DragonConfigHandler
 {
-	public static Configuration config;
+	public static ConfigurationVN config;
 	
 	
 	public static String[] dragon_prefix;
@@ -27,26 +27,26 @@ public class DragonConfigHandler
 	{
 		if (config == null)
 		{
-			config = new Configuration(configFile);
+			config = new ConfigurationVN(configFile);
 			loadConfiguration();
 		}
 	}
 	
 	public static void loadConfiguration()
 	{
-		dragon_prefix = config.getString(Reference.NAME_PREFIXES, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_PREFIX_DEFAULT,
+		dragon_prefix = config.getStringWithoutDefaultsInComment(Reference.NAME_PREFIXES, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_PREFIX_DEFAULT,
 				Reference.DESCRIPTION_PREFIXES).trim().split("\\s*,\\s*");
 		
-		dragon_root_initial = config.getString(Reference.NAME_ROOT_INITIAL, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_INITIAL_DEFAULT,
+		dragon_root_initial = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_INITIAL, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_INITIAL_DEFAULT,
 				Reference.DESCRIPTION_ROOT_INITIAL).trim().split("\\s*,\\s*");
 		
-		dragon_root_syllables = config.getString(Reference.NAME_ROOT_SYLLABLES, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_SYL_BEGIN_DEFAULT,
+		dragon_root_syllables = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_SYLLABLES, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_SYL_BEGIN_DEFAULT,
 				Reference.DESCRIPTION_ROOT_SYLLABLES).trim().split("\\s*,\\s*");
 		
-		dragon_root_terminal = config.getString(Reference.NAME_ROOT_TERMINAL, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_TERMINAL_DEFAULT,
+		dragon_root_terminal = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_TERMINAL, Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_ROOT_TERMINAL_DEFAULT,
 				Reference.DESCRIPTION_ROOT_TERMINAL).trim().split("\\s*,\\s*");
 		
-		dragon_suffix = config.getString("Suffixes", Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_SUFFIX_DEFAULT,
+		dragon_suffix = config.getStringWithoutDefaultsInComment("Suffixes", Reference.CATEGORY_DRAGON_SYLLABLE_POOL, NamePiecesEntities.DRAGON_SUFFIX_DEFAULT,
 				Reference.DESCRIPTION_SUFFIXES).trim().split("\\s*,\\s*");
 
 		

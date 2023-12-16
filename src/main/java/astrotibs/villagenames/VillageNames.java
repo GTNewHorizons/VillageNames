@@ -19,6 +19,7 @@ import astrotibs.villagenames.igloo.VNComponentIglooPieces;
 import astrotibs.villagenames.igloo.VNMapGenIgloo;
 import astrotibs.villagenames.init.Recipes;
 import astrotibs.villagenames.integration.antiqueatlas.VillageWatcherAA;
+import astrotibs.villagenames.integration.antiqueatlas.signposts.SignPost;
 import astrotibs.villagenames.integration.ganyssurface.TileEntityWoodSign;
 import astrotibs.villagenames.item.ModItems;
 import astrotibs.villagenames.nbt.NBTUpdater;
@@ -468,6 +469,10 @@ public final class VillageNames
 	        registerVillageComponentBuilding(SwampStructures.SwampStreetDecor.class, "VNSwStDe", new StructureCreationHandlers.SwampStreetDecor_Handler());
 	        registerVillageComponentBuilding(SwampStructures.SwampRoadAccent.class, "VNSwRdAc", new StructureCreationHandlers.SwampRoadAccent_Handler());
 	        
+	        if (Loader.isModLoaded("signposts") && GeneralConfig.antiqueAtlasPlaceSignPosts) {
+	        	registerVillageComponentBuilding(SignPost.class, "VNPSgnPst", new StructureCreationHandlers.SignPost_Handler());
+	        }
+	        
 	        
 	        // Listener that interrupts old village generation with the new one
 			MinecraftForge.TERRAIN_GEN_BUS.register(new MapGenVillageVN());
@@ -596,6 +601,8 @@ public final class VillageNames
         if (Loader.isModLoaded(Reference.ANTIQUE_ATLAS_MODID))
         {
         	MinecraftForge.EVENT_BUS.register(new VillageWatcherAA()); // Antique Atlas map listener
+//        	TileEntity.addMapping(SignPostTileEntity.class, "VNSignPost");
+//        	GameRegistry.registerTileEntity(SignPostTileEntity.class, Reference.MOD_ID + ".signpost"); // VillageNames.sign // ganyssurface.wood_sign
         }
 	}
 	

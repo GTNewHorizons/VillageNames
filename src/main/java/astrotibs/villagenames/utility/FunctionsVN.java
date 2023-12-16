@@ -24,6 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -1788,7 +1789,7 @@ public class FunctionsVN
                 		
                 		int nextSlotToFill = buyingList.size()+1;
                 		
-                		if (GeneralConfig.debugMessages) LogHelper.info("Infinite loop suspected while generating villager trades. Stopping with "
+                		if (GeneralConfig.debugMessages) LogHelper.warn("Infinite loop suspected while generating villager trades. Stopping with "
                 				+ buyingList.size() + " trades"
                 						);
                 		
@@ -2135,32 +2136,21 @@ public class FunctionsVN
         return out_array;
 	}
 	
-	/*
-	// Way to convert from color meta int into string formatting (for e.g. signs)
-	public static String mapColorMetaToStringFormat(int colorMeta) {
-		HashMap<Integer, String> signColorToFormat = new HashMap<Integer, String>();//new HashMap();
-		// This hashmap translates the town's name color on the sign to a color meta value.
-		// This meta should be universal through e.g. wool, clay, etc
-		signColorToFormat.put(0, "\u00a7f"); //white
-		signColorToFormat.put(1, "\u00a76"); //gold
-		signColorToFormat.put(2, "\u00a7d"); //light_purple
-		signColorToFormat.put(3, "\u00a79"); //blue
-		signColorToFormat.put(4, "\u00a7e"); //yellow
-		signColorToFormat.put(5, "\u00a7a"); //green
-		signColorToFormat.put(6, "\u00a7c"); //red
-		signColorToFormat.put(7, "\u00a78"); //dark_gray
-		signColorToFormat.put(8, "\u00a77"); //gray
-		//signColorToFormat.put(9, "\u00a7b"); //aqua
-		signColorToFormat.put(9, "\u00a73"); //dark_aqua
-		signColorToFormat.put(10, "\u00a75"); //dark_purple
-		signColorToFormat.put(11, "\u00a71"); //dark_blue
-		signColorToFormat.put(12, "\u00a70"); //black
-		signColorToFormat.put(13, "\u00a72"); //dark_green
-		signColorToFormat.put(14, "\u00a74"); //dark_red
-		signColorToFormat.put(15, "\u00a70"); //black
+	public static NBTTagCompound setItemValues(ItemStack stack, NBTTagCompound bannerTag) {
+
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("BlockEntityTag", 10)) {
+			NBTTagCompound nbttagcompound = stack.getTagCompound().getCompoundTag("BlockEntityTag");
+
+			if (nbttagcompound.hasKey("Patterns"))
+				bannerTag.setTag("Patterns", (NBTTagList) nbttagcompound.getTagList("Patterns", 10).copy());
+
+			if (nbttagcompound.hasKey("Base", 99))
+				bannerTag.setInteger("Base", nbttagcompound.getInteger("Base"));
+			else
+				bannerTag.setInteger("Base", stack.getItemDamage() & 15);
+		} else
+			bannerTag.setInteger("Base", stack.getItemDamage() & 15);
 		
-		// Return a "town color" string
-		return signColorToFormat.get(colorMeta);
+		return bannerTag;
 	}
-	*/
 }

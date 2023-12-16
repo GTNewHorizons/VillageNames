@@ -2,13 +2,13 @@ package astrotibs.villagenames.config.pieces;
 
 import java.io.File;
 
+import astrotibs.villagenames.config.ConfigurationVN;
 import astrotibs.villagenames.name.NamePieces;
 import astrotibs.villagenames.utility.Reference;
-import net.minecraftforge.common.config.Configuration;
 
 public class MonumentConfigHandler
 {
-	public static Configuration config;
+	public static ConfigurationVN config;
 	
 	
 	public static String[] monument_prefix;
@@ -27,26 +27,26 @@ public class MonumentConfigHandler
 	{
 		if (config == null)
 		{
-			config = new Configuration(configFile);
+			config = new ConfigurationVN(configFile);
 			loadConfiguration();
 		}
 	}
 	
 	public static void loadConfiguration()
 	{
-		monument_prefix = config.getString(Reference.NAME_PREFIXES, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_PREFIX_DEFAULT,
+		monument_prefix = config.getStringWithoutDefaultsInComment(Reference.NAME_PREFIXES, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_PREFIX_DEFAULT,
 				Reference.DESCRIPTION_PREFIXES).trim().split("\\s*,\\s*");
 		
-		monument_root_initial = config.getString(Reference.NAME_ROOT_INITIAL, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_INITIAL_DEFAULT,
+		monument_root_initial = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_INITIAL, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_INITIAL_DEFAULT,
 				Reference.DESCRIPTION_ROOT_INITIAL).trim().split("\\s*,\\s*");
 		
-		monument_root_syllables = config.getString(Reference.NAME_ROOT_SYLLABLES, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_SYL_BEGIN_DEFAULT,
+		monument_root_syllables = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_SYLLABLES, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_SYL_BEGIN_DEFAULT,
 				Reference.DESCRIPTION_ROOT_SYLLABLES).trim().split("\\s*,\\s*");
 		
-		monument_root_terminal = config.getString(Reference.NAME_ROOT_TERMINAL, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_TERMINAL_DEFAULT,
+		monument_root_terminal = config.getStringWithoutDefaultsInComment(Reference.NAME_ROOT_TERMINAL, Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_ROOT_TERMINAL_DEFAULT,
 				Reference.DESCRIPTION_ROOT_TERMINAL).trim().split("\\s*,\\s*");
 		
-		monument_suffix = config.getString("Suffixes", Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_SUFFIX_DEFAULT,
+		monument_suffix = config.getStringWithoutDefaultsInComment("Suffixes", Reference.CATEGORY_MONUMENT_SYLLABLE_POOL, NamePieces.MONUMENT_SUFFIX_DEFAULT,
 				Reference.DESCRIPTION_SUFFIXES).trim().split("\\s*,\\s*");
 
 		

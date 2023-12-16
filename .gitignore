@@ -20,6 +20,7 @@ gradle*
 eclipse
 README.txt
 /api
+/libs
 .gitignore
 
 # Junk added by AstroTibs

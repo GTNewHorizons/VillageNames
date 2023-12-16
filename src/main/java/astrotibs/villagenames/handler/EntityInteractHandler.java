@@ -83,6 +83,20 @@ public class EntityInteractHandler {
 //					0, // Meta
 //					2);}
 			
+			
+			// Get the NBT list of marker data
+//        	MarkerToTileMap signposts_MarkerToTileMap = (MarkerToTileMap) event.world.loadItemData(MarkerToTileMap.class, "signposts_MarkerToTileMap");
+//        	NBTTagCompound data = new NBTTagCompound();
+//			signposts_MarkerToTileMap.writeToNBT(data);
+//			NBTTagList arrayList = data.getTagList("arrayList", 10);
+//			for (int ind=0; ind<arrayList.tagCount(); ind++) {
+//				NBTTagCompound teleportMarkerTagCompound = arrayList.getCompoundTagAt(ind);
+//				int markerId = teleportMarkerTagCompound.getInteger("markerId");
+//				
+//				LogHelper.info("Compound index " + ind + " has markerId " + markerId);
+//			}
+			
+			
 			//LogHelper.info("ArrayList<Integer> " + GeneralConfig.structureModernPlainsAccessory1_vals);
 		}
 		
@@ -1274,6 +1288,8 @@ public class EntityInteractHandler {
     // Will also be used to monitor player rep in 1.9+
     @SubscribeEvent
     public void onPlayerAttackEntity(AttackEntityEvent event) {
+
+    	if (event==null || event.target==null || event.target.worldObj==null) {return;}
     	
     	if (!event.target.worldObj.isRemote
     		&& event.entity.dimension == 0 // Only applies to the Overworld
