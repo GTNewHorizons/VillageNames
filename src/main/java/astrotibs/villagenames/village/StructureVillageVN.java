@@ -36,6 +36,7 @@ import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockIce;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPackedIce;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -572,31 +573,28 @@ public class StructureVillageVN
     public static int getAboveTopmostSolidOrLiquidBlockVN(World world, int posX, int posZ)
     {
         Chunk chunk = world.getChunkFromBlockCoords(posX, posZ);
-        int x = posX;
-        int z = posZ;
-        int k = chunk.getTopFilledSegment() + 15;
-        posX &= 15;
+        int posXwithinChunk = posX & 15;
+        int posZwithinChunk = posZ & 15;
         
-        // Search downward until you hit the first block that meets the "solid/liquid" requirement
-        for (posZ &= 15; k > 0; --k)
+        for (int y=chunk.getTopFilledSegment() + 15; y > 0; --y)
         {
-            Block block = chunk.getBlock(posX, k, posZ);
-            Material material = block.getMaterial();
-            
-            if (
-            		// If it's a solid, full block that isn't one of these particular types
-            		(material.blocksMovement()
-            		&& material != Material.leaves
-    				&& material != Material.plants
-					&& material != Material.vine
-					&& material != Material.air
-            		&& !block.isFoliage(world, x, k, z)
-            		&& block.isNormalCube())
-            		// If the block is liquid, return the value above it
-            		|| material.isLiquid()
-            		)
-            {
-                return k + 1;
+        	Block block = chunk.getBlock(posXwithinChunk, y, posZwithinChunk);
+        	Material material = block.getMaterial();
+        	
+        	// Stop and return position above the current block if it...
+        	if (
+        			// ... is liquid
+        			material.isLiquid()
+        			|| ( // or
+        					material.blocksMovement() // ... blocks movement
+        					&& !material.isReplaceable() // isn't "replaceable" (e.g. you can place blocks into an replace tall grass)
+        					&& !block.isLeaves(world, posX, y, posZ) // isn't leaves
+        					&& !block.isFoliage(world, posX, y, posZ) // isn't foliage
+        					&& !(block instanceof BlockLog) // isn't a log
+        					)
+        			)
+        	{
+                return y + 1;
             }
         }
         

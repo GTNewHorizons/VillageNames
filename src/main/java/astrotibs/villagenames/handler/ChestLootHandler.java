@@ -507,7 +507,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.book), DEFAULT_LOOT_STACK_MINIMUM, 3, 3},
 			{new ItemStack(Items.apple), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 15},
 			{new ItemStack(Items.emerald), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, DEFAULT_LOOT_STACK_WEIGHT},
-			{new ItemStack(FunctionsVN.getItemFromName(ModObjects.dustyBook_LB)), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Lost Book
+			{ModObjects.dustyBook_LB==null ? null : new ItemStack(FunctionsVN.getItemFromName(ModObjects.dustyBook_LB)), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Lost Book
 		})
 		{
 			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}

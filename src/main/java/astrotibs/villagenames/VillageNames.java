@@ -520,27 +520,32 @@ public final class VillageNames
         
         event.getModMetadata().name = 			// name 
         		EnumChatFormatting.GOLD + 
-        		Reference.MOD_NAME;
+        		Reference.MOD_NAME+
+        		EnumChatFormatting.RESET;
         
         event.getModMetadata().version = 		// version 
-        		EnumChatFormatting.YELLOW+
         		Reference.VERSION;
         
         event.getModMetadata().credits = 		// credits 
         		EnumChatFormatting.AQUA +
-        		"Thanks: Pahimar, MineMaarten, whrrgarbl, Jabelar, Darian Stephens";
+        		"Thanks: Pahimar, MineMaarten, whrrgarbl, Jabelar, Darian Stephens"+
+        		EnumChatFormatting.RESET;
         
         event.getModMetadata().authorList.clear();
         event.getModMetadata().authorList.add(  // authorList - added as a list
         		EnumChatFormatting.BLUE +
-        		"AstroTibs");
+        		"AstroTibs"+
+        		EnumChatFormatting.RESET);
         
-        event.getModMetadata().url = EnumChatFormatting.GRAY +
-        		Reference.URL;
+        event.getModMetadata().url =            // project URL
+        		EnumChatFormatting.GRAY +
+        		Reference.URL+
+        		EnumChatFormatting.RESET;
         
         event.getModMetadata().description = 	// description
 	       		EnumChatFormatting.GREEN +
-	       		"Generates random names for villages, villagers, and other structures and entities.";
+	       		"Generates random names for villages, villagers, and other structures and entities."+
+        		EnumChatFormatting.RESET;
         
         event.getModMetadata().logoFile = "assets/villagenames/vn_banner.png";
         
