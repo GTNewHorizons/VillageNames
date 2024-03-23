@@ -28,21 +28,13 @@ import net.minecraftforge.event.world.WorldEvent;
 
 public class SpawnEventListener {
 	
-	//public static SpawnEventListener instance;
-	
 	/**
 	 * WOW. Literal weeks of wracking my brain over how to add Guardian spawns, and I accidentally stumbled on this thread:
 	 * http://www.minecraftforge.net/forum/topic/17547-spawning-a-custom-entity/
 	 * which brings EnumHelper to the fore. And to think I was about to abandon that thread as useless.
 	 */
-	//creatureClass, maxNumberofCreature, creatureMaterial, isPeacefulCreature, isAnimal
 	// Here I called the monster max number explicitly (70)
 	public static final EnumCreatureType waterMonster = EnumHelper.addCreatureType("waterMonster", IMob.class, EnumCreatureType.monster.getMaxNumberOfCreature(), Material.water, false, false); 
-	/*
-	public SpawnEventListener() {
-		//instance = this;
-	}
-	*/
 	
 	/**
 	 * This method actively cancels creature types "monster" and "waterMonster" from spawning
@@ -67,11 +59,7 @@ public class SpawnEventListener {
 				&& this.capMonsterSpawns(event.world, countMonsterType, countWaterMonsterType, true, true)
 				) 
 		{   // Cap the number of spawns per chunk for monster and waterMonster, collectively
-			//event.setResult(Result.DENY);
-			//event.setCanceled(true);
-			//LogHelper.info("Event type " + event.type + " denied? " + (event.getResult()==Result.DENY) );
-			//LogHelper.info("Event type " + event.type + " canceled? " + (event.isCanceled()) );
-			
+			return;
 		}
 		//LogHelper.info("Monsters: " + countMonsterType + ", Water Monsters: " + countWaterMonsterType + "; Total: " + (countMonsterType + countWaterMonsterType));
 		
