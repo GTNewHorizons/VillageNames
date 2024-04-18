@@ -922,6 +922,8 @@ public class TaigaStructures
             {
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
             }
+            // Water in the trough
+            this.fillWithBlocks(world, structureBB, 3, 1, 4, 4, 1, 4, Blocks.water, Blocks.water, false);
         	
         	
             // Wood stairs
@@ -1801,14 +1803,15 @@ public class TaigaStructures
             	// Yard frame
             	{6,1,0, 9,1,0, 2}, 
             	{5,1,1, 5,1,1, 3}, 
-            	{10,1,1, 10,1,3, 1}, 
+            	{10,1,1, 10,1,3, 1},
             	// Barrel
-            	{2,2,5, 2,2,5, 2}, {3,2,6, 3,2,6, 1}, 
-            	//
+            	{2,2,5, 2,2,5, 2}, {3,2,6, 3,2,6, 1},
             	})
             {
             	this.fillWithMetadataBlocks(world, structureBB, uuvvww[0], uuvvww[1], uuvvww[2], uuvvww[3], uuvvww[4], uuvvww[5], biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[6], this.coordBaseMode, false, true), false);	
             }
+            // Water in the trough
+            this.placeBlockAtCurrentPosition(world, Blocks.water, 0, 2, 2, 6, structureBB);
             
             
             // Trapdoor (Top Vertical)
@@ -4854,7 +4857,7 @@ public class TaigaStructures
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
             for (int[] uvw : new int[][]{
             	// Posts
-            	{3,3,6}, {3,4,6}, 
+            	{3,3,6}, {3,4,6},
         		})
             {
             	this.placeBlockAtCurrentPosition(world, biomeFenceBlock, 0, uvw[0],uvw[1],uvw[2], structureBB);
@@ -4862,14 +4865,14 @@ public class TaigaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{4,6,3},
+        	for (int[] uuvvwwo : new int[][]{
+        		{4,6,3, -2},
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
             
@@ -6557,15 +6560,15 @@ public class TaigaStructures
         	
         	
             // Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{8,2,3}, 
-        		{8,2,4}, 
+        	for (int[] uuvvwwo : new int[][]{
+        		{8,2,3, 0}, 
+        		{8,2,4, 0}, 
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
         	
@@ -8761,6 +8764,8 @@ public class TaigaStructures
             {
             	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[3], this.coordBaseMode, false, true), uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
             }
+            // Water in the trough
+            this.fillWithBlocks(world, structureBB, 3, 1, 4, 3, 1, 5, Blocks.water, Blocks.water, false);
         	
         	
             // Stone stairs
@@ -9157,6 +9162,8 @@ public class TaigaStructures
             {
             	this.placeBlockAtCurrentPosition(world, biomeTrapdoorBlock, StructureVillageVN.getTrapdoorMeta(uuvvww[3], this.coordBaseMode, false, true), uuvvww[0], uuvvww[1], uuvvww[2], structureBB);
             }
+            // Water in the trough
+            this.placeBlockAtCurrentPosition(world, Blocks.water, 0, 11, 1, 9, structureBB);
         	
         	
             // Stone stairs
@@ -10565,10 +10572,14 @@ public class TaigaStructures
     				BlueprintData.addPlaceBlockAndClearAbove(blueprint, 0, -1, i+(shift?1:0), biomePlankBlock, biomePlankMeta);
     				BlueprintData.addFillBelowTo(blueprint, 0, -2, i+(shift?1:0), biomeFillerBlock, biomeFillerMeta);
     			}
+    			if (VillageGeneratorConfigHandler.fillTroughsWithWater)
+    			{
+    				BlueprintData.addFillWithBlocks(blueprint, 0, 0, -2+(shift?1:0), 0, 0, 1+(shift?1:0), Blocks.water, 0);
+    			}
     			
     			// Left
     			BlueprintData.addFillWithBlocks(blueprint, -1, 0, -2+(shift?1:0), -1, 0, 1+(shift?1:0), biomeTrapdoorBlock, coordBaseMode%2==0 ? 6 : 4);
-    			BlueprintData.addFillWithBlocks(blueprint, -1, -1, -2+(shift?1:0), -1, 1, 1+(shift?1:0), biomeTopBlock, biomeTopMeta);
+    			BlueprintData.addFillWithBlocks(blueprint, -1, -1, -2+(shift?1:0), -1, -1, 1+(shift?1:0), biomeTopBlock, biomeTopMeta);
     			// Right
     			BlueprintData.addFillWithBlocks(blueprint, 1, 0, -2+(shift?1:0), 1, 0, 1+(shift?1:0), biomeTrapdoorBlock, coordBaseMode%2==0 ? 7 : 5);
     			BlueprintData.addFillWithBlocks(blueprint, 1, -1, -2+(shift?1:0), 1, -1, 1+(shift?1:0), biomeTopBlock, biomeTopMeta);
@@ -10582,10 +10593,22 @@ public class TaigaStructures
     			break;
     			
     		case 1:
-    			// Base
-    			BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), -1, 0, 1+(shift?1:0), -1, 0, biomePlankBlock, biomePlankMeta);
-    			// Foundation
-    			for (int i=-2 ; i<=1; i++) {BlueprintData.addPlaceBlock(blueprint, i+(shift?1:0), -2, 0, biomeFillerBlock, biomeFillerMeta);}
+    			
+    			// Base and foundation
+    			for (int i=-2 ; i<=1; i++)
+    			{
+    				BlueprintData.addPlaceBlockAndClearAbove(blueprint, i+(shift?1:0), -1, 0, biomePlankBlock, biomePlankMeta);
+    				BlueprintData.addFillBelowTo(blueprint, i+(shift?1:0), -2, 0, biomeFillerBlock, biomeFillerMeta);
+    			}
+    			if (VillageGeneratorConfigHandler.fillTroughsWithWater)
+    			{
+    				BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), 0, 0, 1+(shift?1:0), 0, 0, Blocks.water, 0);
+    			}
+    			
+//    			// Base
+//    			BlueprintData.addFillWithBlocks(blueprint, -2+(shift?1:0), -1, 0, 1+(shift?1:0), -1, 0, biomePlankBlock, biomePlankMeta);
+//    			// Foundation
+//    			for (int i=-2 ; i<=1; i++) {BlueprintData.addPlaceBlock(blueprint, i+(shift?1:0), -2, 0, biomeFillerBlock, biomeFillerMeta);}
     			
     			// Left
     			BlueprintData.addFillWithBlocks(blueprint, -3+(shift?1:0), 0, 0, -3+(shift?1:0), 0, 0, biomeTrapdoorBlock, coordBaseMode%2==0 ? 6 : 4);

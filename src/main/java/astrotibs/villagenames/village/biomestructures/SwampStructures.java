@@ -2678,14 +2678,14 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{7,1,6}, 
+        	for (int[] uuvvwwo : new int[][]{
+        		{7,1,6, -2}, 
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
     		
@@ -7861,14 +7861,14 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{7,2,2}, 
+        	for (int[] uuvvwwo : new int[][]{
+        		{7,2,2, -2}, 
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
             
@@ -8312,14 +8312,14 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{6,2,6}, 
+        	for (int[] uuvvwwo : new int[][]{
+        		{6,2,6, 3}, 
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
             
@@ -10639,14 +10639,14 @@ public class SwampStructures
         	
         	
     		// Table
-            Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0);
-        	for (int[] uuvvww : new int[][]{
-        		{3,3,4}, 
+        	for (int[] uuvvwwo : new int[][]{
+        		{3,3,4, -2}, 
         		})
             {
+                Object[][] tableComponentObjects = ModObjects.chooseModWoodenTable(biomePlankBlock==Blocks.planks ? biomePlankMeta : 0, uuvvwwo[3], this.coordBaseMode);
         		for (int i=1; i>=0; i--)
         		{
-        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvww[0], uuvvww[1]+1-i, uuvvww[2], structureBB);
+        			this.placeBlockAtCurrentPosition(world, (Block)tableComponentObjects[i][0], (Integer)tableComponentObjects[i][1], uuvvwwo[0], uuvvwwo[1]+1-i, uuvvwwo[2], structureBB);
         		}
             }
             

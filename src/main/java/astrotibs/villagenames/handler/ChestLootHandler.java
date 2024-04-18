@@ -10,6 +10,7 @@ import cpw.mods.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -256,13 +257,15 @@ public class ChestLootHandler {
 		
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
+		Item sweetBerries = ModObjects.chooseModSweetBerriesItem();
+		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
 		for (Object[] chestItemObject : new Object[][]{
 			{ModObjects.chooseModIronNugget(), 1, 5, DEFAULT_LOOT_STACK_WEIGHT},
 			{new ItemStack(Blocks.tallgrass, 1, 2), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Fern
 			{new ItemStack(Blocks.double_plant, 1, 3), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Large Fern
 			{new ItemStack(Items.potato), 1, 7, 10},
-			{new ItemStack (ModObjects.chooseModSweetBerriesItem()), 1, 7, 5},
+			{sweetBerries==null ? null : new ItemStack(sweetBerries), 1, 7 ,5},
 			{new ItemStack(Items.bread), 1, 4, 10},
 			{new ItemStack(Items.pumpkin_seeds), 1, 5, 5},
 			{new ItemStack(Items.pumpkin_pie), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, DEFAULT_LOOT_STACK_WEIGHT},
@@ -274,7 +277,6 @@ public class ChestLootHandler {
 		{
 			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}
 		}
-		
 		
 		
 		// --- Jungle House --- //
@@ -498,6 +500,8 @@ public class ChestLootHandler {
 		
 		chestGenHooks.setMin(stacks_min); chestGenHooks.setMax(stacks_max+1);
 		
+		Item dustyBook_LB = FunctionsVN.getItemFromName(ModObjects.dustyBook_LB);
+		
 		// Register chest entries: ItemStack, stackMin, stackMax, weight
 		for (Object[] chestItemObject : new Object[][]{
 			{new ItemStack(Items.paper), DEFAULT_LOOT_STACK_MINIMUM, 3, DEFAULT_LOOT_STACK_WEIGHT},
@@ -507,7 +511,7 @@ public class ChestLootHandler {
 			{new ItemStack(Items.book), DEFAULT_LOOT_STACK_MINIMUM, 3, 3},
 			{new ItemStack(Items.apple), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 15},
 			{new ItemStack(Items.emerald), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, DEFAULT_LOOT_STACK_WEIGHT},
-			{ModObjects.dustyBook_LB==null ? null : new ItemStack(FunctionsVN.getItemFromName(ModObjects.dustyBook_LB)), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Lost Book
+			{dustyBook_LB==null ? null : new ItemStack(dustyBook_LB), DEFAULT_LOOT_STACK_MINIMUM, DEFAULT_LOOT_STACK_MAXIMUM, 2}, // Lost Book
 		})
 		{
 			if (chestItemObject[0] != null) {chestGenHooks.addItem(new WeightedRandomChestContent((ItemStack)chestItemObject[0], (Integer)chestItemObject[1], (Integer)chestItemObject[2], (Integer)chestItemObject[3]));}

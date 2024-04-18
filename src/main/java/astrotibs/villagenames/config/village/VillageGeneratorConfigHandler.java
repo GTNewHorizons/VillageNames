@@ -530,6 +530,7 @@ public class VillageGeneratorConfigHandler
 	
 	// Decor
 	public static boolean allowTaigaTroughs;
+	public static boolean fillTroughsWithWater;
 	public static boolean restrictTaigaTroughs;
 /*	public static boolean decorPlainsLamp1; // Four torches on elevated stripped wood
 	
@@ -686,55 +687,55 @@ public class VillageGeneratorConfigHandler
 				"Weighted chance to select this component as a Desert village's town center instead of other Desert town centers. Set to 0 to disable.");
 		
 		componentModernTaigaSquare = config.getInt(componentModern+"Taiga "+townCenter+"Square", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Taiga village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Taiga village's town center instead of other Taiga town centers. Set to 0 to disable.");
 		
 		componentModernTaigaWell = config.getInt(componentModern+"Taiga "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Taiga village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Taiga village's town center instead of other Taiga town centers. Set to 0 to disable.");
 		
 		componentModernSavannaMarket = config.getInt(componentModern+"Savanna "+townCenter+"Market", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Savanna village's town center instead of other Savanna town centers. Set to 0 to disable.");
 		
 		componentModernSavannaFountain = config.getInt(componentModern+"Savanna "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Savanna village's town center instead of other Savanna town centers. Set to 0 to disable.");
 		
 		componentModernSavannaDoubleWell = config.getInt(componentModern+"Savanna "+townCenter+"Double Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Savanna village's town center instead of other Savanna town centers. Set to 0 to disable.");
 		
 		componentModernSavannaWell = config.getInt(componentModern+"Savanna "+townCenter+"Well", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Savanna village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Savanna village's town center instead of other Savanna town centers. Set to 0 to disable.");
 		
 		componentModernSnowyIceSpire = config.getInt(componentModern+"Snowy "+townCenter+"Ice Spire", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Snowy village's town center instead of other Snowy town centers. Set to 0 to disable.");
 		
 		componentModernSnowyFountain = config.getInt(componentModern+"Snowy "+townCenter+"Fountain", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Snowy village's town center instead of other Snowy town centers. Set to 0 to disable.");
 		
 		componentModernSnowyPavilion = config.getInt(componentModern+"Snowy "+townCenter+"Pavilion", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Snowy village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Snowy village's town center instead of other Snowy town centers. Set to 0 to disable.");
 		
 		componentModernJungleStatue = config.getInt(componentModern+"Jungle "+townCenter+"Statue", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Jungle village's town center instead of other Jungle town centers. Set to 0 to disable.");
 		
 		componentModernJungleCocoaTree = config.getInt(componentModern+"Jungle "+townCenter+"Cocoa Tree", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Jungle village's town center instead of other Jungle town centers. Set to 0 to disable.");
 		
 		componentModernJungleGarden = config.getInt(componentModern+"Jungle "+townCenter+"Garden", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Jungle village's town center instead of other Jungle town centers. Set to 0 to disable.");
 		
 		componentModernJungleVilla = config.getInt(componentModern+"Jungle "+townCenter+"Villa", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Jungle village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Jungle village's town center instead of other Jungle town centers. Set to 0 to disable.");
 		
 		componentModernSwampWillow = config.getInt(componentModern+"Swamp "+townCenter+"Willow", Reference.CATEGORY_VILLAGE_GENERATOR, 6, 0, 10000,
-				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Swamp village's town center instead of other Swamp town centers. Set to 0 to disable.");
 		
 		componentModernSwampStatue = config.getInt(componentModern+"Swamp "+townCenter+"Statue", Reference.CATEGORY_VILLAGE_GENERATOR, 1, 0, 10000,
-				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Swamp village's town center instead of other Swamp town centers. Set to 0 to disable.");
 		
 		componentModernSwampPavilion = config.getInt(componentModern+"Swamp "+townCenter+"Pavilion", Reference.CATEGORY_VILLAGE_GENERATOR, 6, 0, 10000,
-				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Swamp village's town center instead of other Swamp town centers. Set to 0 to disable.");
 		
 		componentModernSwampMonolith = config.getInt(componentModern+"Swamp "+townCenter+"Monolith", Reference.CATEGORY_VILLAGE_GENERATOR, 3, 0, 10000,
-				"Weighted chance to select this component as a Swamp village's town center instead of other Desert town centers. Set to 0 to disable.");
+				"Weighted chance to select this component as a Swamp village's town center instead of other Swamp town centers. Set to 0 to disable.");
 		
 		
 		ArrayList<Double> modernDefaults = new ArrayList<Double>(Arrays.asList(
@@ -1517,6 +1518,7 @@ public class VillageGeneratorConfigHandler
 		
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
+		fillTroughsWithWater = config.getBoolean("Decor: Fill Troughs With Water", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Whether generated decor troughs are filled with water");
 		restrictTaigaTroughs = config.getBoolean("Decor: Restrict Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Limit taiga troughs only to the well or as street decor. "
 				+ "Setting this to false allows them in any flagged taiga decor location, at the risk of them cutting into the parent structure.");
 		

@@ -36,7 +36,6 @@ import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockIce;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPackedIce;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -107,6 +106,15 @@ public class StructureVillageVN
 		{5,3,5,3},
 		{2,5,3,4},
 		{4,2,4,2},
+	};
+	
+	// Indexed by [orientation][horizIndex]
+	public static final int[][] STAIRS_META_ARRAY = new int[][]{
+		{0,2,0,2}, // left
+		{1,3,1,3}, // right
+		{3,0,2,1}, // forward
+		{2,1,3,0}, // back
+	//	 N E S W
 	};
 	
 	// Indexed by [orientation][horizIndex]
@@ -590,7 +598,7 @@ public class StructureVillageVN
         					&& !material.isReplaceable() // isn't "replaceable" (e.g. you can place blocks into an replace tall grass)
         					&& !block.isLeaves(world, posX, y, posZ) // isn't leaves
         					&& !block.isFoliage(world, posX, y, posZ) // isn't foliage
-        					&& !(block instanceof BlockLog) // isn't a log
+        					&& !block.isWood(world, posX, y, posZ) // isn't a log
         					)
         			)
         	{
@@ -2749,6 +2757,13 @@ public class StructureVillageVN
 	{
 		if (orientation<0) {return -orientation;}
 		return FURNACE_META_ARRAY[orientation][horizIndex];
+	}
+	
+	// Used for setting replacement "table" blocks
+	public static int chooseStairsMeta(int orientation, int horizIndex)
+	{
+		if (orientation<0) {return -orientation;}
+		return STAIRS_META_ARRAY[orientation][horizIndex];
 	}
 	
 	public static int chooseStonecutterMeta(int orientation, int horizIndex)

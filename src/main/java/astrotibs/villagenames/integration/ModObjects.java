@@ -8,6 +8,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.StructureVillageVN;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -4708,7 +4709,7 @@ public class ModObjects {
 	}
 	
 	// Wooden table (Vanilla is a fence with a pressure plate on top)
-	public static Object[][] chooseModWoodenTable(int materialMeta)
+	public static Object[][] chooseModWoodenTable(int materialMeta, int orientation, int horizIndex)
 	{
 		String[] modprioritylist = GeneralConfig.modWoodenTable;
 		
@@ -4718,7 +4719,7 @@ public class ModObjects {
 		{
 			if (mod.toLowerCase().trim().equals("minecraft"))
 			{
-				return chooseVanillaWoodenTable(materialMeta);
+				return chooseVanillaWoodenTable(materialMeta, orientation, horizIndex);
 			}
 			else if (mod.toLowerCase().trim().equals("bibliocraft"))
 			{
@@ -4746,14 +4747,84 @@ public class ModObjects {
 			}
 		}
 		// If all else fails, grab the vanilla version
-		return chooseVanillaWoodenTable(materialMeta);
+		return chooseVanillaWoodenTable(materialMeta, orientation, horizIndex);
 	}
-	public static Object[][] chooseVanillaWoodenTable(int materialMeta)
+	public static Object[][] chooseVanillaWoodenTable(int materialMeta, int orientation, int horizIndex)
 	{
-		return new Object[][] {
-			new Object[] {ModObjects.chooseModPressurePlate(materialMeta), 0},
-			ModObjects.chooseModFence(materialMeta)
-			};
+		if (Loader.isModLoaded("bugtorch")) {
+			return new Object[][] {
+				new Object[] {ModObjects.chooseModPressurePlate(materialMeta), 0},
+				ModObjects.chooseModFence(materialMeta)
+				};	
+		}
+		else
+		{
+			if (
+					ModObjects.chooseModPressurePlate(materialMeta) == Blocks.wooden_pressure_plate
+					&& (Block)(ModObjects.chooseModFence(materialMeta)[0]) == Blocks.fence
+					)
+			{
+				// This is a vanilla, unmodded table. It is allowed to stay because
+				// only modded fences and pressure plates have trouble keeping together as a table
+				return new Object[][] {
+					new Object[] {Blocks.wooden_pressure_plate, 0},
+					new Object[] {Blocks.fence, 0}
+					};
+			}
+			
+			if (orientation==-2)
+			{
+				// Put nothing here.
+				return new Object[][] {
+					new Object[] {Blocks.air, 0},
+					new Object[] {Blocks.air, 0}
+					};				
+			}
+			
+			// orientation:
+			// -2 = use nothing
+			// -1 = use plank instead!
+			// 0 = left-facing
+			// 1 = right-facing
+			// 2 = facing forward, away from you
+			// 3 = facing back towards you
+			Block tableBlock = Blocks.planks;
+			boolean isAPlank = orientation==-1;
+			
+			if (!isAPlank)
+			{
+				switch (materialMeta)
+				{
+				default:
+				case 0:
+					tableBlock = Blocks.oak_stairs;
+					break;
+				case 1:
+					tableBlock = Blocks.spruce_stairs;
+					break;
+				case 2:
+					tableBlock = Blocks.birch_stairs;
+					break;
+				case 3:
+					tableBlock = Blocks.jungle_stairs;
+					break;
+				case 4:
+					tableBlock = Blocks.acacia_stairs;
+					break;
+				case 5:
+					tableBlock = Blocks.dark_oak_stairs;
+					break;
+				}
+			}
+			
+			int meta = StructureVillageVN.chooseStairsMeta(orientation, horizIndex);
+			
+			return new Object[][] {
+				new Object[] {Blocks.air, 0},
+				new Object[] {tableBlock, isAPlank ? materialMeta : meta+4}
+				};
+		}
+		
 	}
 	
 	// Woodland Explorer Map
