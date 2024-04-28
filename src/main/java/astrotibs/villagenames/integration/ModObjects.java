@@ -4827,6 +4827,17 @@ public class ModObjects {
 		
 	}
 	
+	/**
+	 * Mods that haven't updated Village Names 4.4.7+ as a dependency (e.g. Mine Trading Cards)
+	 * are calling the old version of this method and will crash.
+	 * This version operates as a placeholder for the old one.
+	 */
+	@Deprecated
+	public static Object[][] chooseModWoodenTable(int materialMeta)
+	{
+		return chooseModWoodenTable(materialMeta, -2, 0);
+	}
+	
 	// Woodland Explorer Map
 	public static ItemStack chooseModWoodlandExplorerMap()
 	{
