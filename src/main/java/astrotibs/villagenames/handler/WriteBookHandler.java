@@ -408,14 +408,15 @@ public class WriteBookHandler {
     	try
     	{
     		int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession);
-    		
-    		villagerMappedProfession =  
-    				villagerProfession > (GeneralConfig.enableNitwit ? 5 : 4)
-    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : villagerProfession;
+    		if (indexofmodprof>-1) {
+        		villagerMappedProfession =  
+        				villagerProfession > (GeneralConfig.enableNitwit ? 5 : 4)
+        				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : villagerProfession;    			
+    		}
 		}
     	catch (Exception e)
     	{
-    		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID. Check your formatting!");
+    		if(!event.entityLiving.worldObj.isRemote) LogHelper.error("Error evaluating mod profession ID when generating a village book. Check the formatting of your Mod Professions config entry!");
 		}
     	
     	// Primitive Mobs hard coding for career detection

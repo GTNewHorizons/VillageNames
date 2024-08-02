@@ -229,12 +229,13 @@ public class EntityInteractHandler {
 			{
 		    	try {
 		    		int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(targetProfession);
-		    		
-		    		villagerMappedProfession = 
-		    				 targetProfession >= 5
-		    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : targetProfession;
+		    		if (indexofmodprof>-1) {
+			    		villagerMappedProfession = 
+			    				 targetProfession >= 5
+			    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : targetProfession;
+			    		}		    			
 		    		}
-		    	catch (Exception e) {LogHelper.error("Error evaluating mod profession ID. Check your formatting!");}
+		    	catch (Exception e) {LogHelper.error("Error evaluating mod profession ID mapping. Check the formatting of your Mod Professions config entry!");}
 			}
 			
 	    	// Primitive Mobs hard coding for career detection
