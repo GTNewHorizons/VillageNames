@@ -227,14 +227,23 @@ public class EntityInteractHandler {
 			if (!world.isRemote
 					&& target instanceof EntityVillager)
 			{
-		    	try {
-		    		int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(targetProfession);
-		    		if (indexofmodprof>-1) {
-			    		villagerMappedProfession = 
-			    				 targetProfession >= 5
-			    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : targetProfession;
-			    		}		    			
+		    	try
+		    	{
+		    		if (isVanillaProfession(targetProfession))
+		    		{
+		    			villagerMappedProfession = targetProfession;
 		    		}
+		    		else
+		    		{
+		    			int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(targetProfession);
+			    		if (indexofmodprof>-1)
+			    		{
+				    		villagerMappedProfession = 
+				    				 !isVanillaProfession(targetProfession)
+				    				? (Integer)GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof) : targetProfession;
+				    	}
+	    			}
+		    	}
 		    	catch (Exception e) {LogHelper.error("Error evaluating mod profession ID mapping. Check the formatting of your Mod Professions config entry!");}
 			}
 			
@@ -528,7 +537,7 @@ public class EntityInteractHandler {
 			// If you're holding an emerald or iron/gold ingot,
 			else if (
 					!world.isRemote
-					&& GeneralConfig.villagerSellsCodex
+					&& GeneralConfig.villagerMakesCodex
 					&& itemstack != null
 					&& ( itemstack.getItem() == Items.emerald
 					  || itemstack.getItem() == Items.gold_ingot
@@ -659,6 +668,7 @@ public class EntityInteractHandler {
 					!world.isRemote
 					&& itemstack != null
 					&& itemstack.getItem() == Items.book
+					&& GeneralConfig.villagerMakesBook
 					) {
 				
 				// The target is a Villager
@@ -1489,5 +1499,9 @@ public class EntityInteractHandler {
     	return villagerAssessmentPool[new Random().nextInt(villagerAssessmentPool.length)];
     }
     
+    public static boolean isVanillaProfession(int professionID)
+    {
+    	return professionID >=0 && professionID <= (GeneralConfig.enableNitwit ? 5 : 4); 
+    }
 }
 

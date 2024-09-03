@@ -947,7 +947,6 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 							        		new ItemStack(Items.emerald, 1)
 							        		));
 								}
-
 							}
 							if (nextSlotToFill == 2 || nextSlotToFill > 5)
 							{
@@ -965,6 +964,14 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 											moditemstack ) );
 								}
 								
+	    						// Slot for Codex
+	    						if (GeneralConfig.villagersOfferCodexTrade)
+	    						{
+	    							FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, 4 - (random.nextInt(11)+2)/5),
+											random.nextBoolean() ? new ItemStack(Items.iron_ingot, 8 - ((random.nextInt(11)+1)*5)/12) : new ItemStack(Items.gold_ingot, 4 - (random.nextInt(11)+2)/5),
+											new ItemStack( ModItems.codex, 1 ) ) );
+	    						}
 							}
 							
 							// Level 3: Journeyman
@@ -1079,6 +1086,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 						// Treasure trades here, irrespective of if modern trades is on
 						if (
 								GeneralConfig.treasureTrades
+								&& (GeneralConfig.codexChestLoot || GeneralConfig.villagerMakesCodex || GeneralConfig.villagersOfferCodexTrade)
 								&& nextSlotToFill >= (GeneralConfig.modernVillagerTrades ? 6 : 8)
 								) {
 							
@@ -1332,6 +1340,14 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 										new ItemStack( Item.getItemFromBlock(Blocks.glass_pane), FunctionsVN.modernTradeCostBySlot(11, 1, nextSlotToFill, 2) ),
 										new ItemStack( Items.emerald, 1 ) ) );
 								// TODO - Emerald and Compass to Ocean Explorer map
+								
+	    						// Slot for Codex
+	    						if (GeneralConfig.villagersOfferCodexTrade)
+	    						{
+	    							FunctionsVN.addToListWithCheckMeta(recipeList, new MerchantRecipe(
+											new ItemStack( Items.emerald, 5 - (random.nextInt(11)+2)/5),
+											new ItemStack( ModItems.codex, 1 ) ) );
+	    						}
 							}
 							
 							// Level 3: Journeyman 
@@ -1431,6 +1447,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 						
 						if (
 								GeneralConfig.treasureTrades
+								&& (GeneralConfig.codexChestLoot || GeneralConfig.villagerMakesCodex || GeneralConfig.villagersOfferCodexTrade)
 								&& nextSlotToFill >= (GeneralConfig.modernVillagerTrades ? 6 : 4)
 								) {
 							

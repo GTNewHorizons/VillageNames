@@ -149,10 +149,15 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
         	
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
+            
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -477,10 +482,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -813,22 +822,26 @@ public class PlainsStructures
             }
         	
         	Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wooden_slab, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWoodSlabBlock = (Block)blockObject[0]; int biomeWoodSlabMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.standing_sign, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeStandingSignBlock = (Block)blockObject[0];
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
         	Block biomeTopBlock=biomeGrassBlock; int biomeTopMeta=biomeGrassMeta; if (this.biome!=null && this.biome.topBlock!=null) {biomeTopBlock=this.biome.topBlock; biomeTopMeta=0;}
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -1137,8 +1150,8 @@ public class PlainsStructures
                 this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.minY - GROUND_LEVEL, 0);
             }
         	
-        	Object[] blockObject;	
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
+        	Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];	
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.wall_sign, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeWallSignBlock = (Block)blockObject[0];
@@ -1149,10 +1162,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	// Generate or otherwise obtain village name and banner and colors
         	NBTTagCompound villageNBTtag = StructureVillageVN.getOrMakeVNInfo(world, 
@@ -1495,7 +1512,8 @@ public class PlainsStructures
         	// you may need to reestablish the village name/color/type info
         	this.populateVillageFields(world);
         	
-            Object[] blockObject;	
+            Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -1503,10 +1521,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
             // Sod filling
@@ -1602,7 +1624,8 @@ public class PlainsStructures
         	// you may need to reestablish the village name/color/type info
         	this.populateVillageFields(world);
         	
-            Object[] blockObject;	
+            Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];	
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -1810,7 +1833,8 @@ public class PlainsStructures
         	// you may need to reestablish the village name/color/type info
         	this.populateVillageFields(world);
         	
-            Object[] blockObject;	
+            Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];	
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -2040,7 +2064,8 @@ public class PlainsStructures
         	// you may need to reestablish the village name/color/type info
         	this.populateVillageFields(world);
         	
-            Object[] blockObject;	
+            Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];	
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -2048,10 +2073,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Decor
@@ -2281,6 +2310,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -2288,14 +2318,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
         	// Cobblestone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	for(int[] uuvvww : new int[][]{
         		// Floor
         		{1,0,1, 6,0,7}, 
@@ -2539,6 +2572,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -2546,10 +2580,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
                     	
             
             // Log frame
@@ -2570,7 +2608,6 @@ public class PlainsStructures
             }
             
             // Front and back walls
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             this.fillWithMetadataBlocks(world, structureBB, 2, 1, 1, 8, 3, 1, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             this.fillWithMetadataBlocks(world, structureBB, 2, 1, 5, 4, 3, 5, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             this.fillWithMetadataBlocks(world, structureBB, 6, 1, 5, 8, 3, 5, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
@@ -2821,6 +2858,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -2828,10 +2866,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
             // Log frame
@@ -2852,7 +2894,6 @@ public class PlainsStructures
             for (int w : new int[]{2,5,6}) {this.placeBlockAtCurrentPosition(world, biomeLogHorAlongBlock, biomeLogHorAlongMeta, 6, 2, w, structureBB);}
             
             // Stone front and back walls
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for (int w : new int[]{1,9})
             {
             	this.fillWithMetadataBlocks(world, structureBB, 2, 0, w, 5, 1, w, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
@@ -3162,6 +3203,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -3169,10 +3211,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Decor
@@ -3272,7 +3318,6 @@ public class PlainsStructures
             
             // Floors
             // Stone first story
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             this.fillWithMetadataBlocks(world, structureBB, 2, 0, 2, 4, 0, 8, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             this.fillWithMetadataBlocks(world, structureBB, 2, 0, 4, 2, 0, 5, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
             // Wood second story
@@ -3558,6 +3603,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -3565,10 +3611,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -3593,7 +3643,6 @@ public class PlainsStructures
             // Floor
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
             this.fillWithMetadataBlocks(world, structureBB, 2, 0, 3, 4, 0, 7, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 3, 0, 2, structureBB);
             
             // Left and right walls
@@ -3855,6 +3904,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -3862,10 +3912,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -3891,7 +3945,6 @@ public class PlainsStructures
             
             // Floor
             this.fillWithMetadataBlocks(world, structureBB, 3, 1, 1, 7, 1, 5, biomeDirtBlock, biomeDirtMeta, biomeDirtBlock, biomeDirtMeta, false);
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             this.placeBlockAtCurrentPosition(world, biomeCobblestoneBlock, biomeCobblestoneMeta, 3, 0, 2, structureBB);
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.planks, 0, this.materialType, this.biome, this.disallowModSubs); Block biomePlankBlock = (Block)blockObject[0]; int biomePlankMeta = (Integer)blockObject[1];
             this.fillWithMetadataBlocks(world, structureBB, 5, 2, 2, 6, 2, 4, biomePlankBlock, biomePlankMeta, biomePlankBlock, biomePlankMeta, false);
@@ -4182,6 +4235,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -4189,10 +4243,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Decor
@@ -4306,7 +4364,6 @@ public class PlainsStructures
             this.placeBlockAtCurrentPosition(world, biomePlankBlock, biomePlankMeta, 5, 0, 2, structureBB);
             
             // Walls
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for (int u : new int[]{2,8}) {
             	this.fillWithMetadataBlocks(world, structureBB, u, 1, 4, u, 4, 4, biomeCobblestoneBlock, biomeCobblestoneMeta, biomeCobblestoneBlock, biomeCobblestoneMeta, false);
             }
@@ -4548,6 +4605,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -4787,6 +4845,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -4794,14 +4853,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	{1,0,3, 5,0,9},
             	{11,0,3, 15,0,9},
@@ -5140,6 +5202,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -5147,14 +5210,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Floor
             	{2,0,3, 6,0,4},
@@ -5492,6 +5558,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -5499,14 +5566,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Floor
             	{1,0,2, 7,0,6},
@@ -5813,6 +5883,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	
@@ -5846,10 +5917,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Decor
@@ -5918,7 +5993,6 @@ public class PlainsStructures
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,1,1, 8,2,1},
@@ -6282,6 +6356,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -6289,14 +6364,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,0,1, 4,3,1}, {8,0,1, 10,3,1}, {6,3,1, 6,3,1},
@@ -6635,6 +6713,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -6642,10 +6721,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Decor
@@ -6716,7 +6799,6 @@ public class PlainsStructures
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uw : new int[][]{
             	{3, 3}, {3, 6}, 
             	{4, 1}, {4, 4}, 
@@ -7025,6 +7107,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -7032,10 +7115,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Decor
@@ -7328,6 +7415,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -7335,10 +7423,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
             // Decor
@@ -7705,6 +7797,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
             // Establish top and filler blocks, substituting Grass and Dirt if they're null
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
@@ -7908,6 +8001,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -7932,10 +8026,14 @@ public class PlainsStructures
         	}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -7950,7 +8048,6 @@ public class PlainsStructures
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,0,1, 4,3,1}, 
@@ -8201,6 +8298,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -8225,10 +8323,14 @@ public class PlainsStructures
         	}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -8243,7 +8345,6 @@ public class PlainsStructures
             
             
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,0,1, 4,0,1}, 
@@ -8488,6 +8589,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -8495,10 +8597,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -8513,7 +8619,6 @@ public class PlainsStructures
             }
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,0,1, 4,3,1}, 
@@ -8782,6 +8887,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -8789,10 +8895,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -8807,7 +8917,6 @@ public class PlainsStructures
             }
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front wall
             	{2,0,1, 4,3,1}, {2,5,1, 4,5,1}, 
@@ -9073,6 +9182,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -9080,10 +9190,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
             // Decor
@@ -9169,7 +9283,6 @@ public class PlainsStructures
             
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Left
             	{1,1,4, 1,1,6}, 
@@ -9465,6 +9578,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -9472,10 +9586,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Log Frame
@@ -9490,7 +9608,6 @@ public class PlainsStructures
             }
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Ground
             	{2,0,2, 4,0,5}, 
@@ -9780,6 +9897,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -9787,10 +9905,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Vertical logs
@@ -9808,7 +9930,6 @@ public class PlainsStructures
             }
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front
             	{2,0,1, 5,1,1}, {2,3,1, 5,4,1}, {3,5,1, 4,5,1}, 
@@ -10091,6 +10212,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -10098,10 +10220,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
             
             // Vertical logs
@@ -10116,7 +10242,6 @@ public class PlainsStructures
             }
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front
             	{3,2,1, 5,7,1}, 
@@ -10402,6 +10527,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -10409,10 +10535,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
         	
             // Decor
@@ -10482,7 +10612,6 @@ public class PlainsStructures
             
 
             // Stone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front
             	{5,1,2, 14,4,2}, 
@@ -10769,6 +10898,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -10776,10 +10906,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Stained terracotta
@@ -11090,6 +11224,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -11097,14 +11232,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Cobblestone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Front
             	{2,0,3, 6,3,3}, 
@@ -11416,6 +11554,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -11423,10 +11562,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Terracotta
@@ -11487,7 +11630,6 @@ public class PlainsStructures
             
 
             // Cobblestone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Floor rim
             	{2,0,1, 4,0,1}, 
@@ -11720,6 +11862,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -11727,14 +11870,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Cobblestone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Posts out front
             	{1,0,0, 1,0,0}, {5,0,0, 5,0,0}, 
@@ -12029,6 +12175,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -12036,14 +12183,17 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Cobblestone
-        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
             for(int[] uuvvww : new int[][]{
             	// Posts out front
             	{1,0,4, 10,0,7}, 
@@ -12307,6 +12457,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -12314,10 +12465,14 @@ public class PlainsStructures
         	Block biomeFillerBlock=biomeDirtBlock; int biomeFillerMeta=biomeDirtMeta; if (this.biome!=null && this.biome.fillerBlock!=null) {biomeFillerBlock=this.biome.fillerBlock; biomeFillerMeta=0;}
         	
         	// Clear space above
-        	this.clearSpaceAbove(world, structureBB, this.STRUCTURE_WIDTH, this.STRUCTURE_DEPTH, this.GROUND_LEVEL);
+        	this.clearSpaceAbove(world, structureBB, STRUCTURE_WIDTH, STRUCTURE_DEPTH, GROUND_LEVEL);
             
             // Follow the blueprint to set up the starting foundation
-            this.establishFoundation(world, structureBB, this.foundationPattern, this.GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome, biomeTopBlock, biomeTopMeta, biomeFillerBlock, biomeFillerMeta);
+       		this.establishFoundation(world, structureBB, foundationPattern, GROUND_LEVEL, this.materialType, this.disallowModSubs, this.biome,
+       				FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeTopBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeTopMeta,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneBlock : biomeFillerBlock,
+					FunctionsVN.shouldUseCobblestoneFoundation(this.biome) ? biomeCobblestoneMeta : biomeFillerMeta);
             
 
             // Cobblestone
@@ -12683,6 +12838,7 @@ public class PlainsStructures
         	this.populateVillageFields(world);
         	
             Object[] blockObject;
+        	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeDirtBlock = (Block)blockObject[0]; int biomeDirtMeta = (Integer)blockObject[1];
         	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];
         	// Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -12833,6 +12989,7 @@ public class PlainsStructures
 		// Generate per-material blocks
 		
 		Object[] blockObject;
+    	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.cobblestone, 0, materialType, biome, disallowModSubs); Block biomeCobblestoneBlock = (Block)blockObject[0]; int biomeCobblestoneMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.fence, 0, materialType, biome, disallowModSubs); Block biomeFenceBlock = (Block)blockObject[0];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.log, 0, materialType, biome, disallowModSubs); Block biomeLogVertBlock = (Block)blockObject[0]; int biomeLogVertMeta = (Integer)blockObject[1];
     	blockObject = StructureVillageVN.getBiomeSpecificBlockObject(Blocks.grass, 0, materialType, biome, disallowModSubs); Block biomeGrassBlock = (Block)blockObject[0]; int biomeGrassMeta = (Integer)blockObject[1];

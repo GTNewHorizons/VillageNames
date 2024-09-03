@@ -3,8 +3,12 @@ package astrotibs.villagenames.utility;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+
+import javax.annotation.Nullable;
 
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
@@ -32,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class FunctionsVN
 {
@@ -177,160 +182,83 @@ public class FunctionsVN
 	{
 		// Get a list of tags for this biome
 		BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
-		// Bytes used to count conditions
-		byte b = 0; byte b1 = 0;
+		List typeList = Arrays.asList(typeTags);
 		
 		// Now check the type list against a series of conditions to determine which biome skin int to return.
 		// These are arranged in priority order.
 		
 		// Nether type (13)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.NETHER)
-			{
-				return 13;
-			}
-		}
-		
+		if(typeList.contains(BiomeDictionary.Type.NETHER)) {return 13;}
+				
 		// End type (12)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.END)
-			{
-				return 12;
-			}
-		}
-		
+		if(typeList.contains(BiomeDictionary.Type.END)) {return 12;}
+				
 		// Snow type (11)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.SNOWY)
-			{
-				return 11;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.SNOWY)) {return 11;}
 		
 		// Mushroom type (10)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.MUSHROOM)
-			{
-				return 10;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.MUSHROOM)) {return 10;}
 		
 		// Savanna type (9)
-		b = 0;
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.HOT) {b |= 1;}
-			if (type==BiomeDictionary.Type.SAVANNA) {b |= 2;}
-			if (b==3)
-			{
-				return 9;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.HOT) && typeList.contains(BiomeDictionary.Type.MUSHROOM)) {return 9;}
 		
 		// Desert type (8)
-		b = 0; b1 = 0;
-		for (BiomeDictionary.Type type : typeTags)
+		if(
+				typeList.contains(BiomeDictionary.Type.SANDY)
+				&& (
+						(typeList.contains(BiomeDictionary.Type.HOT) && typeList.contains(BiomeDictionary.Type.DRY))
+						|| (typeList.contains(BiomeDictionary.Type.MESA))
+						)
+				)
 		{
-			if (type==BiomeDictionary.Type.SANDY) {b |= 1; b1 |= 1;}
-			if (type==BiomeDictionary.Type.HOT) {b |= 2;}
-			if (type==BiomeDictionary.Type.DRY) {b |= 4;}
-			if (type==BiomeDictionary.Type.MESA) {b1 |= 2;}
-			if (b==7 || b1==3)
-			{
-				return 8;
-			}
+			return 8;
 		}
-		
+				
 		// Taiga type (7)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.CONIFEROUS)
-			{
-				return 7;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.CONIFEROUS)) {return 7;}
 		
 		// Swamp type (6)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.SWAMP)
-			{
-				return 6;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.SWAMP)) {return 6;}
 		
 		// Jungle type (5)
-		b = 0;
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.COLD || type==BiomeDictionary.Type.SPARSE || type==BiomeDictionary.Type.DEAD) {b = 0; break;}
-			if (type==BiomeDictionary.Type.JUNGLE) {b |= 1;}
-			if (type==BiomeDictionary.Type.WET || type==BiomeDictionary.Type.LUSH || type==BiomeDictionary.Type.DENSE) {b |= 2;}
-		}
-		if (b==3)
+		if(
+				typeList.contains(BiomeDictionary.Type.JUNGLE)
+				&& (typeList.contains(BiomeDictionary.Type.WET) || typeList.contains(BiomeDictionary.Type.LUSH) || typeList.contains(BiomeDictionary.Type.DENSE))
+				&& !(typeList.contains(BiomeDictionary.Type.COLD) || typeList.contains(BiomeDictionary.Type.SPARSE) || typeList.contains(BiomeDictionary.Type.DEAD))
+				)
 		{
 			return 5;
 		}
 		
 		// Aquatic type (4)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.OCEAN || type==BiomeDictionary.Type.RIVER || type==BiomeDictionary.Type.BEACH)
-			{
-				return 4;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.OCEAN) || typeList.contains(BiomeDictionary.Type.RIVER) || typeList.contains(BiomeDictionary.Type.BEACH)) {return 4;}
 		
 		// Magical type (1)
-		b = 0;
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.DEAD || type==BiomeDictionary.Type.SPOOKY) {b = 0; break;}
-			if (type==BiomeDictionary.Type.MAGICAL) {b |= 1;}
-		}
-		if (b==1)
+		if(
+				typeList.contains(BiomeDictionary.Type.MAGICAL)
+				&& !(typeList.contains(BiomeDictionary.Type.DEAD) || typeList.contains(BiomeDictionary.Type.SPOOKY))
+				)
 		{
 			return 1;
 		}
 		
 		// Highland type (2)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.MOUNTAIN)
-			{
-				return 2;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.MOUNTAIN)) {return 2;}
 				
 		// Forest type (3)
-		b = 0; b1 = 0;
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.DEAD) {b = 0; break;}
-			if (type==BiomeDictionary.Type.SPARSE) {b1--;}
-			if (type==BiomeDictionary.Type.DENSE) {b1++;}
-			if (type==BiomeDictionary.Type.FOREST) {b |= 1;}
-		}
-		if (b==1 && b1!=-1)
+		if(
+				typeList.contains(BiomeDictionary.Type.FOREST)
+				&& !(typeList.contains(BiomeDictionary.Type.DEAD))
+				&& (typeList.contains(BiomeDictionary.Type.DENSE) || !typeList.contains(BiomeDictionary.Type.SPARSE))
+				)
 		{
 			return 3;
 		}
 		
 		// Plains type (0)
-		for (BiomeDictionary.Type type : typeTags)
-		{
-			if (type==BiomeDictionary.Type.PLAINS)
-			{
-				return 0;
-			}
-		}
+		if(typeList.contains(BiomeDictionary.Type.PLAINS)) {return 0;}
 		
 		// In case none of these ticked off, return -1.
-		// This will cause the mod to check again
 		return -1;
 	}
 	
@@ -1073,88 +1001,74 @@ public class FunctionsVN
 	{
 		// Get a list of tags for this biome
 		BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
+		List typeList = Arrays.asList(typeTags);
 		
 		// Now check the type list, modifying the median for particular biomes.
 		int skin_mu = 0; // Center of the Gaussian distribution; start as 0 (default villager)
 		int skin_tags = 0; // How many skin-altering tags were counted
 		
-		for (BiomeDictionary.Type type : typeTags)
+		// Cold, snowy, high-latitude values lighten skin:
+		if(typeList.contains(BiomeDictionary.Type.COLD))
 		{
-			// Cold, snowy, high-latitude values lighten skin:
-			if (type==BiomeDictionary.Type.COLD)
-			{
-				skin_mu += 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.WET)
-			{
-				skin_mu += 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.CONIFEROUS)
-			{
-				skin_mu += 2;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.NETHER)
-			{
-				skin_mu += 2;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.END)
-			{
-				skin_mu += 2;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.MOUNTAIN)
-			{
-				skin_mu += 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.SNOWY)
-			{
-				skin_mu += 2;
-				skin_tags++;
-				continue;
-			}
-			
-			// Hot, dry, low-latitude values darken skin:
-			if (type==BiomeDictionary.Type.HOT)
-			{
-				skin_mu -= 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.DRY)
-			{
-				skin_mu -= 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.SAVANNA)
-			{
-				skin_mu -= 2;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.JUNGLE)
-			{
-				skin_mu -= 1;
-				skin_tags++;
-				continue;
-			}
-			if (type==BiomeDictionary.Type.MESA)
-			{
-				skin_mu -= 1;
-				skin_tags++;
-				continue;
-			}
+			skin_mu += 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.WET))
+		{
+			skin_mu += 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.CONIFEROUS))
+		{
+			skin_mu += 2;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.NETHER))
+		{
+			skin_mu += 2;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.END))
+		{
+			skin_mu += 2;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.MOUNTAIN))
+		{
+			skin_mu += 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.SNOWY))
+		{
+			skin_mu += 2;
+			skin_tags++;
+		}
+		
+		// Hot, dry, low-latitude values darken skin:
+		if(typeList.contains(BiomeDictionary.Type.HOT))
+		{
+			skin_mu -= 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.DRY))
+		{
+			skin_mu -= 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.SAVANNA))
+		{
+			skin_mu -= 2;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.JUNGLE))
+		{
+			skin_mu -= 1;
+			skin_tags++;
+		}
+		if(typeList.contains(BiomeDictionary.Type.MESA))
+		{
+			skin_mu -= 1;
+			skin_tags++;
 		}
 		
 		// Now, draw a Gaussian-distributed random value centered on skin_mu:
@@ -2152,5 +2066,24 @@ public class FunctionsVN
 			bannerTag.setInteger("Base", stack.getItemDamage() & 15);
 		
 		return bannerTag;
+	}
+	
+	public static boolean shouldUseCobblestoneFoundation(@Nullable BiomeGenBase biome)
+	{
+		if (biome==null)
+		{
+			return false;
+		}
+		else
+		{
+			List<Type> biomeList = Arrays.asList(BiomeDictionary.getTypesForBiome(biome));
+			return (
+						biomeList.contains(BiomeDictionary.Type.MOUNTAIN)
+						|| biomeList.contains(BiomeDictionary.Type.OCEAN)
+						|| biomeList.contains(BiomeDictionary.Type.RIVER)
+						|| biomeList.contains(BiomeDictionary.Type.BEACH)
+						|| biomeList.contains(BiomeDictionary.Type.MESA)
+						);
+		}
 	}
 }
