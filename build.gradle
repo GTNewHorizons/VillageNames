@@ -28,6 +28,8 @@ minecraft {
     runDir = "eclipse"
 	replaceIn 'src/main/java/astrotibs/villagenames/utility/Reference.java'
 	replace '@VERSION@', project.version
+	replaceIn 'src/main/resources/mcmod.info'
+	replace '@VERSION@', project.version
 }
 
 processResources

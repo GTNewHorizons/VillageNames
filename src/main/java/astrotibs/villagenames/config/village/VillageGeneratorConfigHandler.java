@@ -552,6 +552,7 @@ public class VillageGeneratorConfigHandler
 	
 	// Misc new village stuff
 	public static String[] componentVillageTypes;
+	public static boolean replaceAnvils;
 	public static boolean useModdedWoodenDoors;
 	public static boolean spawnModdedVillagers;
 	public static boolean spawnVillagersInResidences;
@@ -1545,6 +1546,7 @@ public class VillageGeneratorConfigHandler
 		
 		
 		// Misc
+		replaceAnvils = config.getBoolean("Replace anvils with smooth stone slabs", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Set this to true to replace all instances of anvil generation in VN structures with smooth double stone slabs (like in classic vanilla blacksmiths).");
 		useModdedWoodenDoors = config.getBoolean("Use modded wooden doors in mod structures", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set this to false to use the vanilla 1.7 wooden doors, even if supported mod doors are found. Some villagers have trouble opening some modded doors.");
 		spawnModdedVillagers = config.getBoolean("Spawn Extra Villagers with mod professions", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Villagers spawned in town centers or residential houses can have non-vanilla professions.");
 		spawnVillagersInResidences = config.getBoolean("Spawn Extra Villagers in Residences", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Spawn villagers with random professions and ages in non-job-specific residential houses.");

@@ -3177,6 +3177,11 @@ public class StructureVillageVN
 	 */
 	public static ArrayList<BlueprintData> getRandomDecorBlueprint(VillageType villageType, MaterialType materialType, boolean disallowModSubs, BiomeGenBase biome, int horizIndex, Random random, boolean allowTaigaTroughs)
 	{
+		// Last-second null check and default assignment so that the switch doesn't fail
+		if (villageType==null) {villageType=VillageType.PLAINS;}
+		if (materialType==null) {materialType=MaterialType.OAK;}
+		if (biome==null) {biome=BiomeGenBase.getBiome(1);}
+		
 		switch (villageType)
 		{
 		default:

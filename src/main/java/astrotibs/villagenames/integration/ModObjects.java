@@ -5,6 +5,7 @@ import java.util.Random;
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
+import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.village.StructureVillageVN;
@@ -3088,8 +3089,8 @@ public class ModObjects {
 	// Grindstone
 	public static Object[] chooseModGrindstone(int orientation, int horizIndex, boolean isHanging)
 	{
-		Block modblock = Blocks.anvil;
-		int meta = StructureVillageVN.chooseAnvilMeta(orientation, horizIndex);
+		Block modblock = VillageGeneratorConfigHandler.replaceAnvils ? Blocks.double_stone_slab : Blocks.anvil;
+		int meta = VillageGeneratorConfigHandler.replaceAnvils ? 0 : StructureVillageVN.chooseAnvilMeta(orientation, horizIndex);
 		
 		return new Object[]{modblock, meta};
 	}

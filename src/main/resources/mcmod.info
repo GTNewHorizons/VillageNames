@@ -4,12 +4,12 @@
   "name": "Village Names",
   "description": "",
   "version": "",
-  "mcversion": "",
-  "url": "minecraft.curseforge.com/projects/village-names",
+  "mcversion": "1.7.10",
+  "url": "https://modrinth.com/mod/village-names",
   "updateUrl": "",
   "authorList": ["AstroTibs"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/villagenames/vn_logo.png",
   "screenshots": [],
   "dependencies": []
 }

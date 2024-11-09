@@ -412,6 +412,9 @@ public class GeneralConfig {
 				"alien-demon-angel|Evolved Boss Ghast|galaxyspace.galaxies.milkyway.SolarSystem.moons.io.entities.EntityBossGhast|add",
 				"alien-demon-golem|Evolved Boss Blaze|galaxyspace.galaxies.milkyway.SolarSystem.planets.ceres.entities.EntityBossBlaze|add",
 				
+				// Amun-Ra
+				"alien-demon-golem|Undead Pharaoh|de.katzenpapst.amunra.mob.entity.EntityMummyBoss|add",
+				
 				// Primitive Mobs
 				"villager|Summoner|net.daveyx0.primitivemobs.entity.monster.EntityDSummoner|add",
 				
@@ -474,6 +477,10 @@ public class GeneralConfig {
 				"alien-villager-goblin||stevekung.mods.moreplanets.module.planets.fronos.entities.EntityFronosVillager", // 1.10
 				"alien-villager-angel||stevekung.mods.moreplanets.planets.nibiru.entity.EntityNibiruVillager", // 1.7
 				"alien-villager-angel||stevekung.mods.moreplanets.module.planets.nibiru.entity.EntityNibiruVillager", // 1.10
+				
+				// Amun-Ra
+		        "alien-goblin||de.katzenpapst.amunra.mob.entity.EntityARVillager",
+		        "alien-villager-golem||de.katzenpapst.amunra.mob.entity.EntityRobotVillager",
 				
 				// Natura
 				"goblin-demon||mods.natura.entity.ImpEntity",
