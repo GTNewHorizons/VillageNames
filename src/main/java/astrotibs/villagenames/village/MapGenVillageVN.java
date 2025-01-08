@@ -49,7 +49,10 @@ public class MapGenVillageVN extends MapGenVillage {
         if (event.type == EventType.VILLAGE && VillageGeneratorConfigHandler.newVillageGenerator) {
             // Do a try/catch because in case the Overworld has not yet loaded
             try {
-                if (MinecraftServer.getServer().worldServerForDimension(0).getWorldInfo().getTerrainType() == null) {
+                if (MinecraftServer.getServer()
+                    .worldServerForDimension(0)
+                    .getWorldInfo()
+                    .getTerrainType() == null) {
                     return;
                 }
             } catch (Exception e) {}
@@ -67,32 +70,31 @@ public class MapGenVillageVN extends MapGenVillage {
 
         // Set spacings
         this.field_82666_h = VillageGeneratorConfigHandler.newVillageSpacingMedian
-                - VillageGeneratorConfigHandler.newVillageSpacingSpread;
+            - VillageGeneratorConfigHandler.newVillageSpacingSpread;
         if (this.field_82666_h < 1) {
             this.field_82666_h = 1;
         }
 
         this.field_82665_g = VillageGeneratorConfigHandler.newVillageSpacingMedian
-                + VillageGeneratorConfigHandler.newVillageSpacingSpread;
+            + VillageGeneratorConfigHandler.newVillageSpacingSpread;
 
     }
 
     // Same as vanilla
     public MapGenVillageVN(Map par1Map) {
         this();
-        Iterator iterator = par1Map.entrySet().iterator();
+        Iterator iterator = par1Map.entrySet()
+            .iterator();
 
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
             if (((String) entry.getKey()).equals("size")) {
                 this.villageSize = (float) MathHelper
-                        .parseDoubleWithDefaultAndMax((String) entry.getValue(), this.villageSize, 0);
+                    .parseDoubleWithDefaultAndMax((String) entry.getValue(), this.villageSize, 0);
             } else if (((String) entry.getKey()).equals("distance")) {
-                this.field_82665_g = MathHelper.parseIntWithDefaultAndMax(
-                        (String) entry.getValue(),
-                        this.field_82665_g,
-                        this.field_82666_h + 1);
+                this.field_82665_g = MathHelper
+                    .parseIntWithDefaultAndMax((String) entry.getValue(), this.field_82665_g, this.field_82666_h + 1);
             }
         }
     }
@@ -151,10 +153,13 @@ public class MapGenVillageVN extends MapGenVillage {
             if (VillageGeneratorConfigHandler.spawnBiomesNames != null) // Biome list is not empty
             {
                 Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler
-                        .unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+                    .unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
 
-                for (int i = 0; i < mappedBiomes.get("BiomeNames").size(); i++) {
-                    if (mappedBiomes.get("BiomeNames").get(i).equals(biome.biomeName)) {
+                for (int i = 0; i < mappedBiomes.get("BiomeNames")
+                    .size(); i++) {
+                    if (mappedBiomes.get("BiomeNames")
+                        .get(i)
+                        .equals(biome.biomeName)) {
                         BiomeManager.addVillageBiome(biome, true); // Set biome to be able to spawn villages
 
                         return true;
@@ -180,16 +185,14 @@ public class MapGenVillageVN extends MapGenVillage {
             randomizedVillageSize /= VillageGeneratorConfigHandler.newVillageSizeNormalOrder;
             // Scale and offset the variate based on the maximum, minimum, and mode values wanted
             double halfrange = MathHelper.abs_max(
-                    VillageGeneratorConfigHandler.newVillageSizeMaximum
-                            - VillageGeneratorConfigHandler.newVillageSizeMode,
-                    VillageGeneratorConfigHandler.newVillageSizeMode
-                            - VillageGeneratorConfigHandler.newVillageSizeMinimum);
+                VillageGeneratorConfigHandler.newVillageSizeMaximum - VillageGeneratorConfigHandler.newVillageSizeMode,
+                VillageGeneratorConfigHandler.newVillageSizeMode - VillageGeneratorConfigHandler.newVillageSizeMinimum);
             randomizedVillageSize *= (2 * halfrange);
             randomizedVillageSize += (VillageGeneratorConfigHandler.newVillageSizeMode - halfrange);
         }
         // Keep drawing until the value is within the range specified
         while (randomizedVillageSize > VillageGeneratorConfigHandler.newVillageSizeMaximum
-                || randomizedVillageSize < VillageGeneratorConfigHandler.newVillageSizeMinimum);
+            || randomizedVillageSize < VillageGeneratorConfigHandler.newVillageSizeMinimum);
 
         this.villageSize = randomizedVillageSize - 1F;
 
@@ -214,18 +217,19 @@ public class MapGenVillageVN extends MapGenVillage {
             WorldChunkManager chunkManager = world.getWorldChunkManager();
             BiomeGenBase biome = chunkManager.getBiomeGenAt(posX, posZ);
             Map<String, ArrayList<String>> mappedBiomes = VillageGeneratorConfigHandler
-                    .unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
+                .unpackBiomes(VillageGeneratorConfigHandler.spawnBiomesNames);
             FunctionsVN.VillageType startVillageType;
 
             // Attempt to swap it with the config value
             try {
-                String mappedVillageType = (String) (mappedBiomes.get("VillageTypes"))
-                        .get(mappedBiomes.get("BiomeNames").indexOf(biome.biomeName));
+                String mappedVillageType = (String) (mappedBiomes.get("VillageTypes")).get(
+                    mappedBiomes.get("BiomeNames")
+                        .indexOf(biome.biomeName));
                 if (mappedVillageType.equals("")) {
                     startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);
                 } else {
                     startVillageType = FunctionsVN.VillageType
-                            .getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);
+                        .getVillageTypeFromName(mappedVillageType, FunctionsVN.VillageType.PLAINS);
                 }
             } catch (Exception e) {
                 startVillageType = FunctionsVN.VillageType.getVillageTypeFromBiome(chunkManager, posX, posZ);
@@ -237,10 +241,10 @@ public class MapGenVillageVN extends MapGenVillage {
             // Print out the list of components for player use
             if (GeneralConfig.debugMessages) {
                 Map<String, ArrayList> mappedComponentVillageTypes = VillageGeneratorConfigHandler
-                        .unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
+                    .unpackComponentVillageTypes(VillageGeneratorConfigHandler.componentVillageTypes);
                 Map<String, ArrayList> mappedComponentVillageTypesNonModDefaults = VillageGeneratorConfigHandler
-                        .unpackComponentVillageTypes(
-                                VillageGeneratorConfigHandler.MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS);
+                    .unpackComponentVillageTypes(
+                        VillageGeneratorConfigHandler.MODERN_VANILLA_COMPONENT_VILLAGE_TYPE_DEFAULTS);
 
                 Iterator iterator = list.iterator();
 
@@ -254,25 +258,33 @@ public class MapGenVillageVN extends MapGenVillage {
 
                     // This component does not appear in the "Component Village Types" config entry
                     if (!mappedComponentVillageTypes.get("ClassPaths")
-                            .contains(pw.villagePieceClass.toString().substring(6))) {
+                        .contains(
+                            pw.villagePieceClass.toString()
+                                .substring(6))) {
                         if (mappedComponentVillageTypesNonModDefaults.get("ClassPaths")
-                                .contains(pw.villagePieceClass.toString().substring(6))) {
+                            .contains(
+                                pw.villagePieceClass.toString()
+                                    .substring(6))) {
                             int classPathListIndexNonModDefaults = mappedComponentVillageTypesNonModDefaults
-                                    .get("ClassPaths").indexOf(pw.villagePieceClass.toString().substring(6));
+                                .get("ClassPaths")
+                                .indexOf(
+                                    pw.villagePieceClass.toString()
+                                        .substring(6));
 
                             if (classPathListIndexNonModDefaults != -1) // It is in the "Component Village Types"
                                                                         // default values
                             {
                                 // This component is a default type
                                 LogHelper.warn(
-                                        "A village queued " + Reference.MOD_NAME
-                                                + " building component "
-                                                + pw.villagePieceClass.toString().substring(6)
-                                                + " which does not appear in your \"Component Village Types\" config entry. Its default biome type of "
-                                                + ((String) ((mappedComponentVillageTypesNonModDefaults
-                                                        .get("VillageTypes")).get(classPathListIndexNonModDefaults)))
-                                                                .trim().toLowerCase()
-                                                + " will be used.");
+                                    "A village queued " + Reference.MOD_NAME
+                                        + " building component "
+                                        + pw.villagePieceClass.toString()
+                                            .substring(6)
+                                        + " which does not appear in your \"Component Village Types\" config entry. Its default biome type of "
+                                        + ((String) ((mappedComponentVillageTypesNonModDefaults.get("VillageTypes"))
+                                            .get(classPathListIndexNonModDefaults))).trim()
+                                                .toLowerCase()
+                                        + " will be used.");
                             }
                         } else {
                             // This component is not a default type
@@ -283,18 +295,19 @@ public class MapGenVillageVN extends MapGenVillage {
 
                 if (unmapped_mod_components.size() > 0) {
                     LogHelper.warn(
-                            "A village queued the following modded village components which do not appear in your \"Component Village Types\" config entry. They will be registered for all village types until otherwise specified:");
+                        "A village queued the following modded village components which do not appear in your \"Component Village Types\" config entry. They will be registered for all village types until otherwise specified:");
 
                     Iterator unmapped_mod_components_iterator = unmapped_mod_components.iterator();
                     while (unmapped_mod_components_iterator.hasNext()) {
                         PieceWeight pw_unmapped = (StructureVillagePieces.PieceWeight) unmapped_mod_components_iterator
-                                .next();
+                            .next();
                         LogHelper.warn(
-                                "Weight " + pw_unmapped.villagePieceWeight
-                                        + ", Limit "
-                                        + pw_unmapped.villagePiecesLimit
-                                        + ": "
-                                        + pw_unmapped.villagePieceClass.toString().substring(6));
+                            "Weight " + pw_unmapped.villagePieceWeight
+                                + ", Limit "
+                                + pw_unmapped.villagePiecesLimit
+                                + ": "
+                                + pw_unmapped.villagePieceClass.toString()
+                                    .substring(6));
                     }
                 }
             }
@@ -305,216 +318,216 @@ public class MapGenVillageVN extends MapGenVillage {
             // Select a starter at random
 
             StructureVillageVN.StartVN[] plainsStarters = new StructureVillageVN.StartVN[] {
-                    new PlainsStructures.PlainsFountain01(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Fountain
-                    new PlainsStructures.PlainsMeetingPoint1(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Plains Well
-                    new PlainsStructures.PlainsMeetingPoint2(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Market
-                    new PlainsStructures.PlainsMeetingPoint3(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Tree
+                new PlainsStructures.PlainsFountain01(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Fountain
+                new PlainsStructures.PlainsMeetingPoint1(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Plains Well
+                new PlainsStructures.PlainsMeetingPoint2(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Market
+                new PlainsStructures.PlainsMeetingPoint3(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Tree
             };
 
             StructureVillageVN.StartVN[] desertStarters = new StructureVillageVN.StartVN[] {
-                    new DesertStructures.DesertMeetingPoint1(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Fountain with structure
-                    new DesertStructures.DesertMeetingPoint2(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Desert well
-                    new DesertStructures.DesertMeetingPoint3(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Desert market
+                new DesertStructures.DesertMeetingPoint1(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Fountain with structure
+                new DesertStructures.DesertMeetingPoint2(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Desert well
+                new DesertStructures.DesertMeetingPoint3(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Desert market
             };
 
             StructureVillageVN.StartVN[] taigaStarters = new StructureVillageVN.StartVN[] {
-                    new TaigaStructures.TaigaMeetingPoint1(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Simple grass plot with two houses
-                    new TaigaStructures.TaigaMeetingPoint2(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Taiga Well
+                new TaigaStructures.TaigaMeetingPoint1(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Simple grass plot with two houses
+                new TaigaStructures.TaigaMeetingPoint2(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Taiga Well
             };
 
             StructureVillageVN.StartVN[] savannaStarters = new StructureVillageVN.StartVN[] {
-                    new SavannaStructures.SavannaMeetingPoint1(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Savanna market
-                    new SavannaStructures.SavannaMeetingPoint2(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Savanna fountain
-                    new SavannaStructures.SavannaMeetingPoint3(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Savanna double well
-                    new SavannaStructures.SavannaMeetingPoint4(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Savanna single well
+                new SavannaStructures.SavannaMeetingPoint1(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Savanna market
+                new SavannaStructures.SavannaMeetingPoint2(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Savanna fountain
+                new SavannaStructures.SavannaMeetingPoint3(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Savanna double well
+                new SavannaStructures.SavannaMeetingPoint4(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Savanna single well
             };
 
             StructureVillageVN.StartVN[] snowyStarters = new StructureVillageVN.StartVN[] {
-                    new SnowyStructures.SnowyMeetingPoint1(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Ice spire
-                    new SnowyStructures.SnowyMeetingPoint2(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Frozen Fountain
-                    new SnowyStructures.SnowyMeetingPoint3(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Snowy Pavilion
+                new SnowyStructures.SnowyMeetingPoint1(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Ice spire
+                new SnowyStructures.SnowyMeetingPoint2(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Frozen Fountain
+                new SnowyStructures.SnowyMeetingPoint3(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Snowy Pavilion
             };
 
             StructureVillageVN.StartVN[] jungleStarters = new StructureVillageVN.StartVN[] {
-                    new JungleStructures.JungleStatue(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Jungle Statue
-                    new JungleStructures.JungleCocoaTree(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Jungle Cocoa Tree
-                    new JungleStructures.JungleGarden(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Jungle Garden
-                    new JungleStructures.JungleVilla(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Jungle Villa
+                new JungleStructures.JungleStatue(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Jungle Statue
+                new JungleStructures.JungleCocoaTree(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Jungle Cocoa Tree
+                new JungleStructures.JungleGarden(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Jungle Garden
+                new JungleStructures.JungleVilla(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Jungle Villa
             };
 
             StructureVillageVN.StartVN[] swampStarters = new StructureVillageVN.StartVN[] {
-                    new SwampStructures.SwampWillow(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Swamp Willow
-                    new SwampStructures.SwampStatue(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Swamp Statue
-                    new SwampStructures.SwampPavilion(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Swamp Pavilion
-                    new SwampStructures.SwampMonolith(
-                            world.getWorldChunkManager(),
-                            0,
-                            random,
-                            (chunkX << 4) + 2,
-                            (chunkZ << 4) + 2,
-                            list,
-                            villageSize), // Swamp Monolith
+                new SwampStructures.SwampWillow(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Swamp Willow
+                new SwampStructures.SwampStatue(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Swamp Statue
+                new SwampStructures.SwampPavilion(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Swamp Pavilion
+                new SwampStructures.SwampMonolith(
+                    world.getWorldChunkManager(),
+                    0,
+                    random,
+                    (chunkX << 4) + 2,
+                    (chunkZ << 4) + 2,
+                    list,
+                    villageSize), // Swamp Monolith
             };
 
             double[] townCenterWeightArray;
@@ -523,42 +536,42 @@ public class MapGenVillageVN extends MapGenVillage {
             if (startVillageType == FunctionsVN.VillageType.DESERT) {
                 townCenterElementArray = desertStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernDesertFountain,
-                        VillageGeneratorConfigHandler.componentModernDesertWell,
-                        VillageGeneratorConfigHandler.componentModernDesertMarket };
+                    VillageGeneratorConfigHandler.componentModernDesertWell,
+                    VillageGeneratorConfigHandler.componentModernDesertMarket };
             } else if (startVillageType == FunctionsVN.VillageType.TAIGA) {
                 townCenterElementArray = taigaStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernTaigaSquare,
-                        VillageGeneratorConfigHandler.componentModernTaigaWell };
+                    VillageGeneratorConfigHandler.componentModernTaigaWell };
             } else if (startVillageType == FunctionsVN.VillageType.SAVANNA) {
                 townCenterElementArray = savannaStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernSavannaMarket,
-                        VillageGeneratorConfigHandler.componentModernSavannaFountain,
-                        VillageGeneratorConfigHandler.componentModernSavannaDoubleWell,
-                        VillageGeneratorConfigHandler.componentModernSavannaWell };
+                    VillageGeneratorConfigHandler.componentModernSavannaFountain,
+                    VillageGeneratorConfigHandler.componentModernSavannaDoubleWell,
+                    VillageGeneratorConfigHandler.componentModernSavannaWell };
             } else if (startVillageType == FunctionsVN.VillageType.SNOWY) {
                 townCenterElementArray = snowyStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernSnowyIceSpire,
-                        VillageGeneratorConfigHandler.componentModernSnowyFountain,
-                        VillageGeneratorConfigHandler.componentModernSnowyPavilion };
+                    VillageGeneratorConfigHandler.componentModernSnowyFountain,
+                    VillageGeneratorConfigHandler.componentModernSnowyPavilion };
             } else if (startVillageType == FunctionsVN.VillageType.JUNGLE) {
                 townCenterElementArray = jungleStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernJungleStatue,
-                        VillageGeneratorConfigHandler.componentModernJungleCocoaTree,
-                        VillageGeneratorConfigHandler.componentModernJungleGarden,
-                        VillageGeneratorConfigHandler.componentModernJungleVilla };
+                    VillageGeneratorConfigHandler.componentModernJungleCocoaTree,
+                    VillageGeneratorConfigHandler.componentModernJungleGarden,
+                    VillageGeneratorConfigHandler.componentModernJungleVilla };
             } else if (startVillageType == FunctionsVN.VillageType.SWAMP) {
                 townCenterElementArray = swampStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernSwampWillow,
-                        VillageGeneratorConfigHandler.componentModernSwampStatue,
-                        VillageGeneratorConfigHandler.componentModernSwampPavilion,
-                        VillageGeneratorConfigHandler.componentModernSwampMonolith };
+                    VillageGeneratorConfigHandler.componentModernSwampStatue,
+                    VillageGeneratorConfigHandler.componentModernSwampPavilion,
+                    VillageGeneratorConfigHandler.componentModernSwampMonolith };
             } else // Plains if nothing else matches
             {
                 townCenterElementArray = plainsStarters;
                 townCenterWeightArray = new double[] { VillageGeneratorConfigHandler.componentModernPlainsFountain,
-                        VillageGeneratorConfigHandler.componentModernPlainsWell,
-                        VillageGeneratorConfigHandler.componentModernPlainsMarket,
-                        VillageGeneratorConfigHandler.componentModernPlainsOakTree };
+                    VillageGeneratorConfigHandler.componentModernPlainsWell,
+                    VillageGeneratorConfigHandler.componentModernPlainsMarket,
+                    VillageGeneratorConfigHandler.componentModernPlainsOakTree };
             }
 
             double totalWeight = 0D;
@@ -571,7 +584,7 @@ public class MapGenVillageVN extends MapGenVillage {
             else // Select the starter based off of weighting specified in configs
             {
                 start = (StructureVillageVN.StartVN) FunctionsVN
-                        .weightedRandom(townCenterElementArray, townCenterWeightArray, random);
+                    .weightedRandom(townCenterElementArray, townCenterWeightArray, random);
             }
 
             // === FORCE A SPECIFIC STARTER FOR TESTING PURPOSES === //

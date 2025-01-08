@@ -110,7 +110,8 @@ public class ServerInfoTracker {
                 LogHelper.info("> Player [" + playerID + "] started to cure zombie [" + zombieID + "]");
             }
             ServerInfoTracker.CuredZombies.put(zombieID, playerID);
-            ServerInfoTracker.CuredZombiesListLastChange = MinecraftServer.getServer().getTickCounter();
+            ServerInfoTracker.CuredZombiesListLastChange = MinecraftServer.getServer()
+                .getTickCounter();
         }
     }
 
@@ -127,15 +128,16 @@ public class ServerInfoTracker {
         if (newVillagerID > 0 && playerID != null && playerID > 0) {
             if (GeneralConfig.debugMessages) {
                 LogHelper.info(
-                        "> Player [" + playerID
-                                + "] cured villager ["
-                                + newVillagerID
-                                + "], formerly known as zombie ["
-                                + oldZombieID
-                                + "]");
+                    "> Player [" + playerID
+                        + "] cured villager ["
+                        + newVillagerID
+                        + "], formerly known as zombie ["
+                        + oldZombieID
+                        + "]");
             }
             ServerInfoTracker.CuredVillagers.put(newVillagerID, playerID);
-            ServerInfoTracker.CuredVillagersListLastChange = MinecraftServer.getServer().getTickCounter();
+            ServerInfoTracker.CuredVillagersListLastChange = MinecraftServer.getServer()
+                .getTickCounter();
         }
     }
 
@@ -161,10 +163,13 @@ public class ServerInfoTracker {
          */
 
         // Adds the "tick of birth" to control when the event will expire
-        event.setBirthTick(MinecraftServer.getServer().getTickCounter());
+        event.setBirthTick(
+            MinecraftServer.getServer()
+                .getTickCounter());
 
         // Adds the event to the specific list
-        type.getTracker().add(event);
+        type.getTracker()
+            .add(event);
 
     }
 
@@ -217,7 +222,7 @@ public class ServerInfoTracker {
      * @param ageTolerance Maximum age of event accepted
      */
     private static EventTracker seekValueOnList(List<EventTracker> list, Vec3i position, int rangeLimit,
-            int ageTolerance)
+        int ageTolerance)
     // private static EventTracker seekValueOnList(List<EventTracker> list, Vec3 position, int rangeLimit, int
     // ageTolerance)
     {
@@ -226,7 +231,7 @@ public class ServerInfoTracker {
         for (final EventTracker et : list) {
 
             if (et.getBirthTick() > 0 && et.getBirthTick() + ageTolerance >= thisTick
-                    && position.distanceSq(et.getPosition()) <= rangeLimit) {
+                && position.distanceSq(et.getPosition()) <= rangeLimit) {
                 // && position.squareDistanceTo(et.getPosition()) <= rangeLimit) {
 
                 if (GeneralConfig.debugMessages) {
@@ -366,9 +371,12 @@ public class ServerInfoTracker {
          */
         canStartTracking = true;
 
-        EventType.ZOMBIE.getTracker().clear();
-        EventType.VILLAGER.getTracker().clear();
-        EventType.GUARD.getTracker().clear();
+        EventType.ZOMBIE.getTracker()
+            .clear();
+        EventType.VILLAGER.getTracker()
+            .clear();
+        EventType.GUARD.getTracker()
+            .clear();
 
         CuredZombies.clear();
         CuredVillagers.clear();
@@ -379,7 +387,8 @@ public class ServerInfoTracker {
      * 
      */
     private static int ThisTick() {
-        return MinecraftServer.getServer().getTickCounter();
+        return MinecraftServer.getServer()
+            .getTickCounter();
     }
 
 }

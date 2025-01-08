@@ -33,7 +33,7 @@ public class LayeredColorMaskTexture extends AbstractTexture {
     private final List<EnumColour> field_174950_i;
 
     public LayeredColorMaskTexture(ResourceLocation textureLocationIn, List<String> p_i46101_2_,
-            List<EnumColour> p_i46101_3_) {
+        List<EnumColour> p_i46101_3_) {
         textureLocation = textureLocationIn;
         field_174949_h = p_i46101_2_;
         field_174950_i = p_i46101_3_;
@@ -46,7 +46,8 @@ public class LayeredColorMaskTexture extends AbstractTexture {
 
         try {
             BufferedImage bufferedimage1 = readBufferedImage(
-                    resourceManager.getResource(textureLocation).getInputStream());
+                resourceManager.getResource(textureLocation)
+                    .getInputStream());
             int i = bufferedimage1.getType();
 
             if (i == 0) i = 6;
@@ -57,15 +58,17 @@ public class LayeredColorMaskTexture extends AbstractTexture {
 
             for (int j = 0; j < field_174949_h.size() && j < field_174950_i.size(); ++j) {
                 String s = field_174949_h.get(j);
-                MapColor mapcolor = field_174950_i.get(j).getMapColour();
+                MapColor mapcolor = field_174950_i.get(j)
+                    .getMapColour();
 
                 if (s != null) {
-                    InputStream inputstream = resourceManager.getResource(new ResourceLocation(s)).getInputStream();
+                    InputStream inputstream = resourceManager.getResource(new ResourceLocation(s))
+                        .getInputStream();
                     BufferedImage bufferedimage2 = readBufferedImage(inputstream);
 
                     if (bufferedimage2.getWidth() == bufferedimage.getWidth()
-                            && bufferedimage2.getHeight() == bufferedimage.getHeight()
-                            && bufferedimage2.getType() == 6) {
+                        && bufferedimage2.getHeight() == bufferedimage.getHeight()
+                        && bufferedimage2.getType() == 6) {
                         for (int k = 0; k < bufferedimage2.getHeight(); ++k)
                             for (int l = 0; l < bufferedimage2.getWidth(); ++l) {
                                 int i1 = bufferedimage2.getRGB(l, k);
@@ -78,7 +81,8 @@ public class LayeredColorMaskTexture extends AbstractTexture {
                                 }
                             }
 
-                        bufferedimage.getGraphics().drawImage(bufferedimage2, 0, 0, (ImageObserver) null);
+                        bufferedimage.getGraphics()
+                            .drawImage(bufferedimage2, 0, 0, (ImageObserver) null);
                     }
                 }
             }

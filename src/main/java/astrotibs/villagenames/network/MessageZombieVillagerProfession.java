@@ -18,7 +18,7 @@ public class MessageZombieVillagerProfession implements IMessage {
     public MessageZombieVillagerProfession() {}
 
     public MessageZombieVillagerProfession(int entityID, int profession, int career, int biomeType, int professionLevel,
-            int skinTone) {
+        int skinTone) {
         this.entityID = entityID;
         this.profession = profession;
         this.career = career;

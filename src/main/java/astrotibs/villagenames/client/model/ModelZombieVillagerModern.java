@@ -43,7 +43,7 @@ public class ModelZombieVillagerModern extends ModelZombie {
         // Main headwear portion
         this.zombieVillagerHeadwear = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
         this.zombieVillagerHeadwear.setTextureOffset(32, 0)
-                .addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset);
+            .addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset);
         this.zombieVillagerHeadwear.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
         // Higher Rim -- used for Farmer and Fisherman
@@ -53,17 +53,17 @@ public class ModelZombieVillagerModern extends ModelZombie {
         this.zombieVillagerHatRimHigh.setTextureOffset(rimHighTextureOffsetX, rimHighTextureOffsetY);
 
         this.zombieVillagerHatRimHigh.cubeList.add(
-                new ModelPlane(
-                        this.zombieVillagerHatRimHigh,
-                        rimHighTextureOffsetX,
-                        rimHighTextureOffsetY,
-                        -8F,
-                        -6F,
-                        -8F,
-                        16,
-                        0,
-                        16,
-                        0.0F));
+            new ModelPlane(
+                this.zombieVillagerHatRimHigh,
+                rimHighTextureOffsetX,
+                rimHighTextureOffsetY,
+                -8F,
+                -6F,
+                -8F,
+                16,
+                0,
+                16,
+                0.0F));
         this.zombieVillagerHatRimHigh.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
         // Lower Rim -- used for Shepherd
@@ -72,34 +72,38 @@ public class ModelZombieVillagerModern extends ModelZombie {
         int rimLowTextureOffsetY = 48;
         this.zombieVillagerHatRimLow.setTextureOffset(rimLowTextureOffsetX, rimLowTextureOffsetY);
         this.zombieVillagerHatRimLow.cubeList.add(
-                new ModelPlane(
-                        this.zombieVillagerHatRimLow,
-                        rimLowTextureOffsetX,
-                        rimLowTextureOffsetY,
-                        -8F,
-                        -5F,
-                        -8F,
-                        16,
-                        0,
-                        16,
-                        0.0F));
+            new ModelPlane(
+                this.zombieVillagerHatRimLow,
+                rimLowTextureOffsetX,
+                rimLowTextureOffsetY,
+                -8F,
+                -5F,
+                -8F,
+                16,
+                0,
+                16,
+                0.0F));
         this.zombieVillagerHatRimLow.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
         bipedHeadwear.isHidden = true;
 
         bipedHead = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
         bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-        bipedHead.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale);
+        bipedHead.setTextureOffset(0, 0)
+            .addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale);
 
         ModelRenderer nose = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
         nose.setRotationPoint(0.0F, -2.0F, 0.0F);
-        nose.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, headScale);
+        nose.setTextureOffset(24, 0)
+            .addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, headScale);
         bipedHead.addChild(nose);
 
         bipedBody = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
         bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-        bipedBody.setTextureOffset(16, 20).addBox(-4.0F, 0.0F, -3.0F, 8, 12, 6, headScale);
-        bipedBody.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, headScale + headscaleOffset);
+        bipedBody.setTextureOffset(16, 20)
+            .addBox(-4.0F, 0.0F, -3.0F, 8, 12, 6, headScale);
+        bipedBody.setTextureOffset(0, 38)
+            .addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, headScale + headscaleOffset);
 
         bipedRightArm = new ModelRenderer(this, 44, 22).setTextureSize(textureFileWidth, textureFileHeight);
         bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, headScale);
@@ -143,12 +147,12 @@ public class ModelZombieVillagerModern extends ModelZombie {
             int prof = ieep.getProfession();
 
             if (prof > 5 // This is a non-vanilla villager profession
-                    & !this.isChild // and is not a child
-                    & !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
-                    & // and...
-                    (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
-                            | !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
-                    )) {
+                & !this.isChild // and is not a child
+                & !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+                & // and...
+                (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
+                    | !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+                )) {
                 return;
             }
 

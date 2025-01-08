@@ -34,7 +34,7 @@ public class RenderGlazedTerracotta implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-            RenderBlocks renderer) {
+        RenderBlocks renderer) {
         renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         int orient = world.getBlockMetadata(x, y, z) / 4; // Direction block is facing: 0=N, 1=E, 2=S, 3=W
 

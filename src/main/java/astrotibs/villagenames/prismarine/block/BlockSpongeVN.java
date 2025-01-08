@@ -40,12 +40,12 @@ public class BlockSpongeVN extends BlockGeneric {
             world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 
             world.playSoundEffect(
-                    (double) ((float) x + 0.5F),
-                    (double) ((float) y + 0.5F),
-                    (double) ((float) z + 0.5F),
-                    "random.fizz",
-                    0.5F,
-                    2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+                (double) ((float) x + 0.5F),
+                (double) ((float) y + 0.5F),
+                (double) ((float) z + 0.5F),
+                "random.fizz",
+                0.5F,
+                2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
             // Smoke particles - doesn't seem to be working
             // for (int l = 0; l < 8; ++l)
@@ -86,7 +86,8 @@ public class BlockSpongeVN extends BlockGeneric {
             for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
                 WorldCoord blockpos2 = blockpos1.add(dir);
 
-                if (world.getBlock(blockpos2.x, blockpos2.y, blockpos2.z).getMaterial() == Material.water) {
+                if (world.getBlock(blockpos2.x, blockpos2.y, blockpos2.z)
+                    .getMaterial() == Material.water) {
                     world.setBlockToAir(blockpos2.x, blockpos2.y, blockpos2.z);
                     arraylist.add(blockpos2);
                     i++;
@@ -114,7 +115,7 @@ public class BlockSpongeVN extends BlockGeneric {
             ForgeDirection dir = getRandomDirection(rand);
 
             if (dir != ForgeDirection.UP
-                    && !World.doesBlockHaveSolidTopSurface(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)) {
+                && !World.doesBlockHaveSolidTopSurface(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)) {
                 double d0 = x;
                 double d1 = y;
                 double d2 = z;

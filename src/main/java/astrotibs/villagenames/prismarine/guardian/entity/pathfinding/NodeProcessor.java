@@ -55,5 +55,5 @@ public abstract class NodeProcessor {
     public abstract PathPointSwimmer getPathPointToCoords(Entity entityIn, double x, double y, double target);
 
     public abstract int findPathOptions(PathPointSwimmer[] pathOptions, Entity entityIn, PathPointSwimmer currentPoint,
-            PathPointSwimmer targetPoint, float maxDistance);
+        PathPointSwimmer targetPoint, float maxDistance);
 }

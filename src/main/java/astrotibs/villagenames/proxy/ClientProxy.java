@@ -69,14 +69,18 @@ public class ClientProxy extends CommonProxy {
     public void registerEvents() {
         super.registerEvents();
         if (GeneralConfig.addOceanMonuments) {
-            FMLCommonHandler.instance().bus().register(RegisterRenderPrismarine.INSTANCE);
+            FMLCommonHandler.instance()
+                .bus()
+                .register(RegisterRenderPrismarine.INSTANCE);
             MinecraftForge.EVENT_BUS.register(RegisterRenderPrismarine.INSTANCE);
             // RenderingRegistry.registerEntityRenderingHandler(EntityGuardian.class, new RenderGuardian());
         }
     }
 
     public static void handleHealthUpdate(EntityGuardian guardian) {
-        Minecraft.getMinecraft().getSoundHandler().playSound(new GuardianSound(guardian));
+        Minecraft.getMinecraft()
+            .getSoundHandler()
+            .playSound(new GuardianSound(guardian));
     }
     /*
      * public static void playEndPortalSound() { //Minecraft.getMinecraft().getSoundHandler().playSound(new

@@ -60,54 +60,59 @@ public class CommonProxy {
          */
 
         VillageNames.laputa = new Achievement(
-                Reference.MOD_ID.toLowerCase() + ".achievement.laputa",
-                "laputa",
-                1,
-                -2,
-                Blocks.red_flower,
-                (Achievement) null).initIndependentStat().registerStat();// .setSpecial();
+            Reference.MOD_ID.toLowerCase() + ".achievement.laputa",
+            "laputa",
+            1,
+            -2,
+            Blocks.red_flower,
+            (Achievement) null).initIndependentStat()
+                .registerStat();// .setSpecial();
 
         VillageNames.maxrep = new Achievement(
-                Reference.MOD_ID.toLowerCase() + ".achievement.maxrep",
-                "maxrep",
-                3,
-                0,
-                Items.emerald,
-                (Achievement) null).initIndependentStat().registerStat();
+            Reference.MOD_ID.toLowerCase() + ".achievement.maxrep",
+            "maxrep",
+            3,
+            0,
+            Items.emerald,
+            (Achievement) null).initIndependentStat()
+                .registerStat();
 
         VillageNames.archaeologist = new Achievement(
-                Reference.MOD_ID.toLowerCase() + ".achievement.archaeologist",
-                "archaeologist",
-                -1,
-                0,
-                ModItems.codex,
-                (Achievement) null).func_150953_b(JsonSerializableSet.class).registerStat();
+            Reference.MOD_ID.toLowerCase() + ".achievement.archaeologist",
+            "archaeologist",
+            -1,
+            0,
+            ModItems.codex,
+            (Achievement) null).func_150953_b(JsonSerializableSet.class)
+                .registerStat();
 
         VillageNames.ghosttown = new Achievement(
-                Reference.MOD_ID.toLowerCase() + ".achievement.ghosttown",
-                "ghosttown",
-                0,
-                2,
-                ModItems.villageBook,
-                (Achievement) null).initIndependentStat().registerStat();
+            Reference.MOD_ID.toLowerCase() + ".achievement.ghosttown",
+            "ghosttown",
+            0,
+            2,
+            ModItems.villageBook,
+            (Achievement) null).initIndependentStat()
+                .registerStat();
 
         VillageNames.minrep = new Achievement(
-                Reference.MOD_ID.toLowerCase() + ".achievement.minrep",
-                "minrep",
-                2,
-                2,
-                new ItemStack(Items.skull, 1, 1),
-                (Achievement) null).initIndependentStat().registerStat();
+            Reference.MOD_ID.toLowerCase() + ".achievement.minrep",
+            "minrep",
+            2,
+            2,
+            new ItemStack(Items.skull, 1, 1),
+            (Achievement) null).initIndependentStat()
+                .registerStat();
 
         // Need to register the stats so that the achievements will be saved
         // ghosttown.registerStat();
 
         // My Little Achievement Page
         AchievementPage.registerAchievementPage(
-                new AchievementPage(
-                        Reference.MOD_NAME,
-                        new Achievement[] { VillageNames.maxrep, VillageNames.archaeologist, VillageNames.minrep,
-                                VillageNames.ghosttown, VillageNames.laputa }));
+            new AchievementPage(
+                Reference.MOD_NAME,
+                new Achievement[] { VillageNames.maxrep, VillageNames.archaeologist, VillageNames.minrep,
+                    VillageNames.ghosttown, VillageNames.laputa }));
 
     }
 

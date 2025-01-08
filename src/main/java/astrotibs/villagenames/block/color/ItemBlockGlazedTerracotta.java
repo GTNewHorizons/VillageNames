@@ -38,8 +38,8 @@ public class ItemBlockGlazedTerracotta extends ItemBlock {
         // itemName.substring(0,itemName.length()-1) + "." +
         // BlockGlazedTerracotta.subBlock[((metadata%4)+(batch-1)*4)]);
         return String.format(
-                "%s",
-                "tile." + itemName.substring(0, itemName.length() - 1)
-                        + BlockGlazedTerracotta.subBlockUnloc[((metadata % 4) + (batch - 1) * 4)]);
+            "%s",
+            "tile." + itemName.substring(0, itemName.length() - 1)
+                + BlockGlazedTerracotta.subBlockUnloc[((metadata % 4) + (batch - 1) * 4)]);
     }
 }

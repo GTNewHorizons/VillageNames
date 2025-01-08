@@ -54,7 +54,8 @@ public class VersionChecker extends Thread {
         }
 
         try {
-            latestVersion = IOUtils.readLines(in, Charset.defaultCharset()).get(0);
+            latestVersion = IOUtils.readLines(in, Charset.defaultCharset())
+                .get(0);
         } catch (Exception e) {
             if (!warnaboutfailure) {
                 LogHelper.error("Failed to compare " + Reference.MOD_NAME + " version");
@@ -69,11 +70,11 @@ public class VersionChecker extends Thread {
 
         if (!this.isLatestVersion() && !latestVersion.equals("") && !latestVersion.equals(null)) {
             LogHelper.info(
-                    "This version of " + Reference.MOD_NAME_COLORIZED
-                            + " ("
-                            + Reference.VERSION
-                            + ") differs from the latest version: "
-                            + latestVersion);
+                "This version of " + Reference.MOD_NAME_COLORIZED
+                    + " ("
+                    + Reference.VERSION
+                    + ") differs from the latest version: "
+                    + latestVersion);
         }
 
         isUpdateCheckFinished = true;
@@ -98,7 +99,7 @@ public class VersionChecker extends Thread {
         // Used to repeat the version check
         if ((latestVersion.equals(null) || latestVersion.equals("")) && !warnaboutfailure // Skip the "run" if a failure
                                                                                           // was detected
-                && !hasThreadStarted) {
+            && !hasThreadStarted) {
             start();
             hasThreadStarted = true;
         }
@@ -110,30 +111,32 @@ public class VersionChecker extends Thread {
         }
 
         if (event.player.worldObj.isRemote && event.phase == Phase.END // Stops doubling the checks unnecessarily
-                && event.player.ticksExisted >= 30
-                && isUpdateCheckFinished
-                && !quitChecking) {
+            && event.player.ticksExisted >= 30
+            && isUpdateCheckFinished
+            && !quitChecking) {
             // Ordinary version checker
             if (GeneralConfig.versionChecker && !instance.isLatestVersion()
-                    && !latestVersion.equals(null)
-                    && !latestVersion.equals("")
-                    && !(Reference.VERSION).contains("DEV")) {
+                && !latestVersion.equals(null)
+                && !latestVersion.equals("")
+                && !(Reference.VERSION).contains("DEV")) {
                 quitChecking = true;
 
                 event.player.addChatComponentMessage(
-                        new ChatComponentText(
-                                Reference.MOD_NAME_COLORIZED + EnumChatFormatting.RESET
-                                        + " version "
-                                        + EnumChatFormatting.YELLOW
-                                        + this.getLatestVersion()
-                                        + EnumChatFormatting.RESET
-                                        + " is available! Get it at:"));
+                    new ChatComponentText(
+                        Reference.MOD_NAME_COLORIZED + EnumChatFormatting.RESET
+                            + " version "
+                            + EnumChatFormatting.YELLOW
+                            + this.getLatestVersion()
+                            + EnumChatFormatting.RESET
+                            + " is available! Get it at:"));
                 event.player.addChatComponentMessage(ForgeHooks.newChatWithLinks(Reference.URL));
             }
         }
 
         if (quitChecking) {
-            FMLCommonHandler.instance().bus().unregister(instance);
+            FMLCommonHandler.instance()
+                .bus()
+                .unregister(instance);
             return;
         }
     }

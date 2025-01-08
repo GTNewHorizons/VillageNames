@@ -18,9 +18,9 @@ public class BlockVN extends Block {
     @Override
     public String getUnlocalizedName() {
         return String.format(
-                "tile.%s%s",
-                Reference.MOD_ID.toLowerCase() + ":",
-                getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+            "tile.%s%s",
+            Reference.MOD_ID.toLowerCase() + ":",
+            getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     // Texture
@@ -28,7 +28,7 @@ public class BlockVN extends Block {
     @SideOnly(Side.CLIENT) // This method only exists on the client side. There is one for the server, too.
     public void registerBlockIcons(IIconRegister iconRegister) {
         blockIcon = iconRegister
-                .registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+            .registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
     // Block name?

@@ -63,9 +63,9 @@ public class WriteBookHandler {
      * @param player,           target - used to consume the book and drop the newly-written book
      */
     public static void targetWriteNewVillageBook(String bookType, String author, int locX, int locY, int locZ,
-            String structureName, String dimensionName, String namePrefix, String nameRoot, String nameSuffix,
-            boolean playerIsInVillage, Village villageYouAreIn, EntityInteractEvent event, int targetProfession,
-            int targetCareer, int targetTradeCount, int playerRep, EntityPlayer player, EntityLiving target) {
+        String structureName, String dimensionName, String namePrefix, String nameRoot, String nameSuffix,
+        boolean playerIsInVillage, Village villageYouAreIn, EntityInteractEvent event, int targetProfession,
+        int targetCareer, int targetTradeCount, int playerRep, EntityPlayer player, EntityLiving target) {
 
         // \n is "new line"
         // \u00a7 is the section symbol, which Minecraft uses for text formatting
@@ -84,7 +84,9 @@ public class WriteBookHandler {
         String targetClassPath = "";
         // It's possible to pass a null entity (when using a Codex)
         if (target != null) {
-            targetClassPath = target.getClass().toString().substring(6);
+            targetClassPath = target.getClass()
+                .toString()
+                .substring(6);
         }
 
         String bookContents = "\n"; // Start on line 2
@@ -95,35 +97,38 @@ public class WriteBookHandler {
         bookContents += "\u00a7l"; // The name will be bolded
 
         // Add the next lines with the town's title
-        if ((namePrefix + " " + nameRoot + " " + nameSuffix).trim().length() <= 15) { // All three pieces fit on the 1st
-                                                                                      // line
+        if ((namePrefix + " " + nameRoot + " " + nameSuffix).trim()
+            .length() <= 15) { // All three pieces fit on the 1st
+                               // line
             bookContents += (namePrefix + " " + nameRoot + " " + nameSuffix).trim();
-        } else if ((namePrefix + " " + nameRoot).trim().length() <= 15) { // Just the first two pieces fit on the 1st
-                                                                          // line
-            bookContents += (namePrefix + " " + nameRoot).trim();
-            bookContents += "\n" + "\u00a7l" + nameSuffix;
-        } else { // Only the prefix fits on the 1st line!
-            bookContents += (namePrefix).trim(); // Line 1
+        } else if ((namePrefix + " " + nameRoot).trim()
+            .length() <= 15) { // Just the first two pieces fit on the 1st
+                               // line
+                bookContents += (namePrefix + " " + nameRoot).trim();
+                bookContents += "\n" + "\u00a7l" + nameSuffix;
+            } else { // Only the prefix fits on the 1st line!
+                bookContents += (namePrefix).trim(); // Line 1
 
-            if ((nameRoot + " " + nameSuffix).trim().length() <= 15) { // The name root and suffix fit on the 2nd line
-                bookContents += "\n" + "\u00a7l" + (nameRoot + " " + nameSuffix).trim(); // Line 2
-            } else { // Just the root name fits on the second line!
-                bookContents += "\n" + "\u00a7l" + (nameRoot).trim(); // Line 2
-                bookContents += "\n" + "\u00a7l" + (nameSuffix).trim(); // Line 3
+                if ((nameRoot + " " + nameSuffix).trim()
+                    .length() <= 15) { // The name root and suffix fit on the 2nd line
+                    bookContents += "\n" + "\u00a7l" + (nameRoot + " " + nameSuffix).trim(); // Line 2
+                } else { // Just the root name fits on the second line!
+                    bookContents += "\n" + "\u00a7l" + (nameRoot).trim(); // Line 2
+                    bookContents += "\n" + "\u00a7l" + (nameSuffix).trim(); // Line 3
+                }
             }
-        }
 
         // Next, add the structures coordinates:
         if (GeneralConfig.recordStructureCoords) {
             bookContents += "\n\n" + // Skip a line before adding the next set of info
-                    "\u00a7rLocated at:\n"
-                    + "\u00a7rx = \u00a7l"
-                    + locX
-                    + "\u00a7r\ny = \u00a7l"
-                    + locY
-                    + "\u00a7r\nz = \u00a7l"
-                    + locZ
-                    + "\u00a7r";
+                "\u00a7rLocated at:\n"
+                + "\u00a7rx = \u00a7l"
+                + locX
+                + "\u00a7r\ny = \u00a7l"
+                + locY
+                + "\u00a7r\nz = \u00a7l"
+                + locZ
+                + "\u00a7r";
         }
 
         bookContents += (dimensionName.equals("")) ? "\u00a7r" : "\n\u00a7r(" + dimensionName + ")";
@@ -145,45 +150,77 @@ public class WriteBookHandler {
         // Select the book type to produce based on what string was entered
 
         // Vanilla structures
-        if (bookType.toLowerCase().trim().equals("mineshaft")) {
+        if (bookType.toLowerCase()
+            .trim()
+            .equals("mineshaft")) {
             book = new ItemStack(ModItems.mineshaftBook);
-        } else if (bookType.toLowerCase().trim().equals("temple")) {
-            book = new ItemStack(ModItems.templeBook);
-        } else if (bookType.toLowerCase().trim().equals("monument")) {
-            book = new ItemStack(ModItems.monumentBook);
-        } else if (bookType.toLowerCase().trim().equals("fortress")) {
-            book = new ItemStack(ModItems.fortressBook);
-        } else if (bookType.toLowerCase().trim().equals("stronghold")) {
-            book = new ItemStack(ModItems.strongholdBook);
-        } else if (bookType.toLowerCase().trim().equals("endcity")) {
-            book = new ItemStack(ModItems.endcityBook);
-        } else if (bookType.toLowerCase().trim().equals("mansion")) {
-            book = new ItemStack(ModItems.mansionBook);
-        }
+        } else if (bookType.toLowerCase()
+            .trim()
+            .equals("temple")) {
+                book = new ItemStack(ModItems.templeBook);
+            } else if (bookType.toLowerCase()
+                .trim()
+                .equals("monument")) {
+                    book = new ItemStack(ModItems.monumentBook);
+                } else if (bookType.toLowerCase()
+                    .trim()
+                    .equals("fortress")) {
+                        book = new ItemStack(ModItems.fortressBook);
+                    } else if (bookType.toLowerCase()
+                        .trim()
+                        .equals("stronghold")) {
+                            book = new ItemStack(ModItems.strongholdBook);
+                        } else if (bookType.toLowerCase()
+                            .trim()
+                            .equals("endcity")) {
+                                book = new ItemStack(ModItems.endcityBook);
+                            } else if (bookType.toLowerCase()
+                                .trim()
+                                .equals("mansion")) {
+                                    book = new ItemStack(ModItems.mansionBook);
+                                }
 
         // Mod structures
-        else if (bookType.toLowerCase().trim().equals("moonvillage")) {
-            book = new ItemStack(ModItems.moonvillageBook);
-        } else if (bookType.toLowerCase().trim().equals("fronosvillage")) {
-            book = new ItemStack(ModItems.fronosvillageBook);
-        } else if (bookType.toLowerCase().trim().equals("koentusvillage")) {
-            book = new ItemStack(ModItems.koentusvillageBook);
-        } else if (bookType.toLowerCase().trim().equals("nibiruvillage")) {
-            book = new ItemStack(ModItems.nibiruvillageBook);
-        } else if (bookType.toLowerCase().trim().equals("abandonedbase")) {
-            book = new ItemStack(ModItems.abandonedbasebook);
-        }
+        else if (bookType.toLowerCase()
+            .trim()
+            .equals("moonvillage")) {
+                book = new ItemStack(ModItems.moonvillageBook);
+            } else if (bookType.toLowerCase()
+                .trim()
+                .equals("fronosvillage")) {
+                    book = new ItemStack(ModItems.fronosvillageBook);
+                } else if (bookType.toLowerCase()
+                    .trim()
+                    .equals("koentusvillage")) {
+                        book = new ItemStack(ModItems.koentusvillageBook);
+                    } else if (bookType.toLowerCase()
+                        .trim()
+                        .equals("nibiruvillage")) {
+                            book = new ItemStack(ModItems.nibiruvillageBook);
+                        } else if (bookType.toLowerCase()
+                            .trim()
+                            .equals("abandonedbase")) {
+                                book = new ItemStack(ModItems.abandonedbasebook);
+                            }
 
         // New temples
-        else if (bookType.toLowerCase().trim().equals("jungletemple")) {
-            book = new ItemStack(ModItems.jungletempleBook);
-        } else if (bookType.toLowerCase().trim().equals("desertpyramid")) {
-            book = new ItemStack(ModItems.desertpyramidBook);
-        } else if (bookType.toLowerCase().trim().equals("swamphut")) {
-            book = new ItemStack(ModItems.swamphutBook);
-        } else if (bookType.toLowerCase().trim().equals("igloo")) {
-            book = new ItemStack(ModItems.igloobook);
-        }
+        else if (bookType.toLowerCase()
+            .trim()
+            .equals("jungletemple")) {
+                book = new ItemStack(ModItems.jungletempleBook);
+            } else if (bookType.toLowerCase()
+                .trim()
+                .equals("desertpyramid")) {
+                    book = new ItemStack(ModItems.desertpyramidBook);
+                } else if (bookType.toLowerCase()
+                    .trim()
+                    .equals("swamphut")) {
+                        book = new ItemStack(ModItems.swamphutBook);
+                    } else if (bookType.toLowerCase()
+                        .trim()
+                        .equals("igloo")) {
+                            book = new ItemStack(ModItems.igloobook);
+                        }
 
         else {
             book = new ItemStack(ModItems.villageBook);
@@ -200,8 +237,9 @@ public class WriteBookHandler {
         if (author != null && !author.equals("")) {
             try {
                 book.stackTagCompound.setString(
-                        "author",
-                        author.indexOf("(") != -1 ? author.substring(0, author.indexOf("(")).trim() : author);
+                    "author",
+                    author.indexOf("(") != -1 ? author.substring(0, author.indexOf("("))
+                        .trim() : author);
             }
             // If the target's name starts with a parenthesis for some reason, this will crash with an index OOB
             // exception. In that case, add no author name.
@@ -218,10 +256,15 @@ public class WriteBookHandler {
         // ----- Second Page ----- //
         // ----------------------- //
         if (target != null) {
-            if ((target instanceof EntityVillager
-                    || target.getClass().toString().substring(6).equals(ModObjects.PMLostMinerClass)
-                    || target.getClass().toString().substring(6).equals(ModObjects.PMTravelingMerchantClass))
-                    && ((author != "" && author != null) || !GeneralConfig.nameEntities)) {
+            if ((target instanceof EntityVillager || target.getClass()
+                .toString()
+                .substring(6)
+                .equals(ModObjects.PMLostMinerClass)
+                || target.getClass()
+                    .toString()
+                    .substring(6)
+                    .equals(ModObjects.PMTravelingMerchantClass))
+                && ((author != "" && author != null) || !GeneralConfig.nameEntities)) {
 
                 // All the machinery to make a second page should only work if the villager is named.
                 // Alternatively, do not require a name if you have the "Name Villagers" flag off.
@@ -229,16 +272,16 @@ public class WriteBookHandler {
                 // Put second page call into try/catch
                 try {
                     String structureHintPageText = makeSecondPage(
-                            event,
-                            targetClassPath,
-                            villageYouAreIn,
-                            locX,
-                            locY,
-                            locZ,
-                            playerRep,
-                            targetProfession,
-                            targetCareer,
-                            targetTradeCount);
+                        event,
+                        targetClassPath,
+                        villageYouAreIn,
+                        locX,
+                        locY,
+                        locZ,
+                        playerRep,
+                        targetProfession,
+                        targetCareer,
+                        targetTradeCount);
                     if (!structureHintPageText.equals("")) { // Add a second page!
                         pagesTag.appendTag(new NBTTagString(structureHintPageText));
                     }
@@ -256,26 +299,27 @@ public class WriteBookHandler {
 
         // Give the book to the player
         EntityItem eitem = ((GeneralConfig.villagerDropBook && target != null) ? target : player)
-                .entityDropItem(book, 1);
+            .entityDropItem(book, 1);
         eitem.delayBeforeCanPickup = 0; // No delay: directly into the inventory!
 
         // Trigger the Ghost Town achievement
         if (target == null // There was no "target" (i.e. Villager) to create the book
-                // All of these values are impossible naturally: they are set by using the Codex.
-                && targetProfession == -6
-                && targetCareer == -27
-                && targetTradeCount == -8
-                && playerRep == -16
-                && !player.worldObj.isRemote
-                && ( // Definitely no population, confirmed
-                population == 0 || // OR
-                // Population can't be loaded in because this village does not exist in the villages.dat file.
-                // As far as I can tell, villages get removed from this list if they have a population of zero,
-                // which would explain the spotty village lookup behavior.
-                        (playerIsInVillage && population == -1))) {
+            // All of these values are impossible naturally: they are set by using the Codex.
+            && targetProfession == -6
+            && targetCareer == -27
+            && targetTradeCount == -8
+            && playerRep == -16
+            && !player.worldObj.isRemote
+            && ( // Definitely no population, confirmed
+            population == 0 || // OR
+            // Population can't be loaded in because this village does not exist in the villages.dat file.
+            // As far as I can tell, villages get removed from this list if they have a population of zero,
+            // which would explain the spotty village lookup behavior.
+                (playerIsInVillage && population == -1))) {
             // The if condition was inserted so that your achievement stat will cap out at 1
             try {
-                if (!((EntityPlayerMP) player).func_147099_x().hasAchievementUnlocked(VillageNames.ghosttown)) {
+                if (!((EntityPlayerMP) player).func_147099_x()
+                    .hasAchievementUnlocked(VillageNames.ghosttown)) {
                     player.triggerAchievement(VillageNames.ghosttown);
                     AchievementReward.allFiveAchievements((EntityPlayerMP) player);
                 }
@@ -288,8 +332,8 @@ public class WriteBookHandler {
      * "hint" page.
      */
     public static void codexWriteNewVillageBook(String bookType, String author, int locX, int locY, int locZ,
-            String structureName, String dimensionName, String namePrefix, String nameRoot, String nameSuffix,
-            EntityPlayer player, Village villagePlayerIsIn, boolean playerIsInVillage) {
+        String structureName, String dimensionName, String namePrefix, String nameRoot, String nameSuffix,
+        EntityPlayer player, Village villagePlayerIsIn, boolean playerIsInVillage) {
 
         // Consume Codex
         if (!player.capabilities.isCreativeMode) {
@@ -297,31 +341,31 @@ public class WriteBookHandler {
         }
 
         targetWriteNewVillageBook(
-                bookType,
-                author,
-                locX,
-                locY,
-                locZ,
-                structureName,
-                dimensionName,
-                namePrefix,
-                nameRoot,
-                nameSuffix,
-                playerIsInVillage,
-                villagePlayerIsIn,
-                null,
-                -6,
-                -27,
-                -8,
-                -16,
-                player,
-                null);
+            bookType,
+            author,
+            locX,
+            locY,
+            locZ,
+            structureName,
+            dimensionName,
+            namePrefix,
+            nameRoot,
+            nameSuffix,
+            playerIsInVillage,
+            villagePlayerIsIn,
+            null,
+            -6,
+            -27,
+            -8,
+            -16,
+            player,
+            null);
 
     }
 
     public static String makeSecondPage(EntityInteractEvent event, String targetClassPath, Village villageNearVillager,
-            double targetX, double targetY, double targetZ, int playerRep, int villagerProfession, int villagerCareer,
-            int villagerTradeCount) {
+        double targetX, double targetY, double targetZ, int playerRep, int villagerProfession, int villagerCareer,
+        int villagerTradeCount) {
 
         double radiusCoef = 64.0f; // Feature search radius is playerRep x tradeCount x radiusCoef
         double strongholdCoefSquared = 0.5f; // Multiplier to reduce chances of locating a stronghold
@@ -368,7 +412,7 @@ public class WriteBookHandler {
             dz = vz - villageNearVillager.getCenter().posZ;
             rsq = (dx * dx) + (dy * dy) + (dz * dz);
             if (rsq < vmaxr && rsq >= ((radius + EntityInteractHandler.villageRadiusBuffer)
-                    * (radius + EntityInteractHandler.villageRadiusBuffer))) {
+                * (radius + EntityInteractHandler.villageRadiusBuffer))) {
                 vmaxr = rsq;
                 nearestVillageXYZ[0] = vx;
                 nearestVillageXYZ[1] = vy;
@@ -383,18 +427,19 @@ public class WriteBookHandler {
 
         try {
             structureData = (MapGenStructureData) event.entityPlayer.worldObj.perWorldStorage
-                    .loadData(MapGenStructureData.class, "Village");
+                .loadData(MapGenStructureData.class, "Village");
             nbttagcompound = structureData.func_143041_a();
         } catch (Exception e) // Village.dat does not exist
         {
             try {
                 structureData = (MapGenStructureData) event.entityPlayer.worldObj.perWorldStorage
-                        .loadData(MapGenStructureData.class, "OTGVillage");
+                    .loadData(MapGenStructureData.class, "OTGVillage");
                 nbttagcompound = structureData.func_143041_a();
             } catch (Exception e1) {} // OTGVillage.dat does not exist
         }
 
-        Iterator itr = nbttagcompound.func_150296_c().iterator();
+        Iterator itr = nbttagcompound.func_150296_c()
+            .iterator();
 
         while (itr.hasNext()) {
             Object element = itr.next();
@@ -413,13 +458,13 @@ public class WriteBookHandler {
                     int vz = villageNearVillager.getCenter().posZ;
 
                     if (nbttagcompound2.getBoolean("Valid") && // Was not generated as a junk entry
-                            !( // If the center of the village this villager is in is not inside the bounding box of the
-                               // village in question
-                            vx >= (boundingBox[0]) && vy >= (boundingBox[1])
-                                    && vz >= (boundingBox[2])
-                                    && vx <= (boundingBox[3])
-                                    && vy <= (boundingBox[4])
-                                    && vz <= (boundingBox[5]))) {
+                        !( // If the center of the village this villager is in is not inside the bounding box of the
+                           // village in question
+                        vx >= (boundingBox[0]) && vy >= (boundingBox[1])
+                            && vz >= (boundingBox[2])
+                            && vx <= (boundingBox[3])
+                            && vy <= (boundingBox[4])
+                            && vz <= (boundingBox[5]))) {
                         dx = (boundingBox[0] + boundingBox[3]) / 2 - vx;
                         dy = (boundingBox[1] + boundingBox[4]) / 2 - vy;
                         dz = (boundingBox[2] + boundingBox[5]) / 2 - vz;
@@ -445,7 +490,7 @@ public class WriteBookHandler {
 
         double[] villagerCoords = { event.target.posX, event.target.posY, event.target.posZ };
         double[] villageCoords = { villageNearVillager.getCenter().posX, villageNearVillager.getCenter().posY,
-                villageNearVillager.getCenter().posZ };
+            villageNearVillager.getCenter().posZ };
 
         String closestStructure = "";
         int[] closestCoords = new int[3];
@@ -454,15 +499,17 @@ public class WriteBookHandler {
         int villagerMappedProfession = -1; // If the below fails, do none
 
         try {
-            int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession);
+            int indexofmodprof = GeneralConfig.modProfessionMapping_map.get("IDs")
+                .indexOf(villagerProfession);
             if (indexofmodprof > -1) {
                 villagerMappedProfession = villagerProfession > (GeneralConfig.enableNitwit ? 5 : 4)
-                        ? (Integer) GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps").get(indexofmodprof)
-                        : villagerProfession;
+                    ? (Integer) GeneralConfig.modProfessionMapping_map.get("VanillaProfMaps")
+                        .get(indexofmodprof)
+                    : villagerProfession;
             }
         } catch (Exception e) {
             if (!event.entityLiving.worldObj.isRemote) LogHelper.error(
-                    "Error evaluating mod profession ID when generating a village book. Check the formatting of your Mod Professions config entry!");
+                "Error evaluating mod profession ID when generating a village book. Check the formatting of your Mod Professions config entry!");
         }
 
         // Primitive Mobs hard coding for career detection
@@ -484,11 +531,11 @@ public class WriteBookHandler {
                 // Calculate distances here
                 nearestMonumentXYZ = nearestStructureLoc("Monument", event);
                 monumentDistSq = (nearestMonumentXYZ[0] == 0 && nearestMonumentXYZ[1] == 0
-                        && nearestMonumentXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
-                                        + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
-                                        + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
+                    && nearestMonumentXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
+                            + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
+                            + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
 
                 if (villagerCareer == 2 && monumentDistSq <= maxStructureDistance * maxStructureDistance) {
                     // Villager is a fisherman. Find an ocean monument.
@@ -497,11 +544,11 @@ public class WriteBookHandler {
                 } else {
 
                     villageDistSq = (nearestVillageXYZ[0] == 0 && nearestVillageXYZ[1] == 0
-                            && nearestVillageXYZ[2] == 0)
-                                    ? Double.MAX_VALUE
-                                    : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
-                                            + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
-                                            + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
+                        && nearestVillageXYZ[2] == 0)
+                            ? Double.MAX_VALUE
+                            : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
+                                + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
+                                + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
 
                     // Villager is another kind of farmer, or a fisherman didn't report a Monument.
                     if (villageDistSq <= maxStructureDistance * maxStructureDistance) {
@@ -517,54 +564,54 @@ public class WriteBookHandler {
 
                 nearestStrongholdXYZ = nearestStructureLoc("Stronghold", event);
                 strongholdDistSq = (nearestStrongholdXYZ[0] == 0 && nearestStrongholdXYZ[1] == 0
-                        && nearestStrongholdXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestStrongholdXYZ[0] - targetX) * (nearestStrongholdXYZ[0] - targetX)
-                                        + (nearestStrongholdXYZ[1] - targetY) * (nearestStrongholdXYZ[1] - targetY)
-                                        + (nearestStrongholdXYZ[2] - targetZ) * (nearestStrongholdXYZ[2] - targetZ);
+                    && nearestStrongholdXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestStrongholdXYZ[0] - targetX) * (nearestStrongholdXYZ[0] - targetX)
+                            + (nearestStrongholdXYZ[1] - targetY) * (nearestStrongholdXYZ[1] - targetY)
+                            + (nearestStrongholdXYZ[2] - targetZ) * (nearestStrongholdXYZ[2] - targetZ);
 
                 nearestMansionXYZ = nearestStructureLoc("Mansion", event);
                 mansionDistSq = (nearestMansionXYZ[0] == 0 && nearestMansionXYZ[1] == 0 && nearestMansionXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestMansionXYZ[0] - targetX) * (nearestMansionXYZ[0] - targetX)
-                                + (nearestMansionXYZ[1] - targetY) * (nearestMansionXYZ[1] - targetY)
-                                + (nearestMansionXYZ[2] - targetZ) * (nearestMansionXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestMansionXYZ[0] - targetX) * (nearestMansionXYZ[0] - targetX)
+                        + (nearestMansionXYZ[1] - targetY) * (nearestMansionXYZ[1] - targetY)
+                        + (nearestMansionXYZ[2] - targetZ) * (nearestMansionXYZ[2] - targetZ);
 
                 if (strongholdDistSq <= maxStructureDistance * maxStructureDistance * strongholdCoefSquared
-                        && strongholdDistSq < mansionDistSq) {
+                    && strongholdDistSq < mansionDistSq) {
                     // Only a Stronghold has been legally detected. Report that.
                     closestStructure = "Stronghold";
                     closestCoords = nearestStrongholdXYZ;
                 } else if (mansionDistSq <= maxStructureDistance * maxStructureDistance
-                        && mansionDistSq <= strongholdDistSq) {
-                            // Only a Mansion has been legally detected. Report that.
-                            closestStructure = "Mansion";
-                            closestCoords = nearestMansionXYZ;
-                        }
+                    && mansionDistSq <= strongholdDistSq) {
+                        // Only a Mansion has been legally detected. Report that.
+                        closestStructure = "Mansion";
+                        closestCoords = nearestMansionXYZ;
+                    }
                 break;
 
             case 2: // Villager is a Priest. Find a temple.
 
                 nearestTempleXYZ = nearestStructureLoc("Temple", event);
                 templeDistSq = (nearestTempleXYZ[0] == 0 && nearestTempleXYZ[1] == 0 && nearestTempleXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
-                                + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
-                                + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
+                        + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
+                        + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
 
                 nearestMonumentXYZ = nearestStructureLoc("Monument", event);
                 monumentDistSq = (nearestMonumentXYZ[0] == 0 && nearestMonumentXYZ[1] == 0
-                        && nearestMonumentXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
-                                        + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
-                                        + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
+                    && nearestMonumentXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
+                            + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
+                            + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
 
                 if (villagerCareer == 0 && !GeneralConfig.villagerCareers // If the priest's career is 0--only plausible
                                                                           // in 1.7.10--then perhaps find a Monument
                                                                           // instead
-                        && monumentDistSq <= maxStructureDistance * maxStructureDistance
-                        && monumentDistSq <= templeDistSq) {
+                    && monumentDistSq <= maxStructureDistance * maxStructureDistance
+                    && monumentDistSq <= templeDistSq) {
                     // Only a Monument has been legally detected. Report that.
                     closestStructure = "Monument";
                     closestCoords = nearestMonumentXYZ;
@@ -580,11 +627,11 @@ public class WriteBookHandler {
 
                 nearestMineshaftXYZ = nearestStructureLoc("Mineshaft", event);
                 mineshaftDistSq = (nearestMineshaftXYZ[0] == 0 && nearestMineshaftXYZ[1] == 0
-                        && nearestMineshaftXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestMineshaftXYZ[0] - targetX) * (nearestMineshaftXYZ[0] - targetX)
-                                        + (nearestMineshaftXYZ[1] - targetY) * (nearestMineshaftXYZ[1] - targetY)
-                                        + (nearestMineshaftXYZ[2] - targetZ) * (nearestMineshaftXYZ[2] - targetZ);
+                    && nearestMineshaftXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestMineshaftXYZ[0] - targetX) * (nearestMineshaftXYZ[0] - targetX)
+                            + (nearestMineshaftXYZ[1] - targetY) * (nearestMineshaftXYZ[1] - targetY)
+                            + (nearestMineshaftXYZ[2] - targetZ) * (nearestMineshaftXYZ[2] - targetZ);
 
                 if (mineshaftDistSq <= maxStructureDistance * maxStructureDistance) {
                     // Mineshaft found. Write a page about it.
@@ -597,16 +644,16 @@ public class WriteBookHandler {
 
                 nearestTempleXYZ = nearestStructureLoc("Temple", event);
                 templeDistSq = (nearestTempleXYZ[0] == 0 && nearestTempleXYZ[1] == 0 && nearestTempleXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
-                                + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
-                                + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
+                        + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
+                        + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
 
                 villageDistSq = (nearestVillageXYZ[0] == 0 && nearestVillageXYZ[1] == 0 && nearestVillageXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
-                                + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
-                                + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
+                        + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
+                        + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
 
                 if (villageDistSq <= maxStructureDistance * maxStructureDistance && villageDistSq < templeDistSq) {
                     // Only a Village has been legally detected. Report that.
@@ -627,11 +674,11 @@ public class WriteBookHandler {
 
                 nearestStrongholdXYZ = nearestStructureLoc("Stronghold", event);
                 strongholdDistSq = (nearestStrongholdXYZ[0] == 0 && nearestStrongholdXYZ[1] == 0
-                        && nearestStrongholdXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestStrongholdXYZ[0] - targetX) * (nearestStrongholdXYZ[0] - targetX)
-                                        + (nearestStrongholdXYZ[1] - targetY) * (nearestStrongholdXYZ[1] - targetY)
-                                        + (nearestStrongholdXYZ[2] - targetZ) * (nearestStrongholdXYZ[2] - targetZ);
+                    && nearestStrongholdXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestStrongholdXYZ[0] - targetX) * (nearestStrongholdXYZ[0] - targetX)
+                            + (nearestStrongholdXYZ[1] - targetY) * (nearestStrongholdXYZ[1] - targetY)
+                            + (nearestStrongholdXYZ[2] - targetZ) * (nearestStrongholdXYZ[2] - targetZ);
 
                 // Check Stronghold distance first because of the extra coefficient
                 if (strongholdDistSq <= nitwitRadius * nitwitRadius * strongholdCoefSquared) {
@@ -642,10 +689,10 @@ public class WriteBookHandler {
                 }
 
                 villageDistSq = (nearestVillageXYZ[0] == 0 && nearestVillageXYZ[1] == 0 && nearestVillageXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
-                                + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
-                                + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestVillageXYZ[0] - targetX) * (nearestVillageXYZ[0] - targetX)
+                        + (nearestVillageXYZ[1] - targetY) * (nearestVillageXYZ[1] - targetY)
+                        + (nearestVillageXYZ[2] - targetZ) * (nearestVillageXYZ[2] - targetZ);
 
                 if (villageDistSq <= nitwitRadius * nitwitRadius && villageDistSq <= nitwitMax) {
                     // Village may be the closest structure.
@@ -656,11 +703,11 @@ public class WriteBookHandler {
 
                 nearestMineshaftXYZ = nearestStructureLoc("Mineshaft", event);
                 mineshaftDistSq = (nearestMineshaftXYZ[0] == 0 && nearestMineshaftXYZ[1] == 0
-                        && nearestMineshaftXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestMineshaftXYZ[0] - targetX) * (nearestMineshaftXYZ[0] - targetX)
-                                        + (nearestMineshaftXYZ[1] - targetY) * (nearestMineshaftXYZ[1] - targetY)
-                                        + (nearestMineshaftXYZ[2] - targetZ) * (nearestMineshaftXYZ[2] - targetZ);
+                    && nearestMineshaftXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestMineshaftXYZ[0] - targetX) * (nearestMineshaftXYZ[0] - targetX)
+                            + (nearestMineshaftXYZ[1] - targetY) * (nearestMineshaftXYZ[1] - targetY)
+                            + (nearestMineshaftXYZ[2] - targetZ) * (nearestMineshaftXYZ[2] - targetZ);
 
                 if (mineshaftDistSq <= nitwitRadius * nitwitRadius && mineshaftDistSq <= nitwitMax) {
                     // Mineshaft may be the closest structure.
@@ -671,10 +718,10 @@ public class WriteBookHandler {
 
                 nearestTempleXYZ = nearestStructureLoc("Temple", event);
                 templeDistSq = (nearestTempleXYZ[0] == 0 && nearestTempleXYZ[1] == 0 && nearestTempleXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
-                                + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
-                                + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestTempleXYZ[0] - targetX) * (nearestTempleXYZ[0] - targetX)
+                        + (nearestTempleXYZ[1] - targetY) * (nearestTempleXYZ[1] - targetY)
+                        + (nearestTempleXYZ[2] - targetZ) * (nearestTempleXYZ[2] - targetZ);
 
                 if (templeDistSq <= nitwitRadius * nitwitRadius && templeDistSq <= nitwitMax) {
                     // Temple may be the closest structure.
@@ -685,11 +732,11 @@ public class WriteBookHandler {
 
                 nearestMonumentXYZ = nearestStructureLoc("Monument", event);
                 monumentDistSq = (nearestMonumentXYZ[0] == 0 && nearestMonumentXYZ[1] == 0
-                        && nearestMonumentXYZ[2] == 0)
-                                ? Double.MAX_VALUE
-                                : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
-                                        + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
-                                        + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
+                    && nearestMonumentXYZ[2] == 0)
+                        ? Double.MAX_VALUE
+                        : (nearestMonumentXYZ[0] - targetX) * (nearestMonumentXYZ[0] - targetX)
+                            + (nearestMonumentXYZ[1] - targetY) * (nearestMonumentXYZ[1] - targetY)
+                            + (nearestMonumentXYZ[2] - targetZ) * (nearestMonumentXYZ[2] - targetZ);
 
                 if (monumentDistSq <= nitwitRadius * nitwitRadius && monumentDistSq <= nitwitMax) {
                     // Monument may be the closest structure.
@@ -700,10 +747,10 @@ public class WriteBookHandler {
 
                 nearestMansionXYZ = nearestStructureLoc("Mansion", event);
                 mansionDistSq = (nearestMansionXYZ[0] == 0 && nearestMansionXYZ[1] == 0 && nearestMansionXYZ[2] == 0)
-                        ? Double.MAX_VALUE
-                        : (nearestMansionXYZ[0] - targetX) * (nearestMansionXYZ[0] - targetX)
-                                + (nearestMansionXYZ[1] - targetY) * (nearestMansionXYZ[1] - targetY)
-                                + (nearestMansionXYZ[2] - targetZ) * (nearestMansionXYZ[2] - targetZ);
+                    ? Double.MAX_VALUE
+                    : (nearestMansionXYZ[0] - targetX) * (nearestMansionXYZ[0] - targetX)
+                        + (nearestMansionXYZ[1] - targetY) * (nearestMansionXYZ[1] - targetY)
+                        + (nearestMansionXYZ[2] - targetZ) * (nearestMansionXYZ[2] - targetZ);
 
                 if (mansionDistSq <= nitwitRadius * nitwitRadius && mansionDistSq <= nitwitMax) {
                     // Mansion may be the closest structure.
@@ -716,12 +763,12 @@ public class WriteBookHandler {
 
         if (!closestStructure.equals("")) {
             String structureHintPageText = "\n\n" + writeStructureHintPage(
-                    closestStructure,
-                    closestCoords,
-                    villagerProfession,
-                    villageCoords,
-                    radius,
-                    event);
+                closestStructure,
+                closestCoords,
+                villagerProfession,
+                villageCoords,
+                radius,
+                event);
 
             // pagesTag.appendTag(new NBTTagString(structureHintPageText));
             return structureHintPageText;
@@ -735,15 +782,15 @@ public class WriteBookHandler {
      * also enter an X and Z position offset for the search.
      */
     private static int[] nearestStructureLoc(String structureName, EntityInteractEvent event, double xOffset,
-            double zOffset, boolean includeThis) {
+        double zOffset, boolean includeThis) {
 
         int[] structurePos = new int[] { 0, 0, 0 };
 
         Map<String, ChunkPosition> nearbyStructures = StructureRegistry.instance.getNearestStructures(
-                (WorldServer) event.entityPlayer.worldObj,
-                (int) (event.target.posX + xOffset),
-                (int) event.target.posY,
-                (int) (event.target.posZ + zOffset));
+            (WorldServer) event.entityPlayer.worldObj,
+            (int) (event.target.posX + xOffset),
+            (int) event.target.posY,
+            (int) (event.target.posZ + zOffset));
 
         double max = Double.MAX_VALUE;
 
@@ -764,7 +811,8 @@ public class WriteBookHandler {
             double distsq = (dx * dx) + (dy * dy) + (dz * dz);
 
             // Locate nearest component of specified type to specified position
-            if (distsq < max && e.getKey().equals(structureName)) {
+            if (distsq < max && e.getKey()
+                .equals(structureName)) {
                 // Return the nearest structure of interest
                 max = distsq;
                 structurePos[0] = pos.chunkPosX;
@@ -787,7 +835,7 @@ public class WriteBookHandler {
      * This method generates the additional page about a nearby structure
      */
     private static String writeStructureHintPage(String nearbyStructure, int[] structureCoords, int villagerProfession,
-            double[] villageCoords, int villageRadius, EntityInteractEvent event) {
+        double[] villageCoords, int villageRadius, EntityInteractEvent event) {
         String structureHintPage = "";
         Random random = event.entity.worldObj.rand;
 
@@ -866,7 +914,7 @@ public class WriteBookHandler {
             // VNWorldData data=null;
 
             VNWorldDataStructure data = VNWorldDataStructure
-                    .forWorld(event.entity.worldObj, "villagenames3_" + nearbyStructure, "NamedStructures");
+                .forWorld(event.entity.worldObj, "villagenames3_" + nearbyStructure, "NamedStructures");
 
             int signX = structureCoords[0];
             int signY = structureCoords[1];
@@ -874,7 +922,7 @@ public class WriteBookHandler {
 
             Random deterministic = new Random();
             deterministic
-                    .setSeed(event.entity.worldObj.getSeed() + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
+                .setSeed(event.entity.worldObj.getSeed() + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
             structureNameArray = NameGenerator.newRandomName(nearbyStructure, deterministic);
 
             // Gotta copy this thing to each IF condition I think
@@ -910,9 +958,10 @@ public class WriteBookHandler {
             // .getTagList() will return all the entries under the specific village name.
             NBTTagCompound tagCompound = data.getData();
 
-            data.getData().setTag(
+            data.getData()
+                .setTag(
                     (namePrefix + " " + nameRoot + " " + nameSuffix)
-                            .trim() + ", x" + signX + " y" + signY + " z" + signZ,
+                        .trim() + ", x" + signX + " y" + signY + " z" + signZ,
                     nbttaglist);
             data.markDirty();
 
@@ -932,44 +981,44 @@ public class WriteBookHandler {
 
         if (nearbyStructure.equals("Village")) {
             String[] structureStringArray = new String[] { "We trade with " + structureName + ", ",
-                    "The villagers of this town trade with " + structureName + ", ",
-                    "Our trading partner, " + structureName + ", is ",
-                    "There's another settlement named " + structureName + " that we trade with, ",
-                    "The village of " + structureName + " is ", "A village named " + structureName + " is ",
-                    "There is a village, " + structureName + ", " };
+                "The villagers of this town trade with " + structureName + ", ",
+                "Our trading partner, " + structureName + ", is ",
+                "There's another settlement named " + structureName + " that we trade with, ",
+                "The village of " + structureName + " is ", "A village named " + structureName + " is ",
+                "There is a village, " + structureName + ", " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else if (nearbyStructure.equals("Stronghold")) {
             String[] structureStringArray = new String[] { "We have records of a stronghold, " + structureName + ", ",
-                    "An underground fortress, " + structureName + ", is ",
-                    "Our records list a stronghold, " + structureName + ", ",
-                    "A mysterious labyrinth, " + structureName + ", is " };
+                "An underground fortress, " + structureName + ", is ",
+                "Our records list a stronghold, " + structureName + ", ",
+                "A mysterious labyrinth, " + structureName + ", is " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else if (nearbyStructure.equals("Temple")) {
             String[] structureStringArray = new String[] { "An abandoned temple called " + structureName + " is ",
-                    "A former religious ritual site, " + structureName + ", is ",
-                    "Some bygone religious sect constructed a temple at the " + structureName + " site. It's ",
-                    "A previous civilization built the temple of " + structureName + ", " };
+                "A former religious ritual site, " + structureName + ", is ",
+                "Some bygone religious sect constructed a temple at the " + structureName + " site. It's ",
+                "A previous civilization built the temple of " + structureName + ", " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else if (nearbyStructure.equals("Mineshaft")) {
             String[] structureStringArray = new String[] { "An underground mining site, " + structureName + ", is ",
-                    "Previous settlers built an underground mining site, " + structureName + ", ",
-                    "There's a long-deserted mine at the old " + structureName + " site ",
-                    "Back at the old " + structureName + " site, there should be an abandoned mineshaft. It's ",
-                    "An abandoned mining structure known as " + structureName + " is " };
+                "Previous settlers built an underground mining site, " + structureName + ", ",
+                "There's a long-deserted mine at the old " + structureName + " site ",
+                "Back at the old " + structureName + " site, there should be an abandoned mineshaft. It's ",
+                "An abandoned mining structure known as " + structureName + " is " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else if (nearbyStructure.equals("Monument")) {
             String[] structureStringArray = new String[] {
-                    "Rumors on the wind speak of a sunken temple, " + structureName + ", ",
-                    "There are rumors of " + structureName + ", under the sea, ",
-                    "The monument of " + structureName
-                            + "was said to have been dragged into the sea long ago. It's rumored to be ",
-                    "An old fisherman's tale mentions " + structureName + ", " };
+                "Rumors on the wind speak of a sunken temple, " + structureName + ", ",
+                "There are rumors of " + structureName + ", under the sea, ",
+                "The monument of " + structureName
+                    + "was said to have been dragged into the sea long ago. It's rumored to be ",
+                "An old fisherman's tale mentions " + structureName + ", " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else if (nearbyStructure.equals("Mansion")) {
             String[] structureStringArray = new String[] { "We have records of a cult mansion, " + structureName + ", ",
-                    "We have records of a cult operating at " + structureName + ", ",
-                    "Our records list a cult mansion, " + structureName + ", ",
-                    "A mysterious cult meets at a mansion called " + structureName + ", " };
+                "We have records of a cult operating at " + structureName + ", ",
+                "Our records list a cult mansion, " + structureName + ", ",
+                "A mysterious cult meets at a mansion called " + structureName + ", " };
             structureString = structureStringArray[random.nextInt(structureStringArray.length)];
         } else {
             // There's nothing left, man
@@ -980,40 +1029,40 @@ public class WriteBookHandler {
 
             if (nearbyStructure.equals("Mineshaft")) {
                 String[] structureStringArray = new String[] {
-                        "I hear there used to be a mine called " + structureName + ", ",
-                        "There used to be a mine over at the old " + structureName + " site, ",
-                        "If the wind is still over at the " + structureName
-                                + " site, you can hear faint sounds coming from deep underground. You can go check it out if you want: it's " };
+                    "I hear there used to be a mine called " + structureName + ", ",
+                    "There used to be a mine over at the old " + structureName + " site, ",
+                    "If the wind is still over at the " + structureName
+                        + " site, you can hear faint sounds coming from deep underground. You can go check it out if you want: it's " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             } else if (nearbyStructure.equals("Stronghold")) {
                 String[] structureStringArray = new String[] {
-                        "I've heard rumors about " + structureName + ", an underground stronghold ",
-                        "I get really weird supernatural sensations over at the old " + structureName
-                                + " site. If you want to dig around under there, it's " };
+                    "I've heard rumors about " + structureName + ", an underground stronghold ",
+                    "I get really weird supernatural sensations over at the old " + structureName
+                        + " site. If you want to dig around under there, it's " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             } else if (nearbyStructure.equals("Temple")) {
                 String[] structureStringArray = new String[] {
-                        "In my wanderings I've stumbled upon an abandoned site called " + structureName + ", ",
-                        "I hear there's a temple or something like that over at the " + structureName
-                                + " religious site, " };
+                    "In my wanderings I've stumbled upon an abandoned site called " + structureName + ", ",
+                    "I hear there's a temple or something like that over at the " + structureName
+                        + " religious site, " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             } else if (nearbyStructure.equals("Village")) {
                 String[] structureStringArray = new String[] { "There is another village named " + structureName + ", ",
-                        "Everyone knows about the town of " + structureName + ", ",
-                        "My buddy once lost a shoe while visiting " + structureName + ", " };
+                    "Everyone knows about the town of " + structureName + ", ",
+                    "My buddy once lost a shoe while visiting " + structureName + ", " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             } else if (nearbyStructure.equals("Monument")) {
                 String[] structureStringArray = new String[] {
-                        "I've heard fishermen mention a sunken monument called " + structureName + ", ",
-                        "The darkest sea tales, whispered in hushed tones, mention " + structureName
-                                + ", a sunken temple filled with treasure. If you dare to look for it, rumor says it's " };
+                    "I've heard fishermen mention a sunken monument called " + structureName + ", ",
+                    "The darkest sea tales, whispered in hushed tones, mention " + structureName
+                        + ", a sunken temple filled with treasure. If you dare to look for it, rumor says it's " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             } else if (nearbyStructure.equals("Mansion")) {
                 String[] structureStringArray = new String[] {
-                        "I've heard a lot of very bad things about the cult that practices in " + structureName + ", ",
-                        "Others don't like to talk about it, but everyone here knows about the eerie cult that gathers at "
-                                + structureName
-                                + ", deep in the dark wood. If you're foolish enough to look, it's " };
+                    "I've heard a lot of very bad things about the cult that practices in " + structureName + ", ",
+                    "Others don't like to talk about it, but everyone here knows about the eerie cult that gathers at "
+                        + structureName
+                        + ", deep in the dark wood. If you're foolish enough to look, it's " };
                 structureString = structureStringArray[random.nextInt(structureStringArray.length)];
             }
         }
@@ -1064,11 +1113,11 @@ public class WriteBookHandler {
      * @return {namePrefix, nameRoot, nameSuffix} if something is found; {null, null, null} otherwise
      */
     private static String[] tryGetStructureName(String nearbyStructure, int[] structureCoords,
-            EntityInteractEvent event) {
+        EntityInteractEvent event) {
 
         // Load in names data
         VNWorldData data = VNWorldDataStructure
-                .forWorld(event.entity.worldObj, "villagenames3_" + nearbyStructure, "NamedStructures");
+            .forWorld(event.entity.worldObj, "villagenames3_" + nearbyStructure, "NamedStructures");
 
         // .getTagList() will return all the entries under the specific village name.
         NBTTagCompound tagCompound = data.getData();
@@ -1086,7 +1135,8 @@ public class WriteBookHandler {
 
             townSignEntry = element.toString(); // Text name of village header (e.g. "x535y80z39")
             // The only index that has data is 0:
-            NBTTagCompound tagList = tagCompound.getTagList(townSignEntry, tagCompound.getId()).getCompoundTagAt(0);
+            NBTTagCompound tagList = tagCompound.getTagList(townSignEntry, tagCompound.getId())
+                .getCompoundTagAt(0);
 
             // Town's location
             int featureX = tagList.getInteger("signX");
@@ -1142,20 +1192,21 @@ public class WriteBookHandler {
 
             featureSignLoc = element.toString(); // Text name of feature header (e.g. "x535y80z39")
             // The only index that has data is 0:
-            NBTTagCompound tagList = tagCompound.getTagList(featureSignLoc, tagCompound.getId()).getCompoundTagAt(0);
+            NBTTagCompound tagList = tagCompound.getTagList(featureSignLoc, tagCompound.getId())
+                .getCompoundTagAt(0);
 
             int[] structureCoords = new int[] { tagList.getInteger("signX"), tagList.getInteger("signY"),
-                    tagList.getInteger("signZ") };
+                tagList.getInteger("signZ") };
 
             // A signY of 64 likely means it was detected pre-generation.
             // The below code detects if you're in the 3D bounding box if and only if signY is not 64.
             // If signY is 64, the code detects if you're in the 2D (x vs z) bounding box.
 
             if (structureCoords[0] >= structureBB[0] && structureCoords[2] >= structureBB[2]
-                    && structureCoords[0] <= structureBB[3]
-                    && structureCoords[2] <= structureBB[5]
-                    && (structureCoords[1] == 64
-                            || (structureCoords[1] >= structureBB[1] && structureCoords[1] <= structureBB[4]))) {
+                && structureCoords[0] <= structureBB[3]
+                && structureCoords[2] <= structureBB[5]
+                && (structureCoords[1] == 64
+                    || (structureCoords[1] >= structureBB[1] && structureCoords[1] <= structureBB[4]))) {
                 // This entry has been correctly matched to the structure in question
                 namePrefix = tagList.getString("namePrefix");
                 nameRoot = tagList.getString("nameRoot");

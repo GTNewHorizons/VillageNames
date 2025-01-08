@@ -24,35 +24,30 @@ public class PathFinderSwimmer {
      * Creates a path from one entity to another within a minimum distance
      */
     public PathEntitySwimmer createEntityPathTo(IBlockAccess blockaccess, Entity entityFrom, Entity entityTo,
-            float dist) {
-        return this.createEntityPathTo(
-                blockaccess,
-                entityFrom,
-                entityTo.posX,
-                entityTo.boundingBox.minY,
-                entityTo.posZ,
-                dist);
+        float dist) {
+        return this
+            .createEntityPathTo(blockaccess, entityFrom, entityTo.posX, entityTo.boundingBox.minY, entityTo.posZ, dist);
     }
 
     /**
      * Creates a path from an entity to a specified location within a minimum distance
      */
     public PathEntitySwimmer createEntityPathTo(IBlockAccess blockaccess, Entity entityIn, BlockPos targetPos,
-            float dist) {
+        float dist) {
         return this.createEntityPathTo(
-                blockaccess,
-                entityIn,
-                (double) ((float) targetPos.getX() + 0.5F),
-                (double) ((float) targetPos.getY() + 0.5F),
-                (double) ((float) targetPos.getZ() + 0.5F),
-                dist);
+            blockaccess,
+            entityIn,
+            (double) ((float) targetPos.getX() + 0.5F),
+            (double) ((float) targetPos.getY() + 0.5F),
+            (double) ((float) targetPos.getZ() + 0.5F),
+            dist);
     }
 
     /**
      * Internal implementation of creating a path from an entity to a point
      */
     private PathEntitySwimmer createEntityPathTo(IBlockAccess blockaccess, Entity entityIn, double x, double y,
-            double z, float distance) {
+        double z, float distance) {
         this.path.clearPath();
         this.nodeProcessor.initProcessor(blockaccess, entityIn);
         PathPointSwimmer pathpoint = this.nodeProcessor.getPathPointTo(entityIn);
@@ -66,7 +61,7 @@ public class PathFinderSwimmer {
      * Adds a path from start to end and returns the whole path
      */
     private PathEntitySwimmer addToPath(Entity entityIn, PathPointSwimmer pathpointStart, PathPointSwimmer pathpointEnd,
-            float maxDistance) {
+        float maxDistance) {
         pathpointStart.totalPathDistance = 0.0F;
         pathpointStart.distanceToNext = pathpointStart.distanceToSquared(pathpointEnd);
         pathpointStart.distanceToTarget = pathpointStart.distanceToNext;
@@ -87,7 +82,7 @@ public class PathFinderSwimmer {
 
             pathpoint1.visited = true;
             int i = this.nodeProcessor
-                    .findPathOptions(this.pathOptions, entityIn, pathpoint1, pathpointEnd, maxDistance);
+                .findPathOptions(this.pathOptions, entityIn, pathpoint1, pathpointEnd, maxDistance);
 
             for (int j = 0; j < i; ++j) {
                 PathPointSwimmer pathpoint2 = this.pathOptions[j];

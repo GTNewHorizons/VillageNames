@@ -25,7 +25,7 @@ public class SpawnEggRegistry {
     private static final int MOD_MOBS_IDS_START = 1;
 
     public static final Object[][] spawnEggData = new Object[][] { { "guardian", guardian(false), 0x5A8272, 0xF17D30 }, // Guardian
-            { "guardian.elder", guardian(true), 0xCECCBA, 0x747693 }, // Elder Guardian
+        { "guardian.elder", guardian(true), 0xCECCBA, 0x747693 }, // Elder Guardian
     };
 
     public static void registerSpawnEgg(SpawnEggInfo info) throws IllegalArgumentException {
@@ -62,19 +62,19 @@ public class SpawnEggRegistry {
 
             try {
                 SpawnEggRegistry.registerSpawnEgg(
-                        new SpawnEggInfo(
-                                (short) currentID, // Meta ID that's going to try to load
-                                Reference.MOD_ID + "." + Reference.MOB_GUARDIAN_VN, // Mob's internal name (e.g.
-                                                                                    // Ocelot_NEC)
-                                (String) (spawnEggData[i][0]), // The name to be displayed on the spawn egg item
-                                (NBTTagCompound) (spawnEggData[i][1]), // Extra data to be applied to the mob
-                                (Integer) (spawnEggData[i][2]),
-                                (Integer) (spawnEggData[i][3]))); // The base and speckle colors of the spawn egg
+                    new SpawnEggInfo(
+                        (short) currentID, // Meta ID that's going to try to load
+                        Reference.MOD_ID + "." + Reference.MOB_GUARDIAN_VN, // Mob's internal name (e.g.
+                                                                            // Ocelot_NEC)
+                        (String) (spawnEggData[i][0]), // The name to be displayed on the spawn egg item
+                        (NBTTagCompound) (spawnEggData[i][1]), // Extra data to be applied to the mob
+                        (Integer) (spawnEggData[i][2]),
+                        (Integer) (spawnEggData[i][3]))); // The base and speckle colors of the spawn egg
             } catch (IllegalArgumentException e) {
                 LogHelper.warn(
-                        "Could not register spawn egg for entity " + (String) (spawnEggData[i][0])
-                                + " into ID "
-                                + currentID);
+                    "Could not register spawn egg for entity " + (String) (spawnEggData[i][0])
+                        + " into ID "
+                        + currentID);
             }
         }
     }

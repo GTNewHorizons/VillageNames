@@ -28,8 +28,10 @@ public class ModelGuardian extends ModelBase {
         this.textureHeight = 64;
         this.guardianSpines = new ModelRenderer[12];
         this.guardianBody = new ModelRenderer(this);
-        this.guardianBody.setTextureOffset(0, 0).addBox(-6.0F, 10.0F, -8.0F, 12, 12, 16);
-        this.guardianBody.setTextureOffset(0, 28).addBox(-8.0F, 10.0F, -6.0F, 2, 12, 12); // Renders right side of body
+        this.guardianBody.setTextureOffset(0, 0)
+            .addBox(-6.0F, 10.0F, -8.0F, 12, 12, 16);
+        this.guardianBody.setTextureOffset(0, 28)
+            .addBox(-8.0F, 10.0F, -6.0F, 2, 12, 12); // Renders right side of body
 
         // TODO - fix mirror rendering
         // Renders left side of body addBox(offX, offY, offZ, width, height, depth, mirrored)
@@ -40,8 +42,10 @@ public class ModelGuardian extends ModelBase {
         this.guardianBody.mirror = false;
 
         // this.guardianBody.mirror=true; // This flips ALL textures on this.guardianBody
-        this.guardianBody.setTextureOffset(16, 40).addBox(-6.0F, 8.0F, -6.0F, 12, 2, 12); // Renders bottom of body
-        this.guardianBody.setTextureOffset(16, 40).addBox(-6.0F, 22.0F, -6.0F, 12, 2, 12); // Renders top of body
+        this.guardianBody.setTextureOffset(16, 40)
+            .addBox(-6.0F, 8.0F, -6.0F, 12, 2, 12); // Renders bottom of body
+        this.guardianBody.setTextureOffset(16, 40)
+            .addBox(-6.0F, 22.0F, -6.0F, 12, 2, 12); // Renders top of body
 
         for (int i = 0; i < this.guardianSpines.length; ++i) {
             this.guardianSpines[i] = new ModelRenderer(this, 0, 0);
@@ -58,8 +62,10 @@ public class ModelGuardian extends ModelBase {
         this.guardianTail[1] = new ModelRenderer(this, 0, 54);
         this.guardianTail[1].addBox(0.0F, 14.0F, 0.0F, 3, 3, 7);
         this.guardianTail[2] = new ModelRenderer(this);
-        this.guardianTail[2].setTextureOffset(41, 32).addBox(0.0F, 14.0F, 0.0F, 2, 2, 6);
-        this.guardianTail[2].setTextureOffset(25, 19).addBox(1.0F, 10.5F, 3.0F, 1, 9, 9);
+        this.guardianTail[2].setTextureOffset(41, 32)
+            .addBox(0.0F, 14.0F, 0.0F, 2, 2, 6);
+        this.guardianTail[2].setTextureOffset(25, 19)
+            .addBox(1.0F, 10.5F, 3.0F, 1, 9, 9);
         this.guardianBody.addChild(this.guardianTail[0]);
         this.guardianTail[0].addChild(this.guardianTail[1]);
         this.guardianTail[1].addChild(this.guardianTail[2]);
@@ -76,7 +82,7 @@ public class ModelGuardian extends ModelBase {
      */
     // Fires
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
-            float p_78088_6_, float scale) {
+        float p_78088_6_, float scale) {
         // LogHelper.info("render fired");
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entityIn);
         this.guardianBody.render(scale);
@@ -89,7 +95,7 @@ public class ModelGuardian extends ModelBase {
      */
     // Fires
     public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_,
-            float p_78087_5_, float p_78087_6_, Entity entityIn) {
+        float p_78087_5_, float p_78087_6_, Entity entityIn) {
         // LogHelper.info("setRotationAngles fired");
         EntityGuardian entityguardian = (EntityGuardian) entityIn;
         float f = p_78087_3_ - (float) entityguardian.ticksExisted;
@@ -108,11 +114,11 @@ public class ModelGuardian extends ModelBase {
             this.guardianSpines[i].rotateAngleY = (float) Math.PI * afloat1[i];
             this.guardianSpines[i].rotateAngleZ = (float) Math.PI * afloat2[i];
             this.guardianSpines[i].rotationPointX = afloat3[i]
-                    * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
+                * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
             this.guardianSpines[i].rotationPointY = 16.0F
-                    + afloat4[i] * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
+                + afloat4[i] * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
             this.guardianSpines[i].rotationPointZ = afloat5[i]
-                    * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
+                * (1.0F + MathHelper1122.cos(p_78087_3_ * 1.5F + (float) i) * 0.01F - f1);
         }
 
         this.guardianEye.rotationPointZ = -8.25F;
@@ -145,11 +151,11 @@ public class ModelGuardian extends ModelBase {
             // Vec3 vec33 = (Vec3.createVectorHelper(vec31.xCoord - vec3.xCoord, 0.0D, vec31.zCoord -
             // vec3.zCoord)).normalize().rotateYaw(((float)Math.PI / 2F));
             Vec3 vec33 = (Vec3.createVectorHelper(vec31.xCoord - vec3.xCoord, 0.0D, vec31.zCoord - vec3.zCoord))
-                    .normalize();
+                .normalize();
             vec33 = rotateYaw(vec33, ((float) Math.PI / 2F)); // created a RotateYaw below to achieve this
             double d1 = vec32.dotProduct(vec33);
             this.guardianEye.rotationPointX = MathHelper1122.sqrt_float((float) Math.abs(d1)) * 2.0F
-                    * (float) Math.signum(d1);
+                * (float) Math.signum(d1);
         }
 
         this.guardianEye.showModel = true;
@@ -176,7 +182,7 @@ public class ModelGuardian extends ModelBase {
         } else {
             double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * (double) partialTicks;
             double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * (double) partialTicks
-                    + (double) this.getEyeHeight(entity);
+                + (double) this.getEyeHeight(entity);
             double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double) partialTicks;
             return Vec3.createVectorHelper(d0, d1, d2);
         }

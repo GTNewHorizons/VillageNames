@@ -119,7 +119,10 @@ public class ClientInfoTracker {
         Entity entity = world.getEntityByID(entityID);
 
         // If found the entity, attempt to sync with info sent by the server
-        if (entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) {
+        if (entity.getClass()
+            .toString()
+            .substring(6)
+            .equals(ModObjects.WitcheryGuardClass)) {
             ClientInfoTracker.SyncGuardMessage((EntityLiving) entity);
         }
 

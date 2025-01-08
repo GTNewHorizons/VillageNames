@@ -19,7 +19,7 @@ public class PrismarineIcon extends TextureAtlasSprite {
     public PrismarineIcon(String name) {
         super(name);
         fanimationMetadata = ReflectionHelper
-                .findField(TextureAtlasSprite.class, "animationMetadata", "field_110982_k");
+            .findField(TextureAtlasSprite.class, "animationMetadata", "field_110982_k");
         fanimationMetadata.setAccessible(true);
     }
 

@@ -52,10 +52,8 @@ public class ModBlocksVN {
 
         if (GeneralConfig.addPrismarine) {
             GameRegistry.registerBlock(blockSeaLantern, "sea_lantern");
-            GameRegistry.registerBlock(
-                    blockPrismarine,
-                    ((ISubBlocksBlock) blockPrismarine).getItemBlockClass(),
-                    "prismarine");
+            GameRegistry
+                .registerBlock(blockPrismarine, ((ISubBlocksBlock) blockPrismarine).getItemBlockClass(), "prismarine");
 
             // Oredict registries
             OreDictionary.registerOre("blockPrismarine", new ItemStack(blockPrismarine, 1, 0));

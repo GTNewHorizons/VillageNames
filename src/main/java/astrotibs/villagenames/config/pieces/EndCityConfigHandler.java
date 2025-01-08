@@ -29,65 +29,84 @@ public class EndCityConfigHandler {
     }
 
     public static void loadConfiguration() {
-        endcity_prefix = config.getStringWithoutDefaultsInComment(
+        endcity_prefix = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_PREFIXES,
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 NamePieces.END_CITY_PREFIX_DEFAULT,
-                Reference.DESCRIPTION_PREFIXES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_PREFIXES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        endcity_root_initial = config.getStringWithoutDefaultsInComment(
+        endcity_root_initial = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_INITIAL,
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 NamePieces.END_CITY_ROOT_INITIAL_DEFAULT,
-                Reference.DESCRIPTION_ROOT_INITIAL).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_INITIAL)
+            .trim()
+            .split("\\s*,\\s*");
 
-        endcity_root_syllables = config.getStringWithoutDefaultsInComment(
+        endcity_root_syllables = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_SYLLABLES,
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 NamePieces.END_CITY_ROOT_SYL_BEGIN_DEFAULT,
-                Reference.DESCRIPTION_ROOT_SYLLABLES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_SYLLABLES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        endcity_root_terminal = config.getStringWithoutDefaultsInComment(
+        endcity_root_terminal = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_TERMINAL,
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 NamePieces.END_CITY_ROOT_TERMINAL_DEFAULT,
-                Reference.DESCRIPTION_ROOT_TERMINAL).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_TERMINAL)
+            .trim()
+            .split("\\s*,\\s*");
 
-        endcity_suffix = config.getStringWithoutDefaultsInComment(
+        endcity_suffix = config
+            .getStringWithoutDefaultsInComment(
                 "Suffixes",
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 NamePieces.END_CITY_SUFFIX_DEFAULT,
-                Reference.DESCRIPTION_SUFFIXES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_SUFFIXES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        syllable_count_weighting = config.get(
+        syllable_count_weighting = config
+            .get(
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 Reference.NAME_SYLLABLE_COUNT_WEIGHTING,
                 NamePieces.END_CITY_SYLLABLE_COUNT_WEIGHTS,
-                Reference.DESCRIPTION_SYLLABLE_COUNT_WEIGHTING).getIntList();
+                Reference.DESCRIPTION_SYLLABLE_COUNT_WEIGHTING)
+            .getIntList();
 
-        terminal_blank_counts = config.get(
+        terminal_blank_counts = config
+            .get(
                 Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
                 Reference.NAME_TERMINAL_BLANK_COUNTS,
                 NamePieces.END_CITY_BLANK_TERMINAL_COUNTS,
-                Reference.DESCRIPTION_TERMINAL_BLANK_COUNTS).getIntList();
+                Reference.DESCRIPTION_TERMINAL_BLANK_COUNTS)
+            .getIntList();
 
         prefix_chance = config.getFloat(
-                Reference.NAME_PREFIX_CHANCE,
-                Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
-                (endcity_root_initial.length - 1) <= 0 ? 0
-                        : ((float) endcity_prefix.length - 1) / (endcity_root_initial.length - 1),
-                0.0F,
-                1.0F,
-                Reference.DESCRIPTION_PREFIX_CHANCE);
+            Reference.NAME_PREFIX_CHANCE,
+            Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
+            (endcity_root_initial.length - 1) <= 0 ? 0
+                : ((float) endcity_prefix.length - 1) / (endcity_root_initial.length - 1),
+            0.0F,
+            1.0F,
+            Reference.DESCRIPTION_PREFIX_CHANCE);
 
         suffix_chance = config.getFloat(
-                Reference.NAME_SUFFIX_CHANCE,
-                Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
-                (endcity_root_initial.length - 1) <= 0 ? 0
-                        : ((float) endcity_suffix.length - 1) / (endcity_root_initial.length - 1),
-                0.0F,
-                1.0F,
-                Reference.DESCRIPTION_SUFFIX_CHANCE);
+            Reference.NAME_SUFFIX_CHANCE,
+            Reference.CATEGORY_END_CITY_SYLLABLE_POOL,
+            (endcity_root_initial.length - 1) <= 0 ? 0
+                : ((float) endcity_suffix.length - 1) / (endcity_root_initial.length - 1),
+            0.0F,
+            1.0F,
+            Reference.DESCRIPTION_SUFFIX_CHANCE);
 
         if (config.hasChanged()) config.save();
     }

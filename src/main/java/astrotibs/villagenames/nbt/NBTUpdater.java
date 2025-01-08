@@ -68,18 +68,18 @@ public class NBTUpdater {
             old_dataname_map.put("villagenames_mpnv", "NibiruVillages");
 
             String[] new_titleTags = new String[] { "Village", "Temple", "Mineshaft", "Stronghold", "Monument",
-                    "Mansion", "Fortress", "EndCity", "GC_AbandonedBase", "hardcoreenderdragon_EndIsland",
-                    "hardcoreenderdragon_EndTower", "FronosVillage", "KoentusVillage", "MoonVillage", "NibiruVillage",
-                    "DUMMY" };
+                "Mansion", "Fortress", "EndCity", "GC_AbandonedBase", "hardcoreenderdragon_EndIsland",
+                "hardcoreenderdragon_EndTower", "FronosVillage", "KoentusVillage", "MoonVillage", "NibiruVillage",
+                "DUMMY" };
 
             String[] old_topTags = new String[] { "Villages", "Temples", "Mineshafts", "Strongholds", "Monuments",
-                    "Mansions", "Fortresses", "EndCities", "AbandonedBases", "hardcoreenderdragon_EndIsland",
-                    "hardcoreenderdragon_EndTower", "FronosVillages", "KoentusVillages", "MoonVillages",
-                    "NibiruVillages", "NamedStructures" };
+                "Mansions", "Fortresses", "EndCities", "AbandonedBases", "hardcoreenderdragon_EndIsland",
+                "hardcoreenderdragon_EndTower", "FronosVillages", "KoentusVillages", "MoonVillages", "NibiruVillages",
+                "NamedStructures" };
             String[] old_filenames = new String[] { "villagenames", "villagenames_te", "villagenames_mi",
-                    "villagenames_st", "villagenames_mo", "villagenames_ma", "villagenames_fo", "villagenames_ec",
-                    "villagenames_gcab", "villagenames_heei", "villagenames_heet", "villagenames_mpfv",
-                    "villagenames_mpkv", "villagenames_gcmv", "villagenames_mpnv", "villagenames_DUMMY" };
+                "villagenames_st", "villagenames_mo", "villagenames_ma", "villagenames_fo", "villagenames_ec",
+                "villagenames_gcab", "villagenames_heei", "villagenames_heet", "villagenames_mpfv", "villagenames_mpkv",
+                "villagenames_gcmv", "villagenames_mpnv", "villagenames_DUMMY" };
 
             for (int i = 0; i < old_filenames.length; i++) {
 
@@ -89,7 +89,7 @@ public class NBTUpdater {
                 Set tagmapKeyset_old = tagCompound_old.func_150296_c(); // Gets the town key list: "coordinates"
 
                 VNWorldDataStructure data_new = VNWorldDataStructure
-                        .forWorld(world, "villagenames3_" + new_titleTags[i], "NamedStructures");
+                    .forWorld(world, "villagenames3_" + new_titleTags[i], "NamedStructures");
                 NBTTagCompound tagCompound_new = data_new.getData();
                 Set tagmapKeyset_new = tagCompound_new.func_150296_c(); // Gets the town key list: "coordinates"
 
@@ -102,11 +102,11 @@ public class NBTUpdater {
                         String townSignEntry_old;
 
                         LogHelper.warn(
-                                "ATTENTION! The old data file " + old_filenames[i]
-                                        + ".nat will no longer be used. "
-                                        + "Its data has been moved into the new file villagenames3_"
-                                        + new_titleTags[i]
-                                        + ".dat");
+                            "ATTENTION! The old data file " + old_filenames[i]
+                                + ".nat will no longer be used. "
+                                + "Its data has been moved into the new file villagenames3_"
+                                + new_titleTags[i]
+                                + ".dat");
 
                         while (itr.hasNext()) { // Going through the list of VN villages
                             Object element = itr.next();
@@ -114,7 +114,8 @@ public class NBTUpdater {
 
                             // The only index that has data is 0:
                             NBTTagCompound tagList_old = tagCompound_old
-                                    .getTagList(townSignEntry_old, tagCompound_old.getId()).getCompoundTagAt(0);
+                                .getTagList(townSignEntry_old, tagCompound_old.getId())
+                                .getCompoundTagAt(0);
 
                             // Make the data bundle to save to NBT
                             NBTTagList nbttaglist_new = new NBTTagList();
@@ -142,9 +143,10 @@ public class NBTUpdater {
                             String signY = tagList_old.getString("signY");
                             String signZ = tagList_old.getString("signZ");
 
-                            data_new.getData().setTag(
+                            data_new.getData()
+                                .setTag(
                                     (namePrefix + " " + nameRoot + " " + nameSuffix)
-                                            .trim() + ", x" + signX + " y" + signY + " z" + signZ,
+                                        .trim() + ", x" + signX + " y" + signY + " z" + signZ,
                                     nbttaglist_new);
                         }
                         data_new.markDirty();
@@ -156,14 +158,14 @@ public class NBTUpdater {
                         // has temporarily reverted to a previous version of VN and has discovered new structures,
                         // or else I have done something wrong. Either way, notify the player.
                         LogHelper.error(
-                                "ATTENTION! The new data file" + new_titleTags[i]
-                                        + ".dat has entries, but the old "
-                                        + old_filenames[i]
-                                        + ".dat"
-                                        + "has MORE entries.");
+                            "ATTENTION! The new data file" + new_titleTags[i]
+                                + ".dat has entries, but the old "
+                                + old_filenames[i]
+                                + ".dat"
+                                + "has MORE entries.");
                         LogHelper.error(
-                                "This could happen if you switched to an older version of " + Reference.MOD_NAME
-                                        + " after running a newer one. Either way, those newer generated names will be ignored.");
+                            "This could happen if you switched to an older version of " + Reference.MOD_NAME
+                                + " after running a newer one. Either way, those newer generated names will be ignored.");
                     }
                 }
             }
@@ -179,17 +181,18 @@ public class NBTUpdater {
 
                     try {
                         structureData = (MapGenStructureData) event.world.perWorldStorage
-                                .loadData(MapGenStructureData.class, "Temple");
+                            .loadData(MapGenStructureData.class, "Temple");
                         nbttagcompound = structureData.func_143041_a();
                     } catch (Exception e) {
                         try {
                             structureData = (MapGenStructureData) event.world.perWorldStorage
-                                    .loadData(MapGenStructureData.class, "OTGTemple");
+                                .loadData(MapGenStructureData.class, "OTGTemple");
                             nbttagcompound = structureData.func_143041_a();
                         } catch (Exception e1) {}
                     }
 
-                    Iterator itr = nbttagcompound.func_150296_c().iterator();
+                    Iterator itr = nbttagcompound.func_150296_c()
+                        .iterator();
 
                     while (itr.hasNext()) { // Go through list of already-generated Desert Pyramids
                         Object element = itr.next();
@@ -204,8 +207,9 @@ public class NBTUpdater {
 
                                 boolean hasHadWoolReplaced = nbttagcompound2.getBoolean("VNWoolReplaced");
 
-                                String templeType = nbttagcompound2.getTagList("Children", 10).getCompoundTagAt(0)
-                                        .getString("id");
+                                String templeType = nbttagcompound2.getTagList("Children", 10)
+                                    .getCompoundTagAt(0)
+                                    .getString("id");
 
                                 if (templeType.equals("TeDP") && !hasHadWoolReplaced) { // This Pyramid was generated
                                                                                         // before the 2.1 update, so
@@ -228,23 +232,23 @@ public class NBTUpdater {
                                             for (int j = -16; j < 16; j++) {
 
                                                 blocktoscan = event.world
-                                                        .getBlock((ChunkX << 4) + i, k, (ChunkZ << 4) + j);
+                                                    .getBlock((ChunkX << 4) + i, k, (ChunkZ << 4) + j);
 
                                                 if (blocktoscan == Blocks.wool) {
 
                                                     woolmeta = event.world
-                                                            .getBlockMetadata((ChunkX << 4) + i, k, (ChunkZ << 4) + j);
+                                                        .getBlockMetadata((ChunkX << 4) + i, k, (ChunkZ << 4) + j);
 
                                                     if (woolmeta == 1 || woolmeta == 11) { // This is blue wool at y=64
 
                                                         // Replace the wool block
                                                         event.world.setBlock(
-                                                                (ChunkX << 4) + i,
-                                                                k,
-                                                                (ChunkZ << 4) + j,
-                                                                Blocks.stained_hardened_clay,
-                                                                woolmeta,
-                                                                2);
+                                                            (ChunkX << 4) + i,
+                                                            k,
+                                                            (ChunkZ << 4) + j,
+                                                            Blocks.stained_hardened_clay,
+                                                            woolmeta,
+                                                            2);
 
                                                     }
                                                 }
@@ -253,9 +257,9 @@ public class NBTUpdater {
                                     }
 
                                     if (GeneralConfig.debugMessages) LogHelper.info(
-                                            "Replacing desert pyramid wool at " + (int) pyramidXCenter
-                                                    + " "
-                                                    + (int) pyramidZCenter);
+                                        "Replacing desert pyramid wool at " + (int) pyramidXCenter
+                                            + " "
+                                            + (int) pyramidZCenter);
 
                                     // Set a new temple tag to indicate that the wool has been replaced
 

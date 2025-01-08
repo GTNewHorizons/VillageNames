@@ -37,7 +37,7 @@ public class ModelVillagerModern extends ModelVillager {
         // Main headwear portion
         this.villagerHeadwear = new ModelRenderer(this).setTextureSize(textureFileWidth, textureFileHeight);
         this.villagerHeadwear.setTextureOffset(32, 0)
-                .addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset);
+            .addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, headScale + headscaleOffset);
         this.villagerHeadwear.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
         // Higher Rim -- used for Farmer and Fisherman
@@ -55,17 +55,17 @@ public class ModelVillagerModern extends ModelVillager {
         // 0.0F));
         // My version, which implements a singly-textured plane:
         this.villagerHatRimHigh.cubeList.add(
-                new ModelPlane(
-                        this.villagerHatRimHigh,
-                        rimHighTextureOffsetX,
-                        rimHighTextureOffsetY,
-                        -8F,
-                        -6F,
-                        -8F,
-                        16,
-                        0,
-                        16,
-                        0.0F));
+            new ModelPlane(
+                this.villagerHatRimHigh,
+                rimHighTextureOffsetX,
+                rimHighTextureOffsetY,
+                -8F,
+                -6F,
+                -8F,
+                16,
+                0,
+                16,
+                0.0F));
         this.villagerHatRimHigh.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
         // Lower Rim -- used for Shepherd
@@ -74,17 +74,17 @@ public class ModelVillagerModern extends ModelVillager {
         int rimLowTextureOffsetY = 48;
         this.villagerHatRimLow.setTextureOffset(rimLowTextureOffsetX, rimLowTextureOffsetY);
         this.villagerHatRimLow.cubeList.add(
-                new ModelPlane(
-                        this.villagerHatRimLow,
-                        rimLowTextureOffsetX,
-                        rimLowTextureOffsetY,
-                        -8F,
-                        -5F,
-                        -8F,
-                        16,
-                        0,
-                        16,
-                        0.0F));
+            new ModelPlane(
+                this.villagerHatRimLow,
+                rimLowTextureOffsetX,
+                rimLowTextureOffsetY,
+                -8F,
+                -5F,
+                -8F,
+                16,
+                0,
+                16,
+                0.0F));
         this.villagerHatRimLow.setRotationPoint(0.0F, 0.0F + noseY, 0.0F);
 
     }
@@ -112,12 +112,12 @@ public class ModelVillagerModern extends ModelVillager {
         int prof = villager.getProfession();
 
         if (prof > 5 // This is a non-vanilla villager profession
-                & !villager.isChild() // and is not a child
-                & !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
-                & // and...
-                (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
-                        | !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
-                )) {
+            & !villager.isChild() // and is not a child
+            & !GeneralConfig.moddedVillagerHeadwearWhitelist.contains(prof) // and is not whitelisted
+            & // and...
+            (GeneralConfig.moddedVillagerHeadwearBlacklist.contains(prof) // is blacklisted,
+                | !GeneralConfig.moddedVillagerHeadwear // OR headwear is disabled
+            )) {
             return;
         }
 

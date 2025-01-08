@@ -55,7 +55,7 @@ public class Vec3i implements Comparable<Vec3i> {
     public int compareTo(Vec3i p_compareTo_1_) {
         if (this.getY() == p_compareTo_1_.getY()) {
             return this.getZ() == p_compareTo_1_.getZ() ? this.getX() - p_compareTo_1_.getX()
-                    : this.getZ() - p_compareTo_1_.getZ();
+                : this.getZ() - p_compareTo_1_.getZ();
         } else {
             return this.getY() - p_compareTo_1_.getY();
         }
@@ -87,9 +87,9 @@ public class Vec3i implements Comparable<Vec3i> {
      */
     public Vec3i crossProduct(Vec3i vec) {
         return new Vec3i(
-                this.getY() * vec.getZ() - this.getZ() * vec.getY(),
-                this.getZ() * vec.getX() - this.getX() * vec.getZ(),
-                this.getX() * vec.getY() - this.getY() * vec.getX());
+            this.getY() * vec.getZ() - this.getZ() * vec.getY(),
+            this.getZ() * vec.getX() - this.getX() * vec.getZ(),
+            this.getX() * vec.getY() - this.getY() * vec.getX());
     }
 
     public double getDistance(int xIn, int yIn, int zIn) {
@@ -128,7 +128,10 @@ public class Vec3i implements Comparable<Vec3i> {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("x", this.getX()).add("y", this.getY()).add("z", this.getZ())
-                .toString();
+        return Objects.toStringHelper(this)
+            .add("x", this.getX())
+            .add("y", this.getY())
+            .add("z", this.getZ())
+            .toString();
     }
 }

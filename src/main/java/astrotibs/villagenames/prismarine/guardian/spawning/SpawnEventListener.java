@@ -36,12 +36,12 @@ public class SpawnEventListener {
      */
     // Here I called the monster max number explicitly (70)
     public static final EnumCreatureType waterMonster = EnumHelper.addCreatureType(
-            "waterMonster",
-            IMob.class,
-            EnumCreatureType.monster.getMaxNumberOfCreature(),
-            Material.water,
-            false,
-            false);
+        "waterMonster",
+        IMob.class,
+        EnumCreatureType.monster.getMaxNumberOfCreature(),
+        Material.water,
+        false,
+        false);
 
     /**
      * This method actively cancels creature types "monster" and "waterMonster" from spawning if their collective sum is
@@ -62,19 +62,19 @@ public class SpawnEventListener {
 
         // Here I count the number of eligible spawning chunks
         if ((event.type == EnumCreatureType.monster || event.type == waterMonster)
-                // && (countMonsterType + countWaterMonsterType) > EnumCreatureType.monster.getMaxNumberOfCreature() *
-                // 289 / 256 // 289 is 17 (chunks) squared, centered on player
-                && this.capMonsterSpawns(event.world, countMonsterType, countWaterMonsterType, true, true)) { // Cap the
-                                                                                                              // number
-                                                                                                              // of
-                                                                                                              // spawns
-                                                                                                              // per
-                                                                                                              // chunk
-                                                                                                              // for
-                                                                                                              // monster
-                                                                                                              // and
-                                                                                                              // waterMonster,
-                                                                                                              // collectively
+            // && (countMonsterType + countWaterMonsterType) > EnumCreatureType.monster.getMaxNumberOfCreature() *
+            // 289 / 256 // 289 is 17 (chunks) squared, centered on player
+            && this.capMonsterSpawns(event.world, countMonsterType, countWaterMonsterType, true, true)) { // Cap the
+                                                                                                          // number
+                                                                                                          // of
+                                                                                                          // spawns
+                                                                                                          // per
+                                                                                                          // chunk
+                                                                                                          // for
+                                                                                                          // monster
+                                                                                                          // and
+                                                                                                          // waterMonster,
+                                                                                                          // collectively
             return;
         }
         // LogHelper.info("Monsters: " + countMonsterType + ", Water Monsters: " + countWaterMonsterType + "; Total: " +
@@ -82,10 +82,12 @@ public class SpawnEventListener {
 
         if ( // If the attempted spawn is a waterMonster, check if the spawn is in water and inside the BB of a
              // Monument.
-        event.world.getWorldInfo().getVanillaDimension() == 0 && event.world.getWorldInfo().isMapFeaturesEnabled()
-                && event.type == waterMonster
-                && GeneralConfig.addOceanMonuments
-                && isIntersectingWithAnyMonument(event)) {
+        event.world.getWorldInfo()
+            .getVanillaDimension() == 0 && event.world.getWorldInfo()
+                .isMapFeaturesEnabled()
+            && event.type == waterMonster
+            && GeneralConfig.addOceanMonuments
+            && isIntersectingWithAnyMonument(event)) {
             this.getPossibleMonumentCreatures(event); // Populate the waterMonster spawn list with the Monument spawn
                                                       // list (a group of 2-4 Guardians)
         }
@@ -107,10 +109,11 @@ public class SpawnEventListener {
             MapGenStructureData structureData;
             try {
                 structureData = (MapGenStructureData) event.world.perWorldStorage
-                        .loadData(MapGenStructureData.class, "Monument");
+                    .loadData(MapGenStructureData.class, "Monument");
                 NBTTagCompound nbttagcompound = structureData.func_143041_a();
 
-                Iterator itr = nbttagcompound.func_150296_c().iterator();
+                Iterator itr = nbttagcompound.func_150296_c()
+                    .iterator();
 
                 while (itr.hasNext()) { // Go through list of already-generated Monuments
                     Object element = itr.next();
@@ -134,8 +137,9 @@ public class SpawnEventListener {
                             if (!hasHadElders) { // This Monument was generated before the 2.1 update, so here's our
                                                  // chance to shove some Elders into it
 
-                                int coordBaseMode = nbttagcompound2.getTagList("Children", 10).getCompoundTagAt(0)
-                                        .getInteger("O");
+                                int coordBaseMode = nbttagcompound2.getTagList("Children", 10)
+                                    .getCompoundTagAt(0)
+                                    .getInteger("O");
 
                                 int chunkXPos = nbttagcompound2.getInteger("ChunkX");
                                 int chunkZPos = nbttagcompound2.getInteger("ChunkZ");
@@ -155,24 +159,24 @@ public class SpawnEventListener {
 
                                 // Spawn an Elder in the Left wing. Accurate to within 3x3x3 block
                                 this.spawnElder(
-                                        event.world,
-                                        boundingBox,
-                                        monumentXCenter + ((coordBaseMode % 2 == 0 ? 16.5D : 13.5D)
-                                                * (coordBaseMode > 1 ? -1.0D : 1.0D)),
-                                        seedOffset == 0 ? 45.0D : 41.0D, // Supposed to be 42 OR 45. Floored to 41
-                                                                         // because he hits his head lmao
-                                        monumentZCenter + ((coordBaseMode % 2 == 0 ? 13.5D : 16.5D)
-                                                * (Math.abs((2 * coordBaseMode) - 3) > 2 ? -1.0D : 1.0D)));
+                                    event.world,
+                                    boundingBox,
+                                    monumentXCenter + ((coordBaseMode % 2 == 0 ? 16.5D : 13.5D)
+                                        * (coordBaseMode > 1 ? -1.0D : 1.0D)),
+                                    seedOffset == 0 ? 45.0D : 41.0D, // Supposed to be 42 OR 45. Floored to 41
+                                                                     // because he hits his head lmao
+                                    monumentZCenter + ((coordBaseMode % 2 == 0 ? 13.5D : 16.5D)
+                                        * (Math.abs((2 * coordBaseMode) - 3) > 2 ? -1.0D : 1.0D)));
 
                                 // Spawn an Elder in the Right wing. Accurate to within 3x3x3 block
                                 this.spawnElder(
-                                        event.world,
-                                        boundingBox,
-                                        monumentXCenter + ((coordBaseMode % 2 == 0 ? 16.5D : 13.5D)
-                                                * (Math.abs((2 * coordBaseMode) - 3) > 2 ? -1.0D : 1.0D)),
-                                        seedOffset == 0 ? 41.0D : 45.0D, // Supposed to be 42 OR 45
-                                        monumentZCenter + ((coordBaseMode % 2 == 0 ? 13.5D : 16.5D)
-                                                * (coordBaseMode < 2 ? -1.0D : 1.0D)));
+                                    event.world,
+                                    boundingBox,
+                                    monumentXCenter + ((coordBaseMode % 2 == 0 ? 16.5D : 13.5D)
+                                        * (Math.abs((2 * coordBaseMode) - 3) > 2 ? -1.0D : 1.0D)),
+                                    seedOffset == 0 ? 41.0D : 45.0D, // Supposed to be 42 OR 45
+                                    monumentZCenter + ((coordBaseMode % 2 == 0 ? 13.5D : 16.5D)
+                                        * (coordBaseMode < 2 ? -1.0D : 1.0D)));
 
                                 // Set the tag to "true" so that we won't generate elders again
                                 nbttagcompound2.setBoolean(Reference.ELDER_GEN_VN4, true);
@@ -209,7 +213,8 @@ public class SpawnEventListener {
             int j = MathHelper.floor_double(elderGuardian.posZ / 16.0D);
             boolean flag = elderGuardian.forceSpawn;
 
-            worldIn.getChunkFromChunkCoords(i, j).addEntity(elderGuardian);
+            worldIn.getChunkFromChunkCoords(i, j)
+                .addEntity(elderGuardian);
             worldIn.loadedEntityList.add(elderGuardian);
             worldIn.onEntityAdded(elderGuardian);
 
@@ -232,10 +237,11 @@ public class SpawnEventListener {
         if (event.world.provider.dimensionId == 0) { // Player is in the Overworld
             try {
                 structureData = (MapGenStructureData) event.world.perWorldStorage
-                        .loadData(MapGenStructureData.class, "Monument");
+                    .loadData(MapGenStructureData.class, "Monument");
                 NBTTagCompound nbttagcompound = structureData.func_143041_a();
 
-                Iterator itr = nbttagcompound.func_150296_c().iterator();
+                Iterator itr = nbttagcompound.func_150296_c()
+                    .iterator();
                 // LogHelper.info("Monument list size: " + nbttagcompound.func_150296_c().size());
                 while (itr.hasNext()) {
                     Object element = itr.next();
@@ -247,10 +253,10 @@ public class SpawnEventListener {
 
                             // Now check to see if the spawn entity is inside the monument
                             if (event.x >= boundingBox[0] && event.y >= boundingBox[1]
-                                    && event.z >= boundingBox[2]
-                                    && event.x <= boundingBox[3]
-                                    && event.y <= boundingBox[4]
-                                    && event.z <= boundingBox[5]) {
+                                && event.z >= boundingBox[2]
+                                && event.x <= boundingBox[3]
+                                && event.y <= boundingBox[4]
+                                && event.z <= boundingBox[5]) {
                                 // Spawn event is inside bounding box.
                                 return true;
                             }
@@ -289,7 +295,7 @@ public class SpawnEventListener {
      * chunks.
      */
     public boolean capMonsterSpawns(World worldIn, int typeMonsterCount, int typeWaterMonsterCount,
-            boolean spawnHostileMobs, boolean spawnPeacefulMobs) {
+        boolean spawnHostileMobs, boolean spawnPeacefulMobs) {
         if (!spawnHostileMobs && !spawnPeacefulMobs) {
             return true; // Neither hostile nor peaceful mobs are allowed
         } else {
@@ -312,11 +318,11 @@ public class SpawnEventListener {
                                                                                            // in the Z direction
                     {
                         boolean isOnSearchBoundary = searchCX == -chunkRadius || searchCX == chunkRadius
-                                || searchCZ == -chunkRadius
-                                || searchCZ == chunkRadius;
+                            || searchCZ == -chunkRadius
+                            || searchCZ == chunkRadius;
                         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(
-                                searchCX + playerChunkX,
-                                searchCZ + playerChunkZ);
+                            searchCX + playerChunkX,
+                            searchCZ + playerChunkZ);
 
                         if (!isOnSearchBoundary) {
                             this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.valueOf(false));
@@ -328,7 +334,7 @@ public class SpawnEventListener {
             }
 
             if (spawnHostileMobs && (typeMonsterCount + typeWaterMonsterCount)
-                    > EnumCreatureType.monster.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256) {
+                > EnumCreatureType.monster.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256) {
                 return true; // "Monster" type cap is reached
             } else return false; // Monster cap is not yet reached
         }

@@ -31,24 +31,27 @@ public class ItemVillageBook extends ItemEditableBook {
     @Override
     public String getUnlocalizedName() {
         return String.format(
-                "item.%s%s",
-                Reference.MOD_ID.toLowerCase() + ":",
-                getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+            "item.%s%s",
+            Reference.MOD_ID.toLowerCase() + ":",
+            getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
         return String.format(
-                "item.%s%s",
-                Reference.MOD_ID.toLowerCase() + ":",
-                getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+            "item.%s%s",
+            Reference.MOD_ID.toLowerCase() + ":",
+            getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister
-                .registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        itemIcon = iconRegister.registerIcon(
+            this.getUnlocalizedName()
+                .substring(
+                    this.getUnlocalizedName()
+                        .indexOf(".") + 1));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
@@ -72,7 +75,8 @@ public class ItemVillageBook extends ItemEditableBook {
     @SideOnly(Side.CLIENT)
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         if (par3EntityPlayer.worldObj.isRemote) {
-            Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBook(par3EntityPlayer, par1ItemStack, false));
+            Minecraft.getMinecraft()
+                .displayGuiScreen(new GuiScreenBook(par3EntityPlayer, par1ItemStack, false));
         }
         return par1ItemStack;
     }

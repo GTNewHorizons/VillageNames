@@ -19,7 +19,7 @@ public class MessageModernVillagerSkin implements IMessage {
     public MessageModernVillagerSkin() {}
 
     public MessageModernVillagerSkin(int entityID, int profession, int career, int biomeType, int professionLevel,
-            int skinTone) {
+        int skinTone) {
         this.entityID = entityID;
         this.profession = profession;
         this.career = career;

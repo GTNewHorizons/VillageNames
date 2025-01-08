@@ -17,18 +17,20 @@ public class DevVersionWarning {
     public void onPlayerTickEvent(PlayerTickEvent event) {
         if (event.player.worldObj.isRemote) {
             event.player.addChatComponentMessage(
-                    new ChatComponentText(
-                            "You're using a " + EnumChatFormatting.RED
-                                    + "development version"
-                                    + EnumChatFormatting.RESET
-                                    + " of "
-                                    + Reference.MOD_NAME
-                                    + "."));
+                new ChatComponentText(
+                    "You're using a " + EnumChatFormatting.RED
+                        + "development version"
+                        + EnumChatFormatting.RESET
+                        + " of "
+                        + Reference.MOD_NAME
+                        + "."));
 
             event.player.addChatComponentMessage(
-                    new ChatComponentText(EnumChatFormatting.RED + "This version is not meant for public use."));
+                new ChatComponentText(EnumChatFormatting.RED + "This version is not meant for public use."));
 
-            FMLCommonHandler.instance().bus().unregister(instance);
+            FMLCommonHandler.instance()
+                .bus()
+                .unregister(instance);
         }
     }
 }

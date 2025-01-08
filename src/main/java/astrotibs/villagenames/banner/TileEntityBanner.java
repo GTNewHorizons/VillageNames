@@ -39,11 +39,13 @@ public class TileEntityBanner extends TileEntity {
     public void setItemValues(ItemStack stack) {
         patterns = null;
 
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("BlockEntityTag", 10)) {
-            NBTTagCompound nbttagcompound = stack.getTagCompound().getCompoundTag("BlockEntityTag");
+        if (stack.hasTagCompound() && stack.getTagCompound()
+            .hasKey("BlockEntityTag", 10)) {
+            NBTTagCompound nbttagcompound = stack.getTagCompound()
+                .getCompoundTag("BlockEntityTag");
 
-            if (nbttagcompound.hasKey("Patterns"))
-                patterns = (NBTTagList) nbttagcompound.getTagList("Patterns", 10).copy();
+            if (nbttagcompound.hasKey("Patterns")) patterns = (NBTTagList) nbttagcompound.getTagList("Patterns", 10)
+                .copy();
 
             if (nbttagcompound.hasKey("Base", 99)) baseColor = nbttagcompound.getInteger("Base");
             else baseColor = stack.getItemDamage() & 15;
@@ -95,14 +97,13 @@ public class TileEntityBanner extends TileEntity {
     public static int getBaseColor(ItemStack stack) {
         NBTTagCompound nbttagcompound = getSubTag(stack, "BlockEntityTag", false);
         return nbttagcompound != null && nbttagcompound.hasKey("Base") ? nbttagcompound.getInteger("Base")
-                : stack.getItemDamage();
+            : stack.getItemDamage();
     }
 
     public static int getPatterns(ItemStack stack) {
         NBTTagCompound nbttagcompound = getSubTag(stack, "BlockEntityTag", false);
-        return nbttagcompound != null && nbttagcompound.hasKey("Patterns")
-                ? nbttagcompound.getTagList("Patterns", 10).tagCount()
-                : 0;
+        return nbttagcompound != null && nbttagcompound.hasKey("Patterns") ? nbttagcompound.getTagList("Patterns", 10)
+            .tagCount() : 0;
     }
 
     // Copied from ItemBanner
@@ -144,9 +145,11 @@ public class TileEntityBanner extends TileEntity {
                 nbttaglist.removeTag(nbttaglist.tagCount() - 1);
 
                 if (nbttaglist.tagCount() == 0) {
-                    stack.getTagCompound().removeTag("BlockEntityTag");
+                    stack.getTagCompound()
+                        .removeTag("BlockEntityTag");
 
-                    if (stack.getTagCompound().hasNoTags()) stack.setTagCompound((NBTTagCompound) null);
+                    if (stack.getTagCompound()
+                        .hasNoTags()) stack.setTagCompound((NBTTagCompound) null);
                 }
             }
         }

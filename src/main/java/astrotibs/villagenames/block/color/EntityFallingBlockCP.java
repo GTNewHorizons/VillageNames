@@ -118,7 +118,8 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
                     for (int jOff = 0; jOff <= Math.max(0, motionY < -1.0 ? 1 : 0); jOff++) { // If it's moving downward
                                                                                               // faster than a threshold
                                                                                               // speed: 1 in this case
-                        if (this.worldObj.getBlock(i, j - jOff, k).getMaterial() == Material.water) {
+                        if (this.worldObj.getBlock(i, j - jOff, k)
+                            .getMaterial() == Material.water) {
                             this.setDead();
                             this.worldObj.setBlock(i, j - jOff, k, concreteOut, field_145814_a, 2);
                             break;
@@ -146,20 +147,20 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
                         this.setDead();
 
                         if (!this.field_145808_f
-                                && this.worldObj.canPlaceEntityOnSide(
-                                        this.field_145811_e,
-                                        i,
-                                        j,
-                                        k,
-                                        true,
-                                        1,
-                                        (Entity) null,
-                                        (ItemStack) null)
-                                && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k)
-                                && this.worldObj.setBlock(i, j, k, this.field_145811_e, this.field_145814_a, 3)) {
+                            && this.worldObj.canPlaceEntityOnSide(
+                                this.field_145811_e,
+                                i,
+                                j,
+                                k,
+                                true,
+                                1,
+                                (Entity) null,
+                                (ItemStack) null)
+                            && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k)
+                            && this.worldObj.setBlock(i, j, k, this.field_145811_e, this.field_145814_a, 3)) {
                             if (this.field_145811_e instanceof BlockFalling) {
                                 ((BlockFalling) this.field_145811_e)
-                                        .func_149828_a(this.worldObj, i, j, k, this.field_145814_a);
+                                    .func_149828_a(this.worldObj, i, j, k, this.field_145814_a);
                             }
 
                             if (this.field_145810_d != null && this.field_145811_e instanceof ITileEntityProvider) {
@@ -168,7 +169,8 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
                                 if (tileentity != null) {
                                     NBTTagCompound nbttagcompound = new NBTTagCompound();
                                     tileentity.writeToNBT(nbttagcompound);
-                                    Iterator iterator = this.field_145810_d.func_150296_c().iterator();
+                                    Iterator iterator = this.field_145810_d.func_150296_c()
+                                        .iterator();
 
                                     while (iterator.hasNext()) {
                                         String s = (String) iterator.next();
@@ -185,26 +187,26 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
                             }
                         } else if (this.field_145813_c && !this.field_145808_f) {
                             this.entityDropItem(
-                                    new ItemStack(
-                                            this.field_145811_e,
-                                            1,
-                                            this.field_145811_e.damageDropped(this.field_145814_a)),
-                                    0.0F);
+                                new ItemStack(
+                                    this.field_145811_e,
+                                    1,
+                                    this.field_145811_e.damageDropped(this.field_145814_a)),
+                                0.0F);
                         }
                     }
                 } else if (this.field_145812_b > 100 && !this.worldObj.isRemote && (j < 1 || j > 256)
-                        || this.field_145812_b > 600) {
-                            if (this.field_145813_c) {
-                                this.entityDropItem(
-                                        new ItemStack(
-                                                this.field_145811_e,
-                                                1,
-                                                this.field_145811_e.damageDropped(this.field_145814_a)),
-                                        0.0F);
-                            }
-
-                            this.setDead();
+                    || this.field_145812_b > 600) {
+                        if (this.field_145813_c) {
+                            this.entityDropItem(
+                                new ItemStack(
+                                    this.field_145811_e,
+                                    1,
+                                    this.field_145811_e.damageDropped(this.field_145814_a)),
+                                0.0F);
                         }
+
+                        this.setDead();
+                    }
             }
         }
     }
@@ -219,7 +221,7 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
 
             if (i > 0) {
                 ArrayList arraylist = new ArrayList(
-                        this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox));
+                    this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox));
                 boolean flag = this.field_145811_e == Blocks.anvil;
                 DamageSource damagesource = flag ? DamageSource.anvil : DamageSource.fallingBlock;
                 Iterator iterator = arraylist.iterator();
@@ -227,8 +229,8 @@ public class EntityFallingBlockCP extends EntityFallingBlock {
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();
                     entity.attackEntityFrom(
-                            damagesource,
-                            Math.min(MathHelper.floor_float(i * this.field_145816_i), this.field_145815_h));
+                        damagesource,
+                        Math.min(MathHelper.floor_float(i * this.field_145816_i), this.field_145815_h));
                 }
 
                 if (flag && this.rand.nextFloat() < 0.05000000074505806D + i * 0.05D) {

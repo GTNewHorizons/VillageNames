@@ -21,7 +21,7 @@ import astrotibs.villagenames.config.GeneralConfig;
 public class VNMapGenIgloo extends MapGenStructure {
 
     private static List biomelist = Arrays
-            .asList(new BiomeGenBase[] { BiomeGenBase.icePlains, BiomeGenBase.coldTaiga });
+        .asList(new BiomeGenBase[] { BiomeGenBase.icePlains, BiomeGenBase.coldTaiga });
     /** contains possible spawns for scattered features */
     private List scatteredFeatureSpawnList;
     /** the maximum distance between scattered features */
@@ -37,16 +37,17 @@ public class VNMapGenIgloo extends MapGenStructure {
 
     public VNMapGenIgloo(Map p_i2061_1_) {
         this();
-        Iterator iterator = p_i2061_1_.entrySet().iterator();
+        Iterator iterator = p_i2061_1_.entrySet()
+            .iterator();
 
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
             if (((String) entry.getKey()).equals("distance")) {
                 this.maxDistanceBetweenScatteredFeatures = MathHelper.parseIntWithDefaultAndMax(
-                        (String) entry.getValue(),
-                        this.maxDistanceBetweenScatteredFeatures,
-                        this.minDistanceBetweenScatteredFeatures + 1);
+                    (String) entry.getValue(),
+                    this.maxDistanceBetweenScatteredFeatures,
+                    this.minDistanceBetweenScatteredFeatures + 1);
             }
         }
     }
@@ -87,10 +88,11 @@ public class VNMapGenIgloo extends MapGenStructure {
                                                                                                         // this.minDistanceBetweenScatteredFeatures);
 
         if (k == i1 && l == j1) {
-            BiomeGenBase biomegenbase = worldIn.getWorldChunkManager().getBiomeGenAt(k * 16 + 8, l * 16 + 8);// this.worldObj.getWorldChunkManager().getBiomeGenAt(k
-                                                                                                             // * 16 +
-                                                                                                             // 8, l *
-                                                                                                             // 16 + 8);
+            BiomeGenBase biomegenbase = worldIn.getWorldChunkManager()
+                .getBiomeGenAt(k * 16 + 8, l * 16 + 8);// this.worldObj.getWorldChunkManager().getBiomeGenAt(k
+                                                       // * 16 +
+                                                       // 8, l *
+                                                       // 16 + 8);
             Iterator iterator = biomelist.iterator();
 
             while (iterator.hasNext()) {
@@ -114,8 +116,10 @@ public class VNMapGenIgloo extends MapGenStructure {
         StructureStart structurestart = this.func_143028_c(p_143030_1_, p_143030_2_, p_143030_3_);
 
         if (structurestart != null && structurestart instanceof VNMapGenIgloo.Start
-                && !structurestart.getComponents().isEmpty()) {
-            StructureComponent structurecomponent = (StructureComponent) structurestart.getComponents().getFirst();
+            && !structurestart.getComponents()
+                .isEmpty()) {
+            StructureComponent structurecomponent = (StructureComponent) structurestart.getComponents()
+                .getFirst();
             return false;
         } else {
             return false;
@@ -165,7 +169,7 @@ public class VNMapGenIgloo extends MapGenStructure {
             }
 
             if ((biomegenbase == BiomeGenBase.icePlains || biomegenbase == BiomeGenBase.coldTaiga)
-                    || (GeneralConfig.biomedictIgloos && isSnowy)) {
+                || (GeneralConfig.biomedictIgloos && isSnowy)) {
                 VNComponentIglooPieces.Igloo igloo = new VNComponentIglooPieces.Igloo(rand, chunkX * 16, chunkZ * 16);
                 this.components.add(igloo);
             }
