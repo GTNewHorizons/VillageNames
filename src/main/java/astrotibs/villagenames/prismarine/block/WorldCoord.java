@@ -29,7 +29,10 @@ public class WorldCoord implements Comparable<WorldCoord> {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(x).append(y).append(z).hashCode();
+        return new HashCodeBuilder().append(x)
+            .append(y)
+            .append(z)
+            .hashCode();
     }
 
     @Override

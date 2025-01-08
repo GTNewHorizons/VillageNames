@@ -44,7 +44,8 @@ public enum EnumColour {
 
     public String getMojangName() {
         if (this == LIGHT_GREY) return "silver";
-        return name.substring(0, 1).toLowerCase() + name.substring(1);
+        return name.substring(0, 1)
+            .toLowerCase() + name.substring(1);
     }
 
     public String getOreName() {
@@ -58,9 +59,9 @@ public enum EnumColour {
     public Color getColour() {
         int i = getDamage();
         return new Color(
-                EntitySheep.fleeceColorTable[i][0],
-                EntitySheep.fleeceColorTable[i][1],
-                EntitySheep.fleeceColorTable[i][2]);
+            EntitySheep.fleeceColorTable[i][0],
+            EntitySheep.fleeceColorTable[i][1],
+            EntitySheep.fleeceColorTable[i][2]);
     }
 
     public int getDamage() {
@@ -72,11 +73,13 @@ public enum EnumColour {
     }
 
     public int getDarker() {
-        return getColour().darker().getRGB();
+        return getColour().darker()
+            .getRGB();
     }
 
     public int getBrighter() {
-        return getColour().brighter().getRGB();
+        return getColour().brighter()
+            .getRGB();
     }
 
     public String getTranslatedName() {

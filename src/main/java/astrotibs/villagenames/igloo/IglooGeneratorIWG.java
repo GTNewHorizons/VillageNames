@@ -17,11 +17,12 @@ public class IglooGeneratorIWG implements IWorldGenerator {
 
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
-            IChunkProvider chunkProvider) {
+        IChunkProvider chunkProvider) {
 
         Block[] ablock = new Block[65536];
 
-        if ((world.provider.dimensionId == 0) && (world.getWorldInfo().isMapFeaturesEnabled())) {
+        if ((world.provider.dimensionId == 0) && (world.getWorldInfo()
+            .isMapFeaturesEnabled())) {
             // THIS BLOCK RUNS REGARDLESS OF WHETHER GENERATION TYPE IS VANILLA, ALTERNATE, REALISTIC
             // iglooGenerator = (VNMapGenIgloo) TerrainGen.getModdedMapGen(new VNMapGenIgloo(),
             // EventType.SCATTERED_FEATURE);
@@ -44,10 +45,10 @@ public class IglooGeneratorIWG implements IWorldGenerator {
 
                         try {
                             boolean generateInChunk = this.iglooGenerator
-                                    .generateStructuresInChunk(world, rand, chunkX + OM_x, chunkZ + OM_z); // THIS
-                                                                                                           // needed for
-                                                                                                           // chunk
-                                                                                                           // generation
+                                .generateStructuresInChunk(world, rand, chunkX + OM_x, chunkZ + OM_z); // THIS
+                                                                                                       // needed for
+                                                                                                       // chunk
+                                                                                                       // generation
                         } catch (Exception e) {}
 
                     }

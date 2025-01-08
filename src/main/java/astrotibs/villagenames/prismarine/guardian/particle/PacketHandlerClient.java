@@ -55,7 +55,7 @@ public class PacketHandlerClient implements IMessageHandler<SToCMessage, IMessag
 
     @SideOnly(Side.CLIENT)
     private static void drawParticle(World worldObj, double srcX, double srcY, double srcZ, String particleName,
-            int age, EntityClientPlayerMP target) {
+        int age, EntityClientPlayerMP target) {
         EntityFX particle = null;
         if (particleName.equals("mobappearance")) {
             // RENDERS THE CURSE ANIMATION

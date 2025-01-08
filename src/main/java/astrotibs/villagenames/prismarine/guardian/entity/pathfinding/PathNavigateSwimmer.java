@@ -77,14 +77,14 @@ public class PathNavigateSwimmer {
             BlockPos blockpos = new BlockPos(this.theEntity);
             int i = (int) (f + 8.0F);
             ChunkCache chunkcache = new ChunkCache(
-                    this.worldObj,
-                    blockpos.getX() - i,
-                    blockpos.getY() - i,
-                    blockpos.getZ() - i,
-                    blockpos.getX() + i,
-                    blockpos.getY() + i,
-                    blockpos.getZ() + i,
-                    0);
+                this.worldObj,
+                blockpos.getX() - i,
+                blockpos.getY() - i,
+                blockpos.getZ() - i,
+                blockpos.getX() + i,
+                blockpos.getY() + i,
+                blockpos.getZ() + i,
+                0);
             PathEntitySwimmer pathentity = this.pathFinder.createEntityPathTo(chunkcache, this.theEntity, pos, f);
             this.worldObj.theProfiler.endSection();
             return pathentity;
@@ -96,9 +96,9 @@ public class PathNavigateSwimmer {
      */
     public boolean tryMoveToXYZ(double x, double y, double z, double speedIn) {
         PathEntitySwimmer pathentity = this.getPathToXYZ(
-                (double) MathHelper1122.floor_double(x),
-                (double) ((int) y),
-                (double) MathHelper1122.floor_double(z));
+            (double) MathHelper1122.floor_double(x),
+            (double) ((int) y),
+            (double) MathHelper1122.floor_double(z));
         return this.setPath(pathentity, speedIn);
     }
 
@@ -121,14 +121,14 @@ public class PathNavigateSwimmer {
             BlockPos blockpos = (new BlockPos(this.theEntity)).up();
             int i = (int) (f + 16.0F);
             ChunkCache chunkcache = new ChunkCache(
-                    this.worldObj,
-                    blockpos.getX() - i,
-                    blockpos.getY() - i,
-                    blockpos.getZ() - i,
-                    blockpos.getX() + i,
-                    blockpos.getY() + i,
-                    blockpos.getZ() + i,
-                    0);
+                this.worldObj,
+                blockpos.getX() - i,
+                blockpos.getY() - i,
+                blockpos.getZ() - i,
+                blockpos.getX() + i,
+                blockpos.getY() + i,
+                blockpos.getZ() + i,
+                0);
             PathEntitySwimmer pathentity = this.pathFinder.createEntityPathTo(chunkcache, this.theEntity, entityIn, f);
             this.worldObj.theProfiler.endSection();
             return pathentity;
@@ -184,32 +184,31 @@ public class PathNavigateSwimmer {
             if (this.canNavigate()) {
                 this.pathFollow();
             } else if (this.currentPath != null
-                    && this.currentPath.getCurrentPathIndex() < this.currentPath.getCurrentPathLength()) {
-                        Vec3 vec3 = this.getEntityPosition();
-                        Vec3 vec31 = this.currentPath
-                                .getVectorFromIndex(this.theEntity, this.currentPath.getCurrentPathIndex());
+                && this.currentPath.getCurrentPathIndex() < this.currentPath.getCurrentPathLength()) {
+                    Vec3 vec3 = this.getEntityPosition();
+                    Vec3 vec31 = this.currentPath
+                        .getVectorFromIndex(this.theEntity, this.currentPath.getCurrentPathIndex());
 
-                        if (vec3.yCoord > vec31.yCoord && !this.theEntity.onGround
-                                && MathHelper1122.floor_double(vec3.xCoord) == MathHelper1122.floor_double(vec31.xCoord)
-                                && MathHelper1122.floor_double(vec3.zCoord)
-                                        == MathHelper1122.floor_double(vec31.zCoord)) {
-                            this.currentPath.setCurrentPathIndex(this.currentPath.getCurrentPathIndex() + 1);
-                        }
+                    if (vec3.yCoord > vec31.yCoord && !this.theEntity.onGround
+                        && MathHelper1122.floor_double(vec3.xCoord) == MathHelper1122.floor_double(vec31.xCoord)
+                        && MathHelper1122.floor_double(vec3.zCoord) == MathHelper1122.floor_double(vec31.zCoord)) {
+                        this.currentPath.setCurrentPathIndex(this.currentPath.getCurrentPathIndex() + 1);
                     }
+                }
 
             if (!this.noPath()) {
                 Vec3 vec32 = this.currentPath.getPosition(this.theEntity);
 
                 if (vec32 != null) {
                     AxisAlignedBB axisalignedbb1 = (AxisAlignedBB.getBoundingBox(
-                            vec32.xCoord,
-                            vec32.yCoord,
-                            vec32.zCoord,
-                            vec32.xCoord,
-                            vec32.yCoord,
-                            vec32.zCoord)).expand(0.5D, 0.5D, 0.5D);
+                        vec32.xCoord,
+                        vec32.yCoord,
+                        vec32.zCoord,
+                        vec32.xCoord,
+                        vec32.yCoord,
+                        vec32.zCoord)).expand(0.5D, 0.5D, 0.5D);
                     List<AxisAlignedBB> list = this.worldObj
-                            .getCollidingBoundingBoxes(this.theEntity, axisalignedbb1.addCoord(0.0D, -1.0D, 0.0D));
+                        .getCollidingBoundingBoxes(this.theEntity, axisalignedbb1.addCoord(0.0D, -1.0D, 0.0D));
                     double d0 = -1.0D;
                     axisalignedbb1 = axisalignedbb1.offset(0.0D, 1.0D, 0.0D);
 
@@ -229,14 +228,13 @@ public class PathNavigateSwimmer {
         int i = 6;
 
         if (vec3.squareDistanceTo(
-                this.currentPath.getVectorFromIndex(this.theEntity, this.currentPath.getCurrentPathIndex()))
-                < (double) f) {
+            this.currentPath.getVectorFromIndex(this.theEntity, this.currentPath.getCurrentPathIndex())) < (double) f) {
             this.currentPath.incrementPathIndex();
         }
 
         for (int j = Math
-                .min(this.currentPath.getCurrentPathIndex() + i, this.currentPath.getCurrentPathLength() - 1); j
-                        > this.currentPath.getCurrentPathIndex(); --j) {
+            .min(this.currentPath.getCurrentPathIndex() + i, this.currentPath.getCurrentPathLength() - 1); j
+                > this.currentPath.getCurrentPathIndex(); --j) {
             Vec3 vec31 = this.currentPath.getVectorFromIndex(this.theEntity, j);
 
             if (vec31.squareDistanceTo(vec3) <= 36.0D && this.isDirectPathBetweenPoints(vec3, vec31, 0, 0, 0)) {
@@ -279,9 +277,9 @@ public class PathNavigateSwimmer {
 
     protected Vec3 getEntityPosition() {
         return Vec3.createVectorHelper(
-                this.theEntity.posX,
-                this.theEntity.posY + (double) this.theEntity.height * 0.5D,
-                this.theEntity.posZ);
+            this.theEntity.posX,
+            this.theEntity.posY + (double) this.theEntity.height * 0.5D,
+            this.theEntity.posZ);
     }
 
     /**
@@ -309,15 +307,15 @@ public class PathNavigateSwimmer {
      */
     protected boolean isDirectPathBetweenPoints(Vec3 posVec31, Vec3 posVec32, int sizeX, int sizeY, int sizeZ) {
         MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(
-                posVec31,
-                Vec3.createVectorHelper(
-                        posVec32.xCoord,
-                        posVec32.yCoord + (double) this.theEntity.height * 0.5D,
-                        posVec32.zCoord),
-                false,
-                true,
-                false);
+            posVec31,
+            Vec3.createVectorHelper(
+                posVec32.xCoord,
+                posVec32.yCoord + (double) this.theEntity.height * 0.5D,
+                posVec32.zCoord),
+            false,
+            true,
+            false);
         return movingobjectposition == null
-                || movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.MISS;
+            || movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.MISS;
     }
 }

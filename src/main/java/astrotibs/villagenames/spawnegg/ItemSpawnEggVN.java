@@ -68,9 +68,9 @@ public class ItemSpawnEggVN extends Item {
         if (displayName == null) {
             name += " " + attemptToTranslate("entity." + mobID + ".name", mobID);
         } else {
-            name += " " + (""
-                    + StatCollector.translateToLocal("eggdisplay." + Reference.MOD_ID + "." + displayName + ".name"))
-                            .trim();
+            name += " "
+                + ("" + StatCollector.translateToLocal("eggdisplay." + Reference.MOD_ID + "." + displayName + ".name"))
+                    .trim();
         }
 
         return name;
@@ -107,7 +107,7 @@ public class ItemSpawnEggVN extends Item {
      */
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int par7,
-            float par8, float par9, float par10) {
+        float par8, float par9, float par10) {
 
         if (world.isRemote) {
             return true;
@@ -123,11 +123,11 @@ public class ItemSpawnEggVN extends Item {
             }
 
             Entity entity = spawnCreature(
-                    world,
-                    itemStack,
-                    (double) x + Reference.SPAWN_BLOCK_OFFSET,
-                    (double) y + d0,
-                    (double) z + Reference.SPAWN_BLOCK_OFFSET);
+                world,
+                itemStack,
+                (double) x + Reference.SPAWN_BLOCK_OFFSET,
+                (double) y + d0,
+                (double) z + Reference.SPAWN_BLOCK_OFFSET);
 
             if (entity != null) {
                 if (entity instanceof EntityLiving && itemStack.hasDisplayName()) {
@@ -227,12 +227,8 @@ public class ItemSpawnEggVN extends Item {
 
         if (entity != null && entity instanceof EntityLiving) {
             EntityLiving entityliving = (EntityLiving) entity;
-            entity.setLocationAndAngles(
-                    x,
-                    y,
-                    z,
-                    MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F),
-                    0.0F);
+            entity
+                .setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
             entityliving.rotationYawHead = entityliving.rotationYaw;
             entityliving.renderYawOffset = entityliving.rotationYaw;
             entityliving.onSpawnWithEgg(null);
@@ -261,7 +257,10 @@ public class ItemSpawnEggVN extends Item {
 
         for (String name : (Set<String>) spawnData.func_150296_c()) // getKeySet() in 1.8
         {
-            newTag.setTag(name, spawnData.getTag(name).copy());
+            newTag.setTag(
+                name,
+                spawnData.getTag(name)
+                    .copy());
         }
 
         entity.readFromNBT(newTag);

@@ -190,12 +190,13 @@ public class ExtendedVillager implements IExtendedEntityProperties {
     public static int determineProfessionLevel(EntityVillager villager) {
         // Pull out the recipe list and use its size to determine the profession level of the villager
         MerchantRecipeList buyingList = ReflectionHelper
-                .getPrivateValue(EntityVillager.class, villager, new String[] { "buyingList", "field_70963_i" });
+            .getPrivateValue(EntityVillager.class, villager, new String[] { "buyingList", "field_70963_i" });
         int professionLevel = (buyingList == null ? 0 : Math.max(buyingList.size(), 0)); // Ensure the PL is not below 0
 
-        if (villager.getProfession() == 0 && ExtendedVillager.get(villager).getCareer() == 3 // Is a shepherd
-                && (professionLevel >= 16 && !GeneralConfig.modernVillagerTrades) // Has unlocked the colored wool
-                                                                                  // trades - modern trades condition
+        if (villager.getProfession() == 0 && ExtendedVillager.get(villager)
+            .getCareer() == 3 // Is a shepherd
+            && (professionLevel >= 16 && !GeneralConfig.modernVillagerTrades) // Has unlocked the colored wool
+                                                                              // trades - modern trades condition
         ) {
             professionLevel -= 15;
         } // Do this to offset the immense additions to the shepherd

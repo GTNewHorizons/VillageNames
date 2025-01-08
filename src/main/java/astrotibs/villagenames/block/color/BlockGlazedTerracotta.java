@@ -24,39 +24,39 @@ public class BlockGlazedTerracotta extends Block {
 
     // These are used to reference texture names
     public static String[] subBlock = { "white", // 0
-            "orange", // 1
-            "magenta", // 2
-            "light_blue", // 3
-            "yellow", // 4
-            "lime", // 5
-            "pink", // 6
-            "gray", // 7
-            "silver", // 8
-            "cyan", // 9
-            "purple", // 10
-            "blue", // 11
-            "brown", // 12
-            "green", // 13
-            "red", // 14
-            "black" // 15
+        "orange", // 1
+        "magenta", // 2
+        "light_blue", // 3
+        "yellow", // 4
+        "lime", // 5
+        "pink", // 6
+        "gray", // 7
+        "silver", // 8
+        "cyan", // 9
+        "purple", // 10
+        "blue", // 11
+        "brown", // 12
+        "green", // 13
+        "red", // 14
+        "black" // 15
     };
     // These are used to reference unlocalized names
     public static String[] subBlockUnloc = { "White", // 0
-            "Orange", // 1
-            "Magenta", // 2
-            "LightBlue", // 3
-            "Yellow", // 4
-            "Lime", // 5
-            "Pink", // 6
-            "Gray", // 7
-            "Silver", // 8
-            "Cyan", // 9
-            "Purple", // 10
-            "Blue", // 11
-            "Brown", // 12
-            "Green", // 13
-            "Red", // 14
-            "Black" // 15
+        "Orange", // 1
+        "Magenta", // 2
+        "LightBlue", // 3
+        "Yellow", // 4
+        "Lime", // 5
+        "Pink", // 6
+        "Gray", // 7
+        "Silver", // 8
+        "Cyan", // 9
+        "Purple", // 10
+        "Blue", // 11
+        "Brown", // 12
+        "Green", // 13
+        "Red", // 14
+        "Black" // 15
     };
     private IIcon[] blockIcons = new IIcon[32];
     private int metaSubStart; // This value iterates through the color strings because you can only register 4 (since
@@ -99,9 +99,9 @@ public class BlockGlazedTerracotta extends Block {
              * it would only replace some of the block faces.
              */
             this.blockIcons[subs] = iicon
-                    .registerIcon(Reference.MOD_ID + ":glazed_terracotta_" + subBlock[metaSubStart + subs]);
+                .registerIcon(Reference.MOD_ID + ":glazed_terracotta_" + subBlock[metaSubStart + subs]);
             this.blockIcons[subs + 16] = iicon
-                    .registerIcon(Reference.MOD_ID + ":glazed_terracotta_" + subBlock[metaSubStart + subs] + "_i");
+                .registerIcon(Reference.MOD_ID + ":glazed_terracotta_" + subBlock[metaSubStart + subs] + "_i");
         }
     }
 

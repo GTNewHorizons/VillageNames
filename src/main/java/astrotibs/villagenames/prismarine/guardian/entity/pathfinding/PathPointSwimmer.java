@@ -65,8 +65,8 @@ public class PathPointSwimmer {
         } else {
             PathPointSwimmer pathpoint = (PathPointSwimmer) p_equals_1_;
             return this.hash == pathpoint.hash && this.xCoord == pathpoint.xCoord
-                    && this.yCoord == pathpoint.yCoord
-                    && this.zCoord == pathpoint.zCoord;
+                && this.yCoord == pathpoint.yCoord
+                && this.zCoord == pathpoint.zCoord;
         }
     }
 

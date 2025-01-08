@@ -29,65 +29,84 @@ public class VillagerConfigHandler {
     }
 
     public static void loadConfiguration() {
-        villager_prefix = config.getStringWithoutDefaultsInComment(
+        villager_prefix = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_PREFIXES,
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 NamePiecesEntities.VILLAGER_PREFIX_DEFAULT,
-                Reference.DESCRIPTION_PREFIXES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_PREFIXES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        villager_root_initial = config.getStringWithoutDefaultsInComment(
+        villager_root_initial = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_INITIAL,
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 NamePiecesEntities.VILLAGER_ROOT_INITIAL_DEFAULT,
-                Reference.DESCRIPTION_ROOT_INITIAL).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_INITIAL)
+            .trim()
+            .split("\\s*,\\s*");
 
-        villager_root_syllables = config.getStringWithoutDefaultsInComment(
+        villager_root_syllables = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_SYLLABLES,
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 NamePiecesEntities.VILLAGER_ROOT_SYL_BEGIN_DEFAULT,
-                Reference.DESCRIPTION_ROOT_SYLLABLES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_SYLLABLES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        villager_root_terminal = config.getStringWithoutDefaultsInComment(
+        villager_root_terminal = config
+            .getStringWithoutDefaultsInComment(
                 Reference.NAME_ROOT_TERMINAL,
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 NamePiecesEntities.VILLAGER_ROOT_TERMINAL_DEFAULT,
-                Reference.DESCRIPTION_ROOT_TERMINAL).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_ROOT_TERMINAL)
+            .trim()
+            .split("\\s*,\\s*");
 
-        villager_suffix = config.getStringWithoutDefaultsInComment(
+        villager_suffix = config
+            .getStringWithoutDefaultsInComment(
                 "Suffixes",
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 NamePiecesEntities.VILLAGER_SUFFIX_DEFAULT,
-                Reference.DESCRIPTION_SUFFIXES).trim().split("\\s*,\\s*");
+                Reference.DESCRIPTION_SUFFIXES)
+            .trim()
+            .split("\\s*,\\s*");
 
-        syllable_count_weighting = config.get(
+        syllable_count_weighting = config
+            .get(
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 Reference.NAME_SYLLABLE_COUNT_WEIGHTING,
                 NamePiecesEntities.VILLAGER_SYLLABLE_COUNT_WEIGHTS,
-                Reference.DESCRIPTION_SYLLABLE_COUNT_WEIGHTING).getIntList();
+                Reference.DESCRIPTION_SYLLABLE_COUNT_WEIGHTING)
+            .getIntList();
 
-        terminal_blank_counts = config.get(
+        terminal_blank_counts = config
+            .get(
                 Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
                 Reference.NAME_TERMINAL_BLANK_COUNTS,
                 NamePiecesEntities.VILLAGER_BLANK_TERMINAL_COUNTS,
-                Reference.DESCRIPTION_TERMINAL_BLANK_COUNTS).getIntList();
+                Reference.DESCRIPTION_TERMINAL_BLANK_COUNTS)
+            .getIntList();
 
         prefix_chance = config.getFloat(
-                Reference.NAME_PREFIX_CHANCE,
-                Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
-                (villager_root_initial.length - 1) <= 0 ? 0
-                        : ((float) villager_prefix.length - 1) / (villager_root_initial.length - 1),
-                0.0F,
-                1.0F,
-                Reference.DESCRIPTION_PREFIX_CHANCE);
+            Reference.NAME_PREFIX_CHANCE,
+            Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
+            (villager_root_initial.length - 1) <= 0 ? 0
+                : ((float) villager_prefix.length - 1) / (villager_root_initial.length - 1),
+            0.0F,
+            1.0F,
+            Reference.DESCRIPTION_PREFIX_CHANCE);
 
         suffix_chance = config.getFloat(
-                Reference.NAME_SUFFIX_CHANCE,
-                Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
-                (villager_root_initial.length - 1) <= 0 ? 0
-                        : ((float) villager_suffix.length - 1) / (villager_root_initial.length - 1),
-                0.0F,
-                1.0F,
-                Reference.DESCRIPTION_SUFFIX_CHANCE);
+            Reference.NAME_SUFFIX_CHANCE,
+            Reference.CATEGORY_VILLAGER_SYLLABLE_POOL,
+            (villager_root_initial.length - 1) <= 0 ? 0
+                : ((float) villager_suffix.length - 1) / (villager_root_initial.length - 1),
+            0.0F,
+            1.0F,
+            Reference.DESCRIPTION_SUFFIX_CHANCE);
 
         if (config.hasChanged()) config.save();
     }

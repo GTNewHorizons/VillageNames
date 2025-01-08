@@ -52,8 +52,8 @@ public class WellDecorateEvent {
     public void onPopulating(PopulateChunkEvent.Post event) {
 
         if (event.hasVillageGenerated && event.world.provider.dimensionId == 0
-                && !VillageGeneratorConfigHandler.newVillageGenerator
-                && !event.world.isRemote) {
+            && !VillageGeneratorConfigHandler.newVillageGenerator
+            && !event.world.isRemote) {
 
             Random random = event.world.rand;
 
@@ -107,8 +107,8 @@ public class WellDecorateEvent {
             // The banner is at an adjacent corner. If Village Banners is turned off, set its location to the same as
             // the Sign (this serves a function)
             int bannerLocation = (GeneralConfig.villageBanners && testForBanner != null)
-                    ? (signLocation + (random.nextBoolean() ? 1 : -1) + 4) % 4
-                    : signLocation;
+                ? (signLocation + (random.nextBoolean() ? 1 : -1) + 4) % 4
+                : signLocation;
             int bannerXOffset = (1 - Math.abs((bannerLocation + 1) / 2 - 1) * 2) * 2; // NW: -2, NE: 2, SE: 2, SW: -2
             int bannerZOffset = ((bannerLocation / 2) * 2 - 1) * 2; // NW: -2, NE: -2, SE: 2, SW: 2
 
@@ -228,10 +228,10 @@ public class WellDecorateEvent {
                                 listWater3 = getBorder(event.world, id3, field3);
                                 listOpaque = getOpaqueBorder(event.world, field);
                                 if (listWater.size() == 3 && listWater2.size() == 3
-                                        && listWater3.size() == 3
-                                        && listOpaque.size() == 5) {// found 3 water blocks AND 5 opaque blocks
-                                                                    // surrounding one water block on THREE levels,
-                                                                    // assuming this is a village well
+                                    && listWater3.size() == 3
+                                    && listOpaque.size() == 5) {// found 3 water blocks AND 5 opaque blocks
+                                                                // surrounding one water block on THREE levels,
+                                                                // assuming this is a village well
 
                                     // Now I need to get tricky with the sign generation.
                                     isWellCorner++; // 1=NW, 2=SW, 3=NE, 4=SE
@@ -241,13 +241,13 @@ public class WellDecorateEvent {
                                     int signZ = (z + signZOffset);
 
                                     if (1 - Math.abs(isWellCorner / 2 - 1) + ((isWellCorner - 1) % 2) * 2
-                                            == signLocation) {
+                                        == signLocation) {
 
                                         // Call the name generator here
                                         Random deterministic = new Random();
                                         deterministic.setSeed(
-                                                event.world.getSeed()
-                                                        + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
+                                            event.world.getSeed()
+                                                + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
                                         String[] newVillageName = NameGenerator.newRandomName("Village", deterministic);
                                         String headerTags = newVillageName[0];
                                         String namePrefix = newVillageName[1];
@@ -255,26 +255,22 @@ public class WellDecorateEvent {
                                         String nameSuffix = newVillageName[3];
 
                                         if (event.world.getBlock(x + signXOffset, y + 2, z + signZOffset)
-                                                .isAir(event.world, x + signXOffset, y + 2, z + signZOffset)
-                                                || event.world.getBlock(x + signXOffset, y + 2, z + signZOffset)
-                                                        .isLeaves(
-                                                                event.world,
-                                                                x + signXOffset,
-                                                                y + 2,
-                                                                z + signZOffset)) {
+                                            .isAir(event.world, x + signXOffset, y + 2, z + signZOffset)
+                                            || event.world.getBlock(x + signXOffset, y + 2, z + signZOffset)
+                                                .isLeaves(event.world, x + signXOffset, y + 2, z + signZOffset)) {
                                             // Set the sign now!
 
                                             // Generate banner info, regardless of if we make a banner.
                                             Object[] newRandomBanner = BannerGenerator
-                                                    .randomBannerArrays(deterministic, -1, -1);
+                                                .randomBannerArrays(deterministic, -1, -1);
                                             ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                                             ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 
                                             ItemStack villageBanner = BannerGenerator
-                                                    .makeBanner(patternArray, colorArray);
+                                                .makeBanner(patternArray, colorArray);
                                             int townColorMeta = 15 - colorArray.get(0);
                                             int townColorMeta2 = colorArray.size() == 1 ? townColorMeta
-                                                    : 15 - colorArray.get(1);
+                                                : 15 - colorArray.get(1);
 
                                             // ---------------------------------------- //
                                             // -------- Determine Village Size -------- //
@@ -293,20 +289,21 @@ public class WellDecorateEvent {
 
                                             try {
                                                 structureData = (MapGenStructureData) event.world.perWorldStorage
-                                                        .loadData(MapGenStructureData.class, "Village");
+                                                    .loadData(MapGenStructureData.class, "Village");
                                                 nbttagcompound = structureData.func_143041_a();
                                             } catch (Exception e) // Village.dat does not exist
                                             {
                                                 try {
                                                     structureData = (MapGenStructureData) event.world.perWorldStorage
-                                                            .loadData(MapGenStructureData.class, "OTGVillage");
+                                                        .loadData(MapGenStructureData.class, "OTGVillage");
                                                     nbttagcompound = structureData.func_143041_a();
                                                 } catch (Exception e1) {} // OTGVillage.dat does not exist
                                             }
 
                                             try {
 
-                                                Iterator itr0 = nbttagcompound.func_150296_c().iterator();
+                                                Iterator itr0 = nbttagcompound.func_150296_c()
+                                                    .iterator();
 
                                                 while (itr0.hasNext()) { // Go through every village in the Village.nbt
                                                                          // list
@@ -322,24 +319,24 @@ public class WellDecorateEvent {
                                                             int[] boundingBox = nbttagcompound2.getIntArray("BB");
                                                             // Check to see if the well is inside the village
                                                             if (signX >= boundingBox[0] && signY >= boundingBox[1]
-                                                                    && signZ >= boundingBox[2]
-                                                                    && signX <= boundingBox[3]
-                                                                    && signY <= boundingBox[4]
-                                                                    && signZ <= boundingBox[5]) {
+                                                                && signZ >= boundingBox[2]
+                                                                && signX <= boundingBox[3]
+                                                                && signY <= boundingBox[4]
+                                                                && signZ <= boundingBox[5]) {
 
                                                                 // Player is inside bounding box.
                                                                 int ChunkX = nbttagcompound2.getInteger("ChunkX");
                                                                 int ChunkZ = nbttagcompound2.getInteger("ChunkZ");
                                                                 villageArea = (boundingBox[3] - boundingBox[0])
-                                                                        * (boundingBox[3] - boundingBox[0]);
+                                                                    * (boundingBox[3] - boundingBox[0]);
 
                                                                 if (GeneralConfig.debugMessages) {
                                                                     LogHelper.info(
-                                                                            "Village located at ChunkX: " + ChunkX
-                                                                                    + ", ChunkZ: "
-                                                                                    + ChunkZ
-                                                                                    + " with area "
-                                                                                    + villageArea);
+                                                                        "Village located at ChunkX: " + ChunkX
+                                                                            + ", ChunkZ: "
+                                                                            + ChunkZ
+                                                                            + " with area "
+                                                                            + villageArea);
                                                                 }
 
                                                                 // Update sign coordinates so it's central to the BB
@@ -351,7 +348,7 @@ public class WellDecorateEvent {
                                                         } catch (Exception e) {
                                                             if (GeneralConfig.debugMessages) {
                                                                 LogHelper.warn(
-                                                                        "Village bounding box could not be determined.");
+                                                                    "Village bounding box could not be determined.");
                                                             }
                                                         }
                                                     }
@@ -387,10 +384,11 @@ public class WellDecorateEvent {
                                                 // so it defaults to either a blank first line or "Welcome to."
                                             }
 
-                                            topLine = topLine.replaceAll("\\^", " ").trim();
+                                            topLine = topLine.replaceAll("\\^", " ")
+                                                .trim();
 
                                             VNWorldDataStructure data = VNWorldDataStructure
-                                                    .forWorld(event.world, "villagenames3_Village", "NamedStructures");
+                                                .forWorld(event.world, "villagenames3_Village", "NamedStructures");
 
                                             // This checks to see if the village has already been named
 
@@ -409,8 +407,8 @@ public class WellDecorateEvent {
                                                                                     // "x535y80z39")
                                                 // The only index that has data is 0:
                                                 NBTTagCompound tagList = tagCompound
-                                                        .getTagList(townSignEntry, tagCompound.getId())
-                                                        .getCompoundTagAt(0);
+                                                    .getTagList(townSignEntry, tagCompound.getId())
+                                                    .getCompoundTagAt(0);
 
                                                 int townX = tagList.getInteger("signX");
                                                 int townY = tagList.getInteger("signY");
@@ -418,9 +416,9 @@ public class WellDecorateEvent {
 
                                                 int radiussearch = 32;
                                                 if ((signX - townX) * (signX - townX)
-                                                        + (signY - townY) * (signY - townY)
-                                                        + (signZ - townZ) * (signZ - townZ)
-                                                        <= radiussearch * radiussearch) {
+                                                    + (signY - townY) * (signY - townY)
+                                                    + (signZ - townZ) * (signZ - townZ)
+                                                    <= radiussearch * radiussearch) {
                                                     // This village already has a name.
                                                     townColorMeta = tagList.getInteger("townColor");// Too annoying.
                                                                                                     // Just generate a
@@ -437,22 +435,22 @@ public class WellDecorateEvent {
                                             if (GeneralConfig.wellDecorations && GeneralConfig.nameSign) {
                                                 // Cobblestone wall pole and sign proper
                                                 event.world.setBlock(
-                                                        x + signXOffset,
-                                                        y + 1,
-                                                        z + signZOffset,
-                                                        Blocks.cobblestone_wall);
+                                                    x + signXOffset,
+                                                    y + 1,
+                                                    z + signZOffset,
+                                                    Blocks.cobblestone_wall);
                                                 event.world.setBlock(
-                                                        x + signXOffset,
-                                                        y + 2,
-                                                        z + signZOffset,
-                                                        Blocks.standing_sign,
-                                                        signOrientation,
-                                                        2); // Last field 2 for some reason please
+                                                    x + signXOffset,
+                                                    y + 2,
+                                                    z + signZOffset,
+                                                    Blocks.standing_sign,
+                                                    signOrientation,
+                                                    2); // Last field 2 for some reason please
                                             }
 
                                             if (villageBanner != null && GeneralConfig.wellDecorations
-                                                    && GeneralConfig.villageBanners
-                                                    && signLocation != bannerLocation) {
+                                                && GeneralConfig.villageBanners
+                                                && signLocation != bannerLocation) {
 
                                                 int bannerX = x + bannerXOffset;
                                                 int bannerY = y + 2;
@@ -463,15 +461,15 @@ public class WellDecorateEvent {
                                                     // Set the banner and its orientation
                                                     event.world.setBlock(bannerX, bannerY, bannerZ, testForBanner);
                                                     event.world.setBlockMetadataWithNotify(
-                                                            bannerX,
-                                                            bannerY,
-                                                            bannerZ,
-                                                            bannerOrientation,
-                                                            2);
+                                                        bannerX,
+                                                        bannerY,
+                                                        bannerZ,
+                                                        bannerOrientation,
+                                                        2);
 
                                                     // Set the tile entity
                                                     TileEntity bannerTileEntity = event.world
-                                                            .getTileEntity(bannerX, bannerY, bannerZ);
+                                                        .getTileEntity(bannerX, bannerY, bannerZ);
                                                     if (bannerTileEntity == null) {
                                                         bannerTileEntity = new TileEntityBanner();
                                                     }
@@ -480,11 +478,11 @@ public class WellDecorateEvent {
                                                     bannerNBTTagCompound.setBoolean("IsStanding", true);
 
                                                     bannerNBTTagCompound = FunctionsVN
-                                                            .setItemValues(villageBanner, bannerNBTTagCompound);
+                                                        .setItemValues(villageBanner, bannerNBTTagCompound);
                                                     bannerTileEntity.readFromNBT(bannerNBTTagCompound);
 
                                                     event.world
-                                                            .setTileEntity(bannerX, bannerY, bannerZ, bannerTileEntity);
+                                                        .setTileEntity(bannerX, bannerY, bannerZ, bannerTileEntity);
                                                 }
 
                                             }
@@ -506,33 +504,33 @@ public class WellDecorateEvent {
                                                         for (int rimi = 2; rimi > -3; rimi--) {
                                                             // This builds the rim around the well
                                                             event.world.setBlock(
-                                                                    x + (signXOffset / 2 * rimi),
-                                                                    pedY,
-                                                                    z + signZOffset,
-                                                                    concreteBlock,
-                                                                    concreteMeta,
-                                                                    2); // The one under the sign when rimi=2
+                                                                x + (signXOffset / 2 * rimi),
+                                                                pedY,
+                                                                z + signZOffset,
+                                                                concreteBlock,
+                                                                concreteMeta,
+                                                                2); // The one under the sign when rimi=2
                                                             event.world.setBlock(
-                                                                    x + signXOffset,
-                                                                    pedY,
-                                                                    z + (-signZOffset / 2 * (1 + rimi)),
-                                                                    concreteBlock,
-                                                                    concreteMeta,
-                                                                    2);
+                                                                x + signXOffset,
+                                                                pedY,
+                                                                z + (-signZOffset / 2 * (1 + rimi)),
+                                                                concreteBlock,
+                                                                concreteMeta,
+                                                                2);
                                                             event.world.setBlock(
-                                                                    x - (signXOffset * 3 / 2),
-                                                                    pedY,
-                                                                    z + (signZOffset / 2 * rimi),
-                                                                    concreteBlock,
-                                                                    concreteMeta,
-                                                                    2);
+                                                                x - (signXOffset * 3 / 2),
+                                                                pedY,
+                                                                z + (signZOffset / 2 * rimi),
+                                                                concreteBlock,
+                                                                concreteMeta,
+                                                                2);
                                                             event.world.setBlock(
-                                                                    x + (-signXOffset / 2 * (1 + rimi)),
-                                                                    pedY,
-                                                                    z - (signZOffset * 3 / 2),
-                                                                    concreteBlock,
-                                                                    concreteMeta,
-                                                                    2);
+                                                                x + (-signXOffset / 2 * (1 + rimi)),
+                                                                pedY,
+                                                                z - (signZOffset * 3 / 2),
+                                                                concreteBlock,
+                                                                concreteMeta,
+                                                                2);
                                                         }
                                                     }
 
@@ -540,12 +538,12 @@ public class WellDecorateEvent {
                                                     // Generate old-style clay base
                                                     for (int pedY = y - 3; pedY <= y; pedY++) {
                                                         event.world.setBlock(
-                                                                x + signXOffset,
-                                                                pedY,
-                                                                z + signZOffset,
-                                                                Blocks.stained_hardened_clay,
-                                                                townColorMeta,
-                                                                2);
+                                                            x + signXOffset,
+                                                            pedY,
+                                                            z + signZOffset,
+                                                            Blocks.stained_hardened_clay,
+                                                            townColorMeta,
+                                                            2);
                                                     }
                                                 }
 
@@ -555,7 +553,7 @@ public class WellDecorateEvent {
                                                                                       // modulo doesn't work properly
                                                                                       // with negative numbers :P
                                                 Object[] tryGlazedTerracotta = ModObjects
-                                                        .chooseModGlazedTerracotta(townColorMeta, (metaSpin) % 4);
+                                                    .chooseModGlazedTerracotta(townColorMeta, (metaSpin) % 4);
 
                                                 // Clay base OR concrete
                                                 if (tryGlazedTerracotta != null && GeneralConfig.concreteWell) {
@@ -571,45 +569,45 @@ public class WellDecorateEvent {
                                                                                                        // well
 
                                                     event.world.setBlock(
-                                                            x,
-                                                            y + 4,
-                                                            z,
-                                                            (Block) tryGlazedTerracotta[0],
-                                                            (Integer) tryGlazedTerracotta[1],
-                                                            2);
+                                                        x,
+                                                        y + 4,
+                                                        z,
+                                                        (Block) tryGlazedTerracotta[0],
+                                                        (Integer) tryGlazedTerracotta[1],
+                                                        2);
 
                                                     tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(
-                                                            townColorMeta,
-                                                            (metaSpin + metaChirality) % 4);
+                                                        townColorMeta,
+                                                        (metaSpin + metaChirality) % 4);
                                                     event.world.setBlock(
-                                                            x,
-                                                            y + 4,
-                                                            z - (signZOffset / 2),
-                                                            (Block) tryGlazedTerracotta[0],
-                                                            (Integer) tryGlazedTerracotta[1],
-                                                            2);
+                                                        x,
+                                                        y + 4,
+                                                        z - (signZOffset / 2),
+                                                        (Block) tryGlazedTerracotta[0],
+                                                        (Integer) tryGlazedTerracotta[1],
+                                                        2);
 
                                                     tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(
-                                                            townColorMeta,
-                                                            (metaSpin + metaChirality * 2) % 4);
+                                                        townColorMeta,
+                                                        (metaSpin + metaChirality * 2) % 4);
                                                     event.world.setBlock(
-                                                            x - (signXOffset / 2),
-                                                            y + 4,
-                                                            z - (signZOffset / 2),
-                                                            (Block) tryGlazedTerracotta[0],
-                                                            (Integer) tryGlazedTerracotta[1],
-                                                            2);
+                                                        x - (signXOffset / 2),
+                                                        y + 4,
+                                                        z - (signZOffset / 2),
+                                                        (Block) tryGlazedTerracotta[0],
+                                                        (Integer) tryGlazedTerracotta[1],
+                                                        2);
 
                                                     tryGlazedTerracotta = ModObjects.chooseModGlazedTerracotta(
-                                                            townColorMeta,
-                                                            (metaSpin + metaChirality * 3) % 4);
+                                                        townColorMeta,
+                                                        (metaSpin + metaChirality * 3) % 4);
                                                     event.world.setBlock(
-                                                            x - (signXOffset / 2),
-                                                            y + 4,
-                                                            z,
-                                                            (Block) tryGlazedTerracotta[0],
-                                                            (Integer) tryGlazedTerracotta[1],
-                                                            2);
+                                                        x - (signXOffset / 2),
+                                                        y + 4,
+                                                        z,
+                                                        (Block) tryGlazedTerracotta[0],
+                                                        (Integer) tryGlazedTerracotta[1],
+                                                        2);
 
                                                 }
 
@@ -632,21 +630,21 @@ public class WellDecorateEvent {
                                                     signContents.signText[2] = (nameRoot + " " + nameSuffix).trim();
                                                 }
                                             } else if ((namePrefix.length() + 1
-                                                    + nameRoot.length()
-                                                    + 1
-                                                    + nameSuffix.length()) <= 15) {
-                                                        // Whole name fits on one line! Put it all on line 2.
-                                                        signContents.signText[1] = headerTags + topLine;
-                                                        signContents.signText[2] = (namePrefix + " "
-                                                                + nameRoot
-                                                                + " "
-                                                                + nameSuffix).trim();
-                                                    } else {
-                                                        // Only Prefix and Root can fit together on line 2.
-                                                        signContents.signText[1] = headerTags + topLine.trim();
-                                                        signContents.signText[2] = (namePrefix + " " + nameRoot).trim();
-                                                        signContents.signText[3] = nameSuffix.trim();
-                                                    }
+                                                + nameRoot.length()
+                                                + 1
+                                                + nameSuffix.length()) <= 15) {
+                                                    // Whole name fits on one line! Put it all on line 2.
+                                                    signContents.signText[1] = headerTags + topLine;
+                                                    signContents.signText[2] = (namePrefix + " "
+                                                        + nameRoot
+                                                        + " "
+                                                        + nameSuffix).trim();
+                                                } else {
+                                                    // Only Prefix and Root can fit together on line 2.
+                                                    signContents.signText[1] = headerTags + topLine.trim();
+                                                    signContents.signText[2] = (namePrefix + " " + nameRoot).trim();
+                                                    signContents.signText[3] = nameSuffix.trim();
+                                                }
                                             // If top line is blank, roll everything up one line:
                                             if (topLine.equals("")) {
                                                 for (int isign = 0; isign < 3; isign++) {
@@ -656,12 +654,8 @@ public class WellDecorateEvent {
                                             }
 
                                             // Put the stuff on the sign.
-                                            if (GeneralConfig.wellDecorations && GeneralConfig.nameSign)
-                                                event.world.setTileEntity(
-                                                        x + signXOffset,
-                                                        y + 2,
-                                                        z + signZOffset,
-                                                        signContents);
+                                            if (GeneralConfig.wellDecorations && GeneralConfig.nameSign) event.world
+                                                .setTileEntity(x + signXOffset, y + 2, z + signZOffset, signContents);
 
                                             // Make the data bundle to save to NBT
                                             NBTTagList nbttaglist = new NBTTagList();
@@ -688,27 +682,28 @@ public class WellDecorateEvent {
                                             // generated once you do.
                                             if (villageBanner != null) {
                                                 nbttagcompound1.setTag(
-                                                        "BlockEntityTag",
-                                                        BannerGenerator.getNBTFromBanner(villageBanner));
+                                                    "BlockEntityTag",
+                                                    BannerGenerator.getNBTFromBanner(villageBanner));
                                             }
 
                                             nbttaglist.appendTag(nbttagcompound1);
                                             // Save the data under a "Villages" entry with unique name based on sign
                                             // coords
-                                            data.getData().setTag(
+                                            data.getData()
+                                                .setTag(
                                                     (namePrefix + " " + nameRoot + " " + nameSuffix)
-                                                            .trim() + ", x" + signX + " y" + signY + " z" + signZ,
+                                                        .trim() + ", x" + signX + " y" + signY + " z" + signZ,
                                                     nbttaglist);
                                             data.markDirty();
                                         } else { // The stupid thing is generating a sign inside the well structure for
                                                  // some reason.
 
                                             LogHelper.error(
-                                                    "Tried to generate a sign inside a well's post at x=" + signX
-                                                            + " y="
-                                                            + signY
-                                                            + " z="
-                                                            + signZ);
+                                                "Tried to generate a sign inside a well's post at x=" + signX
+                                                    + " y="
+                                                    + signY
+                                                    + " z="
+                                                    + signZ);
                                         }
 
                                     }
@@ -738,16 +733,16 @@ public class WellDecorateEvent {
 
         // Piggybacking the wool replacer
         if (GeneralConfig.pyramidTerracotta && event.world.provider.dimensionId == 0
-                && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
-                        != BiomeGenBase.jungle
-                && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
-                        != BiomeGenBase.jungleHills
-                && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
-                        != BiomeGenBase.swampland
-                && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
-                        != BiomeGenBase.coldTaiga
-                && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
-                        != BiomeGenBase.icePlains) {
+            && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
+                != BiomeGenBase.jungle
+            && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
+                != BiomeGenBase.jungleHills
+            && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
+                != BiomeGenBase.swampland
+            && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
+                != BiomeGenBase.coldTaiga
+            && event.world.getBiomeGenForCoordsBody((event.chunkX << 4) + 8, (event.chunkZ << 4) + 8)
+                != BiomeGenBase.icePlains) {
 
             // Block blocktoscan;
             // int woolmeta;
@@ -767,8 +762,8 @@ public class WellDecorateEvent {
      */
     private static boolean hasAround(World world, Block id, int x, int y, int z) {
         return world.getBlock(x - 1, y, z) == id && world.getBlock(x + 1, y, z) == id
-                && world.getBlock(x, y, z - 1) == id
-                && world.getBlock(x, y, z + 1) == id;
+            && world.getBlock(x, y, z - 1) == id
+            && world.getBlock(x, y, z + 1) == id;
     }
 
     /**
@@ -800,8 +795,8 @@ public class WellDecorateEvent {
         List<int[]> list = new ArrayList<int[]>();
         for (int x = field[0] - 1; x < field[0] + 2; x++) {
             for (int z = field[2] - 1; z < field[2] + 2; z++) {
-                if ((x != field[0] || z != field[2]) && world.getBlock(x, field[1], z).isOpaqueCube())
-                    list.add(new int[] { x, field[1], z });
+                if ((x != field[0] || z != field[2]) && world.getBlock(x, field[1], z)
+                    .isOpaqueCube()) list.add(new int[] { x, field[1], z });
             }
         }
         return list;
@@ -830,7 +825,8 @@ public class WellDecorateEvent {
      * @return true if the position is replaceable by any block
      */
     private static boolean isReplaceable(World world, int x, int y, int z) {
-        return world.getBlock(x, y, z).isReplaceable(world, x, y, z);
+        return world.getBlock(x, y, z)
+            .isReplaceable(world, x, y, z);
     }
 
     /**
@@ -857,17 +853,18 @@ public class WellDecorateEvent {
 
                 try {
                     structureData = (MapGenStructureData) event.world.perWorldStorage
-                            .loadData(MapGenStructureData.class, "Temple");
+                        .loadData(MapGenStructureData.class, "Temple");
                     nbttagcompound = structureData.func_143041_a();
                 } catch (Exception e) {
                     try {
                         structureData = (MapGenStructureData) event.world.perWorldStorage
-                                .loadData(MapGenStructureData.class, "OTGTemple");
+                            .loadData(MapGenStructureData.class, "OTGTemple");
                         nbttagcompound = structureData.func_143041_a();
                     } catch (Exception e1) {}
                 }
 
-                Iterator itr = nbttagcompound.func_150296_c().iterator();
+                Iterator itr = nbttagcompound.func_150296_c()
+                    .iterator();
                 while (itr.hasNext()) {
                     Object element = itr.next();
                     NBTBase nbtbase = nbttagcompound.getTag(element.toString());
@@ -881,11 +878,11 @@ public class WellDecorateEvent {
 
                             // Now check to see if the spawn entity is inside the monument
                             if (xChunkCenter >= boundingBox[0] - buffer
-                                    // && event.y >= boundingBox[1]
-                                    && zChunkCenter >= boundingBox[2] - buffer
-                                    && xChunkCenter <= boundingBox[3] + buffer
-                                    // && event.y <= boundingBox[4]
-                                    && zChunkCenter <= boundingBox[5] + buffer) {
+                                // && event.y >= boundingBox[1]
+                                && zChunkCenter >= boundingBox[2] - buffer
+                                && xChunkCenter <= boundingBox[3] + buffer
+                                // && event.y <= boundingBox[4]
+                                && zChunkCenter <= boundingBox[5] + buffer) {
                                 // Event is inside bounding box.
 
                                 Block blocktoscan;
@@ -896,33 +893,32 @@ public class WellDecorateEvent {
                                         for (int j = -16; j < 16; j++) {
 
                                             blocktoscan = event.world
-                                                    .getBlock((event.chunkX << 4) + i, k, (event.chunkZ << 4) + j);
+                                                .getBlock((event.chunkX << 4) + i, k, (event.chunkZ << 4) + j);
 
                                             if (blocktoscan == Blocks.wool) {
 
                                                 woolmeta = event.world.getBlockMetadata(
-                                                        (event.chunkX << 4) + i,
-                                                        k,
-                                                        (event.chunkZ << 4) + j);
+                                                    (event.chunkX << 4) + i,
+                                                    k,
+                                                    (event.chunkZ << 4) + j);
 
                                                 if (woolmeta == 1 || woolmeta == 11) { // This is blue wool at y=64
 
                                                     // Replace the wool block
                                                     event.world.setBlock(
-                                                            (event.chunkX << 4) + i,
-                                                            k,
-                                                            (event.chunkZ << 4) + j,
-                                                            Blocks.stained_hardened_clay,
-                                                            woolmeta,
-                                                            2);
+                                                        (event.chunkX << 4) + i,
+                                                        k,
+                                                        (event.chunkZ << 4) + j,
+                                                        Blocks.stained_hardened_clay,
+                                                        woolmeta,
+                                                        2);
 
                                                     if (GeneralConfig.debugMessages) LogHelper.info(
-                                                            "Replacing desert pyramid wool at "
-                                                                    + ((event.chunkX << 4) + i)
-                                                                    + " "
-                                                                    + k
-                                                                    + " "
-                                                                    + ((event.chunkZ << 4) + j));
+                                                        "Replacing desert pyramid wool at " + ((event.chunkX << 4) + i)
+                                                            + " "
+                                                            + k
+                                                            + " "
+                                                            + ((event.chunkZ << 4) + j));
                                                 }
                                             }
                                         }

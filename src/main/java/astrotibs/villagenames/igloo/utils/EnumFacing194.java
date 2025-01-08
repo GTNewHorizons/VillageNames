@@ -41,7 +41,7 @@ public enum EnumFacing194 implements IStringSerializable {
     private static final Map<String, EnumFacing194> NAME_LOOKUP = Maps.<String, EnumFacing194>newHashMap();
 
     private EnumFacing194(int indexIn, int oppositeIn, int horizontalIndexIn, String nameIn,
-            EnumFacing194.AxisDirection axisDirectionIn, EnumFacing194.Axis axisIn, Vec3i directionVecIn) {
+        EnumFacing194.AxisDirection axisDirectionIn, EnumFacing194.Axis axisIn, Vec3i directionVecIn) {
         this.index = indexIn;
         this.horizontalIndex = horizontalIndexIn;
         this.opposite = oppositeIn;
@@ -261,7 +261,7 @@ public enum EnumFacing194 implements IStringSerializable {
 
         for (EnumFacing194 enumfacing1 : values()) {
             float f1 = x * (float) enumfacing1.directionVec.getX() + y * (float) enumfacing1.directionVec.getY()
-                    + z * (float) enumfacing1.directionVec.getZ();
+                + z * (float) enumfacing1.directionVec.getZ();
 
             if (f1 > f) {
                 f = f1;
@@ -281,7 +281,7 @@ public enum EnumFacing194 implements IStringSerializable {
     }
 
     public static EnumFacing194 getFacingFromAxis(EnumFacing194.AxisDirection axisDirectionIn,
-            EnumFacing194.Axis axisIn) {
+        EnumFacing194.Axis axisIn) {
         for (EnumFacing194 enumfacing : values()) {
             if (enumfacing.getAxisDirection() == axisDirectionIn && enumfacing.getAxis() == axisIn) {
                 return enumfacing;
@@ -302,11 +302,15 @@ public enum EnumFacing194 implements IStringSerializable {
         for (EnumFacing194 enumfacing : values()) {
             VALUES[enumfacing.index] = enumfacing;
 
-            if (enumfacing.getAxis().isHorizontal()) {
+            if (enumfacing.getAxis()
+                .isHorizontal()) {
                 HORIZONTALS[enumfacing.horizontalIndex] = enumfacing;
             }
 
-            NAME_LOOKUP.put(enumfacing.getName2().toLowerCase(), enumfacing);
+            NAME_LOOKUP.put(
+                enumfacing.getName2()
+                    .toLowerCase(),
+                enumfacing);
         }
     }
 
@@ -375,7 +379,10 @@ public enum EnumFacing194 implements IStringSerializable {
 
         static {
             for (EnumFacing194.Axis enumfacing$axis : values()) {
-                NAME_LOOKUP.put(enumfacing$axis.getName2().toLowerCase(), enumfacing$axis);
+                NAME_LOOKUP.put(
+                    enumfacing$axis.getName2()
+                        .toLowerCase(),
+                    enumfacing$axis);
             }
         }
     }
@@ -417,7 +424,7 @@ public enum EnumFacing194 implements IStringSerializable {
             switch (this) {
                 case HORIZONTAL:
                     return new EnumFacing194[] { EnumFacing194.NORTH, EnumFacing194.EAST, EnumFacing194.SOUTH,
-                            EnumFacing194.WEST };
+                        EnumFacing194.WEST };
                 case VERTICAL:
                     return new EnumFacing194[] { EnumFacing194.UP, EnumFacing194.DOWN };
                 default:
@@ -434,7 +441,8 @@ public enum EnumFacing194 implements IStringSerializable {
         }
 
         public boolean apply(@Nullable EnumFacing194 p_apply_1_) {
-            return p_apply_1_ != null && p_apply_1_.getAxis().getPlane() == this;
+            return p_apply_1_ != null && p_apply_1_.getAxis()
+                .getPlane() == this;
         }
 
         public Iterator<EnumFacing194> iterator() {

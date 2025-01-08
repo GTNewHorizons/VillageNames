@@ -43,7 +43,7 @@ public class SignPost extends StructureVillageVN.VNComponent {
     public SignPost() {}
 
     public SignPost(StartVN start, int componentType, Random random, StructureBoundingBox boundingBox,
-            int coordBaseMode) {
+        int coordBaseMode) {
         super();
         this.coordBaseMode = coordBaseMode;
         this.boundingBox = boundingBox;
@@ -52,43 +52,43 @@ public class SignPost extends StructureVillageVN.VNComponent {
     }
 
     public static SignPost buildComponent(StartVN villagePiece, List pieces, Random random, int x, int y, int z,
-            int coordBaseMode, int componentType) {
+        int coordBaseMode, int componentType) {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(
-                x,
-                y,
-                z,
-                0,
-                0,
-                0,
-                STRUCTURE_WIDTH,
-                STRUCTURE_HEIGHT,
-                STRUCTURE_DEPTH,
-                coordBaseMode);
+            x,
+            y,
+            z,
+            0,
+            0,
+            0,
+            STRUCTURE_WIDTH,
+            STRUCTURE_HEIGHT,
+            STRUCTURE_DEPTH,
+            coordBaseMode);
 
         return canVillageGoDeeper(structureboundingbox)
-                && StructureComponent.findIntersecting(pieces, structureboundingbox) == null
-                        ? new SignPost(villagePiece, componentType, random, structureboundingbox, coordBaseMode)
-                        : null;
+            && StructureComponent.findIntersecting(pieces, structureboundingbox) == null
+                ? new SignPost(villagePiece, componentType, random, structureboundingbox, coordBaseMode)
+                : null;
     }
 
     @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB) {
         if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = StructureVillageVN.getMedianGroundLevel(
-                    world,
-                    // Set the bounding box version as this bounding box but with Y going from 0 to 512
-                    new StructureBoundingBox(
-                            this.boundingBox.minX + (new int[] { INCREASE_MIN_U, DECREASE_MAX_W, INCREASE_MIN_U,
-                                    INCREASE_MIN_W }[this.coordBaseMode]),
-                            this.boundingBox.minZ + (new int[] { INCREASE_MIN_W, INCREASE_MIN_U, DECREASE_MAX_W,
-                                    INCREASE_MIN_U }[this.coordBaseMode]),
-                            this.boundingBox.maxX - (new int[] { DECREASE_MAX_U, INCREASE_MIN_W, DECREASE_MAX_U,
-                                    DECREASE_MAX_W }[this.coordBaseMode]),
-                            this.boundingBox.maxZ - (new int[] { DECREASE_MAX_W, DECREASE_MAX_U, INCREASE_MIN_W,
-                                    DECREASE_MAX_U }[this.coordBaseMode])),
-                    true,
-                    (byte) 15,
-                    this.coordBaseMode);
+                world,
+                // Set the bounding box version as this bounding box but with Y going from 0 to 512
+                new StructureBoundingBox(
+                    this.boundingBox.minX + (new int[] { INCREASE_MIN_U, DECREASE_MAX_W, INCREASE_MIN_U,
+                        INCREASE_MIN_W }[this.coordBaseMode]),
+                    this.boundingBox.minZ + (new int[] { INCREASE_MIN_W, INCREASE_MIN_U, DECREASE_MAX_W,
+                        INCREASE_MIN_U }[this.coordBaseMode]),
+                    this.boundingBox.maxX - (new int[] { DECREASE_MAX_U, INCREASE_MIN_W, DECREASE_MAX_U,
+                        DECREASE_MAX_W }[this.coordBaseMode]),
+                    this.boundingBox.maxZ - (new int[] { DECREASE_MAX_W, DECREASE_MAX_U, INCREASE_MIN_W,
+                        DECREASE_MAX_U }[this.coordBaseMode])),
+                true,
+                (byte) 15,
+                this.coordBaseMode);
 
             if (this.averageGroundLevel < 0) {
                 return true;
@@ -106,12 +106,12 @@ public class SignPost extends StructureVillageVN.VNComponent {
 
         // Grass
         blockObject = StructureVillageVN
-                .getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs);
+            .getBiomeSpecificBlockObject(Blocks.grass, 0, this.materialType, this.biome, this.disallowModSubs);
         Block biomeGrassBlock = (Block) blockObject[0];
         int biomeGrassMeta = (Integer) blockObject[1];
         // Dirt
         blockObject = StructureVillageVN
-                .getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs);
+            .getBiomeSpecificBlockObject(Blocks.dirt, 0, this.materialType, this.biome, this.disallowModSubs);
         Block biomeDirtBlock = (Block) blockObject[0];
         int biomeDirtMeta = (Integer) blockObject[1];
         // Establish top and filler blocks, substituting Grass and Dirt if they're null
@@ -129,26 +129,22 @@ public class SignPost extends StructureVillageVN.VNComponent {
         }
 
         // Cobblestone
-        blockObject = StructureVillageVN.getBiomeSpecificBlockObject(
-                Blocks.cobblestone,
-                0,
-                this.materialType,
-                this.biome,
-                this.disallowModSubs);
+        blockObject = StructureVillageVN
+            .getBiomeSpecificBlockObject(Blocks.cobblestone, 0, this.materialType, this.biome, this.disallowModSubs);
         Block biomeCobblestoneBlock = (Block) blockObject[0];
         int biomeCobblestoneMeta = (Integer) blockObject[1];
         // Cobblestone wall
         blockObject = StructureVillageVN.getBiomeSpecificBlockObject(
-                Blocks.cobblestone_wall,
-                0,
-                this.materialType,
-                this.biome,
-                this.disallowModSubs);
+            Blocks.cobblestone_wall,
+            0,
+            this.materialType,
+            this.biome,
+            this.disallowModSubs);
         Block biomeCobblestoneWallBlock = (Block) blockObject[0];
         int biomeCobblestoneWallMeta = (Integer) blockObject[1];
         // Vertical log
         blockObject = StructureVillageVN
-                .getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs);
+            .getBiomeSpecificBlockObject(Blocks.log, 0, this.materialType, this.biome, this.disallowModSubs);
         Block biomeLogVertBlock = (Block) blockObject[0];
         int biomeLogVertMeta = (Integer) blockObject[1];
         // Vertical stripped log
@@ -157,7 +153,7 @@ public class SignPost extends StructureVillageVN.VNComponent {
         int biomeStrippedLogVerticMeta = (Integer) blockObject[1];
         // Fence
         blockObject = StructureVillageVN
-                .getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);
+            .getBiomeSpecificBlockObject(Blocks.fence, 0, this.materialType, this.biome, this.disallowModSubs);
         Block biomeFenceBlock = (Block) blockObject[0];
         int biomeFenceMeta = (Integer) blockObject[1];
 
@@ -195,25 +191,25 @@ public class SignPost extends StructureVillageVN.VNComponent {
 
         // Follow the blueprint to set up the starting foundation
         this.establishFoundation(
-                world,
-                structureBB,
-                this.foundationPattern,
-                this.GROUND_LEVEL,
-                this.materialType,
-                this.disallowModSubs,
-                this.biome,
-                biomeTopBlock,
-                biomeTopMeta,
-                biomeFillerBlock,
-                biomeFillerMeta,
-                false);
+            world,
+            structureBB,
+            this.foundationPattern,
+            this.GROUND_LEVEL,
+            this.materialType,
+            this.disallowModSubs,
+            this.biome,
+            biomeTopBlock,
+            biomeTopMeta,
+            biomeFillerBlock,
+            biomeFillerMeta,
+            false);
 
         int signPostX = this.getXWithOffset(signPostXBB, signPostZBB);
         int signPostY = this.getYWithOffset(signPostYBB);
         int signPostZ = this.getZWithOffset(signPostXBB, signPostZBB);
 
         NBTTagCompound villageNBTtag = StructureVillageVN
-                .getOrMakeVNInfo(world, this.getXWithOffset(4, 4), this.getYWithOffset(12), this.getZWithOffset(4, 4));
+            .getOrMakeVNInfo(world, this.getXWithOffset(4, 4), this.getYWithOffset(12), this.getZWithOffset(4, 4));
 
         // Load the values of interest into memory
         if (this.townColor == -1) {
@@ -264,16 +260,16 @@ public class SignPost extends StructureVillageVN.VNComponent {
             case SNOWY: // 6 2 1 1
             case JUNGLE: // 6 2 1 1
                 signIsOn = random_pick < 6 ? NOTHING
-                        : random_pick < 6 + 2 ? COBBLESTONE_BLOCK
-                                : random_pick < 6 + 2 + 1 ? COBBLESTONE_WALL : STRIPPED_LOG;
+                    : random_pick < 6 + 2 ? COBBLESTONE_BLOCK
+                        : random_pick < 6 + 2 + 1 ? COBBLESTONE_WALL : STRIPPED_LOG;
                 break;
             case DESERT: // 2 8 0 0
                 signIsOn = random_pick < 2 ? NOTHING : COBBLESTONE_BLOCK;
                 break;
             case TAIGA: // 2 3 2 3
                 signIsOn = random_pick < 2 ? NOTHING
-                        : random_pick < 2 + 3 ? COBBLESTONE_BLOCK
-                                : random_pick < 2 + 3 + 2 ? COBBLESTONE_WALL : STRIPPED_LOG;
+                    : random_pick < 2 + 3 ? COBBLESTONE_BLOCK
+                        : random_pick < 2 + 3 + 2 ? COBBLESTONE_WALL : STRIPPED_LOG;
                 break;
             case SAVANNA: // 9 0 0 1
                 signIsOn = random_pick < 9 ? NOTHING : STRIPPED_LOG;
@@ -286,16 +282,15 @@ public class SignPost extends StructureVillageVN.VNComponent {
         if (!signIsOn.equals(NOTHING)) {
             signPostYBB++;
             this.placeBlockAtCurrentPosition(
-                    world,
-                    signIsOn.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock
-                            : signIsOn.equals(COBBLESTONE_WALL) ? biomeCobblestoneWallBlock
-                                    : biomeStrippedLogVerticBlock,
-                    signIsOn.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta
-                            : signIsOn.equals(COBBLESTONE_WALL) ? biomeCobblestoneWallMeta : biomeStrippedLogVerticMeta,
-                    2,
-                    GROUND_LEVEL,
-                    signPostZBB,
-                    structureBB);
+                world,
+                signIsOn.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock
+                    : signIsOn.equals(COBBLESTONE_WALL) ? biomeCobblestoneWallBlock : biomeStrippedLogVerticBlock,
+                signIsOn.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta
+                    : signIsOn.equals(COBBLESTONE_WALL) ? biomeCobblestoneWallMeta : biomeStrippedLogVerticMeta,
+                2,
+                GROUND_LEVEL,
+                signPostZBB,
+                structureBB);
         }
 
         // Put foundation underneath the ground
@@ -332,19 +327,19 @@ public class SignPost extends StructureVillageVN.VNComponent {
 
         if (signFoundationDepth != 0) {
             this.fillWithMetadataBlocks(
-                    world,
-                    structureBB,
-                    2,
-                    GROUND_LEVEL - signFoundationDepth,
-                    signPostZBB,
-                    2,
-                    GROUND_LEVEL - 1,
-                    signPostZBB,
-                    underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock : biomeStrippedLogVerticBlock,
-                    underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta : biomeStrippedLogVerticMeta,
-                    underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock : biomeStrippedLogVerticBlock,
-                    underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta : biomeStrippedLogVerticMeta,
-                    false);
+                world,
+                structureBB,
+                2,
+                GROUND_LEVEL - signFoundationDepth,
+                signPostZBB,
+                2,
+                GROUND_LEVEL - 1,
+                signPostZBB,
+                underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock : biomeStrippedLogVerticBlock,
+                underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta : biomeStrippedLogVerticMeta,
+                underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneBlock : biomeStrippedLogVerticBlock,
+                underTheGround.equals(COBBLESTONE_BLOCK) ? biomeCobblestoneMeta : biomeStrippedLogVerticMeta,
+                false);
         }
 
         // Surround with fence sometimes
@@ -386,62 +381,62 @@ public class SignPost extends StructureVillageVN.VNComponent {
         // Build fences
         if (!enclosingMaterial.equals(NOTHING)) {
             for (int[] uuvvww : new int[][] { { 0, GROUND_LEVEL, 3, 4, GROUND_LEVEL, 3 },
-                    { 0, GROUND_LEVEL, 0, 0, GROUND_LEVEL, 3 }, { 4, GROUND_LEVEL, 0, 4, GROUND_LEVEL, 3 }, }) {
+                { 0, GROUND_LEVEL, 0, 0, GROUND_LEVEL, 3 }, { 4, GROUND_LEVEL, 0, 4, GROUND_LEVEL, 3 }, }) {
                 Block fenceMaterialBlock = enclosingMaterial.equals(FENCE) ? biomeFenceBlock
-                        : biomeCobblestoneWallBlock;
+                    : biomeCobblestoneWallBlock;
                 int fenceMaterialMeta = enclosingMaterial.equals(FENCE) ? biomeFenceMeta : biomeCobblestoneWallMeta;
 
                 if (connectedWalls) {
                     this.fillWithMetadataBlocks(
-                            world,
-                            structureBB,
-                            uuvvww[0],
-                            uuvvww[1],
-                            uuvvww[2],
-                            uuvvww[3],
-                            uuvvww[4],
-                            uuvvww[5],
-                            fenceMaterialBlock,
-                            fenceMaterialMeta,
-                            fenceMaterialBlock,
-                            fenceMaterialMeta,
-                            false);
+                        world,
+                        structureBB,
+                        uuvvww[0],
+                        uuvvww[1],
+                        uuvvww[2],
+                        uuvvww[3],
+                        uuvvww[4],
+                        uuvvww[5],
+                        fenceMaterialBlock,
+                        fenceMaterialMeta,
+                        fenceMaterialBlock,
+                        fenceMaterialMeta,
+                        false);
                 } else {
                     this.placeBlockAtCurrentPosition(
-                            world,
-                            fenceMaterialBlock,
-                            fenceMaterialMeta,
-                            uuvvww[0],
-                            uuvvww[1],
-                            uuvvww[2],
-                            structureBB);
+                        world,
+                        fenceMaterialBlock,
+                        fenceMaterialMeta,
+                        uuvvww[0],
+                        uuvvww[1],
+                        uuvvww[2],
+                        structureBB);
                     this.placeBlockAtCurrentPosition(
-                            world,
-                            fenceMaterialBlock,
-                            fenceMaterialMeta,
-                            uuvvww[3],
-                            uuvvww[4],
-                            uuvvww[5],
-                            structureBB);
+                        world,
+                        fenceMaterialBlock,
+                        fenceMaterialMeta,
+                        uuvvww[3],
+                        uuvvww[4],
+                        uuvvww[5],
+                        structureBB);
                 }
 
                 if (this.villageType == VillageType.SWAMP) {
                     this.func_151554_b(
-                            world,
-                            biomeStrippedLogVerticBlock,
-                            biomeStrippedLogVerticMeta,
-                            uuvvww[0],
-                            uuvvww[1] - 1,
-                            uuvvww[2],
-                            structureBB);
+                        world,
+                        biomeStrippedLogVerticBlock,
+                        biomeStrippedLogVerticMeta,
+                        uuvvww[0],
+                        uuvvww[1] - 1,
+                        uuvvww[2],
+                        structureBB);
                     this.func_151554_b(
-                            world,
-                            biomeStrippedLogVerticBlock,
-                            biomeStrippedLogVerticMeta,
-                            uuvvww[3],
-                            uuvvww[4] - 1,
-                            uuvvww[5],
-                            structureBB);
+                        world,
+                        biomeStrippedLogVerticBlock,
+                        biomeStrippedLogVerticMeta,
+                        uuvvww[3],
+                        uuvvww[4] - 1,
+                        uuvvww[5],
+                        structureBB);
                 }
             }
         }
@@ -506,46 +501,46 @@ public class SignPost extends StructureVillageVN.VNComponent {
         if (includeFrontCornerTorches) {
             for (int[] uvw : new int[][] { { 0, torchHeight, 0 }, { 4, torchHeight, 0 }, }) {
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        torchlikeBlock,
-                        torchlikeMeta,
-                        uvw[0],
-                        uvw[1],
-                        uvw[2],
-                        structureBB);
+                    world,
+                    torchlikeBlock,
+                    torchlikeMeta,
+                    uvw[0],
+                    uvw[1],
+                    uvw[2],
+                    structureBB);
                 // Add support post
                 if (this.villageType == VillageType.SWAMP) {
                     this.func_151554_b(
-                            world,
-                            biomeStrippedLogVerticBlock,
-                            biomeStrippedLogVerticMeta,
-                            uvw[0],
-                            GROUND_LEVEL - 1,
-                            uvw[2],
-                            structureBB);
+                        world,
+                        biomeStrippedLogVerticBlock,
+                        biomeStrippedLogVerticMeta,
+                        uvw[0],
+                        GROUND_LEVEL - 1,
+                        uvw[2],
+                        structureBB);
                 }
             }
         }
         if (includeBackCornerTorches) {
             for (int[] uvw : new int[][] { { 0, torchHeight, 3 }, { 4, torchHeight, 3 }, }) {
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        torchlikeBlock,
-                        torchlikeMeta,
-                        uvw[0],
-                        uvw[1],
-                        uvw[2],
-                        structureBB);
+                    world,
+                    torchlikeBlock,
+                    torchlikeMeta,
+                    uvw[0],
+                    uvw[1],
+                    uvw[2],
+                    structureBB);
                 // Add support post
                 if (this.villageType == VillageType.SWAMP) {
                     this.func_151554_b(
-                            world,
-                            biomeStrippedLogVerticBlock,
-                            biomeStrippedLogVerticMeta,
-                            uvw[0],
-                            GROUND_LEVEL - 1,
-                            uvw[2],
-                            structureBB);
+                        world,
+                        biomeStrippedLogVerticBlock,
+                        biomeStrippedLogVerticMeta,
+                        uvw[0],
+                        GROUND_LEVEL - 1,
+                        uvw[2],
+                        structureBB);
                 }
             }
         }
@@ -555,7 +550,8 @@ public class SignPost extends StructureVillageVN.VNComponent {
         if (signpostsSignBlock != null && true) {
             // === Generate AA marker === //
             String markerName = this.nameRoot.trim();
-            if (GeneralConfig.antiqueAtlasSignPostLabel.trim().equals("")) {
+            if (GeneralConfig.antiqueAtlasSignPostLabel.trim()
+                .equals("")) {
                 if ((this.namePrefix.length() + 1 + this.nameRoot.length()) > 15) {
                     // Prefix+Root is too long
                     if ((nameRoot.length() + 1 + this.nameSuffix.length()) > 15) {
@@ -580,17 +576,17 @@ public class SignPost extends StructureVillageVN.VNComponent {
             boolean signPostSuccessfullyMade = true;
             for (int i = 0; i < 2; i++) {
                 int signPostMeta = new int[] { StructureVillageVN.getSignRotationMeta(8, this.coordBaseMode, false) / 4,
-                        4 }[i];
+                    4 }[i];
                 boolean isBottom = signPostMeta != 4;
                 int signPostYMod = new int[] { 0, 1 }[i];
                 // Block
                 world.setBlock(
-                        signPostX,
-                        signPostY + signPostYMod,
-                        signPostZ,
-                        signpostsSignBlock,
-                        signPostMeta, // Meta
-                        2);
+                    signPostX,
+                    signPostY + signPostYMod,
+                    signPostZ,
+                    signpostsSignBlock,
+                    signPostMeta, // Meta
+                    2);
 
                 // TileEntity
                 try {
@@ -610,18 +606,18 @@ public class SignPost extends StructureVillageVN.VNComponent {
                             // Rewrite of SignPostsMod.addJumpTarget() to not require an EntityPlayer
                             harceroi.mc.signposts.block.SignPostTileEntity signPost = (harceroi.mc.signposts.block.SignPostTileEntity) tileEntity;
                             int markerId = harceroi.mc.signposts.SignPostsMod
-                                    .addGlobalMarker(signX, signZ, markerName, world);
+                                .addGlobalMarker(signX, signZ, markerName, world);
                             signPost.setAsJumpLocation(jumpX, jumpY, jumpZ, markerId);
                             harceroi.mc.signposts.data.MarkerToTileMap.get(world)
-                                    .setTileForMarker(signX, signY, signZ, markerId);
+                                .setTileForMarker(signX, signY, signZ, markerId);
 
                             signPostTagCompound.setDouble(
-                                    "jumpX",
-                                    signPostX + (signPostMeta == 1 ? -1 : signPostMeta == 3 ? 1 : 0) + 0.5);
+                                "jumpX",
+                                signPostX + (signPostMeta == 1 ? -1 : signPostMeta == 3 ? 1 : 0) + 0.5);
                             signPostTagCompound.setDouble("jumpY", signPostY);
                             signPostTagCompound.setDouble(
-                                    "jumpZ",
-                                    signPostZ + (signPostMeta == 0 ? 1 : signPostMeta == 2 ? -1 : 0) + 0.5);
+                                "jumpZ",
+                                signPostZ + (signPostMeta == 0 ? 1 : signPostMeta == 2 ? -1 : 0) + 0.5);
                             signPostTagCompound.setInteger("markerId", markerId);
 
                             tileEntity.readFromNBT(signPostTagCompound);
@@ -632,12 +628,12 @@ public class SignPost extends StructureVillageVN.VNComponent {
                 } catch (Exception e) {
                     signPostSuccessfullyMade = false;
                     LogHelper.info(
-                            "Error while assigning TileEntity to SignPost at " + signPostX
-                                    + " "
-                                    + (signPostY + signPostYMod)
-                                    + " "
-                                    + signPostZ
-                                    + ":");
+                        "Error while assigning TileEntity to SignPost at " + signPostX
+                            + " "
+                            + (signPostY + signPostYMod)
+                            + " "
+                            + signPostZ
+                            + ":");
                     LogHelper.info(e);
                 }
             }

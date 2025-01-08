@@ -52,7 +52,8 @@ public class CommandBanner extends CommandBase {
             }
 
             // Player wants to retrieve the banner for the current village
-            if (arguments[0].toLowerCase().equals("village") && getCommandSenderAsPlayer(sender) != null) {
+            if (arguments[0].toLowerCase()
+                .equals("village") && getCommandSenderAsPlayer(sender) != null) {
                 Object[] villageBannerData = BannerGenerator.getVillageBannerData(entity);
                 NBTTagCompound bannerNBT = new NBTTagCompound();
                 String villageNameForBanner = "";
@@ -77,44 +78,63 @@ public class CommandBanner extends CommandBase {
                 if (arguments[i].equals("-1")) {
                     sender.addChatMessage(new ChatComponentText("Unknown color: -1"));
                     return;
-                } else if (arguments[i].toLowerCase().equals("black")) {
-                    arguments[i] = "0";
-                } else if (arguments[i].toLowerCase().equals("red")) {
-                    arguments[i] = "1";
-                } else if (arguments[i].toLowerCase().equals("green")) {
-                    arguments[i] = "2";
-                } else if (arguments[i].toLowerCase().equals("brown")) {
-                    arguments[i] = "3";
-                } else if (arguments[i].toLowerCase().equals("blue")) {
-                    arguments[i] = "4";
-                } else if (arguments[i].toLowerCase().equals("purple")) {
-                    arguments[i] = "5";
-                } else if (arguments[i].toLowerCase().equals("cyan")) {
-                    arguments[i] = "6";
-                } else if (arguments[i].toLowerCase().equals("light_gray")
-                        || arguments[i].toLowerCase().equals("lightgray")
-                        || arguments[i].toLowerCase().equals("silver")) {
-                            arguments[i] = "7";
-                        } else
-                    if (arguments[i].toLowerCase().equals("gray")) {
-                        arguments[i] = "8";
-                    } else if (arguments[i].toLowerCase().equals("pink")) {
-                        arguments[i] = "9";
-                    } else if (arguments[i].toLowerCase().equals("lime")) {
-                        arguments[i] = "10";
-                    } else if (arguments[i].toLowerCase().equals("yellow")) {
-                        arguments[i] = "11";
-                    } else if (arguments[i].toLowerCase().equals("light_blue")
-                            || arguments[i].toLowerCase().equals("lightblue")) {
-                                arguments[i] = "12";
-                            } else
-                        if (arguments[i].toLowerCase().equals("magenta")) {
-                            arguments[i] = "13";
-                        } else if (arguments[i].toLowerCase().equals("orange")) {
-                            arguments[i] = "14";
-                        } else if (arguments[i].toLowerCase().equals("white")) {
-                            arguments[i] = "15";
-                        }
+                } else if (arguments[i].toLowerCase()
+                    .equals("black")) {
+                        arguments[i] = "0";
+                    } else if (arguments[i].toLowerCase()
+                        .equals("red")) {
+                            arguments[i] = "1";
+                        } else if (arguments[i].toLowerCase()
+                            .equals("green")) {
+                                arguments[i] = "2";
+                            } else if (arguments[i].toLowerCase()
+                                .equals("brown")) {
+                                    arguments[i] = "3";
+                                } else if (arguments[i].toLowerCase()
+                                    .equals("blue")) {
+                                        arguments[i] = "4";
+                                    } else if (arguments[i].toLowerCase()
+                                        .equals("purple")) {
+                                            arguments[i] = "5";
+                                        } else if (arguments[i].toLowerCase()
+                                            .equals("cyan")) {
+                                                arguments[i] = "6";
+                                            } else if (arguments[i].toLowerCase()
+                                                .equals("light_gray")
+                                                || arguments[i].toLowerCase()
+                                                    .equals("lightgray")
+                                                || arguments[i].toLowerCase()
+                                                    .equals("silver")) {
+                                                        arguments[i] = "7";
+                                                    } else
+                                                if (arguments[i].toLowerCase()
+                                                    .equals("gray")) {
+                                                        arguments[i] = "8";
+                                                    } else if (arguments[i].toLowerCase()
+                                                        .equals("pink")) {
+                                                            arguments[i] = "9";
+                                                        } else if (arguments[i].toLowerCase()
+                                                            .equals("lime")) {
+                                                                arguments[i] = "10";
+                                                            } else if (arguments[i].toLowerCase()
+                                                                .equals("yellow")) {
+                                                                    arguments[i] = "11";
+                                                                } else if (arguments[i].toLowerCase()
+                                                                    .equals("light_blue")
+                                                                    || arguments[i].toLowerCase()
+                                                                        .equals("lightblue")) {
+                                                                            arguments[i] = "12";
+                                                                        } else
+                                                                    if (arguments[i].toLowerCase()
+                                                                        .equals("magenta")) {
+                                                                            arguments[i] = "13";
+                                                                        } else if (arguments[i].toLowerCase()
+                                                                            .equals("orange")) {
+                                                                                arguments[i] = "14";
+                                                                            } else if (arguments[i].toLowerCase()
+                                                                                .equals("white")) {
+                                                                                    arguments[i] = "15";
+                                                                                }
             }
 
             // Convert number argument to an actual integer
@@ -148,7 +168,7 @@ public class CommandBanner extends CommandBase {
             // Generate a random banner, perhaps using argument as a forced base color
             if (getCommandSenderAsPlayer(sender) != null && getCommandSenderAsPlayer(sender) instanceof EntityPlayer) {
                 Object[] newRandomBanner = BannerGenerator
-                        .randomBannerArrays(entity.worldObj.rand, forcedmeta, forcedmeta2);
+                    .randomBannerArrays(entity.worldObj.rand, forcedmeta, forcedmeta2);
                 ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                 ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
 
@@ -178,9 +198,9 @@ public class CommandBanner extends CommandBase {
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] strings) {
         if (strings.length == 1) {
             return getListOfStringsMatchingLastWord(
-                    strings,
-                    new String[] { "village", "black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray",
-                            "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white" });
+                strings,
+                new String[] { "village", "black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray",
+                    "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white" });
         } else {
             return new ArrayList<String>();
         }

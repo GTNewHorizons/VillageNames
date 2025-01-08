@@ -36,18 +36,18 @@ public class ModelPlane extends ModelBox {
     public String boxName;
 
     public ModelPlane(ModelRenderer modelRenderer, int textureOffsetX, int textureOffsetY, float originX, float originY,
-            float originZ, int width, int height, int depth, float scaleFactor) {
+        float originZ, int width, int height, int depth, float scaleFactor) {
         super(
-                modelRenderer,
-                textureOffsetX,
-                textureOffsetY,
-                originX,
-                originY,
-                originZ,
-                width,
-                height,
-                depth,
-                scaleFactor);
+            modelRenderer,
+            textureOffsetX,
+            textureOffsetY,
+            originX,
+            originY,
+            originZ,
+            width,
+            height,
+            depth,
+            scaleFactor);
 
         this.posX1 = originX;
         this.posY1 = originY;
@@ -77,31 +77,31 @@ public class ModelPlane extends ModelBox {
         PositionTextureVertex posvertex_X1_Y1_Z1 = new PositionTextureVertex(originX, originY, originZ, 0.0F, 0.0F);
         PositionTextureVertex posvertex_X2_Y1_Z1 = new PositionTextureVertex(posX2scaled, originY, originZ, 0.0F, 8.0F);
         PositionTextureVertex posvertex_X2_Y2_Z1 = new PositionTextureVertex(
-                posX2scaled,
-                posY2scaled,
-                originZ,
-                8.0F,
-                8.0F);
+            posX2scaled,
+            posY2scaled,
+            originZ,
+            8.0F,
+            8.0F);
         PositionTextureVertex posvertex_X1_Y2_Z1 = new PositionTextureVertex(originX, posY2scaled, originZ, 8.0F, 0.0F);
         PositionTextureVertex posvertex_X1_Y1_Z2 = new PositionTextureVertex(originX, originY, posZ2scaled, 0.0F, 0.0F);
         PositionTextureVertex posvertex_X2_Y1_Z2 = new PositionTextureVertex(
-                posX2scaled,
-                originY,
-                posZ2scaled,
-                0.0F,
-                8.0F);
+            posX2scaled,
+            originY,
+            posZ2scaled,
+            0.0F,
+            8.0F);
         PositionTextureVertex posvertex_X2_Y2_Z2 = new PositionTextureVertex(
-                posX2scaled,
-                posY2scaled,
-                posZ2scaled,
-                8.0F,
-                8.0F);
+            posX2scaled,
+            posY2scaled,
+            posZ2scaled,
+            8.0F,
+            8.0F);
         PositionTextureVertex posvertex_X1_Y2_Z2 = new PositionTextureVertex(
-                originX,
-                posY2scaled,
-                posZ2scaled,
-                8.0F,
-                0.0F);
+            originX,
+            posY2scaled,
+            posZ2scaled,
+            8.0F,
+            0.0F);
         this.vertexPositions[0] = posvertex_X1_Y1_Z1;
         this.vertexPositions[1] = posvertex_X2_Y1_Z1;
         this.vertexPositions[2] = posvertex_X2_Y2_Z1;
@@ -122,14 +122,14 @@ public class ModelPlane extends ModelBox {
          */
         // Top face
         this.quadList[0] = new TexturedQuad(
-                new PositionTextureVertex[] { posvertex_X2_Y1_Z2, posvertex_X1_Y1_Z2, posvertex_X1_Y1_Z1,
-                        posvertex_X2_Y1_Z1 },
-                textureOffsetX + depth,
-                textureOffsetY,
-                textureOffsetX + depth + width,
-                textureOffsetY + depth,
-                modelRenderer.textureWidth,
-                modelRenderer.textureHeight);
+            new PositionTextureVertex[] { posvertex_X2_Y1_Z2, posvertex_X1_Y1_Z2, posvertex_X1_Y1_Z1,
+                posvertex_X2_Y1_Z1 },
+            textureOffsetX + depth,
+            textureOffsetY,
+            textureOffsetX + depth + width,
+            textureOffsetY + depth,
+            modelRenderer.textureWidth,
+            modelRenderer.textureHeight);
         /*
          * // Bottom face this.quadList[0] = new TexturedQuad( new PositionTextureVertex[] {posvertex_X2_Y2_Z1,
          * posvertex_X1_Y2_Z1, posvertex_X1_Y2_Z2, posvertex_X2_Y2_Z2}, textureOffsetX + depth,// + width,

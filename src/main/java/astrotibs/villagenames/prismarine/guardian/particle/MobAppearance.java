@@ -22,7 +22,7 @@ public class MobAppearance extends EntityFX {
     private EntityClientPlayerMP targetPlayer;
 
     public MobAppearance(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn,
-            EntityClientPlayerMP entityIn) {
+        EntityClientPlayerMP entityIn) {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.motionX = this.motionY = this.motionZ = 0.0D;
@@ -55,7 +55,7 @@ public class MobAppearance extends EntityFX {
     // public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float p_180434_4_,
     // float p_180434_5_, float p_180434_6_, float p_180434_7_, float p_180434_8_)
     public void renderParticle(Tessellator worldRendererIn, float partialTicks, float p_180434_4_, float p_180434_5_,
-            float p_180434_6_, float p_180434_7_, float p_180434_8_) {
+        float p_180434_6_, float p_180434_7_, float p_180434_8_) {
         if (this.entity != null) {
             // RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
             RenderManager rendermanager = RenderManager.instance;

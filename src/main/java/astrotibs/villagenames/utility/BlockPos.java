@@ -50,7 +50,7 @@ public class BlockPos extends Vec3i {
      */
     public BlockPos add(double x, double y, double z) {
         return x == 0.0D && y == 0.0D && z == 0.0D ? this
-                : new BlockPos((double) this.getX() + x, (double) this.getY() + y, (double) this.getZ() + z);
+            : new BlockPos((double) this.getX() + x, (double) this.getY() + y, (double) this.getZ() + z);
     }
 
     /**
@@ -65,7 +65,7 @@ public class BlockPos extends Vec3i {
      */
     public BlockPos add(Vec3i vec) {
         return vec.getX() == 0 && vec.getY() == 0 && vec.getZ() == 0 ? this
-                : new BlockPos(this.getX() + vec.getX(), this.getY() + vec.getY(), this.getZ() + vec.getZ());
+            : new BlockPos(this.getX() + vec.getX(), this.getY() + vec.getY(), this.getZ() + vec.getZ());
     }
 
     /**
@@ -73,7 +73,7 @@ public class BlockPos extends Vec3i {
      */
     public BlockPos subtract(Vec3i vec) {
         return vec.getX() == 0 && vec.getY() == 0 && vec.getZ() == 0 ? this
-                : new BlockPos(this.getX() - vec.getX(), this.getY() - vec.getY(), this.getZ() - vec.getZ());
+            : new BlockPos(this.getX() - vec.getX(), this.getY() - vec.getY(), this.getZ() - vec.getZ());
     }
 
     /**
@@ -172,10 +172,10 @@ public class BlockPos extends Vec3i {
      */
     public BlockPos offset(EnumFacing facing, int n) {
         return n == 0 ? this
-                : new BlockPos(
-                        this.getX() + facing.getFrontOffsetX() * n,
-                        this.getY() + facing.getFrontOffsetY() * n,
-                        this.getZ() + facing.getFrontOffsetZ() * n);
+            : new BlockPos(
+                this.getX() + facing.getFrontOffsetX() * n,
+                this.getY() + facing.getFrontOffsetY() * n,
+                this.getZ() + facing.getFrontOffsetZ() * n);
     }
 
     /**
@@ -183,9 +183,9 @@ public class BlockPos extends Vec3i {
      */
     public BlockPos crossProduct(Vec3i vec) {
         return new BlockPos(
-                this.getY() * vec.getZ() - this.getZ() * vec.getY(),
-                this.getZ() * vec.getX() - this.getX() * vec.getZ(),
-                this.getX() * vec.getY() - this.getY() * vec.getX());
+            this.getY() * vec.getZ() - this.getZ() * vec.getY(),
+            this.getZ() * vec.getX() - this.getX() * vec.getZ(),
+            this.getX() * vec.getY() - this.getY() * vec.getX());
     }
 
     /**
@@ -193,7 +193,7 @@ public class BlockPos extends Vec3i {
      */
     public long toLong() {
         return ((long) this.getX() & X_MASK) << X_SHIFT | ((long) this.getY() & Y_MASK) << Y_SHIFT
-                | ((long) this.getZ() & Z_MASK) << 0;
+            | ((long) this.getZ() & Z_MASK) << 0;
     }
 
     /**
@@ -208,13 +208,13 @@ public class BlockPos extends Vec3i {
 
     public static Iterable<BlockPos> getAllInBox(BlockPos from, BlockPos to) {
         final BlockPos blockpos = new BlockPos(
-                Math.min(from.getX(), to.getX()),
-                Math.min(from.getY(), to.getY()),
-                Math.min(from.getZ(), to.getZ()));
+            Math.min(from.getX(), to.getX()),
+            Math.min(from.getY(), to.getY()),
+            Math.min(from.getZ(), to.getZ()));
         final BlockPos blockpos1 = new BlockPos(
-                Math.max(from.getX(), to.getX()),
-                Math.max(from.getY(), to.getY()),
-                Math.max(from.getZ(), to.getZ()));
+            Math.max(from.getX(), to.getX()),
+            Math.max(from.getY(), to.getY()),
+            Math.max(from.getZ(), to.getZ()));
         return new Iterable<BlockPos>() {
 
             public Iterator<BlockPos> iterator() {
@@ -255,13 +255,13 @@ public class BlockPos extends Vec3i {
 
     public static Iterable<BlockPos.MutableBlockPos> getAllInBoxMutable(BlockPos from, BlockPos to) {
         final BlockPos blockpos = new BlockPos(
-                Math.min(from.getX(), to.getX()),
-                Math.min(from.getY(), to.getY()),
-                Math.min(from.getZ(), to.getZ()));
+            Math.min(from.getX(), to.getX()),
+            Math.min(from.getY(), to.getY()),
+            Math.min(from.getZ(), to.getZ()));
         final BlockPos blockpos1 = new BlockPos(
-                Math.max(from.getX(), to.getX()),
-                Math.max(from.getY(), to.getY()),
-                Math.max(from.getZ(), to.getZ()));
+            Math.max(from.getX(), to.getX()),
+            Math.max(from.getY(), to.getY()),
+            Math.max(from.getZ(), to.getZ()));
         return new Iterable<BlockPos.MutableBlockPos>() {
 
             public Iterator<BlockPos.MutableBlockPos> iterator() {
@@ -272,9 +272,9 @@ public class BlockPos extends Vec3i {
                     protected BlockPos.MutableBlockPos computeNext() {
                         if (this.theBlockPos == null) {
                             this.theBlockPos = new BlockPos.MutableBlockPos(
-                                    blockpos.getX(),
-                                    blockpos.getY(),
-                                    blockpos.getZ());
+                                blockpos.getX(),
+                                blockpos.getY(),
+                                blockpos.getZ());
                             return this.theBlockPos;
                         } else if (this.theBlockPos.equals(blockpos1)) {
                             return (BlockPos.MutableBlockPos) this.endOfData();

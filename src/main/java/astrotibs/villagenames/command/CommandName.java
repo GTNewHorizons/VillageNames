@@ -34,8 +34,8 @@ public class CommandName extends CommandBase {
     private static final String NAME_CUSTOM = "Custom";
     private static final int maxLoops = 10; // Maximum number of outputs from the name generator command
     private static final String[] nameChoices = { NAME_ALIENVILLAGE, NAME_ALIEN, NAME_ANGEL, NAME_CUSTOM, NAME_DEMON,
-            NAME_DRAGON, NAME_ENDCITY, NAME_FORTRESS, NAME_GOBLIN, NAME_GOLEM, NAME_MANSION, NAME_MINESHAFT,
-            NAME_MONUMENT, NAME_PET, NAME_STRONGHOLD, NAME_TEMPLE, NAME_VILLAGE, NAME_VILLAGER };
+        NAME_DRAGON, NAME_ENDCITY, NAME_FORTRESS, NAME_GOBLIN, NAME_GOLEM, NAME_MANSION, NAME_MINESHAFT, NAME_MONUMENT,
+        NAME_PET, NAME_STRONGHOLD, NAME_TEMPLE, NAME_VILLAGE, NAME_VILLAGER };
 
     @Override
     public String getCommandName() {

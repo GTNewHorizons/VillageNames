@@ -259,17 +259,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsAccessory1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsAccessory1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -279,10 +279,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsAccessory1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -298,18 +298,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -319,10 +319,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -338,18 +338,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsAnimalPen2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsAnimalPen2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -359,10 +359,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsAnimalPen2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -378,18 +378,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsAnimalPen3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsAnimalPen3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -399,10 +399,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsAnimalPen3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -417,17 +417,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsArmorerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsArmorerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -437,10 +437,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsArmorerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -455,17 +455,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsBigHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsBigHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -475,10 +475,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsBigHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -494,18 +494,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsButcherShop1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsButcherShop1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -515,10 +515,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsButcherShop1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -534,18 +534,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsButcherShop2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsButcherShop2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -555,10 +555,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsButcherShop2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -573,17 +573,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsCartographer1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsCartographer1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -593,10 +593,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsCartographer1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -611,17 +611,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsFisherCottage1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsFisherCottage1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -631,10 +631,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsFisherCottage1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -649,17 +649,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -669,10 +669,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -687,17 +687,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsLargeFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsLargeFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -707,10 +707,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsLargeFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -725,17 +725,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsLibrary1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsLibrary1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -745,10 +745,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsLibrary1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -763,17 +763,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsLibrary2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsLibrary2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -783,10 +783,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsLibrary2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -801,17 +801,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsMasonsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsMasonsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -821,10 +821,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsMasonsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -839,17 +839,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -859,10 +859,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -877,17 +877,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -897,10 +897,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -915,17 +915,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsMeetingPoint4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsMeetingPoint4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -935,10 +935,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsMeetingPoint4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -953,17 +953,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsMeetingPoint5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsMeetingPoint5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -973,10 +973,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsMeetingPoint5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -992,18 +992,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsShepherdsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsShepherdsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1013,10 +1013,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsShepherdsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1031,17 +1031,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1051,10 +1051,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1069,17 +1069,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1089,10 +1089,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1107,17 +1107,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1127,10 +1127,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1145,17 +1145,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1165,10 +1165,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1183,17 +1183,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1203,10 +1203,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1221,17 +1221,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1241,10 +1241,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1259,17 +1259,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse6.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse6.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1279,10 +1279,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse6
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1297,17 +1297,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse7.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse7.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1317,10 +1317,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse7
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1335,17 +1335,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsSmallHouse8.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsSmallHouse8.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1355,10 +1355,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsSmallHouse8
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1374,18 +1374,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsStable1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsStable1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1395,10 +1395,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsStable1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1414,18 +1414,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsStable2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsStable2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1435,10 +1435,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsStable2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1453,17 +1453,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1473,10 +1473,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1491,17 +1491,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsTemple3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsTemple3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1511,10 +1511,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsTemple3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1529,17 +1529,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsTemple4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsTemple4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1549,10 +1549,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsTemple4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1567,17 +1567,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsToolSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsToolSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1587,10 +1587,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsToolSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1605,17 +1605,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsWeaponsmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsWeaponsmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1625,10 +1625,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsWeaponsmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1643,17 +1643,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    PlainsStreetDecor1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                PlainsStreetDecor1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1663,10 +1663,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return PlainsStreetDecor1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1682,18 +1682,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1703,10 +1703,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1722,18 +1722,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertAnimalPen2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertAnimalPen2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1743,10 +1743,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertAnimalPen2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1761,17 +1761,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertArmorer1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertArmorer1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1781,10 +1781,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertArmorer1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1800,18 +1800,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertButcherShop1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertButcherShop1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1821,10 +1821,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertButcherShop1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1839,17 +1839,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertCartographerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertCartographerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1859,10 +1859,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertCartographerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1877,17 +1877,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1897,10 +1897,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1915,17 +1915,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertFarm2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertFarm2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1935,10 +1935,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertFarm2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1953,17 +1953,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertFisher1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertFisher1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -1973,10 +1973,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertFisher1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -1991,17 +1991,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2011,10 +2011,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2029,17 +2029,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertLargeFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertLargeFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2049,10 +2049,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertLargeFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2067,17 +2067,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertLibrary1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertLibrary1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2087,10 +2087,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertLibrary1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2105,17 +2105,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertMason1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertMason1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2125,10 +2125,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertMason1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2143,17 +2143,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2163,10 +2163,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2181,17 +2181,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2201,10 +2201,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2220,18 +2220,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertShepherdHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertShepherdHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2241,10 +2241,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertShepherdHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2259,17 +2259,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2279,10 +2279,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2297,17 +2297,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2317,10 +2317,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2335,17 +2335,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2355,10 +2355,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2373,17 +2373,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2393,10 +2393,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2411,17 +2411,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2431,10 +2431,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2449,17 +2449,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse6.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse6.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2469,10 +2469,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse6
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2487,17 +2487,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse7.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse7.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2507,10 +2507,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse7
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2525,17 +2525,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertSmallHouse8.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertSmallHouse8.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2545,10 +2545,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertSmallHouse8
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2563,17 +2563,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2583,10 +2583,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2601,17 +2601,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertTemple1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertTemple1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2621,10 +2621,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertTemple1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2639,17 +2639,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertTemple2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertTemple2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2659,10 +2659,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertTemple2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2677,17 +2677,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertToolSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertToolSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2697,10 +2697,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertToolSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2715,17 +2715,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertWeaponsmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertWeaponsmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2735,10 +2735,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertWeaponsmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2753,17 +2753,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertStreetDecor1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertStreetDecor1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2773,10 +2773,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertStreetDecor1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2791,17 +2791,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertStreetSubstitute1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertStreetSubstitute1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2811,10 +2811,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertStreetSubstitute1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2829,17 +2829,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertStreetSubstitute2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertStreetSubstitute2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2849,10 +2849,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertStreetSubstitute2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2867,17 +2867,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    DesertStreetSubstitute3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                DesertStreetSubstitute3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2887,10 +2887,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return DesertStreetSubstitute3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2906,18 +2906,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2927,10 +2927,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2945,17 +2945,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaArmorer2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaArmorer2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -2965,10 +2965,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaArmorer2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -2983,17 +2983,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaArmorerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaArmorerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3003,10 +3003,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaArmorerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3022,18 +3022,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaButcherShop1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaButcherShop1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3043,10 +3043,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaButcherShop1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3061,17 +3061,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaCartographerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaCartographerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3081,10 +3081,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaCartographerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3099,17 +3099,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaFisherCottage1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaFisherCottage1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3119,10 +3119,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaFisherCottage1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3137,17 +3137,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3157,10 +3157,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3175,17 +3175,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaLargeFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaLargeFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3195,10 +3195,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaLargeFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3213,17 +3213,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaLargeFarm2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaLargeFarm2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3233,10 +3233,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaLargeFarm2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3251,17 +3251,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaLibrary1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaLibrary1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3271,10 +3271,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaLibrary1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3289,17 +3289,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaMasonsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaMasonsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3309,10 +3309,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaMasonsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3327,17 +3327,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3347,10 +3347,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3365,17 +3365,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3385,10 +3385,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3403,17 +3403,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaMediumHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaMediumHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3423,10 +3423,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaMediumHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3441,17 +3441,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaMediumHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaMediumHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3461,10 +3461,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaMediumHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3480,18 +3480,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaShepherdsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaShepherdsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3501,10 +3501,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaShepherdsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3519,17 +3519,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3539,10 +3539,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3557,17 +3557,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3577,10 +3577,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3595,17 +3595,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3615,10 +3615,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3633,17 +3633,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3653,10 +3653,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3671,17 +3671,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3691,10 +3691,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3709,17 +3709,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3729,10 +3729,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3747,17 +3747,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3767,10 +3767,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3785,17 +3785,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaTemple1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaTemple1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3805,10 +3805,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaTemple1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3823,17 +3823,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaToolSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaToolSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3843,10 +3843,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaToolSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3861,17 +3861,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaWeaponsmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaWeaponsmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3881,10 +3881,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaWeaponsmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3899,17 +3899,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaWeaponsmith2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaWeaponsmith2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3919,10 +3919,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaWeaponsmith2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3937,17 +3937,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    TaigaStreetDecor1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                TaigaStreetDecor1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3957,10 +3957,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return TaigaStreetDecor1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -3976,18 +3976,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -3997,10 +3997,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4016,18 +4016,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaAnimalPen2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaAnimalPen2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4037,10 +4037,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaAnimalPen2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4056,18 +4056,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaAnimalPen3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaAnimalPen3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4077,10 +4077,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaAnimalPen3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4095,17 +4095,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaArmorer1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaArmorer1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4115,10 +4115,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaArmorer1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4134,18 +4134,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaButchersShop1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaButchersShop1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4155,10 +4155,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaButchersShop1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4174,18 +4174,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaButchersShop2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaButchersShop2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4195,10 +4195,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaButchersShop2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4213,17 +4213,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaCartographer1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaCartographer1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4233,10 +4233,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaCartographer1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4251,17 +4251,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaFisherCottage1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaFisherCottage1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4271,10 +4271,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaFisherCottage1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4289,17 +4289,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4309,10 +4309,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4327,17 +4327,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaLargeFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaLargeFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4347,10 +4347,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaLargeFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4365,17 +4365,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaLargeFarm2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaLargeFarm2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4385,10 +4385,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaLargeFarm2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4403,17 +4403,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaLibrary1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaLibrary1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4423,10 +4423,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaLibrary1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4441,17 +4441,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaMason1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaMason1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4461,10 +4461,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaMason1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4479,17 +4479,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4499,10 +4499,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4517,17 +4517,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4537,10 +4537,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4556,18 +4556,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaShepherd1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaShepherd1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4577,10 +4577,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaShepherd1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4595,17 +4595,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4615,10 +4615,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4633,17 +4633,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4653,10 +4653,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4671,17 +4671,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4691,10 +4691,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4709,17 +4709,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4729,10 +4729,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4747,17 +4747,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4767,10 +4767,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4785,17 +4785,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4805,10 +4805,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4823,17 +4823,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse6.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse6.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4843,10 +4843,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse6
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4861,17 +4861,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse7.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse7.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4881,10 +4881,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse7
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4899,17 +4899,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaSmallHouse8.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaSmallHouse8.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4919,10 +4919,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaSmallHouse8
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4937,17 +4937,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4957,10 +4957,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -4975,17 +4975,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaTemple1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaTemple1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -4995,10 +4995,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaTemple1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5013,17 +5013,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaTemple2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaTemple2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5033,10 +5033,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaTemple2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5051,17 +5051,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaToolSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaToolSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5071,10 +5071,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaToolSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5089,17 +5089,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaWeaponsmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaWeaponsmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5109,10 +5109,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaWeaponsmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5127,17 +5127,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaWeaponsmith2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaWeaponsmith2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5147,10 +5147,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaWeaponsmith2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5165,17 +5165,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaStreetDecor1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaStreetDecor1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5185,10 +5185,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaStreetDecor1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5203,17 +5203,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaStreetSubstitute1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaStreetSubstitute1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5223,10 +5223,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaStreetSubstitute1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5241,17 +5241,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaStreetSubstitute2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaStreetSubstitute2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5261,10 +5261,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaStreetSubstitute2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5279,17 +5279,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaStreetSubstitute3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaStreetSubstitute3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5299,10 +5299,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaStreetSubstitute3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5317,17 +5317,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SavannaStreetSubstitute4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SavannaStreetSubstitute4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5337,10 +5337,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SavannaStreetSubstitute4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5356,18 +5356,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5377,10 +5377,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5396,18 +5396,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyAnimalPen2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyAnimalPen2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5417,10 +5417,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyAnimalPen2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5435,17 +5435,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyArmorerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyArmorerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5455,10 +5455,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyArmorerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5473,17 +5473,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyArmorerHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyArmorerHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5493,10 +5493,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyArmorerHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5512,18 +5512,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyButchersShop1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyButchersShop1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5533,10 +5533,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyButchersShop1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5552,18 +5552,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyButchersShop2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyButchersShop2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5573,10 +5573,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyButchersShop2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5591,17 +5591,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyCartographerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyCartographerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5611,10 +5611,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyCartographerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5629,17 +5629,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyFarm1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyFarm1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5649,10 +5649,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyFarm1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5667,17 +5667,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyFarm2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyFarm2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5687,10 +5687,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyFarm2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5705,17 +5705,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyFisherCottage.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyFisherCottage.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5725,10 +5725,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyFisherCottage
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5743,17 +5743,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5763,10 +5763,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5781,17 +5781,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyLibrary1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyLibrary1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5801,10 +5801,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyLibrary1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5819,17 +5819,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyMasonsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyMasonsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5839,10 +5839,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyMasonsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5857,17 +5857,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyMasonsHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyMasonsHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5877,10 +5877,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyMasonsHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5895,17 +5895,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5915,10 +5915,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5933,17 +5933,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5953,10 +5953,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -5971,17 +5971,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyMediumHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyMediumHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -5991,10 +5991,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyMediumHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6010,18 +6010,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyShepherdsHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyShepherdsHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6031,10 +6031,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyShepherdsHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6049,17 +6049,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6069,10 +6069,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6087,17 +6087,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6107,10 +6107,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6125,17 +6125,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6145,10 +6145,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6163,17 +6163,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6183,10 +6183,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6201,17 +6201,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6221,10 +6221,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6239,17 +6239,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse6.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse6.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6259,10 +6259,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse6
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6277,17 +6277,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse7.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse7.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6297,10 +6297,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse7
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6315,17 +6315,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowySmallHouse8.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowySmallHouse8.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6335,10 +6335,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowySmallHouse8
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6353,17 +6353,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6373,10 +6373,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6391,17 +6391,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyTemple1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyTemple1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6411,10 +6411,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyTemple1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6429,17 +6429,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyToolSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyToolSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6449,10 +6449,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyToolSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6467,17 +6467,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyWeaponSmith1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyWeaponSmith1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6487,10 +6487,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyWeaponSmith1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6505,17 +6505,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SnowyStreetDecor1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SnowyStreetDecor1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6525,10 +6525,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SnowyStreetDecor1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6543,17 +6543,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleArmorerHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleArmorerHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6563,10 +6563,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleArmorerHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6582,18 +6582,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleButcherShop.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleButcherShop.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6603,10 +6603,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleButcherShop
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6621,17 +6621,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleCartographerHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleCartographerHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6641,10 +6641,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleCartographerHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6659,17 +6659,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleCartographerHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleCartographerHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6679,10 +6679,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleCartographerHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6697,17 +6697,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleFisherCottage.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleFisherCottage.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6717,10 +6717,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleFisherCottage
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6735,17 +6735,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleFletcherHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleFletcherHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6755,10 +6755,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleFletcherHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6773,17 +6773,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleFletcherHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleFletcherHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6793,10 +6793,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleFletcherHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6811,17 +6811,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleLargeHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleLargeHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6831,10 +6831,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleLargeHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6849,17 +6849,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleLibrary.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleLibrary.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6869,10 +6869,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleLibrary
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6887,17 +6887,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleMasonHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleMasonHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6907,10 +6907,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleMasonHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6925,17 +6925,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6945,10 +6945,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -6963,17 +6963,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -6983,10 +6983,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7001,17 +7001,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleMediumHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleMediumHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7021,10 +7021,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleMediumHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7039,17 +7039,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleMediumHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleMediumHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7059,10 +7059,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleMediumHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7077,17 +7077,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleShepherdHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleShepherdHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7097,10 +7097,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleShepherdHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7115,17 +7115,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7135,10 +7135,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7153,17 +7153,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7173,10 +7173,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7191,17 +7191,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7211,10 +7211,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7229,17 +7229,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7249,10 +7249,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7267,17 +7267,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7287,10 +7287,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7305,17 +7305,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse6.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse6.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7325,10 +7325,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse6
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7343,17 +7343,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse7.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse7.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7363,10 +7363,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse7
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7381,17 +7381,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSmallHouse8.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSmallHouse8.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7401,10 +7401,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSmallHouse8
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7420,18 +7420,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleStable.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleStable.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7441,10 +7441,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleStable
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7459,17 +7459,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleSteppedFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleSteppedFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7479,10 +7479,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleSteppedFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7498,18 +7498,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleStoneAnimalPen.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleStoneAnimalPen.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7519,10 +7519,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleStoneAnimalPen
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7537,17 +7537,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleTamedFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleTamedFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7557,10 +7557,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleTamedFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7575,17 +7575,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleTannery1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleTannery1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7595,10 +7595,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleTannery1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7613,17 +7613,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleTannery2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleTannery2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7633,10 +7633,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleTannery2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7651,17 +7651,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleTemple.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleTemple.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7671,10 +7671,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleTemple
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7689,17 +7689,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleToolSmithy1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleToolSmithy1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7709,10 +7709,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleToolSmithy1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7727,17 +7727,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleToolSmithy2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleToolSmithy2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7747,10 +7747,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleToolSmithy2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7765,17 +7765,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleWeaponSmithy.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleWeaponSmithy.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7785,10 +7785,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleWeaponSmithy
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7803,17 +7803,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleWildFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleWildFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7823,10 +7823,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleWildFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7842,18 +7842,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleWoodAnimalPen.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleWoodAnimalPen.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7863,10 +7863,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleWoodAnimalPen
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7881,17 +7881,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleStreetDecor.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleStreetDecor.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7901,10 +7901,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleStreetDecor
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7919,17 +7919,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleRoadAccent1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleRoadAccent1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7939,10 +7939,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleRoadAccent1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7957,17 +7957,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    JungleRoadAccent2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                JungleRoadAccent2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -7977,10 +7977,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return JungleRoadAccent2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -7996,18 +7996,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampAnimalPen1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampAnimalPen1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8017,10 +8017,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampAnimalPen1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8036,18 +8036,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampAnimalPen2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampAnimalPen2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8057,10 +8057,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampAnimalPen2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8075,17 +8075,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampArmorerHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampArmorerHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8095,10 +8095,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampArmorerHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8114,18 +8114,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampButcherShop.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampButcherShop.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8135,10 +8135,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampButcherShop
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8153,17 +8153,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampCartographerHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampCartographerHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8173,10 +8173,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampCartographerHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8191,17 +8191,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampFisherCottage1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampFisherCottage1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8211,10 +8211,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampFisherCottage1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8229,17 +8229,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampFisherCottage2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampFisherCottage2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8249,10 +8249,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampFisherCottage2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8267,17 +8267,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampFletcherHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampFletcherHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8287,10 +8287,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampFletcherHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8305,17 +8305,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampHutFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampHutFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8325,10 +8325,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampHutFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8343,17 +8343,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampHorribleSecret.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampHorribleSecret.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8363,10 +8363,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampHorribleSecret
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8381,17 +8381,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampLargeHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampLargeHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8401,10 +8401,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampLargeHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8419,17 +8419,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampLibrary.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampLibrary.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8439,10 +8439,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampLibrary
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8457,17 +8457,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampMasonHouse.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampMasonHouse.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8477,10 +8477,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampMasonHouse
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8495,17 +8495,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampMediumHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampMediumHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8515,10 +8515,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampMediumHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8533,17 +8533,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampMediumHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampMediumHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8553,10 +8553,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampMediumHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8572,18 +8572,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampShepherdHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampShepherdHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8593,10 +8593,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampShepherdHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8612,18 +8612,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampShepherdHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampShepherdHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8633,10 +8633,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampShepherdHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8651,17 +8651,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampSmallHouse1.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampSmallHouse1.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8671,10 +8671,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampSmallHouse1
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8689,17 +8689,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampSmallHouse2.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampSmallHouse2.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8709,10 +8709,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampSmallHouse2
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8727,17 +8727,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampSmallHouse3.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampSmallHouse3.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8747,10 +8747,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampSmallHouse3
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8765,17 +8765,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampSmallHouse4.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampSmallHouse4.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8785,10 +8785,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampSmallHouse4
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8803,17 +8803,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampSmallHouse5.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampSmallHouse5.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8823,10 +8823,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampSmallHouse5
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8842,18 +8842,18 @@ public class StructureCreationHandlers {
             // This component spawns animals, so it might be switched off
             double weightDouble = ali.get(0);
             int weightStochastic = (VillageGeneratorConfigHandler.villageAnimalRestrictionLevel < 3)
-                    ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
-                    : 0;
+                ? MathHelper.floor_double(weightDouble) + (random.nextDouble() < (weightDouble % 1) ? 1 : 0)
+                : 0;
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampStable.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampStable.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8863,10 +8863,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampStable
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8881,17 +8881,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampTannery.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampTannery.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8901,10 +8901,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampTannery
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8919,17 +8919,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampTemple.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampTemple.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8939,10 +8939,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampTemple
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8957,17 +8957,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampToolSmithy.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampToolSmithy.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -8977,10 +8977,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampToolSmithy
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -8995,17 +8995,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampWeaponSmithy.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampWeaponSmithy.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -9015,10 +9015,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampWeaponSmithy
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -9033,17 +9033,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampWildFarm.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampWildFarm.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -9053,10 +9053,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampWildFarm
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -9071,17 +9071,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampStreetDecor.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampStreetDecor.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -9091,10 +9091,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampStreetDecor
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -9109,17 +9109,17 @@ public class StructureCreationHandlers {
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             double weightDouble = ali.get(0);
             int weightStochastic = MathHelper.floor_double(weightDouble)
-                    + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (weightDouble % 1) ? 1 : 0);
             double lowerLimitDouble = villageSize * ali.get(1) + ali.get(2);
             int lowerLimitStochastic = MathHelper.floor_double(lowerLimitDouble)
-                    + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (lowerLimitDouble % 1) ? 1 : 0);
             double upperLimitDouble = villageSize * ali.get(3) + ali.get(4);
             int upperLimitStochastic = MathHelper.floor_double(upperLimitDouble)
-                    + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
+                + (random.nextDouble() < (upperLimitDouble % 1) ? 1 : 0);
             return new PieceWeight(
-                    SwampRoadAccent.class,
-                    weightStochastic,
-                    MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
+                SwampRoadAccent.class,
+                weightStochastic,
+                MathHelper.getRandomIntegerInRange(random, lowerLimitStochastic, upperLimitStochastic));
         }
 
         @Override
@@ -9129,10 +9129,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SwampRoadAccent
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }
@@ -9144,11 +9144,11 @@ public class StructureCreationHandlers {
         @Override
         public PieceWeight getVillagePieceWeight(Random random, int villageSize) {
             return new PieceWeight(
-                    SignPost.class,
-                    (GeneralConfig.antiqueAtlasPlaceSignPosts && Block.getBlockFromName(ModObjects.signPost_SP) != null)
-                            ? Integer.MAX_VALUE / 3
-                            : 0,
-                    1);
+                SignPost.class,
+                (GeneralConfig.antiqueAtlasPlaceSignPosts && Block.getBlockFromName(ModObjects.signPost_SP) != null)
+                    ? Integer.MAX_VALUE / 3
+                    : 0,
+                1);
         }
 
         @Override
@@ -9158,10 +9158,10 @@ public class StructureCreationHandlers {
 
         @Override
         public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int x,
-                int y, int z, int horizIndex, int componentType) {
+            int y, int z, int horizIndex, int componentType) {
             if (startPiece instanceof StartVN) {
                 return SignPost
-                        .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
+                    .buildComponent((StartVN) startPiece, pieces, random, x, y, z, horizIndex, componentType);
             }
             return null;
         }

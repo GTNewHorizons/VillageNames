@@ -37,12 +37,12 @@ public class NetworkHelper {
     public static void sendModernVillagerSkinMessage(int villagerID, ExtendedVillager ev, EntityPlayer target) {
         if (GeneralConfig.villagerCareers && (villagerID > 0 && ev != null && ev.getCareer() > 0)) {
             MessageModernVillagerSkin message = new MessageModernVillagerSkin(
-                    villagerID,
-                    ev.getProfession(),
-                    ev.getCareer(),
-                    ev.getBiomeType(),
-                    ev.getProfessionLevel(),
-                    ev.getSkinTone());
+                villagerID,
+                ev.getProfession(),
+                ev.getCareer(),
+                ev.getBiomeType(),
+                ev.getProfessionLevel(),
+                ev.getSkinTone());
 
             // Sends a message to the player, with the zombie extra info
             VillageNames.VNNetworkWrapper.sendTo(message, (EntityPlayerMP) target);
@@ -84,18 +84,23 @@ public class NetworkHelper {
      * Server -> Client
      */
     public static void sendZombieVillagerProfessionMessage(int zombieId, ExtendedZombieVillager properties,
-            EntityPlayer target) {
-        if ((GeneralConfig.villagerCareers && (zombieId > 0 && properties != null
-                && properties.getProfession() >= 0
-                && properties.getCareer() >= 0)) // Career 0 condition to allow non-standard profs
-                || (zombieId > 0 && properties != null && properties.getProfession() >= 0)) {
+        EntityPlayer target) {
+        if ((GeneralConfig.villagerCareers
+            && (zombieId > 0 && properties != null && properties.getProfession() >= 0 && properties.getCareer() >= 0)) // Career
+                                                                                                                       // 0
+                                                                                                                       // condition
+                                                                                                                       // to
+                                                                                                                       // allow
+                                                                                                                       // non-standard
+                                                                                                                       // profs
+            || (zombieId > 0 && properties != null && properties.getProfession() >= 0)) {
             MessageZombieVillagerProfession message = new MessageZombieVillagerProfession(
-                    zombieId,
-                    properties.getProfession(),
-                    properties.getCareer(),
-                    properties.getBiomeType(),
-                    properties.getProfessionLevel(),
-                    properties.getSkinTone());
+                zombieId,
+                properties.getProfession(),
+                properties.getCareer(),
+                properties.getBiomeType(),
+                properties.getProfessionLevel(),
+                properties.getSkinTone());
             if (GeneralConfig.debugMessages) { // Debug
                 // LogHelper.info("** Sending Message: Zombie Profession **");
                 LogHelper.info("NetworkHelper > target: " + target);
@@ -112,14 +117,14 @@ public class NetworkHelper {
     // ---------------------------------------------------------------------
 
     public static class ZombieVillagerProfessionHandler
-            implements IMessageHandler<MessageZombieVillagerProfession, IMessage> {
+        implements IMessageHandler<MessageZombieVillagerProfession, IMessage> {
 
         @Override
         public IMessage onMessage(MessageZombieVillagerProfession message, MessageContext ctx) {
 
             if ((GeneralConfig.villagerCareers
-                    && (message.getEntityID() > 0 && message.getProfession() >= 0 && message.getCareer() > 0))
-                    || (message.getEntityID() > 0 && message.getProfession() >= 0)) {
+                && (message.getEntityID() > 0 && message.getProfession() >= 0 && message.getCareer() > 0))
+                || (message.getEntityID() > 0 && message.getProfession() >= 0)) {
                 // Saves the info to be used later, when the entity actually loads
                 ClientInfoTracker.addZombieMessage(message);
 

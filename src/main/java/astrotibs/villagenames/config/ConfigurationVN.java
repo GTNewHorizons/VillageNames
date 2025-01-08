@@ -24,7 +24,7 @@ public class ConfigurationVN extends Configuration {
     }
 
     public String[] getStringListWithoutDefaultsInComment(String name, String category, String[] defaultValue,
-            String comment) {
+        String comment) {
         Property prop = this.get(category, name, defaultValue);
         prop.setLanguageKey(name);
         prop.setValidValues((String[]) null);

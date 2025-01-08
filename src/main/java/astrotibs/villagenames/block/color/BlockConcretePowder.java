@@ -23,30 +23,30 @@ public class BlockConcretePowder extends BlockFalling {
     // @SideOnly(Side.CLIENT)
     private IIcon[] blockIcons = new IIcon[16];
     public static String[] subBlock = { "white", // 0
-            "orange", // 1
-            "magenta", // 2
-            "light_blue", // 3
-            "yellow", // 4
-            "lime", // 5
-            "pink", // 6
-            "gray", // 7
-            "silver", // 8
-            "cyan", // 9
-            "purple", // 10
-            "blue", // 11
-            "brown", // 12
-            "green", // 13
-            "red", // 14
-            "black" // 15
+        "orange", // 1
+        "magenta", // 2
+        "light_blue", // 3
+        "yellow", // 4
+        "lime", // 5
+        "pink", // 6
+        "gray", // 7
+        "silver", // 8
+        "cyan", // 9
+        "purple", // 10
+        "blue", // 11
+        "brown", // 12
+        "green", // 13
+        "red", // 14
+        "black" // 15
     };
 
     public BlockConcretePowder(String unlocalizedName) {
         super(Material.sand);
         this.setBlockName(
-                String.format(
-                        "%s%s",
-                        Reference.MOD_ID.toLowerCase() + ":",
-                        unlocalizedName.substring(unlocalizedName.lastIndexOf(".") + 1)));
+            String.format(
+                "%s%s",
+                Reference.MOD_ID.toLowerCase() + ":",
+                unlocalizedName.substring(unlocalizedName.lastIndexOf(".") + 1)));
         this.setCreativeTab(CreativeTabs.tabBlock);
         this.setHardness(0.5F);
         this.setHarvestLevel("shovel", 0);
@@ -110,12 +110,12 @@ public class BlockConcretePowder extends BlockFalling {
 
                 if (!world.isRemote) {
                     EntityFallingBlockCP entityfallingblock = new EntityFallingBlockCP(
-                            world,
-                            x + 0.5F,
-                            y + 0.5F,
-                            z + 0.5F,
-                            this,
-                            world.getBlockMetadata(x, y, z));
+                        world,
+                        x + 0.5F,
+                        y + 0.5F,
+                        z + 0.5F,
+                        this,
+                        world.getBlockMetadata(x, y, z));
                     this.func_149829_a(entityfallingblock);
                     world.spawnEntityInWorld(entityfallingblock);
                 }
@@ -164,7 +164,8 @@ public class BlockConcretePowder extends BlockFalling {
                     break;
             }
 
-            if (worldIn.getBlock(xo, yo, zo).getMaterial() == Material.water) {
+            if (worldIn.getBlock(xo, yo, zo)
+                .getMaterial() == Material.water) {
                 flag = true;
                 break;
             }

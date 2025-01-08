@@ -50,17 +50,17 @@ public class ItemCodex extends Item {
     @Override
     public String getUnlocalizedName() {
         return String.format(
-                "item.%s%s",
-                Reference.MOD_ID.toLowerCase() + ":",
-                getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+            "item.%s%s",
+            Reference.MOD_ID.toLowerCase() + ":",
+            getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
         return String.format(
-                "item.%s%s",
-                Reference.MOD_ID.toLowerCase() + ":",
-                getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+            "item.%s%s",
+            Reference.MOD_ID.toLowerCase() + ":",
+            getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @SideOnly(Side.CLIENT)
@@ -75,8 +75,11 @@ public class ItemCodex extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister
-                .registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        itemIcon = iconRegister.registerIcon(
+            this.getUnlocalizedName()
+                .substring(
+                    this.getUnlocalizedName()
+                        .indexOf(".") + 1));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
@@ -192,7 +195,7 @@ public class ItemCodex extends Item {
 
                         for (String s : usingOTG ? new String[] { "OTG", "" } : new String[] { "" }) {
                             structureData = (MapGenStructureData) worldIn.perWorldStorage
-                                    .loadData(MapGenStructureData.class, s + structureTypes.get(i));
+                                .loadData(MapGenStructureData.class, s + structureTypes.get(i));
                             if (!(structureData == null)) {
                                 break;
                             }
@@ -200,7 +203,8 @@ public class ItemCodex extends Item {
 
                         NBTTagCompound nbttagcompound = structureData.func_143041_a();
 
-                        Iterator itr = nbttagcompound.func_150296_c().iterator();
+                        Iterator itr = nbttagcompound.func_150296_c()
+                            .iterator();
 
                         while (itr.hasNext()) {
                             Object element = itr.next();
@@ -215,21 +219,23 @@ public class ItemCodex extends Item {
                                     int[] boundingBox = nbttagcompound2.getIntArray("BB");
                                     // Now check to see if the player is inside the feature
                                     if (player.posX >= boundingBox[0] && player.posY >= boundingBox[1]
-                                            && player.posZ >= boundingBox[2]
-                                            && player.posX <= boundingBox[3]
-                                            && player.posY <= boundingBox[4]
-                                            && player.posZ <= boundingBox[5]) { // Player is inside bounding box.
+                                        && player.posZ >= boundingBox[2]
+                                        && player.posX <= boundingBox[3]
+                                        && player.posY <= boundingBox[4]
+                                        && player.posZ <= boundingBox[5]) { // Player is inside bounding box.
 
                                         // Specifically check if this is a Village.
                                         // If so, you can pass this for checking the Ghost Town achievement.
-                                        if (structureTypes.get(i).equals("Village")
-                                                || structureTypes.get(i).equals("OTGVillage")) {
+                                        if (structureTypes.get(i)
+                                            .equals("Village")
+                                            || structureTypes.get(i)
+                                                .equals("OTGVillage")) {
                                             playerIsInVillage = true;
                                         }
 
                                         String structureName;
                                         String[] structureInfoArray = WriteBookHandler
-                                                .tryGetStructureInfo(structureTypes.get(i), boundingBox, worldIn);
+                                            .tryGetStructureInfo(structureTypes.get(i), boundingBox, worldIn);
 
                                         namePrefix = structureInfoArray[0];
                                         nameRoot = structureInfoArray[1];
@@ -251,8 +257,8 @@ public class ItemCodex extends Item {
                                         // below:
 
                                         int[] structureCoords = new int[] { (boundingBox[0] + boundingBox[3]) / 2,
-                                                (boundingBox[1] + boundingBox[4]) / 2,
-                                                (boundingBox[2] + boundingBox[5]) / 2, };
+                                            (boundingBox[1] + boundingBox[4]) / 2,
+                                            (boundingBox[2] + boundingBox[5]) / 2, };
 
                                         // Set a bunch of variables to be used to make the book
                                         bookType = bookTypes.get(i);
@@ -266,52 +272,50 @@ public class ItemCodex extends Item {
                                             if (structureType.equals("Temple")) {
 
                                                 BiomeGenBase biomeYoureIn = world.getBiomeGenForCoords(
-                                                        MathHelper.floor_double(player.posX),
-                                                        MathHelper.floor_double(player.posZ));
+                                                    MathHelper.floor_double(player.posX),
+                                                    MathHelper.floor_double(player.posZ));
                                                 String structure_id = nbttagcompound2.getString("id");
 
                                                 if (structure_id.equals("TeJP") || biomeYoureIn == BiomeGenBase.jungle
-                                                        || biomeYoureIn == BiomeGenBase.jungleHills
-                                                        || biomeYoureIn == BiomeGenBase.jungleEdge) {
+                                                    || biomeYoureIn == BiomeGenBase.jungleHills
+                                                    || biomeYoureIn == BiomeGenBase.jungleEdge) {
                                                     structureType = "JungleTemple";
                                                     structureTitle = "Jungle Temple";
                                                     bookType = "jungletemple";
                                                 } else if (structure_id.equals("TeDP")
-                                                        || biomeYoureIn == BiomeGenBase.desert
-                                                        || biomeYoureIn == BiomeGenBase.desertHills) {
-                                                            structureType = "DesertPyramid";
-                                                            structureTitle = "Desert Pyramid";
-                                                            bookType = "desertpyramid";
-                                                        } else
-                                                    if (structure_id.equals("TeSH")
-                                                            || biomeYoureIn == BiomeGenBase.swampland) {
-                                                                structureType = "SwampHut";
-                                                                structureTitle = "Swamp Hut";
-                                                                bookType = "swamphut";
-                                                            } else
-                                                        if (structure_id.equals("Iglu")
-                                                                || biomeYoureIn == BiomeGenBase.icePlains
-                                                                || biomeYoureIn == BiomeGenBase.coldTaiga
-                                                                || biomeYoureIn == BiomeGenBase.iceMountains
-                                                                || biomeYoureIn == BiomeGenBase.coldBeach
-                                                                || biomeYoureIn == BiomeGenBase.coldTaigaHills) {
-                                                                    structureType = "Igloo";
-                                                                    structureTitle = "Igloo";
-                                                                    bookType = "igloo";
-                                                                }
+                                                    || biomeYoureIn == BiomeGenBase.desert
+                                                    || biomeYoureIn == BiomeGenBase.desertHills) {
+                                                        structureType = "DesertPyramid";
+                                                        structureTitle = "Desert Pyramid";
+                                                        bookType = "desertpyramid";
+                                                    } else if (structure_id.equals("TeSH")
+                                                        || biomeYoureIn == BiomeGenBase.swampland) {
+                                                            structureType = "SwampHut";
+                                                            structureTitle = "Swamp Hut";
+                                                            bookType = "swamphut";
+                                                        } else if (structure_id.equals("Iglu")
+                                                            || biomeYoureIn == BiomeGenBase.icePlains
+                                                            || biomeYoureIn == BiomeGenBase.coldTaiga
+                                                            || biomeYoureIn == BiomeGenBase.iceMountains
+                                                            || biomeYoureIn == BiomeGenBase.coldBeach
+                                                            || biomeYoureIn == BiomeGenBase.coldTaigaHills) {
+                                                                structureType = "Igloo";
+                                                                structureTitle = "Igloo";
+                                                                bookType = "igloo";
+                                                            }
                                             }
                                         } catch (Exception e) {} // Something went wrong, so it'll just use the default
                                                                  // "temple" stuff.
 
                                         if (structureInfoArray[0] == null && structureInfoArray[1] == null
-                                                && structureInfoArray[2] == null) {
+                                            && structureInfoArray[2] == null) {
                                             // Structure has no name. Generate it here.
 
                                             // forWorld(World world, String key, String toptagIn)
                                             VNWorldDataStructure data = VNWorldDataStructure.forWorld(
-                                                    world,
-                                                    "villagenames3_" + structureTypes.get(i),
-                                                    "NamedStructures");
+                                                world,
+                                                "villagenames3_" + structureTypes.get(i),
+                                                "NamedStructures");
 
                                             signX = structureCoords[0];
                                             signY = structureCoords[1];
@@ -319,21 +323,20 @@ public class ItemCodex extends Item {
 
                                             Random deterministic = new Random();
                                             deterministic.setSeed(
-                                                    world.getSeed()
-                                                            + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
+                                                world.getSeed() + FunctionsVN.getUniqueLongForXYZ(signX, signY, signZ));
                                             structureInfoArray = NameGenerator
-                                                    .newRandomName(nameTypes.get(i), deterministic);
+                                                .newRandomName(nameTypes.get(i), deterministic);
 
                                             // Generate banner info, regardless of if we make a banner.
                                             Object[] newRandomBanner = BannerGenerator
-                                                    .randomBannerArrays(deterministic, -1, -1);
+                                                .randomBannerArrays(deterministic, -1, -1);
                                             ArrayList<String> patternArray = (ArrayList<String>) newRandomBanner[0];
                                             ArrayList<Integer> colorArray = (ArrayList<Integer>) newRandomBanner[1];
                                             ItemStack villageBanner = BannerGenerator
-                                                    .makeBanner(patternArray, colorArray);
+                                                .makeBanner(patternArray, colorArray);
                                             int townColorMeta = 15 - colorArray.get(0);
                                             int townColorMeta2 = colorArray.size() == 1 ? townColorMeta
-                                                    : 15 - colorArray.get(1);
+                                                : 15 - colorArray.get(1);
 
                                             headerTags = structureInfoArray[0];
                                             namePrefix = structureInfoArray[1];
@@ -364,8 +367,8 @@ public class ItemCodex extends Item {
                                             // generated once you do.
                                             if (villageBanner != null) {
                                                 nbttagcompound1.setTag(
-                                                        "BlockEntityTag",
-                                                        BannerGenerator.getNBTFromBanner(villageBanner));
+                                                    "BlockEntityTag",
+                                                    BannerGenerator.getNBTFromBanner(villageBanner));
                                             }
 
                                             nbttaglist.appendTag(nbttagcompound1);
@@ -374,23 +377,24 @@ public class ItemCodex extends Item {
                                             // name.
                                             // NBTTagCompound tagCompound = data.getData();
 
-                                            data.getData().setTag(
+                                            data.getData()
+                                                .setTag(
                                                     (namePrefix + " " + nameRoot + " " + nameSuffix)
-                                                            .trim() + ", x" + signX + " y" + signY + " z" + signZ,
+                                                        .trim() + ", x" + signX + " y" + signY + " z" + signZ,
                                                     nbttaglist);
                                             data.markDirty();
 
                                             structureName = structureInfoArray[1] + " "
-                                                    + structureInfoArray[2]
-                                                    + " "
-                                                    + structureInfoArray[3];
+                                                + structureInfoArray[2]
+                                                + " "
+                                                + structureInfoArray[3];
                                             structureName = structureName.trim();
                                         } else {
                                             // Structure has a name. Unpack it here.
                                             structureName = structureInfoArray[0] + " "
-                                                    + structureInfoArray[1]
-                                                    + " "
-                                                    + structureInfoArray[2];
+                                                + structureInfoArray[1]
+                                                + " "
+                                                + structureInfoArray[2];
                                             structureName = structureName.trim();
                                         }
 
@@ -402,15 +406,16 @@ public class ItemCodex extends Item {
 
                                             // Get list of structures that the player used a Codex in
                                             JsonSerializableSet jsonserializableset = (JsonSerializableSet) playerMP
-                                                    .func_147099_x().func_150870_b(VillageNames.archaeologist);
+                                                .func_147099_x()
+                                                .func_150870_b(VillageNames.archaeologist);
 
                                             if (jsonserializableset == null) {
                                                 // Load in the player statistics file and make a new
                                                 // JsonSerializableList
                                                 jsonserializableset = (JsonSerializableSet) playerMP.func_147099_x()
-                                                        .func_150872_a(
-                                                                VillageNames.archaeologist,
-                                                                new JsonSerializableSet());
+                                                    .func_150872_a(
+                                                        VillageNames.archaeologist,
+                                                        new JsonSerializableSet());
                                             }
 
                                             // Add the structure type you searched into the list if it's not there
@@ -419,11 +424,11 @@ public class ItemCodex extends Item {
 
                                             // Now check the size of that thar list!
                                             if (jsonserializableset.size()
-                                                    >= VillageNames.numberStructuresArchaeologist) {
+                                                >= VillageNames.numberStructuresArchaeologist) {
 
                                                 // Give the player the achievement if they do not have it already
                                                 if (!playerMP.func_147099_x()
-                                                        .hasAchievementUnlocked(VillageNames.archaeologist)) {
+                                                    .hasAchievementUnlocked(VillageNames.archaeologist)) {
                                                     player.triggerAchievement(VillageNames.archaeologist);
                                                     AchievementReward.allFiveAchievements(playerMP);
                                                 }
@@ -449,23 +454,23 @@ public class ItemCodex extends Item {
 
                     // Generate a book using my brand-new handy dandy method
                     WriteBookHandler.codexWriteNewVillageBook(
-                            bookType,
-                            player.getDisplayName(),
-                            signX,
-                            signY,
-                            signZ,
-                            structureTitle,
-                            dimensionName,
-                            namePrefix,
-                            nameRoot,
-                            nameSuffix,
-                            player,
-                            world.villageCollectionObj.findNearestVillage(
-                                    MathHelper.floor_double(player.posX),
-                                    MathHelper.floor_double(player.posY),
-                                    MathHelper.floor_double(player.posZ),
-                                    EntityInteractHandler.villageRadiusBuffer),
-                            playerIsInVillage);
+                        bookType,
+                        player.getDisplayName(),
+                        signX,
+                        signY,
+                        signZ,
+                        structureTitle,
+                        dimensionName,
+                        namePrefix,
+                        nameRoot,
+                        nameSuffix,
+                        player,
+                        world.villageCollectionObj.findNearestVillage(
+                            MathHelper.floor_double(player.posX),
+                            MathHelper.floor_double(player.posY),
+                            MathHelper.floor_double(player.posZ),
+                            EntityInteractHandler.villageRadiusBuffer),
+                        playerIsInVillage);
                 }
             }
         }

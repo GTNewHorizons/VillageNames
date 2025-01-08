@@ -29,9 +29,9 @@ public class SwimNodeProcessor extends NodeProcessor {
      */
     public PathPointSwimmer getPathPointTo(Entity entityIn) {
         return this.openPoint( // TODO - added 0.5D to X and Z
-                MathHelper1122.floor_double(entityIn.boundingBox.minX + 0.5D),
-                MathHelper1122.floor_double(entityIn.boundingBox.minY + 0.5D),
-                MathHelper1122.floor_double(entityIn.boundingBox.minZ + 0.5D));
+            MathHelper1122.floor_double(entityIn.boundingBox.minX + 0.5D),
+            MathHelper1122.floor_double(entityIn.boundingBox.minY + 0.5D),
+            MathHelper1122.floor_double(entityIn.boundingBox.minZ + 0.5D));
         // return this.openPoint(MathHelper1122.floor_double(entityIn.getBoundingBox().minX),
         // MathHelper1122.floor_double(entityIn.getBoundingBox().minY + 0.5D),
         // MathHelper1122.floor_double(entityIn.getBoundingBox().minZ));
@@ -42,21 +42,21 @@ public class SwimNodeProcessor extends NodeProcessor {
      */
     public PathPointSwimmer getPathPointToCoords(Entity entityIn, double x, double y, double target) {
         return this.openPoint(
-                MathHelper1122.floor_double(x - (double) (entityIn.width / 2.0F)),
-                MathHelper1122.floor_double(y + 0.5D),
-                MathHelper1122.floor_double(target - (double) (entityIn.width / 2.0F)));
+            MathHelper1122.floor_double(x - (double) (entityIn.width / 2.0F)),
+            MathHelper1122.floor_double(y + 0.5D),
+            MathHelper1122.floor_double(target - (double) (entityIn.width / 2.0F)));
     }
 
     public int findPathOptions(PathPointSwimmer[] pathOptions, Entity entityIn, PathPointSwimmer currentPoint,
-            PathPointSwimmer targetPoint, float maxDistance) {
+        PathPointSwimmer targetPoint, float maxDistance) {
         int i = 0;
 
         for (EnumFacing enumfacing : EnumFacing.values()) {
             PathPointSwimmer pathpoint = this.getSafePoint(
-                    entityIn,
-                    currentPoint.xCoord + enumfacing.getFrontOffsetX(),
-                    currentPoint.yCoord + enumfacing.getFrontOffsetY(),
-                    currentPoint.zCoord + enumfacing.getFrontOffsetZ());
+                entityIn,
+                currentPoint.xCoord + enumfacing.getFrontOffsetX(),
+                currentPoint.yCoord + enumfacing.getFrontOffsetY(),
+                currentPoint.zCoord + enumfacing.getFrontOffsetZ());
 
             if (pathpoint != null && !pathpoint.visited && pathpoint.distanceTo(targetPoint) < maxDistance) {
                 pathOptions[i++] = pathpoint;

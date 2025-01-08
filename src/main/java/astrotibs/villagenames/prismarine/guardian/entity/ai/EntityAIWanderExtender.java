@@ -38,7 +38,8 @@ public class EntityAIWanderExtender extends EntityAIWander {
                 return false;
             }
 
-            if (this.entity.getRNG().nextInt(this.executionChance) != 0) {
+            if (this.entity.getRNG()
+                .nextInt(this.executionChance) != 0) {
                 return false;
             }
         }

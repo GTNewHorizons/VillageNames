@@ -80,14 +80,14 @@ public class EntityGuardian extends EntityMob // implements IMob
         this.wander.setMutexBits(3);
         entityaimovetowardsrestriction.setMutexBits(3);
         this.targetTasks.addTask(
-                1,
-                new EntityAINearestAttackableTarget(
-                        this,
-                        EntityLivingBase.class,
-                        10,
-                        true,
-                        false,
-                        new EntityGuardian.GuardianTargetSelector(this)));
+            1,
+            new EntityAINearestAttackableTarget(
+                this,
+                EntityLivingBase.class,
+                10,
+                true,
+                false,
+                new EntityGuardian.GuardianTargetSelector(this)));
         this.moveHelper = new EntityGuardian.GuardianMoveHelper(this);
         this.lookHelper = new EntityGuardian.GuardianLookHelper(this);
         this.navigator = new PathNavigateSwimmer(this, worldIn);
@@ -96,10 +96,14 @@ public class EntityGuardian extends EntityMob // implements IMob
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+            .setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+            .setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange)
+            .setBaseValue(16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+            .setBaseValue(30.0D);
     }
 
     /**
@@ -172,9 +176,12 @@ public class EntityGuardian extends EntityMob // implements IMob
 
         if (elder) {
             this.setSize(1.9975F, 1.9975F);
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+                .setBaseValue(0.30000001192092896D);
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+                .setBaseValue(8.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+                .setBaseValue(80.0D);
             this.func_110163_bv(); // Equivalent to EntityLiving.enablePersistence() in 1.8
             this.wander.setExecutionChance(400);
         }
@@ -270,7 +277,7 @@ public class EntityGuardian extends EntityMob // implements IMob
      */
     protected String getLivingSound() {
         return (!this.isInWater()) ? "VillageNames:land_idle"
-                : (this.isElder() ? "VillageNames:elder_idle" : "VillageNames:guardian_idle");
+            : (this.isElder() ? "VillageNames:elder_idle" : "VillageNames:guardian_idle");
     }
 
     /**
@@ -278,7 +285,7 @@ public class EntityGuardian extends EntityMob // implements IMob
      */
     protected String getHurtSound() {
         return (!this.isInWater()) ? "VillageNames:land_hit"
-                : (this.isElder() ? "VillageNames:elder_hit" : "VillageNames:guardian_hit");
+            : (this.isElder() ? "VillageNames:elder_hit" : "VillageNames:guardian_hit");
     }
 
     /**
@@ -286,7 +293,7 @@ public class EntityGuardian extends EntityMob // implements IMob
      */
     protected String getDeathSound() {
         return (!this.isInWater()) ? "VillageNames:land_death"
-                : (this.isElder() ? "VillageNames:elder_death" : "VillageNames:guardian_death");
+            : (this.isElder() ? "VillageNames:elder_death" : "VillageNames:guardian_death");
     }
 
     /**
@@ -305,8 +312,8 @@ public class EntityGuardian extends EntityMob // implements IMob
     {
         // return this.worldObj.getBlockState(pos).getBlock().getMaterial() == Material.water ? 10.0F +
         // this.worldObj.getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
-        return this.worldObj.getBlock(x, y, z).getMaterial() == Material.water
-                ? 10.0F + this.worldObj.getLightBrightness(x, y, z) - 0.5F
+        return this.worldObj.getBlock(x, y, z)
+            .getMaterial() == Material.water ? 10.0F + this.worldObj.getLightBrightness(x, y, z) - 0.5F
                 : super.getBlockPathWeight(x, y, z);
     }
 
@@ -359,7 +366,7 @@ public class EntityGuardian extends EntityMob // implements IMob
                 int yDetect = (int) this.posY;// (Math.round(this.posY));
                 int zDetect = (int) this.posZ;// Math.round(this.posZ);
                 this.clientSideTouchedGround = this.motionY < 0.0D
-                        && (this.worldObj.isBlockNormalCubeDefault(xDetect, yDetect - 1, zDetect, false));
+                    && (this.worldObj.isBlockNormalCubeDefault(xDetect, yDetect - 1, zDetect, false));
             } else if (this.isMoving()) {
                 if (this.clientSideTailAnimationSpeed < 0.5F) {
                     this.clientSideTailAnimationSpeed = 4.0F;
@@ -391,13 +398,13 @@ public class EntityGuardian extends EntityMob // implements IMob
                                               // vec3.yCoord * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) *
                                               // (double)this.width - vec3.zCoord * 1.5D, 0.0D, 0.0D, 0.0D, new int[0]);
                     this.worldObj.spawnParticle(
-                            "bubble",
-                            this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3.xCoord * 1.5D,
-                            this.posY + this.rand.nextDouble() * (double) this.height - vec3.yCoord * 1.5D,
-                            this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3.zCoord * 1.5D,
-                            0.0D,
-                            0.0D,
-                            0.0D); // vX vY vZ
+                        "bubble",
+                        this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3.xCoord * 1.5D,
+                        this.posY + this.rand.nextDouble() * (double) this.height - vec3.yCoord * 1.5D,
+                        this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3.zCoord * 1.5D,
+                        0.0D,
+                        0.0D,
+                        0.0D); // vX vY vZ
                 }
             }
 
@@ -417,8 +424,8 @@ public class EntityGuardian extends EntityMob // implements IMob
                     double dx = target.posX - this.posX;
 
                     double dy = target.posY
-                            + (double) (target.height * (targetedEntity instanceof EntityPlayer ? -0.5F : 0.5F))
-                            - (this.posY + (double) this.getEyeHeight());
+                        + (double) (target.height * (targetedEntity instanceof EntityPlayer ? -0.5F : 0.5F))
+                        - (this.posY + (double) this.getEyeHeight());
                     // double dy = target.posY + (double)(target.yOffset * 0.5F) - (this.posY +
                     // (double)this.getEyeHeight());
                     // double dy = target.posY - (this.posY + (double)this.getEyeHeight());
@@ -435,13 +442,13 @@ public class EntityGuardian extends EntityMob // implements IMob
                         // this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + d0 * d4, this.posY +
                         // d1 * d4 + (double)this.getEyeHeight(), this.posZ + d2 * d4, 0.0D, 0.0D, 0.0D, new int[0]);
                         this.worldObj.spawnParticle(
-                                "bubble",
-                                this.posX + dx * randomDouble,
-                                this.posY + dy * randomDouble + (double) this.getEyeHeight(),
-                                this.posZ + dz * randomDouble,
-                                0.0D,
-                                0.0D,
-                                0.0D); // vX vY vZ
+                            "bubble",
+                            this.posX + dx * randomDouble,
+                            this.posY + dy * randomDouble + (double) this.getEyeHeight(),
+                            this.posZ + dz * randomDouble,
+                            0.0D,
+                            0.0D,
+                            0.0D); // vX vY vZ
                     }
                 }
             }
@@ -468,13 +475,13 @@ public class EntityGuardian extends EntityMob // implements IMob
     @SideOnly(Side.CLIENT)
     public float getTailAnimation(float partialTicks) {
         return this.clientSideTailAnimationO
-                + (this.clientSideTailAnimation - this.clientSideTailAnimationO) * partialTicks;
+            + (this.clientSideTailAnimation - this.clientSideTailAnimationO) * partialTicks;
     }
 
     @SideOnly(Side.CLIENT)
     public float getSpikesAnimation(float partialTicks) {
         return this.clientSideSpikesAnimationO
-                + (this.clientSideSpikesAnimation - this.clientSideSpikesAnimationO) * partialTicks;
+            + (this.clientSideSpikesAnimation - this.clientSideSpikesAnimationO) * partialTicks;
     }
 
     // The percent of the way through the beam attack you are. Used for color, volume, pitch of beam.
@@ -499,7 +506,7 @@ public class EntityGuardian extends EntityMob // implements IMob
     // Fires when an Elder beam-attacks a non-creative player
     private boolean survivalOrAdventure(EntityPlayerMP player) {
         return player.theItemInWorldManager.getGameType() == GameType.SURVIVAL
-                || player.theItemInWorldManager.getGameType() == GameType.ADVENTURE;
+            || player.theItemInWorldManager.getGameType() == GameType.ADVENTURE;
     }
 
     /*
@@ -566,8 +573,8 @@ public class EntityGuardian extends EntityMob // implements IMob
 
                     public boolean apply(@Nullable EntityPlayerMP player) {
                         return EntityGuardian.this.getDistanceSqToEntity(player) < 2500.0D
-                                // && p_apply_1_.theItemInWorldManager.survivalOrAdventure();
-                                && survivalOrAdventure(player);
+                            // && p_apply_1_.theItemInWorldManager.survivalOrAdventure();
+                            && survivalOrAdventure(player);
                     }
                 };
 
@@ -576,9 +583,10 @@ public class EntityGuardian extends EntityMob // implements IMob
                 // List<EntityPlayerMP> cursePlayers = Lists.<EntityPlayerMP>newArrayList();
 
                 for (EntityPlayerMP entityplayermp : allPlayers) {
-                    if (!entityplayermp.isPotionActive(potion)
-                            || entityplayermp.getActivePotionEffect(potion).getAmplifier() < mfLevel
-                            || entityplayermp.getActivePotionEffect(potion).getDuration() < mfRenew) {
+                    if (!entityplayermp.isPotionActive(potion) || entityplayermp.getActivePotionEffect(potion)
+                        .getAmplifier() < mfLevel
+                        || entityplayermp.getActivePotionEffect(potion)
+                            .getDuration() < mfRenew) {
 
                         // This is what plays the Elder Curse sound and animation.
                         // entityplayermp.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(10, 0.0F));
@@ -635,8 +643,8 @@ public class EntityGuardian extends EntityMob // implements IMob
             ItemStack prismarineItem = ModObjects.chooseModPrismarineShardItemStack();
             if (prismarineItem != null) {
                 this.entityDropItem(
-                        new ItemStack(prismarineItem.getItem(), num_prismarine_shards, prismarineItem.getItemDamage()),
-                        1.0F);
+                    new ItemStack(prismarineItem.getItem(), num_prismarine_shards, prismarineItem.getItemDamage()),
+                    1.0F);
             }
         }
 
@@ -650,8 +658,8 @@ public class EntityGuardian extends EntityMob // implements IMob
 
             if (prismarineCrystalsItem != null) {
                 this.entityDropItem(
-                        new ItemStack(prismarineCrystalsItem.getItem(), 1, prismarineCrystalsItem.getItemDamage()),
-                        1.0F);
+                    new ItemStack(prismarineCrystalsItem.getItem(), 1, prismarineCrystalsItem.getItemDamage()),
+                    1.0F);
             }
         }
 
@@ -677,7 +685,7 @@ public class EntityGuardian extends EntityMob // implements IMob
     protected void dropRareDrop(int i)// addRandomDrop()
     {
         ItemStack itemstack = ((WeightedRandomFishable) WeightedRandom.getRandomItem(this.rand, func_174855_j()))
-                .func_150708_a(this.rand);
+            .func_150708_a(this.rand);
         this.entityDropItem(itemstack, 1.0F);
     }
 
@@ -717,31 +725,33 @@ public class EntityGuardian extends EntityMob // implements IMob
         int spawnZ = (int) this.posZ;
 
         boolean canSpawnHere = // Added requirements that the spawning block be water.
-                (world.getBlock(spawnX, spawnY, spawnZ).getMaterial() == Material.water && // Added in so that spawners
-                                                                                           // don't randomly spawn
-                                                                                           // Guardians in the air
-                        (this.rand.nextInt(20) == 0 || // Overrides the below conditions if true; taken from 1.8
-                                                       // Guardian's getCanSpawnHere()
-                                !this.canBlockSeeSky((int) this.posX, (int) this.posY, (int) this.posZ) // taken from
-                                                                                                        // 1.8
-                                                                                                        // Guardian's
-                                                                                                        // getCanSpawnHere()
-                                        // super.getCanSpawnHere() //Can't use this because it ultimately requires no
-                                        // liquids to be present
-                                        && (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL
-                                                && this.isValidLightLevel() // part of EntityMob.getCanSpawnHere()
-                                                // part of EntityCreature.getCanSpawnHere():
-                                                && this.getBlockPathWeight(
-                                                        MathHelper1122.floor_double(this.posX),
-                                                        MathHelper1122.floor_double(this.boundingBox.minY),
-                                                        MathHelper1122.floor_double(this.posZ)) >= 0.0F
-                                        // && true // 1.8 EntityLiving.getCanSpawnHere() concludes with this, rather
-                                        // than:
-                                        // && this.isNotColliding()
-                                        // this.worldObj.checkNoEntityCollision(this.boundingBox) &&
-                                        // this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() &&
-                                        // !this.worldObj.isAnyLiquid(this.boundingBox)
-                                        )));
+            (world.getBlock(spawnX, spawnY, spawnZ)
+                .getMaterial() == Material.water && // Added in so that spawners
+                                                    // don't randomly spawn
+                                                    // Guardians in the air
+                (this.rand.nextInt(20) == 0 || // Overrides the below conditions if true; taken from 1.8
+                                               // Guardian's getCanSpawnHere()
+                    !this.canBlockSeeSky((int) this.posX, (int) this.posY, (int) this.posZ) // taken from
+                                                                                            // 1.8
+                                                                                            // Guardian's
+                                                                                            // getCanSpawnHere()
+                        // super.getCanSpawnHere() //Can't use this because it ultimately requires no
+                        // liquids to be present
+                        && (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL && this.isValidLightLevel() // part
+                                                                                                                   // of
+                                                                                                                   // EntityMob.getCanSpawnHere()
+                        // part of EntityCreature.getCanSpawnHere():
+                            && this.getBlockPathWeight(
+                                MathHelper1122.floor_double(this.posX),
+                                MathHelper1122.floor_double(this.boundingBox.minY),
+                                MathHelper1122.floor_double(this.posZ)) >= 0.0F
+                        // && true // 1.8 EntityLiving.getCanSpawnHere() concludes with this, rather
+                        // than:
+                        // && this.isNotColliding()
+                        // this.worldObj.checkNoEntityCollision(this.boundingBox) &&
+                        // this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() &&
+                        // !this.worldObj.isAnyLiquid(this.boundingBox)
+                        )));
         return canSpawnHere;
     }
 
@@ -767,7 +777,8 @@ public class EntityGuardian extends EntityMob // implements IMob
                 {
                     Block block = this.worldObj.getBlock(spawnX, y, spawnZ);
 
-                    if (block.getLightOpacity() > 0 && !block.getMaterial().isLiquid()) {
+                    if (block.getLightOpacity() > 0 && !block.getMaterial()
+                        .isLiquid()) {
                         return false; // One of the blocks in the column is non-liquid and isn't completely transparent.
                         // Air has opacity 0, Water and Ice 3, Leaves 1, Snow layer and carpet 0
                     }
@@ -782,9 +793,9 @@ public class EntityGuardian extends EntityMob // implements IMob
      */
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (!this.isMoving() && !source.isMagicDamage()
-                && source.getSourceOfDamage() instanceof EntityLivingBase
-                && (this.getHealth() > 0) // Added this condition so that you can't multi-pound a Guardian corpse and
-                                          // fire the Thorn effect repeatedly, you sicko
+            && source.getSourceOfDamage() instanceof EntityLivingBase
+            && (this.getHealth() > 0) // Added this condition so that you can't multi-pound a Guardian corpse and
+                                      // fire the Thorn effect repeatedly, you sicko
         ) {
             EntityLivingBase entitylivingbase = (EntityLivingBase) source.getSourceOfDamage();
 
@@ -863,7 +874,7 @@ public class EntityGuardian extends EntityMob // implements IMob
         // Fires while Guardian is targeting a mofo
         public boolean continueExecuting() {
             return super.continueExecuting() && (this.theEntity.isElder()
-                    || this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
+                || this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
         }
 
         /**
@@ -904,7 +915,9 @@ public class EntityGuardian extends EntityMob // implements IMob
 
                 if (this.tickCounter == 0) // When ticks count up to zero, a target is chosen and engaged with the beam
                 {
-                    this.theEntity.setTargetedEntity(this.theEntity.getAttackTarget().getEntityId());
+                    this.theEntity.setTargetedEntity(
+                        this.theEntity.getAttackTarget()
+                            .getEntityId());
                     this.theEntity.worldObj.setEntityState(this.theEntity, (byte) 21);
                 } else if (this.tickCounter >= this.theEntity.getAttackDuration()) // When ticks reach the limit (60 or
                                                                                    // 80), stop the beam and deal damage
@@ -922,11 +935,11 @@ public class EntityGuardian extends EntityMob // implements IMob
                     }
 
                     entitylivingbase
-                            .attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.theEntity, this.theEntity), f);
+                        .attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.theEntity, this.theEntity), f);
                     entitylivingbase.attackEntityFrom(
-                            DamageSource.causeMobDamage(this.theEntity),
-                            (float) this.theEntity.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-                                    .getAttributeValue());
+                        DamageSource.causeMobDamage(this.theEntity),
+                        (float) this.theEntity.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+                            .getAttributeValue());
                     this.theEntity.setAttackTarget((EntityLivingBase) null);
                 }
                 // This used to do something every 20 ticks. Probably re-start attack sound?
@@ -988,18 +1001,19 @@ public class EntityGuardian extends EntityMob // implements IMob
                 float f = (float) (MathHelper1122.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
                 this.entityGuardian.rotationYaw = this.limitAngle(this.entityGuardian.rotationYaw, f, 30.0F);
                 this.entityGuardian.renderYawOffset = this.entityGuardian.rotationYaw;
-                float f1 = (float) (this.speed * this.entityGuardian
-                        .getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                float f1 = (float) (this.speed
+                    * this.entityGuardian.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+                        .getAttributeValue());
                 this.entityGuardian.setAIMoveSpeed(
-                        this.entityGuardian.getAIMoveSpeed() + (f1 - this.entityGuardian.getAIMoveSpeed()) * 0.125F);
+                    this.entityGuardian.getAIMoveSpeed() + (f1 - this.entityGuardian.getAIMoveSpeed()) * 0.125F);
                 double d4 = Math.sin(
-                        (double) (this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.5D) * 0.05D;
+                    (double) (this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.5D) * 0.05D;
                 double d5 = Math.cos((double) (this.entityGuardian.rotationYaw * (float) Math.PI / 180.0F));
                 double d6 = Math.sin((double) (this.entityGuardian.rotationYaw * (float) Math.PI / 180.0F));
                 this.entityGuardian.motionX += d4 * d5;
                 this.entityGuardian.motionZ += d4 * d6;
                 d4 = Math.sin((double) (this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.75D)
-                        * 0.05D;
+                    * 0.05D;
                 this.entityGuardian.motionY += d4 * (d6 + d5) * 0.25D;
                 this.entityGuardian.motionY += (double) this.entityGuardian.getAIMoveSpeed() * d1 * 0.1D;
                 // EntityLookHelper entitylookhelper = this.entityGuardian.getLookHelper();
@@ -1020,11 +1034,11 @@ public class EntityGuardian extends EntityMob // implements IMob
                 // this.entityGuardian.getLookHelper().setLookPosition(d10 + (d7 - d10) * 0.125D, d11 + (d8 - d11) *
                 // 0.125D, d12 + (d9 - d12) * 0.125D, 10.0F, 40.0F);
                 this.entityGuardian.lookHelper.setLookPosition(
-                        d10 + (d7 - d10) * 0.125D,
-                        d11 + (d8 - d11) * 0.125D,
-                        d12 + (d9 - d12) * 0.125D,
-                        10.0F,
-                        40.0F);
+                    d10 + (d7 - d10) * 0.125D,
+                    d11 + (d8 - d11) * 0.125D,
+                    d12 + (d9 - d12) * 0.125D,
+                    10.0F,
+                    40.0F);
                 this.entityGuardian.setMoving(true);
             } else {
                 this.entityGuardian.setAIMoveSpeed(0.0F);
@@ -1088,7 +1102,7 @@ public class EntityGuardian extends EntityMob // implements IMob
         // Renamed this from apply(EntityLivingBase)
         public boolean isEntityApplicable(Entity potentialTarget) {
             return (potentialTarget instanceof EntityPlayer || potentialTarget instanceof EntitySquid)
-                    && potentialTarget.getDistanceSqToEntity(this.parentEntity) > 9.0D;
+                && potentialTarget.getDistanceSqToEntity(this.parentEntity) > 9.0D;
         }
     }
 
@@ -1159,18 +1173,16 @@ public class EntityGuardian extends EntityMob // implements IMob
                 float f = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
                 float f1 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
                 this.entityGuardian.rotationPitch = this
-                        .updateRotation(this.entityGuardian.rotationPitch, f1, this.deltaLookPitch);
+                    .updateRotation(this.entityGuardian.rotationPitch, f1, this.deltaLookPitch);
                 this.entityGuardian.rotationYawHead = this
-                        .updateRotation(this.entityGuardian.rotationYawHead, f, this.deltaLookYaw);
+                    .updateRotation(this.entityGuardian.rotationYawHead, f, this.deltaLookYaw);
             } else {
-                this.entityGuardian.rotationYawHead = this.updateRotation(
-                        this.entityGuardian.rotationYawHead,
-                        this.entityGuardian.renderYawOffset,
-                        10.0F);
+                this.entityGuardian.rotationYawHead = this
+                    .updateRotation(this.entityGuardian.rotationYawHead, this.entityGuardian.renderYawOffset, 10.0F);
             }
 
             float f2 = MathHelper1122
-                    .wrapAngleTo180_float(this.entityGuardian.rotationYawHead - this.entityGuardian.renderYawOffset);
+                .wrapAngleTo180_float(this.entityGuardian.rotationYawHead - this.entityGuardian.renderYawOffset);
 
             if (!this.entityGuardian.navigator.noPath()) {
                 if (f2 < -75.0F) {

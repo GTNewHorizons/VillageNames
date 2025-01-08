@@ -70,7 +70,7 @@ public class StructureRegistry {
                 List<MapGenStructure> result = Lists.newArrayList();
                 try {
                     List<MapGenStructure> gen = ReflectionHelper
-                            .getPrivateValue(ChunkProviderFlat.class, cp, "structureGenerators", "field_82696_f");
+                        .getPrivateValue(ChunkProviderFlat.class, cp, "structureGenerators", "field_82696_f");
                     if (gen != null) result.addAll(gen);
                 } catch (UnableToAccessFieldException e) {
                     LogHelper.warn("Can't access map gen list from provider %s. Some structures may not be detected");
@@ -139,7 +139,7 @@ public class StructureRegistry {
     }
 
     public Map<String, ChunkPosition> getNearestStructures(final WorldServer world, final int x, final int y,
-            final int z) {
+        final int z) {
         final ImmutableMap.Builder<String, ChunkPosition> result = ImmutableMap.builder();
         visitStructures(world, new IStructureVisitor() {
 
@@ -163,7 +163,7 @@ public class StructureRegistry {
     }
 
     public Set<ChunkPosition> getNearestInstance(final String name, final WorldServer world, final int x, final int y,
-            final int z) {
+        final int z) {
         final ImmutableSet.Builder<ChunkPosition> result = ImmutableSet.builder();
         visitStructures(world, new IStructureVisitor() {
 

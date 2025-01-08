@@ -69,7 +69,8 @@ public class FunctionsVN {
             BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
 
             // Ordered by personal priority. The first of these to be fulfilled gets returned
-            if (biome.biomeName.toLowerCase().contains("taiga")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("taiga")) {
                 return TAIGA;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -77,7 +78,8 @@ public class FunctionsVN {
                     return TAIGA;
                 }
             }
-            if (biome.biomeName.toLowerCase().contains("savanna")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("savanna")) {
                 return SAVANNA;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -97,8 +99,8 @@ public class FunctionsVN {
                     isWasteland = true;
                 }
                 if (type == BiomeDictionary.Type.DENSE || type == BiomeDictionary.Type.FOREST
-                        || type == BiomeDictionary.Type.LUSH
-                        || type == BiomeDictionary.Type.SPARSE) {
+                    || type == BiomeDictionary.Type.LUSH
+                    || type == BiomeDictionary.Type.SPARSE) {
                     isSnowy = false;
                     isWasteland = false;
                     break;
@@ -108,7 +110,8 @@ public class FunctionsVN {
                 return SNOWY;
             }
 
-            if (biome.biomeName.toLowerCase().contains("desert")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("desert")) {
                 return DESERT;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -116,7 +119,8 @@ public class FunctionsVN {
                     return DESERT;
                 }
             }
-            if (biome.biomeName.toLowerCase().contains("jungle")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("jungle")) {
                 return JUNGLE;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -124,7 +128,8 @@ public class FunctionsVN {
                     return JUNGLE;
                 }
             }
-            if (biome.biomeName.toLowerCase().contains("swamp")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("swamp")) {
                 return SWAMP;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -138,21 +143,28 @@ public class FunctionsVN {
         }
 
         public static VillageType getVillageTypeFromName(String name, VillageType defaultType) {
-            if (name.toUpperCase().equals("PLAINS")) {
+            if (name.toUpperCase()
+                .equals("PLAINS")) {
                 return PLAINS;
-            } else if (name.toUpperCase().equals("DESERT")) {
-                return DESERT;
-            } else if (name.toUpperCase().equals("TAIGA")) {
-                return TAIGA;
-            } else if (name.toUpperCase().equals("SAVANNA")) {
-                return SAVANNA;
-            } else if (name.toUpperCase().equals("SNOWY")) {
-                return SNOWY;
-            } else if (name.toUpperCase().equals("JUNGLE")) {
-                return JUNGLE;
-            } else if (name.toUpperCase().equals("SWAMP")) {
-                return SWAMP;
-            }
+            } else if (name.toUpperCase()
+                .equals("DESERT")) {
+                    return DESERT;
+                } else if (name.toUpperCase()
+                    .equals("TAIGA")) {
+                        return TAIGA;
+                    } else if (name.toUpperCase()
+                        .equals("SAVANNA")) {
+                            return SAVANNA;
+                        } else if (name.toUpperCase()
+                            .equals("SNOWY")) {
+                                return SNOWY;
+                            } else if (name.toUpperCase()
+                                .equals("JUNGLE")) {
+                                    return JUNGLE;
+                                } else if (name.toUpperCase()
+                                    .equals("SWAMP")) {
+                                        return SWAMP;
+                                    }
             return defaultType;
         }
     }
@@ -179,21 +191,24 @@ public class FunctionsVN {
         }
 
         public static MaterialType getMaterialTemplateForBiome(WorldChunkManager worldChunkManager, int posX,
-                int posZ) {
+            int posZ) {
             BiomeGenBase biome = worldChunkManager.getBiomeGenAt(posX, posZ);
             return getMaterialTemplateForBiome(biome);
         }
 
         public static MaterialType getMaterialTemplateForBiome(BiomeGenBase biome) {
-            if (biome.biomeName.toLowerCase().contains("birch")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("birch")) {
                 return BIRCH;
             }
-            if (biome.biomeName.toLowerCase().contains("roofed forest")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("roofed forest")) {
                 return DARK_OAK;
             }
 
             BiomeDictionary.Type[] typeTags = BiomeDictionary.getTypesForBiome(biome);
-            if (biome.biomeName.toLowerCase().contains("taiga")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("taiga")) {
                 return SPRUCE;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -206,7 +221,8 @@ public class FunctionsVN {
                     return JUNGLE;
                 }
             }
-            if (biome.biomeName.toLowerCase().contains("savanna")) {
+            if (biome.biomeName.toLowerCase()
+                .contains("savanna")) {
                 return ACACIA;
             }
             for (BiomeDictionary.Type type : typeTags) {
@@ -236,8 +252,8 @@ public class FunctionsVN {
                     isWasteland = true;
                 }
                 if (type == BiomeDictionary.Type.DENSE || type == BiomeDictionary.Type.FOREST
-                        || type == BiomeDictionary.Type.LUSH
-                        || type == BiomeDictionary.Type.SPARSE) {
+                    || type == BiomeDictionary.Type.LUSH
+                    || type == BiomeDictionary.Type.SPARSE) {
                     isSnowy = false;
                     isWasteland = false;
                     break;
@@ -258,27 +274,37 @@ public class FunctionsVN {
         }
 
         public static MaterialType getMaterialTypeFromName(String name, MaterialType defaultType) {
-            if (name.toUpperCase().equals("OAK")) {
+            if (name.toUpperCase()
+                .equals("OAK")) {
                 return OAK;
-            } else if (name.toUpperCase().equals("SPRUCE")) {
-                return SPRUCE;
-            } else if (name.toUpperCase().equals("BIRCH")) {
-                return BIRCH;
-            } else if (name.toUpperCase().equals("JUNGLE")) {
-                return JUNGLE;
-            } else if (name.toUpperCase().equals("ACACIA")) {
-                return ACACIA;
-            } else if (name.toUpperCase().equals("DARK_OAK")) {
-                return DARK_OAK;
-            } else if (name.toUpperCase().equals("SAND")) {
-                return SAND;
-            } else if (name.toUpperCase().equals("MESA")) {
-                return MESA;
-            } else if (name.toUpperCase().equals("SNOW")) {
-                return SNOW;
-            } else if (name.toUpperCase().equals("MUSHROOM")) {
-                return MUSHROOM;
-            }
+            } else if (name.toUpperCase()
+                .equals("SPRUCE")) {
+                    return SPRUCE;
+                } else if (name.toUpperCase()
+                    .equals("BIRCH")) {
+                        return BIRCH;
+                    } else if (name.toUpperCase()
+                        .equals("JUNGLE")) {
+                            return JUNGLE;
+                        } else if (name.toUpperCase()
+                            .equals("ACACIA")) {
+                                return ACACIA;
+                            } else if (name.toUpperCase()
+                                .equals("DARK_OAK")) {
+                                    return DARK_OAK;
+                                } else if (name.toUpperCase()
+                                    .equals("SAND")) {
+                                        return SAND;
+                                    } else if (name.toUpperCase()
+                                        .equals("MESA")) {
+                                            return MESA;
+                                        } else if (name.toUpperCase()
+                                            .equals("SNOW")) {
+                                                return SNOW;
+                                            } else if (name.toUpperCase()
+                                                .equals("MUSHROOM")) {
+                                                    return MUSHROOM;
+                                                }
             return defaultType;
         }
     }
@@ -329,8 +355,8 @@ public class FunctionsVN {
 
         // Desert type (8)
         if (typeList.contains(BiomeDictionary.Type.SANDY)
-                && ((typeList.contains(BiomeDictionary.Type.HOT) && typeList.contains(BiomeDictionary.Type.DRY))
-                        || (typeList.contains(BiomeDictionary.Type.MESA)))) {
+            && ((typeList.contains(BiomeDictionary.Type.HOT) && typeList.contains(BiomeDictionary.Type.DRY))
+                || (typeList.contains(BiomeDictionary.Type.MESA)))) {
             return 8;
         }
 
@@ -346,22 +372,22 @@ public class FunctionsVN {
 
         // Jungle type (5)
         if (typeList.contains(BiomeDictionary.Type.JUNGLE)
-                && (typeList.contains(BiomeDictionary.Type.WET) || typeList.contains(BiomeDictionary.Type.LUSH)
-                        || typeList.contains(BiomeDictionary.Type.DENSE))
-                && !(typeList.contains(BiomeDictionary.Type.COLD) || typeList.contains(BiomeDictionary.Type.SPARSE)
-                        || typeList.contains(BiomeDictionary.Type.DEAD))) {
+            && (typeList.contains(BiomeDictionary.Type.WET) || typeList.contains(BiomeDictionary.Type.LUSH)
+                || typeList.contains(BiomeDictionary.Type.DENSE))
+            && !(typeList.contains(BiomeDictionary.Type.COLD) || typeList.contains(BiomeDictionary.Type.SPARSE)
+                || typeList.contains(BiomeDictionary.Type.DEAD))) {
             return 5;
         }
 
         // Aquatic type (4)
         if (typeList.contains(BiomeDictionary.Type.OCEAN) || typeList.contains(BiomeDictionary.Type.RIVER)
-                || typeList.contains(BiomeDictionary.Type.BEACH)) {
+            || typeList.contains(BiomeDictionary.Type.BEACH)) {
             return 4;
         }
 
         // Magical type (1)
         if (typeList.contains(BiomeDictionary.Type.MAGICAL)
-                && !(typeList.contains(BiomeDictionary.Type.DEAD) || typeList.contains(BiomeDictionary.Type.SPOOKY))) {
+            && !(typeList.contains(BiomeDictionary.Type.DEAD) || typeList.contains(BiomeDictionary.Type.SPOOKY))) {
             return 1;
         }
 
@@ -372,7 +398,7 @@ public class FunctionsVN {
 
         // Forest type (3)
         if (typeList.contains(BiomeDictionary.Type.FOREST) && !(typeList.contains(BiomeDictionary.Type.DEAD))
-                && (typeList.contains(BiomeDictionary.Type.DENSE) || !typeList.contains(BiomeDictionary.Type.SPARSE))) {
+            && (typeList.contains(BiomeDictionary.Type.DENSE) || !typeList.contains(BiomeDictionary.Type.SPARSE))) {
             return 3;
         }
 
@@ -401,7 +427,7 @@ public class FunctionsVN {
      * Returns "true" if a particular trade was flagged for removal from the villager's Offers
      */
     public static boolean isTradeInappropriate(MerchantRecipe merchantrecipe, int profession, int career,
-            int slotPosition) {
+        int slotPosition) {
 
         switch (profession) {
 
@@ -415,48 +441,43 @@ public class FunctionsVN {
                 // Career = 1: Farmer
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.wheat, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.wheat, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
-                            : (career == 1 && (slotPosition == 1 || slotPosition > 4)))
-                        return false;
+                        : (career == 1 && (slotPosition == 1 || slotPosition > 4))) return false;
                     else return true;
                 }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.bread, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition == 1 || slotPosition > 4)))
-                                return false;
-                            else return true;
-                        }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.bread, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
+                            : (career == 1 && (slotPosition == 1 || slotPosition > 4))) return false;
+                        else return true;
+                    }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.apple, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 2 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition == 3 || slotPosition > 4)))
-                                return false;
-                            else return true;
-                        }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.apple, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 2 || slotPosition > 5))
+                            : (career == 1 && (slotPosition == 3 || slotPosition > 4))) return false;
+                        else return true;
+                    }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.cookie, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition >= 4)))
-                                return false;
-                            else return true;
-                        }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.cookie, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
+                            : (career == 1 && (slotPosition >= 4))) return false;
+                        else return true;
+                    }
 
                 // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.melon, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades ? (false)
-                                    : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 5)))
-                                return false;
-                            else return true;
-                        }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.melon, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (false)
+                            : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 5))) return false;
+                        else return true;
+                    }
 
                 /*
                  * // Career = 2: Fisherman else if ( hasSameIDsAndMetasAs(merchantrecipe, new MerchantRecipe(new
@@ -483,68 +504,64 @@ public class FunctionsVN {
                 // Career = 3: Shepherd
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Item.getItemFromBlock(Blocks.wool), 1, 0),
-                                new ItemStack(Items.emerald, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 3 && (slotPosition == 1 || slotPosition > 5))
-                                            : (career == 3 && (slotPosition == 1 || slotPosition > 2)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.shears, 1, 0)))) {
+                    new MerchantRecipe(
+                        new ItemStack(Item.getItemFromBlock(Blocks.wool), 1, 0),
+                        new ItemStack(Items.emerald, 1, 0)))) {
                             if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 3 && (slotPosition == 1 || slotPosition > 5))
-                                    : (career == 3 && (slotPosition == 1 || slotPosition > 2)))
-                                return false;
+                                ? (career == 3 && (slotPosition == 1 || slotPosition > 5))
+                                : (career == 3 && (slotPosition == 1 || slotPosition > 2))) return false;
                             else return true;
                         }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.shears, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 3 && (slotPosition == 1 || slotPosition > 5))
+                            : (career == 3 && (slotPosition == 1 || slotPosition > 2))) return false;
+                        else return true;
+                    }
 
                 // Career = 4: Fletcher
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.arrow, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 4 && (slotPosition == 1 || slotPosition > 5))
-                                    : (career == 4 && (slotPosition == 1 || slotPosition > 2)))
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.arrow, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 4 && (slotPosition == 1 || slotPosition > 5))
+                            : (career == 4 && (slotPosition == 1 || slotPosition > 2))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Item.getItemFromBlock(Blocks.gravel), 1, 0),
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.flint, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (false) : (career == 4 && (slotPosition >= 2)))
                                 return false;
                             else return true;
                         }
 
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Item.getItemFromBlock(Blocks.gravel), 1, 0),
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.flint, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (false)
-                                            : (career == 4 && (slotPosition >= 2)))
-                                        return false;
-                                    else return true;
-                                }
-
                 // Obsoleted generic trades
                 else {
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.cooked_fished, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.cooked_fished, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0))))
                         return true;
                     // if ( merchantrecipe.hasSameIDsAs(new MerchantRecipe( new ItemStack(Items.emerald, 1, 0), new
                     // ItemStack(Items.melon, 1, 0))) ) return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.flint_and_steel, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.flint_and_steel, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(new ItemStack(Items.chicken, 1, 0), new ItemStack(Items.emerald, 1, 0))))
+                        new MerchantRecipe(new ItemStack(Items.chicken, 1, 0), new ItemStack(Items.emerald, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.cooked_chicken, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.cooked_chicken, 1, 0))))
                         return true;
                 }
 
@@ -559,11 +576,11 @@ public class FunctionsVN {
                 // Common trades
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.paper, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.paper, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if ((career == 1
-                            && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 6)))
-                            || (career == 2 && (slotPosition == 1
-                                    || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4))))
+                        && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 6)))
+                        || (career == 2
+                            && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4))))
                         return false;
                     else return true;
                 }
@@ -571,63 +588,55 @@ public class FunctionsVN {
                 // Career = 1: Librarian
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.book, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.book, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 2 || slotPosition > 5))
+                            : (career == 1 && (slotPosition == 2 || slotPosition > 6))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.compass, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 4 || slotPosition > 5))
+                            : (career == 1 && (slotPosition == 2 || slotPosition > 6))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 1, 0)))) {
                             if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 2 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition == 2 || slotPosition > 6)))
-                                return false;
+                                ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
+                                : (career == 1 && (slotPosition == 2 || slotPosition > 6))) return false;
                             else return true;
                         }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.compass, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.written_book, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (false)
+                            : (career == 1 && (slotPosition == 3 || slotPosition > 6))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.clock, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 4 || slotPosition > 5))
+                            : (career == 1 && (slotPosition == 3 || slotPosition > 6))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Item.getItemFromBlock(Blocks.glass), 1, 0)))) {
                             if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 4 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition == 2 || slotPosition > 6)))
-                                return false;
+                                ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
+                                : (career == 1 && (slotPosition == 3 || slotPosition > 6))) return false;
                             else return true;
                         }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
-                                            : (career == 1 && (slotPosition == 2 || slotPosition > 6)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.written_book, 1, 0),
-                                new ItemStack(Items.emerald, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (false)
-                                            : (career == 1 && (slotPosition == 3 || slotPosition > 6)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.clock, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 4 || slotPosition > 5))
-                                    : (career == 1 && (slotPosition == 3 || slotPosition > 6)))
-                                return false;
-                            else return true;
-                        }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Item.getItemFromBlock(Blocks.glass), 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
-                                            : (career == 1 && (slotPosition == 3 || slotPosition > 6)))
-                                        return false;
-                                    else return true;
-                                }
 
                 // Career = 2: Cartographer
 
@@ -635,13 +644,13 @@ public class FunctionsVN {
 
                 else {
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.book, 1),
-                                    new ItemStack(Items.emerald, 1),
-                                    new ItemStack(Items.enchanted_book, 1)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.book, 1),
+                            new ItemStack(Items.emerald, 1),
+                            new ItemStack(Items.enchanted_book, 1)))) {
                         if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition != 5))
-                                : ((career == 1 && (slotPosition == 2 || slotPosition == 3 || slotPosition == 6))
-                                        || career == 2))
+                            : ((career == 1 && (slotPosition == 2 || slotPosition == 3 || slotPosition == 6))
+                                || career == 2))
                             return false;
                         else return true;
                     }
@@ -658,42 +667,38 @@ public class FunctionsVN {
                 // Career = 1: Cleric
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.redstone, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.redstone, 1, 0)))) {
                     if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1 || slotPosition > 5))
-                            : (career == 1 && (slotPosition == 2 || slotPosition > 4)))
-                        return false;
+                        : (career == 1 && (slotPosition == 2 || slotPosition > 4))) return false;
                     else return true;
                 }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Item.getItemFromBlock(Blocks.glowstone), 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
-                                            : (career == 1 && (slotPosition == 3 || slotPosition > 4)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Item.getItemFromBlock(Blocks.glowstone), 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades
+                                ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
+                                : (career == 1 && (slotPosition == 3 || slotPosition > 4))) return false;
+                            else return true;
+                        }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.experience_bottle, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 5))
-                                            : (career == 1 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.experience_bottle, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 5))
+                                : (career == 1 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
 
                 // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.ender_eye, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades ? (false)
-                                    : GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 5))
-                                return false;
-                            else return true;
-                        }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.ender_eye, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (false)
+                            : GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 5)) return false;
+                        else return true;
+                    }
 
                 // Obsoleted generic trades
 
@@ -701,52 +706,52 @@ public class FunctionsVN {
                     // if ( merchantrecipe.hasSameIDsAs(new MerchantRecipe( new ItemStack(Items.emerald, 1, 0), new
                     // ItemStack(Items.ender_eye, 1, 0))) ) return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.iron_sword, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_sword, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.iron_sword, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_sword, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.diamond_sword, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_sword, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.diamond_sword, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_sword, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.iron_chestplate, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_chestplate, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.iron_chestplate, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_chestplate, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.diamond_chestplate, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_chestplate, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.diamond_chestplate, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_chestplate, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.iron_axe, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_axe, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.iron_axe, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_axe, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.diamond_axe, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_axe, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.diamond_axe, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_axe, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.iron_pickaxe, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_pickaxe, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.iron_pickaxe, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_pickaxe, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.diamond_pickaxe, 1, 0),
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_pickaxe, 1, 0))))
+                        new MerchantRecipe(
+                            new ItemStack(Items.diamond_pickaxe, 1, 0),
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_pickaxe, 1, 0))))
                         return true;
                 }
 
@@ -761,38 +766,36 @@ public class FunctionsVN {
                 // Common trades
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.coal, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.coal, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if ((career == 1
-                            && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4)))
-                            || (career == 2 && (slotPosition == 1
-                                    || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3)))
-                            || (career == 3 && (slotPosition == 1
-                                    || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3))))
+                        && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4)))
+                        || (career == 2
+                            && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3)))
+                        || (career == 3
+                            && (slotPosition == 1 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3))))
                         return false;
                     else return true;
                 }
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.iron_ingot, 1, 0),
-                                new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.iron_ingot, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if ((career == 1
-                            && (slotPosition == 2 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4)))
-                            || (career == 2 && (slotPosition == 2
-                                    || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3)))
-                            || (career == 3 && (slotPosition == 2
-                                    || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3))))
+                        && (slotPosition == 2 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 4)))
+                        || (career == 2
+                            && (slotPosition == 2 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3)))
+                        || (career == 3
+                            && (slotPosition == 2 || slotPosition > (GeneralConfig.modernVillagerTrades ? 5 : 3))))
                         return false;
                     else return true;
                 }
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.diamond, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.diamond, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if (career == 4) {
                         return true;
                     } else if (((career >= 1 || career <= 3)
-                            && (GeneralConfig.modernVillagerTrades ? (slotPosition == 4 || slotPosition > 5)
-                                    : (slotPosition == 3 || slotPosition > 4))))
+                        && (GeneralConfig.modernVillagerTrades ? (slotPosition == 4 || slotPosition > 5)
+                            : (slotPosition == 3 || slotPosition > 4))))
                         return false;
                     else return true;
                 }
@@ -800,163 +803,135 @@ public class FunctionsVN {
                 // Career = 1: Armorer
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.iron_helmet, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1))
-                                            : (career == 1 && (slotPosition == 1 || slotPosition > 4)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_helmet, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1))
+                            : (career == 1 && (slotPosition == 1 || slotPosition > 4))) return false;
+                        else return true;
+                    }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.iron_chestplate, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1))
-                                            : (career == 1 && (slotPosition == 2 || slotPosition > 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.diamond_chestplate, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 5))
-                                            : (career == 1 && (slotPosition == 3 || slotPosition > 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.chainmail_boots, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 2))
-                                            : (career == 1 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.chainmail_leggings, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 2))
-                                            : (career == 1 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.chainmail_helmet, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 3))
-                                            : (career == 1 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.chainmail_chestplate, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 3))
-                                            : (career == 1 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
-
-                // Career = 2: Weapon Smith
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_axe, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades
-                                    ? ((career == 2 && (slotPosition == 1))
-                                            || (career == 3 && (slotPosition == 3 || slotPosition > 5)))
-                                    : (career == 2 && (slotPosition == 1 || slotPosition > 3)))
-                                return false;
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.iron_chestplate, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1))
+                                : (career == 1 && (slotPosition == 2 || slotPosition > 4))) return false;
                             else return true;
                         }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.iron_sword, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition == 2))
-                                            : (career == 2 && (slotPosition == 2 || slotPosition > 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.diamond_chestplate, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 5))
+                                : (career == 1 && (slotPosition == 3 || slotPosition > 4))) return false;
+                            else return true;
+                        }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.diamond_sword, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition == 5))
-                                            : (career == 2 && (slotPosition >= 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.chainmail_boots, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 2))
+                                : (career == 1 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.diamond_axe, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? ((career == 2 && (slotPosition == 4))
-                                                    || (career == 3 && (slotPosition == 4 || slotPosition > 5)))
-                                            : (career == 2 && (slotPosition >= 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.chainmail_leggings, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 2))
+                                : (career == 1 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.chainmail_helmet, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 3))
+                                : (career == 1 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.chainmail_chestplate, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 3))
+                                : (career == 1 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
+
+                // Career = 2: Weapon Smith
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_axe, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? ((career == 2 && (slotPosition == 1))
+                                || (career == 3 && (slotPosition == 3 || slotPosition > 5)))
+                            : (career == 2 && (slotPosition == 1 || slotPosition > 3))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_sword, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition == 2))
+                            : (career == 2 && (slotPosition == 2 || slotPosition > 3))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.diamond_sword, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition == 5))
+                            : (career == 2 && (slotPosition >= 3))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.diamond_axe, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? ((career == 2 && (slotPosition == 4))
+                                || (career == 3 && (slotPosition == 4 || slotPosition > 5)))
+                            : (career == 2 && (slotPosition >= 3))) return false;
+                        else return true;
+                    }
 
                 // Career = 3: Tool Smith
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.iron_shovel, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 3))
-                                            : (career == 3 && (slotPosition == 1 || slotPosition > 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_shovel, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 3))
+                            : (career == 3 && (slotPosition == 1 || slotPosition > 3))) return false;
+                        else return true;
+                    }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.iron_pickaxe, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 3))
-                                            : (career == 3 && (slotPosition == 2 || slotPosition > 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_pickaxe, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 3))
+                            : (career == 3 && (slotPosition == 2 || slotPosition > 3))) return false;
+                        else return true;
+                    }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.diamond_pickaxe, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 5))
-                                            : (career == 3 && (slotPosition >= 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.diamond_pickaxe, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades ? (career == 3 && (slotPosition == 5))
+                                : (career == 3 && (slotPosition >= 3))) return false;
+                            else return true;
+                        }
 
                 // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.gold_ingot, 1, 0),
-                                new ItemStack(Items.emerald, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades ? (false)
-                                            : GeneralConfig.LEGACYTRADESFALSE && ((career == 1 && (slotPosition >= 5))
-                                                    || (career == 2 && (slotPosition >= 4))
-                                                    || (career == 3 && (slotPosition >= 4))))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.gold_ingot, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (false)
+                            : GeneralConfig.LEGACYTRADESFALSE
+                                && ((career == 1 && (slotPosition >= 5)) || (career == 2 && (slotPosition >= 4))
+                                    || (career == 3 && (slotPosition >= 4))))
+                            return false;
+                        else return true;
+                    }
 
                 // Obsoleted generic trades
 
@@ -976,65 +951,62 @@ public class FunctionsVN {
                     // if ( merchantrecipe.hasSameIDsAs(new MerchantRecipe( new ItemStack(Items.emerald, 1, 0), new
                     // ItemStack(Items.iron_shovel, 1, 0))) ) return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_shovel, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_shovel, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 3 && (slotPosition == 4))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_hoe, 1, 0))))
+                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.iron_hoe, 1, 0))))
                         return true;
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_hoe, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_hoe, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades
-                                && (career == 3 && (slotPosition == 3 || slotPosition > 5)))
-                            return false;
+                            && (career == 3 && (slotPosition == 3 || slotPosition > 5))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_boots, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_boots, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 1))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_boots, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_boots, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 4))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_helmet, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_helmet, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 5))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_chestplate, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_chestplate, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 5))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.iron_leggings, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.iron_leggings, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 1))) return false;
                         else return true;
                     }
                     if (merchantrecipe.hasSameIDsAs(
-                            new MerchantRecipe(
-                                    new ItemStack(Items.emerald, 1, 0),
-                                    new ItemStack(Items.diamond_leggings, 1, 0)))) {
+                        new MerchantRecipe(
+                            new ItemStack(Items.emerald, 1, 0),
+                            new ItemStack(Items.diamond_leggings, 1, 0)))) {
                         if (GeneralConfig.modernVillagerTrades && (career == 1 && (slotPosition == 4))) return false;
                         else return true;
                     }
@@ -1051,112 +1023,95 @@ public class FunctionsVN {
                 // Career = 1: Butcher
 
                 if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.porkchop, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.porkchop, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
                     if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition == 1 || slotPosition > 3))
-                            : (career == 1 && (slotPosition == 1 || slotPosition > 2)))
-                        return false;
+                        : (career == 1 && (slotPosition == 1 || slotPosition > 2))) return false;
                     else return true;
                 }
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.coal, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                    new MerchantRecipe(new ItemStack(Items.coal, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 2 || slotPosition > 3))
+                            : (career == 1 && (slotPosition >= 2))) return false;
+                        else return true;
+                    }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.cooked_porkchop, 1, 0)))) {
                             if (GeneralConfig.modernVillagerTrades
-                                    ? (career == 1 && (slotPosition == 2 || slotPosition > 3))
-                                    : (career == 1 && (slotPosition >= 2)))
-                                return false;
-                            else return true;
-                        }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.cooked_porkchop, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 1 && (slotPosition == 2 || slotPosition > 3))
-                                            : (career == 1 && (slotPosition >= 2)))
-                                        return false;
-                                    else return true;
-                                }
-
-                // Legacy trade
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.beef, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 3))
-                                    : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 3)))
-                                return false;
+                                ? (career == 1 && (slotPosition == 2 || slotPosition > 3))
+                                : (career == 1 && (slotPosition >= 2))) return false;
                             else return true;
                         }
 
                 // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.cooked_beef, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
-                                            : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 3)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.beef, 1, 0), new ItemStack(Items.emerald, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 1 && (slotPosition >= 3))
+                            : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 3))) return false;
+                        else return true;
+                    }
+
+                // Legacy trade
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.cooked_beef, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 1 && (slotPosition == 3 || slotPosition > 5))
+                            : (GeneralConfig.LEGACYTRADESFALSE && career == 1 && (slotPosition >= 3))) return false;
+                        else return true;
+                    }
 
                 // Career = 2: Leatherworker
 
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.leather_leggings, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 2 && (slotPosition == 1 || slotPosition == 4))
-                                            : (career == 2 && (slotPosition == 1 || slotPosition > 3)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.leather_chestplate, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 2
-                                                    && (slotPosition == 1 || slotPosition == 3 || slotPosition == 4))
-                                            : (career == 2 && (slotPosition == 2 || slotPosition > 3)))
-                                        return false;
-                                    else return true;
-                                }
-
-                else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.saddle, 1, 0)))) {
-                            if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition >= 5))
-                                    : (career == 2 && (slotPosition >= 3)))
-                                return false;
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.leather_leggings, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades
+                                ? (career == 2 && (slotPosition == 1 || slotPosition == 4))
+                                : (career == 2 && (slotPosition == 1 || slotPosition > 3))) return false;
                             else return true;
                         }
 
-                // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.leather_boots, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 2
-                                                    && (slotPosition == 2 || slotPosition == 4 || slotPosition > 5))
-                                            : (GeneralConfig.LEGACYTRADESFALSE && career == 2 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.leather_chestplate, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades
+                                ? (career == 2 && (slotPosition == 1 || slotPosition == 3 || slotPosition == 4))
+                                : (career == 2 && (slotPosition == 2 || slotPosition > 3))) return false;
+                            else return true;
+                        }
+
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.saddle, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades ? (career == 2 && (slotPosition >= 5))
+                            : (career == 2 && (slotPosition >= 3))) return false;
+                        else return true;
+                    }
 
                 // Legacy trade
                 else if (merchantrecipe.hasSameIDsAs(
-                        new MerchantRecipe(
-                                new ItemStack(Items.emerald, 1, 0),
-                                new ItemStack(Items.leather_helmet, 1, 0)))) {
-                                    if (GeneralConfig.modernVillagerTrades
-                                            ? (career == 2
-                                                    && (slotPosition == 2 || slotPosition == 4 || slotPosition == 5))
-                                            : (GeneralConfig.LEGACYTRADESFALSE && career == 2 && (slotPosition >= 4)))
-                                        return false;
-                                    else return true;
-                                }
+                    new MerchantRecipe(new ItemStack(Items.emerald, 1, 0), new ItemStack(Items.leather_boots, 1, 0)))) {
+                        if (GeneralConfig.modernVillagerTrades
+                            ? (career == 2 && (slotPosition == 2 || slotPosition == 4 || slotPosition > 5))
+                            : (GeneralConfig.LEGACYTRADESFALSE && career == 2 && (slotPosition >= 4))) return false;
+                        else return true;
+                    }
+
+                // Legacy trade
+                else if (merchantrecipe.hasSameIDsAs(
+                    new MerchantRecipe(
+                        new ItemStack(Items.emerald, 1, 0),
+                        new ItemStack(Items.leather_helmet, 1, 0)))) {
+                            if (GeneralConfig.modernVillagerTrades
+                                ? (career == 2 && (slotPosition == 2 || slotPosition == 4 || slotPosition == 5))
+                                : (GeneralConfig.LEGACYTRADESFALSE && career == 2 && (slotPosition >= 4))) return false;
+                            else return true;
+                        }
 
                 // Obsoleted generic trades
                 /*
@@ -1210,12 +1165,12 @@ public class FunctionsVN {
     }
 
     public static void addToListWithCheckMeta(MerchantRecipeList recipeList, MerchantRecipe newRecipe,
-            boolean discriminateMetas) {
+        boolean discriminateMetas) {
         for (int i = 0; i < recipeList.size(); ++i) {
             MerchantRecipe existingRecipe = (MerchantRecipe) recipeList.get(i);
 
             if ((discriminateMetas && hasSameIDsAndMetasAs(newRecipe, existingRecipe))
-                    || (!discriminateMetas && newRecipe.hasSameIDsAs(existingRecipe))) {
+                || (!discriminateMetas && newRecipe.hasSameIDsAs(existingRecipe))) {
                 // LogHelper.info("New recipe " + newRecipe + " has same IDs and Metas as existing recipe " +
                 // existingRecipe);
                 if (hasSameItemsAs(newRecipe, existingRecipe)) // If this version is cheaper for the player, or offers a
@@ -1243,8 +1198,7 @@ public class FunctionsVN {
                                                                                                              // old cost
                                                                                                              // and new
             int buyitem2diff = ((newRecipe.getSecondItemToBuy() != null) ? newRecipe.getSecondItemToBuy().stackSize : 0)
-                    - ((existingRecipe.getSecondItemToBuy() != null) ? existingRecipe.getSecondItemToBuy().stackSize
-                            : 0);
+                - ((existingRecipe.getSecondItemToBuy() != null) ? existingRecipe.getSecondItemToBuy().stackSize : 0);
             int sellitemdiff = newRecipe.getItemToSell().stackSize - existingRecipe.getItemToSell().stackSize;
 
             return (buyitem1diff + buyitem2diff - sellitemdiff) < 0;
@@ -1257,16 +1211,29 @@ public class FunctionsVN {
      * Checks if both the first and second ItemToBuy IDs are the same
      */
     public static boolean hasSameIDsAndMetasAs(MerchantRecipe recipe1, MerchantRecipe recipe2) {
-        return ((recipe1.getItemToBuy().getItem() == recipe2.getItemToBuy().getItem()
-                && recipe1.getItemToSell().getItem() == recipe2.getItemToSell().getItem())
-                && (recipe1.getItemToBuy().getItemDamage() == recipe2.getItemToBuy().getItemDamage()
-                        && recipe1.getItemToSell().getItemDamage() == recipe2.getItemToSell().getItemDamage()))
-                                ? recipe1.getSecondItemToBuy() == null && recipe2.getSecondItemToBuy() == null
-                                        || recipe1.getSecondItemToBuy() != null
-                                                && recipe2.getSecondItemToBuy() != null
-                                                && recipe1.getSecondItemToBuy().getItemDamage()
-                                                        == recipe2.getSecondItemToBuy().getItemDamage()
-                                : false;
+        return ((recipe1.getItemToBuy()
+            .getItem()
+            == recipe2.getItemToBuy()
+                .getItem()
+            && recipe1.getItemToSell()
+                .getItem()
+                == recipe2.getItemToSell()
+                    .getItem())
+            && (recipe1.getItemToBuy()
+                .getItemDamage()
+                == recipe2.getItemToBuy()
+                    .getItemDamage()
+                && recipe1.getItemToSell()
+                    .getItemDamage()
+                    == recipe2.getItemToSell()
+                        .getItemDamage()))
+                            ? recipe1.getSecondItemToBuy() == null && recipe2.getSecondItemToBuy() == null
+                                || recipe1.getSecondItemToBuy() != null && recipe2.getSecondItemToBuy() != null
+                                    && recipe1.getSecondItemToBuy()
+                                        .getItemDamage()
+                                        == recipe2.getSecondItemToBuy()
+                                            .getItemDamage()
+                            : false;
     }
 
     /**
@@ -1276,21 +1243,21 @@ public class FunctionsVN {
     public static int combineDyeColors(int[] metaStream) {
         // Dye integers
         final int[] colorInts = new int[] { 16777215, // White
-                14188339, // Orange
-                11685080, // Magenta
-                6724056, // Light blue
-                15066419, // Yellow
-                8375321, // Lime
-                15892389, // Pink
-                5000268, // Gray
-                10066329, // Light gray
-                5013401, // Cyan
-                8339378, // Purple
-                3361970, // Blue
-                6704179, // Brown
-                6717235, // Green
-                10040115, // Red
-                1644825 // Black
+            14188339, // Orange
+            11685080, // Magenta
+            6724056, // Light blue
+            15066419, // Yellow
+            8375321, // Lime
+            15892389, // Pink
+            5000268, // Gray
+            10066329, // Light gray
+            5013401, // Cyan
+            8339378, // Purple
+            3361970, // Blue
+            6704179, // Brown
+            6717235, // Green
+            10040115, // Red
+            1644825 // Black
         };
 
         // Sum up r, g, b values
@@ -1350,10 +1317,10 @@ public class FunctionsVN {
      */
     public static int modernTradeCostBySlot(int defaultQuantity, int priceMultiplier, int slot, int intendedSlot) {
         return MathHelper.clamp_int(
-                defaultQuantity + priceMultiplier * (intendedSlot - Math.min(slot, 5))
-                        + (priceMultiplier * (5 - Math.max(slot, 5))) / 2,
-                1,
-                64);
+            defaultQuantity + priceMultiplier * (intendedSlot - Math.min(slot, 5))
+                + (priceMultiplier * (5 - Math.max(slot, 5))) / 2,
+            1,
+            64);
     }
 
     /**
@@ -1362,7 +1329,7 @@ public class FunctionsVN {
      */
     public static MerchantRecipe modernEnchantedBookTrade(Random random) {
         Enchantment enchantment = Enchantment.enchantmentsBookList[random
-                .nextInt(Enchantment.enchantmentsBookList.length)];
+            .nextInt(Enchantment.enchantmentsBookList.length)];
         int i = MathHelper.getRandomIntegerInRange(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
         ItemStack itemstack = Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i));
         int emeraldprice = 2 + random.nextInt(5 + i * 10) + 3 * i;
@@ -1406,48 +1373,48 @@ public class FunctionsVN {
         // Stacks loaded in from NEI have twice the duration value.
         int[][] etFuturumPotionValues = new int[][] {
 
-                { 0, 0, 10, 225 }, // Arrow of Regeneration
-                { 0, 0, 10, 112 }, // Arrow of Regeneration
-                { 0, 0, 10, 600 }, // Arrow of Regeneration
+            { 0, 0, 10, 225 }, // Arrow of Regeneration
+            { 0, 0, 10, 112 }, // Arrow of Regeneration
+            { 0, 0, 10, 600 }, // Arrow of Regeneration
 
-                { 0, 0, 1, 900 }, // Arrow of Swiftness
-                { 0, 0, 1, 450 }, // Arrow of Swiftness
-                { 0, 0, 1, 2400 }, // Arrow of Swiftness
+            { 0, 0, 1, 900 }, // Arrow of Swiftness
+            { 0, 0, 1, 450 }, // Arrow of Swiftness
+            { 0, 0, 1, 2400 }, // Arrow of Swiftness
 
-                { 0, 0, 12, 900 }, // Arrow of Fire Resistance
-                { 0, 0, 12, 2400 }, // Arrow of Fire Resistance
+            { 0, 0, 12, 900 }, // Arrow of Fire Resistance
+            { 0, 0, 12, 2400 }, // Arrow of Fire Resistance
 
-                { 0, 0, 19, 225 }, // Arrow of Poison
-                { 0, 0, 19, 112 }, // Arrow of Poison
-                { 0, 0, 19, 600 }, // Arrow of Poison
+            { 0, 0, 19, 225 }, // Arrow of Poison
+            { 0, 0, 19, 112 }, // Arrow of Poison
+            { 0, 0, 19, 600 }, // Arrow of Poison
 
-                { 0, 0, 6, 1 }, // Arrow of Healing
-                { 0, 0, 6, 1 }, // Arrow of Healing
+            { 0, 0, 6, 1 }, // Arrow of Healing
+            { 0, 0, 6, 1 }, // Arrow of Healing
 
-                { 0, 0, 16, 900 }, // Arrow of Night Vision
-                { 0, 0, 16, 2400 }, // Arrow of Night Vision
+            { 0, 0, 16, 900 }, // Arrow of Night Vision
+            { 0, 0, 16, 2400 }, // Arrow of Night Vision
 
-                { 0, 0, 18, 450 }, // Arrow of Weakness
-                { 0, 0, 18, 1200 }, // Arrow of Weakness
+            { 0, 0, 18, 450 }, // Arrow of Weakness
+            { 0, 0, 18, 1200 }, // Arrow of Weakness
 
-                { 0, 0, 5, 900 }, // Arrow of Strength
-                { 0, 0, 5, 450 }, // Arrow of Strength
-                { 0, 0, 5, 2400 }, // Arrow of Strength
+            { 0, 0, 5, 900 }, // Arrow of Strength
+            { 0, 0, 5, 450 }, // Arrow of Strength
+            { 0, 0, 5, 2400 }, // Arrow of Strength
 
-                { 0, 0, 2, 450 }, // Arrow of Slowness
-                { 0, 0, 2, 1200 }, // Arrow of Slowness
+            { 0, 0, 2, 450 }, // Arrow of Slowness
+            { 0, 0, 2, 1200 }, // Arrow of Slowness
 
-                { 0, 0, 8, 900 }, // Arrow of Leaping
-                { 0, 0, 8, 450 }, // Arrow of Leaping
+            { 0, 0, 8, 900 }, // Arrow of Leaping
+            { 0, 0, 8, 450 }, // Arrow of Leaping
 
-                { 0, 0, 7, 1 }, // Arrow of Harming
-                { 0, 0, 7, 1 }, // Arrow of Harming
+            { 0, 0, 7, 1 }, // Arrow of Harming
+            { 0, 0, 7, 1 }, // Arrow of Harming
 
-                { 0, 0, 13, 900 }, // Arrow of Water Breathing
-                { 0, 0, 13, 2400 }, // Arrow of Water Breathing
+            { 0, 0, 13, 900 }, // Arrow of Water Breathing
+            { 0, 0, 13, 2400 }, // Arrow of Water Breathing
 
-                { 0, 0, 14, 900 }, // Arrow of Invisibility
-                { 0, 0, 14, 2400 }, // Arrow of Invisibility
+            { 0, 0, 14, 900 }, // Arrow of Invisibility
+            { 0, 0, 14, 2400 }, // Arrow of Invisibility
         };
 
         // Apply the color
@@ -1576,7 +1543,7 @@ public class FunctionsVN {
 
         // Standard deviation, reduced by number of skin tags found and influenced by user's config values
         float sigma = MathHelper.sqrt_double(1D / (skin_tags * GeneralConfig.villagerSkinToneVarianceAnnealing + 1D))
-                * GeneralConfig.villagerSkinToneVarianceScale;
+            * GeneralConfig.villagerSkinToneVarianceScale;
         double skin_r = random.nextGaussian() * sigma + skin_mu;
         int chosen_skin = MathHelper.clamp_int((int) Math.round(skin_r), -4, 3);
 
@@ -1638,7 +1605,7 @@ public class FunctionsVN {
 
             // Get the current buying list
             MerchantRecipeList buyingList = ReflectionHelper
-                    .getPrivateValue(EntityVillager.class, villager, new String[] { "buyingList", "field_70963_i" });
+                .getPrivateValue(EntityVillager.class, villager, new String[] { "buyingList", "field_70963_i" });
 
             // --- If the career and careerLevel are null, assign them values --- //
 
@@ -1671,10 +1638,10 @@ public class FunctionsVN {
 
                 // EntityVillager.addDefaultEquipmentAndRecipies(n) adds n unique trades.
                 Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
-                        EntityVillager.class,
-                        villager,
-                        new String[] { "addDefaultEquipmentAndRecipies", "func_70950_c" },
-                        Integer.TYPE);
+                    EntityVillager.class,
+                    villager,
+                    new String[] { "addDefaultEquipmentAndRecipies", "func_70950_c" },
+                    Integer.TYPE);
 
                 // 2. If the number of trades is less than (CareerLevel+listSizeAdd), generate new trades until they're
                 // equal.
@@ -1694,9 +1661,9 @@ public class FunctionsVN {
 
                     // Re-collect the trade list
                     buyingList = ReflectionHelper.getPrivateValue(
-                            EntityVillager.class,
-                            villager,
-                            new String[] { "buyingList", "field_70963_i" });
+                        EntityVillager.class,
+                        villager,
+                        new String[] { "buyingList", "field_70963_i" });
 
                     mulliganTrades++;
 
@@ -1734,142 +1701,144 @@ public class FunctionsVN {
                             if (profession == 0 && career == 2) {
                                 if ((slot == 1 & VillageNames.canVillagerTradesDistinguishMeta) // has cooked non-cod in
                                                                                                 // slot 1 - set to cod
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.emerald, 1),
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.cooked_fished, 1)))
-                                        && (merchantrecipe.getItemToSell().getItemDamage() != 0)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.emerald, 1),
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.cooked_fished, 1)))
+                                    && (merchantrecipe.getItemToSell()
+                                        .getItemDamage() != 0)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 1)),
-                                                    new ItemStack(
-                                                            Items.fish,
-                                                            FunctionsVN.modernTradeCostBySlot(6, 0, slot, 1),
-                                                            0),
-                                                    new ItemStack(Items.cooked_fished, 6, 0)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 1)),
+                                            new ItemStack(
+                                                Items.fish,
+                                                FunctionsVN.modernTradeCostBySlot(6, 0, slot, 1),
+                                                0),
+                                            new ItemStack(Items.cooked_fished, 6, 0)));
                                 }
 
                                 else if ((slot == 2 & VillageNames.canVillagerTradesDistinguishMeta) // has cooked
                                                                                                      // non-salmon in
                                                                                                      // slot 2 - set to
                                                                                                      // cod
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.emerald, 1),
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.cooked_fished, 1)))
-                                        && (merchantrecipe.getItemToSell().getItemDamage() != 0)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.emerald, 1),
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.cooked_fished, 1)))
+                                    && (merchantrecipe.getItemToSell()
+                                        .getItemDamage() != 0)) {
                                             buyingList.set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.emerald,
-                                                                    FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
-                                                            new ItemStack(
-                                                                    Items.fish,
-                                                                    FunctionsVN.modernTradeCostBySlot(6, 0, slot, 2),
-                                                                    1),
-                                                            new ItemStack(Items.cooked_fished, 6, 1)));
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.emerald,
+                                                        FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(6, 0, slot, 2),
+                                                        1),
+                                                    new ItemStack(Items.cooked_fished, 6, 1)));
                                         }
 
                                 else if ((slot == 2 & VillageNames.canVillagerTradesDistinguishMeta) // has non-cod in
                                                                                                      // slot 2 - set to
                                                                                                      // cod
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().getItemDamage() != 0)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy()
+                                        .getItemDamage() != 0)) {
                                             buyingList.set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.fish,
-                                                                    FunctionsVN.modernTradeCostBySlot(15, 1, slot, 2),
-                                                                    0),
-                                                            new ItemStack(Items.emerald, 1)));
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(15, 1, slot, 2),
+                                                        0),
+                                                    new ItemStack(Items.emerald, 1)));
                                         }
 
                                 else if ((slot == 3 & VillageNames.canVillagerTradesDistinguishMeta) // has non-salmon
                                                                                                      // in slot 3 - set
                                                                                                      // to salmon
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().getItemDamage() != 1)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy()
+                                        .getItemDamage() != 1)) {
                                             buyingList.set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.fish,
-                                                                    FunctionsVN.modernTradeCostBySlot(13, 1, slot, 3),
-                                                                    1),
-                                                            new ItemStack(Items.emerald, 1)));
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(13, 1, slot, 3),
+                                                        1),
+                                                    new ItemStack(Items.emerald, 1)));
                                         }
 
                                 else if ((slot == 4 & VillageNames.canVillagerTradesDistinguishMeta) // has
                                                                                                      // non-clownfish in
                                                                                                      // slot 4 - set to
                                                                                                      // clownfish
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().getItemDamage() != 2)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy()
+                                        .getItemDamage() != 2)) {
                                             buyingList.set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.fish,
-                                                                    FunctionsVN.modernTradeCostBySlot(6, 1, slot, 4),
-                                                                    2),
-                                                            new ItemStack(Items.emerald, 1)));
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(6, 1, slot, 4),
+                                                        2),
+                                                    new ItemStack(Items.emerald, 1)));
                                         }
 
                                 else if ((slot == 5 & VillageNames.canVillagerTradesDistinguishMeta) // has
                                                                                                      // non-pufferfish
                                                                                                      // in slot 5 - set
                                                                                                      // to pufferfish
-                                        && merchantrecipe.hasSameIDsAs(
-                                                new MerchantRecipe(
-                                                        new ItemStack(Items.fish, 1),
-                                                        new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().getItemDamage() != 3)) {
+                                    && merchantrecipe.hasSameIDsAs(
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.fish, 1),
+                                            new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy()
+                                        .getItemDamage() != 3)) {
                                             buyingList.set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.fish,
-                                                                    FunctionsVN.modernTradeCostBySlot(4, 1, slot, 5),
-                                                                    3),
-                                                            new ItemStack(Items.emerald, 1)));
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(4, 1, slot, 5),
+                                                        3),
+                                                    new ItemStack(Items.emerald, 1)));
                                         }
 
                                 else if (// This is a differentiated pufferfish trade (Puff + emerald = emerald).
                                          // Replace it with its appropriate trade.
                                 VillageNames.canVillagerTradesDistinguishMeta && merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.fish, 1),
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.emerald, 1)))) {
-                                                    buyingList.set(
-                                                            i,
-                                                            new MerchantRecipe(
-                                                                    new ItemStack(
-                                                                            Items.fish,
-                                                                            FunctionsVN.modernTradeCostBySlot(
-                                                                                    4,
-                                                                                    1,
-                                                                                    slot,
-                                                                                    5),
-                                                                            3),
-                                                                    new ItemStack(Items.emerald, 1)));
-                                                }
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.fish, 1),
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.emerald, 1)))) {
+                                            buyingList.set(
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        Items.fish,
+                                                        FunctionsVN.modernTradeCostBySlot(4, 1, slot, 5),
+                                                        3),
+                                                    new ItemStack(Items.emerald, 1)));
+                                        }
                             }
 
                             // Shepherd
@@ -1877,35 +1846,41 @@ public class FunctionsVN {
                                 // Dye in slot 3 is of the form (Dye + emerald = emerald).
                                 // Detect these trades and change them to sell for one emerald.
                                 if (merchantrecipe.getItemToBuy() != null && merchantrecipe.getSecondItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy().getItem() == Items.emerald
-                                        && merchantrecipe.getItemToSell() != null
-                                        && merchantrecipe.getItemToSell().getItem() == Items.emerald) {
+                                    && merchantrecipe.getSecondItemToBuy()
+                                        .getItem() == Items.emerald
+                                    && merchantrecipe.getItemToSell() != null
+                                    && merchantrecipe.getItemToSell()
+                                        .getItem() == Items.emerald) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            merchantrecipe.getItemToBuy().getItem(),
-                                                            merchantrecipe.getItemToBuy().stackSize,
-                                                            merchantrecipe.getItemToBuy().getItemDamage()),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                merchantrecipe.getItemToBuy()
+                                                    .getItem(),
+                                                merchantrecipe.getItemToBuy().stackSize,
+                                                merchantrecipe.getItemToBuy()
+                                                    .getItemDamage()),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
                                 // Dye in slot 4 is of the form (Dye + diamond = diamond).
                                 // Detect these trades and change them to sell for one emerald.
                                 else if (merchantrecipe.getItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy().getItem() == Items.diamond
-                                        && merchantrecipe.getItemToSell() != null
-                                        && merchantrecipe.getItemToSell().getItem() == Items.diamond) {
-                                            buyingList
-                                                    .set(
-                                                            i,
-                                                            new MerchantRecipe(
-                                                                    new ItemStack(
-                                                                            merchantrecipe.getItemToBuy().getItem(),
-                                                                            merchantrecipe.getItemToBuy().stackSize,
-                                                                            merchantrecipe.getItemToBuy()
-                                                                                    .getItemDamage()),
-                                                                    new ItemStack(Items.emerald, 1)));
+                                    && merchantrecipe.getSecondItemToBuy() != null
+                                    && merchantrecipe.getSecondItemToBuy()
+                                        .getItem() == Items.diamond
+                                    && merchantrecipe.getItemToSell() != null
+                                    && merchantrecipe.getItemToSell()
+                                        .getItem() == Items.diamond) {
+                                            buyingList.set(
+                                                i,
+                                                new MerchantRecipe(
+                                                    new ItemStack(
+                                                        merchantrecipe.getItemToBuy()
+                                                            .getItem(),
+                                                        merchantrecipe.getItemToBuy().stackSize,
+                                                        merchantrecipe.getItemToBuy()
+                                                            .getItemDamage()),
+                                                    new ItemStack(Items.emerald, 1)));
                                         }
                             }
 
@@ -1913,47 +1888,48 @@ public class FunctionsVN {
                             else if (profession == 0 && career == 4) {
                                 // In order to distinguish bow from enchanted bow, the enchanted bow sells for two
                                 // distinct emerald stacks
-                                if (merchantrecipe.getItemToBuy() != null
-                                        && merchantrecipe.getItemToBuy().getItem() == Items.emerald
-                                        && merchantrecipe.getSecondItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy().getItem() == Items.emerald) {
+                                if (merchantrecipe.getItemToBuy() != null && merchantrecipe.getItemToBuy()
+                                    .getItem() == Items.emerald
+                                    && merchantrecipe.getSecondItemToBuy() != null
+                                    && merchantrecipe.getSecondItemToBuy()
+                                        .getItem() == Items.emerald) {
                                     int enchantvalue = 5 + villager.worldObj.rand.nextInt(15);
-                                    buyingList
-                                            .set(
-                                                    i,
-                                                    new MerchantRecipe(
-                                                            new ItemStack(
-                                                                    Items.emerald,
-                                                                    FunctionsVN.modernTradeCostBySlot(
-                                                                            enchantvalue + (2 + villager.worldObj.rand
-                                                                                    .nextInt(2)),
-                                                                            1,
-                                                                            slot,
-                                                                            4)),
-                                                            EnchantmentHelper.addRandomEnchantment(
-                                                                    villager.worldObj.rand,
-                                                                    new ItemStack(Items.bow, 1, 0),
-                                                                    enchantvalue)));
+                                    buyingList.set(
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(
+                                                    enchantvalue + (2 + villager.worldObj.rand.nextInt(2)),
+                                                    1,
+                                                    slot,
+                                                    4)),
+                                            EnchantmentHelper.addRandomEnchantment(
+                                                villager.worldObj.rand,
+                                                new ItemStack(Items.bow, 1, 0),
+                                                enchantvalue)));
                                 }
                             }
 
                             // Librarian
                             else if (profession == 1 && career == 1) {
-                                if (merchantrecipe.getItemToBuy() != null
-                                        && merchantrecipe.getItemToBuy().getItem() == Items.emerald
-                                        && merchantrecipe.getSecondItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy().getItem() == Items.book
-                                        && merchantrecipe.getItemToSell() != null
-                                        && merchantrecipe.getItemToSell().getItem() == Items.emerald) {
+                                if (merchantrecipe.getItemToBuy() != null && merchantrecipe.getItemToBuy()
+                                    .getItem() == Items.emerald
+                                    && merchantrecipe.getSecondItemToBuy() != null
+                                    && merchantrecipe.getSecondItemToBuy()
+                                        .getItem() == Items.book
+                                    && merchantrecipe.getItemToSell() != null
+                                    && merchantrecipe.getItemToSell()
+                                        .getItem() == Items.emerald) {
                                     // This is a placeholder for an enchanted book, to allow multiples from the same
                                     // librarian.
                                     {
                                         Enchantment enchantment = Enchantment.enchantmentsBookList[villager.worldObj.rand
-                                                .nextInt(Enchantment.enchantmentsBookList.length)];
+                                            .nextInt(Enchantment.enchantmentsBookList.length)];
                                         int enchLevel = MathHelper.getRandomIntegerInRange(
-                                                villager.worldObj.rand,
-                                                enchantment.getMinLevel(),
-                                                enchantment.getMaxLevel());
+                                            villager.worldObj.rand,
+                                            enchantment.getMinLevel(),
+                                            enchantment.getMaxLevel());
                                         buyingList.set(i, FunctionsVN.modernEnchantedBookTrade(villager.worldObj.rand)
                                         /*
                                          * new MerchantRecipe( new ItemStack(Items.emerald,
@@ -1971,85 +1947,98 @@ public class FunctionsVN {
                             // Leatherworker
                             else if (profession == 4 && career == 2) {
                                 // Detect these trades and change them to sell for one emerald stack instead of two.
-                                if (merchantrecipe.getItemToBuy() != null
-                                        && merchantrecipe.getItemToBuy().getItem() == Items.emerald
-                                        && merchantrecipe.getSecondItemToBuy() != null
-                                        && merchantrecipe.getSecondItemToBuy().getItem() == Items.emerald
-                                        && merchantrecipe.getItemToSell() != null) {
+                                if (merchantrecipe.getItemToBuy() != null && merchantrecipe.getItemToBuy()
+                                    .getItem() == Items.emerald
+                                    && merchantrecipe.getSecondItemToBuy() != null
+                                    && merchantrecipe.getSecondItemToBuy()
+                                        .getItem() == Items.emerald
+                                    && merchantrecipe.getItemToSell() != null) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    merchantrecipe.getItemToBuy(),
-                                                    merchantrecipe.getItemToSell()));
+                                        i,
+                                        new MerchantRecipe(
+                                            merchantrecipe.getItemToBuy(),
+                                            merchantrecipe.getItemToSell()));
                                 }
                             }
 
                             // This block is for enchanting equipment items that should be but aren't.
-                            if (merchantrecipe.getItemToBuy() != null
-                                    && merchantrecipe.getItemToBuy().getItem() == Items.emerald
-                                    // && merchantrecipe.getSecondItemToBuy() == null
-                                    && merchantrecipe.getItemToSell() != null
-                                    && (
-                                    // Armorer
-                                    (profession == 3 && career == 1
-                                            && merchantrecipe.getItemToSell().getItem() == Items.diamond_leggings)
-                                            || (profession == 3 && career == 1
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_boots)
-                                            || (profession == 3 && career == 1
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_helmet)
-                                            || (profession == 3 && career == 1
-                                                    && merchantrecipe.getItemToSell().getItem()
-                                                            == Items.diamond_chestplate)
-                                            // Weaponsmith
-                                            || (profession == 3 && career == 2
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.iron_sword)
-                                            || (profession == 3 && career == 2
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_axe)
-                                            || (profession == 3 && career == 2
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_sword)
-                                            // Toolsmith
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.iron_axe)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.iron_shovel)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.iron_pickaxe)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_hoe)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_axe)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.diamond_shovel)
-                                            || (profession == 3 && career == 3
-                                                    && merchantrecipe.getItemToSell().getItem()
-                                                            == Items.diamond_pickaxe)
-                                            // Leatherworker
-                                            || (profession == 4 && career == 2
-                                                    && merchantrecipe.getItemToSell().getItem()
-                                                            == Items.leather_chestplate
-                                                    && slot != 1)
-                                            || (profession == 4 && career == 2
-                                                    && merchantrecipe.getItemToSell().getItem() == Items.leather_helmet
-                                                    && slot != 2))
-                                    && !merchantrecipe.getItemToSell().isItemEnchanted()) {
+                            if (merchantrecipe.getItemToBuy() != null && merchantrecipe.getItemToBuy()
+                                .getItem() == Items.emerald
+                            // && merchantrecipe.getSecondItemToBuy() == null
+                                && merchantrecipe.getItemToSell() != null
+                                && (
+                                // Armorer
+                                (profession == 3 && career == 1
+                                    && merchantrecipe.getItemToSell()
+                                        .getItem() == Items.diamond_leggings)
+                                    || (profession == 3 && career == 1
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_boots)
+                                    || (profession == 3 && career == 1
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_helmet)
+                                    || (profession == 3 && career == 1
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_chestplate)
+                                    // Weaponsmith
+                                    || (profession == 3 && career == 2
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.iron_sword)
+                                    || (profession == 3 && career == 2
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_axe)
+                                    || (profession == 3 && career == 2
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_sword)
+                                    // Toolsmith
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.iron_axe)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.iron_shovel)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.iron_pickaxe)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_hoe)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_axe)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_shovel)
+                                    || (profession == 3 && career == 3
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.diamond_pickaxe)
+                                    // Leatherworker
+                                    || (profession == 4 && career == 2
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.leather_chestplate
+                                        && slot != 1)
+                                    || (profession == 4 && career == 2
+                                        && merchantrecipe.getItemToSell()
+                                            .getItem() == Items.leather_helmet
+                                        && slot != 2))
+                                && !merchantrecipe.getItemToSell()
+                                    .isItemEnchanted()) {
                                 ItemStack itemToEnchant = merchantrecipe.getItemToSell();
                                 int enchantvalue = 5 + villager.worldObj.rand.nextInt(15);
                                 itemToEnchant = EnchantmentHelper
-                                        .addRandomEnchantment(villager.worldObj.rand, itemToEnchant, enchantvalue);
+                                    .addRandomEnchantment(villager.worldObj.rand, itemToEnchant, enchantvalue);
                                 // Re-apply it to the list.
-                                buyingList
-                                        .set(
-                                                i,
-                                                new MerchantRecipe(
-                                                        new ItemStack(
-                                                                Items.emerald,
-                                                                FunctionsVN.modernTradeCostBySlot(
-                                                                        enchantvalue + (6
-                                                                                + villager.worldObj.rand.nextInt(3)),
-                                                                        1,
-                                                                        slot,
-                                                                        3)),
-                                                        itemToEnchant));
+                                buyingList.set(
+                                    i,
+                                    new MerchantRecipe(
+                                        new ItemStack(
+                                            Items.emerald,
+                                            FunctionsVN.modernTradeCostBySlot(
+                                                enchantvalue + (6 + villager.worldObj.rand.nextInt(3)),
+                                                1,
+                                                slot,
+                                                3)),
+                                        itemToEnchant));
                             }
 
                             // Change some prices to make them more fair
@@ -2057,373 +2046,361 @@ public class FunctionsVN {
                             // Farmer
                             if (profession == 0 && career == 1) {
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.cookie, 1)))
-                                        && (merchantrecipe.getItemToSell().stackSize < 18)) {
+                                    new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.cookie, 1)))
+                                    && (merchantrecipe.getItemToSell().stackSize < 18)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(3, 1, slot, 3)),
-                                                    new ItemStack(Items.cookie, 18)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(3, 1, slot, 3)),
+                                            new ItemStack(Items.cookie, 18)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.bread, 1)))
-                                        && (merchantrecipe.getItemToSell().stackSize < 6)) {
+                                    new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.bread, 1)))
+                                    && (merchantrecipe.getItemToSell().stackSize < 6)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2)),
-                                                    new ItemStack(Items.bread, 6)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2)),
+                                            new ItemStack(Items.bread, 6)));
                                 }
                             }
 
                             // Librarian
                             if (profession == 1 && career == 1) {
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.book, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2))) {
+                                    new MerchantRecipe(new ItemStack(Items.book, 1), new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.book,
-                                                            FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(Items.book, FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 1, 0)))
-                                        && (merchantrecipe.getItemToSell().stackSize != 3)) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 1, 0)))
+                                    && (merchantrecipe.getItemToSell().stackSize != 3)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(6, 1, slot, 1)),
-                                                    new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 3)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(6, 1, slot, 1)),
+                                            new ItemStack(Item.getItemFromBlock(Blocks.bookshelf), 3)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.compass, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 4))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.compass, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 4))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(4, 1, slot, 4)),
-                                                    new ItemStack(Items.compass, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(4, 1, slot, 4)),
+                                            new ItemStack(Items.compass, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.clock, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(5, 1, slot, 4))) {
+                                    new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.clock, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(5, 1, slot, 4))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(5, 1, slot, 4)),
-                                                    new ItemStack(Items.clock, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(5, 1, slot, 4)),
+                                            new ItemStack(Items.clock, 1)));
                                 }
                             }
 
                             // Blacksmith
                             if (profession == 3 && (career >= 1 || career <= 3)) {
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.coal, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(15, 1, slot, 1))) {
+                                    new MerchantRecipe(new ItemStack(Items.coal, 1), new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(15, 1, slot, 1))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.coal,
-                                                            FunctionsVN.modernTradeCostBySlot(15, 1, slot, 1)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.coal,
+                                                FunctionsVN.modernTradeCostBySlot(15, 1, slot, 1)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.iron_ingot, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.iron_ingot, 1),
+                                        new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.iron_ingot,
-                                                            FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.iron_ingot,
+                                                FunctionsVN.modernTradeCostBySlot(4, 1, slot, 2)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.diamond, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 4))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.diamond, 1),
+                                        new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 4))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.diamond,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 4)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.diamond,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 4)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.chainmail_helmet, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.chainmail_helmet, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
-                                                    new ItemStack(Items.chainmail_helmet, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
+                                            new ItemStack(Items.chainmail_helmet, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.chainmail_chestplate, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.chainmail_chestplate, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3)),
-                                                    new ItemStack(Items.chainmail_chestplate, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3)),
+                                            new ItemStack(Items.chainmail_chestplate, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.chainmail_leggings, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.chainmail_leggings, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2)),
-                                                    new ItemStack(Items.chainmail_leggings, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(3, 1, slot, 2)),
+                                            new ItemStack(Items.chainmail_leggings, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.chainmail_boots, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.chainmail_boots, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
-                                                    new ItemStack(Items.chainmail_boots, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
+                                            new ItemStack(Items.chainmail_boots, 1)));
                                 }
                             }
 
                             // Butcher
                             if (profession == 4 && career == 1) {
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.chicken, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(14, 1, slot, 1))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.chicken, 1),
+                                        new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(14, 1, slot, 1))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.chicken,
-                                                            FunctionsVN.modernTradeCostBySlot(14, 1, slot, 1)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.chicken,
+                                                FunctionsVN.modernTradeCostBySlot(14, 1, slot, 1)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.porkchop, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(7, 1, slot, 1))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.porkchop, 1),
+                                        new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(7, 1, slot, 1))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.porkchop,
-                                                            FunctionsVN.modernTradeCostBySlot(7, 1, slot, 1)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.porkchop,
+                                                FunctionsVN.modernTradeCostBySlot(7, 1, slot, 1)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.beef, 1),
-                                                new ItemStack(Items.emerald, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(10, 1, slot, 3))) {
+                                    new MerchantRecipe(new ItemStack(Items.beef, 1), new ItemStack(Items.emerald, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(10, 1, slot, 3))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.beef,
-                                                            FunctionsVN.modernTradeCostBySlot(10, 1, slot, 3)),
-                                                    new ItemStack(Items.emerald, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.beef,
+                                                FunctionsVN.modernTradeCostBySlot(10, 1, slot, 3)),
+                                            new ItemStack(Items.emerald, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.cooked_porkchop, 1)))
-                                        && (merchantrecipe.getItemToSell().stackSize != 5)) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.cooked_porkchop, 1)))
+                                    && (merchantrecipe.getItemToSell().stackSize != 5)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
-                                                    new ItemStack(Items.cooked_porkchop, 5)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
+                                            new ItemStack(Items.cooked_porkchop, 5)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.cooked_chicken, 1)))
-                                        && (merchantrecipe.getItemToSell().stackSize != 8)) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.cooked_chicken, 1)))
+                                    && (merchantrecipe.getItemToSell().stackSize != 8)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
-                                                    new ItemStack(Items.cooked_chicken, 8)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 2)),
+                                            new ItemStack(Items.cooked_chicken, 8)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.cooked_chicken, 1)))
-                                        && (merchantrecipe.getItemToSell().stackSize != 8)) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.cooked_chicken, 1)))
+                                    && (merchantrecipe.getItemToSell().stackSize != 8)) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3)),
-                                                    new ItemStack(Items.cooked_beef, 3)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(1, 1, slot, 3)),
+                                            new ItemStack(Items.cooked_beef, 3)));
                                 }
                             }
 
                             // Leatherworker
                             if (profession == 4 && career == 2) {
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.leather_leggings, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(3, 2, slot, 1))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.leather_leggings, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(3, 2, slot, 1))) {
                                     ItemStack itemStackColorizable = new ItemStack(Items.leather_leggings);
                                     itemStackColorizable = FunctionsVN.colorizeItemstack(
-                                            itemStackColorizable,
-                                            FunctionsVN.combineDyeColors(
-                                                    new int[] { villager.worldObj.rand.nextInt(16),
-                                                            villager.worldObj.rand.nextInt(16) }));
+                                        itemStackColorizable,
+                                        FunctionsVN.combineDyeColors(
+                                            new int[] { villager.worldObj.rand.nextInt(16),
+                                                villager.worldObj.rand.nextInt(16) }));
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(3, 2, slot, 1)),
-                                                    itemStackColorizable));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(3, 2, slot, 1)),
+                                            itemStackColorizable));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.leather_boots, 1)))
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(4, 2, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.leather_boots, 1)))
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(4, 2, slot, 2))) {
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(4, 2, slot, 2)),
-                                                    new ItemStack(Items.leather_boots, 1)));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(4, 2, slot, 2)),
+                                            new ItemStack(Items.leather_boots, 1)));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.leather_chestplate, 1)))
-                                        && !merchantrecipe.getItemToSell().isItemEnchanted()
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(7, 2, slot, 1))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.leather_chestplate, 1)))
+                                    && !merchantrecipe.getItemToSell()
+                                        .isItemEnchanted()
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(7, 2, slot, 1))) {
                                     ItemStack itemStackColorizable = new ItemStack(Items.leather_chestplate);
                                     itemStackColorizable = FunctionsVN.colorizeItemstack(
-                                            itemStackColorizable,
-                                            FunctionsVN.combineDyeColors(
-                                                    new int[] { villager.worldObj.rand.nextInt(16),
-                                                            villager.worldObj.rand.nextInt(16) }));
+                                        itemStackColorizable,
+                                        FunctionsVN.combineDyeColors(
+                                            new int[] { villager.worldObj.rand.nextInt(16),
+                                                villager.worldObj.rand.nextInt(16) }));
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(7, 2, slot, 1)),
-                                                    itemStackColorizable));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(7, 2, slot, 1)),
+                                            itemStackColorizable));
                                 }
 
                                 if (merchantrecipe.hasSameIDsAs(
-                                        new MerchantRecipe(
-                                                new ItemStack(Items.emerald, 1),
-                                                new ItemStack(Items.leather_helmet, 1)))
-                                        && !merchantrecipe.getItemToSell().isItemEnchanted()
-                                        && (merchantrecipe.getItemToBuy().stackSize
-                                                != FunctionsVN.modernTradeCostBySlot(5, 2, slot, 2))) {
+                                    new MerchantRecipe(
+                                        new ItemStack(Items.emerald, 1),
+                                        new ItemStack(Items.leather_helmet, 1)))
+                                    && !merchantrecipe.getItemToSell()
+                                        .isItemEnchanted()
+                                    && (merchantrecipe.getItemToBuy().stackSize
+                                        != FunctionsVN.modernTradeCostBySlot(5, 2, slot, 2))) {
                                     ItemStack itemStackColorizable = new ItemStack(Items.leather_helmet);
                                     itemStackColorizable = FunctionsVN.colorizeItemstack(
-                                            itemStackColorizable,
-                                            FunctionsVN.combineDyeColors(
-                                                    new int[] { villager.worldObj.rand.nextInt(16),
-                                                            villager.worldObj.rand.nextInt(16) }));
+                                        itemStackColorizable,
+                                        FunctionsVN.combineDyeColors(
+                                            new int[] { villager.worldObj.rand.nextInt(16),
+                                                villager.worldObj.rand.nextInt(16) }));
                                     buyingList.set(
-                                            i,
-                                            new MerchantRecipe(
-                                                    new ItemStack(
-                                                            Items.emerald,
-                                                            FunctionsVN.modernTradeCostBySlot(5, 2, slot, 2)),
-                                                    itemStackColorizable));
+                                        i,
+                                        new MerchantRecipe(
+                                            new ItemStack(
+                                                Items.emerald,
+                                                FunctionsVN.modernTradeCostBySlot(5, 2, slot, 2)),
+                                            itemStackColorizable));
                                 }
                             }
 
@@ -2459,12 +2436,14 @@ public class FunctionsVN {
                         // This is where I'll put the "illegal trade removal" method.
                         // Right now this is a placeholder specifically to remove the paper/emerald Librarian trade
                         if (merchantrecipe == null || merchantrecipe.getItemToBuy() == null
-                                || merchantrecipe.getItemToBuy().getItem() == Item.getItemFromBlock(Blocks.air)
-                                || merchantrecipe.getItemToSell() == null
-                                || merchantrecipe.getItemToSell().getItem() == Item.getItemFromBlock(Blocks.air)
-                                // Since we're equating careerLevel and trade list position, insert that instead of
-                                // careerLevel for evaluation.
-                                || FunctionsVN.isTradeInappropriate(merchantrecipe, profession, career, i + 1)// -listSizeAdd)
+                            || merchantrecipe.getItemToBuy()
+                                .getItem() == Item.getItemFromBlock(Blocks.air)
+                            || merchantrecipe.getItemToSell() == null
+                            || merchantrecipe.getItemToSell()
+                                .getItem() == Item.getItemFromBlock(Blocks.air)
+                            // Since we're equating careerLevel and trade list position, insert that instead of
+                            // careerLevel for evaluation.
+                            || FunctionsVN.isTradeInappropriate(merchantrecipe, profession, career, i + 1)// -listSizeAdd)
                         ) {
                             // summon Villager ~ ~ ~ {Profession:1}
 
@@ -2481,10 +2460,10 @@ public class FunctionsVN {
                     } else {
                         // Apply the culled list to the villager
                         ReflectionHelper.setPrivateValue(
-                                EntityVillager.class,
-                                villager,
-                                buyingList,
-                                new String[] { "buyingList", "field_70963_i" });
+                            EntityVillager.class,
+                            villager,
+                            buyingList,
+                            new String[] { "buyingList", "field_70963_i" });
                     }
 
                     // Accept that this is probably an infinite loop.
@@ -2493,37 +2472,34 @@ public class FunctionsVN {
                         int nextSlotToFill = buyingList.size() + 1;
 
                         if (GeneralConfig.debugMessages) LogHelper.warn(
-                                "Infinite loop suspected while generating villager trades. Stopping with "
-                                        + buyingList.size()
-                                        + " trades");
+                            "Infinite loop suspected while generating villager trades. Stopping with "
+                                + buyingList.size()
+                                + " trades");
 
                         // If the Villager is a Librarian who already has an enchanted book, they can't get another one,
                         // and that's probably why the search failed. So give them one manually.
                         if (!(GeneralConfig.modernVillagerTrades) && profession == 1 // Profession: Librarian
-                                && career == 1 // Career: Librarian
-                                && buyingList != null
-                                && (nextSlotToFill == 1 || nextSlotToFill == 4 || nextSlotToFill == 5)) {
+                            && career == 1 // Career: Librarian
+                            && buyingList != null
+                            && (nextSlotToFill == 1 || nextSlotToFill == 4 || nextSlotToFill == 5)) {
                             Enchantment enchantment = Enchantment.enchantmentsBookList[villager.worldObj.rand
-                                    .nextInt(Enchantment.enchantmentsBookList.length)];
+                                .nextInt(Enchantment.enchantmentsBookList.length)];
                             int i1 = MathHelper.getRandomIntegerInRange(
-                                    villager.worldObj.rand,
-                                    enchantment.getMinLevel(),
-                                    enchantment.getMaxLevel());
+                                villager.worldObj.rand,
+                                enchantment.getMinLevel(),
+                                enchantment.getMaxLevel());
                             buyingList.add(
-                                    new MerchantRecipe(
-                                            new ItemStack(Items.book),
-                                            new ItemStack(
-                                                    Items.emerald,
-                                                    Math.min(
-                                                            (villager.worldObj.rand.nextInt(5 + i1 * 10) + 3 * i1),
-                                                            64)),
-                                            Items.enchanted_book
-                                                    .getEnchantedItemStack(new EnchantmentData(enchantment, i1))));
+                                new MerchantRecipe(
+                                    new ItemStack(Items.book),
+                                    new ItemStack(
+                                        Items.emerald,
+                                        Math.min((villager.worldObj.rand.nextInt(5 + i1 * 10) + 3 * i1), 64)),
+                                    Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i1))));
                             ReflectionHelper.setPrivateValue(
-                                    EntityVillager.class,
-                                    villager,
-                                    buyingList,
-                                    new String[] { "buyingList", "field_70963_i" });
+                                EntityVillager.class,
+                                villager,
+                                buyingList,
+                                new String[] { "buyingList", "field_70963_i" });
                         }
                         // Modern trades cleanup
                         else if (GeneralConfig.modernVillagerTrades
@@ -2536,25 +2512,20 @@ public class FunctionsVN {
                                     if (VillageNames.canVillagerTradesDistinguishMeta) {
                                         // Add the clownfish trade
                                         buyingList.add(
-                                                new MerchantRecipe(
-                                                        new ItemStack(
-                                                                Items.fish,
-                                                                FunctionsVN
-                                                                        .modernTradeCostBySlot(6, 0, nextSlotToFill, 4),
-                                                                2),
-                                                        new ItemStack(Items.emerald, 1)));
+                                            new MerchantRecipe(
+                                                new ItemStack(
+                                                    Items.fish,
+                                                    FunctionsVN.modernTradeCostBySlot(6, 0, nextSlotToFill, 4),
+                                                    2),
+                                                new ItemStack(Items.emerald, 1)));
                                     } else {
                                         // Reverse trade because vanilla 1.7 can't distinguish emeralds
                                         buyingList.add(
-                                                new MerchantRecipe(
-                                                        new ItemStack(
-                                                                Items.emerald,
-                                                                FunctionsVN.modernTradeCostBySlot(
-                                                                        1,
-                                                                        1,
-                                                                        nextSlotToFill,
-                                                                        4)),
-                                                        new ItemStack(Items.fish, 9, 2)));
+                                            new MerchantRecipe(
+                                                new ItemStack(
+                                                    Items.emerald,
+                                                    FunctionsVN.modernTradeCostBySlot(1, 1, nextSlotToFill, 4)),
+                                                new ItemStack(Items.fish, 9, 2)));
                                     }
                                 }
                             }
@@ -2578,9 +2549,9 @@ public class FunctionsVN {
 
                         // Reload trade list
                         buyingList = ReflectionHelper.getPrivateValue(
-                                EntityVillager.class,
-                                villager,
-                                new String[] { "buyingList", "field_70963_i" });
+                            EntityVillager.class,
+                            villager,
+                            new String[] { "buyingList", "field_70963_i" });
                     }
 
                 }
@@ -2595,51 +2566,44 @@ public class FunctionsVN {
                     if ((buyingList == null ? 0 : buyingList.size()) <= 0) {
                         // LogHelper.info("Adding gold ingots");
                         buyingList.addToListWithCheck(
-                                new MerchantRecipe(
-                                        new ItemStack(Items.gold_ingot, 8 + villager.worldObj.rand.nextInt(3)),
-                                        new ItemStack(Items.emerald, 1)));
+                            new MerchantRecipe(
+                                new ItemStack(Items.gold_ingot, 8 + villager.worldObj.rand.nextInt(3)),
+                                new ItemStack(Items.emerald, 1)));
                         ReflectionHelper.setPrivateValue(
-                                EntityVillager.class,
-                                villager,
-                                buyingList,
-                                new String[] { "buyingList", "field_70963_i" });
+                            EntityVillager.class,
+                            villager,
+                            buyingList,
+                            new String[] { "buyingList", "field_70963_i" });
                     }
                     // Special handler: if this is a shepherd and the final slot is _selling wool_, then add all the
                     // colored varieties.
                     else if (!(GeneralConfig.modernVillagerTrades) && profession == 0 // Profession: Farmer
-                            && career == 3 // Career: Shepherd
-                            && buyingList != null
-                            && buyingList.size() <= 16
-                            && ((MerchantRecipe) buyingList.get(buyingList.size() - 1)).hasSameIDsAs(
-                                    new MerchantRecipe(
-                                            new ItemStack(Items.emerald, 1),
-                                            new ItemStack(Item.getItemFromBlock(Blocks.wool), 1)))) {
-                                                buyingList.remove(buyingList.size() - 1);
+                        && career == 3 // Career: Shepherd
+                        && buyingList != null
+                        && buyingList.size() <= 16
+                        && ((MerchantRecipe) buyingList.get(buyingList.size() - 1)).hasSameIDsAs(
+                            new MerchantRecipe(
+                                new ItemStack(Items.emerald, 1),
+                                new ItemStack(Item.getItemFromBlock(Blocks.wool), 1)))) {
+                                    buyingList.remove(buyingList.size() - 1);
 
-                                                final int[] woolRandOrder = shuffledIntArray(
-                                                        0,
-                                                        15,
-                                                        villager.worldObj.rand);
+                                    final int[] woolRandOrder = shuffledIntArray(0, 15, villager.worldObj.rand);
 
-                                                for (int i = 0; i < 16; i++) {
-                                                    buyingList
-                                                            .add(
-                                                                    new MerchantRecipe(
-                                                                            new ItemStack(
-                                                                                    Items.emerald,
-                                                                                    1 + villager.worldObj.rand
-                                                                                            .nextInt(2)),
-                                                                            new ItemStack(
-                                                                                    Item.getItemFromBlock(Blocks.wool),
-                                                                                    1,
-                                                                                    woolRandOrder[i])));
-                                                }
-                                                ReflectionHelper.setPrivateValue(
-                                                        EntityVillager.class,
-                                                        villager,
-                                                        buyingList,
-                                                        new String[] { "buyingList", "field_70963_i" });
-                                            }
+                                    for (int i = 0; i < 16; i++) {
+                                        buyingList.add(
+                                            new MerchantRecipe(
+                                                new ItemStack(Items.emerald, 1 + villager.worldObj.rand.nextInt(2)),
+                                                new ItemStack(
+                                                    Item.getItemFromBlock(Blocks.wool),
+                                                    1,
+                                                    woolRandOrder[i])));
+                                    }
+                                    ReflectionHelper.setPrivateValue(
+                                        EntityVillager.class,
+                                        villager,
+                                        buyingList,
+                                        new String[] { "buyingList", "field_70963_i" });
+                                }
                     // Go through list of Blacksmith items, and enchant stuff that is not enchanted.
                     else if (!(GeneralConfig.modernVillagerTrades) && profession == 3) { // Profession: Blacksmith
 
@@ -2648,20 +2612,19 @@ public class FunctionsVN {
                             MerchantRecipe merchantrecipe = (MerchantRecipe) buyingList.get(i);
                             ItemStack itemToCheck = merchantrecipe.getItemToSell();
                             if (!itemToCheck.isItemEnchanted() && ((career == 1
-                                    && itemToCheck.isItemEqual(new ItemStack(Items.diamond_chestplate)))
-                                    || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.iron_sword)))
-                                    || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.diamond_sword)))
-                                    || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.diamond_axe)))
-                                    || (career == 3 && itemToCheck.isItemEqual(new ItemStack(Items.iron_shovel)))
-                                    || (career == 3 && itemToCheck.isItemEqual(new ItemStack(Items.iron_pickaxe)))
-                                    || (career == 3
-                                            && itemToCheck.isItemEqual(new ItemStack(Items.diamond_pickaxe))))) {
+                                && itemToCheck.isItemEqual(new ItemStack(Items.diamond_chestplate)))
+                                || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.iron_sword)))
+                                || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.diamond_sword)))
+                                || (career == 2 && itemToCheck.isItemEqual(new ItemStack(Items.diamond_axe)))
+                                || (career == 3 && itemToCheck.isItemEqual(new ItemStack(Items.iron_shovel)))
+                                || (career == 3 && itemToCheck.isItemEqual(new ItemStack(Items.iron_pickaxe)))
+                                || (career == 3 && itemToCheck.isItemEqual(new ItemStack(Items.diamond_pickaxe))))) {
                                 ItemStack emeraldPrice = merchantrecipe.getItemToBuy();
                                 // Enchant the item.
                                 itemToCheck = EnchantmentHelper.addRandomEnchantment(
-                                        villager.worldObj.rand,
-                                        itemToCheck,
-                                        5 + villager.worldObj.rand.nextInt(15));
+                                    villager.worldObj.rand,
+                                    itemToCheck,
+                                    5 + villager.worldObj.rand.nextInt(15));
                                 // Re-apply it to the list.
                                 buyingList.set(i, new MerchantRecipe(emeraldPrice, itemToCheck));
                             }
@@ -2685,14 +2648,14 @@ public class FunctionsVN {
                                 if (!itemToCheck.isItemEnchanted() && itemToCheck.isItemEqual(alis.get(j))) {
                                     // Enchant the item.
                                     itemToCheck = EnchantmentHelper.addRandomEnchantment(
-                                            villager.worldObj.rand,
-                                            itemToCheck,
-                                            5 + villager.worldObj.rand.nextInt(15));
+                                        villager.worldObj.rand,
+                                        itemToCheck,
+                                        5 + villager.worldObj.rand.nextInt(15));
                                     // Change the emerald cost
                                     ItemStack emeraldPrice = new ItemStack(
-                                            Items.emerald,
-                                            new int[] { 7, 4, 5, 5 }[j]
-                                                    + villager.worldObj.rand.nextInt(new int[] { 6, 5, 5, 6 }[j]));
+                                        Items.emerald,
+                                        new int[] { 7, 4, 5, 5 }[j]
+                                            + villager.worldObj.rand.nextInt(new int[] { 6, 5, 5, 6 }[j]));
                                     // Re-apply it to the list.
                                     buyingList.set(i, new MerchantRecipe(emeraldPrice, itemToCheck));
                                 }
@@ -2724,10 +2687,10 @@ public class FunctionsVN {
      */
     public static Item returnRandomBoatTypeForVillager(EntityVillager villager) {
         Item[] boats = new Item[] { FunctionsVN.getItemFromName(ModObjects.boatAcaciaUTD),
-                FunctionsVN.getItemFromName(ModObjects.boatBirchUTD),
-                FunctionsVN.getItemFromName(ModObjects.boatDarkOakUTD),
-                FunctionsVN.getItemFromName(ModObjects.boatJungleUTD), Items.boat,
-                FunctionsVN.getItemFromName(ModObjects.boatSpruceUTD) };
+            FunctionsVN.getItemFromName(ModObjects.boatBirchUTD),
+            FunctionsVN.getItemFromName(ModObjects.boatDarkOakUTD),
+            FunctionsVN.getItemFromName(ModObjects.boatJungleUTD), Items.boat,
+            FunctionsVN.getItemFromName(ModObjects.boatSpruceUTD) };
 
         int[] randomOrder = shuffledIntArray(0, 5, villager.getRNG());
         for (int i = 0; i < 6; i++) {
@@ -2757,10 +2720,12 @@ public class FunctionsVN {
         ArrayList<String> boatTypes = new ArrayList<String>();
 
         // Add wood types to pool based on name
-        if (biome.biomeName.toLowerCase().contains("birch")) {
+        if (biome.biomeName.toLowerCase()
+            .contains("birch")) {
             boatTypes.add("birch");
         }
-        if (biome.biomeName.toLowerCase().contains("roofed")) {
+        if (biome.biomeName.toLowerCase()
+            .contains("roofed")) {
             boatTypes.add("darkoak");
         }
 
@@ -2788,7 +2753,9 @@ public class FunctionsVN {
 
         // Now, pick a boat type from the tags available
         if (boatTypes.size() > 0) {
-            return boatTypes.get(entity.getRNG().nextInt(boatTypes.size()));
+            return boatTypes.get(
+                entity.getRNG()
+                    .nextInt(boatTypes.size()));
         }
 
         // If none of the above applied, and the "isForest" tag is true, return oak.
@@ -2796,7 +2763,8 @@ public class FunctionsVN {
             return "oak";
         }
 
-        return (new String[] { "acacia", "birch", "darkoak", "jungle", "oak", "spruce" })[entity.getRNG().nextInt(6)];
+        return (new String[] { "acacia", "birch", "darkoak", "jungle", "oak", "spruce" })[entity.getRNG()
+            .nextInt(6)];
     }
 
     /**
@@ -2864,8 +2832,8 @@ public class FunctionsVN {
         z = Math.abs(z);
 
         return ((x + y + z) * (x + y + z + 1) * (x + y + z + 2) / 6 + (y + z) * (y + z + 1) / 2
-                + y
-                + (zIsNegative ? 1 : 0)) * (xIsNegative ? -2 : 2);
+            + y
+            + (zIsNegative ? 1 : 0)) * (xIsNegative ? -2 : 2);
     }
 
     /**
@@ -2894,11 +2862,15 @@ public class FunctionsVN {
 
     public static NBTTagCompound setItemValues(ItemStack stack, NBTTagCompound bannerTag) {
 
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("BlockEntityTag", 10)) {
-            NBTTagCompound nbttagcompound = stack.getTagCompound().getCompoundTag("BlockEntityTag");
+        if (stack.hasTagCompound() && stack.getTagCompound()
+            .hasKey("BlockEntityTag", 10)) {
+            NBTTagCompound nbttagcompound = stack.getTagCompound()
+                .getCompoundTag("BlockEntityTag");
 
-            if (nbttagcompound.hasKey("Patterns"))
-                bannerTag.setTag("Patterns", (NBTTagList) nbttagcompound.getTagList("Patterns", 10).copy());
+            if (nbttagcompound.hasKey("Patterns")) bannerTag.setTag(
+                "Patterns",
+                (NBTTagList) nbttagcompound.getTagList("Patterns", 10)
+                    .copy());
 
             if (nbttagcompound.hasKey("Base", 99)) bannerTag.setInteger("Base", nbttagcompound.getInteger("Base"));
             else bannerTag.setInteger("Base", stack.getItemDamage() & 15);
@@ -2913,9 +2885,9 @@ public class FunctionsVN {
         } else {
             List<Type> biomeList = Arrays.asList(BiomeDictionary.getTypesForBiome(biome));
             return (biomeList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeList.contains(BiomeDictionary.Type.OCEAN)
-                    || biomeList.contains(BiomeDictionary.Type.RIVER)
-                    || biomeList.contains(BiomeDictionary.Type.BEACH)
-                    || biomeList.contains(BiomeDictionary.Type.MESA));
+                || biomeList.contains(BiomeDictionary.Type.RIVER)
+                || biomeList.contains(BiomeDictionary.Type.BEACH)
+                || biomeList.contains(BiomeDictionary.Type.MESA));
         }
     }
 }

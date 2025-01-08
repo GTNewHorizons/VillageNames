@@ -36,7 +36,7 @@ public class IntHashMap1122<V> {
         int i = computeHash(hashEntry);
 
         for (IntHashMap1122.Entry<V> entry = this.slots[getSlotIndex(i, this.slots.length)]; entry
-                != null; entry = entry.nextEntry) {
+            != null; entry = entry.nextEntry) {
             if (entry.hashEntry == hashEntry) {
                 return entry.valueEntry;
             }
@@ -60,7 +60,7 @@ public class IntHashMap1122<V> {
         int i = computeHash(hashEntry);
 
         for (IntHashMap1122.Entry<V> entry = this.slots[getSlotIndex(i, this.slots.length)]; entry
-                != null; entry = entry.nextEntry) {
+            != null; entry = entry.nextEntry) {
             if (entry.hashEntry == hashEntry) {
                 return entry;
             }

@@ -37,8 +37,7 @@ public enum Mirror {
     public Rotation toRotation(EnumFacing194 facing) {
         EnumFacing194.Axis enumfacing$axis = facing.getAxis();
         return (this != LEFT_RIGHT || enumfacing$axis != EnumFacing194.Axis.Z)
-                && (this != FRONT_BACK || enumfacing$axis != EnumFacing194.Axis.X) ? Rotation.NONE
-                        : Rotation.CLOCKWISE_180;
+            && (this != FRONT_BACK || enumfacing$axis != EnumFacing194.Axis.X) ? Rotation.NONE : Rotation.CLOCKWISE_180;
     }
 
     /**

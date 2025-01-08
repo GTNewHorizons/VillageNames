@@ -19,7 +19,7 @@ public class SpawnEggInfo {
     public final int secondaryColor;
 
     public SpawnEggInfo(short eggID, String mobID, String displayName, NBTTagCompound spawnData, int primaryColor,
-            int secondaryColor) {
+        int secondaryColor) {
         this.eggID = eggID;
         this.mobID = mobID;
         this.displayName = displayName;

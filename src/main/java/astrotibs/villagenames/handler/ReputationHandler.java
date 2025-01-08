@@ -27,13 +27,13 @@ public class ReputationHandler {
 
         try {
             structureData = (MapGenStructureData) player.worldObj.perWorldStorage
-                    .loadData(MapGenStructureData.class, "Village");
+                .loadData(MapGenStructureData.class, "Village");
             nbttagcompound = structureData.func_143041_a();
         } catch (Exception e) // Village.dat does not exist
         {
             try {
                 structureData = (MapGenStructureData) player.worldObj.perWorldStorage
-                        .loadData(MapGenStructureData.class, "OTGVillage");
+                    .loadData(MapGenStructureData.class, "OTGVillage");
                 nbttagcompound = structureData.func_143041_a();
             } catch (Exception e1) {} // OTGVillage.dat does not exist
         }
@@ -63,9 +63,13 @@ public class ReputationHandler {
                 // -------------------------------------------------- //
                 // --- We found an entry for the player's VN rep! --- //
                 // -------------------------------------------------- //
-                if (playerReps.hasKey(player.getUniqueID().toString())) {
+                if (playerReps.hasKey(
+                    player.getUniqueID()
+                        .toString())) {
 
-                    int PrevVNPlayerRep = playerReps.getInteger(player.getUniqueID().toString());
+                    int PrevVNPlayerRep = playerReps.getInteger(
+                        player.getUniqueID()
+                            .toString());
 
                     if (village == null) { // There is no village in the collectionObj--presumably, it was annihilated.
                                            // Return the VN rep.
@@ -86,8 +90,8 @@ public class ReputationHandler {
                                 VNPlayerRep = collectionRep;
                                 if (GeneralConfig.debugMessages) {
                                     LogHelper.info(
-                                            "There was a reputation mismatch. We assume villageCollectionObj was correct: "
-                                                    + VNPlayerRep);
+                                        "There was a reputation mismatch. We assume villageCollectionObj was correct: "
+                                            + VNPlayerRep);
                                 }
                             } else { // This village was previously reported as annihilated
                                      // The village is no longer annihilated, so its reputation is going to return to
@@ -96,14 +100,12 @@ public class ReputationHandler {
 
                                 // 3.0.1 update: setReputationForPlayer INCREMENTS reputation; it doesn't set the
                                 // absolute value!!
-                                village.setReputationForPlayer(
-                                        player.getDisplayName(),
-                                        PrevVNPlayerRep - collectionRep);
+                                village
+                                    .setReputationForPlayer(player.getDisplayName(), PrevVNPlayerRep - collectionRep);
                                 VNPlayerRep = PrevVNPlayerRep;
                                 if (GeneralConfig.debugMessages) {
                                     LogHelper.info(
-                                            "There was a reputation mismatch. We assume VN's was correct: "
-                                                    + VNPlayerRep);
+                                        "There was a reputation mismatch. We assume VN's was correct: " + VNPlayerRep);
                                 }
                             }
                         }
@@ -135,7 +137,10 @@ public class ReputationHandler {
 
             villageTag.setTag(repKey, playerReps);
             villageTag.setBoolean(collectedKey, !(village == null));
-            playerReps.setInteger(player.getUniqueID().toString(), VNPlayerRep);
+            playerReps.setInteger(
+                player.getUniqueID()
+                    .toString(),
+                VNPlayerRep);
             structureData.markDirty(); // You changed a value.
 
             return VNPlayerRep;
@@ -172,18 +177,19 @@ public class ReputationHandler {
 
         try {
             structureData = (MapGenStructureData) player.worldObj.perWorldStorage
-                    .loadData(MapGenStructureData.class, "Village");
+                .loadData(MapGenStructureData.class, "Village");
             nbttagcompound = structureData.func_143041_a();
         } catch (Exception e) // Village.dat does not exist
         {
             try {
                 structureData = (MapGenStructureData) player.worldObj.perWorldStorage
-                        .loadData(MapGenStructureData.class, "OTGVillage");
+                    .loadData(MapGenStructureData.class, "OTGVillage");
                 nbttagcompound = structureData.func_143041_a();
             } catch (Exception e1) {} // OTGVillage.dat does not exist
         }
 
-        Iterator itr = nbttagcompound.func_150296_c().iterator();
+        Iterator itr = nbttagcompound.func_150296_c()
+            .iterator();
 
         while (itr.hasNext()) {
             Object entry = itr.next();
@@ -201,10 +207,10 @@ public class ReputationHandler {
                     int posZ = (int) player.posZ;
 
                     if ((posX >= (boundingBox[0]) && posY >= (boundingBox[1])
-                            && posZ >= (boundingBox[2])
-                            && posX <= (boundingBox[3])
-                            && posY <= (boundingBox[4])
-                            && posZ <= (boundingBox[5]))) {
+                        && posZ >= (boundingBox[2])
+                        && posX <= (boundingBox[3])
+                        && posY <= (boundingBox[4])
+                        && posZ <= (boundingBox[5]))) {
                         // Player is inside the bounding box of this village
 
                         return entry.toString();

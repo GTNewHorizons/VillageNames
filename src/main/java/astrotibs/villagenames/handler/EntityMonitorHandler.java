@@ -63,22 +63,22 @@ public class EntityMonitorHandler {
 
                 if (GeneralConfig.debugMessages) {
                     LogHelper.info(
-                            "EntityMonitorHandler > A zombie just killed villager "
-                                    + (villager.getCustomNameTag().equals("")
-                                            || villager.getCustomNameTag().equals(null) ? "(None)"
-                                                    : villager.getCustomNameTag())
-                                    + " ["
-                                    + villager.getEntityId()
-                                    + "] "
-                                    + "at ["
-                                    +
-                                    // villager.getPosition(1.0F)
-                                    // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Changed
-                                    // because of server crash
-                                    new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
-                                    + "], profession ["
-                                    + villager.getProfession()
-                                    + "]");
+                        "EntityMonitorHandler > A zombie just killed villager " + (villager.getCustomNameTag()
+                            .equals("")
+                            || villager.getCustomNameTag()
+                                .equals(null) ? "(None)" : villager.getCustomNameTag())
+                            + " ["
+                            + villager.getEntityId()
+                            + "] "
+                            + "at ["
+                            +
+                            // villager.getPosition(1.0F)
+                            // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Changed
+                            // because of server crash
+                            new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
+                            + "], profession ["
+                            + villager.getProfession()
+                            + "]");
                 }
             }
         }
@@ -103,26 +103,27 @@ public class EntityMonitorHandler {
                     // Check if the zombie has special properties
                     final ExtendedZombieVillager properties = ExtendedZombieVillager.get(zombie);
                     if (properties != null) {
-                        NetworkHelper.sendZombieVillagerProfessionMessage(
-                                zombie.getEntityId(),
-                                properties,
-                                event.entityPlayer);
+                        NetworkHelper
+                            .sendZombieVillagerProfessionMessage(zombie.getEntityId(), properties, event.entityPlayer);
                     }
                 }
             }
 
             // Check if the player started tracking a village guard
-            else if (event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) {
-                // final EntityZombie zombie = (EntityZombie) event.target;
-                final EntityLiving guard = (EntityLiving) event.target;
+            else if (event.entity.getClass()
+                .toString()
+                .substring(6)
+                .equals(ModObjects.WitcheryGuardClass)) {
+                    // final EntityZombie zombie = (EntityZombie) event.target;
+                    final EntityLiving guard = (EntityLiving) event.target;
 
-                // Check if the guard has special properties
-                final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
-                if (properties != null) {
-                    NetworkHelper.sendVillageGuardMessage(guard.getEntityId(), properties, event.entityPlayer);
+                    // Check if the guard has special properties
+                    final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
+                    if (properties != null) {
+                        NetworkHelper.sendVillageGuardMessage(guard.getEntityId(), properties, event.entityPlayer);
+                    }
+
                 }
-
-            }
 
         }
 
@@ -155,10 +156,10 @@ public class EntityMonitorHandler {
                 // final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER,
                 // zombie.getPosition(1.0F));//zombie.getPosition());
                 final EventTracker tracked = ServerInfoTracker.seek(
-                        EventType.VILLAGER,
-                        // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
-                        new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ)); // Replaced because of mp server-side
-                                                                                  // crash
+                    EventType.VILLAGER,
+                    // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
+                    new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ)); // Replaced because of mp server-side
+                                                                              // crash
 
                 if (tracked != null) {
                     if (GeneralConfig.debugMessages) {
@@ -208,10 +209,10 @@ public class EntityMonitorHandler {
             } else {
                 // Looks on the event tracker for a zombie that was cured
                 final EventTracker tracked = ServerInfoTracker.seek(
-                        EventType.ZOMBIE,
-                        // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Replaced because of
-                        // mp server-side crash
-                        new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ));// .getPosition());
+                    EventType.ZOMBIE,
+                    // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Replaced because of
+                    // mp server-side crash
+                    new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ));// .getPosition());
 
                 if (tracked != null) {
                     // This is a cured Villager Zombie.
@@ -270,7 +271,7 @@ public class EntityMonitorHandler {
                     for (int k = (int) zombie.posX - 4; k < (int) zombie.posX + 4 && countedBedsOrBars < 14; ++k) {
                         for (int l = (int) zombie.posY - 4; l < (int) zombie.posY + 4 && countedBedsOrBars < 14; ++l) {
                             for (int i1 = (int) zombie.posZ - 4; i1 < (int) zombie.posZ + 4
-                                    && countedBedsOrBars < 14; ++i1) {
+                                && countedBedsOrBars < 14; ++i1) {
                                 Block block = zombie.worldObj.getBlock(k, l, i1);
 
                                 if (block == Blocks.iron_bars || block == Blocks.bed) {
@@ -291,18 +292,21 @@ public class EntityMonitorHandler {
 
                 if (zombie.worldObj.rand.nextFloat() < (0.01F * checkfactor)) {
 
-                    for (int groupi = 0; groupi < GeneralConfig.zombieCureGroups_map.get("Groups").size(); groupi++) { // Go
-                                                                                                                       // through
-                                                                                                                       // all
-                                                                                                                       // the
-                                                                                                                       // groups
-                                                                                                                       // in
-                                                                                                                       // GeneralConfig.zombieCureGroups_map
+                    for (int groupi = 0; groupi < GeneralConfig.zombieCureGroups_map.get("Groups")
+                        .size(); groupi++) { // Go
+                                             // through
+                                             // all
+                                             // the
+                                             // groups
+                                             // in
+                                             // GeneralConfig.zombieCureGroups_map
 
-                        String group = (String) GeneralConfig.zombieCureGroups_map.get("Groups").get(groupi);
-                        int groupLimit = (Integer) GeneralConfig.zombieCureGroups_map.get("Limits").get(groupi);
-                        double groupSpeedup = ((Double) GeneralConfig.zombieCureGroups_map.get("Speedups").get(groupi))
-                                / checkfactor;
+                        String group = (String) GeneralConfig.zombieCureGroups_map.get("Groups")
+                            .get(groupi);
+                        int groupLimit = (Integer) GeneralConfig.zombieCureGroups_map.get("Limits")
+                            .get(groupi);
+                        double groupSpeedup = ((Double) GeneralConfig.zombieCureGroups_map.get("Speedups")
+                            .get(groupi)) / checkfactor;
 
                         // Extract sign and apply it later
                         int speedupSign = groupSpeedup < 0 ? -1 : 1;
@@ -311,39 +315,44 @@ public class EntityMonitorHandler {
                         int countedGroupBlocks = 0;
 
                         for (int k = (int) zombie.posX - 4; k < (int) zombie.posX + 4
-                                && countedGroupBlocks < groupLimit; ++k) {
+                            && countedGroupBlocks < groupLimit; ++k) {
                             for (int l = (int) zombie.posY - 4; l < (int) zombie.posY + 4
-                                    && countedGroupBlocks < groupLimit; ++l) {
+                                && countedGroupBlocks < groupLimit; ++l) {
                                 for (int i1 = (int) zombie.posZ - 4; i1 < (int) zombie.posZ + 4
-                                        && countedGroupBlocks < groupLimit; ++i1) {
+                                    && countedGroupBlocks < groupLimit; ++i1) {
 
                                     Block block = zombie.worldObj.getBlock(k, l, i1);
                                     int blockmeta = zombie.worldObj.getBlockMetadata(k, l, i1);
-                                    String blockClassPath = block.getClass().toString().substring(6);
+                                    String blockClassPath = block.getClass()
+                                        .toString()
+                                        .substring(6);
                                     String blockUnlocName = block.getUnlocalizedName();
 
-                                    for (int blocki = 0; blocki
-                                            < GeneralConfig.zombieCureCatalysts_map.get("Groups").size(); blocki++) { // Go
-                                                                                                                      // through
-                                                                                                                      // all
-                                                                                                                      // the
-                                                                                                                      // custom
-                                                                                                                      // block
-                                                                                                                      // entries
+                                    for (int blocki = 0; blocki < GeneralConfig.zombieCureCatalysts_map.get("Groups")
+                                        .size(); blocki++) { // Go
+                                                             // through
+                                                             // all
+                                                             // the
+                                                             // custom
+                                                             // block
+                                                             // entries
 
                                         String catalystGroup = (String) GeneralConfig.zombieCureCatalysts_map
-                                                .get("Groups").get(blocki);
+                                            .get("Groups")
+                                            .get(blocki);
                                         String catalystClassPath = (String) GeneralConfig.zombieCureCatalysts_map
-                                                .get("ClassPaths").get(blocki);
+                                            .get("ClassPaths")
+                                            .get(blocki);
                                         String catalystUnlocName = (String) GeneralConfig.zombieCureCatalysts_map
-                                                .get("UnlocNames").get(blocki);
+                                            .get("UnlocNames")
+                                            .get(blocki);
                                         int catalystMeta = (Integer) GeneralConfig.zombieCureCatalysts_map.get("Metas")
-                                                .get(blocki);
+                                            .get(blocki);
 
                                         if (catalystGroup.equals(group) && catalystClassPath.equals(blockClassPath)
-                                                && (catalystUnlocName.equals("")
-                                                        || catalystUnlocName.equals(blockUnlocName))
-                                                && (catalystMeta == -1 || blockmeta == catalystMeta)) {
+                                            && (catalystUnlocName.equals("")
+                                                || catalystUnlocName.equals(blockUnlocName))
+                                            && (catalystMeta == -1 || blockmeta == catalystMeta)) {
 
                                             // if (GeneralConfigHandler.debugMessages) {
                                             // LogHelper.info("Ticked match at " + k + " " + l + " " + i1);
@@ -386,19 +395,19 @@ public class EntityMonitorHandler {
 
                 try {
                     conversionTime = ReflectionHelper.getPrivateValue(
-                            EntityZombie.class,
-                            (EntityZombie) event.entity,
-                            new String[] { "conversionTime", "field_82234_d" }); // The MCP mapping for this field name
+                        EntityZombie.class,
+                        (EntityZombie) event.entity,
+                        new String[] { "conversionTime", "field_82234_d" }); // The MCP mapping for this field name
                     // Increment conversion time
                     conversionTime -= (vanillaRollbackTicks + modTickAdjustment);
                     // Cap at 5 minutes
                     conversionTime = MathHelper.clamp_int(conversionTime, 1, 6000);
                     // Set the conversion value to this modified value
                     ReflectionHelper.setPrivateValue(
-                            EntityZombie.class,
-                            (EntityZombie) event.entity,
-                            conversionTime,
-                            new String[] { "conversionTime", "field_82234_d" });
+                        EntityZombie.class,
+                        (EntityZombie) event.entity,
+                        conversionTime,
+                        new String[] { "conversionTime", "field_82234_d" });
                     // if (GeneralConfigHandler.debugMessages) {LogHelper.warn("Setting conversion timer to
                     // "+conversionTime);}
                 } catch (Exception e) {
@@ -407,10 +416,10 @@ public class EntityMonitorHandler {
                 }
 
                 Method getConversionTimeBoost_m = ReflectionHelper.findMethod(
-                        EntityZombie.class,
-                        (EntityZombie) event.entity,
-                        new String[] { "getConversionTimeBoost", "func_82233_q" }); // The MCP mapping for this method
-                                                                                    // name
+                    EntityZombie.class,
+                    (EntityZombie) event.entity,
+                    new String[] { "getConversionTimeBoost", "func_82233_q" }); // The MCP mapping for this method
+                                                                                // name
 
                 int getConversionTimeBoost = 0;
 
@@ -426,22 +435,23 @@ public class EntityMonitorHandler {
 
                 if (GeneralConfig.debugMessages && nextConversionTime <= 500 // Starts counting down 25 seconds before
                                                                              // conversion
-                        && nextConversionTime % 20 == 0 // Confirmation message every second
+                    && nextConversionTime % 20 == 0 // Confirmation message every second
                 ) { // Counts down 25 seconds until a zombie villager is cured
                     LogHelper.info(
-                            "EntityMonitorHandler > Zombie [" + zombie.getEntityId()
-                                    + "] being cured in "
-                                    + conversionTime
-                                    + " ticks");
+                        "EntityMonitorHandler > Zombie [" + zombie.getEntityId()
+                            + "] being cured in "
+                            + conversionTime
+                            + " ticks");
                 }
 
                 // NOTE: if [conversionTime] is zero, the zombie already converted and it's too late to track
                 if (nextConversionTime <= 0 && conversionTime > 0) {
                     if (GeneralConfig.debugMessages) {
                         LogHelper.info(
-                                "EntityMonitorHandler > Zombie " + zombie.toString()
-                                        + " is about to be cured in tick "
-                                        + MinecraftServer.getServer().getTickCounter());
+                            "EntityMonitorHandler > Zombie " + zombie.toString()
+                                + " is about to be cured in tick "
+                                + MinecraftServer.getServer()
+                                    .getTickCounter());
                     }
                     ServerInfoTracker.add(zombie);
                 }
@@ -480,20 +490,20 @@ public class EntityMonitorHandler {
                     // )).setProfessionLevel(ExtendedVillager.determineProfessionLevel(zombie));
                     // Sends a ping to everyone within 80 blocks
                     NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(
-                            zombie.dimension,
-                            zombie.lastTickPosX,
-                            zombie.lastTickPosY,
-                            zombie.lastTickPosZ,
-                            16 * 5);
+                        zombie.dimension,
+                        zombie.lastTickPosX,
+                        zombie.lastTickPosY,
+                        zombie.lastTickPosZ,
+                        16 * 5);
                     VillageNames.VNNetworkWrapper.sendToAllAround(
-                            new MessageZombieVillagerProfession(
-                                    zombie.getEntityId(),
-                                    ezv.getProfession(),
-                                    ezv.getCareer(),
-                                    ezv.getBiomeType(),
-                                    ezv.getProfessionLevel(),
-                                    ezv.getSkinTone()),
-                            targetPoint);
+                        new MessageZombieVillagerProfession(
+                            zombie.getEntityId(),
+                            ezv.getProfession(),
+                            ezv.getCareer(),
+                            ezv.getBiomeType(),
+                            ezv.getProfessionLevel(),
+                            ezv.getSkinTone()),
+                        targetPoint);
                 }
             }
 
@@ -501,8 +511,12 @@ public class EntityMonitorHandler {
 
         // New entity is a village guard. Check to see if it came into being via a player's recruitment.
         else if (Loader.isModLoaded("witchery") && event.entity instanceof EntityLiving
-                && event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)
-                && (EventType.GUARD).getTracker().size() > 0) {
+            && event.entity.getClass()
+                .toString()
+                .substring(6)
+                .equals(ModObjects.WitcheryGuardClass)
+            && (EventType.GUARD).getTracker()
+                .size() > 0) {
 
                     final EntityLiving guard = (EntityLiving) event.entity;
 
@@ -515,17 +529,17 @@ public class EntityMonitorHandler {
                         // final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER,
                         // zombie.getPosition(1.0F));//zombie.getPosition());
                         final EventTracker tracked = ServerInfoTracker.seek(
-                                EventType.GUARD,
-                                // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
-                                new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ)); // Replaced because of mp
-                                                                                       // server-side crash
+                            EventType.GUARD,
+                            // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
+                            new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ)); // Replaced because of mp
+                                                                                   // server-side crash
 
                         final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
 
                         if (tracked != null) {
                             if (GeneralConfig.debugMessages) {
                                 LogHelper.info(
-                                        "EntityMonitorHandler > Found villager info on the tracker--must copy to guard");
+                                    "EntityMonitorHandler > Found villager info on the tracker--must copy to guard");
                             }
 
                             // If found, copy the data from the villager
@@ -543,153 +557,162 @@ public class EntityMonitorHandler {
 
         // --- Initialize villager trades and sync skin with client --- //
 
-        else if (event.entity.getClass().toString().substring(6).equals(Reference.VILLAGER_CLASS) // Explicit vanilla
-                                                                                                  // villager class
-                && !event.entity.worldObj.isRemote) {
-                    EntityVillager villager = (EntityVillager) event.entity;
-                    ExtendedVillager ev = ExtendedVillager.get(villager);
+        else if (event.entity.getClass()
+            .toString()
+            .substring(6)
+            .equals(Reference.VILLAGER_CLASS) // Explicit vanilla
+                                              // villager class
+            && !event.entity.worldObj.isRemote) {
+                EntityVillager villager = (EntityVillager) event.entity;
+                ExtendedVillager ev = ExtendedVillager.get(villager);
 
-                    if (GeneralConfig.modernVillagerSkins) {
-                        // Initialize buying list in order to provoke the villager to choose a career
-                        villager.getRecipes(null);
-                        FunctionsVN.monitorVillagerTrades(villager);
-                    }
+                if (GeneralConfig.modernVillagerSkins) {
+                    // Initialize buying list in order to provoke the villager to choose a career
+                    villager.getRecipes(null);
+                    FunctionsVN.monitorVillagerTrades(villager);
+                }
 
-                    int professionLevel = ev.getProfessionLevel();
-                    if (professionLevel < 0) {
-                        ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
-                    }
+                int professionLevel = ev.getProfessionLevel();
+                if (professionLevel < 0) {
+                    ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
+                }
 
-                    // Update biome and skin tone values
-                    if (ev.getBiomeType() == -1) {
-                        ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
-                    }
-                    if (ev.getSkinTone() == -99) {
-                        ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));
-                    }
+                // Update biome and skin tone values
+                if (ev.getBiomeType() == -1) {
+                    ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
+                }
+                if (ev.getSkinTone() == -99) {
+                    ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));
+                }
 
-                    if ((villager.ticksExisted + villager.getEntityId()) % 5 == 0 // Ticks intermittently, modulated so
-                                                                                  // villagers don't deliberately sync.
-                            && ev.getProfession() >= 0
-                            && (ev.getProfession() <= 5
-                                    || GeneralConfig.professionID_a.indexOf(ev.getProfession()) > -1) // This villager
-                                                                                                      // ID is specified
-                                                                                                      // in the configs
-                    ) {
-                        // Only strip armor if modern villager skins are on
-                        if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor) {
-                            // Turn off gear pickup to prevent goofball rendering
-                            if (villager.canPickUpLoot()) {
-                                villager.setCanPickUpLoot(false);
-                            }
-
-                            // Strip armor
-                            for (int slot = 1; slot <= 4; slot++) {
-                                if (villager.getEquipmentInSlot(slot) != null) {
-                                    villager.setCurrentItemOrArmor(slot, null);
-                                }
-                            }
+                if ((villager.ticksExisted + villager.getEntityId()) % 5 == 0 // Ticks intermittently, modulated so
+                                                                              // villagers don't deliberately sync.
+                    && ev.getProfession() >= 0
+                    && (ev.getProfession() <= 5 || GeneralConfig.professionID_a.indexOf(ev.getProfession()) > -1) // This
+                                                                                                                  // villager
+                                                                                                                  // ID
+                                                                                                                  // is
+                                                                                                                  // specified
+                                                                                                                  // in
+                                                                                                                  // the
+                                                                                                                  // configs
+                ) {
+                    // Only strip armor if modern villager skins are on
+                    if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor) {
+                        // Turn off gear pickup to prevent goofball rendering
+                        if (villager.canPickUpLoot()) {
+                            villager.setCanPickUpLoot(false);
                         }
 
-                        // Initialize the buying list so that the badge displays
-                        MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue(
+                        // Strip armor
+                        for (int slot = 1; slot <= 4; slot++) {
+                            if (villager.getEquipmentInSlot(slot) != null) {
+                                villager.setCurrentItemOrArmor(slot, null);
+                            }
+                        }
+                    }
+
+                    // Initialize the buying list so that the badge displays
+                    MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue(
+                        EntityVillager.class,
+                        villager,
+                        new String[] { "buyingList", "field_70963_i" });
+                    if (buyingList == null) {
+                        try {
+                            Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
                                 EntityVillager.class,
                                 villager,
-                                new String[] { "buyingList", "field_70963_i" });
-                        if (buyingList == null) {
-                            try {
-                                Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
-                                        EntityVillager.class,
-                                        villager,
-                                        new String[] { "addDefaultEquipmentAndRecipies", "func_70950_c" },
-                                        Integer.TYPE);
-                                addDefaultEquipmentAndRecipies_m.invoke(villager, 1);
-                            } catch (Exception e) {
-                                if (GeneralConfig.debugMessages) LogHelper
-                                        .warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");
-                            }
+                                new String[] { "addDefaultEquipmentAndRecipies", "func_70950_c" },
+                                Integer.TYPE);
+                            addDefaultEquipmentAndRecipies_m.invoke(villager, 1);
+                        } catch (Exception e) {
+                            if (GeneralConfig.debugMessages)
+                                LogHelper.warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");
                         }
-
-                        ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
-                        // Sends a ping to everyone within 80 blocks
-                        NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(
-                                villager.dimension,
-                                villager.lastTickPosX,
-                                villager.lastTickPosY,
-                                villager.lastTickPosZ,
-                                16 * 5);
-                        VillageNames.VNNetworkWrapper.sendToAllAround(
-                                new MessageModernVillagerSkin(
-                                        villager.getEntityId(),
-                                        ev.getProfession(),
-                                        ev.getCareer(),
-                                        ev.getBiomeType(),
-                                        professionLevel,
-                                        ev.getSkinTone()),
-                                targetPoint);
                     }
 
+                    ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
+                    // Sends a ping to everyone within 80 blocks
+                    NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(
+                        villager.dimension,
+                        villager.lastTickPosX,
+                        villager.lastTickPosY,
+                        villager.lastTickPosZ,
+                        16 * 5);
+                    VillageNames.VNNetworkWrapper.sendToAllAround(
+                        new MessageModernVillagerSkin(
+                            villager.getEntityId(),
+                            ev.getProfession(),
+                            ev.getCareer(),
+                            ev.getBiomeType(),
+                            professionLevel,
+                            ev.getSkinTone()),
+                        targetPoint);
                 }
+
+            }
 
         // Monitor the player for purposes of the village reputations achievements
         else if (event.entity instanceof EntityPlayerMP && !event.entity.worldObj.isRemote
-                && event.entity.dimension == 0 // Only applies to the Overworld
-                && event.entity.ticksExisted % (tickRate) == 0) { // Only check every few seconds so as not to bog down
-                                                                  // the server with Village.dat scans
+            && event.entity.dimension == 0 // Only applies to the Overworld
+            && event.entity.ticksExisted % (tickRate) == 0) { // Only check every few seconds so as not to bog down
+                                                              // the server with Village.dat scans
 
-                    EntityPlayerMP player = (EntityPlayerMP) event.entity;
-                    World world = player.worldObj;
+                EntityPlayerMP player = (EntityPlayerMP) event.entity;
+                World world = player.worldObj;
 
-                    try {
+                try {
 
-                        String villageTopTagPlayerIsIn = ReputationHandler.getVillageTagPlayerIsIn(player);
+                    String villageTopTagPlayerIsIn = ReputationHandler.getVillageTagPlayerIsIn(player);
 
-                        Village villageObjPlayerIsIn = world.villageCollectionObj.findNearestVillage(
-                                (int) player.posX,
-                                (int) player.posY,
-                                (int) player.posZ,
-                                EntityInteractHandler.villageRadiusBuffer);
+                    Village villageObjPlayerIsIn = world.villageCollectionObj.findNearestVillage(
+                        (int) player.posX,
+                        (int) player.posY,
+                        (int) player.posZ,
+                        EntityInteractHandler.villageRadiusBuffer);
 
-                        if (!villageTopTagPlayerIsIn.equals("none") || villageObjPlayerIsIn != null) { // Player is in a
-                                                                                                       // valid
-                                                                                                       // Village.dat
-                                                                                                       // village.
+                    if (!villageTopTagPlayerIsIn.equals("none") || villageObjPlayerIsIn != null) { // Player is in a
+                                                                                                   // valid
+                                                                                                   // Village.dat
+                                                                                                   // village.
 
-                            int playerRep = ReputationHandler
-                                    .getVNReputationForPlayer(player, villageTopTagPlayerIsIn, villageObjPlayerIsIn);
+                        int playerRep = ReputationHandler
+                            .getVNReputationForPlayer(player, villageTopTagPlayerIsIn, villageObjPlayerIsIn);
 
-                            // ---- Maximum Rep Achievement ---- //
-                            // - Must also be checked onEntity - //
-                            if (playerRep <= -30 // Town rep is minimum
-                                    && !player.func_147099_x().hasAchievementUnlocked(VillageNames.minrep) // Copied
-                                                                                                           // over from
-                                                                                                           // EntityPlayerMP
-                            ) {
-                                player.triggerAchievement(VillageNames.minrep);
-                                AchievementReward.allFiveAchievements(player);
-                            }
-
-                            // --- Maximum Rep Achievement --- //
-
-                            else if (playerRep >= 10 // Town rep is maximum
-                                    && !player.func_147099_x().hasAchievementUnlocked(VillageNames.maxrep) // Copied
-                                                                                                           // over from
-                                                                                                           // EntityPlayerMP
-                            ) {
-                                player.triggerAchievement(VillageNames.maxrep);
-                                AchievementReward.allFiveAchievements(player);
-                            }
-
-                            if (tickRate < 50) tickRate += 2;
-                            else if (tickRate > 50) tickRate = 50;
-
-                        } else { // Player is not in a valid village.dat village.
-                            tickRate = 100; // Slow down the checker when you're not in a village.
+                        // ---- Maximum Rep Achievement ---- //
+                        // - Must also be checked onEntity - //
+                        if (playerRep <= -30 // Town rep is minimum
+                            && !player.func_147099_x()
+                                .hasAchievementUnlocked(VillageNames.minrep) // Copied
+                                                                             // over from
+                                                                             // EntityPlayerMP
+                        ) {
+                            player.triggerAchievement(VillageNames.minrep);
+                            AchievementReward.allFiveAchievements(player);
                         }
 
-                    } catch (Exception e) {} // Could not verify village status
+                        // --- Maximum Rep Achievement --- //
 
-                }
+                        else if (playerRep >= 10 // Town rep is maximum
+                            && !player.func_147099_x()
+                                .hasAchievementUnlocked(VillageNames.maxrep) // Copied
+                                                                             // over from
+                                                                             // EntityPlayerMP
+                        ) {
+                            player.triggerAchievement(VillageNames.maxrep);
+                            AchievementReward.allFiveAchievements(player);
+                        }
+
+                        if (tickRate < 50) tickRate += 2;
+                        else if (tickRate > 50) tickRate = 50;
+
+                    } else { // Player is not in a valid village.dat village.
+                        tickRate = 100; // Slow down the checker when you're not in a village.
+                    }
+
+                } catch (Exception e) {} // Could not verify village status
+
+            }
     }
 
     @SubscribeEvent
@@ -697,7 +720,7 @@ public class EntityMonitorHandler {
 
         // Adds the Extended Properties to zombies
         if (FunctionsVN.isVanillaZombie(event.entity)
-                && ExtendedZombieVillager.get((EntityZombie) event.entity) == null) {
+            && ExtendedZombieVillager.get((EntityZombie) event.entity) == null) {
             ExtendedZombieVillager.register((EntityZombie) event.entity);
         }
 
@@ -716,19 +739,21 @@ public class EntityMonitorHandler {
 
         }
 
-        else if (Loader.isModLoaded("witchery")
-                && event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) {
+        else if (Loader.isModLoaded("witchery") && event.entity.getClass()
+            .toString()
+            .substring(6)
+            .equals(ModObjects.WitcheryGuardClass)) {
 
-                    EntityLiving guard = (EntityLiving) event.entity;
+                EntityLiving guard = (EntityLiving) event.entity;
 
-                    // Adds the extended properties to guards
-                    if (ExtendedVillageGuard.get(guard) == null) {
+                // Adds the extended properties to guards
+                if (ExtendedVillageGuard.get(guard) == null) {
 
-                        ExtendedVillageGuard.register(guard);
-
-                    }
+                    ExtendedVillageGuard.register(guard);
 
                 }
+
+            }
 
     }
 

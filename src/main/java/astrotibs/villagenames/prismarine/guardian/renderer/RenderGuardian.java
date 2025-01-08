@@ -23,11 +23,11 @@ public class RenderGuardian extends RenderLiving// Extender//<EntityGuardian>
 
     // Of course, these three resources below are modified
     public static final ResourceLocation GUARDIAN_TEXTURE = new ResourceLocation(
-            "minecraft:textures/entity/guardian.png");
+        "minecraft:textures/entity/guardian.png");
     public static final ResourceLocation GUARDIAN_ELDER_TEXTURE = new ResourceLocation(
-            "minecraft:textures/entity/guardian_elder.png");
+        "minecraft:textures/entity/guardian_elder.png");
     public static final ResourceLocation GUARDIAN_BEAM_TEXTURE = new ResourceLocation(
-            "minecraft:textures/entity/guardian_beam.png");
+        "minecraft:textures/entity/guardian_beam.png");
     private RenderLiving RLExtender;
     int lastModelVersion;
     public RenderManager rManager = RenderManager.instance;
@@ -70,11 +70,11 @@ public class RenderGuardian extends RenderLiving// Extender//<EntityGuardian>
     // Fires
     private Vec3 getPosition(EntityLivingBase entityLivingBaseIn, double yOffset, float vectorScale) {
         double d0 = entityLivingBaseIn.lastTickPosX
-                + (entityLivingBaseIn.posX - entityLivingBaseIn.lastTickPosX) * (double) vectorScale;
+            + (entityLivingBaseIn.posX - entityLivingBaseIn.lastTickPosX) * (double) vectorScale;
         double d1 = yOffset + entityLivingBaseIn.lastTickPosY
-                + (entityLivingBaseIn.posY - entityLivingBaseIn.lastTickPosY) * (double) vectorScale;
+            + (entityLivingBaseIn.posY - entityLivingBaseIn.lastTickPosY) * (double) vectorScale;
         double d2 = entityLivingBaseIn.lastTickPosZ
-                + (entityLivingBaseIn.posZ - entityLivingBaseIn.lastTickPosZ) * (double) vectorScale;
+            + (entityLivingBaseIn.posZ - entityLivingBaseIn.lastTickPosZ) * (double) vectorScale;
         return Vec3.createVectorHelper(d0, d1, d2);
     }
 
@@ -85,12 +85,12 @@ public class RenderGuardian extends RenderLiving// Extender//<EntityGuardian>
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
     public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_,
-            float p_76986_9_) {
+        float p_76986_9_) {
         this.doRender((EntityGuardian) p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 
     public void doRender(EntityGuardian entityGuardian, double x, double y, double z, float entityYaw,
-            float partialTicks) // Renamed from 1.8's doRender()
+        float partialTicks) // Renamed from 1.8's doRender()
     {
         // EntityGuardian entity = (EntityGuardian) entityIn;
         if (this.lastModelVersion != ((ModelGuardian) this.mainModel).getModelVersion()) {
@@ -132,9 +132,9 @@ public class RenderGuardian extends RenderLiving// Extender//<EntityGuardian>
             // The beam doesn't quite render properly so I changed the target positioning to be negative when the target
             // is a player
             Vec3 vec3 = this.getPosition(
-                    targetedEntity,
-                    (double) targetedEntity.height * (targetedEntity instanceof EntityPlayer ? -0.5D : 0.5D),
-                    partialTicks);
+                targetedEntity,
+                (double) targetedEntity.height * (targetedEntity instanceof EntityPlayer ? -0.5D : 0.5D),
+                partialTicks);
             Vec3 vec31 = this.getPosition(entityGuardian, (double) f4, partialTicks);
             Vec3 vec32 = vec31.subtract(vec3);// vec3.subtract(vec31); // I think 1.7 and 1.8 use opposite subtract
                                               // order

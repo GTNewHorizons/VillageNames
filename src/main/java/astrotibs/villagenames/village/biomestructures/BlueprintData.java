@@ -87,7 +87,7 @@ public class BlueprintData {
 
     // Methods for filling space with blocks
     public static void addFillWithBlocks(ArrayList<BlueprintData> blueprint, int umin, int vmin, int wmin, int umax,
-            int vmax, int wmax, Block block, int meta) {
+        int vmax, int wmax, Block block, int meta) {
         for (int u = umin; u <= umax; u++) {
             for (int v = vmin; v <= vmax; v++) {
                 for (int w = wmin; w <= wmax; w++) {
@@ -98,7 +98,7 @@ public class BlueprintData {
     }
 
     public static void addFillWithBlocks(ArrayList<BlueprintData> blueprint, int umin, int vmin, int wmin, int umax,
-            int vmax, int wmax, Block block) {
+        int vmax, int wmax, Block block) {
         addFillWithBlocks(blueprint, umin, vmin, wmin, umax, vmax, wmax, block, 0);
     }
 
@@ -113,23 +113,23 @@ public class BlueprintData {
 
     // Methods for placing a block and clearing the space above
     public static void addPlaceBlockAndClearAbove(ArrayList<BlueprintData> blueprint, int u, int v, int w, Block block,
-            int meta) {
+        int meta) {
         blueprint.add(new BlueprintData(u, v, w, block, meta, (byte) 2));
     }
 
     public static void addPlaceBlockAndClearAbove(ArrayList<BlueprintData> blueprint, int u, int v, int w,
-            Block block) {
+        Block block) {
         blueprint.add(new BlueprintData(u, v, w, block, 0, (byte) 2));
     }
 
     // Methods for filling up to a space with a block and clearing the space above
     public static void addFillBelowToAndClearAbove(ArrayList<BlueprintData> blueprint, int u, int v, int w, Block block,
-            int meta) {
+        int meta) {
         blueprint.add(new BlueprintData(u, v, w, block, meta, (byte) 3));
     }
 
     public static void addFillBelowToAndClearAbove(ArrayList<BlueprintData> blueprint, int u, int v, int w,
-            Block block) {
+        Block block) {
         blueprint.add(new BlueprintData(u, v, w, block, 0, (byte) 3));
     }
 

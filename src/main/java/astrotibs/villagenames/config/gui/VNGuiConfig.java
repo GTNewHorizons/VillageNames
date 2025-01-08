@@ -55,13 +55,13 @@ public class VNGuiConfig extends GuiConfig {
 
     public VNGuiConfig(GuiScreen guiScreen) {
         super(
-                guiScreen, // parentScreen: the parent GuiScreen object
-                getElements(), // configElements: a List of IConfigProperty objects
-                Reference.MOD_ID, // modID: the mod ID for the mod whose config settings will be edited
-                false, // allRequireWorldRestart: send true if all configElements on this screen require a world restart
-                false, // allRequireMcRestart: send true if all configElements on this screen require MC to be restarted
-                getHeader() // title: the desired title for this screen. For consistency it is recommended that you pass
-                            // the path of the config file being edited.
+            guiScreen, // parentScreen: the parent GuiScreen object
+            getElements(), // configElements: a List of IConfigProperty objects
+            Reference.MOD_ID, // modID: the mod ID for the mod whose config settings will be edited
+            false, // allRequireWorldRestart: send true if all configElements on this screen require a world restart
+            false, // allRequireMcRestart: send true if all configElements on this screen require MC to be restarted
+            getHeader() // title: the desired title for this screen. For consistency it is recommended that you pass
+                        // the path of the config file being edited.
         );
     }
 
@@ -115,11 +115,11 @@ public class VNGuiConfig extends GuiConfig {
         subCats.add(new ConfigElement(cc));
 
         topCats.add(
-                new DummyCategoryElement(
-                        // EnumChatFormatting.GREEN +
-                        "General Settings",
-                        "config.villagenames.global",
-                        subCats));
+            new DummyCategoryElement(
+                // EnumChatFormatting.GREEN +
+                "General Settings",
+                "config.villagenames.global",
+                subCats));
 
         // Village generator
         subCats = new ArrayList<IConfigElement>();
@@ -131,11 +131,11 @@ public class VNGuiConfig extends GuiConfig {
         subCats.add(new ConfigElement(cc));
 
         topCats.add(
-                new DummyCategoryElement(
-                        // EnumChatFormatting.GREEN +
-                        Reference.CATEGORY_VILLAGE_GENERATOR,
-                        "config.villagenames.villagegenerator",
-                        subCats));
+            new DummyCategoryElement(
+                // EnumChatFormatting.GREEN +
+                Reference.CATEGORY_VILLAGE_GENERATOR,
+                "config.villagenames.villagegenerator",
+                subCats));
 
         // Syllable pools
         subCats = new ArrayList<IConfigElement>();
@@ -231,11 +231,11 @@ public class VNGuiConfig extends GuiConfig {
         subCats.add(new ConfigElement(cc));
 
         topCats.add(
-                new DummyCategoryElement(
-                        // EnumChatFormatting.GREEN +
-                        "Syllable Pools",
-                        "config.villagenames.syllables",
-                        subCats));
+            new DummyCategoryElement(
+                // EnumChatFormatting.GREEN +
+                "Syllable Pools",
+                "config.villagenames.syllables",
+                subCats));
 
         return topCats;
     }
@@ -248,30 +248,34 @@ public class VNGuiConfig extends GuiConfig {
 
             try {
                 if ((configID != null || this.parentScreen == null || !(this.parentScreen instanceof VNGuiConfig))
-                        && (this.entryList.hasChangedEntry(true))) {
+                    && (this.entryList.hasChangedEntry(true))) {
                     boolean requiresMcRestart = this.entryList.saveConfigElements();
 
                     if (Loader.isModLoaded(modID)) {
                         ConfigChangedEvent event = new OnConfigChangedEvent(
-                                modID,
-                                configID,
-                                isWorldRunning,
-                                requiresMcRestart);
-                        FMLCommonHandler.instance().bus().post(event);
+                            modID,
+                            configID,
+                            isWorldRunning,
+                            requiresMcRestart);
+                        FMLCommonHandler.instance()
+                            .bus()
+                            .post(event);
 
-                        if (!event.getResult().equals(Result.DENY)) {
-                            FMLCommonHandler.instance().bus().post(
-                                    new PostConfigChangedEvent(modID, configID, isWorldRunning, requiresMcRestart));
+                        if (!event.getResult()
+                            .equals(Result.DENY)) {
+                            FMLCommonHandler.instance()
+                                .bus()
+                                .post(new PostConfigChangedEvent(modID, configID, isWorldRunning, requiresMcRestart));
                             ConfigReloader.reloadConfigs(); // To force-sync the config options
                         }
                         if (requiresMcRestart) {
                             flag = false;
                             mc.displayGuiScreen(
-                                    new GuiMessageDialog(
-                                            parentScreen,
-                                            "fml.configgui.gameRestartTitle",
-                                            new ChatComponentText(I18n.format("fml.configgui.gameRestartRequired")),
-                                            "fml.configgui.confirmRestartMessage"));
+                                new GuiMessageDialog(
+                                    parentScreen,
+                                    "fml.configgui.gameRestartTitle",
+                                    new ChatComponentText(I18n.format("fml.configgui.gameRestartRequired")),
+                                    "fml.configgui.confirmRestartMessage"));
                         }
 
                         if (this.parentScreen instanceof VNGuiConfig)

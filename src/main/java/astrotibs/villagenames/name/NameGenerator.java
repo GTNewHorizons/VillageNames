@@ -43,13 +43,15 @@ public class NameGenerator {
         // Unpack nameType into multiple possible name pools
 
         // Split input string by hyphen
-        String[] nameType_raw = nameType.trim().split("\\s*-\\s*"); // Using regular expression \s* to optional remove
-                                                                    // leading and tailing spaces
+        String[] nameType_raw = nameType.trim()
+            .split("\\s*-\\s*"); // Using regular expression \s* to optional remove
+                                 // leading and tailing spaces
 
         // Cast all elements as lowercase for easier comparison
         String[] nameType_a = new String[nameType_raw.length];
         for (int input_i = 0; input_i < nameType_raw.length; input_i++) {
-            nameType_a[input_i] = nameType_raw[input_i].toLowerCase().trim();
+            nameType_a[input_i] = nameType_raw[input_i].toLowerCase()
+                .trim();
         }
 
         // Step 0: initialize empty syllable pools, into which will be added specific source pools
@@ -68,7 +70,8 @@ public class NameGenerator {
 
         // Load in syllable pieces
 
-        if (Arrays.asList(nameType_a).contains("village")) {
+        if (Arrays.asList(nameType_a)
+            .contains("village")) {
             prefix = ArrayUtils.addAll(prefix, VillageConfigHandler.village_prefix);
             root_initial = ArrayUtils.addAll(root_initial, VillageConfigHandler.village_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, VillageConfigHandler.village_root_syllables);
@@ -85,7 +88,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + VillageConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + VillageConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(VillageConfigHandler.syllable_count_weighting[i]);
@@ -96,16 +99,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + VillageConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + VillageConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(VillageConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("temple")) {
+        if (Arrays.asList(nameType_a)
+            .contains("temple")) {
             prefix = ArrayUtils.addAll(prefix, TempleConfigHandler.temple_prefix);
             root_initial = ArrayUtils.addAll(root_initial, TempleConfigHandler.temple_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, TempleConfigHandler.temple_root_syllables);
@@ -122,7 +125,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + TempleConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + TempleConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(TempleConfigHandler.syllable_count_weighting[i]);
@@ -134,14 +137,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + TempleConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + TempleConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(TempleConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("mineshaft")) {
+        if (Arrays.asList(nameType_a)
+            .contains("mineshaft")) {
             prefix = ArrayUtils.addAll(prefix, MineshaftConfigHandler.mineshaft_prefix);
             root_initial = ArrayUtils.addAll(root_initial, MineshaftConfigHandler.mineshaft_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, MineshaftConfigHandler.mineshaft_root_syllables);
@@ -158,7 +162,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + MineshaftConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + MineshaftConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(MineshaftConfigHandler.syllable_count_weighting[i]);
@@ -169,16 +173,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + MineshaftConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + MineshaftConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(MineshaftConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("fortress")) {
+        if (Arrays.asList(nameType_a)
+            .contains("fortress")) {
             prefix = ArrayUtils.addAll(prefix, FortressConfigHandler.fortress_prefix);
             root_initial = ArrayUtils.addAll(root_initial, FortressConfigHandler.fortress_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, FortressConfigHandler.fortress_root_syllables);
@@ -195,7 +199,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + FortressConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + FortressConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(FortressConfigHandler.syllable_count_weighting[i]);
@@ -206,16 +210,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + FortressConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + FortressConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(FortressConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("stronghold")) {
+        if (Arrays.asList(nameType_a)
+            .contains("stronghold")) {
             prefix = ArrayUtils.addAll(prefix, StrongholdConfigHandler.stronghold_prefix);
             root_initial = ArrayUtils.addAll(root_initial, StrongholdConfigHandler.stronghold_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, StrongholdConfigHandler.stronghold_root_syllables);
@@ -232,7 +236,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + StrongholdConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + StrongholdConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(StrongholdConfigHandler.syllable_count_weighting[i]);
@@ -243,16 +247,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + StrongholdConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + StrongholdConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(StrongholdConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("monument")) {
+        if (Arrays.asList(nameType_a)
+            .contains("monument")) {
             prefix = ArrayUtils.addAll(prefix, MonumentConfigHandler.monument_prefix);
             root_initial = ArrayUtils.addAll(root_initial, MonumentConfigHandler.monument_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, MonumentConfigHandler.monument_root_syllables);
@@ -269,7 +273,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + MonumentConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + MonumentConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(MonumentConfigHandler.syllable_count_weighting[i]);
@@ -280,16 +284,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + MonumentConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + MonumentConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(MonumentConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("endcity")) {
+        if (Arrays.asList(nameType_a)
+            .contains("endcity")) {
             prefix = ArrayUtils.addAll(prefix, EndCityConfigHandler.endcity_prefix);
             root_initial = ArrayUtils.addAll(root_initial, EndCityConfigHandler.endcity_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, EndCityConfigHandler.endcity_root_syllables);
@@ -306,7 +310,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + EndCityConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + EndCityConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(EndCityConfigHandler.syllable_count_weighting[i]);
@@ -317,16 +321,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + EndCityConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + EndCityConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(EndCityConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("mansion")) {
+        if (Arrays.asList(nameType_a)
+            .contains("mansion")) {
             prefix = ArrayUtils.addAll(prefix, MansionConfigHandler.mansion_prefix);
             root_initial = ArrayUtils.addAll(root_initial, MansionConfigHandler.mansion_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, MansionConfigHandler.mansion_root_syllables);
@@ -343,7 +347,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + MansionConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + MansionConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(MansionConfigHandler.syllable_count_weighting[i]);
@@ -354,16 +358,16 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + MansionConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + MansionConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(MansionConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("alien")) {
+        if (Arrays.asList(nameType_a)
+            .contains("alien")) {
             prefix = ArrayUtils.addAll(prefix, AlienConfigHandler.alien_prefix);
             root_initial = ArrayUtils.addAll(root_initial, AlienConfigHandler.alien_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, AlienConfigHandler.alien_root_syllables);
@@ -380,7 +384,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + AlienConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + AlienConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(AlienConfigHandler.syllable_count_weighting[i]);
@@ -392,14 +396,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + AlienConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + AlienConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(AlienConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("alienvillage")) {
+        if (Arrays.asList(nameType_a)
+            .contains("alienvillage")) {
             prefix = ArrayUtils.addAll(prefix, AlienVillageConfigHandler.alienvillage_prefix);
             root_initial = ArrayUtils.addAll(root_initial, AlienVillageConfigHandler.alienvillage_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, AlienVillageConfigHandler.alienvillage_root_syllables);
@@ -415,9 +420,8 @@ public class NameGenerator {
             for (int i = 0; i < AlienVillageConfigHandler.syllable_count_weighting.length; i++) {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
-                    pooled_length_weights.set(
-                            i,
-                            pooled_length_weights.get(i) + AlienVillageConfigHandler.syllable_count_weighting[i]);
+                    pooled_length_weights
+                        .set(i, pooled_length_weights.get(i) + AlienVillageConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(AlienVillageConfigHandler.syllable_count_weighting[i]);
@@ -429,15 +433,16 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + AlienVillageConfigHandler.terminal_blank_counts[i]);
+                        i,
+                        pooled_terminal_blank_counts.get(i) + AlienVillageConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(AlienVillageConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("goblin")) {
+        if (Arrays.asList(nameType_a)
+            .contains("goblin")) {
             prefix = ArrayUtils.addAll(prefix, GoblinConfigHandler.goblin_prefix);
             root_initial = ArrayUtils.addAll(root_initial, GoblinConfigHandler.goblin_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, GoblinConfigHandler.goblin_root_syllables);
@@ -454,7 +459,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + GoblinConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + GoblinConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(GoblinConfigHandler.syllable_count_weighting[i]);
@@ -466,14 +471,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + GoblinConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + GoblinConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(GoblinConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("golem")) {
+        if (Arrays.asList(nameType_a)
+            .contains("golem")) {
             prefix = ArrayUtils.addAll(prefix, GolemConfigHandler.golem_prefix);
             root_initial = ArrayUtils.addAll(root_initial, GolemConfigHandler.golem_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, GolemConfigHandler.golem_root_syllables);
@@ -490,7 +496,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + GolemConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + GolemConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(GolemConfigHandler.syllable_count_weighting[i]);
@@ -502,14 +508,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + GolemConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + GolemConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(GolemConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("demon")) {
+        if (Arrays.asList(nameType_a)
+            .contains("demon")) {
             prefix = ArrayUtils.addAll(prefix, DemonConfigHandler.demon_prefix);
             root_initial = ArrayUtils.addAll(root_initial, DemonConfigHandler.demon_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, DemonConfigHandler.demon_root_syllables);
@@ -526,7 +533,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + DemonConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + DemonConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(DemonConfigHandler.syllable_count_weighting[i]);
@@ -538,14 +545,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + DemonConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + DemonConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(DemonConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("angel")) {
+        if (Arrays.asList(nameType_a)
+            .contains("angel")) {
             prefix = ArrayUtils.addAll(prefix, AngelConfigHandler.angel_prefix);
             root_initial = ArrayUtils.addAll(root_initial, AngelConfigHandler.angel_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, AngelConfigHandler.angel_root_syllables);
@@ -562,7 +570,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + AngelConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + AngelConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(AngelConfigHandler.syllable_count_weighting[i]);
@@ -574,14 +582,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + AngelConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + AngelConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(AngelConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("dragon")) {
+        if (Arrays.asList(nameType_a)
+            .contains("dragon")) {
             prefix = ArrayUtils.addAll(prefix, DragonConfigHandler.dragon_prefix);
             root_initial = ArrayUtils.addAll(root_initial, DragonConfigHandler.dragon_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, DragonConfigHandler.dragon_root_syllables);
@@ -598,7 +607,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + DragonConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + DragonConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(DragonConfigHandler.syllable_count_weighting[i]);
@@ -610,14 +619,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + DragonConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + DragonConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(DragonConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("pet")) {
+        if (Arrays.asList(nameType_a)
+            .contains("pet")) {
             prefix = ArrayUtils.addAll(prefix, PetConfigHandler.pet_prefix);
             root_initial = ArrayUtils.addAll(root_initial, PetConfigHandler.pet_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, PetConfigHandler.pet_root_syllables);
@@ -634,7 +644,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + PetConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + PetConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(PetConfigHandler.syllable_count_weighting[i]);
@@ -646,14 +656,15 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + PetConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + PetConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(PetConfigHandler.terminal_blank_counts[i]);
                 }
             }
         }
-        if (Arrays.asList(nameType_a).contains("custom")) {
+        if (Arrays.asList(nameType_a)
+            .contains("custom")) {
             prefix = ArrayUtils.addAll(prefix, CustomConfigHandler.custom_prefix);
             root_initial = ArrayUtils.addAll(root_initial, CustomConfigHandler.custom_root_initial);
             root_sylBegin = ArrayUtils.addAll(root_sylBegin, CustomConfigHandler.custom_root_syllables);
@@ -670,7 +681,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + CustomConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + CustomConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(CustomConfigHandler.syllable_count_weighting[i]);
@@ -682,7 +693,7 @@ public class NameGenerator {
                                                              // master weight array
                 {
                     pooled_terminal_blank_counts
-                            .set(i, pooled_terminal_blank_counts.get(i) + CustomConfigHandler.terminal_blank_counts[i]);
+                        .set(i, pooled_terminal_blank_counts.get(i) + CustomConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(CustomConfigHandler.terminal_blank_counts[i]);
@@ -691,10 +702,12 @@ public class NameGenerator {
         }
         // It's possible the player made a mistake and no name pieces were correctly entered. If so, default to
         // "villager"
-        if (Arrays.asList(nameType_a).contains("villager") // OR, the user deliberately chose "villager"
-                || root_initial.length <= 0 // No previous entries were chosen
+        if (Arrays.asList(nameType_a)
+            .contains("villager") // OR, the user deliberately chose "villager"
+            || root_initial.length <= 0 // No previous entries were chosen
         ) {
-            if (!Arrays.asList(nameType_a).contains("villager") && (root_initial.length <= 0)) {
+            if (!Arrays.asList(nameType_a)
+                .contains("villager") && (root_initial.length <= 0)) {
                 if (GeneralConfig.debugMessages)
                     LogHelper.error("Submitted nameType contained no valid entries! Defaulting to Villager name pool.");
             }
@@ -715,7 +728,7 @@ public class NameGenerator {
                 if (pooled_length_weights.size() > i) // Add weights of this name length to the master weight array
                 {
                     pooled_length_weights
-                            .set(i, pooled_length_weights.get(i) + VillagerConfigHandler.syllable_count_weighting[i]);
+                        .set(i, pooled_length_weights.get(i) + VillagerConfigHandler.syllable_count_weighting[i]);
                 } else // Weights of this name length don't exist in the master array. Expand the array.
                 {
                     pooled_length_weights.add(VillagerConfigHandler.syllable_count_weighting[i]);
@@ -726,9 +739,8 @@ public class NameGenerator {
                 if (pooled_terminal_blank_counts.size() > i) // Add blanks terminal entries for this name length to the
                                                              // master weight array
                 {
-                    pooled_terminal_blank_counts.set(
-                            i,
-                            pooled_terminal_blank_counts.get(i) + VillagerConfigHandler.terminal_blank_counts[i]);
+                    pooled_terminal_blank_counts
+                        .set(i, pooled_terminal_blank_counts.get(i) + VillagerConfigHandler.terminal_blank_counts[i]);
                 } else // Blank terminal entries for this name length don't exist in the master array. Expand the array.
                 {
                     pooled_terminal_blank_counts.add(VillagerConfigHandler.terminal_blank_counts[i]);
@@ -779,7 +791,7 @@ public class NameGenerator {
             } else {
                 if (++prefixsuffixFail >= tooManyFailures) {
                     String errorMessage = "Name type " + nameType
-                            + " Matched too many prefixes and suffixes! Check your syllable configs.";
+                        + " Matched too many prefixes and suffixes! Check your syllable configs.";
                     LogHelper.fatal(errorMessage);
                     throw new RuntimeException(errorMessage);
                 }
@@ -801,7 +813,7 @@ public class NameGenerator {
 
             if (totalWeight <= 0) {
                 String errorMessage = "Name type " + nameType
-                        + " total syllable weighting was non-positive! Check the weighting values in your configs.";
+                    + " total syllable weighting was non-positive! Check the weighting values in your configs.";
                 LogHelper.fatal(errorMessage);
                 throw new RuntimeException(errorMessage);
             }
@@ -819,7 +831,7 @@ public class NameGenerator {
             // Step 2.1: Generate the beginning sound of the name
             if (root_initial.length <= 0) {
                 String errorMessage = "Name type " + nameType
-                        + " has no root-initial entries! No name can be constructed!";
+                    + " has no root-initial entries! No name can be constructed!";
                 LogHelper.fatal(errorMessage);
                 throw new RuntimeException(errorMessage);
             } else {
@@ -831,7 +843,7 @@ public class NameGenerator {
             for (int i = 0; i < rootname_syllable_inserts; i++) {
                 if (root_sylBegin.length <= 0) {
                     String errorMessage = "Name type " + nameType
-                            + " has no root-syllable entries! You need at least one, even if it's the blank entry character: ^";
+                        + " has no root-syllable entries! You need at least one, even if it's the blank entry character: ^";
                     LogHelper.error(errorMessage);
                     sb.append(CAROT);
                 } else {
@@ -842,7 +854,7 @@ public class NameGenerator {
             // Step 2.3: Generate the ending sound of the name, if any
             if (root_terminal.length <= 0) {
                 String errorMessage = "Name type " + nameType
-                        + " has no root-terminal entries! You need at least one, even if it's the blank entry character: ^";
+                    + " has no root-terminal entries! You need at least one, even if it's the blank entry character: ^";
                 LogHelper.error(errorMessage);
                 sb.append(CAROT);
             } else {
@@ -853,9 +865,8 @@ public class NameGenerator {
                 // Determine if the end sound is supposed to be blank or not
                 if (pooled_terminal_blank_counts.size() < rootname_syllable_inserts + 1) {
                     LogHelper.error(
-                            "You're missing the the corresponding value in your \""
-                                    + Reference.NAME_TERMINAL_BLANK_COUNTS
-                                    + "\" config entry. Did you change something?");
+                        "You're missing the the corresponding value in your \"" + Reference.NAME_TERMINAL_BLANK_COUNTS
+                            + "\" config entry. Did you change something?");
                 } else {
                     // Determine the chance that the terminal character will be blank
                     int name_weight = pooled_length_weights.get(rootname_syllable_inserts);
@@ -863,18 +874,18 @@ public class NameGenerator {
 
                     if (name_weight < terminal_blank_weight) {
                         LogHelper.error(
-                                "Your \"" + Reference.NAME_TERMINAL_BLANK_COUNTS
-                                        + "\" config entry is higher than the corresponding \""
-                                        + Reference.NAME_SYLLABLE_COUNT_WEIGHTING
-                                        + "\", implying there are more blank endings than names. Please check your configs.");
+                            "Your \"" + Reference.NAME_TERMINAL_BLANK_COUNTS
+                                + "\" config entry is higher than the corresponding \""
+                                + Reference.NAME_SYLLABLE_COUNT_WEIGHTING
+                                + "\", implying there are more blank endings than names. Please check your configs.");
                     } else if (name_weight < 0) {
                         LogHelper.error(
-                                "Your \"" + Reference.NAME_SYLLABLE_COUNT_WEIGHTING
-                                        + "\" is less than zero. Please check your configs.");
+                            "Your \"" + Reference.NAME_SYLLABLE_COUNT_WEIGHTING
+                                + "\" is less than zero. Please check your configs.");
                     } else if (terminal_blank_weight < 0) {
                         LogHelper.error(
-                                "Your \"" + Reference.NAME_TERMINAL_BLANK_COUNTS
-                                        + "\" is less than zero. Please check your configs.");
+                            "Your \"" + Reference.NAME_TERMINAL_BLANK_COUNTS
+                                + "\" is less than zero. Please check your configs.");
                     } else {
                         // Determine at this stage whether to use a blank terminal character or not
                         boolean root_terminal_is_blank = random.nextInt(name_weight) < terminal_blank_weight;
@@ -886,8 +897,10 @@ public class NameGenerator {
                             // Try for some number of times to generate an end character
                             for (int i = 0; i < tooManyFailures * 2; i++) {
                                 String try_terminal_character = root_terminal[random.nextInt(root_terminal.length)];
-                                if ((try_terminal_character.trim().equals(CAROT) && root_terminal_is_blank)
-                                        || (!try_terminal_character.trim().equals(CAROT) && !root_terminal_is_blank)) {
+                                if ((try_terminal_character.trim()
+                                    .equals(CAROT) && root_terminal_is_blank)
+                                    || (!try_terminal_character.trim()
+                                        .equals(CAROT) && !root_terminal_is_blank)) {
                                     // Terminal character agrees with our choice (blank vs non-blank)
                                     terminal_character_accepted = true;
                                     sb.append(try_terminal_character);
@@ -910,7 +923,8 @@ public class NameGenerator {
 
             // Step 2V: clean up for validation
 
-            rootName = sb.toString().trim();
+            rootName = sb.toString()
+                .trim();
 
             // Remove any spaces
             rootName = rootName.replace(" ", "");
@@ -926,12 +940,13 @@ public class NameGenerator {
                 // Make sure a six-letter name isn't the same two letters three times
                 if (rootName.length() >= 6) {
                     // Now, make sure the same characters don't appear in the name three times in a row
-                    char[] nameRootArray = rootName.toLowerCase().toCharArray();
+                    char[] nameRootArray = rootName.toLowerCase()
+                        .toCharArray();
                     int consecutives = 0;
                     for (int ci = 0; ci <= nameRootArray.length - 6; ci++) {
                         if (nameRootArray[ci] == nameRootArray[ci + 2] && nameRootArray[ci] == nameRootArray[ci + 4]
-                                && nameRootArray[ci + 1] == nameRootArray[ci + 3]
-                                && nameRootArray[ci + 1] == nameRootArray[ci + 5]) {
+                            && nameRootArray[ci + 1] == nameRootArray[ci + 3]
+                            && nameRootArray[ci + 1] == nameRootArray[ci + 5]) {
                             consecutives++;
                             break;
                         }
@@ -943,7 +958,8 @@ public class NameGenerator {
 
                 if (rootName.length() >= 3) {
                     // Now, make sure the same characters don't appear in the name three times in a row
-                    char[] nameRootArray = rootName.toLowerCase().toCharArray();
+                    char[] nameRootArray = rootName.toLowerCase()
+                        .toCharArray();
                     int consecutives = 0;
                     for (int ci = 0; ci < nameRootArray.length - 2; ci++) {
                         if (nameRootArray[ci] == nameRootArray[ci + 1] && nameRootArray[ci] == nameRootArray[ci + 2]) {
@@ -965,7 +981,10 @@ public class NameGenerator {
                 }
                 // Now ensure that a two-letter name isn't the same letter twice.
                 else if (rootName.length() == 2) {
-                    if (rootName.toLowerCase().charAt(0) != rootName.toLowerCase().charAt(1)) {
+                    if (rootName.toLowerCase()
+                        .charAt(0)
+                        != rootName.toLowerCase()
+                            .charAt(1)) {
                         // Do a content scan
                         if (!contentScan(rootName)) {
                             // Passes all the checks! Accept the name!
@@ -1002,13 +1021,13 @@ public class NameGenerator {
             }
             if (repeatedChar >= tooManyFailures) {
                 String errorMessage = "Name type " + nameType
-                        + " has too many consecutive repeated letters or pairs of letters! Check your syllable configs.";
+                    + " has too many consecutive repeated letters or pairs of letters! Check your syllable configs.";
                 LogHelper.fatal(errorMessage);
                 throw new RuntimeException(errorMessage);
             }
             if (filterFail >= tooManyFailures) {
                 String errorMessage = "Name type " + nameType
-                        + " has tripped the content filter too many times. Are you being naughty?";
+                    + " has tripped the content filter too many times. Are you being naughty?";
                 LogHelper.fatal(errorMessage);
                 throw new RuntimeException(errorMessage);
             }
@@ -1034,21 +1053,23 @@ public class NameGenerator {
         StringBuilder careerTag = (new StringBuilder()).append("(");
 
         // The entity is identified in the "clickable" or "automatic" config entry
-        if (GeneralConfig.modNameMappingClickable_map.get("ClassPaths").contains(entityClasspath)) {
+        if (GeneralConfig.modNameMappingClickable_map.get("ClassPaths")
+            .contains(entityClasspath)) {
             careerTag.append(
-                    ((String) ((GeneralConfig.modNameMappingClickable_map.get("Professions"))
-                            .get(GeneralConfig.modNameMappingClickable_map.get("ClassPaths").indexOf(entityClasspath))))
-                                    .trim());
-        } else if (GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").contains(entityClasspath)) {
-            careerTag.append(
-                    ((String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions"))
-                            .get(GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClasspath))))
-                                    .trim());
-        }
+                ((String) ((GeneralConfig.modNameMappingClickable_map.get("Professions")).get(
+                    GeneralConfig.modNameMappingClickable_map.get("ClassPaths")
+                        .indexOf(entityClasspath)))).trim());
+        } else if (GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths")
+            .contains(entityClasspath)) {
+                careerTag.append(
+                    ((String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get(
+                        GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths")
+                            .indexOf(entityClasspath)))).trim());
+            }
 
         // Handle More Planets's Nibiru Villager
         else if (entityClasspath.equals(ModObjects.MPNibiruVillagerClass) // 1.7 version
-                || entityClasspath.equals(ModObjects.MPNibiruVillagerClassModern) // 1.10 version
+            || entityClasspath.equals(ModObjects.MPNibiruVillagerClassModern) // 1.10 version
         ) {
             switch (villagerProfession % 3) {
                 case 0: // Farmer profession
@@ -1148,8 +1169,8 @@ public class NameGenerator {
                         break;
                     }
                     String nitwitCareer = ((GeneralConfig.nitwitProfession.trim()).equals("")
-                            || (GeneralConfig.nitwitProfession.toLowerCase().trim()).equals("null")) ? ""
-                                    : GeneralConfig.nitwitProfession;
+                        || (GeneralConfig.nitwitProfession.toLowerCase()
+                            .trim()).equals("null")) ? "" : GeneralConfig.nitwitProfession;
                     switch (villagerCareer) {
                         case 1:
                             careerTag.append(nitwitCareer);
@@ -1167,7 +1188,9 @@ public class NameGenerator {
             {
                 try {
                     String otherModProfString = (String) ((GeneralConfig.modProfessionMapping_map.get("Professions"))
-                            .get(GeneralConfig.modProfessionMapping_map.get("IDs").indexOf(villagerProfession)));
+                        .get(
+                            GeneralConfig.modProfessionMapping_map.get("IDs")
+                                .indexOf(villagerProfession)));
                     otherModProfString = otherModProfString.replaceAll("\\(", "");
                     otherModProfString = otherModProfString.replaceAll("\\)", "");
                     otherModProfString = otherModProfString.trim();
@@ -1184,7 +1207,8 @@ public class NameGenerator {
 
         careerTag.append(")");
 
-        if (careerTag.toString().equals("()")) {
+        if (careerTag.toString()
+            .equals("()")) {
             careerTag = (new StringBuilder()).append("");
         }
 
@@ -1192,57 +1216,57 @@ public class NameGenerator {
     }
 
     private static final String[] filterIfAnywhere = new String[] { "erttva", // Blck
-            "gbttns", // Stx
-            "upgvo", // Ldy arfr
-            "xphs", // F
-            "gvuf", // S
-            "laans", // Belt
-            "mncf", // Mario Party 8
-            "lffhc", // Flower
-            // Exits
-            "rybuffn", "fvarc", "navtni", "eranro", // Beyond border
-            "ghyf", "rebuj", "gfvcne", // Lvs
-            "vngaru", // H
-            "qybxphp", // watch and let
+        "gbttns", // Stx
+        "upgvo", // Ldy arfr
+        "xphs", // F
+        "gvuf", // S
+        "laans", // Belt
+        "mncf", // Mario Party 8
+        "lffhc", // Flower
+        // Exits
+        "rybuffn", "fvarc", "navtni", "eranro", // Beyond border
+        "ghyf", "rebuj", "gfvcne", // Lvs
+        "vngaru", // H
+        "qybxphp", // watch and let
     };
 
     private static final String[] filterIfEntire = new String[] {
-            // R guy n fam
-            "avyngf", "rvzzbp", "frvzzbp", "grvibf", "fgrvibf",
-            // A guy n fam
-            "erygvu", "vmna", "fvmna",
-            // arise chicken
-            "xpbp", "fxpbp",
-            // chicken says
-            "xphp", "fxphp", "qrxphp",
-            // seed
-            "rcne", "frcne", "qrcne", "lrcne", "tavcne",
-            // K
-            "rxvx", "frxvx",
-            // Bandit
-            "abbp", "fabbp",
-            // Ldy zn
-            "gahp", "fgahp", "lgahp", "zvhd", "fzvhd", "lzzvhd", "gnjg",
-            // arise donkey
-            "ffn", "frffn",
-            // /b
-            "tns", "ftns", "ttns", "fttns", "lttns",
-            // one type
-            "bzbu", "fbzbu",
-            // slow
-            "qengre", "fqengre", "qrqengre",
-            // particips
-            "rug", "na", "sb", "sv", "ab", "ba", "av", "gv", "fv", "vf", "zn", "nz", "fn", "un", "ah", "vu", "frl",
-            "rz", "lz", "ub", "eb", "ro", "jb", "zh", "rj", "jr", "jn", "bl", "hu", "fh", "ch", "bg", "anz", "arz",
-            "lbo", "flbo", "anzbj", "arzbj", "yevt", "fyevt", "ru", "ur", "cnep", "fcnep", "lccnep", "qrccnep", "aznq",
-            "faznq", "ynan", "fhan", "frfhan", "zhp", "fzhp", "lzzhp", "trzf", "mmvw", "zfvw", "zbz", "jbj", "rrc",
-            "ffvc", "lffvc", "qrffvc", "erffvc", "frffvc",
-            // any haha
-            "lan", "nunu", "rynz", "rynzrs", "rvq",
-            // lqd
-            "arzrf",
-            // make copies
-            "krf", "lkrf", };
+        // R guy n fam
+        "avyngf", "rvzzbp", "frvzzbp", "grvibf", "fgrvibf",
+        // A guy n fam
+        "erygvu", "vmna", "fvmna",
+        // arise chicken
+        "xpbp", "fxpbp",
+        // chicken says
+        "xphp", "fxphp", "qrxphp",
+        // seed
+        "rcne", "frcne", "qrcne", "lrcne", "tavcne",
+        // K
+        "rxvx", "frxvx",
+        // Bandit
+        "abbp", "fabbp",
+        // Ldy zn
+        "gahp", "fgahp", "lgahp", "zvhd", "fzvhd", "lzzvhd", "gnjg",
+        // arise donkey
+        "ffn", "frffn",
+        // /b
+        "tns", "ftns", "ttns", "fttns", "lttns",
+        // one type
+        "bzbu", "fbzbu",
+        // slow
+        "qengre", "fqengre", "qrqengre",
+        // particips
+        "rug", "na", "sb", "sv", "ab", "ba", "av", "gv", "fv", "vf", "zn", "nz", "fn", "un", "ah", "vu", "frl", "rz",
+        "lz", "ub", "eb", "ro", "jb", "zh", "rj", "jr", "jn", "bl", "hu", "fh", "ch", "bg", "anz", "arz", "lbo", "flbo",
+        "anzbj", "arzbj", "yevt", "fyevt", "ru", "ur", "cnep", "fcnep", "lccnep", "qrccnep", "aznq", "faznq", "ynan",
+        "fhan", "frfhan", "zhp", "fzhp", "lzzhp", "trzf", "mmvw", "zfvw", "zbz", "jbj", "rrc", "ffvc", "lffvc",
+        "qrffvc", "erffvc", "frffvc",
+        // any haha
+        "lan", "nunu", "rynz", "rynzrs", "rvq",
+        // lqd
+        "arzrf",
+        // make copies
+        "krf", "lkrf", };
 
     /**
      * Scans the input string and returns "true" if there is a particular series of sub-strings within.
@@ -1250,13 +1274,21 @@ public class NameGenerator {
     private static boolean contentScan(String inputString) {
         // Scan string for match anywhere
         for (String s : filterIfAnywhere) {
-            if ((inputString).trim().toLowerCase().contains((new StringBuilder(rot13(s))).reverse().toString())) {
+            if ((inputString).trim()
+                .toLowerCase()
+                .contains(
+                    (new StringBuilder(rot13(s))).reverse()
+                        .toString())) {
                 return true;
             }
         }
         // Return true if entire string matches
         for (String s : filterIfEntire) {
-            if ((inputString).trim().toLowerCase().equals((new StringBuilder(rot13(s))).reverse().toString())) {
+            if ((inputString).trim()
+                .toLowerCase()
+                .equals(
+                    (new StringBuilder(rot13(s))).reverse()
+                        .toString())) {
                 return true;
             }
         }

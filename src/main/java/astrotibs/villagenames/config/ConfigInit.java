@@ -90,7 +90,7 @@ public class ConfigInit {
 
         // New village stuff
         VillageGeneratorConfigHandler
-                .init(new File(configDirectory, Reference.FOLDER_NEWVILLAGES + "/village_gen.cfg"));
+            .init(new File(configDirectory, Reference.FOLDER_NEWVILLAGES + "/village_gen.cfg"));
         MinecraftForge.EVENT_BUS.register(new VillageGeneratorConfigHandler());
 
     }

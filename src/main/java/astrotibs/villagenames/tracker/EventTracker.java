@@ -108,58 +108,57 @@ public class EventTracker {
 
     public EventTracker(EntityVillager villager, ExtendedVillager ieep) {
         this(
-                villager.getEntityId(),
-                // villager.getPosition(),
-                // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ), // Replaced because of mp
-                // server-side crash
-                new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ),
-                villager.getCustomNameTag(),
-                new Object[] {
+            villager.getEntityId(),
+            // villager.getPosition(),
+            // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ), // Replaced because of mp
+            // server-side crash
+            new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ),
+            villager.getCustomNameTag(),
+            new Object[] {
 
-                        villager.getProfession(),
+                villager.getProfession(),
 
-                        (GeneralConfig.villagerCareers) ? ieep.getCareer() : 0, villager.isChild(),
-                        (GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1,
-                        (GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1,
-                        (GeneralConfig.modernVillagerSkins && GeneralConfig.villagerSkinTones) ? ieep.getSkinTone()
-                                : -99
-                /*
-                 * (GeneralConfig.villagerCareers) ? (ExtendedVillager.get(villager)).getCareer() : 0,
-                 * villager.isChild(), (GeneralConfig.modernVillagerSkins) ?
-                 * (ExtendedVillager.get(villager)).getBiomeType() : -1, (GeneralConfig.modernVillagerSkins) ?
-                 * (ExtendedVillager.get(villager)).getProfessionLevel() : -1
-                 */
-                });
+                (GeneralConfig.villagerCareers) ? ieep.getCareer() : 0, villager.isChild(),
+                (GeneralConfig.modernVillagerSkins) ? ieep.getBiomeType() : -1,
+                (GeneralConfig.modernVillagerSkins) ? ieep.getProfessionLevel() : -1,
+                (GeneralConfig.modernVillagerSkins && GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99
+            /*
+             * (GeneralConfig.villagerCareers) ? (ExtendedVillager.get(villager)).getCareer() : 0,
+             * villager.isChild(), (GeneralConfig.modernVillagerSkins) ?
+             * (ExtendedVillager.get(villager)).getBiomeType() : -1, (GeneralConfig.modernVillagerSkins) ?
+             * (ExtendedVillager.get(villager)).getProfessionLevel() : -1
+             */
+            });
     }
 
     public EventTracker(EntityLiving guard) {
         this(
-                guard.getEntityId(),
-                // villager.getPosition(),
-                // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ), // Replaced because of mp
-                // server-side crash
-                new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ),
-                guard.getCustomNameTag(),
-                new Object[] {
-                // guard.getProfession(),
-                // (GeneralConfigHandler.villagerCareers) ? (ExtendedVillager.get(guard)).getCareer() : 0,
-                // guard.isChild()
-                });
+            guard.getEntityId(),
+            // villager.getPosition(),
+            // Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ), // Replaced because of mp
+            // server-side crash
+            new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ),
+            guard.getCustomNameTag(),
+            new Object[] {
+            // guard.getProfession(),
+            // (GeneralConfigHandler.villagerCareers) ? (ExtendedVillager.get(guard)).getCareer() : 0,
+            // guard.isChild()
+            });
     }
 
     public EventTracker(EntityZombie zombie, ExtendedZombieVillager ieep) {
         // this(zombie.getEntityId(), zombie.getPosition(1.0F), zombie.getCustomNameTag(), properties);
         this(
-                zombie.getEntityId(),
-                // zombie.getPosition(),
-                // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ), // Replaced because of mp server-side
-                // crash
-                new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ),
-                zombie.getCustomNameTag(),
-                new Object[] { ieep.getProfession(), (GeneralConfig.villagerCareers) ? (ieep).getCareer() : 0,
-                        zombie.isChild(), (GeneralConfig.modernZombieSkins) ? ieep.getBiomeType() : -1,
-                        (GeneralConfig.modernZombieSkins) ? ieep.getProfessionLevel() : -1,
-                        (GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99, });
+            zombie.getEntityId(),
+            // zombie.getPosition(),
+            // Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ), // Replaced because of mp server-side
+            // crash
+            new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ),
+            zombie.getCustomNameTag(),
+            new Object[] { ieep.getProfession(), (GeneralConfig.villagerCareers) ? (ieep).getCareer() : 0,
+                zombie.isChild(), (GeneralConfig.modernZombieSkins) ? ieep.getBiomeType() : -1,
+                (GeneralConfig.modernZombieSkins) ? ieep.getProfessionLevel() : -1,
+                (GeneralConfig.villagerSkinTones) ? ieep.getSkinTone() : -99, });
     }
 
     /**
@@ -171,9 +170,9 @@ public class EventTracker {
 
         if (GeneralConfig.debugMessages) {
             LogHelper.info(
-                    "EventTracker.updateZombie called with this.getCustomName(): " + this.getCustomName()
-                            + ", this.getObject(): "
-                            + this.getExtraInfo());
+                "EventTracker.updateZombie called with this.getCustomName(): " + this.getCustomName()
+                    + ", this.getObject(): "
+                    + this.getExtraInfo());
         }
 
         // Note: I must trust that this object actually contain a villager info. If not, the cast below will fail.
@@ -199,11 +198,11 @@ public class EventTracker {
          * I18n.format(Reference.PMSheepmanSmithUnlocalized); } catch (Exception e) {}
          */
         if (!customName.equals("") && !customName.equals(null)
-                && !customName.equals(PMTMUnloc)
-                && !customName.equals(PMTMUnlocModern)
-                && !customName.equals(PMShUnloc)
-                && !customName.equals(PMShUnlocModern)
-                && !customName.equals(PMSSUnloc)) {
+            && !customName.equals(PMTMUnloc)
+            && !customName.equals(PMTMUnlocModern)
+            && !customName.equals(PMShUnloc)
+            && !customName.equals(PMShUnlocModern)
+            && !customName.equals(PMSSUnloc)) {
             zombie.setCustomNameTag(this.getCustomName());
             zombie.func_110163_bv(); // Equivalent to EntityLiving.enablePersistence() in 1.8
         }
@@ -274,9 +273,9 @@ public class EventTracker {
 
         if (GeneralConfig.debugMessages) {
             LogHelper.info(
-                    "EventTracker.updateGuard called with this.getCustomName(): " + this.getCustomName()
-                            + ", this.getObject(): "
-                            + this.getExtraInfo());
+                "EventTracker.updateGuard called with this.getCustomName(): " + this.getCustomName()
+                    + ", this.getObject(): "
+                    + this.getExtraInfo());
         }
 
         // Note: I must trust that this object actually contain a villager info. If not, the cast below will fail.
@@ -287,9 +286,12 @@ public class EventTracker {
         if (!customName.equals("") && !customName.equals(null)) {
 
             // Go through the list and eliminate all entries with a matching name
-            for (int i = (EventType.GUARD).getTracker().size() - 1; i >= 0; i--) {
-                if (((EventType.GUARD).getTracker().get(i)).customName == customName) {
-                    (EventType.GUARD).getTracker().remove(i);
+            for (int i = (EventType.GUARD).getTracker()
+                .size() - 1; i >= 0; i--) {
+                if (((EventType.GUARD).getTracker()
+                    .get(i)).customName == customName) {
+                    (EventType.GUARD).getTracker()
+                        .remove(i);
                 }
             }
 
@@ -297,7 +299,8 @@ public class EventTracker {
 
             if ( // Remove any tag that already exists
             customName.indexOf("(") != -1) { // Target has a job tag: remove it...
-                customName = customName.substring(0, customName.indexOf("(")).trim();
+                customName = customName.substring(0, customName.indexOf("("))
+                    .trim();
             }
             if ( // Add a profession tag if the flag is set
             (GeneralConfig.addJobToName && (!(guard instanceof EntityVillager) || targetAge >= 0))) { // Target is named
@@ -305,7 +308,12 @@ public class EventTracker {
                                                                                                       // have job tag:
                                                                                                       // add one!
                 customName = customName + " "
-                        + NameGenerator.getCareerTag(guard.getClass().toString().substring(6), 0, 0);
+                    + NameGenerator.getCareerTag(
+                        guard.getClass()
+                            .toString()
+                            .substring(6),
+                        0,
+                        0);
                 customName = customName.trim();
             }
 
@@ -339,11 +347,11 @@ public class EventTracker {
 
         // Custom name
         if (!customName.equals("") && !customName.equals(null)
-                && !customName.equals(PMTMUnloc)
-                && !customName.equals(PMTMUnlocModern)
-                && !customName.equals(PMShUnloc)
-                && !customName.equals(PMShUnlocModern)
-                && !customName.equals(PMSSUnloc)) {
+            && !customName.equals(PMTMUnloc)
+            && !customName.equals(PMTMUnlocModern)
+            && !customName.equals(PMShUnloc)
+            && !customName.equals(PMShUnlocModern)
+            && !customName.equals(PMSSUnloc)) {
             villager.setCustomNameTag(this.getCustomName());
         }
 
@@ -406,7 +414,9 @@ public class EventTracker {
         if (this.getPosition() == null) {
             r.append("NULL");
         } else {
-            r.append(this.getPosition().toString());
+            r.append(
+                this.getPosition()
+                    .toString());
         }
         r.append(", Tick of Birth = ");
         r.append(this.getBirthTick());
@@ -416,9 +426,14 @@ public class EventTracker {
         if (this.getExtraInfo() == null) {
             r.append("NULL");
         } else {
-            r.append(this.getExtraInfo().getClass().getName());
+            r.append(
+                this.getExtraInfo()
+                    .getClass()
+                    .getName());
             r.append(":");
-            r.append(this.getExtraInfo().toString());
+            r.append(
+                this.getExtraInfo()
+                    .toString());
         }
 
         return r.toString();

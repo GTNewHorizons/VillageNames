@@ -33,11 +33,11 @@ public class StructureOceanMonument extends MapGenStructure {
     private static int field_175800_f;
     private static int field_175801_g;
     public static final List<BiomeGenBase> field_175802_d = Arrays.<BiomeGenBase>asList(
-            new BiomeGenBase[] { BiomeGenBase.ocean, BiomeGenBase.deepOcean, BiomeGenBase.river,
-                    BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver });
+        new BiomeGenBase[] { BiomeGenBase.ocean, BiomeGenBase.deepOcean, BiomeGenBase.river, BiomeGenBase.frozenOcean,
+            BiomeGenBase.frozenRiver });
     // Here I've made an integer array version of field_175802_d for use in my own areBiomesViableVN method
     public static final int[] waterBiomesInt = new int[] { BiomeGenBase.ocean.biomeID, BiomeGenBase.deepOcean.biomeID,
-            BiomeGenBase.river.biomeID, BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID };
+        BiomeGenBase.river.biomeID, BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID };
 
     private static final List<BiomeGenBase.SpawnListEntry> MONUMENT_ENEMIES = Lists.<BiomeGenBase.SpawnListEntry>newArrayList(); // Used
                                                                                                                                  // to
@@ -54,13 +54,15 @@ public class StructureOceanMonument extends MapGenStructure {
         this();
 
         for (Entry<String, String> entry : p_i45608_1_.entrySet()) {
-            if (entry.getKey().equals("spacing")) {
+            if (entry.getKey()
+                .equals("spacing")) {
                 field_175800_f = MathHelper
-                        .parseIntWithDefaultAndMax(entry.getValue(), StructureOceanMonument.field_175800_f, 1);
-            } else if (entry.getKey().equals("separation")) {
-                field_175801_g = MathHelper
+                    .parseIntWithDefaultAndMax(entry.getValue(), StructureOceanMonument.field_175800_f, 1);
+            } else if (entry.getKey()
+                .equals("separation")) {
+                    field_175801_g = MathHelper
                         .parseIntWithDefaultAndMax(entry.getValue(), StructureOceanMonument.field_175801_g, 1);
-            }
+                }
         }
     }
 
@@ -139,7 +141,7 @@ public class StructureOceanMonument extends MapGenStructure {
      * checks given Chunk's Biomes against List of allowed ones
      */
     public static boolean areBiomesViableVN(int xChunkCenter, int zChunkCenter, int radius, String[] allowedBiomes,
-            World worldIn) {
+        World worldIn) {
         IntCache.resetIntCache();
         // Do I need to put these in parentheses to enforce order of operations!?
         int l = xChunkCenter - (radius >> 2); // ~7 blocks west of monument center
@@ -239,8 +241,8 @@ public class StructureOceanMonument extends MapGenStructure {
         public void generateStructure(World worldIn, Random rand, StructureBoundingBox structurebb) {
             // Addeed this to reverse-engineer 1.8's generateStructure(World, Random, ChunkCoordIntPair)
             ChunkCoordIntPair chunkCoord = new ChunkCoordIntPair(
-                    (structurebb.minX - 8) >> 4,
-                    (structurebb.minZ - 8) >> 4);
+                (structurebb.minX - 8) >> 4,
+                (structurebb.minZ - 8) >> 4);
 
             if (!this.field_175790_d) {
                 this.components.clear();
@@ -316,7 +318,7 @@ public class StructureOceanMonument extends MapGenStructure {
                 for (int i = 0; i < nbttaglist.tagCount(); ++i) {
                     NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
                     this.field_175791_c
-                            .add(new ChunkCoordIntPair(nbttagcompound.getInteger("X"), nbttagcompound.getInteger("Z")));
+                        .add(new ChunkCoordIntPair(nbttagcompound.getInteger("X"), nbttagcompound.getInteger("Z")));
                 }
             }
         }
