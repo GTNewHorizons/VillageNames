@@ -26,3 +26,6 @@ README.txt
 # Junk added by AstroTibs
 NewZombieBiomes.png
 run/
+*.iml
+*.ipr
+*.iws

@@ -34,6 +34,6 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    implementation files("libs/antiqueatlas-4.4.5-legacy-dev.jar")
-    implementation files("libs/signposts-1.3.3-dev.jar")
+	    compileOnly('curse.maven:antiqueatlas-227795:2454232') {transitive=false}
+		compileOnly('curse.maven:signpost-261837:2922217') {transitive=false}
 }
