@@ -55,7 +55,7 @@ public class CommonProxy {
 		 * a former soldier reveals its hidden meaning. The first code can be heard in the first chapter of the film. Muska take a call,
 		 * before he got knocked out by Sheeta hitting with an empty bottle.
 		 * 
-		 * In the past, fans have dismissed this message as jibberish, recording it as a repetition of a series of dots and dashes […_ …_ …_],
+		 * In the past, fans have dismissed this message as jibberish, recording it as a repetition of a series of dots and dashes [ï¿½_ ï¿½_ ï¿½_],
 		 * which translates to nothing more than V V V. However, Sakai and his soldier mates, who have experience in deciphering codes with
 		 * no definite beginning and end, discovered that the message contained the code [.._. .. _.. . ._.. .. _ _._ _ ], which spells out the word fidelity.
 		 */

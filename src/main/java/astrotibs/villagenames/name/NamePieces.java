@@ -3,39 +3,39 @@ package astrotibs.villagenames.name;
 public class NamePieces {
 	
 	// Characters that are replaced:
-	// § with \u00a7
-	// À with \u00c0
-	// Á with \u00c1
-	// É with \u00c9
-	// æ with \u00e6
-	// à with \u00e0
-	// á with \u00e1
-	// ã with \u00e3
-	// å with \u00e5
-	// ä with \u00e4
-	// É with \u00C9
-	// è with \u00e8
-	// é with \u00e9
-	// ë with \u00eb
+	// ï¿½ with \u00a7
+	// ï¿½ with \u00c0
+	// ï¿½ with \u00c1
+	// ï¿½ with \u00c9
+	// ï¿½ with \u00e6
+	// ï¿½ with \u00e0
+	// ï¿½ with \u00e1
+	// ï¿½ with \u00e3
+	// ï¿½ with \u00e5
+	// ï¿½ with \u00e4
+	// ï¿½ with \u00C9
+	// ï¿½ with \u00e8
+	// ï¿½ with \u00e9
+	// ï¿½ with \u00eb
 	// I with dot \u0130
-	// í with \u00ed
-	// ï with \u00ef
-	// ñ with \u00f1
-	// ò with \u00f2
-	// ó with \u00f3
-	// Ö with \u00d6
-	// ö with \u00f6
-	// ù with \u00f9
-	// ú with \u00fa
-	// ü with \u00fc
-	// û with \u00fb
-	// ÿ with \u00ff
-	// ž with \u017e
+	// ï¿½ with \u00ed
+	// ï¿½ with \u00ef
+	// ï¿½ with \u00f1
+	// ï¿½ with \u00f2
+	// ï¿½ with \u00f3
+	// ï¿½ with \u00d6
+	// ï¿½ with \u00f6
+	// ï¿½ with \u00f9
+	// ï¿½ with \u00fa
+	// ï¿½ with \u00fc
+	// ï¿½ with \u00fb
+	// ï¿½ with \u00ff
+	// ï¿½ with \u017e
 	
 	//Characters that can't be properly displayed:
 	// A with tilde: \u00c3
 	// d with stroke: \u0111
-	// ð with \u00f0
+	// ï¿½ with \u00f0
 	// a with macron: \u0101
 	// e with dot above: \u0117
 	// h with caron: \u030c

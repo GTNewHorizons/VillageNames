@@ -33,7 +33,6 @@ public class EntityFallingBlockCP extends EntityFallingBlock
     private int field_145815_h;
     private float field_145816_i;
     public NBTTagCompound field_145810_d;
-    private static final String __OBFID = "CL_00001668";
 
     public EntityFallingBlockCP(World p_i1706_1_)
     {

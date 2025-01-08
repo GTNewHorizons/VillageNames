@@ -44,7 +44,7 @@ public class RenderGuardian extends RenderLiving//Extender//<EntityGuardian>
     /*
      *  The purpose of this is to keep the guardian rendered even when off-screen if its beam is still on-screen.
      *  Instead, I've slightly replicated the behavior with EntityGuardian.isInRangeToRender3d, however
-     *  that disregards the frustum completely when the beam is firing. C'EST LA VIE, MON FRÈRE
+     *  that disregards the frustum completely when the beam is firing. C'EST LA VIE, MON FRï¿½RE
      */
     
     /*

@@ -61,7 +61,7 @@ public class CommandName extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "§c/"+getCommandName()+" <structureType> [int, max "+maxLoops+"]";
+		return "ï¿½c/"+getCommandName()+" <structureType> [int, max "+maxLoops+"]";
 	}
 
 	@Override
