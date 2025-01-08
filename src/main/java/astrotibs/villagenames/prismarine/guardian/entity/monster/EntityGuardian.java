@@ -950,7 +950,6 @@ public class EntityGuardian extends EntityMob // implements IMob
         /** The speed at which the entity should move */
         private double speed;
         private boolean update;
-        private static final String __OBFID = "CL_00001573";
 
         public GuardianMoveHelper(EntityGuardian entityIn) {
             this.entityGuardian = entityIn;
