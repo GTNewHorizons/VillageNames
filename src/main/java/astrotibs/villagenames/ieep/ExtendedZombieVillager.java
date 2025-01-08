@@ -1,186 +1,175 @@
 package astrotibs.villagenames.ieep;
 
-import astrotibs.villagenames.config.GeneralConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+import astrotibs.villagenames.config.GeneralConfig;
 
 /**
  * Adapted from Villager Tweaks by sidben:
  * https://github.com/sidben/VillagerTweaks/blob/master/src/main/java/sidben/villagertweaks/common/ExtendedVillagerZombie.java
+ * 
  * @author AstroTibs
  * 
- * Adds extra NBT info to zombie villagers, so I can track info 
- * like the villager original profession. 
+ *         Adds extra NBT info to zombie villagers, so I can track info like the villager original profession.
  */
-public class ExtendedZombieVillager implements IExtendedEntityProperties
-{
+public class ExtendedZombieVillager implements IExtendedEntityProperties {
 
-    public    final static String Identifier = "VillagerInfo";
+    public final static String Identifier = "VillagerInfo";
     protected final static String ProfessionKey = "Profession"; // Controls zombie villager profession
     protected final static String CareerKey = "Career"; // Controls zombie villager profession
-	public final static String biomeKey = "BiomeType";
-	public final static String professionLevelKey = "ProfessionLevel";
-	public final static String skinToneKey = "SkinTone";
+    public final static String biomeKey = "BiomeType";
+    public final static String professionLevelKey = "ProfessionLevel";
+    public final static String skinToneKey = "SkinTone";
     protected final static String InitializedKey = "Defined"; // Controls if a zombie villager was assigned a profession
-    
-    //@SuppressWarnings("unused")
+
+    // @SuppressWarnings("unused")
     private final EntityZombie zombieWoof;
     protected World myWorld;
 
-    
-    
-    //---------------------------------------------------------
+    // ---------------------------------------------------------
     // Properties
-    //---------------------------------------------------------
+    // ---------------------------------------------------------
     private int profession;
     private int career;
-	private int biomeType;
-	private int professionLevel;
-	private int skinTone;
+    private int biomeType;
+    private int professionLevel;
+    private int skinTone;
 
     private Boolean hasValidData; // TODO: Attempt to refactor and get rid of this property
-    
-    
-    public int getProfession()
-    {
+
+    public int getProfession() {
         return this.profession;
     }
-    
-    public int getCareer()
-    {
+
+    public int getCareer() {
         return this.career;
     }
-    
-    public void setProfession(int profession)
-    {
+
+    public void setProfession(int profession) {
         this.profession = profession >= 0 ? profession : -1;
         this.hasValidData = true;
     }
-    
-    public void setCareer(int career)
-    {
+
+    public void setCareer(int career) {
         this.career = career >= 0 ? career : -1;
         this.hasValidData = true;
     }
-    
-	public int getBiomeType()
-	{
-		return this.biomeType;
-	}
-	public void setBiomeType(int b)
-	{
-		this.biomeType = b;
-		//this.hasValidData = true;
-	}
-	public int getProfessionLevel()
-	{
-		return this.professionLevel;
-	}
-	public void setProfessionLevel(int pl)
-	{
-		this.professionLevel = pl;
-		//this.hasValidData = true;
-	}
-    
-    public void pickRandomProfession()
-    {
+
+    public int getBiomeType() {
+        return this.biomeType;
+    }
+
+    public void setBiomeType(int b) {
+        this.biomeType = b;
+        // this.hasValidData = true;
+    }
+
+    public int getProfessionLevel() {
+        return this.professionLevel;
+    }
+
+    public void setProfessionLevel(int pl) {
+        this.professionLevel = pl;
+        // this.hasValidData = true;
+    }
+
+    public void pickRandomProfession() {
         if (this.profession <= -1 && (this.hasValidData == null || !this.hasValidData)) {
-            int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0 and 5
+            int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0
+                                                                                   // and 5
             this.setProfession(p);
         }
     }
 
-	public int getSkinTone() {return this.skinTone;}
-	public void setSkinTone(int pl) {this.skinTone = pl;}
-	
-	
+    public int getSkinTone() {
+        return this.skinTone;
+    }
+
+    public void setSkinTone(int pl) {
+        this.skinTone = pl;
+    }
+
     public void pickRandomProfessionAndCareer() {
         if (this.profession <= -1 && this.career <= -1 && (this.hasValidData == null || !this.hasValidData)) {
-            
-        	int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0 and 5
+
+            int p = this.myWorld.rand.nextInt(GeneralConfig.enableNitwit ? 6 : 5); // Uniformly distributed between 0
+                                                                                   // and 5
             int c = -1;
-            
-            // Added break conditions to actually properly select sub-professions for zombie villagers 
-			switch(p) {
-				
-				case 0: // FARMER
-					c = 1 + this.myWorld.rand.nextInt(4);
-					break;
-					
-				case 1: // LIBRARIAN
-					c = 1 + this.myWorld.rand.nextInt(2);
-					break;
-					
-				case 2: // PRIEST
-					c = 1;// + this.myWorld.rand.nextInt(1);
-					break;
-					
-				case 3: // BLACKSMITH
-					c = 1 + this.myWorld.rand.nextInt(GeneralConfig.modernVillagerTrades ? 4 : 3);
-					break;
-					
-				case 4: // BUTCHER
-					c = 1 + this.myWorld.rand.nextInt(2);
-					break;
-					
-				case 5: // NITWIT
-					c = 1;// + this.myWorld.rand.nextInt(1);
-					break;
-			}
-			
-	    	this.setProfession(p);
-	        this.setCareer(c);
+
+            // Added break conditions to actually properly select sub-professions for zombie villagers
+            switch (p) {
+
+                case 0: // FARMER
+                    c = 1 + this.myWorld.rand.nextInt(4);
+                    break;
+
+                case 1: // LIBRARIAN
+                    c = 1 + this.myWorld.rand.nextInt(2);
+                    break;
+
+                case 2: // PRIEST
+                    c = 1;// + this.myWorld.rand.nextInt(1);
+                    break;
+
+                case 3: // BLACKSMITH
+                    c = 1 + this.myWorld.rand.nextInt(GeneralConfig.modernVillagerTrades ? 4 : 3);
+                    break;
+
+                case 4: // BUTCHER
+                    c = 1 + this.myWorld.rand.nextInt(2);
+                    break;
+
+                case 5: // NITWIT
+                    c = 1;// + this.myWorld.rand.nextInt(1);
+                    break;
+            }
+
+            this.setProfession(p);
+            this.setCareer(c);
         }
     }
-    
-    
-    
-    //---------------------------------------------------------
+
+    // ---------------------------------------------------------
     // Constructor
-    //---------------------------------------------------------
-    public ExtendedZombieVillager(EntityZombie zombie)
-    {
+    // ---------------------------------------------------------
+    public ExtendedZombieVillager(EntityZombie zombie) {
         this.zombieWoof = zombie;
         this.profession = -1;
         this.career = -1;
-		this.biomeType = -1;
-		this.professionLevel = -1;
-		this.skinTone = -99;
-		this.hasValidData = false;
+        this.biomeType = -1;
+        this.professionLevel = -1;
+        this.skinTone = -99;
+        this.hasValidData = false;
     }
-    
-    
-    
-    //---------------------------------------------------------
+
+    // ---------------------------------------------------------
     // Methods
-    //---------------------------------------------------------
-   
-    public static final void register(EntityZombie zombie)
-    {
+    // ---------------------------------------------------------
+
+    public static final void register(EntityZombie zombie) {
         zombie.registerExtendedProperties(ExtendedZombieVillager.Identifier, new ExtendedZombieVillager(zombie));
     }
-    
+
     public static final ExtendedZombieVillager get(EntityZombie zombie) {
-        return (ExtendedZombieVillager)zombie.getExtendedProperties(ExtendedZombieVillager.Identifier);
+        return (ExtendedZombieVillager) zombie.getExtendedProperties(ExtendedZombieVillager.Identifier);
     }
-    
-    
+
     @Override
     public void saveNBTData(NBTTagCompound compound) {
-    	
+
         if (this.hasValidData == null) {
             this.profession = -1;
             this.career = -1;
             this.biomeType = -1;
             this.professionLevel = -1;
-    		this.skinTone = -99;
+            this.skinTone = -99;
             this.hasValidData = false;
         }
-        
+
         NBTTagCompound properties = new NBTTagCompound();
         properties.setInteger(ProfessionKey, this.profession);
         properties.setInteger(CareerKey, this.career);
@@ -189,14 +178,13 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
         properties.setInteger(skinToneKey, this.skinTone);
         properties.setBoolean(InitializedKey, this.hasValidData);
 
-        compound.setTag(Identifier, properties); 
+        compound.setTag(Identifier, properties);
     }
 
-    
     @Override
     public void loadNBTData(NBTTagCompound compound) {
-    	
-        NBTTagCompound properties = (NBTTagCompound)compound.getTag(Identifier);
+
+        NBTTagCompound properties = (NBTTagCompound) compound.getTag(Identifier);
 
         if (properties == null) {
             hasValidData = false;
@@ -205,8 +193,7 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
             biomeType = -1;
             professionLevel = -1;
             skinTone = -99;
-        } 
-        else {
+        } else {
             this.profession = properties.getInteger(ProfessionKey);
             this.career = properties.getInteger(CareerKey);
             this.biomeType = properties.hasKey(biomeKey) ? properties.getInteger(biomeKey) : -1;
@@ -217,10 +204,9 @@ public class ExtendedZombieVillager implements IExtendedEntityProperties
 
     }
 
-    
     @Override
     public void init(Entity entity, World world) {
-    	
+
         myWorld = world;
     }
 

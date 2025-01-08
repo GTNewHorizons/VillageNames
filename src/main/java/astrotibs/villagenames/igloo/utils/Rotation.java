@@ -1,7 +1,7 @@
 package astrotibs.villagenames.igloo.utils;
 
-public enum Rotation
-{
+public enum Rotation {
+
     NONE("rotate_0"),
     CLOCKWISE_90("rotate_90"),
     CLOCKWISE_180("rotate_180"),
@@ -10,19 +10,15 @@ public enum Rotation
     private final String name;
     private static String[] rotationNames = new String[values().length];
 
-    private Rotation(String nameIn)
-    {
+    private Rotation(String nameIn) {
         this.name = nameIn;
     }
 
-    public Rotation add(Rotation rotation)
-    {
-        switch (rotation)
-        {
+    public Rotation add(Rotation rotation) {
+        switch (rotation) {
             case CLOCKWISE_180:
 
-                switch (this)
-                {
+                switch (this) {
                     case NONE:
                         return CLOCKWISE_180;
                     case CLOCKWISE_90:
@@ -35,8 +31,7 @@ public enum Rotation
 
             case COUNTERCLOCKWISE_90:
 
-                switch (this)
-                {
+                switch (this) {
                     case NONE:
                         return COUNTERCLOCKWISE_90;
                     case CLOCKWISE_90:
@@ -49,8 +44,7 @@ public enum Rotation
 
             case CLOCKWISE_90:
 
-                switch (this)
-                {
+                switch (this) {
                     case NONE:
                         return CLOCKWISE_90;
                     case CLOCKWISE_90:
@@ -66,16 +60,11 @@ public enum Rotation
         }
     }
 
-    public EnumFacing194 rotate(EnumFacing194 facing)
-    {
-        if (facing.getAxis() == EnumFacing194.Axis.Y)
-        {
+    public EnumFacing194 rotate(EnumFacing194 facing) {
+        if (facing.getAxis() == EnumFacing194.Axis.Y) {
             return facing;
-        }
-        else
-        {
-            switch (this)
-            {
+        } else {
+            switch (this) {
                 case CLOCKWISE_90:
                     return facing.rotateY();
                 case CLOCKWISE_180:
@@ -88,10 +77,8 @@ public enum Rotation
         }
     }
 
-    public int rotate(int p_185833_1_, int p_185833_2_)
-    {
-        switch (this)
-        {
+    public int rotate(int p_185833_1_, int p_185833_2_) {
+        switch (this) {
             case CLOCKWISE_90:
                 return (p_185833_1_ + p_185833_2_ / 4) % p_185833_2_;
             case CLOCKWISE_180:
@@ -103,12 +90,10 @@ public enum Rotation
         }
     }
 
-    static
-    {
+    static {
         int i = 0;
 
-        for (Rotation rotation : values())
-        {
+        for (Rotation rotation : values()) {
             rotationNames[i++] = rotation.name;
         }
     }

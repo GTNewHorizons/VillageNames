@@ -2,12 +2,12 @@ package astrotibs.villagenames.prismarine.minecraft;
 
 import java.util.Collection;
 
-import com.google.common.collect.ImmutableMap;
-
 import net.minecraft.block.Block;
 
-public interface IBlockState
-{
+import com.google.common.collect.ImmutableMap;
+
+public interface IBlockState {
+
     Collection<IProperty> getPropertyNames();
 
     <T extends Comparable<T>> T getValue(IProperty<T> property);

@@ -1,1 +1,1 @@
-gradlew  updatebuildscript updatedependencies
+gradlew  updatebuildscript spotlessapply updatedependencies

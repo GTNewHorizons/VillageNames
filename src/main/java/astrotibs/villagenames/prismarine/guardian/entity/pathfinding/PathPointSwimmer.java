@@ -1,11 +1,12 @@
 package astrotibs.villagenames.prismarine.guardian.entity.pathfinding;
 
 import astrotibs.villagenames.prismarine.guardian.util.MathHelper1122;
+
 /*
  * The 1.8 backport of PathPoint
  */
-public class PathPointSwimmer
-{
+public class PathPointSwimmer {
+
     /** The x coordinate of this point */
     public final int xCoord;
     /** The y coordinate of this point */
@@ -27,69 +28,60 @@ public class PathPointSwimmer
     /** True if the pathfinder has already visited this point */
     public boolean visited;
 
-    public PathPointSwimmer(int x, int y, int z)
-    {
+    public PathPointSwimmer(int x, int y, int z) {
         this.xCoord = x;
         this.yCoord = y;
         this.zCoord = z;
         this.hash = makeHash(x, y, z);
     }
 
-    public static int makeHash(int x, int y, int z)
-    {
+    public static int makeHash(int x, int y, int z) {
         return y & 255 | (x & 32767) << 8 | (z & 32767) << 24 | (x < 0 ? Integer.MIN_VALUE : 0) | (z < 0 ? 32768 : 0);
     }
 
     /**
      * Returns the linear distance to another path point
      */
-    public float distanceTo(PathPointSwimmer pathpointIn)
-    {
-        float f = (float)(pathpointIn.xCoord - this.xCoord);
-        float f1 = (float)(pathpointIn.yCoord - this.yCoord);
-        float f2 = (float)(pathpointIn.zCoord - this.zCoord);
+    public float distanceTo(PathPointSwimmer pathpointIn) {
+        float f = (float) (pathpointIn.xCoord - this.xCoord);
+        float f1 = (float) (pathpointIn.yCoord - this.yCoord);
+        float f2 = (float) (pathpointIn.zCoord - this.zCoord);
         return MathHelper1122.sqrt_float(f * f + f1 * f1 + f2 * f2);
     }
 
     /**
      * Returns the squared distance to another path point
      */
-    public float distanceToSquared(PathPointSwimmer pathpointIn)
-    {
-        float f = (float)(pathpointIn.xCoord - this.xCoord);
-        float f1 = (float)(pathpointIn.yCoord - this.yCoord);
-        float f2 = (float)(pathpointIn.zCoord - this.zCoord);
+    public float distanceToSquared(PathPointSwimmer pathpointIn) {
+        float f = (float) (pathpointIn.xCoord - this.xCoord);
+        float f1 = (float) (pathpointIn.yCoord - this.yCoord);
+        float f2 = (float) (pathpointIn.zCoord - this.zCoord);
         return f * f + f1 * f1 + f2 * f2;
     }
 
-    public boolean equals(Object p_equals_1_)
-    {
-        if (!(p_equals_1_ instanceof PathPointSwimmer))
-        {
+    public boolean equals(Object p_equals_1_) {
+        if (!(p_equals_1_ instanceof PathPointSwimmer)) {
             return false;
-        }
-        else
-        {
-        	PathPointSwimmer pathpoint = (PathPointSwimmer)p_equals_1_;
-            return this.hash == pathpoint.hash && this.xCoord == pathpoint.xCoord && this.yCoord == pathpoint.yCoord && this.zCoord == pathpoint.zCoord;
+        } else {
+            PathPointSwimmer pathpoint = (PathPointSwimmer) p_equals_1_;
+            return this.hash == pathpoint.hash && this.xCoord == pathpoint.xCoord
+                    && this.yCoord == pathpoint.yCoord
+                    && this.zCoord == pathpoint.zCoord;
         }
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.hash;
     }
 
     /**
      * Returns true if this point has already been assigned to a path
      */
-    public boolean isAssigned()
-    {
+    public boolean isAssigned() {
         return this.index >= 0;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return this.xCoord + ", " + this.yCoord + ", " + this.zCoord;
     }
 }

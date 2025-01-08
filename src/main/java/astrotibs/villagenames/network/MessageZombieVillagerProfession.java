@@ -3,87 +3,95 @@ package astrotibs.villagenames.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
-
 /**
  * Adapted from Villager Tweaks by sidben:
  * https://github.com/sidben/VillagerTweaks/blob/master/src/main/java/sidben/villagertweaks/network/MessageZombieVillagerProfession.java
+ * 
  * @author AstroTibs
  * 
- * Used to notify the client of the zombie villager profession, 
- * so it can render the correct skin.
+ *         Used to notify the client of the zombie villager profession, so it can render the correct skin.
  *
  */
-public class MessageZombieVillagerProfession implements IMessage
-{
-    
-	
+public class MessageZombieVillagerProfession implements IMessage {
+
     // Constructors
-	public MessageZombieVillagerProfession() {}
-    public MessageZombieVillagerProfession(int entityID, int profession, int career, int biomeType, int professionLevel
-    		, int skinTone
-    		) {
+    public MessageZombieVillagerProfession() {}
+
+    public MessageZombieVillagerProfession(int entityID, int profession, int career, int biomeType, int professionLevel,
+            int skinTone) {
         this.entityID = entityID;
         this.profession = profession;
         this.career = career;
         this.biomeType = biomeType;
         this.professionLevel = biomeType;
         this.skinTone = skinTone;
-        
+
     }
-    
- // Fields to be used by this message
+
+    // Fields to be used by this message
     private int entityID;
     private int profession;
     private int career;
     private int biomeType;
     private int professionLevel;
     private int skinTone;
-    
-	
-    // Getters
-    public int getProfession() {return this.profession;}
-    public int getCareer() {return this.career;}
-    public int getEntityID() {return this.entityID;}
-    public int getBiomeType() {return this.biomeType;}
-    public int getProfessionLevel() {return this.professionLevel;}
-    public int getSkinTone() {return this.skinTone;}
 
+    // Getters
+    public int getProfession() {
+        return this.profession;
+    }
+
+    public int getCareer() {
+        return this.career;
+    }
+
+    public int getEntityID() {
+        return this.entityID;
+    }
+
+    public int getBiomeType() {
+        return this.biomeType;
+    }
+
+    public int getProfessionLevel() {
+        return this.professionLevel;
+    }
+
+    public int getSkinTone() {
+        return this.skinTone;
+    }
 
     // Reads the packet
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
+    public void fromBytes(ByteBuf buf) {
         this.entityID = buf.readInt();
         this.profession = buf.readInt();
         this.career = buf.readInt();
         this.biomeType = buf.readInt();
         this.professionLevel = buf.readInt();
         this.skinTone = buf.readInt();
-        
+
         // note - maybe use ByteBufUtils
     }
 
-    
     // Write the packet
     @Override
-    public void toBytes(ByteBuf buf)
-    {
+    public void toBytes(ByteBuf buf) {
         buf.writeInt(this.entityID);
         buf.writeInt(this.profession);
         buf.writeInt(this.career);
         buf.writeInt(this.biomeType);
         buf.writeInt(this.professionLevel);
         buf.writeInt(this.skinTone);
-        
+
     }
 
-    
     // Builds a string
-    @Override 
+    @Override
     public String toString() {
-        
-    	StringBuilder r = new StringBuilder();
-        
+
+        StringBuilder r = new StringBuilder();
+
         r.append("Entity ID = ");
         r.append(this.getEntityID());
         r.append(", Profession = ");
@@ -96,8 +104,8 @@ public class MessageZombieVillagerProfession implements IMessage
         r.append(this.getProfessionLevel());
         r.append(", Skin Tone = ");
         r.append(this.getSkinTone());
-        
+
         return r.toString();
     }
-    
+
 }
