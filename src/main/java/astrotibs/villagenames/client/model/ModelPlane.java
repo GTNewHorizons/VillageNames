@@ -34,7 +34,6 @@ public class ModelPlane extends ModelBox {
     /** Z vertex coordinate of upper box corner */
     public final float posZ2;
     public String boxName;
-    // private static final String __OBFID = "CL_00000872";
 
     public ModelPlane(ModelRenderer modelRenderer, int textureOffsetX, int textureOffsetY, float originX, float originY,
         float originZ, int width, int height, int depth, float scaleFactor) {

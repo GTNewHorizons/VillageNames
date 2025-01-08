@@ -236,7 +236,6 @@ public class RenderZombieVillagerModern extends RenderBiped {
     protected ModelBiped field_82436_m;
     protected ModelBiped field_82433_n;
     private int field_82431_q = 1;
-    private static final String __OBFID = "CL_00001037";
 
     public RenderZombieVillagerModern() {
         super(new ModelZombie(), 0.5F, 1.0F);
