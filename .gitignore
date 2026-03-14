@@ -1,32 +1,39 @@
-# eclipse
-/bin
+.gradle
+.settings
+/.idea/
+/.vscode/
+/run/
+/build/
+/eclipse/
 .classpath
 .project
-.settings
-.metadata
- 
-# forge
-MinecraftForge-Credits.txt
-MinecraftForge-License.txt
-forge-*
-CREDITS-fml.txt
-LICENSE-fml.txt
- 
-# gradle
-.gradle
-gradle*
- 
-# other
-eclipse
-README.txt
-/api
-/libs
-.gitignore
-
-# Junk added by AstroTibs
-NewZombieBiomes.png
-run/
+/bin/
+/config/
+/crash-reports/
+/logs/
+options.txt
+/saves/
+usernamecache.json
+banned-ips.json
+banned-players.json
+eula.txt
+ops.json
+server.properties
+servers.dat
+usercache.json
+whitelist.json
+/out/
 *.iml
 *.ipr
 *.iws
+src/main/resources/mixins.*([!.]).json
 *.bat
+*.DS_Store
+!gradlew.bat
+.factorypath
+addon.local.gradle
+addon.local.gradle.kts
+addon.late.local.gradle
+addon.late.local.gradle.kts
+/.vs
+layout.json
