@@ -14344,11 +14344,14 @@ public class JungleStructures
     		
     					
     		// Brewing stand
-    		for (int[] uvw : new int[][]{
-    			{6,2,5}, 
-    			})
+    		if (VillageGeneratorConfigHandler.allowVillageBrewingStands)
     		{
-    			this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+    			for (int[] uvw : new int[][]{
+    				{6,2,5}, 
+    				})
+    			{
+    				this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+    			}
     		}
     		
     		

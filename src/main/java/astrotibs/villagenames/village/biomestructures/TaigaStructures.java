@@ -9352,11 +9352,14 @@ public class TaigaStructures
             
         	
             // Brewing Stand
-        	for (int[] uvw : new int[][]{
-        		{2,1,4}, 
-        		})
+            if (VillageGeneratorConfigHandler.allowVillageBrewingStands)
             {
-        		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	for (int[] uvw : new int[][]{
+            		{2,1,4}, 
+            		})
+                {
+            		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+                }
             }
             
             
