@@ -10652,11 +10652,14 @@ public class SnowyStructures
             
         	
             // Brewing Stand
-        	for (int[] uvw : new int[][]{
-        		{3,2,6}, 
-        		})
+            if (VillageGeneratorConfigHandler.allowVillageBrewingStands)
             {
-        		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	for (int[] uvw : new int[][]{
+            		{3,2,6}, 
+            		})
+                {
+            		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+                }
             }
             
             

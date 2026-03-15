@@ -10770,11 +10770,14 @@ public class SavannaStructures
             
         	
             // Brewing Stand
-        	for (int[] uvw : new int[][]{
-        		{2,2,10}, 
-        		})
+            if (VillageGeneratorConfigHandler.allowVillageBrewingStands)
             {
-        		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	for (int[] uvw : new int[][]{
+            		{2,2,10}, 
+            		})
+                {
+            		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+                }
             }
             
             
@@ -11153,11 +11156,14 @@ public class SavannaStructures
             
         	
             // Brewing Stand
-        	for (int[] uvw : new int[][]{
-        		{2,1,3}, 
-        		})
+            if (VillageGeneratorConfigHandler.allowVillageBrewingStands)
             {
-        		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+            	for (int[] uvw : new int[][]{
+            		{2,1,3}, 
+            		})
+                {
+            		this.placeBlockAtCurrentPosition(world, ModObjects.chooseModBrewingStandBlock(), 0, uvw[0], uvw[1], uvw[2], structureBB);
+                }
             }
             
             
