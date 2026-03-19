@@ -59,23 +59,35 @@ public class SpawnEventListener {
 			if (world != null) {
 				final int countMonster = world.countEntities(EnumCreatureType.monster, true);
 				final int countWaterMonster = world.countEntities(waterMonster, true);
+				final int totalMonsters = countMonster + countWaterMonster;
+				final int maxMonsters = EnumCreatureType.monster.getMaxNumberOfCreature();
+				final int playerCount = world.playerEntities.size();
 
-				// Count unique chunks within spawn radius of all players
-				eligibleChunks.clear();
-				for (int i = 0; i < world.playerEntities.size(); i++) {
-					final EntityPlayer player = world.playerEntities.get(i);
-					final int pcx = MathHelper.floor_double(player.posX / 16.0D);
-					final int pcz = MathHelper.floor_double(player.posZ / 16.0D);
-					for (int dx = -8; dx <= 8; dx++) {
-						for (int dz = -8; dz <= 8; dz++) {
-							eligibleChunks.add(chunkKey(dx + pcx, dz + pcz));
+				final int lowerBoundChunks = 17 * 17; // Single player's 17x17 spawn area
+				final int upperBoundChunks = playerCount * lowerBoundChunks;
+
+				if (playerCount == 0 || totalMonsters <= maxMonsters * lowerBoundChunks / 256) {
+					// No players, or under cap even with minimum eligible chunks
+					overMonsterCap = false;
+				} else if (totalMonsters > maxMonsters * upperBoundChunks / 256) {
+					// Over cap even with maximum eligible chunks (no player overlap)
+					overMonsterCap = true;
+				} else {
+					// Ambiguous — compute exact chunk count
+					eligibleChunks.clear();
+					for (int i = 0; i < playerCount; i++) {
+						final EntityPlayer player = world.playerEntities.get(i);
+						final int pcx = MathHelper.floor_double(player.posX / 16.0D);
+						final int pcz = MathHelper.floor_double(player.posZ / 16.0D);
+						for (int dx = -8; dx <= 8; dx++) {
+							for (int dz = -8; dz <= 8; dz++) {
+								eligibleChunks.add(chunkKey(dx + pcx, dz + pcz));
+							}
 						}
 					}
+					final int chunkCount = eligibleChunks.size();
+					overMonsterCap = totalMonsters > maxMonsters * chunkCount / 256;
 				}
-
-				final int chunkCount = eligibleChunks.size();
-				overMonsterCap = chunkCount > 0
-						&& (countMonster + countWaterMonster) > EnumCreatureType.monster.getMaxNumberOfCreature() * chunkCount / 256;
 			}
 		}
 
