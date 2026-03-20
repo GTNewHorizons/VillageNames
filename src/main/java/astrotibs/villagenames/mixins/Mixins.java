@@ -11,7 +11,7 @@ public enum Mixins implements IMixins {
 
     MINECRAFT(Side.COMMON, "AccessorChunkProviderFlat", "AccessorChunkProviderGenerate", "AccessorChunkProviderHell",
             "AccessorEntityVillager", "AccessorEntityZombie", "AccessorStructureVillagePieces", "AccessorStructureVillagePiecesVillage",
-            "AccessorTextureAtlasSprite"),
+            "AccessorTextureAtlasSprite", "MixinChunkProviderFlat"),
 
     ;
 
