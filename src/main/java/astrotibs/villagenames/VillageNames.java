@@ -41,7 +41,6 @@ import astrotibs.villagenames.spawnegg.SpawnEggRegistry;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import astrotibs.villagenames.version.DevVersionWarning;
-import astrotibs.villagenames.version.VersionChecker;
 import astrotibs.villagenames.village.MapGenVillageVN;
 import astrotibs.villagenames.village.StructureCreationHandlers;
 import astrotibs.villagenames.village.StructureVillageVN;
@@ -494,8 +493,7 @@ public final class VillageNames
         
         // Version check monitor
         if ((Reference.VERSION).contains("DEV")) {FMLCommonHandler.instance().bus().register(DevVersionWarning.instance);}
-        else if (GeneralConfig.versionChecker) {FMLCommonHandler.instance().bus().register(VersionChecker.instance);}
-        
+
         
 		PROXY.preInit(event);
 		

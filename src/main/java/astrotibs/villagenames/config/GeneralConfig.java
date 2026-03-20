@@ -40,8 +40,7 @@ public class GeneralConfig {
 	public static boolean biomedictIgloos;
 	
 	public static boolean codexChestLoot;
-	public static boolean versionChecker;
-	
+
 	public static boolean wellBoundary;
 	public static boolean wellDecorations;
 	public static boolean useVillageColors;
@@ -345,7 +344,6 @@ public class GeneralConfig {
 	    zombieCureGroups_map.clear();
 	    zombieCureGroups_map = unpackZombieCureGroups(zombieCureGroups);
  		
- 	    versionChecker = config.getBoolean("Version Checker", Reference.CATEGORY_MISCELLANEOUS, true, "Displays a client-side chat message on login if there's an update available.");
 	    codexChestLoot = config.getBoolean("Codex Chest Loot", Reference.CATEGORY_MISCELLANEOUS, true, "The Codex can appear as rare chest loot.");
 	    allowInGameConfig = config.getBoolean("Allow in-game config access", Reference.CATEGORY_MISCELLANEOUS, true, "Set this to false to deacactivate the in-game config GUI, in case it conflicts with other mods.");
 	    debugMessages = config.getBoolean("Debug messages", Reference.CATEGORY_MISCELLANEOUS, false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
