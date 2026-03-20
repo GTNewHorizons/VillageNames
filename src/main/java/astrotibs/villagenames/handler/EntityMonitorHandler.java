@@ -1,13 +1,13 @@
 package astrotibs.villagenames.handler;
 
-import java.lang.reflect.Method;
-
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillageGuard;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.ieep.ExtendedZombieVillager;
 import astrotibs.villagenames.integration.ModObjects;
+import astrotibs.villagenames.mixins.early.AccessorEntityVillager;
+import astrotibs.villagenames.mixins.early.AccessorEntityZombie;
 import astrotibs.villagenames.network.MessageModernVillagerSkin;
 import astrotibs.villagenames.network.MessageZombieVillagerProfession;
 import astrotibs.villagenames.network.NetworkHelper;
@@ -22,7 +22,6 @@ import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityZombie;
@@ -31,7 +30,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
-import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -379,34 +377,18 @@ public class EntityMonitorHandler
             	//if (GeneralConfigHandler.debugMessages && (vanillaRollbackTicks != 0 || modTickAdjustment != 0) ) {
             	//	LogHelper.info("Cumulative advanced ticks: "+accumulatedticks);
             	//	}
-            	
-            	
-            	int conversionTime=0;
-            	
-            	try{
-            		conversionTime = ReflectionHelper.getPrivateValue(EntityZombie.class, (EntityZombie)event.entity, new String[]{"conversionTime", "field_82234_d"}); // The MCP mapping for this field name
-            		// Increment conversion time
-            		conversionTime -= (vanillaRollbackTicks+modTickAdjustment);
-            		// Cap at 5 minutes
-            		conversionTime = MathHelper.clamp_int(conversionTime, 1, 6000);
-            		// Set the conversion value to this modified value
-            		ReflectionHelper.setPrivateValue(EntityZombie.class, (EntityZombie)event.entity, conversionTime, new String[]{"conversionTime", "field_82234_d"});
-            		//if (GeneralConfigHandler.debugMessages) {LogHelper.warn("Setting conversion timer to "+conversionTime);}
-    			}
-            	catch (Exception e) {
-    				//if (GeneralConfigHandler.debugMessages) LogHelper.warn("EntityMonitorHandler > Could not reflect/modify conversionTime field");
-    			}
-            	
-            	Method getConversionTimeBoost_m = ReflectionHelper.findMethod(EntityZombie.class, (EntityZombie)event.entity, new String[]{"getConversionTimeBoost", "func_82233_q"}); // The MCP mapping for this method name
-            	
-            	int getConversionTimeBoost=0;
-            	
-            	try {
-            		getConversionTimeBoost = (Integer)getConversionTimeBoost_m.invoke((EntityZombie)event.entity);
-            	}
-            	catch (Exception e) {
-            		//if (GeneralConfigHandler.debugMessages) {LogHelper.warn("EntityMonitorHandler > Could not reflect EntityZombie.getConversionTimeBoost");}
-            	}
+
+				var accessor = (AccessorEntityZombie) zombie;
+
+				int conversionTime = accessor.getConversionTime();
+				// Increment conversion time
+				conversionTime -= (vanillaRollbackTicks + modTickAdjustment);
+				// Cap at 5 minutes
+				conversionTime = MathHelper.clamp_int(conversionTime, 1, 6000);
+				// Set the conversion value to this modified value
+				accessor.setConversionTime(conversionTime);
+
+            	int getConversionTimeBoost = accessor.invokeGetConversionTimeBoost();
             	
                 final int nextConversionTime = conversionTime - getConversionTimeBoost;//zombie.conversionTime - zombie.getConversionTimeBoost();
                 
@@ -469,7 +451,7 @@ public class EntityMonitorHandler
         	
             final EntityLiving guard = (EntityLiving) event.entity;
             
-            if (event.entity.worldObj.isRemote) {
+            if (guard.worldObj.isRemote) {
                 // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
                 ClientInfoTracker.SyncGuardMessage(guard);
             }
@@ -523,14 +505,14 @@ public class EntityMonitorHandler
             	villager.getRecipes(null);
             	FunctionsVN.monitorVillagerTrades(villager);
         	}
-        	
+
         	int professionLevel = ev.getProfessionLevel();
     		if (professionLevel < 0) {ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));}
-        	    		
+
     		// Update biome and skin tone values
     		if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
     		if (ev.getSkinTone()==-99) {ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
-    		
+
     		if (
     				(villager.ticksExisted + villager.getEntityId())%5 == 0 // Ticks intermittently, modulated so villagers don't deliberately sync.
     				&& ev.getProfession() >= 0 && (ev.getProfession() <=5 || GeneralConfig.professionID_a.indexOf(ev.getProfession())>-1) // This villager ID is specified in the configs
@@ -541,25 +523,15 @@ public class EntityMonitorHandler
 		    	{
 		    		// Turn off gear pickup to prevent goofball rendering
 		    		if (villager.canPickUpLoot()) {villager.setCanPickUpLoot(false);}
-		    		
+
 			    	// Strip armor
 		    		for (int slot=1; slot <=4; slot++) {if (villager.getEquipmentInSlot(slot) != null) {villager.setCurrentItemOrArmor(slot, null);}}
 		    	}
-				
+
     			// Initialize the buying list so that the badge displays
-    			MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
-    			if (buyingList == null)
-    			{
-    				try {
-    					Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
-    							EntityVillager.class, villager, new String[]{"addDefaultEquipmentAndRecipies", "func_70950_c"},
-    							Integer.TYPE
-    							);
-    					addDefaultEquipmentAndRecipies_m.invoke(villager, 1);
-    					}
-            		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");}
-    			}
-    			
+				var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
+				if (buyingList == null) ((AccessorEntityVillager) villager).invokeAddDefaultEquipmentAndRecipies(1);
+
     			ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
     			// Sends a ping to everyone within 80 blocks
     			NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
@@ -567,32 +539,32 @@ public class EntityMonitorHandler
     					new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel, ev.getSkinTone()),
     					targetPoint);
     		}
-        	
+
         }
-        
+
         // Monitor the player for purposes of the village reputations achievements
         else if (event.entity instanceof EntityPlayerMP
         		&& !event.entity.worldObj.isRemote
         		&& event.entity.dimension == 0 // Only applies to the Overworld
         		&& event.entity.ticksExisted % (tickRate) == 0) { // Only check every few seconds so as not to bog down the server with Village.dat scans
-        	
+
         	EntityPlayerMP player = (EntityPlayerMP)event.entity;
         	World world = player.worldObj;
-        	
+
         	try {
-        		
+
             	String villageTopTagPlayerIsIn = ReputationHandler.getVillageTagPlayerIsIn(player);
-            	
+
         		Village villageObjPlayerIsIn = world.villageCollectionObj.findNearestVillage((int)player.posX, (int)player.posY, (int)player.posZ, EntityInteractHandler.villageRadiusBuffer);
-            	
+
             	if (
             			!villageTopTagPlayerIsIn.equals("none")
             			|| villageObjPlayerIsIn!=null
             			) { // Player is in a valid Village.dat village.
-            		
-                	
+
+
                 	int playerRep = ReputationHandler.getVNReputationForPlayer(player, villageTopTagPlayerIsIn, villageObjPlayerIsIn);
-                	
+
                 	// ---- Maximum Rep Achievement ---- //
                 	// - Must also be checked onEntity - //
                 	if (
@@ -602,9 +574,9 @@ public class EntityMonitorHandler
                 		player.triggerAchievement(VillageNames.minrep);
                 		AchievementReward.allFiveAchievements(player);
                 	}
-                	
+
                 	// --- Maximum Rep Achievement --- //
-                	
+
                 	else if (
                 			playerRep >=10 // Town rep is maximum
                 			&& !player.func_147099_x().hasAchievementUnlocked(VillageNames.maxrep) // Copied over from EntityPlayerMP
@@ -612,18 +584,18 @@ public class EntityMonitorHandler
                 		player.triggerAchievement(VillageNames.maxrep);
                 		AchievementReward.allFiveAchievements(player);
                 	}
-                	
+
                 	if (tickRate < 50) tickRate+=2;
                 	else if (tickRate > 50) tickRate=50;
-                	
+
             	}
             	else { // Player is not in a valid village.dat village.
             		tickRate = 100; // Slow down the checker when you're not in a village.
             	}
-        		
+
         	}
         	catch (Exception e) {} // Could not verify village status
-        	
+
         }
     }
     

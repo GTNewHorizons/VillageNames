@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import astrotibs.villagenames.mixins.early.AccessorChunkProviderFlat;
+import astrotibs.villagenames.mixins.early.AccessorChunkProviderGenerate;
+import astrotibs.villagenames.mixins.early.AccessorChunkProviderHell;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
-import astrotibs.villagenames.utility.LogHelper;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.ReflectionHelper.UnableToAccessFieldException;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -25,12 +25,9 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 
 public class StructureRegistry {
 
-	private static <T> void addMapGen(Collection<MapGenStructure> output, Class<T> klazz, T provider, String... names) {
-		try {
-			MapGenStructure struct = ReflectionHelper.getPrivateValue(klazz, provider, names);
-			if (struct != null) output.add(struct);
-		} catch (UnableToAccessFieldException e) {
-			LogHelper.warn("Can't access fields %s from provider %s. Some structures may not be detected");
+	private static void addMapGen(Collection<MapGenStructure> output, MapGenStructure structure) {
+		if (structure != null) {
+			output.add(structure);
 		}
 	}
 
@@ -45,12 +42,12 @@ public class StructureRegistry {
 
 			@Override
 			public Collection<MapGenStructure> listProviders(IChunkProvider provider) {
-				ChunkProviderGenerate cp = (ChunkProviderGenerate)provider;
+				var accessor = ((AccessorChunkProviderGenerate) provider);
 				List<MapGenStructure> result = Lists.newArrayList();
-				addMapGen(result, ChunkProviderGenerate.class, cp, "strongholdGenerator", "field_73225_u");
-				addMapGen(result, ChunkProviderGenerate.class, cp, "villageGenerator", "field_73224_v");
-				addMapGen(result, ChunkProviderGenerate.class, cp, "mineshaftGenerator", "field_73223_w");
-				addMapGen(result, ChunkProviderGenerate.class, cp, "scatteredFeatureGenerator", "field_73233_x");
+				addMapGen(result, accessor.getStrongholdGenerator());
+				addMapGen(result, accessor.getVillageGenerator());
+				addMapGen(result, accessor.getMineshaftGenerator());
+				addMapGen(result, accessor.getScatteredFeatureGenerator());
 				return result;
 			}
 		});
@@ -63,14 +60,9 @@ public class StructureRegistry {
 
 			@Override
 			public Collection<MapGenStructure> listProviders(IChunkProvider provider) {
-				ChunkProviderFlat cp = (ChunkProviderFlat)provider;
+				var accessor = (AccessorChunkProviderFlat) provider;
 				List<MapGenStructure> result = Lists.newArrayList();
-				try {
-					List<MapGenStructure> gen = ReflectionHelper.getPrivateValue(ChunkProviderFlat.class, cp, "structureGenerators", "field_82696_f");
-					if (gen != null) result.addAll(gen);
-				} catch (UnableToAccessFieldException e) {
-					LogHelper.warn("Can't access map gen list from provider %s. Some structures may not be detected");
-				}
+				result.addAll(accessor.getStructureGenerators());
 				return result;
 			}
 		});
@@ -83,9 +75,9 @@ public class StructureRegistry {
 
 			@Override
 			public Collection<MapGenStructure> listProviders(IChunkProvider provider) {
-				ChunkProviderHell cp = (ChunkProviderHell)provider;
+				var accessor = (AccessorChunkProviderHell) provider;
 				List<MapGenStructure> result = Lists.newArrayList();
-				addMapGen(result, ChunkProviderHell.class, cp, "genNetherBridge", "field_73172_c");
+				addMapGen(result, accessor.getGenNetherBridge());
 				return result;
 			}
 		});
@@ -98,23 +90,13 @@ public class StructureRegistry {
 
 	private List<IStructureGenProvider> providers;
 
-	private static IChunkProvider getWrappedChunkProvider(ChunkProviderServer provider) {
-		try {
-			//return ReflectionHelper.getPrivateValue(ChunkProviderServer.class, provider, "currentChunkProvider", "field_73246_d");
-			return provider.currentChunkProvider; // This is public in 1.7.10
-		} catch (UnableToAccessFieldException e) {
-			LogHelper.error("Can't access chunk provider data. No structures will be detected");
-			return null;
-		}
-	}
-
 	private interface IStructureVisitor {
 		public void visit(MapGenStructure structure);
 	}
 
 	private void visitStructures(WorldServer world, IStructureVisitor visitor) {
 		ChunkProviderServer provider = world.theChunkProviderServer;
-		IChunkProvider inner = getWrappedChunkProvider(provider);
+		IChunkProvider inner = provider.currentChunkProvider;
 
 		if (inner != null) {
 			for (IStructureGenProvider p : providers)
