@@ -1,7 +1,6 @@
 package astrotibs.villagenames.utility;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +13,7 @@ import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import astrotibs.villagenames.mixins.early.AccessorEntityVillager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -1137,11 +1136,12 @@ public class FunctionsVN
 			
 			int profession = villager.getProfession();
 			int career = ev.getCareer();
+
+			var accessor = (AccessorEntityVillager) villager;
 			
 			
 			// Get the current buying list
-			MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue(EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"});
-							
+			var buyingList = accessor.getBuyingList();
 			
 			// --- If the career and careerLevel are null, assign them values --- //
 			
@@ -1173,13 +1173,6 @@ public class FunctionsVN
 					//(buyingList == null ? 0 : buyingList.size()) <= 0
 					true
 					) {
-				
-				// EntityVillager.addDefaultEquipmentAndRecipies(n) adds n unique trades.
-				Method addDefaultEquipmentAndRecipies_m = ReflectionHelper.findMethod(
-						EntityVillager.class, villager, new String[]{"addDefaultEquipmentAndRecipies", "func_70950_c"},
-						Integer.TYPE
-						);
-				
 				// 2. If the number of trades is less than (CareerLevel+listSizeAdd), generate new trades until they're equal.
 				
 				int mulliganTrades = 0;
@@ -1189,12 +1182,12 @@ public class FunctionsVN
 						//|| 
 						(buyingList == null ? 0 : buyingList.size()) <= 0
 						) {
-					try {addDefaultEquipmentAndRecipies_m.invoke(villager, 1);}
-            		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");}
-					
+
+					accessor.invokeAddDefaultEquipmentAndRecipies(1);
+
 					// Re-collect the trade list
-					buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
-					
+					buyingList = accessor.getBuyingList();
+
 					mulliganTrades++;
 					
 					if (mulliganTrades >= failuresToForceAcceptance) {
@@ -1205,8 +1198,6 @@ public class FunctionsVN
 				
 				// 3. Then check all of the trades and remove "illegal" ones.
 				// Either this is unchanged from before the while loop began, or it was just changed in step (2).
-				//buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
-				
 				
 				// ---------------------------------------- //
 				// --- Check for "inappropriate" trades --- //
@@ -1694,7 +1685,7 @@ public class FunctionsVN
                 	}
                 	else {
                 		// Apply the culled list to the villager
-                    	ReflectionHelper.setPrivateValue(EntityVillager.class, villager, buyingList, new String[]{"buyingList", "field_70963_i"});
+						accessor.setBuyingList(buyingList);
                 	}
                 	
             		
@@ -1726,8 +1717,8 @@ public class FunctionsVN
 					        		new ItemStack(Items.emerald, Math.min((villager.worldObj.rand.nextInt(5 + i1 * 10) + 3 * i1), 64) ),
 					        		Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i1))
 					        		));
-					        ReflectionHelper.setPrivateValue(EntityVillager.class, villager, buyingList, new String[]{"buyingList", "field_70963_i"});
-						}
+							accessor.setBuyingList(buyingList);
+					      }
 						// Modern trades cleanup
 						else if (
 								GeneralConfig.modernVillagerTrades
@@ -1763,13 +1754,12 @@ public class FunctionsVN
 					if (buyingList.size() < listSizeBeforeCulling) {
 						
 						// Generate a replacement trade
-                    	try {addDefaultEquipmentAndRecipies_m.invoke(villager, 1);}
-	            		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke EntityVillager.addDefaultEquipmentAndRecipies method");}
-                    	
+						accessor.invokeAddDefaultEquipmentAndRecipies(1);
+
                     	mulliganTrades++;
                     	
                     	// Reload trade list
-                    	buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
+						buyingList = accessor.getBuyingList();
 					}
 					
 				}
@@ -1780,21 +1770,18 @@ public class FunctionsVN
 					// But first, do some last-minute checks
 					
 					// If the dust has settled and the poor bastard has absolutely no trades, give him the ol' gold ingot.
-					if ( (buyingList == null ? 0 : buyingList.size()) <= 0 ) {
+                    // Profession: Farmer
+                    // Career: Shepherd
+                    if (buyingList.size() <= 0) {
 						//LogHelper.info("Adding gold ingots");
 						buyingList.addToListWithCheck( new MerchantRecipe(new ItemStack( Items.gold_ingot, 8 + villager.worldObj.rand.nextInt(3) ), new ItemStack(Items.emerald, 1 )) );
-						ReflectionHelper.setPrivateValue(EntityVillager.class, villager, buyingList, new String[]{"buyingList", "field_70963_i"});
-					}
+						accessor.setBuyingList(buyingList);
+						}
 					// Special handler: if this is a shepherd and the final slot is _selling wool_, then add all the colored varieties.
 					else if (
-							!(GeneralConfig.modernVillagerTrades)
-							&& profession== 0 // Profession: Farmer
-							&& career == 3 // Career: Shepherd
-							&& buyingList!=null
-							&& buyingList.size()<=16
-							&& ((MerchantRecipe)buyingList.get(buyingList.size()-1)).hasSameIDsAs(
-									new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack( Item.getItemFromBlock(Blocks.wool), 1))
-									)
+                            !GeneralConfig.modernVillagerTrades && profession == 0 && career == 3 && buyingList.size() <= 16 && ((MerchantRecipe) buyingList.get(buyingList.size() - 1)).hasSameIDsAs(
+                                    new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Item.getItemFromBlock(Blocks.wool), 1))
+                            )
 							) {
 						buyingList.remove(buyingList.size()-1);
 						
@@ -1805,7 +1792,7 @@ public class FunctionsVN
 								new MerchantRecipe(new ItemStack(Items.emerald, 1 + villager.worldObj.rand.nextInt(2) ), new ItemStack( Item.getItemFromBlock(Blocks.wool), 1, woolRandOrder[i]))
 								);
 							}
-						ReflectionHelper.setPrivateValue(EntityVillager.class, villager, buyingList, new String[]{"buyingList", "field_70963_i"});
+						accessor.setBuyingList(buyingList);
 					}
 					// Go through list of Blacksmith items, and enchant stuff that is not enchanted.
 					else if (!(GeneralConfig.modernVillagerTrades)
@@ -1881,7 +1868,7 @@ public class FunctionsVN
 			
 			
 			//villager.func_146091_a(buyingList, Items.blaze_powder, new Random(), 1.0F);
-			//buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
+			//buyingList = accessor.getBuyingList();
 		}
 	}
 	

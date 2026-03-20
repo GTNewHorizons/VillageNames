@@ -12,6 +12,7 @@ import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.ieep.ExtendedZombieVillager;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.item.ModItems;
+import astrotibs.villagenames.mixins.early.AccessorEntityVillager;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
@@ -22,7 +23,6 @@ import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -310,18 +310,12 @@ public class EntityInteractHandler {
 			}
 			
 			// If you're talking to a nitwit, cancel the trade gui
-			if (
-					GeneralConfig.enableNitwit
-					&& target instanceof EntityVillager
-					&& targetProfession==5
-					) {
+			if (GeneralConfig.enableNitwit && target instanceof EntityVillager villager && targetProfession == 5) {
 				// summon Villager ~ ~ ~ {Profession:5}
 				if (!world.isRemote) {
 					// Blank out the trade
-					MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue(EntityVillager.class, (EntityVillager)target, new String[]{"buyingList", "field_70963_i"});
-					if (	
-							buyingList!=null
-							) {
+					var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
+					if (buyingList != null) {
 						Iterator iterator = buyingList.iterator();
 						while (iterator.hasNext()) {
 							buyingList.remove(0);

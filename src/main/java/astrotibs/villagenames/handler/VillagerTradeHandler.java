@@ -10,11 +10,11 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.item.ModItems;
+import astrotibs.villagenames.mixins.early.AccessorEntityVillager;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -93,8 +93,8 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 		
 		int profession = villager.getProfession();
 		int career = (ExtendedVillager.get(villager)).getCareer();
-		
-		MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
+
+		var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
 		int nextSlotToFill = (buyingList == null ? 0 : buyingList.size()) + 1;
 		
 		Item moditem; // Used as a placeholder to attempt to add modded trades to villagers

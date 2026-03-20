@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8.3-GTNH",
+  "package": "astrotibs.villagenames.mixins.early",
+  "refmap": "mixins.villagenames.refmap.json",
+  "target": "@env(DEFAULT)",
+  "injectors":{
+    "maxShiftBy": 2
+  },
+  "compatibilityLevel": "JAVA_8",
+  "mixinextras": {"minVersion": "0.5.0"}
+}
