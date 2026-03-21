@@ -3,11 +3,10 @@ package astrotibs.villagenames.ieep;
 import java.util.Random;
 
 import astrotibs.villagenames.config.GeneralConfig;
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import astrotibs.villagenames.mixins.early.AccessorEntityVillager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -193,7 +192,7 @@ public class ExtendedVillager implements IExtendedEntityProperties {
 	public static int determineProfessionLevel(EntityVillager villager)
 	{
 		// Pull out the recipe list and use its size to determine the profession level of the villager
-		MerchantRecipeList buyingList = ReflectionHelper.getPrivateValue( EntityVillager.class, villager, new String[]{"buyingList", "field_70963_i"} );
+		var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
 		int professionLevel = (buyingList == null ? 0 : Math.max(buyingList.size(),0)); // Ensure the PL is not below 0
 		
 		if (

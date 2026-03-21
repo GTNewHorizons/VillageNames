@@ -13,6 +13,8 @@ import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.config.village.VillageGeneratorConfigHandler;
 import astrotibs.villagenames.ieep.ExtendedVillager;
 import astrotibs.villagenames.integration.ModObjects;
+import astrotibs.villagenames.mixins.early.AccessorStructureVillagePieces;
+import astrotibs.villagenames.mixins.early.AccessorStructureVillagePiecesVillage;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
@@ -30,7 +32,6 @@ import astrotibs.villagenames.village.biomestructures.SwampStructures;
 import astrotibs.villagenames.village.biomestructures.TaigaStructures;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockDirt;
@@ -382,16 +383,10 @@ public class StructureVillageVN
         else if (Math.abs(x - start.getBoundingBox().minX) <= 112 && Math.abs(z - start.getBoundingBox().minZ) <= 112)
         {
 			// Attach another structure
-			Method getNextVillageComponent_reflected = ReflectionHelper.findMethod(
-					StructureVillagePieces.class, null, new String[]{"getNextVillageComponent", "func_75081_c"},
-					StructureVillagePieces.Start.class, List.class, Random.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE
-					);
 			
 			//StructureVillagePieces.Village structurecomponent = StructureVillagePieces.getNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
-			StructureVillagePieces.Village structurecomponent = null;
-			try {structurecomponent = (StructureVillagePieces.Village)getNextVillageComponent_reflected.invoke(start, (StructureVillagePieces.Start)start, components, random, x, y, z, coordBaseMode, componentType + 1);}
-    		catch (Exception e) {if (GeneralConfig.debugMessages) LogHelper.warn("Could not invoke StructureVillagePieces.getNextVillageComponent method");}
-			
+			StructureVillagePieces.Village structurecomponent = AccessorStructureVillagePieces.invokeGetNextVillageComponent(start, components, random, x, y, z, coordBaseMode, componentType + 1);
+
             if (structurecomponent != null)
             {
             	// Substitute old torch with the new one
@@ -2494,7 +2489,7 @@ public class StructureVillageVN
         @Override
         public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBB)
         {
-        	StructureVillagePieces.Start startPiece_reflected = ReflectionHelper.getPrivateValue(StructureVillagePieces.Village.class, this, new String[]{"startPiece", "startPiece"});
+        	var startPiece_reflected = ((AccessorStructureVillagePiecesVillage) this).getStartPiece();
         	
         	// Scans X, Z inside bounding box and finds the ground layer
         	for (int u = 0; u <= (this.boundingBox.maxX-this.boundingBox.minX); ++u)
@@ -2515,7 +2510,7 @@ public class StructureVillageVN
                         }
                         else
                         {
-                        	setPathSpecificBlock(world, ((StartVN)startPiece_reflected).materialType, ((StartVN)startPiece_reflected).biome, ((StartVN)startPiece_reflected).disallowModSubs, x, y, z, true, true);
+                        	setPathSpecificBlock(world, ((StartVN)startPiece_reflected).materialType, startPiece_reflected.biome, ((StartVN)startPiece_reflected).disallowModSubs, x, y, z, true, true);
                         }
                     }
                 }

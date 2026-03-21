@@ -1,24 +1,18 @@
 package astrotibs.villagenames.prismarine.render;
 
-import java.lang.reflect.Field;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import astrotibs.villagenames.mixins.early.AccessorTextureAtlasSprite;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.resources.data.AnimationMetadataSection;
 
 @SideOnly(Side.CLIENT)
 public class PrismarineIcon extends TextureAtlasSprite {
 
 	protected int[][] interpolatedFrameData;
-	private Field fanimationMetadata;
 
 	public PrismarineIcon(String name) {
 		super(name);
-		fanimationMetadata = ReflectionHelper.findField(TextureAtlasSprite.class, "animationMetadata", "field_110982_k");
-		fanimationMetadata.setAccessible(true);
 	}
 	
 	@Override
@@ -30,8 +24,8 @@ public class PrismarineIcon extends TextureAtlasSprite {
 		catch (Exception e) {}
 	}
 
-	private void updateAnimationInterpolated() throws IllegalArgumentException, IllegalAccessException {
-		AnimationMetadataSection animationMetadata = (AnimationMetadataSection) fanimationMetadata.get(this);
+	private void updateAnimationInterpolated() throws IllegalArgumentException {
+		var animationMetadata = ((AccessorTextureAtlasSprite) this).getAnimationMetadata();
 
 		double d0 = 1.0D - tickCounter / (double) animationMetadata.getFrameTimeSingle(frameCounter);
 		int i = animationMetadata.getFrameIndex(frameCounter);
@@ -39,8 +33,8 @@ public class PrismarineIcon extends TextureAtlasSprite {
 		int k = animationMetadata.getFrameIndex((frameCounter + 1) % j);
 
 		if (i != k && k >= 0 && k < framesTextureData.size()) {
-			int[][] aint = (int[][]) framesTextureData.get(i);
-			int[][] aint1 = (int[][]) framesTextureData.get(k);
+			int[][] aint = framesTextureData.get(i);
+			int[][] aint1 = framesTextureData.get(k);
 
 			if (interpolatedFrameData == null || interpolatedFrameData.length != aint.length)
 				interpolatedFrameData = new int[aint.length][];
