@@ -179,7 +179,9 @@ public final class VillageNames
 			GameRegistry.registerItem(spawnEgg, spawnEgg.getUnlocalizedName());
 			BlockDispenser.dispenseBehaviorRegistry.putObject(spawnEgg, new DispenserBehavior());
 			
-			MinecraftForge.EVENT_BUS.register(new SpawnEventListener());
+			SpawnEventListener spawnEventListener = new SpawnEventListener();
+			MinecraftForge.EVENT_BUS.register(spawnEventListener);
+			FMLCommonHandler.instance().bus().register(spawnEventListener);
 			LogHelper.info("Registered Guardians and ocean monuments");
 		}
 		
