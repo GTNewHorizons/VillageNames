@@ -2,11 +2,9 @@ package astrotibs.villagenames.mixins;
 
 import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 import com.gtnewhorizon.gtnhmixins.builders.MixinBuilder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
+import javax.annotation.Nonnull;
+
 public enum Mixins implements IMixins {
 
     MINECRAFT(Side.COMMON, "AccessorChunkProviderFlat", "AccessorChunkProviderGenerate", "AccessorChunkProviderHell",
@@ -19,6 +17,12 @@ public enum Mixins implements IMixins {
 
     Mixins(Side side, String... mixins) {
         this.builder = new MixinBuilder().addSidedMixins(side, mixins)
-            .setPhase(Phase.EARLY);
+                .setPhase(Phase.EARLY);
+    }
+
+    @Nonnull
+    @Override
+    public MixinBuilder getBuilder() {
+        return builder;
     }
 }
