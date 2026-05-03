@@ -531,6 +531,7 @@ public class VillageGeneratorConfigHandler
 	// Decor
 	public static boolean allowTaigaTroughs;
 	public static boolean allowVillageBrewingStands;
+	public static boolean allowVillageBeds;
 	public static boolean fillTroughsWithWater;
 	public static boolean restrictTaigaTroughs;
 /*	public static boolean decorPlainsLamp1; // Four torches on elevated stripped wood
@@ -1521,6 +1522,7 @@ public class VillageGeneratorConfigHandler
 		// --- Decor --- //
 		allowTaigaTroughs = config.getBoolean("Decor: Allow Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to completely disallow the trough as decor in taiga villages");
 		allowVillageBrewingStands = config.getBoolean("Decor: Allow Village Brewing Stands", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Set to true to allow brewing stands to generate in village buildings");
+		allowVillageBeds = config.getBoolean("Decor: Allow Village Beds", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Set to false to prevent beds from generating in village buildings");
 		fillTroughsWithWater = config.getBoolean("Decor: Fill Troughs With Water", Reference.CATEGORY_VILLAGE_GENERATOR, true, "Whether generated decor troughs are filled with water");
 		restrictTaigaTroughs = config.getBoolean("Decor: Restrict Taiga Troughs", Reference.CATEGORY_VILLAGE_GENERATOR, false, "Limit taiga troughs only to the well or as street decor. "
 				+ "Setting this to false allows them in any flagged taiga decor location, at the risk of them cutting into the parent structure.");
