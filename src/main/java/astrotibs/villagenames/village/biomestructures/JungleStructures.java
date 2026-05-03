@@ -6061,26 +6061,28 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{18,6,4, 3, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
-            	{18,6,6, 3, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
-            	{13,5,11, 2, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{18,6,4, 3, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
+	            	{18,6,6, 3, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
+	            	{13,5,11, 2, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -7291,24 +7293,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{4,7,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 0}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{4,7,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 0}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -7945,27 +7949,29 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,5,8, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            	{9,5,8, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            	{3,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            	{9,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{3,5,8, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            	{9,5,8, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            	{3,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            	{9,5,4, 0, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -8305,25 +8311,27 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{1,1,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            	{9,1,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{1,1,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            	{9,1,7, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
     		
     		
@@ -8666,25 +8674,27 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,2,5, 1, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            	{2,2,3, 1, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{2,2,5, 1, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            	{2,2,3, 1, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
     		
     		
@@ -9569,24 +9579,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,4,6, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{3,4,6, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -9980,24 +9992,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{6,2,6, 2, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{6,2,6, 2, GeneralConfig.useVillageColors ? this.townColor2 : 4}, // Yellow
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -10284,24 +10298,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,1,3, 2, GeneralConfig.useVillageColors ? this.townColor4 : 14}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{2,1,3, 2, GeneralConfig.useVillageColors ? this.townColor4 : 14}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -10579,24 +10595,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,1,3, 0, GeneralConfig.useVillageColors ? this.townColor4 : 9}, // Cyan
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{2,1,3, 0, GeneralConfig.useVillageColors ? this.townColor4 : 9}, // Cyan
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
     		
             
@@ -10902,24 +10920,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{4,1,5, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{4,1,5, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
@@ -11220,24 +11240,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{1,1,4, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{1,1,4, 2, GeneralConfig.useVillageColors ? this.townColor3 : 14}, // Red
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
             
     		
@@ -11617,24 +11639,26 @@ public class JungleStructures
             
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{2,2,4, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{2,2,4, 2, GeneralConfig.useVillageColors ? this.townColor : 0}, // White
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
             
     		
@@ -11965,24 +11989,26 @@ public class JungleStructures
         	
             
             // Beds
-            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
-            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
-            	{3,4,4, 3, GeneralConfig.useVillageColors ? this.townColor4 : 9}, // Cyan
-            })
-            {
-            	for (boolean isHead : new boolean[]{false, true})
-            	{
-            		int orientation = uvwoc[3];
-            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
-            		int v = uvwoc[1];
-            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
-            		ModObjects.setModBedBlock(world,
-                			this.getXWithOffset(u, w),
-                			this.getYWithOffset(v),
-                			this.getZWithOffset(u, w),
-                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
-                			uvwoc[4]);
-            	}
+            if (VillageGeneratorConfigHandler.allowVillageBeds) {
+	            for (int[] uvwoc : new int[][]{ // u, v, w, orientation, color meta
+	            	// Orientation - 0:forward, 1:rightward, 2:backward (toward you), 3:leftward
+	            	{3,4,4, 3, GeneralConfig.useVillageColors ? this.townColor4 : 9}, // Cyan
+	            })
+	            {
+	            	for (boolean isHead : new boolean[]{false, true})
+	            	{
+	            		int orientation = uvwoc[3];
+	            		int u = uvwoc[0] + (isHead?(new int[]{0,-1,0,1}[orientation]):0);
+	            		int v = uvwoc[1];
+	            		int w = uvwoc[2] + (isHead?(new int[]{-1,0,1,0}[orientation]):0);
+	            		ModObjects.setModBedBlock(world,
+	                			this.getXWithOffset(u, w),
+	                			this.getYWithOffset(v),
+	                			this.getZWithOffset(u, w),
+	                			StructureVillageVN.getBedOrientationMeta(orientation, this.coordBaseMode, isHead),
+	                			uvwoc[4]);
+	            	}
+	            }
             }
         	
         	
