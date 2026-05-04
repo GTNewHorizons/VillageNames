@@ -7,8 +7,6 @@ public class Reference
 	// Contains common constants for the mod
 	public static final String MOD_ID = "VillageNames";
 	public static final String MOD_NAME = "Village Names";
-	public static final String MOD_NAME_COLORIZED = EnumChatFormatting.GOLD + MOD_NAME;
-	public static final String VERSION = "@VERSION@";
 	public static final String URL = "https://modrinth.com/mod/village-names";
 	public static final String MOD_CHANNEL = "vnChannel";
 	public static final String CLIENT_PROXY = "astrotibs.villagenames.proxy.ClientProxy";
