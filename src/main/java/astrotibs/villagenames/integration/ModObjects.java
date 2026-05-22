@@ -3277,6 +3277,7 @@ public class ModObjects {
 					// Set the tile entity so that you can assign the orientation via NBT 
 					NBTTagCompound nbtCompound = new NBTTagCompound();
 		        	TileEntity tileentity = world.getTileEntity(x, y, z);
+					if (tileentity == null) return;
 		        	tileentity.writeToNBT(nbtCompound);
 		        	nbtCompound.setInteger("deskAngle", chooseBibliocraftDeskMeta(orientation, horizIndex));
 		        	
