@@ -468,46 +468,43 @@ public class EntityMonitorHandler
 
             String villageTopTagPlayerIsIn = ReputationHandler.getVillageTagPlayerIsIn(player);
 
-            Village villageObjPlayerIsIn = world.villageCollectionObj.findNearestVillage((int)player.posX, (int)player.posY, (int)player.posZ, EntityInteractHandler.villageRadiusBuffer);
+            Village villageObjPlayerIsIn = world.villageCollectionObj.findNearestVillage(
+                    (int)player.posX, (int)player.posY, (int)player.posZ, EntityInteractHandler.villageRadiusBuffer);
 
-            if (
-                    !villageTopTagPlayerIsIn.equals("none")
-                            || villageObjPlayerIsIn!=null
-            ) { // Player is in a valid Village.dat village.
-
-
-                int playerRep = ReputationHandler.getVNReputationForPlayer(player, villageTopTagPlayerIsIn, villageObjPlayerIsIn);
-
-                // ---- Maximum Rep Achievement ---- //
-                // - Must also be checked onEntity - //
-                if (
-                        playerRep <=-30 // Town rep is minimum
-                                && !player.func_147099_x().hasAchievementUnlocked(VillageNames.minrep) // Copied over from EntityPlayerMP
-                ) {
-                    player.triggerAchievement(VillageNames.minrep);
-                    AchievementReward.allFiveAchievements(player);
-                }
-
-                // --- Maximum Rep Achievement --- //
-
-                else if (
-                        playerRep >=10 // Town rep is maximum
-                                && !player.func_147099_x().hasAchievementUnlocked(VillageNames.maxrep) // Copied over from EntityPlayerMP
-                ) {
-                    player.triggerAchievement(VillageNames.maxrep);
-                    AchievementReward.allFiveAchievements(player);
-                }
-
-                if (tickRate < 50) tickRate+=2;
-                else if (tickRate > 50) tickRate=50;
-
-            }
-            else { // Player is not in a valid village.dat village.
+            // Player is not in a valid village.dat village.
+            if (villageTopTagPlayerIsIn.equals("none") &&  villageObjPlayerIsIn==null){
                 tickRate = 100; // Slow down the checker when you're not in a village.
+                return;
             }
+
+            // Player is in a valid Village.dat village
+            int playerRep = ReputationHandler.getVNReputationForPlayer(player, villageTopTagPlayerIsIn,
+                    villageObjPlayerIsIn);
+
+            // ---- Maximum Rep Achievement ---- //
+            // - Must also be checked onEntity - //
+            // Town rep is minimum
+            if (playerRep <=-30 && !player.func_147099_x().hasAchievementUnlocked(VillageNames.minrep)) {
+                // Copied over from EntityPlayerMP
+                player.triggerAchievement(VillageNames.minrep);
+                AchievementReward.allFiveAchievements(player);
+            }
+
+            // --- Maximum Rep Achievement --- //
+            // Town rep is maximum
+            else if (playerRep >=10 && !player.func_147099_x().hasAchievementUnlocked(VillageNames.maxrep)) {
+                // Copied over from EntityPlayerMP
+                player.triggerAchievement(VillageNames.maxrep);
+                AchievementReward.allFiveAchievements(player);
+            }
+
+            if (tickRate < 50) tickRate+=2;
+            else if (tickRate > 50) tickRate=50;
 
         }
-        catch (Exception e) {} // Could not verify village status
+        catch (Exception e) {
+            LogHelper.error(e); // Could not verify village status
+        }
 
     }
 
