@@ -38,6 +38,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
+import static astrotibs.villagenames.VillageNames.configDirectory;
 import static astrotibs.villagenames.VillageNames.isWitcheryLoaded;
 
 /**
@@ -407,8 +408,7 @@ public class EntityMonitorHandler
         EntityVillager villager = (EntityVillager)event.entity;
         ExtendedVillager ev = ExtendedVillager.get(villager);
 
-        if (GeneralConfig.modernVillagerSkins)
-        {
+        if (GeneralConfig.modernVillagerSkins) {
             // Initialize buying list in order to provoke the villager to choose a career
             villager.getRecipes(null);
             FunctionsVN.monitorVillagerTrades(villager);
@@ -421,32 +421,34 @@ public class EntityMonitorHandler
         if (ev.getBiomeType()==-1) {ev.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));}
         if (ev.getSkinTone()==-99) {ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
 
-        if (
-                (villager.ticksExisted + villager.getEntityId())%5 == 0 // Ticks intermittently, modulated so villagers don't deliberately sync.
-                        && ev.getProfession() >= 0 && (ev.getProfession() <=5 || GeneralConfig.professionID_a.indexOf(ev.getProfession())>-1) // This villager ID is specified in the configs
-        )
-        {
-            // Only strip armor if modern villager skins are on
-            if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor)
-            {
-                // Turn off gear pickup to prevent goofball rendering
-                if (villager.canPickUpLoot()) {villager.setCanPickUpLoot(false);}
+        // Ticks intermittently, modulated so villagers don't deliberately sync.
+        if ((villager.ticksExisted + villager.getEntityId())%5 == 0) return;
 
-                // Strip armor
-                for (int slot=1; slot <=4; slot++) {if (villager.getEquipmentInSlot(slot) != null) {villager.setCurrentItemOrArmor(slot, null);}}
-            }
+        if (ev.getProfession() < 0) return;
 
-            // Initialize the buying list so that the badge displays
-            var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
-            if (buyingList == null) ((AccessorEntityVillager) villager).invokeAddDefaultEquipmentAndRecipies(1);
+        // This villager ID is specified in the configs
+        if(ev.getProfession() > 5 && !GeneralConfig.professionID_a.contains(ev.getProfession())) return;
 
-            ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
-            // Sends a ping to everyone within 80 blocks
-            NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension, villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
-            VillageNames.VNNetworkWrapper.sendToAllAround(
-                    new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(), ev.getBiomeType(), professionLevel, ev.getSkinTone()),
-                    targetPoint);
+        // Only strip armor if modern villager skins are on
+        if (GeneralConfig.modernVillagerSkins && GeneralConfig.removeMobArmor) {
+            // Turn off gear pickup to prevent goofball rendering
+            if (villager.canPickUpLoot()) {villager.setCanPickUpLoot(false);}
+
+            // Strip armor
+            for (int slot=1; slot <=4; slot++) {if (villager.getEquipmentInSlot(slot) != null) {villager.setCurrentItemOrArmor(slot, null);}}
         }
+
+        // Initialize the buying list so that the badge displays
+        var buyingList = ((AccessorEntityVillager) villager).getBuyingList();
+        if (buyingList == null) ((AccessorEntityVillager) villager).invokeAddDefaultEquipmentAndRecipies(1);
+
+        ev.setProfessionLevel(ExtendedVillager.determineProfessionLevel(villager));
+        // Sends a ping to everyone within 80 blocks
+        NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(villager.dimension,
+                villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
+        VillageNames.VNNetworkWrapper.sendToAllAround(
+                new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(),
+                        ev.getBiomeType(), professionLevel, ev.getSkinTone()), targetPoint);
 
     }
 
