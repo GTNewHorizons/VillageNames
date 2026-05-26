@@ -533,53 +533,33 @@ public class EntityMonitorHandler
         	treatPlayer(event);
         }
     }
-    
-    
+
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
         
     	// Adds the Extended Properties to zombies
-        if (FunctionsVN.isVanillaZombie(event.entity)
-        		&& ExtendedZombieVillager.get((EntityZombie) event.entity) == null) {
+        if (FunctionsVN.isVanillaZombie(event.entity) && ExtendedZombieVillager.get((EntityZombie) event.entity) == null) {
             ExtendedZombieVillager.register((EntityZombie) event.entity);
         }
         
-        
         // summon Villager ~ ~ ~ {Profession:0}
         
-        else if (
-        		event.entity instanceof EntityVillager
-        		) {
-        	
+        else if (event.entity instanceof EntityVillager) {
             final EntityVillager villager = (EntityVillager)event.entity;
             
             // Adds the extended properties to villagers
-            if (
-            		ExtendedVillager.get(villager) == null
-            		) {
-
+            if (ExtendedVillager.get(villager) == null) {
             	ExtendedVillager.register(villager);
-            	
             }
-            
         }
         
-        else if (
-        		Loader.isModLoaded("witchery") &&
-        		event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)
-        		) {
-        	
+        else if (WitcheryHelper.isWitcheryGuard(event.entity)) {
             EntityLiving guard = (EntityLiving)event.entity;
             
             // Adds the extended properties to guards
             if (ExtendedVillageGuard.get(guard) == null) {
-            	
             	ExtendedVillageGuard.register(guard);
-            	
             }
-            
         }
-        
     }
-    
 }
