@@ -171,16 +171,13 @@ public class EntityMonitorHandler
             }
 
         }
-        
-        
+
         // New entity is a villager. Check to see if it came into being via a cured villager-zombie.
-        else if (!(event.entity instanceof EntityVillager)) {
+        if (!(event.entity instanceof EntityVillager villager)) {
             return;
         }
-        	
-        EntityVillager villager = (EntityVillager) event.entity;
 
-        if (GeneralConfig.modernVillagerTrades) {
+		if (GeneralConfig.modernVillagerTrades) {
             FunctionsVN.monitorVillagerTrades(villager);
         }
 
