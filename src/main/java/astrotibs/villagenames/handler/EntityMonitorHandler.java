@@ -38,6 +38,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
+import static astrotibs.villagenames.VillageNames.isWitcheryLoaded;
+
 /**
  * Adapted from Villager Tweaks by sidben:
  * https://github.com/sidben/VillagerTweaks/blob/master/src/main/java/sidben/villagertweaks/handler/EntityMonitorHandler.java
@@ -388,6 +390,8 @@ public class EntityMonitorHandler
     }
 
     private void treatWitcheryGuard(LivingUpdateEvent event){
+        if ((EventType.GUARD).getTracker().isEmpty()) return;
+
         final EntityLiving guard = (EntityLiving) event.entity;
 
         if (guard.worldObj.isRemote) {
@@ -520,12 +524,7 @@ public class EntityMonitorHandler
         }
         
         // New entity is a village guard. Check to see if it came into being via a player's recruitment.
-        else if (
-        		Loader.isModLoaded("witchery")
-        		&& event.entity instanceof EntityLiving
-        		&& event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)
-        		&& (EventType.GUARD).getTracker().size() > 0
-        		) {
+        else if ( WitcheryHelper.isWitcheryGuard(event.entity)) {
         	treatWitcheryGuard(event);
         }
         
