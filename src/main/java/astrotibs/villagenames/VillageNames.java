@@ -109,6 +109,7 @@ public final class VillageNames
 	public static Achievement ghosttown;
 	public static Achievement archaeologist;
 	public static Achievement laputa;
+	public static boolean isWitcheryLoaded;
 	
 	// Disallow trades that discriminate meta values sold from player unless this mod is loaded
 	public static boolean canVillagerTradesDistinguishMeta = false;
@@ -137,6 +138,7 @@ public final class VillageNames
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		isWitcheryLoaded = Loader.isModLoaded("witchery");
 		configDirectory = new File(event.getModConfigurationDirectory(), currentConfigFolder);
 		ConfigInit.init(configDirectory);
 		

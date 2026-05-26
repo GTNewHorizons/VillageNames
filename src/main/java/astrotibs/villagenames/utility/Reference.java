@@ -26,7 +26,6 @@ public class Reference
     // Elder Guardian class path: prior to 1.11, the Elder is just a normal Guardian with an "Elder" flag turned on.
     // This helps distinguish the two via hard-coding a faux class path
     public static final String ELDER_GUARDIAN_CLASS = "astrotibs.villagenames.prismarine.guardian.entity.monster.EntityElderGuardian";
-    public static final String VILLAGER_CLASS = "net.minecraft.entity.passive.EntityVillager";
     public static final int STREET_WIDTH = 3;
 	public static final double SPAWN_BLOCK_OFFSET = 0.5D; // If you obtained the spawn x,y,z as ints, add this offset to x and z to ensure it's in the center of the block.
 	public static final String MOB_GUARDIAN_VN = "Guardian";
