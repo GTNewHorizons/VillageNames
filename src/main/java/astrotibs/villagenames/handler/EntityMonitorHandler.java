@@ -58,12 +58,11 @@ public class EntityMonitorHandler
                 ServerInfoTracker.add(villager);
 
                 if (GeneralConfig.debugMessages) {
+
                     LogHelper.info("EntityMonitorHandler > A zombie just killed villager " 
                     		+ ( villager.getCustomNameTag().equals("")||villager.getCustomNameTag().equals(null) ? "(None)" : villager.getCustomNameTag() ) 
                     		+ " [" + villager.getEntityId() + "] "
-                    		+ "at [" + 
-                    		//villager.getPosition(1.0F)
-                    		//Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Changed because of server crash
+                    		+ "at [" +
                     		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
                     		+ "], profession [" + villager.getProfession() + "]");
                 }
@@ -150,11 +149,9 @@ public class EntityMonitorHandler
                 
             	
                 // Looks on the event tracker for a villager that just died
-                //final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER, zombie.getPosition(1.0F));//zombie.getPosition());
             	final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER,
-            			//Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
             			new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ)
-            			); // Replaced because of mp server-side crash
+            			);
             	
                 if (tracked != null) {
                     if (GeneralConfig.debugMessages) {
@@ -209,9 +206,8 @@ public class EntityMonitorHandler
                 // Looks on the event tracker for a zombie that was cured
                 final EventTracker tracked = ServerInfoTracker.seek(
                 		EventType.ZOMBIE,
-                		//Vec3.createVectorHelper(villager.posX, villager.posY, villager.posZ) // Replaced because of mp server-side crash
                 		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
-                		);//.getPosition());
+                		);
 
                 if (tracked != null) {
                 	// This is a cured Villager Zombie.
@@ -229,27 +225,6 @@ public class EntityMonitorHandler
                     ServerInfoTracker.removeCuredZombiesFromTracker(event.world, tracked.getEntityID());
 
                 }
-                /*
-        		// Try to assign a biome number if this villager has none.
-                if (
-                		ev != null
-                		//&& villager.getProfession() >=0
-                		//&& villager.getProfession() <=5
-                		&& (ExtendedVillager.get(villager)).getBiomeType()<0
-                		)
-                {
-                	(ExtendedVillager.get(villager)).setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(villager));
-                }
-                
-                // Try to assign a skin tone number if this villager has none.
-                if (
-                		ev != null
-                		&& (ExtendedVillager.get(villager)).getSkinTone()==-99
-                		)
-                {
-                	(ExtendedVillager.get(villager)).setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));
-                }
-                */
             }
             
             
@@ -342,10 +317,6 @@ public class EntityMonitorHandler
                                     			&& (catalystMeta==-1 || blockmeta==catalystMeta)
                                     			) {
                                     		
-                                    		//if (GeneralConfigHandler.debugMessages) {
-                                        	//	LogHelper.info("Ticked match at " + k + " " + l + " " + i1);
-                                        	//	}
-                                    		
                                     		for (int i=1; i<groupSpeedup; i++) {
                                         		// Increment time jump
                                         		modTickAdjustment += speedupSign; 
@@ -362,21 +333,8 @@ public class EntityMonitorHandler
                                 }
                             }
                         }
-                        //if (countedGroupBlocks!=0 &&
-                        //		GeneralConfigHandler.debugMessages) {LogHelper.info("Incrementing conversion as per " + countedGroupBlocks + " blocks from " + group + " group.");}
-                	}
+                    }
             	}
-            	
-            	//if (GeneralConfigHandler.debugMessages && modTickAdjustment != 0) {
-            	//	LogHelper.info("Zombie conversion advanced by " + modTickAdjustment + " ticks from custom blocks.");
-            	//	}
-            	//if (GeneralConfigHandler.debugMessages && (vanillaRollbackTicks != 0 || modTickAdjustment != 0) ) {
-            	//	LogHelper.info("Total tick adjustment: " + (vanillaRollbackTicks+modTickAdjustment));
-            	//	}
-            	//this.accumulatedticks += (vanillaRollbackTicks+modTickAdjustment);
-            	//if (GeneralConfigHandler.debugMessages && (vanillaRollbackTicks != 0 || modTickAdjustment != 0) ) {
-            	//	LogHelper.info("Cumulative advanced ticks: "+accumulatedticks);
-            	//	}
 
 				var accessor = (AccessorEntityZombie) zombie;
 
@@ -390,7 +348,7 @@ public class EntityMonitorHandler
 
             	int getConversionTimeBoost = accessor.invokeGetConversionTimeBoost();
             	
-                final int nextConversionTime = conversionTime - getConversionTimeBoost;//zombie.conversionTime - zombie.getConversionTimeBoost();
+                final int nextConversionTime = conversionTime - getConversionTimeBoost;
                 
                 if (GeneralConfig.debugMessages 
                 		&& nextConversionTime <= 500 // Starts counting down 25 seconds before conversion
@@ -425,9 +383,7 @@ public class EntityMonitorHandler
     			    	// Strip armor
     		    		for (int slot=1; slot <=4; slot++) {if (zombie.getEquipmentInSlot(slot) != null) {zombie.setCurrentItemOrArmor(slot, null);}}
     		    	}
-    				
-    				//if (ezv.getBiomeType() < 0) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
-    				//(ExtendedZombieVillager.get( zombie )).setProfessionLevel(ExtendedVillager.determineProfessionLevel(zombie));
+
     				// Sends a ping to everyone within 80 blocks
     				NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(zombie.dimension, zombie.lastTickPosX, zombie.lastTickPosY, zombie.lastTickPosZ, 16*5);
     				VillageNames.VNNetworkWrapper.sendToAllAround(
@@ -457,11 +413,9 @@ public class EntityMonitorHandler
             }
             else {
                 // Looks on the event tracker for a villager that just died
-                //final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER, zombie.getPosition(1.0F));//zombie.getPosition());
-            	final EventTracker tracked = ServerInfoTracker.seek(EventType.GUARD,
-            			//Vec3.createVectorHelper(zombie.posX, zombie.posY, zombie.posZ)
+                final EventTracker tracked = ServerInfoTracker.seek(EventType.GUARD,
             			new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ)
-            			); // Replaced because of mp server-side crash
+            			);
             	
             	final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
 
@@ -473,18 +427,6 @@ public class EntityMonitorHandler
                     // If found, copy the data from the villager
                     tracked.updateGuard(event, properties);
                 }
-                /*
-                else {
-                    if (GeneralConfigHandler.debugMessages) {
-                        LogHelper.info("EntityMonitorHandler > No villager info on the tracker--can't assign to guard!");
-                    }
-                    
-                }
-
-                if (GeneralConfigHandler.debugMessages) {
-                    LogHelper.info("EntityMonitorHandler > Custom name [" + guard.getCustomNameTag() + "]");
-                }
-            	*/
             }
         	
         }
