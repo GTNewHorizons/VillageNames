@@ -217,8 +217,13 @@ public class EntityMonitorHandler
     private void treatVanillaZombie(LivingUpdateEvent event){
         final EntityZombie zombie = (EntityZombie) event.entity;
 
+        if (zombie.worldObj.isRemote) return;
+
         // Based on the [onUpdate] event from zombies
-        if (!zombie.worldObj.isRemote && zombie.isConverting()) {
+        if (zombie.isConverting()) {
+            int zombieX = (int) zombie.posX;
+            int zombieY = (int) zombie.posY;
+            int zombieZ = (int) zombie.posZ;
 
             double checkfactor = 10; // This determines how (many times) frequently to check as compared to vanilla
 
@@ -231,22 +236,18 @@ public class EntityMonitorHandler
 
                 int countedBedsOrBars = 0;
 
-                for (int k = (int)zombie.posX - 4; k < (int)zombie.posX + 4 && countedBedsOrBars < 14; ++k)
-                {
-                    for (int l = (int)zombie.posY - 4; l < (int)zombie.posY + 4 && countedBedsOrBars < 14; ++l)
-                    {
-                        for (int i1 = (int)zombie.posZ - 4; i1 < (int)zombie.posZ + 4 && countedBedsOrBars < 14; ++i1)
-                        {
-                            Block block = zombie.worldObj.getBlock(k, l, i1);
+                for (int x = zombieX - 4; x < zombieX + 4 && countedBedsOrBars < 14; ++x) {
+                    for (int y = zombieY - 4; y < zombieY + 4 && countedBedsOrBars < 14; ++y) {
+                        for (int z = zombieZ - 4; z < zombieZ + 4 && countedBedsOrBars < 14; ++z) {
+                            Block block = zombie.worldObj.getBlock(x, y, z);
 
-                            if (block == Blocks.iron_bars || block == Blocks.bed)
-                            {
-                                if (zombie.worldObj.rand.nextFloat() < (0.3F/checkfactor) ) {
-                                    --vanillaRollbackTicks;
-                                }
+                            if (block != Blocks.iron_bars && block != Blocks.bed) continue;
 
-                                ++countedBedsOrBars;
+                            if (zombie.worldObj.rand.nextFloat() < (0.3F/checkfactor) ) {
+                                --vanillaRollbackTicks;
                             }
+
+                            ++countedBedsOrBars;
                         }
                     }
                 }
@@ -257,12 +258,12 @@ public class EntityMonitorHandler
             int modTickAdjustment = 0;
 
             if (zombie.worldObj.rand.nextFloat() < (0.01F*checkfactor) ) {
-
-                for ( int groupi=0 ; groupi < GeneralConfig.zombieCureGroups_map.get("Groups").size(); groupi++ ) { // Go through all the groups in GeneralConfig.zombieCureGroups_map
-
+                // Go through all the groups in GeneralConfig.zombieCureGroups_map
+                // todo: refactor this performance nightmare into something a tad more fast
+                for ( int groupi=0 ; groupi < GeneralConfig.zombieCureGroups_map.get("Groups").size(); groupi++ ) {
                     String group = (String) GeneralConfig.zombieCureGroups_map.get("Groups").get(groupi);
                     int groupLimit = (Integer) GeneralConfig.zombieCureGroups_map.get("Limits").get(groupi);
-                    double groupSpeedup = ((Double) GeneralConfig.zombieCureGroups_map.get("Speedups").get(groupi))/checkfactor;
+                    double groupSpeedup = ((Double) GeneralConfig.zombieCureGroups_map.get("Speedups").get(groupi)) / checkfactor;
 
                     // Extract sign and apply it later
                     int speedupSign = groupSpeedup<0?-1:1;
@@ -270,41 +271,39 @@ public class EntityMonitorHandler
 
                     int countedGroupBlocks = 0;
 
-                    for (int k = (int)zombie.posX - 4; k < (int)zombie.posX + 4 && countedGroupBlocks < groupLimit; ++k) {
-                        for (int l = (int)zombie.posY - 4; l < (int)zombie.posY + 4 && countedGroupBlocks < groupLimit; ++l) {
-                            for (int i1 = (int)zombie.posZ - 4; i1 < (int)zombie.posZ + 4 && countedGroupBlocks < groupLimit; ++i1) {
+                    for (int x = zombieX - 4; x < zombieX + 4 && countedGroupBlocks < groupLimit; ++x) {
+                        for (int y = zombieY - 4; y < zombieY + 4 && countedGroupBlocks < groupLimit; ++y) {
+                            for (int z = zombieZ - 4; z < zombieZ + 4 && countedGroupBlocks < groupLimit; ++z) {
 
-                                Block block = zombie.worldObj.getBlock(k, l, i1);
-                                int blockmeta = zombie.worldObj.getBlockMetadata(k, l, i1);
+                                Block block = zombie.worldObj.getBlock(x, y, z);
+                                int blockmeta = zombie.worldObj.getBlockMetadata(x, y, z);
                                 String blockClassPath = block.getClass().toString().substring(6);
                                 String blockUnlocName = block.getUnlocalizedName();
 
-                                for ( int blocki=0 ; blocki < GeneralConfig.zombieCureCatalysts_map.get("Groups").size(); blocki++ ) { // Go through all the custom block entries
-
+                                // Go through all the custom block entries
+                                for (int blocki = 0 ; blocki < GeneralConfig.zombieCureCatalysts_map.get("Groups").size(); blocki++ ) {
                                     String catalystGroup = (String) GeneralConfig.zombieCureCatalysts_map.get("Groups").get(blocki);
                                     String catalystClassPath = (String) GeneralConfig.zombieCureCatalysts_map.get("ClassPaths").get(blocki);
                                     String catalystUnlocName = (String) GeneralConfig.zombieCureCatalysts_map.get("UnlocNames").get(blocki);
                                     int catalystMeta = (Integer) GeneralConfig.zombieCureCatalysts_map.get("Metas").get(blocki);
 
-                                    if (
-                                            catalystGroup.equals(group)
-                                                    && catalystClassPath.equals(blockClassPath)
-                                                    && (catalystUnlocName.equals("") || catalystUnlocName.equals(blockUnlocName))
-                                                    && (catalystMeta==-1 || blockmeta==catalystMeta)
-                                    ) {
+                                    if (!catalystGroup.equals(group)) continue;
+                                    if (!catalystClassPath.equals(blockClassPath)) continue;
+                                    if (!catalystUnlocName.isEmpty() && !catalystUnlocName.equals(blockUnlocName)) continue;
+                                    if (catalystMeta != 1 && blockmeta!=catalystMeta) continue;
 
-                                        for (int i=1; i<groupSpeedup; i++) {
-                                            // Increment time jump
-                                            modTickAdjustment += speedupSign;
-                                        }
-                                        // Then, deal with the fractional leftover
-                                        if (zombie.worldObj.rand.nextFloat() < groupSpeedup % 1) {
-                                            modTickAdjustment += speedupSign;
-                                        }
-
-                                        ++countedGroupBlocks;
-                                        break;
+                                    for (int i=1; i<groupSpeedup; i++) {
+                                        // Increment time jump
+                                        modTickAdjustment += speedupSign;
                                     }
+                                    // Then, deal with the fractional leftover
+                                    if (zombie.worldObj.rand.nextFloat() < groupSpeedup % 1) {
+                                        modTickAdjustment += speedupSign;
+                                    }
+
+                                    ++countedGroupBlocks;
+                                    break;
+
                                 }
                             }
                         }
@@ -342,31 +341,36 @@ public class EntityMonitorHandler
             }
         }
 
-        if (!zombie.worldObj.isRemote)
+        final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
+        if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
+        if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
+
+        // Ticks intermittently, modulated so villagers don't deliberately sync.
+        if ((zombie.ticksExisted + zombie.getEntityId())%5 != 0) return;
+
+        // Only strip armor if modern skins are on
+        if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
         {
-            final ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
-            if (ezv.getBiomeType()==-1) {ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));}
-            if (ezv.getSkinTone()==-1) {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
+            // Turn off gear pickup to prevent goofball rendering
+            if (zombie.canPickUpLoot()) {zombie.setCanPickUpLoot(false);}
 
-            if ((zombie.ticksExisted + zombie.getEntityId())%5 == 0) // Ticks intermittently, modulated so villagers don't deliberately sync.
-            {
-                // Only strip armor if modern skins are on
-                if (GeneralConfig.modernZombieSkins && GeneralConfig.removeMobArmor)
-                {
-                    // Turn off gear pickup to prevent goofball rendering
-                    if (zombie.canPickUpLoot()) {zombie.setCanPickUpLoot(false);}
-
-                    // Strip armor
-                    for (int slot=1; slot <=4; slot++) {if (zombie.getEquipmentInSlot(slot) != null) {zombie.setCurrentItemOrArmor(slot, null);}}
+            // Strip armor
+            for (int slot=1; slot <=4; slot++) {
+                if (zombie.getEquipmentInSlot(slot) != null) {
+                    zombie.setCurrentItemOrArmor(slot, null);
                 }
-
-                // Sends a ping to everyone within 80 blocks
-                NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(zombie.dimension, zombie.lastTickPosX, zombie.lastTickPosY, zombie.lastTickPosZ, 16*5);
-                VillageNames.VNNetworkWrapper.sendToAllAround(
-                        new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(), ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()),
-                        targetPoint);
             }
         }
+
+        // Sends a ping to everyone within 80 blocks
+        NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(zombie.dimension, zombie.lastTickPosX,
+                zombie.lastTickPosY, zombie.lastTickPosZ, 16*5);
+
+        VillageNames.VNNetworkWrapper.sendToAllAround(
+                new MessageZombieVillagerProfession(zombie.getEntityId(), ezv.getProfession(), ezv.getCareer(),
+                        ezv.getBiomeType(), ezv.getProfessionLevel(), ezv.getSkinTone()), targetPoint);
+
+
     }
 
     private void treatWitcheryGuard(LivingUpdateEvent event){
