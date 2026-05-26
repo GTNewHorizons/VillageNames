@@ -75,47 +75,38 @@ public class EntityMonitorHandler
     @SubscribeEvent
     public void onPlayerStartTracking(PlayerEvent.StartTracking event) {
     	
-    	if (!event.entity.worldObj.isRemote)
-    	{
-        	if (
-        			event.target instanceof EntityVillager
-        			&& GeneralConfig.villagerCareers
-        			)
-        	{
-        		final EntityVillager villager = (EntityVillager) event.target;
-        		final ExtendedVillager properties = ExtendedVillager.get(villager);
-        		NetworkHelper.sendModernVillagerSkinMessage(villager.getEntityId(), properties, event.entityPlayer);
-        	}
-        	
-            // Check if the player started tracking a zombie villager (happens on server-side).
-        	else if (FunctionsVN.isVanillaZombie(event.target)) {
-                final EntityZombie zombie = (EntityZombie) event.target;
+    	if (event.entity.worldObj.isRemote) return;
 
-                if (zombie.isVillager()) {
-                    // Check if the zombie has special properties
-                    final ExtendedZombieVillager properties = ExtendedZombieVillager.get(zombie);
-                    if (properties != null) {
-                        NetworkHelper.sendZombieVillagerProfessionMessage(zombie.getEntityId(), properties, event.entityPlayer);
-                    }
-                }
-            }
-            
-            // Check if the player started tracking a village guard
-        	else if (event.entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass)) {
-                //final EntityZombie zombie = (EntityZombie) event.target;
-            	final EntityLiving guard = (EntityLiving) event.target;
+        if (event.target instanceof EntityVillager && GeneralConfig.villagerCareers) {
+            final EntityVillager villager = (EntityVillager) event.target;
+            final ExtendedVillager properties = ExtendedVillager.get(villager);
+            NetworkHelper.sendModernVillagerSkinMessage(villager.getEntityId(), properties, event.entityPlayer);
+        }
 
+        // Check if the player started tracking a zombie villager (happens on server-side).
+        else if (FunctionsVN.isVanillaZombie(event.target)) {
+            final EntityZombie zombie = (EntityZombie) event.target;
 
-                // Check if the guard has special properties
-                final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
+            if (zombie.isVillager()) {
+                // Check if the zombie has special properties
+                final ExtendedZombieVillager properties = ExtendedZombieVillager.get(zombie);
                 if (properties != null) {
-                    NetworkHelper.sendVillageGuardMessage(guard.getEntityId(), properties, event.entityPlayer);
+                    NetworkHelper.sendZombieVillagerProfessionMessage(zombie.getEntityId(), properties, event.entityPlayer);
                 }
-
             }
-    		
-    	}
-    	
+        }
+
+        // Check if the player started tracking a village guard
+        else if (WitcheryHelper.isWitcheryGuard(event.entity)) {
+            final EntityLiving guard = (EntityLiving) event.target;
+
+            // Check if the guard has special properties
+            final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
+            if (properties != null) {
+                NetworkHelper.sendVillageGuardMessage(guard.getEntityId(), properties, event.entityPlayer);
+            }
+
+        }
     }
     
 
