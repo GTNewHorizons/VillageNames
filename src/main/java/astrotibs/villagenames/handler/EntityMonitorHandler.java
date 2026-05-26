@@ -418,6 +418,8 @@ public class EntityMonitorHandler
     }
 
     private void treatVillager(LivingUpdateEvent event){
+        if (event.entity.worldObj.isRemote) return;
+
         EntityVillager villager = (EntityVillager)event.entity;
         ExtendedVillager ev = ExtendedVillager.get(villager);
 
@@ -527,14 +529,11 @@ public class EntityMonitorHandler
         else if ( WitcheryHelper.isWitcheryGuard(event.entity)) {
         	treatWitcheryGuard(event);
         }
-        
-        
-        
+
         // --- Initialize villager trades and sync skin with client --- //
-        
-        else if ( event.entity.getClass().toString().substring(6).equals(Reference.VILLAGER_CLASS) // Explicit vanilla villager class
-				&& !event.entity.worldObj.isRemote)
-        {
+
+        // Explicit vanilla villager class
+        else if ( event.entity.getClass() == EntityVillager.class) {
         	treatVillager(event);
         }
 
