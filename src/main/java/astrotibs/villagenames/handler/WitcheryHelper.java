@@ -9,7 +9,7 @@ import static astrotibs.villagenames.VillageNames.isWitcheryLoaded;
 public class WitcheryHelper {
     public static boolean isWitcheryGuard(Entity entity){
         if (!isWitcheryLoaded) return false;
-        return isWitcheryGuard(entity);
+        return instanceOfWitcheryGuard(entity);
     }
 
     @Optional.Method(modid = "witchery")
