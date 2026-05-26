@@ -51,26 +51,24 @@ public class EntityMonitorHandler
 	
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-    	
-        if (event.entity instanceof EntityVillager) {
-            if (FunctionsVN.isVanillaZombie(event.source.getEntity())) {
+    	if (!(event.entity instanceof  EntityVillager) || !FunctionsVN.isVanillaZombie(event.source.getEntity())) return;
 
-                // A villager was killed by a zombie and may be zombified. Adds to the tracker for future check.
-                final EntityVillager villager = (EntityVillager) event.entity;
-                ServerInfoTracker.add(villager);
+        // A villager was killed by a zombie and may be zombified. Adds to the tracker for future check.
+        final EntityVillager villager = (EntityVillager) event.entity;
+        ServerInfoTracker.add(villager);
 
-                if (GeneralConfig.debugMessages) {
+        if (GeneralConfig.debugMessages) {
 
-                    LogHelper.info("EntityMonitorHandler > A zombie just killed villager " 
-                    		+ ( villager.getCustomNameTag().equals("")||villager.getCustomNameTag().equals(null) ? "(None)" : villager.getCustomNameTag() ) 
-                    		+ " [" + villager.getEntityId() + "] "
-                    		+ "at [" +
-                    		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
-                    		+ "], profession [" + villager.getProfession() + "]");
-                }
-            }
+            Vec3i pos = new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ);
+            String tag = ( villager.getCustomNameTag() == null || villager.getCustomNameTag().isEmpty() ? "(None)" : villager.getCustomNameTag() );
+            int entityId = villager.getEntityId();
+            int profession = villager.getProfession();
+
+            LogHelper.info(String.format(
+                    "EntityMonitorHandler > A zombie just killed villager %s [%d] at [%s], profession [%d]",
+                    tag, entityId, pos, profession
+            ));
         }
-        
     }
     
 	
