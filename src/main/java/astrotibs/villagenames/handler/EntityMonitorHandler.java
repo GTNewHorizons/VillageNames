@@ -381,24 +381,24 @@ public class EntityMonitorHandler
         if (guard.worldObj.isRemote) {
             // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
             ClientInfoTracker.SyncGuardMessage(guard);
+            return;
         }
-        else {
-            // Looks on the event tracker for a villager that just died
-            final EventTracker tracked = ServerInfoTracker.seek(EventType.GUARD,
-                    new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ)
-            );
 
-            final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
+        // Looks on the event tracker for a villager that just died
+        final EventTracker tracked = ServerInfoTracker.seek(EventType.GUARD,
+                new Vec3i(guard.posX, guard.posY + 0.5D, guard.posZ)
+        );
 
-            if (tracked != null) {
-                if (GeneralConfig.debugMessages) {
-                    LogHelper.info("EntityMonitorHandler > Found villager info on the tracker--must copy to guard");
-                }
+        final ExtendedVillageGuard properties = ExtendedVillageGuard.get(guard);
 
-                // If found, copy the data from the villager
-                tracked.updateGuard(event, properties);
-            }
+        if (tracked == null) return;
+
+        if (GeneralConfig.debugMessages) {
+            LogHelper.info("EntityMonitorHandler > Found villager info on the tracker--must copy to guard");
         }
+
+        // If found, copy the data from the villager
+        tracked.updateGuard(event, properties);
     }
 
     private void treatVillager(LivingUpdateEvent event){
