@@ -467,8 +467,16 @@ public class EntityMonitorHandler
     }
 
     private void treatPlayer(LivingUpdateEvent event){
-        EntityPlayerMP player = (EntityPlayerMP)event.entity;
+        // Only applies to the Overworld
+        if (event.entity.dimension != 0) return;
+
+        // Only check every few seconds so as not to bog down the server with Village.dat scans
+        if (event.entity.ticksExisted % (tickRate) != 0) return;
+
+        EntityPlayerMP player = (EntityPlayerMP) event.entity;
         World world = player.worldObj;
+
+        if (event.entity.worldObj.isRemote) return;
 
         try {
 
@@ -538,11 +546,7 @@ public class EntityMonitorHandler
         }
 
         // Monitor the player for purposes of the village reputations achievements
-        else if (event.entity instanceof EntityPlayerMP
-        		&& !event.entity.worldObj.isRemote
-        		&& event.entity.dimension == 0 // Only applies to the Overworld
-        		&& event.entity.ticksExisted % (tickRate) == 0) { // Only check every few seconds so as not to bog down the server with Village.dat scans
-
+        else if (event.entity instanceof EntityPlayerMP){
         	treatPlayer(event);
         }
     }
