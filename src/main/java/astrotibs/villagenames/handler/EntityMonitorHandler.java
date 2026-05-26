@@ -115,11 +115,7 @@ public class EntityMonitorHandler
 
     	// summon Zombie ~ ~ ~ {IsVillager:1}
     	// New entity is a Zombie. Check to see if it came into being via a killed Villager.
-        if (
-        		FunctionsVN.isVanillaZombie(event.entity)
-        		&& ((EntityZombie)event.entity).isVillager()
-        		)
-        {
+        if (FunctionsVN.isVanillaZombie(event.entity) && ((EntityZombie)event.entity).isVillager()) {
             final EntityZombie zombie = (EntityZombie) event.entity;
             
             ExtendedZombieVillager ezv = ExtendedZombieVillager.get(zombie);
@@ -127,100 +123,95 @@ public class EntityMonitorHandler
             if (event.world.isRemote) {
                 // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
                 ClientInfoTracker.SyncZombieMessage(zombie);
+                return;
             }
-            else {
-        		// Try to assign a biome number if this villager has none.
-                if (ezv.getBiomeType() <0)
-                {
-                	ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));
-                }
-                
-                if (ezv.getSkinTone() == -99)
-                {ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));}
-                
-            	
-                // Looks on the event tracker for a villager that just died
-            	final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER,
-            			new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ)
-            			);
-            	
-                if (tracked != null) {
-                    if (GeneralConfig.debugMessages) {
-                        LogHelper.info("EntityMonitorHandler > Found info on the tracker--must copy to zombie");
-                    }
 
-                    // If found, copy the data from the villager
-                    tracked.updateZombie(event, ezv);
-                }
-                else if (ezv.getProfession() == -1) {
-                    if (GeneralConfig.debugMessages) {
-                        LogHelper.info("EntityMonitorHandler > No info on the tracker--assigning a random profession");
-                    }
+            // Try to assign a biome number if this villager has none.
+            if (ezv.getBiomeType() <0) {
+                ezv.setBiomeType(FunctionsVN.returnBiomeTypeForEntityLocation(zombie));
+            }
 
-                    // If not, assign a random profession
-                    if (GeneralConfig.villagerCareers) {
-                    	ezv.pickRandomProfessionAndCareer();
-                    }
-                    else {
-                    	ezv.pickRandomProfession();
-                    }
-                }
-                
+            if (ezv.getSkinTone() == -99) {
+                ezv.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(zombie));
+            }
+
+            // Looks on the event tracker for a villager that just died
+            final EventTracker tracked = ServerInfoTracker.seek(EventType.VILLAGER,
+                    new Vec3i(zombie.posX, zombie.posY + 0.5D, zombie.posZ));
+
+            if (tracked != null) {
                 if (GeneralConfig.debugMessages) {
-                    LogHelper.info("EntityMonitorHandler > Custom name [" + zombie.getCustomNameTag() + "]");
-                    LogHelper.info("EntityMonitorHandler > Profession [" + ezv.getProfession() + "]");
-                    if (GeneralConfig.villagerCareers) LogHelper.info("EntityMonitorHandler > Career [" + ezv.getCareer() + "]");
+                    LogHelper.info("EntityMonitorHandler > Found info on the tracker--must copy to zombie");
                 }
 
+                // If found, copy the data from the villager
+                tracked.updateZombie(event, ezv);
+            }
+            else if (ezv.getProfession() == -1) {
+                if (GeneralConfig.debugMessages) {
+                    LogHelper.info("EntityMonitorHandler > No info on the tracker--assigning a random profession");
+                }
+
+                // If not, assign a random profession
+                if (GeneralConfig.villagerCareers) {
+                    ezv.pickRandomProfessionAndCareer();
+                }
+                else {
+                    ezv.pickRandomProfession();
+                }
+            }
+
+            if (GeneralConfig.debugMessages) {
+                LogHelper.info(String.format("EntityMonitorHandler > Custom name [%s]", zombie.getCustomNameTag()));
+                LogHelper.info(String.format("EntityMonitorHandler > Profession [%d]", ezv.getProfession()));
+                if (GeneralConfig.villagerCareers){
+                    LogHelper.info(String.format("EntityMonitorHandler > Career [%d]", ezv.getCareer()));
+                }
             }
 
         }
         
         
         // New entity is a villager. Check to see if it came into being via a cured villager-zombie.
-        else if (event.entity instanceof EntityVillager) {
-        	
-        	EntityVillager villager = (EntityVillager) event.entity;
-            
-            if (GeneralConfig.modernVillagerTrades) {FunctionsVN.monitorVillagerTrades(villager);}
-            
-            
-            ExtendedVillager ev = ExtendedVillager.get(villager);
-            
-            if (event.world.isRemote)
-            {
-                // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
-                ClientInfoTracker.syncModernVillagerMessage(villager);
-            }
-            else
-            {
-                // Looks on the event tracker for a zombie that was cured
-                final EventTracker tracked = ServerInfoTracker.seek(
-                		EventType.ZOMBIE,
-                		new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ)
-                		);
-
-                if (tracked != null) {
-                	// This is a cured Villager Zombie.
-                	
-                    if (GeneralConfig.debugMessages) {
-                        LogHelper.info("EntityMonitorHandler > Found info on the tracker--must copy to villager");
-                    }
-
-                    // If found, copy the data from the zombie
-                    tracked.updateVillager(villager, ev);
-
-                    // Sends info to the special track list
-                    ServerInfoTracker.endedCuringZombie(tracked.getEntityID(), villager.getEntityId());
-
-                    ServerInfoTracker.removeCuredZombiesFromTracker(event.world, tracked.getEntityID());
-
-                }
-            }
-            
-            
+        else if (!(event.entity instanceof EntityVillager)) {
+            return;
         }
-        
+        	
+        EntityVillager villager = (EntityVillager) event.entity;
+
+        if (GeneralConfig.modernVillagerTrades) {
+            FunctionsVN.monitorVillagerTrades(villager);
+        }
+
+        ExtendedVillager ev = ExtendedVillager.get(villager);
+
+        if (event.world.isRemote) {
+            // Looks for info sent by the server that should be applied to the zombie (e.g. villager profession)
+            ClientInfoTracker.syncModernVillagerMessage(villager);
+            return;
+        }
+
+        // Looks on the event tracker for a zombie that was cured
+        final EventTracker tracked = ServerInfoTracker.seek(EventType.ZOMBIE,
+                new Vec3i(villager.posX, villager.posY + 0.5D, villager.posZ));
+
+        if (tracked == null) {
+            return;
+        }
+
+        // This is a cured Villager Zombie.
+
+        if (GeneralConfig.debugMessages) {
+            LogHelper.info("EntityMonitorHandler > Found info on the tracker--must copy to villager");
+        }
+
+        // If found, copy the data from the zombie
+        tracked.updateVillager(villager, ev);
+
+        // Sends info to the special track list
+        ServerInfoTracker.endedCuringZombie(tracked.getEntityID(), villager.getEntityId());
+
+        ServerInfoTracker.removeCuredZombiesFromTracker(event.world, tracked.getEntityID());
     }
 
     private void treatVanillaZombie(LivingUpdateEvent event){
