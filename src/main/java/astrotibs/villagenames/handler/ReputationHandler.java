@@ -158,62 +158,46 @@ public class ReputationHandler {
      */
     
 	public static String getVillageTagPlayerIsIn(EntityPlayerMP player) {
-		
-		// First, check to see if the player is in a village bounding box as defined in Village.dat
+		// First, check to see if the player is in a village bounding box as defined in Village.dat or OTGVillage.dat
 		// If so, check to see if the player is also in a village as defined in villages.dat
 
-		MapGenStructureData structureData;
-		NBTTagCompound nbttagcompound = null;
+		MapGenStructureData structureData =
+				(MapGenStructureData) player.worldObj.perWorldStorage.loadData(
+						MapGenStructureData.class, "Village");
 
-		try
-		{
-			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "Village");
-			nbttagcompound = structureData.func_143041_a();
+		if (structureData == null) {
+			structureData =
+					(MapGenStructureData) player.worldObj.perWorldStorage.loadData(
+							MapGenStructureData.class, "OTGVillage");
 		}
-		catch (Exception e) // Village.dat does not exist
-		{
-			try
-    		{
-    			structureData = (MapGenStructureData)player.worldObj.perWorldStorage.loadData(MapGenStructureData.class, "OTGVillage");
-    			nbttagcompound = structureData.func_143041_a();
-    		}
-    		catch (Exception e1) {} // OTGVillage.dat does not exist
-		}
-		
-		Iterator itr = nbttagcompound.func_150296_c().iterator();
 
-		while (itr.hasNext()) {
-			Object entry = itr.next();
-			
-			NBTBase nbtbase = nbttagcompound.getTag(entry.toString());
-			
-			if (nbtbase.getId() == 10) {
-				NBTTagCompound villageTag = (NBTTagCompound)nbtbase;
-				
-				if (villageTag.getBoolean("Valid")) { // Was not generated as a junk entry
-					int[] boundingBox = villageTag.getIntArray("BB");
-					
-					int posX = (int) player.posX;
-					int posY = (int) player.posY;
-					int posZ = (int) player.posZ;
-					
-					if (
-							(
-							   posX >= (boundingBox[0])
-							&& posY >= (boundingBox[1])
-							&& posZ >= (boundingBox[2])
-							&& posX <= (boundingBox[3])
-							&& posY <= (boundingBox[4])
-							&& posZ <= (boundingBox[5])
-							)) {
-						// Player is inside the bounding box of this village
-						
-						return entry.toString();
-					}
-				}
+		if (structureData == null) {
+			return "none";
+		}
+
+		NBTTagCompound tag = structureData.func_143041_a();
+
+		if (tag == null) return "none";
+
+        for (Object entry : tag.func_150296_c()) {
+            NBTBase nbtbase = tag.getTag(entry.toString());
+
+            if (nbtbase == null || nbtbase.getId() != 10) continue;
+            NBTTagCompound villageTag = (NBTTagCompound) nbtbase;
+
+            // Was not generated as a junk entry
+            if (!villageTag.getBoolean("Valid")) continue;
+            int[] boundingBox = villageTag.getIntArray("BB");
+
+            int posX = (int) player.posX;
+            int posY = (int) player.posY;
+            int posZ = (int) player.posZ;
+
+			if ((posX >= (boundingBox[0]) && posY >= (boundingBox[1]) && posZ >= (boundingBox[2]) && posX <= (boundingBox[3]) && posY <= (boundingBox[4]) && posZ <= (boundingBox[5]))) {
+				// Player is inside the bounding box of this village
+				return entry.toString();
 			}
-		}
-		
+        }
 		return "none"; // Player is not inside a village as defined by Village.dat
 	}
 	
