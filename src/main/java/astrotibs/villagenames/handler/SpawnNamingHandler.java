@@ -1,42 +1,32 @@
 package astrotibs.villagenames.handler;
 
-import java.util.Random;
-
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.prismarine.guardian.entity.monster.EntityGuardian;
-import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
+import java.util.Random;
+
 public class SpawnNamingHandler {
-	
-	@SubscribeEvent()
+
+	@SubscribeEvent
 	public void onPopulating(EntityJoinWorldEvent event) {
-		
-		if (event.entity instanceof EntityLiving
-				&& !(event.entity instanceof EntityPlayer)
-				&& !event.entity.worldObj.isRemote) { // Only looks at living entities in order to reduce grind
-			
-			EntityLiving entity = (EntityLiving)(event.entity); // Makes things easier to manage
-			NBTTagCompound compound = new NBTTagCompound();
-			
-			try {entity.writeEntityToNBT(compound);}
-			catch (Exception e)
-			{
-				LogHelper.info(
-						"Failed to write entity " + entity + " to NBT."
-						+ (entity instanceof EntityVillager ? " Check to make sure it doesn't have an invalidated trade." : ""));
+
+		if (event.entity instanceof EntityLiving && !event.entity.worldObj.isRemote) { // Only looks at living entities in order to reduce grind
+
+			EntityLiving entity = (EntityLiving) (event.entity); // Makes things easier to manage
+			int targetAge = 0;
+			if (entity instanceof EntityAgeable) {
+				targetAge = ((EntityAgeable) entity).getGrowingAge();
 			}
-			int targetAge = compound.getInteger("Age");
-			
+
 			String entityClassPath = entity.getClass().toString().substring(6);
-			
+
 			// Have a specific string for Elder Guardian, so that it can be accessed independently of ordinary Guardians.
 			if (event.entity instanceof EntityGuardian) {
 				if ( ((EntityGuardian) event.entity).isElder() ) { // Reference "Elder" guardians using the below string. Reference ordinary guardians as EntityGuardian
@@ -47,50 +37,40 @@ public class SpawnNamingHandler {
 			// keys: "NameTypes", "Professions", "ClassPaths", "AddOrRemove"
 			if (GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").contains(entityClassPath) ) {
 				// "true" means "add"
-				String addOrRemove = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("AddOrRemove")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
-				
+				final int classIndex = GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath);
+				String addOrRemove = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("AddOrRemove")).get(classIndex));
+
 				// The spawning entity matches the list. Now check to see if it should GAIN or LOSE its tag.
-				
+
 				// Entity does not have a tag and should...
+				final String entityNametag = entity.getCustomNameTag().trim();
 				if (addOrRemove.trim().equals("add") && GeneralConfig.nameEntities) { // Add a new name?
-					if ( entity.getCustomNameTag().trim().equals("") || entity.getCustomNameTag().trim() == null
-							||
-							 (entityClassPath.equals("net.daveyx0.primitivemobs.entity.passive.EntityTravelingMerchant")
-							   && entity.getCustomNameTag().trim().equals("Traveling Merchant")) // Contingency in there specifically for PM's Traveling Merchants
-							) {
-						
-						String nameType = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("NameTypes")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
-						
+					// Contingency in there specifically for PM's Traveling Merchants
+					if (entityNametag.isEmpty() || "net.daveyx0.primitivemobs.entity.passive.EntityTravelingMerchant".equals(entityClassPath) && entityNametag.equals("Traveling Merchant")) {
+
+						String nameType = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("NameTypes")).get(classIndex));
+
 						String[] newNameA = NameGenerator.newRandomName(nameType, new Random());
 						String newName = (newNameA[1]+" "+newNameA[2]+" "+newNameA[3]).trim();
 						// Generate profession tag
-						if (
-								GeneralConfig.addJobToName
-								&& ( !(entity instanceof EntityVillager) || targetAge>=0 )
-								) {
-							String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
-							newName += ( (careerTag.trim().equals("") || careerTag.trim().equals(null)) ? "" : " ("+careerTag+")" );
+						if (GeneralConfig.addJobToName && (!(entity instanceof EntityVillager) || targetAge >= 0)) {
+							String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get(classIndex));
+							newName += careerTag.trim().isEmpty() ? "" : " (" + careerTag + ")";
 						}
 						// Apply the name
 						entity.setCustomNameTag( newName );
 					}
 					// Clickable Entity already has a name. You may want to add (or remove) a career tag.
-					else if (
-							entity.getCustomNameTag().trim().indexOf("(")==-1 && GeneralConfig.addJobToName
-							&& ( !(entity instanceof EntityVillager) || targetAge>=0 )
-							) { // Target is named but does not have job tag: add one!
-						String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get( GeneralConfig.modNameMappingAutomatic_map.get("ClassPaths").indexOf(entityClassPath) ));
-						String newCustomName = entity.getCustomNameTag().trim()
-								+ ( (careerTag.trim().equals("") || careerTag.trim().equals(null)) ? "" : " ("+careerTag+")" );
+					else if (!entityNametag.contains("(") && GeneralConfig.addJobToName && (!(entity instanceof EntityVillager) || targetAge >= 0)) { // Target is named but does not have job tag: add one!
+						String careerTag = (String) ((GeneralConfig.modNameMappingAutomatic_map.get("Professions")).get(classIndex));
+						String newCustomName = entityNametag + (careerTag.trim().isEmpty() ? "" : " (" + careerTag + ")");
 						// Apply the name
-						entity.setCustomNameTag( newCustomName.trim() );
+						entity.setCustomNameTag(newCustomName.trim());
+					} else if (entityNametag.contains("(") && !GeneralConfig.addJobToName) { // Target has a job tag: remove it...
+						entity.setCustomNameTag(entityNametag.substring(0, entityNametag.indexOf("(")).trim());
 					}
-					else if (entity.getCustomNameTag().trim().indexOf("(")!=-1 && !GeneralConfig.addJobToName) { // Target has a job tag: remove it...
-						entity.setCustomNameTag(entity.getCustomNameTag().trim().substring(0, entity.getCustomNameTag().trim().indexOf("(")).trim());
-					}
-				}
-				else if (addOrRemove.trim().equals("remove")) { // Remove an assigned name?
-					if ( !entity.getCustomNameTag().trim().equals("") && !(entity.getCustomNameTag().trim() == null) ) {
+				} else if (addOrRemove.trim().equals("remove")) { // Remove an assigned name?
+					if (!entityNametag.isEmpty()) {
 						entity.setCustomNameTag("");
 					}
 				}

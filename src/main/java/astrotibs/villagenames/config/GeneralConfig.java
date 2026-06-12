@@ -63,8 +63,6 @@ public class GeneralConfig {
 	public static String[] modStructureNames;
 	public static Map<String, List> modStructureNames_map = new HashMap<String, List>();
 	
-	public static boolean allowInGameConfig;
-	
 	public static boolean modernVillagerSkins;
 	public static boolean modernZombieSkins;
 	public static boolean moddedVillagerHeadwear;
@@ -345,7 +343,6 @@ public class GeneralConfig {
 	    zombieCureGroups_map = unpackZombieCureGroups(zombieCureGroups);
  		
 	    codexChestLoot = config.getBoolean("Codex Chest Loot", Reference.CATEGORY_MISCELLANEOUS, true, "The Codex can appear as rare chest loot.");
-	    allowInGameConfig = config.getBoolean("Allow in-game config access", Reference.CATEGORY_MISCELLANEOUS, true, "Set this to false to deacactivate the in-game config GUI, in case it conflicts with other mods.");
 	    debugMessages = config.getBoolean("Debug messages", Reference.CATEGORY_MISCELLANEOUS, false, "Print debug messages to the console, print the class paths of entities and blocks you right-click.");
 	    pyramidTerracotta = config.getBoolean("Pyramid Terracotta", Reference.CATEGORY_MISCELLANEOUS, true, "Replace the wool blocks in desert pyramids with terracotta as in 1.8+");
 	    addLunarinBlocks = config.getBoolean("Add Lunarin Blocks", Reference.CATEGORY_MISCELLANEOUS, true, "Adds an original brick-style block for iron and gold");

@@ -21,7 +21,6 @@ import astrotibs.villagenames.tracker.ServerInfoTracker;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
 import astrotibs.villagenames.utility.Reference;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -44,7 +43,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
-import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureData;
@@ -110,7 +108,7 @@ public class EntityInteractHandler {
 		
 		// This is the placeholder for creating Witchery Village Guards
 		if (
-				Loader.isModLoaded("witchery")
+				VillageNames.isWitcheryLoaded
 				&& event.entity instanceof EntityPlayer
 				&& event.target instanceof EntityVillager
 				&& event.entity.isSneaking()
