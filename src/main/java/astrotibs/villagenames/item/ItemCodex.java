@@ -15,7 +15,6 @@ import astrotibs.villagenames.name.NameGenerator;
 import astrotibs.villagenames.nbt.VNWorldDataStructure;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.Reference;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -182,7 +181,7 @@ public class ItemCodex extends Item {
     			int signY = -1;
     			int signZ = -1;
 
-    			final boolean usingOTG = Loader.isModLoaded("openterraingenerator");
+    			final boolean usingOTG = VillageNames.isOTGLoaded;
     			
     			structureLoop:
     			for (int i=0; i < structureTypes.size(); i++) {

@@ -2,8 +2,6 @@ package astrotibs.villagenames.proxy;
 
 import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.ConfigReloader;
-import astrotibs.villagenames.config.GeneralConfig;
-import astrotibs.villagenames.config.gui.ConfigInGame;
 import astrotibs.villagenames.handler.EntityInteractHandler;
 import astrotibs.villagenames.handler.SpawnNamingHandler;
 import astrotibs.villagenames.handler.WellDecorateEvent;
@@ -36,8 +34,7 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register( new WellDecorateEvent() );
 		MinecraftForge.EVENT_BUS.register( new ConfigReloader() );
 		MinecraftForge.EVENT_BUS.register( new SpawnNamingHandler() );
-		if (GeneralConfig.allowInGameConfig) MinecraftForge.EVENT_BUS.register(new ConfigInGame());
-		
+
 		// Achievements
 		registerAchievements();
 	}

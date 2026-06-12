@@ -4753,7 +4753,7 @@ public class ModObjects {
 	}
 	public static Object[][] chooseVanillaWoodenTable(int materialMeta, int orientation, int horizIndex)
 	{
-		if (Loader.isModLoaded("bugtorch")) {
+		if (VillageNames.isBugTorchLoaded) {
 			return new Object[][] {
 				new Object[] {ModObjects.chooseModPressurePlate(materialMeta), 0},
 				ModObjects.chooseModFence(materialMeta)

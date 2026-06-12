@@ -9,10 +9,10 @@ import astrotibs.villagenames.prismarine.minecraft.Vec3i;
 import astrotibs.villagenames.tracker.ServerInfoTracker.EventType;
 import astrotibs.villagenames.utility.FunctionsVN;
 import astrotibs.villagenames.utility.LogHelper;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
@@ -281,9 +281,10 @@ public class EventTracker
     public void updateGuard(LivingUpdateEvent event, ExtendedVillageGuard properties)
     {
     	EntityLiving guard = (EntityLiving) event.entity;
-    	NBTTagCompound compound = new NBTTagCompound();
-    	guard.writeEntityToNBT(compound);
-		int targetAge = compound.getInteger("Age");
+		int targetAge = 0;
+		if (guard instanceof EntityAgeable) {
+			targetAge = ((EntityAgeable) guard).getGrowingAge();
+		}
     	
     	if (GeneralConfig.debugMessages) {LogHelper.info("EventTracker.updateGuard called with this.getCustomName(): " + this.getCustomName() + ", this.getObject(): " + this.getExtraInfo() );}
         
