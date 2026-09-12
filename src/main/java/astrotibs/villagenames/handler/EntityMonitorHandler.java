@@ -98,7 +98,7 @@ public class EntityMonitorHandler
         }
 
         // Check if the player started tracking a village guard
-        else if (WitcheryHelper.isWitcheryGuard(event.entity)) {
+        else if (WitcheryHelper.isWitcheryGuard(event.target)) {
             final EntityLiving guard = (EntityLiving) event.target;
 
             // Check if the guard has special properties
@@ -288,7 +288,7 @@ public class EntityMonitorHandler
                                     if (!catalystGroup.equals(group)) continue;
                                     if (!catalystClassPath.equals(blockClassPath)) continue;
                                     if (!catalystUnlocName.isEmpty() && !catalystUnlocName.equals(blockUnlocName)) continue;
-                                    if (catalystMeta != 1 && blockmeta!=catalystMeta) continue;
+                                    if (catalystMeta != -1 && blockmeta!=catalystMeta) continue;
 
                                     for (int i=1; i<groupSpeedup; i++) {
                                         // Increment time jump
@@ -419,7 +419,7 @@ public class EntityMonitorHandler
         if (ev.getSkinTone()==-99) {ev.setSkinTone(FunctionsVN.returnSkinToneForEntityLocation(villager));}
 
         // Ticks intermittently, modulated so villagers don't deliberately sync.
-        if ((villager.ticksExisted + villager.getEntityId())%5 == 0) return;
+        if ((villager.ticksExisted + villager.getEntityId())%5 != 0) return;
 
         if (ev.getProfession() < 0) return;
 
@@ -445,7 +445,7 @@ public class EntityMonitorHandler
                 villager.lastTickPosX, villager.lastTickPosY, villager.lastTickPosZ, 16*5);
         VillageNames.VNNetworkWrapper.sendToAllAround(
                 new MessageModernVillagerSkin(villager.getEntityId(), ev.getProfession(), ev.getCareer(),
-                        ev.getBiomeType(), professionLevel, ev.getSkinTone()), targetPoint);
+                        ev.getBiomeType(), ev.getProfessionLevel(), ev.getSkinTone()), targetPoint);
 
     }
 
