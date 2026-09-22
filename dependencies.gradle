@@ -37,4 +37,10 @@ dependencies {
 	compileOnly("com.github.GTNewHorizons:AntiqueAtlas:4.4.6-GTNH:dev")
 	compileOnly("com.github.GTNewHorizons:SignPosts:1.3.5-GTNH:dev")
 	compileOnly rfg.deobf("curse.maven:witchery-69673:2234410")
+
+	runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.125-GTNH:dev")
+
+	// for nbtedit for testing
+	runtimeOnlyNonPublishable("com.github.GTNewHorizons:ServerUtilities:2.4.1:dev")
+
 }
