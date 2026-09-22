@@ -361,9 +361,21 @@ public class EntityInteractHandler {
 					{
 						// Force-name the entity
 						target.setCustomNameTag(itemstack.getDisplayName());
+						// persist
 						target.func_110163_bv();
 						event.setCanceled(true);
 						return;
+					}
+				}
+				else if (itemstack.hasDisplayName() && itemstack.getDisplayName().equals(customName)) {
+					// if name is same, and mob doesn't have persistance, add persistance.
+					if (!compound.getBoolean("PersistenceRequired")) {
+						compound.setBoolean("PersistenceRequired", true);
+
+						target.func_110163_bv();
+						event.setCanceled(true);
+
+						if (!player.capabilities.isCreativeMode) {itemstack.stackSize--;}
 					}
 				}
 				
