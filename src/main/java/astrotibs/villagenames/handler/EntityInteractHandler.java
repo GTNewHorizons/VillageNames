@@ -361,6 +361,7 @@ public class EntityInteractHandler {
 					{
 						// Force-name the entity
 						target.setCustomNameTag(itemstack.getDisplayName());
+						target.func_110163_bv();
 						event.setCanceled(true);
 						return;
 					}
