@@ -1957,7 +1957,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 
-			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete)
+			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete && !VillageNames.isEtFuturumLoaded)
 			{
 				return new Object[]{ModBlocksVN.blockConcrete, new Integer(meta)};
 			}
@@ -2703,7 +2703,7 @@ public class ModObjects {
 		{
 			Block modblock=null;
 
-			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete)
+			if (mod.toLowerCase().trim().equals("villagenames") && GeneralConfig.addConcrete && !VillageNames.isEtFuturumLoaded)
 			{
 				switch (colorMeta/4)
 				{
