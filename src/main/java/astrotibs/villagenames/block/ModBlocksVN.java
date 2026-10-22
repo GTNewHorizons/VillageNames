@@ -1,5 +1,6 @@
 package astrotibs.villagenames.block;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.color.BlockConcrete;
 import astrotibs.villagenames.block.color.BlockConcretePowder;
 import astrotibs.villagenames.block.color.BlockGlazedTerracotta;
@@ -67,7 +68,9 @@ public class ModBlocksVN
 			GameRegistry.registerBlock(blockSpongeVN, ((ISubBlocksBlock) blockSpongeVN).getItemBlockClass(), "sponge");
 		}
 		
-		if (GeneralConfig.addConcrete)
+		// Et Futurum Requiem registers its own concrete, concrete powder and glazed terracotta,
+		// so don't register duplicates of them when it is loaded
+		if (GeneralConfig.addConcrete && !VillageNames.isEtFuturumLoaded)
 		{
 			// Terracotta
 	    	GameRegistry.registerBlock(glazedTerracotta, ItemBlockGlazedTerracotta.class, "glazedTerracotta");

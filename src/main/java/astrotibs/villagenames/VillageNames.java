@@ -112,6 +112,7 @@ public final class VillageNames
 	public static boolean isWitcheryLoaded;
 	public static boolean isOTGLoaded;
 	public static boolean isBugTorchLoaded;
+	public static boolean isEtFuturumLoaded;
 	
 	// Disallow trades that discriminate meta values sold from player unless this mod is loaded
 	public static boolean canVillagerTradesDistinguishMeta = false;
@@ -143,6 +144,7 @@ public final class VillageNames
 		isWitcheryLoaded = Loader.isModLoaded("witchery");
 		isOTGLoaded = Loader.isModLoaded("openterraingenerator");
 		isBugTorchLoaded = Loader.isModLoaded("bugtorch");
+		isEtFuturumLoaded = Loader.isModLoaded("etfuturum");
 		configDirectory = new File(event.getModConfigurationDirectory(), currentConfigFolder);
 		ConfigInit.init(configDirectory);
 		

@@ -1,5 +1,6 @@
 package astrotibs.villagenames.proxy;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.color.RenderGlazedTerracotta;
 import astrotibs.villagenames.client.renderer.entity.RenderVillagerModern;
 import astrotibs.villagenames.client.renderer.entity.RenderZombieVillagerModern;
@@ -42,7 +43,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRender() {
-		if (GeneralConfig.addConcrete) {
+		if (GeneralConfig.addConcrete && !VillageNames.isEtFuturumLoaded) {
 			renderGlazedTerracotta = RenderingRegistry.getNextAvailableRenderId();
 			RenderingRegistry.registerBlockHandler(renderGlazedTerracotta, new RenderGlazedTerracotta());
 		}
