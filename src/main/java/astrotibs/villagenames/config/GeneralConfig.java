@@ -175,7 +175,7 @@ public class GeneralConfig {
 	    
 	    wellDecorations = config.getBoolean("Allow well decorations", Reference.CATEGORY_WELL_KILL_SWITCH, true, "Set this to false to override-disable all well decoration: sign, slabs, terracotta, concrete.");
 	    
-	    addConcrete = config.getBoolean("1.12 Blocks", Reference.CATEGORY_WORLD_OF_COLOR, true, "Whether to add 1.12 style Concrete, Concrete Powder, and Glazed Terracotta");
+	    addConcrete = config.getBoolean("1.12 Blocks", Reference.CATEGORY_WORLD_OF_COLOR, true, "Whether to add 1.12 style Concrete, Concrete Powder, and Glazed Terracotta. This option is ignored when Et Futurum Requiem is loaded, since it adds its own versions of these blocks.");
 	    concreteWell = config.getBoolean("Concrete Well", Reference.CATEGORY_WORLD_OF_COLOR, true, "Whether to decorate wells with Concrete and Glazed Terracotta instead of stained clay. This only applies to old-school wells, i.e. if \"Activate New Village Generator\" is false.");
 	    
 	    

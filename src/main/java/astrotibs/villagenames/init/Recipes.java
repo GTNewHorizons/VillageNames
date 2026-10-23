@@ -1,5 +1,6 @@
 package astrotibs.villagenames.init;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.item.ModItems;
@@ -51,7 +52,7 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.iron_ingot, 6), new ItemStack(ModBlocksVN.lunarinIronBlock)));
 		}
 		
-		if (GeneralConfig.addConcrete)
+		if (GeneralConfig.addConcrete && !VillageNames.isEtFuturumLoaded)
 		{
 			// Add recipes for Glazed Terracotta
 			for (int i = 0 ; i < 4; i++) {
