@@ -709,7 +709,7 @@ public class NameGenerator {
     		for (int i = 0; i < pooled_length_weights.size(); ++i)
     		{
     			randomObject -= pooled_length_weights.get(i);
-    		    if (randomObject <= 0)
+				if (randomObject < 0)
     		    {
     		    	rootname_syllable_inserts = i; // We've determined the length of the name.
     		        break;
