@@ -18,6 +18,7 @@ import astrotibs.villagenames.igloo.IglooGeneratorIWG;
 import astrotibs.villagenames.igloo.VNComponentIglooPieces;
 import astrotibs.villagenames.igloo.VNMapGenIgloo;
 import astrotibs.villagenames.init.Recipes;
+import astrotibs.villagenames.integration.ModObjects;
 import astrotibs.villagenames.integration.antiqueatlas.VillageWatcherAA;
 import astrotibs.villagenames.integration.antiqueatlas.signposts.SignPost;
 import astrotibs.villagenames.integration.ganyssurface.TileEntityWoodSign;
@@ -113,6 +114,7 @@ public final class VillageNames
 	public static boolean isOTGLoaded;
 	public static boolean isBugTorchLoaded;
 	public static boolean isEtFuturumLoaded;
+	public static boolean isBotaniaLoaded;
 	
 	// Disallow trades that discriminate meta values sold from player unless this mod is loaded
 	public static boolean canVillagerTradesDistinguishMeta = false;
@@ -145,6 +147,7 @@ public final class VillageNames
 		isOTGLoaded = Loader.isModLoaded("openterraingenerator");
 		isBugTorchLoaded = Loader.isModLoaded("bugtorch");
 		isEtFuturumLoaded = Loader.isModLoaded("etfuturum");
+		isBotaniaLoaded = Loader.isModLoaded(ModObjects.DOM_BOTANIA);
 		configDirectory = new File(event.getModConfigurationDirectory(), currentConfigFolder);
 		ConfigInit.init(configDirectory);
 		
