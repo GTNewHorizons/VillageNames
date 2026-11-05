@@ -1,5 +1,6 @@
 package astrotibs.villagenames.prismarine.render;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.block.ModBlocksVN;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.block.BlockPrismarine;
@@ -20,7 +21,7 @@ public class RegisterRenderPrismarine {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void loadTextures(TextureStitchEvent.Pre event) {
-		if (GeneralConfig.addPrismarine)
+		if (GeneralConfig.addPrismarine && !VillageNames.isBotaniaLoaded)
 			if (event.map.getTextureType() == 0) {
 				TextureAtlasSprite icon = new PrismarineIcon("prismarine_rough");
 				if (event.map.setTextureEntry("prismarine_rough", icon)) {
