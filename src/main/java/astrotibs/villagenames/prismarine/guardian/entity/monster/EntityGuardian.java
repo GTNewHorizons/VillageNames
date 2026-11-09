@@ -675,14 +675,14 @@ public class EntityGuardian extends EntityMob //implements IMob
      */
     protected void dropFewItems(boolean recentlyHit, int looting)
     {
-        // Drop Prismarine shards
-        int num_prismarine_shards = this.rand.nextInt(3) + this.rand.nextInt(looting + 1);
-        if (num_prismarine_shards > 0)
+        // Drop Prismarine crystals
+        int num_prismarine_crystals = this.rand.nextInt(3) + this.rand.nextInt(looting + 1);
+        if (num_prismarine_crystals > 0)
         {
-        	ItemStack prismarineItem = ModObjects.chooseModPrismarineShardItemStack();
+        	ItemStack prismarineItem = ModObjects.chooseModPrismarineCrystalsItemStack();
         	if (prismarineItem!=null)
         	{
-        		this.entityDropItem(new ItemStack(prismarineItem.getItem(), num_prismarine_shards, prismarineItem.getItemDamage()), 1.0F);
+        		this.entityDropItem(new ItemStack(prismarineItem.getItem(), num_prismarine_crystals, prismarineItem.getItemDamage()), 1.0F);
         	}
         }
         
