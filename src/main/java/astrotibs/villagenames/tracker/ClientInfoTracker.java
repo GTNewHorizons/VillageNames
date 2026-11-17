@@ -140,6 +140,7 @@ public class ClientInfoTracker
         WorldClient world = Minecraft.getMinecraft().theWorld;
         if (world == null) return;
         Entity entity = world.getEntityByID(entityID);
+        if (entity == null) return;
 
         // If found the entity, attempt to sync with info sent by the server 
         if ( entity.getClass().toString().substring(6).equals(ModObjects.WitcheryGuardClass) ) {
