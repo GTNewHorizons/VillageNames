@@ -69,14 +69,16 @@ public class Recipes
 			}
 		}
 		
-		if(GeneralConfig.addPrismarine)
+		OreDictionary.registerOre("crystalPrismarine", new ItemStack(ModItems.prismarine_crystals));
+
+		// Botania already provides prismarine blocks
+		if(GeneralConfig.addPrismarine && !VillageNames.isBotaniaLoaded)
 		{
 			OreDictionary.registerOre("shardPrismarine", new ItemStack(ModItems.prismarine_shard));
-			OreDictionary.registerOre("crystalPrismarine", new ItemStack(ModItems.prismarine_crystals));
 			OreDictionary.registerOre("blockPrismarine", new ItemStack(ModBlocksVN.blockPrismarine, 1, OreDictionary.WILDCARD_VALUE));
-			
+
 			int rough = 0; int bricks = 1; int dark = 2;
-			
+
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocksVN.blockPrismarine, 1, dark), "xxx", "xyx", "xxx", 'x', "shardPrismarine", 'y', "dyeBlack"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocksVN.blockPrismarine, 1, rough), "xx", "xx", 'x', "shardPrismarine"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocksVN.blockPrismarine, 1, bricks), "xxx", "xxx", "xxx", 'x', "shardPrismarine"));

@@ -1,5 +1,6 @@
 package astrotibs.villagenames.item;
 
+import astrotibs.villagenames.VillageNames;
 import astrotibs.villagenames.config.GeneralConfig;
 import astrotibs.villagenames.prismarine.item.PrismarineCrystals;
 import astrotibs.villagenames.prismarine.item.PrismarineShard;
@@ -66,14 +67,14 @@ public class ModItems
 		GameRegistry.registerItem(abandonedbasebook, "abandonedbasebook");
 		
 		// Prismarine
-		if (GeneralConfig.addPrismarine)
+		GameRegistry.registerItem(prismarine_crystals, "prismarine_crystals");
+		OreDictionary.registerOre("dustPrismarine", prismarine_crystals);
+
+		// Botania already provides prismarine shards
+		if (GeneralConfig.addPrismarine && !VillageNames.isBotaniaLoaded)
 		{
 			GameRegistry.registerItem(prismarine_shard, "prismarine_shard");
-			GameRegistry.registerItem(prismarine_crystals, "prismarine_crystals");
-			
-			// Oredict registries
 			OreDictionary.registerOre("gemPrismarine", prismarine_shard);
-			OreDictionary.registerOre("dustPrismarine", prismarine_crystals);
 		}
 	}
 }
