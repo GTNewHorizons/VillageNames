@@ -67,16 +67,14 @@ public class ModItems
 		GameRegistry.registerItem(abandonedbasebook, "abandonedbasebook");
 		
 		// Prismarine
-		if (GeneralConfig.addPrismarine)
+		GameRegistry.registerItem(prismarine_crystals, "prismarine_crystals");
+		OreDictionary.registerOre("dustPrismarine", prismarine_crystals);
+
+		// Botania already provides prismarine shards
+		if (GeneralConfig.addPrismarine && !VillageNames.isBotaniaLoaded)
 		{
-			// Botania already provides prismarine shards
-			if (!VillageNames.isBotaniaLoaded)
-			{
-				GameRegistry.registerItem(prismarine_shard, "prismarine_shard");
-				OreDictionary.registerOre("gemPrismarine", prismarine_shard);
-			}
-			GameRegistry.registerItem(prismarine_crystals, "prismarine_crystals");
-			OreDictionary.registerOre("dustPrismarine", prismarine_crystals);
+			GameRegistry.registerItem(prismarine_shard, "prismarine_shard");
+			OreDictionary.registerOre("gemPrismarine", prismarine_shard);
 		}
 	}
 }
