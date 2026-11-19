@@ -52,7 +52,8 @@ public class ModBlocksVN
 			GameRegistry.registerBlock(lunarinIronBlock, "lunarinIronBlock");
 		}
 		
-		if (GeneralConfig.addPrismarine)
+		// Botania already provides prismarine blocks
+		if (GeneralConfig.addPrismarine && !VillageNames.isBotaniaLoaded)
 		{
 			GameRegistry.registerBlock(blockSeaLantern, "sea_lantern");
 			GameRegistry.registerBlock(blockPrismarine, ((ISubBlocksBlock) blockPrismarine).getItemBlockClass(), "prismarine");
